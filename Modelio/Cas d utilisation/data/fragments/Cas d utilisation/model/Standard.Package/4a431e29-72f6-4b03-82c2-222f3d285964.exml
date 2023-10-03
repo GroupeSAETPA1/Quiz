@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="cas d utilisation" version="4">
+  <OBJECT>
+    <ID name="cas d utilisation" mc="Standard.Package" uid="4a431e29-72f6-4b03-82c2-222f3d285964"/>
+    <PID name="Cas d utilisation" mc="Standard.Project" uid="52e77795-22fe-44fe-88a9-e4d47e69d6b9"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[cas d utilisation]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Eleve" mc="Standard.Actor" uid="dd79b9d7-08ba-4f52-b214-d0b78f2acf70"/>
+        <COMPID name="Créer categorie" mc="Standard.UseCase" uid="971317cb-72fc-4e96-85f2-1f053a5b618e"/>
+        <COMPID name="Modifier - Supprimer une catégorie" mc="Standard.UseCase" uid="b29f1b41-cb47-4b83-bf01-faa6f9db95de"/>
+        <COMPID name="Ajouter question" mc="Standard.UseCase" uid="4b12a0c5-7bcd-45ec-a140-ec5a53b3e166"/>
+        <COMPID name="Modifier - Supprimer Question" mc="Standard.UseCase" uid="65d34f15-1520-47f4-b0e0-5730c4646d83"/>
+        <COMPID name="Importer des questions" mc="Standard.UseCase" uid="1c503d26-c715-441d-8deb-8ce757368c84"/>
+        <COMPID name="Répondre au question" mc="Standard.UseCase" uid="458f0d9c-e9ff-41e6-bdce-22dfe7864249"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation cas d utilisation" mc="Standard.UseCaseDiagram" uid="7ac10177-834e-4b07-95f8-8acf4fc7f6c0"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
