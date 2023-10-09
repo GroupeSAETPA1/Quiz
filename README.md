@@ -9,7 +9,7 @@ réviser leurs connaissances dans le langage Java. Dans le cadre des études à 
 
 ### Membres (nom, prenom, mail, github) :
 
-- Costes Quentin / quentin.costes@iut-rodez.fr / [quentinformatique](https://github.com/quentinformatiquehttps://github.com/quentinformatique)
+- Costes Quentin / quentin.costes@iut-rodez.fr / [quentinformatique](https://github.com/quentinformatique)
 
 - Bécogné Néo / neo.becogne@iut-rodez.fr  [CrabeNeo](https://github.com/CrabeNeo) 
 
