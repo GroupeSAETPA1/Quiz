@@ -11,7 +11,7 @@ réviser leurs connaissances dans le langage Java. Dans le cadre des études à 
 
 - Costes Quentin / quentin.costes@iut-rodez.fr / [quentinformatique](https://github.com/quentinformatique)
 
-- Bécogné Néo / neo.becogne@iut-rodez.fr  [CrabeNeo](https://github.com/CrabeNeo) 
+- Bécogné Néo / neo.becogne@iut-rodez.fr / [CrabeNeo](https://github.com/CrabeNeo) 
 
 - Douaud Tom / tom.douaud.tom@iut-rodez.fr / [TomDouaud](https://github.com/TomDouaud)
 
