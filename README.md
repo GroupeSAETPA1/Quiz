@@ -15,7 +15,7 @@ réviser leurs connaissances dans le langage Java. Dans le cadre des études à 
 
 - Douaud Tom / tom.douaud.tom@iut-rodez.fr / [TomDouaud](https://github.com/TomDouaud)
 
-- De Saint Palais François / francois.desaintpalais@iut-rodez.fr / [Francois389](https://github.com/Francois389)
+- de Saint Palais François / francois.desaintpalais@iut-rodez.fr / [Francois389](https://github.com/Francois389)
 
 - Descriaud Lucas / lucas.descriaud@iut-rodez.fr / [IUTLucas](https://github.com/IUTLucas)
 
