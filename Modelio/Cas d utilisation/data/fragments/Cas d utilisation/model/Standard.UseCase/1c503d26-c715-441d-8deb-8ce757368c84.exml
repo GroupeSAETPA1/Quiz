@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Importer des questions" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Exporter - Importer des questions" version="4">
   <OBJECT>
-    <ID name="Importer des questions" mc="Standard.UseCase" uid="1c503d26-c715-441d-8deb-8ce757368c84"/>
+    <ID name="Exporter - Importer des questions" mc="Standard.UseCase" uid="1c503d26-c715-441d-8deb-8ce757368c84"/>
     <PID name="cas d utilisation" mc="Standard.Package" uid="4a431e29-72f6-4b03-82c2-222f3d285964"/>
     <ATTRIBUTES>
       <ATT name="IsElementary">false</ATT>
@@ -9,7 +9,7 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Importer des questions]]></ATT>
+      <ATT name="Name"><![CDATA[Exporter - Importer des questions]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>

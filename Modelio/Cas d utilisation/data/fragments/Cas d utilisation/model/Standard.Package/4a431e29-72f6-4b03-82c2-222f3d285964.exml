@@ -19,8 +19,10 @@
         <COMPID name="Modifier - Supprimer une catégorie" mc="Standard.UseCase" uid="b29f1b41-cb47-4b83-bf01-faa6f9db95de"/>
         <COMPID name="Ajouter question" mc="Standard.UseCase" uid="4b12a0c5-7bcd-45ec-a140-ec5a53b3e166"/>
         <COMPID name="Modifier - Supprimer Question" mc="Standard.UseCase" uid="65d34f15-1520-47f4-b0e0-5730c4646d83"/>
-        <COMPID name="Importer des questions" mc="Standard.UseCase" uid="1c503d26-c715-441d-8deb-8ce757368c84"/>
+        <COMPID name="Exporter - Importer des questions" mc="Standard.UseCase" uid="1c503d26-c715-441d-8deb-8ce757368c84"/>
         <COMPID name="Répondre au question" mc="Standard.UseCase" uid="458f0d9c-e9ff-41e6-bdce-22dfe7864249"/>
+        <COMPID name="Envoyer - Recevoir des questionnaire" mc="Standard.UseCase" uid="0d6f0cc1-993e-4ba2-89b2-ba6d333361b1"/>
+        <COMPID name="Paramétrage questionnaire" mc="Standard.UseCase" uid="3bd39877-0855-44f0-968d-4c79b40ec05f"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Diagramme de cas d'utilisation cas d utilisation" mc="Standard.UseCaseDiagram" uid="7ac10177-834e-4b07-95f8-8acf4fc7f6c0"/>
