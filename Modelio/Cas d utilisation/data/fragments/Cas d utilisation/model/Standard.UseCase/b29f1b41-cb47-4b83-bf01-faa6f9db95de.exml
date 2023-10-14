@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Modifier - Supprimer une catégorie" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Ajouter une catégorie" version="4">
   <OBJECT>
-    <ID name="Modifier - Supprimer une catégorie" mc="Standard.UseCase" uid="b29f1b41-cb47-4b83-bf01-faa6f9db95de"/>
+    <ID name="Ajouter une catégorie" mc="Standard.UseCase" uid="b29f1b41-cb47-4b83-bf01-faa6f9db95de"/>
     <PID name="cas d utilisation" mc="Standard.Package" uid="4a431e29-72f6-4b03-82c2-222f3d285964"/>
     <ATTRIBUTES>
       <ATT name="IsElementary">false</ATT>
@@ -9,27 +9,10 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Modifier - Supprimer une catégorie]]></ATT>
+      <ATT name="Name"><![CDATA[Ajouter une catégorie]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
-      <COMP relation="Used">
-        <OBJECT>
-          <ID name="UseCaseDependency" mc="Standard.UseCaseDependency" uid="43194f97-a43c-4d32-b910-baaf45f08bd4"/>
-          <ATTRIBUTES>
-            <ATT name="Name"><![CDATA[UseCaseDependency]]></ATT>
-            <ATT name="status">1970354901745664</ATT>
-          </ATTRIBUTES>
-          <DEPENDENCIES>
-            <LINK relation="Target">
-              <ID name="Créer categorie" mc="Standard.UseCase" uid="971317cb-72fc-4e96-85f2-1f053a5b618e"/>
-            </LINK>
-            <LINK relation="Extension">
-              <FOREIGNID name="include" mc="Infrastructure.Stereotype" uid="00000000-0000-9c49-0000-000000000000"/>
-            </LINK>
-          </DEPENDENCIES>
-        </OBJECT>
-      </COMP>
       <COMP relation="Descriptor">
         <OBJECT>
           <ID name="" mc="Infrastructure.Note" uid="7ecaa6ec-45e7-417a-8fe5-a1c13c9b7516"/>

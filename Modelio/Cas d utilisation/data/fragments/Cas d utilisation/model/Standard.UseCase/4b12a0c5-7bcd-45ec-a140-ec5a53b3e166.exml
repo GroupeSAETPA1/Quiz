@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Ajouter question" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Action sur Question" version="4">
   <OBJECT>
-    <ID name="Ajouter question" mc="Standard.UseCase" uid="4b12a0c5-7bcd-45ec-a140-ec5a53b3e166"/>
+    <ID name="Action sur Question" mc="Standard.UseCase" uid="4b12a0c5-7bcd-45ec-a140-ec5a53b3e166"/>
     <PID name="cas d utilisation" mc="Standard.Package" uid="4a431e29-72f6-4b03-82c2-222f3d285964"/>
     <ATTRIBUTES>
       <ATT name="IsElementary">false</ATT>
@@ -9,10 +9,57 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[Ajouter question]]></ATT>
+      <ATT name="Name"><![CDATA[Action sur Question]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
+      <COMP relation="Used">
+        <OBJECT>
+          <ID name="UseCaseDependency" mc="Standard.UseCaseDependency" uid="56088331-49b1-4509-9abb-9d79c037b148"/>
+          <ATTRIBUTES>
+            <ATT name="Name"><![CDATA[UseCaseDependency]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Target">
+              <ID name="Ajouter Question" mc="Standard.UseCase" uid="66220b9f-ef88-4c85-be42-70e718a5264f"/>
+            </LINK>
+            <LINK relation="Extension">
+              <FOREIGNID name="include" mc="Infrastructure.Stereotype" uid="00000000-0000-9c49-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="UseCaseDependency" mc="Standard.UseCaseDependency" uid="6f467242-7542-4c7c-9d97-f3ce992ec521"/>
+          <ATTRIBUTES>
+            <ATT name="Name"><![CDATA[UseCaseDependency]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Target">
+              <ID name="Modifier Question" mc="Standard.UseCase" uid="65d34f15-1520-47f4-b0e0-5730c4646d83"/>
+            </LINK>
+            <LINK relation="Extension">
+              <FOREIGNID name="include" mc="Infrastructure.Stereotype" uid="00000000-0000-9c49-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="UseCaseDependency" mc="Standard.UseCaseDependency" uid="6d400762-22bd-422e-839e-cba1224f0199"/>
+          <ATTRIBUTES>
+            <ATT name="Name"><![CDATA[UseCaseDependency]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Target">
+              <ID name="Supprimer Question" mc="Standard.UseCase" uid="63651a73-c897-4971-ac92-878559d5ffb5"/>
+            </LINK>
+            <LINK relation="Extension">
+              <FOREIGNID name="include" mc="Infrastructure.Stereotype" uid="00000000-0000-9c49-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
       <COMP relation="Descriptor">
         <OBJECT>
           <ID name="" mc="Infrastructure.Note" uid="3b96e046-fe61-4fa1-8e03-fe05376b3bbd"/>
