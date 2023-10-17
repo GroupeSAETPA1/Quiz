@@ -20,6 +20,7 @@
         <COMPID name="Chiffrement" mc="Standard.Class" uid="8e227410-285c-4742-9c90-d330a8739c17"/>
         <COMPID name="HomonymeException" mc="Standard.Class" uid="38f2f42d-8b4d-4f46-971c-0fecb24f2794"/>
         <COMPID name="Exception" mc="Standard.Class" uid="1021a898-7220-47d1-bcf7-12b410797d1e"/>
+        <COMPID name="BanqueCatgorie" mc="Standard.Class" uid="29158db4-b81f-442d-a2e3-915e395b3e73"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Diagramme de classe digramme de classe" mc="Standard.ClassDiagram" uid="17b6e21b-9835-4ef7-9e85-6ae29d9b674f"/>
