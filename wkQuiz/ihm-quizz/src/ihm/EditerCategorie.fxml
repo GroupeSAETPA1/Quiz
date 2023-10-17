@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="RetourBouton" fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0">
+         <image>
+            <Image url="@../../../../images/icons8-retour-96%201.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="29.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retour">
+         <font>
+            <Font name="Open Sans Regular" size="32.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="534.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditer une Catégorie  ">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <ScrollPane layoutX="25.0" layoutY="180.0" prefHeight="560.0" prefWidth="1330.0">
+         <content>
+            <TableView prefHeight="558.0" prefWidth="1313.0">
+              <columns>
+                <TableColumn prefWidth="461.0" text="Nom" />
+                <TableColumn minWidth="0.0" prefWidth="415.0" text="Nombre de question de la catégorie" />
+                  <TableColumn maxWidth="205.0" minWidth="145.0" prefWidth="205.0" text="Modifier" />
+                  <TableColumn maxWidth="231.0" minWidth="180.0" prefWidth="231.0" text="Supprimer" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</Pane>
