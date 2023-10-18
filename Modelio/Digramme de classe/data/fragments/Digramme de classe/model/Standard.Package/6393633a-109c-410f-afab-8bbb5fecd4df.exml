@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="digramme de classe" version="4">
+  <OBJECT>
+    <ID name="digramme de classe" mc="Standard.Package" uid="6393633a-109c-410f-afab-8bbb5fecd4df"/>
+    <PID name="Digramme de classe" mc="Standard.Project" uid="f19fb3c6-81aa-419f-a58d-5eb9216f23a7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[digramme de classe]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Question" mc="Standard.Class" uid="aaa1748e-8446-4718-b452-8fe6e90eaf2a"/>
+        <COMPID name="Categorie" mc="Standard.Class" uid="e3599152-7e26-4986-9f52-9033f37b1fef"/>
+        <COMPID name="BanqueQuestion" mc="Standard.Class" uid="467b495b-558b-4413-8cdf-ff8efbb1efa6"/>
+        <COMPID name="Chiffrement" mc="Standard.Class" uid="8e227410-285c-4742-9c90-d330a8739c17"/>
+        <COMPID name="HomonymeException" mc="Standard.Class" uid="38f2f42d-8b4d-4f46-971c-0fecb24f2794"/>
+        <COMPID name="Exception" mc="Standard.Class" uid="1021a898-7220-47d1-bcf7-12b410797d1e"/>
+        <COMPID name="BanqueCatgorie" mc="Standard.Class" uid="29158db4-b81f-442d-a2e3-915e395b3e73"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de classe digramme de classe" mc="Standard.ClassDiagram" uid="17b6e21b-9835-4ef7-9e85-6ae29d9b674f"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
