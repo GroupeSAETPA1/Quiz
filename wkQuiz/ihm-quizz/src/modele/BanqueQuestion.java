@@ -5,6 +5,8 @@
 
 package modele;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,30 +18,19 @@ public class BanqueQuestion {
     /**
      * <Saisir le texte de la note ici>
      */
-    private Categorie[] questions;
+    private ArrayList<Question> questions;
 
-    public Question question;
+
+    public BanqueQuestion(ArrayList<Question> questions) {
+    }
+
+    public void ajouter(Question question) {
+    }
 
     /**
      * Permet de récupérer une question précise avec son indice dans l’array qui stocke toute les Questions
      */
-    public Question getQuestion(final int id) {
-        // TODO Auto-generated return
-        return null;
-    }
-
-    /**
-     * Permet de récupérer les questions qui on la catégorie passé en paramètres.
-     */
-    public List<Question> getQuestions(final Categorie categorie) {
-        // TODO Auto-generated return
-        return null;
-    }
-
-    /**
-     * Permet de récupérer les questions qui ont la difficultée passée en paramètre
-     */
-    public List<Question> getQuestionsDifficulte(final int difficulte) {
+    public Question getQuestion(int id) {
         // TODO Auto-generated return
         return null;
     }
@@ -47,7 +38,7 @@ public class BanqueQuestion {
     /**
      * Permet de récupérer les questions qui on le nombre de fausses réponses passées en paramètres
      */
-    public List<Question> getQuestionNbFausseReponse(final int nb) {
+    public ArrayList<Question> getQuestionNbFausseReponse(int nb) {
         // TODO Auto-generated return
         return null;
     }
@@ -55,7 +46,23 @@ public class BanqueQuestion {
     /**
      * Permet de récupérer toutes les questions
      */
-    public List<Question> getQuestions() {
+    public ArrayList<Question> getQuestions() {
+        // TODO Auto-generated return
+        return null;
+    }
+
+    /**
+     * Permet de récupérer les questions qui on la catégorie passé en paramètres.
+     */
+    public ArrayList<Question> getQuestions(Categorie categorie) {
+        // TODO Auto-generated return
+        return null;
+    }
+
+    /**
+     * Permet de récupérer les questions qui ont la difficultée passée en paramètre
+     */
+    public ArrayList<Question> getQuestionsDifficulte(int difficulte) {
         // TODO Auto-generated return
         return null;
     }
@@ -63,15 +70,17 @@ public class BanqueQuestion {
     /**
      * Permet de récupérer les questions qui on le libellé passé en paramètre (on vérifie que le libellé contient la string passée en paramètres)
      */
-    public Question getQuestionsLibelle(final List<String> nom) {
+    public Question getQuestionsLibelle(ArrayList<String> nom) {
         // TODO Auto-generated return
         return null;
     }
 
-    public BanqueQuestion(final List<Question> questions) {
+    /* non javadoc - @see java.lang.Object#toString() */
+    @Override
+    public String toString() {
+        return "BanqueQuestion [questions=" + Arrays.toString(questions) + "]";
     }
-
-    public void ajouter(final Question question) {
-    }
+    
+    
 
 }

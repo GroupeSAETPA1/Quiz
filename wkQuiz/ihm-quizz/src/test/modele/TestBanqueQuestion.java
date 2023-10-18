@@ -10,32 +10,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * Classe de test unitaire de la classe {@link modele.BanqueQuestion}
  * @author Francois de Saint Palais
  */
 class TestBanqueQuestion {
+
+    /**
+     * Test method for {@link modele.BanqueQuestion#ajouter(modele.Question)}.
+     */
+    @Test
+    void testAjouter() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
+     */
+    @Test
+    void testBanqueQuestion() {
+        fail("Not yet implemented");
+    }
 
     /**
      * Test method for {@link modele.BanqueQuestion#getQuestion(int)}.
      */
     @Test
     void testGetQuestion() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link modele.BanqueQuestion#getQuestions(modele.Categorie)}.
-     */
-    @Test
-    void testGetQuestionsCategorie() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link modele.BanqueQuestion#getQuestionsDifficulte(int)}.
-     */
-    @Test
-    void testGetQuestionsDifficulte() {
         fail("Not yet implemented");
     }
 
@@ -56,27 +56,29 @@ class TestBanqueQuestion {
     }
 
     /**
+     * Test method for {@link modele.BanqueQuestion#getQuestions(modele.Categorie)}.
+     */
+    @Test
+    void testGetQuestionsCategorie() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link modele.BanqueQuestion#getQuestionsDifficulte(int)}.
+     */
+    @Test
+    void testGetQuestionsDifficulte() {
+        fail("Not yet implemented");
+    }
+
+    /**
      * Test method for {@link modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
      */
     @Test
     void testGetQuestionsLibelle() {
         fail("Not yet implemented");
     }
-
-    /**
-     * Test method for {@link modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
-     */
-    @Test
-    void testBanqueQuestion() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link modele.BanqueQuestion#ajouter(modele.Question)}.
-     */
-    @Test
-    void testAjouter() {
-        fail("Not yet implemented");
-    }
+    
+    
 
 }
