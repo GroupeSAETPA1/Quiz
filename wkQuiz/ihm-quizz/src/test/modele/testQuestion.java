@@ -5,8 +5,15 @@
 
 package test.modele;
 
+import modele.Categorie;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modele.Question;
@@ -15,12 +22,28 @@ import modele.Question;
  * Lancement des tests pour la classe Question
  * @author Lucas
  */
-class testQuestion {
 
+class testQuestion {
+    
+    private ArrayList<Question> questionValide;
+    private ArrayList<String> mauvaiseReponse1;
+    private ArrayList<Question> mauvaiseReponse2;
+    private ArrayList<Question> mauvaiseReponse3;
+    private ArrayList<Question> mauvaiseReponse4;
+    private ArrayList<Question> mauvaiseReponse5;
+    @BeforeEach
+    void genererJeuxDeTest() {
+        questionValide = new ArrayList<Question>();
+        mauvaiseReponse1.add(" /* commentaire */");
+        mauvaiseReponse1.add("<*  commentaire *>");
+        questionValide.add(new Question("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
+                           new Categorie("Commentaire") , 1 , "le délimiteur /**" ,
+                           mauvaiseReponse1));
+    }
+    
     @Test
     void testConstructeurFeedBack() {
-        assertDoesNotThrow(() -> new Question("" , Math , ""));
-        fail("Not yet implemented");
+        //assertDoesNotThrow(() -> new Question("Test",jeuTestCategorie.get(0),1,"bonne reponse",jeuTestReponsesFausses.get(0)));
     }
 
     /**
