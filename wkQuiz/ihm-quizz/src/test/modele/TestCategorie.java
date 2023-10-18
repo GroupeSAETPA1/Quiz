@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import modele.Categorie;
+import application.modele.Categorie;
 
 class TestCategorie {
 

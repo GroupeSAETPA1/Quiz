@@ -3,7 +3,7 @@
  * IUT de Rodez, pas de copyrights ni copyleft
  */
 
-package modele;
+package application.modele;
 
 import java.io.Serializable;
 

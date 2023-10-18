@@ -5,7 +5,6 @@
 
 package test.modele;
 
-import modele.Categorie;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Array;
@@ -16,7 +15,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import modele.Question;
+import application.modele.Categorie;
+import application.modele.Question;
 
 /** 
  * Lancement des tests pour la classe Question
@@ -47,7 +47,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#Question(java.lang.String, modele.Categorie, int, java.lang.String, java.util.ArrayList)}.
+     * Test method for {@link application.modele.Question#Question(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList)}.
      */
     @Test
     void testConstructeurSansFeedback() {
@@ -55,7 +55,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#setLibelle(java.lang.String)}.
+     * Test method for {@link application.modele.Question#setLibelle(java.lang.String)}.
      */
     @Test
     void testSetLibelle() {
@@ -63,7 +63,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#setCatgorie(java.lang.String)}.
+     * Test method for {@link application.modele.Question#setCatgorie(java.lang.String)}.
      */
     @Test
     void testSetCatgorie() {
@@ -71,7 +71,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#setDifficulte(int)}.
+     * Test method for {@link application.modele.Question#setDifficulte(int)}.
      */
     @Test
     void testSetDifficulte() {
@@ -79,7 +79,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#setBonneReponse(java.lang.String)}.
+     * Test method for {@link application.modele.Question#setBonneReponse(java.lang.String)}.
      */
     @Test
     void testSetBonneReponse() {
@@ -87,7 +87,7 @@ class testQuestion {
     }
 
     /**
-     * Test method for {@link modele.Question#setMauvaiseReponse(java.util.ArrayList)}.
+     * Test method for {@link application.modele.Question#setMauvaiseReponse(java.util.ArrayList)}.
      */
     @Test
     void testSetMauvaiseReponse() {
