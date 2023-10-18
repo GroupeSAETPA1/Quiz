@@ -22,6 +22,9 @@
         <COMPID name="Exception" mc="Standard.Class" uid="1021a898-7220-47d1-bcf7-12b410797d1e"/>
         <COMPID name="BanqueCatgorie" mc="Standard.Class" uid="29158db4-b81f-442d-a2e3-915e395b3e73"/>
       </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
       <COMP relation="Product">
         <COMPID name="Diagramme de classe digramme de classe" mc="Standard.ClassDiagram" uid="17b6e21b-9835-4ef7-9e85-6ae29d9b674f"/>
       </COMP>

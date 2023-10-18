@@ -30,3 +30,5 @@ bin/
 .classpath
 .project
 Modelio/Cas d utilisation/.runtime/.save
+
+Modelio/Digramme de classe/.runtime/
