@@ -3,7 +3,9 @@
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
-package ihm;
+package application.vue;
+
+import application.Quiz;
 
 // import Quiz; // marche pas :-(  FIXME
 

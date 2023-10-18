@@ -3,9 +3,11 @@
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
+package application;
+
 import java.io.IOException;
 
-import ihm.GestionVues;
+import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

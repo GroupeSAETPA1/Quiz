@@ -3,7 +3,7 @@
  * IUT de Rodez pas copyright, ni copyleft
  */
 
-package modele;
+package application.modele;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -3,7 +3,7 @@
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
-package controleurs;
+package application.controleurs;
 
 // TODO importer tout les modeles
 // import modeles.*;
