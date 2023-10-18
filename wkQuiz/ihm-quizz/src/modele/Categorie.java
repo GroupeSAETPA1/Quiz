@@ -7,6 +7,8 @@ package modele;
 
 import java.io.Serializable;
 
+import org.hamcrest.core.IsInstanceOf;
+
 /**
  * Modelisation d'une catégorie pour l'application de quizz
  * @author Costes Quentin
@@ -19,7 +21,7 @@ public class Categorie implements Serializable{
     /**
      * Constructeur de la classe
      * @param nom de la catégorie
-     * @throws HomonymeException
+     * @throws IllegalArgumentException
      */
     public Categorie(String nom) {
     	if (nomValide(nom)) {
@@ -35,14 +37,20 @@ public class Categorie implements Serializable{
      * @return true si le nom est valide, false sinon
      */
     public static boolean nomValide(String nom) {
-        return nom != "";
+        return !nom.isBlank();
     }
 
     /**
      * setter du nom de la catégorie
      * @param nom de la categorie
+     * @throws IllegalArgumentException
      */
     public void setNom(String nom) {
+    	if (nomValide(nom)) {
+    		this.nom = nom;
+    	} else {
+    		throw new IllegalArgumentException("le nom est invalide");
+    	}
     }
 
     /**
@@ -50,8 +58,27 @@ public class Categorie implements Serializable{
      * @return
      */
     public String getNom() {
-        // TODO Auto-generated return
-        return null;
+        return this.nom;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Nom de la catégorie : " + this.nom;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (this == obj) {
+    		return true;
+    	}
+    	if (obj == null) {
+    		return false;
+    	}
+    	if (this.getClass() != obj.getClass()) {
+    		return false;
+    	}
+    	Categorie categorie = (Categorie) obj;
+		return categorie.getNom() == this.getNom();
     }
 
 }
