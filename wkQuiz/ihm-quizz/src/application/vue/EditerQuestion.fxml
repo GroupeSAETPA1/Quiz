@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="RetourBouton" fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0">
+         <image>
+            <Image url="@../../../../images/icons8-retour-96%201.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="29.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retour">
+         <font>
+            <Font name="Open Sans Regular" size="32.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="538.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditer une Question">
+         <font>
+            <Font name="Open Sans Regular" size="40.0" />
+         </font>
+      </Text>
+      <ScrollPane layoutX="80.0" layoutY="280.0" prefHeight="471.0" prefWidth="1290.0">
+         <content>
+            <TableView prefHeight="456.0" prefWidth="1980.0" stylesheets="@../css/Editeur.css">
+              <columns>
+                <TableColumn maxWidth="1.7976931348623157E308" minWidth="260.0" prefWidth="-1.0" resizable="false" text="Catégorie de la Question" />
+                <TableColumn maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Nom de la Question" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="-1.0" resizable="false" text="Réponse Juste" />
+                  <TableColumn maxWidth="582.0" minWidth="89.0" prefWidth="600.0" resizable="false" text="Réponses fausses" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Feedback" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" text="Modifier" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" text="Supprimer" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Text fill="WHITE" layoutX="84.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la Question :">
+         <font>
+            <Font name="Open Sans Regular" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="83.0" layoutY="206.0" prefHeight="52.0" prefWidth="403.0" promptText="Nom de la question" style="-fx-background-radius: 20px;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="503.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie :">
+         <font>
+            <Font name="Open Sans Regular" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="502.0" layoutY="206.0" prefHeight="52.0" prefWidth="403.0" promptText="Catégorie de la Question" style="-fx-background-radius: 20px;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="916.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficultée :">
+         <font>
+            <Font name="Open Sans Regular" size="24.0" />
+         </font>
+      </Text>
+      <CheckBox layoutX="917.0" layoutY="213.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Facile" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Regular" size="28.0" />
+         </font>
+      </CheckBox>
+      <CheckBox layoutX="1057.0" layoutY="213.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Moyen" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Regular" size="28.0" />
+         </font>
+      </CheckBox>
+      <CheckBox layoutX="1204.0" layoutY="212.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Difficile" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Regular" size="28.0" />
+         </font>
+      </CheckBox>
+   </children>
+</Pane>

@@ -3,9 +3,11 @@
  * IUT de Rodez pas copright, ni copyleft
  */
 
-package modele;
+package application.modele;
 
 import java.util.List;
+
+import application.exception.HomonymeException;
 
 /**
  * Gestion de toutes les catégories présente dans l'application

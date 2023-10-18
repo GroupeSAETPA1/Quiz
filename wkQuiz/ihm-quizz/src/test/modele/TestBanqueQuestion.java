@@ -14,13 +14,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import exception.HomonymeException;
-import modele.BanqueQuestion;
-import modele.Categorie;
-import modele.Question;
+import application.exception.HomonymeException;
+import application.modele.BanqueQuestion;
+import application.modele.Categorie;
+import application.modele.Question;
 
 /** 
- * Classe de test unitaire de la classe {@link modele.BanqueQuestion}
+ * Classe de test unitaire de la classe {@link application.modele.BanqueQuestion}
  * @author Francois de Saint Palais
  */
 class TestBanqueQuestion {
@@ -53,7 +53,7 @@ class TestBanqueQuestion {
 
 
     /**
-     * Test method for {@link modele.BanqueQuestion#ajouter(modele.Question)}.
+     * Test method for {@link application.modele.BanqueQuestion#ajouter(application.modele.Question)}.
      */
     @Test
     void testAjouter() {
@@ -64,7 +64,7 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
+     * Test method for {@link application.modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
      */
     @Test
     void testBanqueQuestion() {
@@ -72,7 +72,7 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link modele.BanqueQuestion#getQuestion(int)}.
+     * Test method for {@link application.modele.BanqueQuestion#getQuestion(int)}.
      */
     @Test
     void testGetQuestion() {
@@ -84,7 +84,7 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
+     * Test method for {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
      */
     @Test
     void testGetQuestionNbFausseReponse() {
@@ -100,7 +100,7 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link modele.BanqueQuestion#getQuestions()}.
+     * Test method for {@link application.modele.BanqueQuestion#getQuestions()}.
      */
     @Test
     void testGetQuestions() {
@@ -111,7 +111,7 @@ class TestBanqueQuestion {
 
     /**
      * Test method for 
-     * {@link modele.BanqueQuestion#getQuestions(modele.Categorie)}.
+     * {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
      */
     @Test
     void testGetQuestionsCategorie() {
@@ -122,7 +122,7 @@ class TestBanqueQuestion {
 
     /**
      * Test method for 
-     * {@link modele.BanqueQuestion#getQuestionsDifficulte(int)}.
+     * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
      */
     @Test
     void testGetQuestionsDifficulte() {
@@ -139,7 +139,7 @@ class TestBanqueQuestion {
 
     /**
      * Test method for 
-     * {@link modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
+     * {@link application.modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
      */
     @Test
     void testGetQuestionsLibelle() {
