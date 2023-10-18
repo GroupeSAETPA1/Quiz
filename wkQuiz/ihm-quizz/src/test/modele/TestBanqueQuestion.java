@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /** 
  * TODO comment class responsibility (SRP)
- * @author francois
+ * @author Francois de Saint Palais
  */
 class TestBanqueQuestion {
 
