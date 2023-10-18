@@ -21,7 +21,7 @@ public class BanqueQuestion {
     private ArrayList<Question> questions;
 
 
-    public BanqueQuestion(ArrayList<Question> questions) {
+    public BanqueQuestion() {
     }
 
     public void ajouter(Question question) {
@@ -38,7 +38,7 @@ public class BanqueQuestion {
     /**
      * Permet de récupérer les questions qui on le nombre de fausses réponses passées en paramètres
      */
-    public ArrayList<Question> getQuestionNbFausseReponse(int nb) {
+    public ArrayList<Question> getQuestionsNbFausseReponse(int nb) {
         // TODO Auto-generated return
         return null;
     }
@@ -68,9 +68,11 @@ public class BanqueQuestion {
     }
 
     /**
-     * Permet de récupérer les questions qui on le libellé passé en paramètre (on vérifie que le libellé contient la string passée en paramètres)
+     * Permet de récupérer les questions qui on le libellé passé en paramètre 
+     * (on vérifie que le libellé contient la string passée en paramètres)
+     * en ignorant la casse
      */
-    public Question getQuestionsLibelle(ArrayList<String> nom) {
+    public ArrayList<Question> getQuestionsLibelle(String nom) {
         // TODO Auto-generated return
         return null;
     }
@@ -78,7 +80,7 @@ public class BanqueQuestion {
     /* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {
-        return "BanqueQuestion [questions=" + Arrays.toString(questions) + "]";
+        return questions.toString();
     }
     
     
