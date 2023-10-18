@@ -1,28 +1,54 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+/*
+ * Categorie.java 								18/10/2023
+ * IUT de Rodez, pas de copyrights ni copyleft
+ */
 
-@objid ("e3599152-7e26-4986-9f52-9033f37b1fef")
-public class Categorie {
-    /**
-     * Le nom de la catégorie
-     */
-    @objid ("01dd089a-cb6c-4dfa-b82d-797b06571215")
+package modele;
+
+import java.io.Serializable;
+
+/**
+ * Modelisation d'une catégorie pour l'application de quizz
+ * @author Costes Quentin
+ */
+public class Categorie implements Serializable{
+	
+    /** Le nom de la catégorie */
     private String nom;
 
-    @objid ("9911a65c-d902-4803-a8a9-55e9602d5978")
-    public Categorie(final String nom) {
+    /**
+     * Constructeur de la classe
+     * @param nom de la catégorie
+     * @throws HomonymeException
+     */
+    public Categorie(String nom) {
+    	if (nomValide(nom)) {
+    		this.nom = nom;
+    	} else {
+    		throw new IllegalArgumentException("le nom est invalide");
+    	}
+    }
+    
+    /**
+     * verifie la validitée du nom
+     * @param nom a verifier
+     * @return true si le nom est valide, false sinon
+     */
+    public static boolean nomValide(String nom) {
+        return nom != "";
     }
 
-    @objid ("aef60c3b-69ea-45ef-91d2-104349452ddc")
-    public boolean nomValide(final String nom) {
-        // TODO Auto-generated return
-        return false;
+    /**
+     * setter du nom de la catégorie
+     * @param nom de la categorie
+     */
+    public void setNom(String nom) {
     }
 
-    @objid ("10374c45-8daf-45bb-8968-4436172626c0")
-    public void setNom(final String nom) {
-    }
-
-    @objid ("9ace7c2a-5053-44b9-803b-25b761f93105")
+    /**
+     * getter du nom de la catégorie
+     * @return
+     */
     public String getNom() {
         // TODO Auto-generated return
         return null;
