@@ -6,8 +6,6 @@
 package application.modele;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Gestion de toutes les questions présentes  
@@ -22,40 +20,65 @@ public class BanqueQuestion {
 
 
     public BanqueQuestion() {
+        questions = new ArrayList<Question>();
     }
 
     public void ajouter(Question question) {
+        questions.add(question);
     }
 
     /**
      * Permet de récupérer une question précise avec son indice dans l’array qui stocke toute les Questions
+     * @param id L'indice de la question voulue
+     * @return La question à l'indice demandé
      */
     public Question getQuestion(int id) {
-        // TODO Auto-generated return
-        return null;
+        if (id < 0 || questions.size() <= id) {
+            throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
+                    + "hors de la liste de taile %s", id, questions.size()));
+        }
+        return questions.get(id);
     }
 
     /**
-     * Permet de récupérer les questions qui on le nombre de fausses réponses passées en paramètres
+     * Récupère les questions qui on le nombre de fausses réponses 
+     * passées en paramètres
+     * @param nb Le nombre possible de mauvaise réponse
+     * @return
      */
     public ArrayList<Question> getQuestionsNbFausseReponse(int nb) {
-        // TODO Auto-generated return
-        return null;
+        if (nb <= 0 || 4 <= nb) {
+            throw new IllegalArgumentException(String.format("Erreur : %d n'est pas un nombre correct de mauvaise réponse.",nb));
+        }
+        ArrayList<Question> resultat = new ArrayList<Question>();
+        for (Question question : questions) {
+            if (question.getMauvaisesReponses().size() == nb) {
+                resultat.add(question);
+            }
+        }
+        return resultat;
     }
 
     /**
      * Permet de récupérer toutes les questions
+     * @return Toutes les questions 
      */
     public ArrayList<Question> getQuestions() {
-        // TODO Auto-generated return
-        return null;
+        return questions;
     }
 
     /**
      * Permet de récupérer les questions qui on la catégorie passé en paramètres.
+     * @param categorie 
+     * @return
      */
     public ArrayList<Question> getQuestions(Categorie categorie) {
-        // TODO Auto-generated return
+        ArrayList<Question> resultat = new ArrayList<Question>();
+        for (Question question : questions) {
+            if (question.getCategorie().equals(categorie)) {
+                resultat.add(question);
+            }
+        }
         return null;
     }
 
