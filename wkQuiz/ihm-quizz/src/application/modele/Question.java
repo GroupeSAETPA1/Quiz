@@ -116,4 +116,10 @@ public class Question implements Serializable {
     public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
     }
 
+    /** @return valeur de mauvaisesReponses */
+    public ArrayList<String> getMauvaisesReponses() {
+        return mauvaisesReponses;
+    }
+
+    
 }
