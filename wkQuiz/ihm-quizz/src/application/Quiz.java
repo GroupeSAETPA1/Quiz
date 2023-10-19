@@ -23,7 +23,7 @@ import javafx.scene.image.Image;
  * @author Quentin COSTES
  * @author François DE SAINT PALAIS
  * @author Lucas DESCRIAUD
- * @author Tom DOUAUD
+ * @author Tom DOUAUD 
  */
 public class Quiz extends Application {
 
@@ -116,7 +116,7 @@ public class Quiz extends Application {
 	 * Programme principal
 	 * @param args non utilisé
 	 */
-	public static void main(String[] args) {	
+	public static void main(String Args[]) {	
 		launch(args);
 		// new ControleurPrincipal();	FIXME
 	}

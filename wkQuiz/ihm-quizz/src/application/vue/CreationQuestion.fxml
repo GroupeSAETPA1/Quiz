@@ -11,26 +11,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1171.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane layoutY="164.0" prefHeight="1017.0" prefWidth="1000.0" style="-fx-background-color: #282C34;">
+      <ScrollPane layoutY="136.0" prefHeight="664.0" prefWidth="1000.0" style="-fx-border-color: #282C34; -fx-background-color: #282C34;">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1016.0" prefWidth="998.0" style="-fx-background-color: #282C34;">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1016.0" prefWidth="982.0" style="-fx-background-color: #282C34;">
                <children>
                   <Label layoutX="140.0" layoutY="25.0" prefHeight="51.0" prefWidth="338.0" text="Catégorie : " textFill="WHITE">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="140.0" layoutY="75.0" prefHeight="80.0" prefWidth="204.0" promptText="Géneral" />
+                  <ComboBox layoutX="140.0" layoutY="75.0" prefHeight="80.0" prefWidth="200.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
                   <Label layoutX="140.0" layoutY="169.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la question : " textFill="WHITE">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="140.0" layoutY="217.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de votre question">
+                  <TextField layoutX="140.0" layoutY="217.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de votre question" style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
                   <Label layoutX="140.0" layoutY="319.0" prefHeight="51.0" prefWidth="338.0" text="Réponse vrai : " textFill="WHITE">
@@ -38,77 +38,77 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="140.0" layoutY="369.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez la bonne réponse ">
+                  <TextField layoutX="140.0" layoutY="369.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez la bonne réponse " style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
                   <Label layoutX="140.0" layoutY="462.0" prefHeight="51.0" prefWidth="338.0" text="Réponse Fausse : " textFill="WHITE">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="140.0" layoutY="524.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez la première mauvaise réponse ">
+                  <TextField layoutX="140.0" layoutY="524.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez la première mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="140.0" layoutY="622.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez votre deuxième mauvaise réponse ">
+                  <TextField layoutX="140.0" layoutY="622.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez votre deuxième mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="140.0" layoutY="718.0" prefHeight="80.0" prefWidth="720.0" promptText="Saissisez votre troisième mauvaise réponse ">
+                  <TextField layoutX="140.0" layoutY="718.0" prefHeight="80.0" prefWidth="720.0" promptText="Saissisez votre troisième mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="140.0" layoutY="813.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez votre quatrième mauvaise réponse ">
+                  <TextField layoutX="140.0" layoutY="813.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez votre quatrième mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="128.0" layoutY="911.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="392.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="140.0" layoutY="911.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="144.0" layoutY="1219.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Images/IconsMultiplier.png" />
+                              <Image url="@../../../../../Images/IconsSelect.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Button>
-                  <Button layoutX="581.0" layoutY="910.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="392.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                  <Button layoutX="590.0" layoutY="910.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="607.0" layoutY="1219.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Images/IconsSelect.png" />
+                              <Image url="@../../../../../Images/IconsMultiplier.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <font>
-                        <Font size="32.0" />
+                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Button>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label layoutX="238.0" layoutY="60.0" prefHeight="60.0" prefWidth="583.0" text="Création d'une question " textFill="WHITE">
+      <Label layoutX="274.0" layoutY="57.0" prefHeight="60.0" prefWidth="583.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
          <font>
-            <Font size="40.0" />
+            <Font name="Open Sans" size="40.0" />
          </font>
       </Label>
       <Label layoutX="16.0" layoutY="117.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
          <font>
-            <Font size="32.0" />
+            <Font name="Open Sans" size="32.0" />
          </font>
       </Label>
       <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/IconsRetour.png" />
+            <Image url="@../../../../../Images/IconsRetour.png" />
          </image>
       </ImageView>
    </children>
