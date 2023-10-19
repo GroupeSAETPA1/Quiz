@@ -26,33 +26,86 @@ import application.modele.Question;
 class testQuestion {
     
     private ArrayList<Question> questionValide;
-    private ArrayList<String> mauvaiseReponse1;
-    private ArrayList<Question> mauvaiseReponse2;
-    private ArrayList<Question> mauvaiseReponse3;
-    private ArrayList<Question> mauvaiseReponse4;
-    private ArrayList<Question> mauvaiseReponse5;
+    private  ArrayList<String> mauvaiseReponse1;
+    private ArrayList<String> mauvaiseReponse2;
+    private ArrayList<String> mauvaiseReponse3;
+    private ArrayList<String> mauvaiseReponse4;
+    private ArrayList<String> mauvaiseReponse5;
+    private Categorie[] categoriesValides = {new Categorie("Commentaire")};
     @BeforeEach
     void genererJeuxDeTest() {
         questionValide = new ArrayList<Question>();
-        mauvaiseReponse1.add(" /* commentaire */");
-        mauvaiseReponse1.add("<*  commentaire *>");
-        questionValide.add(new Question("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
-                           new Categorie("Commentaire") , 1 , "le délimiteur /**" ,
-                           mauvaiseReponse1));
+        mauvaiseReponse1 = new ArrayList<String>();
+        mauvaiseReponse2 = new ArrayList<String>();
+        mauvaiseReponse3 = new ArrayList<String>();
+        mauvaiseReponse4 = new ArrayList<String>();
+        mauvaiseReponse5 = new ArrayList<String>();
+        
+        mauvaiseReponse1.add("le délimiteur /*");
+        mauvaiseReponse1.add("le délimiteur //");
+        mauvaiseReponse1.add("le délimiteur (*");
+        
+        mauvaiseReponse2.add("une façon de présenter le code choisie par "
+                             + "le programmeur nommé Dupont");
+        mauvaiseReponse2.add("un texte sans signification particulière");
+        
+        mauvaiseReponse3.add(" // commentaire");
+        
+        mauvaiseReponse4.add("Un résumé très bref, pas plus d'une ligne, "
+                             + "du rôle du programme");
+        mauvaiseReponse4.add("Il n'y a pas de commentaire Javadoc "
+                             + "juste avant la ligne \"public class …\"");
+        mauvaiseReponse4.add("Le nom du fichier contenant le programme");
+        mauvaiseReponse4.add("Un texte libre laissé "
+                              + "à l'appréciation du programmeur");
+        
+        
+        questionValide.add(new Question("Quel est le délimiteur de début "
+                                        + "d'un commentaire Javadoc ?" , 
+                           categoriesValides[0] , 1 , "le délimiteur /**" ,
+                           mauvaiseReponse1 ,""));
+        questionValide.add(new Question("A quoi correspond l'expression : "
+                                         + "@author Dupont ?" ,
+                           categoriesValides[0] , 2 , 
+                           "une balise reconnue par Javadoc" , mauvaiseReponse2,
+                           "Les balises Javadoc commencent par le  caractère @"));
+       questionValide.add(new Question("Si un commentaire est écrit "
+                          + "sur plusieurs lignes, quel délimiteur de "
+                          + "commentaire est-il préférable d'utiliser ?" , 
+                          categoriesValides[0],1," /* commentaire */", 
+                          mauvaiseReponse3 ,""));
+       
+       questionValide.add(new Question("Que doit décrire le texte écrit dans "
+                          + "le commentaire Javadoc situé juste avant "
+                          + "la ligne \"public class …\" ?" ,
+                          categoriesValides[0],3 ,  
+                          "Le rôle du programme, en explicitant "
+                          + "de manière précise ce rôle " , mauvaiseReponse4 ,
+                          ""));
     }
     
     @Test
     void testConstructeurFeedBack() {
-        //assertDoesNotThrow(() -> new Question("Test",jeuTestCategorie.get(0),1,"bonne reponse",jeuTestReponsesFausses.get(0)));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Question("" , categoriesValides[0] , 3 ,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],-1,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()-> new Question("libelle non vide" , categoriesValides[0],5,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],
+                                    -999999,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],
+                                    9999999,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        
     }
 
-    /**
-     * Test method for {@link application.modele.Question#Question(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList)}.
-     */
-    @Test
-    void testConstructeurSansFeedback() {
-        fail("Not yet implemented");
-    }
 
     /**
      * Test method for {@link application.modele.Question#setLibelle(java.lang.String)}.
