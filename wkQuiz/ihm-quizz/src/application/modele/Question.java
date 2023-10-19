@@ -69,33 +69,21 @@ public class Question implements Serializable {
     public Question(String libelle,Categorie categorie,int difficulte,
                     String reponseJuste,ArrayList<String> reponsesFausse,
                     String feedback) {
-        
-    }
-
-    /**
-     * Constructeur de la classe utilisant les paramètres
-     * <ul>
-     *  <li>le libellé</li>
-     *  <li>la catégorie</li>
-     *  <li>la difficulté</li>
-     *  <li>la bonne proposition de réponse</li>
-     *  <li>la liste des mauvaises propositions</li>
-     * </ul>
-     * @throw IllegalArgumentException 
-     * <ul>
-     *  <li>si le libellé est une chaîne vide</li> 
-     *  <li>si la reponseJuste est une chaîne vide</li>
-     *  <li>si la difficulté est différente de 1 , 2 ou 3</li>
-     *  <li>si reponsesFausses est une liste vide</li>
-     * </ul>
-     */
-    public Question(String libelle,Categorie categorie,int difficulte ,
-                    String reponseJuste, ArrayList<String> reponsesFausse) {
+        if (libelle.equals("")) {
+            throw new IllegalArgumentException("Le libelle est vide");
+        }
+        if (difficulte < 0 || difficulte > 3) {
+            throw new IllegalArgumentException("Le niveau est compris "
+                                               + "entre 1 et 3");
+        }
+        //else
         this.libelle = libelle;
         this.categorie = categorie;
         this.difficulte = difficulte;
         this.reponseJuste = reponseJuste;
         this.mauvaisesReponses = reponsesFausse;
+        this.feedback = feedback;
+        
     }
 
     public void setLibelle(final String nouveauIntitulle) {

@@ -63,7 +63,7 @@ class testQuestion {
         questionValide.add(new Question("Quel est le délimiteur de début "
                                         + "d'un commentaire Javadoc ?" , 
                            categoriesValides[0] , 1 , "le délimiteur /**" ,
-                           mauvaiseReponse1));
+                           mauvaiseReponse1 ,""));
         questionValide.add(new Question("A quoi correspond l'expression : "
                                          + "@author Dupont ?" ,
                            categoriesValides[0] , 2 , 
@@ -73,28 +73,39 @@ class testQuestion {
                           + "sur plusieurs lignes, quel délimiteur de "
                           + "commentaire est-il préférable d'utiliser ?" , 
                           categoriesValides[0],1," /* commentaire */", 
-                          mauvaiseReponse3));
+                          mauvaiseReponse3 ,""));
        
        questionValide.add(new Question("Que doit décrire le texte écrit dans "
                           + "le commentaire Javadoc situé juste avant "
                           + "la ligne \"public class …\" ?" ,
                           categoriesValides[0],3 ,  
                           "Le rôle du programme, en explicitant "
-                          + "de manière précise ce rôle " , mauvaiseReponse4));
+                          + "de manière précise ce rôle " , mauvaiseReponse4 ,
+                          ""));
     }
     
     @Test
     void testConstructeurFeedBack() {
-        //assertDoesNotThrow(() -> new Question("Test",jeuTestCategorie.get(0),1,"bonne reponse",jeuTestReponsesFausses.get(0)));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Question("" , categoriesValides[0] , 3 ,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],-1,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()-> new Question("libelle non vide" , categoriesValides[0],5,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],
+                                    -999999,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->  new Question("libelle non vide" , categoriesValides[0],
+                                    9999999,
+                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
+        
     }
 
-    /**
-     * Test method for {@link application.modele.Question#Question(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList)}.
-     */
-    @Test
-    void testConstructeurSansFeedback() {
-        fail("Not yet implemented");
-    }
 
     /**
      * Test method for {@link application.modele.Question#setLibelle(java.lang.String)}.
