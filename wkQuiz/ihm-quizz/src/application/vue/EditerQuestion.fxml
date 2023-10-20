@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="RetourBouton" fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0">
          <image>
@@ -32,13 +37,13 @@
          <content>
             <TableView prefHeight="456.0" prefWidth="1980.0" stylesheets="@../css/Editeur.css">
               <columns>
-                <TableColumn maxWidth="1.7976931348623157E308" minWidth="260.0" prefWidth="-1.0" resizable="false" text="Catégorie de la Question" />
-                <TableColumn maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Nom de la Question" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="-1.0" resizable="false" text="Réponse Juste" />
-                  <TableColumn maxWidth="582.0" minWidth="89.0" prefWidth="600.0" resizable="false" text="Réponses fausses" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Feedback" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" text="Modifier" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" text="Supprimer" />
+                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="260.0" prefWidth="-1.0" resizable="false" text="Catégorie de la Question" />
+                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Nom de la Question" />
+                  <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="-1.0" resizable="false" sortable="false" text="Réponse Juste" />
+                  <TableColumn editable="false" maxWidth="582.0" minWidth="89.0" prefWidth="600.0" resizable="false" sortable="false" text="Réponses fausses" />
+                  <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" sortable="false" text="Feedback" />
+                  <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" sortable="false" text="Modifier" />
+                  <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="-1.0" resizable="false" sortable="false" text="Supprimer" />
               </columns>
             </TableView>
          </content>
@@ -63,25 +68,37 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Text fill="WHITE" layoutX="916.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficultée :">
+      <Text fill="WHITE" layoutX="916.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulté :">
          <font>
             <Font name="Open Sans Regular" size="24.0" />
          </font>
       </Text>
-      <CheckBox layoutX="917.0" layoutY="213.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Facile" textFill="WHITE">
+      <RadioButton layoutX="917.0" layoutY="213.0" mnemonicParsing="false" text="Facile" textFill="WHITE">
          <font>
-            <Font name="Open Sans Regular" size="28.0" />
+            <Font size="28.0" />
          </font>
-      </CheckBox>
-      <CheckBox layoutX="1057.0" layoutY="213.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Moyen" textFill="WHITE">
+      </RadioButton>
+      <RadioButton layoutX="1057.0" layoutY="213.0" mnemonicParsing="false" text="Moyen" textFill="WHITE">
          <font>
-            <Font name="Open Sans Regular" size="28.0" />
+            <Font size="28.0" />
          </font>
-      </CheckBox>
-      <CheckBox layoutX="1204.0" layoutY="212.0" mnemonicParsing="false" style="-fx-border-radius: px;" text="Difficile" textFill="WHITE">
+      </RadioButton>
+      <RadioButton layoutX="1204.0" layoutY="213.0" mnemonicParsing="false" text="Difficile" textFill="WHITE">
          <font>
-            <Font name="Open Sans Regular" size="28.0" />
+            <Font size="28.0" />
          </font>
-      </CheckBox>
+      </RadioButton>
+      <Button fx:id="CreerQuestionBouton" layoutX="1010.0" layoutY="28.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@../css/Editeur.css" text="Créer une Question" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" styleClass="cavajamaismarcher">
+               <image>
+                  <Image url="@../../../../images/icons8-plus-96%201.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </Pane>
