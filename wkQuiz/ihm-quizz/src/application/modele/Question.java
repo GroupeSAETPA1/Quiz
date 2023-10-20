@@ -64,6 +64,8 @@ public class Question implements Serializable {
      *  <li>si la reponseJuste est une chaîne vide</li>
      *  <li>si la difficulté est différente de 1 , 2 ou 3</li>
      *  <li>si reponsesFausses est une liste vide</li>
+     *  <li>si repoonseFausses contient une valeur en double 
+     *      (case ignorée) <li>
      * </ul>
      */
     public Question(String libelle,Categorie categorie,int difficulte,
@@ -76,6 +78,18 @@ public class Question implements Serializable {
             throw new IllegalArgumentException("Le niveau est compris "
                                                + "entre 1 et 3");
         }
+        if (reponseJuste.equals("")) {
+            throw new IllegalArgumentException("La réponse juste est vide");
+        }
+        if (reponsesFausse.isEmpty()) {
+            //TODO lever illegalArgumentException
+        }
+        if (reponsesFausseSansDoublon(reponsesFausse)) {
+            //TODO changer message erreur
+            throw new IllegalArgumentException("La liste des mauvaises reponses "
+                    + "ne doit pas etre vide et ne peut pas contenir de valeurs "
+                    + "en double (casse ignoré)");
+        }
         //else
         this.libelle = libelle;
         this.categorie = categorie;
@@ -85,7 +99,29 @@ public class Question implements Serializable {
         this.feedback = feedback;
         
     }
-
+    
+    /**
+     * verifie la validité d'une ArrayList pour le constructeur de question
+     * @param aTester : ArrayList dont on veux verifier la validité
+     * @return true si aTester n'est pas vide et qu'elle n'a que des valeurs
+     *         distinctes (casse ignoré)
+     *         false sinon
+     */
+    //TODO a tester
+    private static boolean reponsesFausseSansDoublon(ArrayList<String>aTester) {
+        boolean sansDoublon = true ;
+        String precedent;
+        for (int i = 0 ; i < aTester.size() && sansDoublon ; i++) {
+            precedent = aTester.get(i);
+            for (int j = 0 ; j < aTester.size() && sansDoublon ; j++) {
+                if (i != j) {
+                    sansDoublon = precedent.equalsIgnoreCase(aTester.get(j));                    
+                }
+            }           
+        }
+        return sansDoublon;
+        
+    }
     public void setLibelle(final String nouveauIntitulle) {
     }
 

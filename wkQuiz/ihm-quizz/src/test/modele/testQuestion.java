@@ -30,8 +30,10 @@ class testQuestion {
     private ArrayList<String> mauvaiseReponse2;
     private ArrayList<String> mauvaiseReponse3;
     private ArrayList<String> mauvaiseReponse4;
-    private ArrayList<String> mauvaiseReponse5;
+    private ArrayList<String> mauvaiseReponseDoublon;
     private Categorie[] categoriesValides = {new Categorie("Commentaire")};
+    private ArrayList<String> mauvaiseReponseVide;
+    
     @BeforeEach
     void genererJeuxDeTest() {
         questionValide = new ArrayList<Question>();
@@ -39,7 +41,9 @@ class testQuestion {
         mauvaiseReponse2 = new ArrayList<String>();
         mauvaiseReponse3 = new ArrayList<String>();
         mauvaiseReponse4 = new ArrayList<String>();
-        mauvaiseReponse5 = new ArrayList<String>();
+        mauvaiseReponseVide =  new ArrayList<String>();
+        mauvaiseReponseDoublon = new ArrayList<String>();
+                
         
         mauvaiseReponse1.add("le délimiteur /*");
         mauvaiseReponse1.add("le délimiteur //");
@@ -49,7 +53,9 @@ class testQuestion {
                              + "le programmeur nommé Dupont");
         mauvaiseReponse2.add("un texte sans signification particulière");
         
+        
         mauvaiseReponse3.add(" // commentaire");
+        
         
         mauvaiseReponse4.add("Un résumé très bref, pas plus d'une ligne, "
                              + "du rôle du programme");
@@ -58,6 +64,11 @@ class testQuestion {
         mauvaiseReponse4.add("Le nom du fichier contenant le programme");
         mauvaiseReponse4.add("Un texte libre laissé "
                               + "à l'appréciation du programmeur");
+        
+        mauvaiseReponseDoublon.add("doublon");
+        mauvaiseReponseDoublon.add("DOUBLON");
+        mauvaiseReponseDoublon.add("doublon");
+        mauvaiseReponseDoublon.add("DoUbLOn");
         
         
         questionValide.add(new Question("Quel est le délimiteur de début "
@@ -103,6 +114,19 @@ class testQuestion {
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                                     9999999,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()-> new Question("libelle non vide" , categoriesValides[0],1,
+                                  "" , mauvaiseReponse3 , ""));
+        assertThrows(IllegalArgumentException.class,
+                ()-> new Question("Libelle non  vide" , categoriesValides[0],1,
+                                  "reponse juste non vide" ,
+                                  mauvaiseReponseVide , ""));
+        assertDoesNotThrow(()->new Question("libelle non vide" , 
+                           categoriesValides[0] , 3 ,"le délimiteur /**" , 
+                           mauvaiseReponse1 ,""));
+        assertThrows(IllegalArgumentException.class,
+                ()->new Question("libelle non vide" , categoriesValides[0],3,
+                        "reponse juste non vide" , mauvaiseReponseDoublon ,""));
         
     }
 
