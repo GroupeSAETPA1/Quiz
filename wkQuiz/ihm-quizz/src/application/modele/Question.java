@@ -145,5 +145,11 @@ public class Question implements Serializable {
         return mauvaisesReponses;
     }
 
+    /** @return valeur de categorie */
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    
     
 }

@@ -5,11 +5,9 @@
 
 package test.modele;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +34,7 @@ class TestBanqueQuestion {
         ArrayList<String> reponsesFausses = new ArrayList<String>();
         reponsesFausses.add("Faux");
         Question question1 = new Question("Libelle", new Categorie("Nom"), 1,
-                "Vrai", reponsesFausses);
+                "Vrai", reponsesFausses,"");
         
         banqueQuestion = new BanqueQuestion();
         ensembleQuestion = new ArrayList<Question>();
@@ -76,10 +74,10 @@ class TestBanqueQuestion {
      */
     @Test
     void testGetQuestion() {
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestion(-1));
+        assertThrows(IndexOutOfBoundsException.class, ()->banqueQuestion.getQuestion(-1));
         
         banqueQuestion.ajouter(ensembleQuestion.get(0));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestion(ensembleQuestion.size()));
+        assertThrows(IndexOutOfBoundsException.class, ()->banqueQuestion.getQuestion(ensembleQuestion.size()));
         assertEquals(ensembleQuestion.get(0), banqueQuestion.getQuestion(0));
     }
 
@@ -104,6 +102,11 @@ class TestBanqueQuestion {
      */
     @Test
     void testGetQuestions() {
+        ArrayList<Question> listeVide = new ArrayList<Question>();
+        assertIterableEquals(listeVide, banqueQuestion.getQuestions());
+        for (Question question : ensembleQuestion) {
+            banqueQuestion.ajouter(question);
+        }
         assertIterableEquals(ensembleQuestion, banqueQuestion.getQuestions());
     }
 
