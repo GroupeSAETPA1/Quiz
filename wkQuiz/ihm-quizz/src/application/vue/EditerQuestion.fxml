@@ -16,7 +16,7 @@
    <children>
       <ImageView fx:id="RetourBouton" fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0">
          <image>
-            <Image url="@../../images/IconeRetour.png" />
+            <Image url="@images/IconeRetour.png" />
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="29.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retour">
@@ -31,7 +31,7 @@
       </Text>
       <ScrollPane layoutX="80.0" layoutY="280.0" prefHeight="471.0" prefWidth="1290.0">
          <content>
-            <TableView prefHeight="456.0" prefWidth="1980.0" stylesheets="@../css/Editeur.css">
+            <TableView prefHeight="456.0" prefWidth="1980.0" stylesheets="@css/Editeur.css">
               <columns>
                 <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="260.0" prefWidth="-1.0" resizable="false" text="Catégorie de la Question" />
                 <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Nom de la Question" />
@@ -84,14 +84,14 @@
             <Font size="28.0" />
          </font>
       </RadioButton>
-      <Button fx:id="CreerQuestionBouton" layoutX="1010.0" layoutY="28.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@../css/Editeur.css" text="Créer une Question" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="CreerQuestionBouton" layoutX="1010.0" layoutY="28.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/Editeur.css" text="Créer une Question" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
          <graphic>
             <ImageView fitHeight="64.0" fitWidth="64.0" styleClass="cavajamaismarcher">
                <image>
-                  <Image url="@../../images/IconeCreer.png" />
+                  <Image url="@images/IconeCreer.png" />
                </image>
             </ImageView>
          </graphic>

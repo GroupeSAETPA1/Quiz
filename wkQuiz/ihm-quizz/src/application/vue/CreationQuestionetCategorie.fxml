@@ -81,7 +81,7 @@
                                  <graphic>
                                     <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../images/IconeAnnuler.png" />
+                                          <Image url="@images/IconeAnnuler.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -93,7 +93,7 @@
                                  <graphic>
                                     <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../images/IconeValider.png" />
+                                          <Image url="@images/IconeValider.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -109,7 +109,7 @@
                   </Label>
                   <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/IconeRetour.png" />
+                        <Image url="@images/IconeRetour.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="32.0" layoutY="96.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
@@ -129,7 +129,7 @@
                      <children>
                         <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/IconeRetour.png" />
+                              <Image url="@images/IconeRetour.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="285.0" layoutY="58.0" prefHeight="57.0" prefWidth="583.0" text="Création d'une catégorie" textFill="WHITE">
@@ -154,7 +154,7 @@
                            <graphic>
                               <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="222.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../images/IconeAnnuler.png" />
+                                    <Image url="@images/IconeAnnuler.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -166,7 +166,7 @@
                            <graphic>
                               <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="633.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../images/IconeValider.png" />
+                                    <Image url="@images/IconeValider.png" />
                                  </image>
                               </ImageView>
                            </graphic>

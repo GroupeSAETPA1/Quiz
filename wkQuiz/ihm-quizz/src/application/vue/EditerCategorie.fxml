@@ -15,7 +15,7 @@
    <children>
       <ImageView fx:id="RetourBouton" fitHeight="96.0" fitWidth="96.0" layoutX="32.0" layoutY="20.0">
          <image>
-            <Image url="@../../images/IconeRetour.png" />
+            <Image url="@images/IconeRetour.png" />
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="29.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retour">
@@ -50,14 +50,14 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="CreerQuestionBouton" layoutX="1020.0" layoutY="38.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@../css/Editeur.css" text="Créer une Catégorie" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="CreerQuestionBouton" layoutX="1020.0" layoutY="38.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/Editeur.css" text="Créer une Catégorie" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
          <graphic>
             <ImageView fitHeight="64.0" fitWidth="64.0" styleClass="cavajamaismarcher">
                <image>
-                  <Image url="@../../images/IconeCreer.png" />
+                  <Image url="@images/IconeCreer.png" />
                </image>
             </ImageView>
          </graphic>
