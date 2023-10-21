@@ -48,24 +48,23 @@ public class Quiz extends Application {
 	private static Scene scenePartagerQuestions;
 	private static Scene sceneChoixPartageQuestions;
 	private static Scene sceneRecevoirQuestions;
+	private static Scene sceneCreationQuestionEtCategorie;
 
 
-	//TODO Utiliser un HashMap ?
+	//TODO Utiliser un HashMap<NomDuFichier, Scene> ?
 	public static Scene[] scenes = {
 			sceneAcceuil, sceneAide, sceneParametrePartie, sceneQuestion, sceneResultat,
-			sceneSolution, sceneEdition, sceneImporterQuestion, sceneCreerQuestion,
-			sceneCreerCategorie, sceneEditerCategorie, sceneEditerQuestion,
-			sceneModeEnLigne, scenePartagerQuestions, sceneChoixPartageQuestions,
-			sceneRecevoirQuestions
+			sceneSolution, sceneEdition, sceneImporterQuestion, sceneEditerCategorie, 
+			sceneEditerQuestion,sceneModeEnLigne, scenePartagerQuestions, 
+			sceneChoixPartageQuestions, sceneRecevoirQuestions, sceneCreationQuestionEtCategorie
 	};
 		
 	private static String[] ressources = {
 			"Acceuil.fxml", "Aide.fxml", "ParametrePartie.fxml",
 			"Question.fxml", "Resultat.fxml", "Solution.fxml",
-			"Editeur.fxml", "ImporterQuestion.fxml", "CreationQuestion.fxml",
-			"CreationCategorie.fxml", "EditerCategorie.fxml", "EditerQuestion.fxml",
-			"ModeEnLigne.fxml", "PartagerQuestions.fxml", "ChoixPartagerQuestions.fxml",
-			"RecevoirQuestions.fxml","CreationQuestionetCatégorie.fxml"
+			"Editeur.fxml", "ImporterQuestion.fxml", "EditerCategorie.fxml", 
+			"EditerQuestion.fxml", "ModeEnLigne.fxml", "PartagerQuestions.fxml",
+			"ChoixPartagerQuestions.fxml", "RecevoirQuestions.fxml","CreationQuestionetCategorie.fxml"
 	};
 
 	/**
@@ -91,7 +90,7 @@ public class Quiz extends Application {
                 
                 /* Création de la scène correspondante à la vue chargée */
                 scenes[indiceScene] = new Scene(conteneur); // TODO: Vérifier que ca va pas ne poser de pb avec les scenes qui ont une taille spécialle
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.err.println("Nous n'avons pas pu loadé : " + ressources[indiceScene]);
             }
         }
