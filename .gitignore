@@ -29,6 +29,6 @@ bin/
 .settings/
 .classpath
 .project
-Modelio/Cas d utilisation/.runtime/.save
+Modelio/Cas d utilisation/.runtime/
 
 Modelio/Digramme de classe/.runtime/
