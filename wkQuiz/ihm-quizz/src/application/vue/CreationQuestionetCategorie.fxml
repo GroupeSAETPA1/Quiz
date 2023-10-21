@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane stylesheets="@CSS/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #282C34;">
                <children>
-                  <ScrollPane layoutY="136.0" prefHeight="664.0" prefWidth="1000.0" stylesheets="@CSS/mainStyle.css">
+                  <ScrollPane layoutY="136.0" prefHeight="664.0" prefWidth="1000.0" stylesheets="@css/mainStyle.css">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1016.0" prefWidth="966.0" style="-fx-background-color: #282C34;">
                            <children>

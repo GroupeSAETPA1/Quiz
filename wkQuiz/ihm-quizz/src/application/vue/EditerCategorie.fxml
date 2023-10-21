@@ -50,7 +50,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="CreerQuestionBouton" layoutX="1020.0" layoutY="38.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/Editeur.css" text="Créer une Catégorie" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="CreerQuestionBouton" layoutX="1020.0" layoutY="38.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Créer une Catégorie" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
