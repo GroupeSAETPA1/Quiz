@@ -1,5 +1,5 @@
 /*
- * testQuestion.java                                    18 oct. 2023
+ * TestQuestion.java                                    18 oct. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
@@ -23,7 +23,7 @@ import application.modele.Question;
  * @author Lucas
  */
 
-class testQuestion {
+class TestQuestion {
     
     private ArrayList<Question> questionValide;
     private  ArrayList<String> mauvaiseReponse1;
@@ -96,27 +96,36 @@ class testQuestion {
     }
     
     @Test
-    void testConstructeurFeedBack() {
+    void testConstructeur() {
+        //Le Libelle est vide
         assertThrows(IllegalArgumentException.class,
                 () -> new Question("" , categoriesValides[0] , 3 ,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
+        
+        //La difficulté est negative
         assertThrows(IllegalArgumentException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],-1,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
         assertThrows(IllegalArgumentException.class,
-                ()-> new Question("libelle non vide" , categoriesValides[0],5,
-                                   "le délimiteur /**" , mauvaiseReponse1 ,""));
-        assertThrows(IllegalArgumentException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
-                                    -999999,
+                        -999999,
+                        "le délimiteur /**" , mauvaiseReponse1 ,""));
+        
+        //La difficulté est strictement supérieur à 3
+        assertThrows(IllegalArgumentException.class,
+                ()-> new Question("libelle non vide" , categoriesValides[0],4,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
         assertThrows(IllegalArgumentException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                                     9999999,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
+        
+        // La réponse juste est vide
         assertThrows(IllegalArgumentException.class,
                 ()-> new Question("libelle non vide" , categoriesValides[0],1,
                                   "" , mauvaiseReponse3 , ""));
+        
+        //La liste des mauvaise réponse est vide
         assertThrows(IllegalArgumentException.class,
                 ()-> new Question("Libelle non  vide" , categoriesValides[0],1,
                                   "reponse juste non vide" ,
@@ -124,6 +133,8 @@ class testQuestion {
         assertDoesNotThrow(()->new Question("libelle non vide" , 
                            categoriesValides[0] , 3 ,"le délimiteur /**" , 
                            mauvaiseReponse1 ,""));
+        
+        //La liste des mauvaise réponse contient un doublon
         assertThrows(IllegalArgumentException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                         "reponse juste non vide" , mauvaiseReponseDoublon ,""));

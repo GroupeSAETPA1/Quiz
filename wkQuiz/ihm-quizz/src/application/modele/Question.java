@@ -81,13 +81,13 @@ public class Question implements Serializable {
         if (reponseJuste.equals("")) {
             throw new IllegalArgumentException("La réponse juste est vide");
         }
-        if (reponsesFausse.isEmpty()) {
-            //TODO lever illegalArgumentException
-        }
-        if (reponsesFausseSansDoublon(reponsesFausse)) {
-            //TODO changer message erreur
+        if (reponsesFausse.size() == 0) {
             throw new IllegalArgumentException("La liste des mauvaises reponses "
-                    + "ne doit pas etre vide et ne peut pas contenir de valeurs "
+                    + "ne doit pas etre vide");
+        }
+        if (!reponsesFausseSansDoublon(reponsesFausse)) {
+            throw new IllegalArgumentException("La liste des mauvaises reponses "
+                    + "ne peut pas contenir de valeurs "
                     + "en double (casse ignoré)");
         }
         //else
@@ -115,7 +115,7 @@ public class Question implements Serializable {
             precedent = aTester.get(i);
             for (int j = 0 ; j < aTester.size() && sansDoublon ; j++) {
                 if (i != j) {
-                    sansDoublon = precedent.equalsIgnoreCase(aTester.get(j));                    
+                    sansDoublon = !precedent.equalsIgnoreCase(aTester.get(j));                    
                 }
             }           
         }
