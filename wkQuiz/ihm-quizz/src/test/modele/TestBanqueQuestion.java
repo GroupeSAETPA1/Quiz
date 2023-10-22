@@ -71,9 +71,10 @@ class TestBanqueQuestion {
 
     /**
      * Test method for {@link application.modele.BanqueQuestion#getQuestion(int)}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestion() {
+    void testGetQuestion() throws HomonymeException {
         assertThrows(IndexOutOfBoundsException.class, ()->banqueQuestion.getQuestion(-1));
         
         banqueQuestion.ajouter(ensembleQuestion.get(0));
@@ -83,9 +84,10 @@ class TestBanqueQuestion {
 
     /**
      * Test method for {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestionNbFausseReponse() {
+    void testGetQuestionNbFausseReponse() throws HomonymeException {
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(Integer.MIN_VALUE));
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(-1));
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(0));
@@ -99,9 +101,10 @@ class TestBanqueQuestion {
 
     /**
      * Test method for {@link application.modele.BanqueQuestion#getQuestions()}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestions() {
+    void testGetQuestions() throws HomonymeException {
         ArrayList<Question> listeVide = new ArrayList<Question>();
         assertIterableEquals(listeVide, banqueQuestion.getQuestions());
         for (Question question : ensembleQuestion) {
@@ -115,9 +118,10 @@ class TestBanqueQuestion {
     /**
      * Test method for 
      * {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestionsCategorie() {
+    void testGetQuestionsCategorie() throws HomonymeException {
         banqueQuestion.ajouter(ensembleQuestionCategorieNom.get(0));
         assertEquals(ensembleQuestionCategorieNom.get(0), 
                 banqueQuestion.getQuestions(new Categorie("Nom")));
@@ -126,9 +130,10 @@ class TestBanqueQuestion {
     /**
      * Test method for 
      * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestionsDifficulte() {
+    void testGetQuestionsDifficulte() throws HomonymeException {
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(-1));
         assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(0));
@@ -143,9 +148,10 @@ class TestBanqueQuestion {
     /**
      * Test method for 
      * {@link application.modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
+     * @throws HomonymeException 
      */
     @Test
-    void testGetQuestionsLibelle() {
+    void testGetQuestionsLibelle() throws HomonymeException {
         banqueQuestion.ajouter(ensembleQuestionLibelleNom.get(0));
         
         assertIterableEquals(ensembleQuestionLibelleNom, 

@@ -150,6 +150,24 @@ public class Question implements Serializable {
         return categorie;
     }
 
+    /** 
+     * TODO comment method role
+     * @return
+     */
+    public int getDifficulte() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    /** 
+     * TODO comment method role
+     * @return
+     */
+    public String getLibelle() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     
     
 }

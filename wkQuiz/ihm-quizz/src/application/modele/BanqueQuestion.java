@@ -5,7 +5,10 @@
 
 package application.modele;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import application.exception.HomonymeException;
 
 /**
  * Gestion de toutes les questions présentes  
@@ -23,7 +26,10 @@ public class BanqueQuestion {
         questions = new ArrayList<Question>();
     }
 
-    public void ajouter(Question question) {
+    public void ajouter(Question question) throws HomonymeException {
+        if (questions.contains(question)) {
+            throw new HomonymeException("La question existe déjà.");
+        }
         questions.add(question);
     }
 
@@ -86,8 +92,14 @@ public class BanqueQuestion {
      * Permet de récupérer les questions qui ont la difficultée passée en paramètre
      */
     public ArrayList<Question> getQuestionsDifficulte(int difficulte) {
-        // TODO Auto-generated return
-        return null;
+        if (difficulte < 1 || 3 < difficulte) {
+            throw new IllegalArgumentException("Une difficulte est comprise entre 1 et 3");
+        }
+        ArrayList<Question> resultat = new ArrayList<Question>();
+        for (Question question : questions) {
+            if (question.getDifficulte() == difficulte) resultat.add(question);
+        }
+        return resultat;
     }
 
     /**
@@ -97,13 +109,24 @@ public class BanqueQuestion {
      */
     public ArrayList<Question> getQuestionsLibelle(String nom) {
         // TODO Auto-generated return
-        return null;
+        ArrayList<Question> resultat = new ArrayList<Question>();
+        for (Question question : questions) {
+            if (question.getLibelle().contains(nom.toLowerCase())) resultat.add(question);
+        }
+        return resultat;
     }
 
     /* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {
-        return questions.toString();
+        StringBuilder resultat = new StringBuilder();
+        for (Question question : questions) {
+            resultat.append(question);
+            resultat.append("\n\n"
+                            + "--------------------------------------------"
+                            + "\n\n");
+        }
+        return resultat.toString();
     }
     
     
