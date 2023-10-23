@@ -40,8 +40,6 @@ public class Quiz extends Application {
 	private static Scene sceneSolution;	
 	private static Scene sceneEdition;
 	private static Scene sceneImporterQuestion;	
-	private static Scene sceneCreerQuestion;
-	private static Scene sceneCreerCategorie;
 	private static Scene sceneEditerCategorie;
 	private static Scene sceneEditerQuestion;
 	private static Scene sceneModeEnLigne;
@@ -97,10 +95,13 @@ public class Quiz extends Application {
         
         // on définit le titre, la hauteur et la largeur de la fenêtre principale
         primaryStage.setTitle("Quizéo - Menu principal");
-        primaryStage.setHeight(600);
-        primaryStage.setWidth(1000);
 
-        //primaryStage.getIcons().add(new Image("vues/images/IconePrincipale.png")); // TODO faudra changer l'architecture de fichier de fond en comble pour que ca puisse marcher
+        
+        try {
+            primaryStage.getIcons().add(new Image("application/vue/images/IconePrincipale.png"));
+        } catch (Exception e) {
+            System.err.println("Erreur : L'îcone est introuvables");
+        }
 
         /*
          * on associe la scène principale à la fenêtre principale
