@@ -58,14 +58,16 @@ public class Question implements Serializable {
      *  <li>la liste des mauvaises propositions</li>
      *  <li>le feedback</li>
      * </ul>
-     * @throw IllegalArgumentException 
+     * @throw IllegalArgumentException si
      * <ul>
-     *  <li>si le libellé est une chaîne vide</li> 
-     *  <li>si la reponseJuste est une chaîne vide</li>
-     *  <li>si la difficulté est différente de 1 , 2 ou 3</li>
-     *  <li>si reponsesFausses est une liste vide</li>
-     *  <li>si repoonseFausses contient une valeur en double 
-     *      (case ignorée) <li>
+     *  <li> le libellé est une chaîne vide</li> 
+     *  <li> la reponseJuste est une chaîne vide</li>
+     *  <li> la difficulté est différente de 1 , 2 ou 3</li>
+     *  <li> reponsesFausses est une liste vide</li>
+     *  <li> reponseFausses contient une valeur en double 
+     *       (case ignorée) </li>
+     *  <li> reponseFausses contient une chaine egale a reponse juste
+     *       (case ignorée) </li>
      * </ul>
      */
     public Question(String libelle,Categorie categorie,int difficulte,
@@ -90,6 +92,12 @@ public class Question implements Serializable {
                     + "ne peut pas contenir de valeurs "
                     + "en double (casse ignoré)");
         }
+        
+        if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
+            throw new IllegalArgumentException("La liste des reponses fausses "
+                    + "contient une ou plusieurs propositions égale "
+                    + "a la réponse juste (casse ignorée");
+        }
         //else
         this.libelle = libelle;
         this.categorie = categorie;
@@ -107,7 +115,6 @@ public class Question implements Serializable {
      *         distinctes (casse ignoré)
      *         false sinon
      */
-    //TODO a tester
     private static boolean reponsesFausseSansDoublon(ArrayList<String>aTester) {
         boolean sansDoublon = true ;
         String precedent;
@@ -120,6 +127,21 @@ public class Question implements Serializable {
             }           
         }
         return sansDoublon;
+        
+    }
+    /**
+     * @param aTester : ArrayList dont on veux verifier la validité
+     * @return true si aTester contient une chaine de caractère identique ,
+     *         la casse est ignorée des deux cotées.
+     *         false sinon.      
+     */
+    private static boolean reponseFausseContientReponseJuste
+    (ArrayList<String> aTester ,  String reponseJuste) {
+        boolean fauxContientJuste = false ;
+        for (int i = 0 ; i < aTester.size() && !fauxContientJuste  ; i++) {
+            fauxContientJuste =  reponseJuste.equalsIgnoreCase(aTester.get(i));
+        }
+        return fauxContientJuste ;
         
     }
     public void setLibelle(final String nouveauIntitulle) {
@@ -160,12 +182,10 @@ public class Question implements Serializable {
     }
 
     /** 
-     * TODO comment method role
-     * @return
+     * @return libelle de la question (this)
      */
     public String getLibelle() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.libelle;
     }
 
     

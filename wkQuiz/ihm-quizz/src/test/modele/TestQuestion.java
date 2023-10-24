@@ -46,7 +46,7 @@ class TestQuestion {
                 
         
         mauvaiseReponse1.add("le délimiteur /*");
-        mauvaiseReponse1.add("le délimiteur //");
+        mauvaiseReponse1.add("le delimiteur //");
         mauvaiseReponse1.add("le délimiteur (*");
         
         mauvaiseReponse2.add("une façon de présenter le code choisie par "
@@ -139,9 +139,34 @@ class TestQuestion {
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                         "reponse juste non vide" , mauvaiseReponseDoublon ,""));
         
+        //La reponse juste est présente dans les reponses fausses 
+       assertThrows(IllegalArgumentException.class,
+                ()->new Question("libelle non vide" , categoriesValides[0],3,
+                       "le délimiteur /*",mauvaiseReponse1 , ""));        
+       assertThrows(IllegalArgumentException.class,
+                ()->new Question("libelle non vide" , categoriesValides[0],3,
+                       "LE DELIMITEUR //",mauvaiseReponse1 , ""));
+       assertThrows(IllegalArgumentException.class,
+                ()->new Question("libelle non vide" , categoriesValides[0],3,
+                       "LE DELimiTEUR //",mauvaiseReponse1 , ""));        
+       assertThrows(IllegalArgumentException.class,
+                ()->new Question("libelle non vide" , categoriesValides[0],3,
+                       "LE delIMIteur //",mauvaiseReponse1 , ""));
+        
     }
 
-
+     @Test
+     void testGetLibelle() {
+         assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
+                 questionValide.get(0).getLibelle());
+         assertEquals("A quoi correspond l'expression : @author Dupont ?" , 
+                 questionValide.get(1).getLibelle());
+         //assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
+         //        questionValide.get(0).getLibelle());
+         //assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
+         //        questionValide.get(0).getLibelle());
+     
+     }
     /**
      * Test method for {@link application.modele.Question#setLibelle(java.lang.String)}.
      */
