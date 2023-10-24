@@ -31,7 +31,7 @@ class TestQuestion {
     private ArrayList<String> mauvaiseReponse3;
     private ArrayList<String> mauvaiseReponse4;
     private ArrayList<String> mauvaiseReponseDoublon;
-    private Categorie[] categoriesValides = {new Categorie("Commentaire")};
+    private Categorie[] categoriesValides = {new Categorie("Commentaire"), new Categorie("test")};
     private ArrayList<String> mauvaiseReponseVide;
     
     @BeforeEach
@@ -73,7 +73,7 @@ class TestQuestion {
         
         questionValide.add(new Question("Quel est le délimiteur de début "
                                         + "d'un commentaire Javadoc ?" , 
-                           categoriesValides[0] , 1 , "le délimiteur /**" ,
+                           categoriesValides[0] , 0 , "le délimiteur /**" ,
                            mauvaiseReponse1 ,""));
         questionValide.add(new Question("A quoi correspond l'expression : "
                                          + "@author Dupont ?" ,
@@ -157,8 +157,7 @@ class TestQuestion {
 
      @Test
      void testGetLibelle() {
-         assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
-                 questionValide.get(0).getLibelle());
+         assertEquals("Commentaire", questionValide.get(0).getCategorie());
          assertEquals("A quoi correspond l'expression : @author Dupont ?" , 
                  questionValide.get(1).getLibelle());
          //assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
@@ -167,60 +166,105 @@ class TestQuestion {
          //        questionValide.get(0).getLibelle());
      
      }
-    /**
-     * Test method for {@link application.modele.Question#setLibelle(java.lang.String)}.
-     */
+    
+     
     @Test
     void testSetLibelle() {
         fail("Not yet implemented");
     }
 
-    /**
-     * Test method for {@link application.modele.Question#setCatgorie(java.lang.String)}.
-     */
+    
+    @Test
+    void testGetCategorie() {
+        assertEquals("Commentaire", questionValide.get(0).getCategorie());
+        assertNotEquals("test", questionValide.get(0).getCategorie());
+        		
+        questionValide.get(0).setCatgorie(categoriesValides[1]);
+        
+        assertEquals("test" , questionValide.get(1).getCategorie());
+        assertNotEquals("Commentaire", questionValide.get(0).getCategorie());
+    }
+    
+    
     @Test
     void testSetCatgorie() {
-        fail("Not yet implemented");
+    	// on verifie que la méthode ne leve pas d'exception
+    	assertDoesNotThrow(()->questionValide.get(0).setCatgorie(categoriesValides[1]));
+    	// on verifie que le changement a bien été effectuer
+        assertEquals("test", questionValide.get(0).getCategorie());
     }
-
-    /**
-     * Test method for {@link application.modele.Question#setDifficulte(int)}.
-     */
+    
+    @Test
+    void testGetDifficulte() {
+    	assertEquals(0, questionValide.get(0).getDifficulte());
+    	assertNotEquals(1, questionValide.get(0).getDifficulte());
+    	
+    	assertEquals(2, questionValide.get(1).getDifficulte());
+    	assertNotEquals(0, questionValide.get(1).getDifficulte());
+    }
+    
+    
     @Test
     void testSetDifficulte() {
-        fail("Not yet implemented");
+    	assertDoesNotThrow(()->questionValide.get(0).setDifficulte(3));
+    	assertThrows(IllegalArgumentException.class, 
+    				 ()-> questionValide.get(0).setDifficulte(6));
+    	assertThrows(IllegalArgumentException.class, 
+				 ()-> questionValide.get(0).setDifficulte(-5));
+    	assertEquals(3, questionValide.get(0).getDifficulte());
+    }
+    
+    @Test
+    void testGetFeedback() {
+    	assertEquals("", questionValide.get(0).getFeedback());
+    	assertNotEquals("test", questionValide.get(0).getFeedback());
+    	
+    	assertEquals("Les balises Javadoc commencent par le  caractère @"
+    			     , questionValide.get(1).getFeedback());
+    	assertEquals("Les balises Javadoc commencent par le  caractère @"
+			     , questionValide.get(1).getFeedback());
+    }
+    
+    @Test
+    void testSetFeedback() {
+    	// on verifie que la méthode ne leve pas d'exception
+    	assertDoesNotThrow(()->questionValide.get(0).setFeedback(""));
+    	assertDoesNotThrow(()->questionValide.get(0).setFeedback("test"));
+    	// on verifie que le changement a bien été effectuer
+        assertEquals("test", questionValide.get(0).getFeedback());
     }
 
-    /**
-     * Test method for {@link application.modele.Question#setBonneReponse(java.lang.String)}.
-     */
+    
     @Test
     void testSetBonneReponse() {
         fail("Not yet implemented");
     }
 
-    /**
-     * Test method for {@link application.modele.Question#setMauvaiseReponse(java.util.ArrayList)}.
-     */
+    
     @Test
     void testSetMauvaiseReponse() {
         fail("Not yet implemented");
     }
 
-    /**
-     * Test method for {@link java.lang.Object#equals(java.lang.Object)}.
-     */
+    
     @Test
     void testEquals() {
         fail("Not yet implemented");
     }
 
-    /**
-     * Test method for {@link java.lang.Object#toString()}.
-     */
+    
     @Test
     void testToString() {
-        fail("Not yet implemented");
+    	String valide = """ 
+    			difficulté de la question : 0
+    			Categorie de la question : Commentaire
+    			Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
+    			Mauvaise réponses :
+    			- le délimiteur /*
+    			- le delimiteur //
+    			- le délimiteur (*
+    			Bonne réponse : le délimiteur /**""";
+        assertEquals(valide, questionValide.get(0).toString());
     }
 
 }

@@ -10,6 +10,13 @@ import java.util.ArrayList;
  */
 
 public class Question implements Serializable {
+	
+	/** difficultée minimale d'une question */
+	private final int DIFFICULTE_MINIMALE = 0;
+	
+	/** difficultée maximale d'une question */
+	private final int DIFFICULTE_MAXIMALE = 3;
+	
     /**
      * Intitulé de la question
      */
@@ -46,7 +53,7 @@ public class Question implements Serializable {
     /**
      * Catégorie de la question
      */  
-    public Categorie categorie;
+    private Categorie categorie;
 
     /**
      * Constructeur de la classe utilisant les paramètres
@@ -76,7 +83,7 @@ public class Question implements Serializable {
         if (libelle.equals("")) {
             throw new IllegalArgumentException("Le libelle est vide");
         }
-        if (difficulte < 0 || difficulte > 3) {
+        if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
             throw new IllegalArgumentException("Le niveau est compris "
                                                + "entre 1 et 3");
         }
@@ -156,6 +163,12 @@ public class Question implements Serializable {
     }
 
     public void setDifficulte(final int nouvelleDifficulte) {
+    	if (nouvelleDifficulte < DIFFICULTE_MINIMALE 
+            || nouvelleDifficulte > DIFFICULTE_MAXIMALE) {
+            throw new IllegalArgumentException("Le niveau est compris "
+                                               + "entre 1 et 3");
+        }
+    	this.difficulte = nouvelleDifficulte;
     }
 
     public void setBonneReponse(final String nouvelleBonneReponse) {
@@ -163,18 +176,22 @@ public class Question implements Serializable {
 
     public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
     }
+    
+    public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
 
-    /** @return valeur de mauvaisesReponses */
+	/** @return valeur de mauvaisesReponses */
     public ArrayList<String> getMauvaisesReponses() {
         return mauvaisesReponses;
     }
 
-    /** @return valeur de categorie */
-    public Categorie getCategorie() {
-        return categorie;
+    /** @return nom de la categorie */
+    public String getCategorie() {
+        return categorie.getNom();
     }
 
-    /** @return */
+    /** @return difficultée de la question*/
     public int getDifficulte() {
         return this.difficulte;
     }
@@ -186,13 +203,31 @@ public class Question implements Serializable {
         return this.libelle;
     }
     
+    /**@return réponse juste de la question */
     public String getReponseJuste() {
     	return this.reponseJuste;
     }
-
+    
+    /** @retrun feedback de la question */
     public String getFeedback() {
     	return this.feedback;
     }
     
-    
+    @Override
+    public String toString() {
+    	String aRetouner =  "difficulté de la question : " + this.getDifficulte()
+    		 + "\nCategorie de la question : " + this.getCategorie()
+    		 + "\nIntiltulé de la question : " + this.getLibelle()
+    		 + "\nMauvaise réponses :\n";
+    		 
+    	for (String reponse : this.mauvaisesReponses) {
+			aRetouner += "- " + reponse + "\n";
+		}
+    	
+    	aRetouner += "Bonne réponse : " + getReponseJuste();
+    	if (getFeedback() != "") {
+    		aRetouner += "\nFeedback : " + getFeedback();    	
+    	}
+    	return aRetouner; 	
+    }
 }
