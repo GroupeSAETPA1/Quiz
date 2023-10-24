@@ -151,13 +151,17 @@ public class Question implements Serializable {
         return fauxContientJuste ;
         
     }
+    
+    /** Change la valeur de this.libelle en nouveau*/
     public void setLibelle(final String nouveauIntitulle) {
+        if (nouveauIntitulle.equals("")) {
+            throw new IllegalArgumentException("Intitule vide");
+        }
+        //else
+        this.libelle = nouveauIntitulle;
     }
 
-    /**
-     *@param nouvelleCategorie : nouvelle valeur
-     * change la valeur de this.categorie en nouvelleCategorie
-     */
+    /** change la valeur de this.categorie en nouvelleCategorie */
     public void setCatgorie(final Categorie nouvelleCategorie) {
         this.categorie = nouvelleCategorie ;
     }
@@ -172,6 +176,11 @@ public class Question implements Serializable {
     }
 
     public void setBonneReponse(final String nouvelleBonneReponse) {
+        if (nouvelleBonneReponse.equals("")) {
+            throw new IllegalArgumentException("Bonne réponse vide");
+        }
+        //else
+        this.reponseJuste = nouvelleBonneReponse;
     }
 
     public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
@@ -196,14 +205,12 @@ public class Question implements Serializable {
         return this.difficulte;
     }
 
-    /** 
-     * @return libelle de la question (this)
-     */
+    /** @return libelle de la question (this) */
     public String getLibelle() {
         return this.libelle;
     }
     
-    /**@return réponse juste de la question */
+    /** @returrn reponse juste de la question (this)*/
     public String getReponseJuste() {
     	return this.reponseJuste;
     }

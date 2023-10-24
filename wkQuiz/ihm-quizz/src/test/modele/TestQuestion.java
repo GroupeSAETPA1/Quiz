@@ -83,7 +83,7 @@ class TestQuestion {
        questionValide.add(new Question("Si un commentaire est écrit "
                           + "sur plusieurs lignes, quel délimiteur de "
                           + "commentaire est-il préférable d'utiliser ?" , 
-                          categoriesValides[0],1," /* commentaire */", 
+                          categoriesValides[0],1,"/* commentaire */", 
                           mauvaiseReponse3 ,""));
        
        questionValide.add(new Question("Que doit décrire le texte écrit dans "
@@ -157,20 +157,38 @@ class TestQuestion {
 
      @Test
      void testGetLibelle() {
-         assertEquals("Commentaire", questionValide.get(0).getCategorie());
+         
+         // Recuperer un libelle existant
+         assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
+                 questionValide.get(0).getLibelle());
          assertEquals("A quoi correspond l'expression : @author Dupont ?" , 
                  questionValide.get(1).getLibelle());
-         //assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
-         //        questionValide.get(0).getLibelle());
-         //assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
-         //        questionValide.get(0).getLibelle());
+         assertEquals("Si un commentaire est écrit sur plusieurs lignes, "
+                 + "quel délimiteur de commentaire est-il préférable d'utiliser ?" , 
+                 questionValide.get(2).getLibelle());
+         assertEquals("Que doit décrire le texte écrit dans le commentaire "
+                 + "Javadoc situé juste avant la ligne \"public class …\" ?" , 
+                 questionValide.get(3).getLibelle());
+         
+         //Recupere un libelle apres modification
+         questionValide.get(0).setLibelle("nouveau libelle");
+         assertEquals("nouveau libelle" , questionValide.get(0).getLibelle());
+         
+         
+         
      
      }
     
      
     @Test
     void testSetLibelle() {
-        fail("Not yet implemented");
+        
+        assertThrows(IllegalArgumentException.class ,
+                ()-> questionValide.get(0).setLibelle(""));
+        
+        assertDoesNotThrow(() -> questionValide.get(0).setLibelle("test1"));
+        assertEquals("test1", questionValide.get(0).getLibelle());
+        
     }
 
     
@@ -237,10 +255,23 @@ class TestQuestion {
     
     @Test
     void testSetBonneReponse() {
-        fail("Not yet implemented");
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setBonneReponse(""));
+        assertDoesNotThrow(()-> questionValide.get(0).setBonneReponse("test1"));
+        assertEquals("test1" , questionValide.get(0).getReponseJuste());
     }
 
-    
+    @Test
+    void testGetBonneReponse() {
+        //Reponse juste deja existante
+        assertEquals("/* commentaire */",questionValide.get(2).getReponseJuste());
+        //Reponse juste apres un changement
+        questionValide.get(2).setBonneReponse("test45");
+        assertEquals("test45" , questionValide.get(2).getReponseJuste());
+    }
+    /**
+     * Test method for {@link application.modele.Question#setMauvaiseReponse(java.util.ArrayList)}.
+     */
     @Test
     void testSetMauvaiseReponse() {
         fail("Not yet implemented");
