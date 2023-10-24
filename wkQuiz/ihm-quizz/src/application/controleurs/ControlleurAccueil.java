@@ -24,5 +24,10 @@ public class ControlleurAccueil {
 	private void quitter() {
 		System.out.println("Quitter");
 	}
+	
+	@FXML
+	private void aider() {
+		System.out.println("Aider");
+	}
 
 }
