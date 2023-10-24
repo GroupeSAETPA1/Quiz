@@ -3,7 +3,7 @@
  * IUT de Rodez pas copright, ni copyleft
  */
 
-package application.outil;
+package outil;
 
 /**
  * 
