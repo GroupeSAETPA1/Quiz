@@ -7,8 +7,6 @@ package application.modele;
 
 import java.io.Serializable;
 
-import org.hamcrest.core.IsInstanceOf;
-
 /**
  * Modelisation d'une catégorie pour l'application de quizz
  * @author Costes Quentin
