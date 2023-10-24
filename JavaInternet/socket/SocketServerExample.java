@@ -23,24 +23,31 @@ public class SocketServerExample {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-        booelan onContinu = true;
-        while(true){
+        boolean onContinu = true;
+        while(onContinu){
             System.out.println("Waiting for the client request");
+
             //creating socket and waiting for client connection
             Socket socket = server.accept();
+
             //read from socket to ObjectInputStream object
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            
             //convert ObjectInputStream object to String
             String message = (String) ois.readObject();
             System.out.println("Message Received: " + message);
+
             //create ObjectOutputStream object
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            
             //write object to Socket
             oos.writeObject("Hi Client "+message);
+
             //close resources
             ois.close();
             oos.close();
             socket.close();
+            
             //terminate the server if client sends exit request
             onContinu = !message.equalsIgnoreCase("exit");
         }

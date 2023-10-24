@@ -33,7 +33,9 @@ public class SocketClientExample {
                 //Fin de la transmission
                 oos.writeObject("exit");
             } else {
+                //Ecrit et envoie directement
                 oos.writeObject("Tome D'OWO" + i);
+                System.out.println("Message envoyé !");
             }
 
             //read the server response message
