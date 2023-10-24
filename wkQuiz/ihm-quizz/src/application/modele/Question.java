@@ -148,9 +148,11 @@ public class Question implements Serializable {
     }
 
     /**
-     * Change l’ancienne catégorie en nouvelleCategorie
+     *@param nouvelleCategorie : nouvelle valeur
+     * change la valeur de this.categorie en nouvelleCategorie
      */
-    public void setCatgorie(final String nouvelleCategorie) {
+    public void setCatgorie(final Categorie nouvelleCategorie) {
+        this.categorie = nouvelleCategorie ;
     }
 
     public void setDifficulte(final int nouvelleDifficulte) {
