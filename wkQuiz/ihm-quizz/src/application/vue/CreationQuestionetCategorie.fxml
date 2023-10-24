@@ -35,7 +35,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="367.0" layoutY="18.0" prefHeight="60.0" prefWidth="583.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
+                  <Label layoutX="428.0" layoutY="18.0" prefHeight="60.0" prefWidth="437.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="109.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
+                  <ComboBox layoutX="105.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
                   <Label layoutX="116.0" layoutY="261.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la question : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
@@ -56,12 +56,12 @@
                         <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="812.0" layoutY="175.0" prefHeight="51.0" prefWidth="338.0" text="Réponse vrai : " textFill="WHITE">
+                  <Label layoutX="803.0" layoutY="160.0" prefHeight="51.0" prefWidth="338.0" text="Réponse vrai : " textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="803.0" layoutY="360.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
+                  <TextField layoutX="803.0" layoutY="361.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
                         <Font name="Open Sans" size="20.0" />
                      </font>
@@ -78,7 +78,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -90,7 +90,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label layoutX="821.0" layoutY="312.0" prefHeight="51.0" prefWidth="338.0" text="Réponse Fausse : " textFill="WHITE">
+                  <Label layoutX="803.0" layoutY="312.0" prefHeight="51.0" prefWidth="338.0" text="Réponse Fausse : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -110,7 +110,7 @@
                         <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="803.0" layoutY="219.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre Bonne réponse " style="-fx-background-radius: 32px;">
+                  <TextField layoutX="803.0" layoutY="236.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre Bonne réponse " style="-fx-background-radius: 32px;">
                      <font>
                         <Font name="Open Sans" size="20.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="114.0" layoutY="417.0" mnemonicParsing="false" text="1" textFill="WHITE">
+                  <RadioButton layoutX="114.0" layoutY="421.0" mnemonicParsing="false" text="1" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="difficulte" />
                      </toggleGroup>
@@ -128,12 +128,12 @@
                         <Font size="25.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="216.0" layoutY="417.0" mnemonicParsing="false" text="2" textFill="#fffdfd" toggleGroup="$difficulte">
+                  <RadioButton layoutX="217.0" layoutY="421.0" mnemonicParsing="false" text="2" textFill="#fffdfd" toggleGroup="$difficulte">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="324.0" layoutY="417.0" mnemonicParsing="false" text="3" textFill="WHITE" toggleGroup="$difficulte">
+                  <RadioButton layoutX="323.0" layoutY="421.0" mnemonicParsing="false" text="3" textFill="WHITE" toggleGroup="$difficulte">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -157,27 +157,27 @@
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
-                  <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="44.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/IconeRetour.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="359.0" layoutY="28.0" prefHeight="57.0" prefWidth="583.0" text="Création d'une catégorie" textFill="WHITE">
+                  <Label layoutX="428.0" layoutY="18.0" prefHeight="58.0" prefWidth="439.0" text="Création d'une catégorie" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="277.0" layoutY="352.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
+                  <Label layoutX="277.0" layoutY="300.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="44.0" layoutY="96.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="100.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <Button layoutX="199.0" layoutY="705.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="277.06" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -189,12 +189,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField layoutX="277.0" layoutY="410.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
+                  <TextField layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="856.0" layoutY="705.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="281.06" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
