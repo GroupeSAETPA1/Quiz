@@ -172,13 +172,9 @@ public class Question implements Serializable {
         return categorie;
     }
 
-    /** 
-     * TODO comment method role
-     * @return
-     */
+    /** @return */
     public int getDifficulte() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.difficulte;
     }
 
     /** 
@@ -187,7 +183,14 @@ public class Question implements Serializable {
     public String getLibelle() {
         return this.libelle;
     }
+    
+    public String getReponseJuste() {
+    	return this.reponseJuste;
+    }
 
+    public String getFeedback() {
+    	return this.feedback;
+    }
     
     
 }
