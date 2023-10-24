@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -25,16 +26,20 @@
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
-                  <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/IconeRetour.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="20.0" layoutY="100.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="32.0" />
-                     </font>
-                  </Label>
+                  <Group layoutX="18.0" layoutY="18.0">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeRetour.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="70.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+                           <font>
+                              <Font name="Open Sans" size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
                   <Label layoutX="428.0" layoutY="18.0" prefHeight="60.0" prefWidth="437.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
@@ -157,11 +162,20 @@
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
-                  <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/IconeRetour.png" />
-                     </image>
-                  </ImageView>
+                  <Group layoutX="18.0" layoutY="18.0">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeRetour.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="70.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
+                           <font>
+                              <Font name="Open Sans" size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
                   <Label layoutX="428.0" layoutY="18.0" prefHeight="58.0" prefWidth="439.0" text="Création d'une catégorie" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
@@ -170,11 +184,6 @@
                   <Label layoutX="277.0" layoutY="300.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
                      <font>
                         <Font size="32.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="20.0" layoutY="100.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
                   <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
