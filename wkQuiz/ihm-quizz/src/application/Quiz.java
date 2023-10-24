@@ -19,6 +19,10 @@ import javafx.scene.image.Image;
  * Classe principale de l'application permettant d'instancier
  * les contrôleurs, les vues et modèles.
  * 
+ * TODO A enlever à la fin
+ * Mettre dans les "VM argument" : 
+ * --module-path /path/to/javafx-sdk-20/lib --add-modules javafx.controls,javafx.fxml
+ * 
  * @author Néo BECOGNE
  * @author Quentin COSTES
  * @author François DE SAINT PALAIS
@@ -36,31 +40,29 @@ public class Quiz extends Application {
 	private static Scene sceneSolution;	
 	private static Scene sceneEdition;
 	private static Scene sceneImporterQuestion;	
-	private static Scene sceneCreerQuestion;
-	private static Scene sceneCreerCategorie;
 	private static Scene sceneEditerCategorie;
 	private static Scene sceneEditerQuestion;
 	private static Scene sceneModeEnLigne;
 	private static Scene scenePartagerQuestions;
 	private static Scene sceneChoixPartageQuestions;
 	private static Scene sceneRecevoirQuestions;
+	private static Scene sceneCreationQuestionEtCategorie;
 
 
+	//TODO Utiliser un HashMap<NomDuFichier, Scene> ?
 	public static Scene[] scenes = {
 			sceneAcceuil, sceneAide, sceneParametrePartie, sceneQuestion, sceneResultat,
-			sceneSolution, sceneEdition, sceneImporterQuestion, sceneCreerQuestion,
-			sceneCreerCategorie, sceneEditerCategorie, sceneEditerQuestion,
-			sceneModeEnLigne, scenePartagerQuestions, sceneChoixPartageQuestions,
-			sceneRecevoirQuestions
+			sceneSolution, sceneEdition, sceneImporterQuestion, sceneEditerCategorie, 
+			sceneEditerQuestion,sceneModeEnLigne, scenePartagerQuestions, 
+			sceneChoixPartageQuestions, sceneRecevoirQuestions, sceneCreationQuestionEtCategorie
 	};
 		
 	private static String[] ressources = {
 			"Acceuil.fxml", "Aide.fxml", "ParametrePartie.fxml",
 			"Question.fxml", "Resultat.fxml", "Solution.fxml",
-			"Editeur.fxml", "ImporterQuestion.fxml", "CreationQuestion.fxml",
-			"CreationCategorie.fxml", "EditerCategorie.fxml", "EditerQuestion.fxml",
-			"ModeEnLigne.fxml", "PartagerQuestions.fxml", "ChoixPartagerQuestions.fxml",
-			"RecevoirQuestions.fxml"
+			"Editeur.fxml", "ImporterQuestion.fxml", "EditerCategorie.fxml", 
+			"EditerQuestion.fxml", "ModeEnLigne.fxml", "PartagerQuestions.fxml",
+			"ChoixPartagerQuestions.fxml", "RecevoirQuestions.fxml","CreationQuestionetCategorie.fxml"
 	};
 
 	/**
@@ -73,50 +75,51 @@ public class Quiz extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		try {
-			
-			for (int indiceScene = 0; indiceScene < scenes.length; indiceScene++) {
-				/*
-				 * Chargement de la vue et création
-				 * de la scène associée à cette vue
-				 */
-				FXMLLoader chargeurFXMLCourant = new FXMLLoader();
-				chargeurFXMLCourant.setLocation(
-						GestionVues.class.getResource(ressources[indiceScene]));
-				Parent conteneur = chargeurFXMLCourant.load();
-				
-				/* Création de la scène correspondante à la vue chargée */
-				scenes[indiceScene] = new Scene(conteneur, 1000, 600); // TODO: Vérifier que ca va pas ne poser de pb avec les scenes qui ont une taille spécialle
-			}
-			
-			// on définit le titre, la hauteur et la largeur de la fenêtre principale
-						primaryStage.setTitle("Quizéo - Menu principal");
-						primaryStage.setHeight(600);
-						primaryStage.setWidth(1000);
-						
-						primaryStage.getIcons().add(new Image("application/vues/images/iconePrincipale.png")); // TODO faudra changer l'architecture de fichier de fond en comble pour que ca puisse marcher
+		for (int indiceScene = 0; indiceScene < scenes.length; indiceScene++) {
+        	try {
+                /*
+                 * Chargement de la vue et création
+                 * de la scène associée à cette vue
+                 */
+                FXMLLoader chargeurFXMLCourant = new FXMLLoader();
+                chargeurFXMLCourant.setLocation(
+                		GestionVues.class.getResource(ressources[indiceScene]));
+                Parent conteneur = chargeurFXMLCourant.load();
+                
+                /* Création de la scène correspondante à la vue chargée */
+                scenes[indiceScene] = new Scene(conteneur); // TODO: Vérifier que ca va pas ne poser de pb avec les scenes qui ont une taille spécialle
+            } catch (IOException e) {
+                System.err.println("Nous n'avons pas pu loadé : " + ressources[indiceScene]);
+            }
+        }
+        
+        // on définit le titre, la hauteur et la largeur de la fenêtre principale
+        primaryStage.setTitle("Quizéo - Menu principal");
 
-						/*
-						 * on associe la scène principale à la fenêtre principale
-						 * Cette dernière est stockée en tant qu'attribut afin d'être accessible
-						 * dans les méthodes activer... Celles qui permettent de rendre active
-						 * l'une des 3 scènes
-						 */
-						primaryStage.setScene(scenes[0]);
-						fenetrePrincipale = primaryStage;
-						fenetrePrincipale.setResizable(false);
-						primaryStage.show();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        
+        try {
+            primaryStage.getIcons().add(new Image("application/vue/images/IconePrincipale.png"));
+        } catch (Exception e) {
+            System.err.println("Erreur : L'îcone est introuvables");
+        }
+
+        /*
+         * on associe la scène principale à la fenêtre principale
+         * Cette dernière est stockée en tant qu'attribut afin d'être accessible
+         * dans les méthodes activer... Celles qui permettent de rendre active
+         * l'une des 3 scènes
+         */
+        primaryStage.setScene(scenes[0]);
+        fenetrePrincipale = primaryStage;
+        fenetrePrincipale.setResizable(false);
+        primaryStage.show();
 	}
 	
 	/**
 	 * Programme principal
 	 * @param args non utilisé
 	 */
-	public static void main(String Args[]) {	
+	public static void main(String args[]) {	
 		launch(args);
 		// new ControleurPrincipal();	FIXME
 	}
