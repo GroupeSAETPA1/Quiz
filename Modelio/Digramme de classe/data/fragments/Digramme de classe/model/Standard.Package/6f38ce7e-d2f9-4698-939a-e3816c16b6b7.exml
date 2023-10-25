@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="modele" version="4">
+  <OBJECT>
+    <ID name="modele" mc="Standard.Package" uid="6f38ce7e-d2f9-4698-939a-e3816c16b6b7"/>
+    <PID name="application" mc="Standard.Package" uid="e45b9f6b-b1de-498f-b3ad-794eb8f70329"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[modele]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="BanqueQuestion" mc="Standard.Class" uid="3cb3ae91-001c-4896-befc-021029465bb2"/>
+        <COMPID name="BanqueCategorie" mc="Standard.Class" uid="022b5470-de2c-4f89-a548-963690d20935"/>
+        <COMPID name="ModelePrincipale" mc="Standard.Class" uid="b644cc03-9e9c-425d-8e43-3e998720c024"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="Note" mc="Infrastructure.Note" uid="26845a17-8a2c-4eb5-9887-8620d9938d3c"/>
+          <ATTRIBUTES>
+            <ATT name="Content"><![CDATA[Contient les classes métier.
+Elle sont décrite dans le diagramme de classe ]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"><![CDATA[Note]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Infrastructure.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
