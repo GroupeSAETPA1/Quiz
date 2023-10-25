@@ -15,7 +15,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="CreerCategorieBouton" layoutX="237.0" layoutY="247.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="510.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Créer une Catégorie ou Catégorie" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="CreerCategorieBouton" layoutX="237.0" layoutY="247.0" mnemonicParsing="false" onAction="#creer" prefHeight="80.0" prefWidth="510.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Créer une Catégorie ou Catégorie" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="EditerQuestionBouton" layoutX="312.0" layoutY="393.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Éditer une Question" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="EditerQuestionBouton" layoutX="312.0" layoutY="393.0" mnemonicParsing="false" onAction="#editerQuestion" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Éditer une Question" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -39,7 +39,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="EditerCategorieBouton" layoutX="312.0" layoutY="492.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Éditer une Catégorie" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="EditerCategorieBouton" layoutX="312.0" layoutY="492.0" mnemonicParsing="false" onAction="#editerCategorie" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Éditer une Catégorie" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -51,7 +51,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="BoutonImporter" layoutX="324.0" layoutY="127.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Importer Des Questions" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="BoutonImporter" layoutX="324.0" layoutY="127.0" mnemonicParsing="false" onAction="#importer" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Importer Des Questions" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -73,7 +73,7 @@
             <Image url="@images/Connector%20line.png" />
          </image>
       </ImageView>
-      <Group layoutX="32.0" layoutY="20.0">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#accueil">
          <children>
             <Text fill="WHITE" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceuil" textAlignment="CENTER">
                <font>
