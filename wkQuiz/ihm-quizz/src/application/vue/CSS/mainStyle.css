@@ -13,20 +13,22 @@
 
 /* Réglage de la zone derriere les boutons */
 .tab-header-area .tab-header-background {
-    -fx-background-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
+    -fx-background-color: #696969; /* Couleur barre onglet (meme couleur que l'application) */
 }
 
 /* les onglets */
 .tab {
-    -fx-background-color:  #5c6169; /* Couleur onglet par défault */
-    -fx-font-size: 30px; /* Taille texte onglet */
-    -fx-background-radius: 15px; /* Arrondi onglet */
+    -fx-background-color: #060608; /* Couleur onglet par défault */
+    -fx-font-size: 30px;  /* Taille texte onglet */
+    /* -fx-background-radius-top-left-radius: 10px; 
+    -fx-background-radius-top-right-radius: 10px; */
+    -fx-background-radius: 10 10 0 0; /* Arrondi onglet */
     -fx-padding: 0 10 0 10;
     
 }
 /* Onglet selectionné */
 .tab:selected {
-    -fx-background-color: #343738;
+    -fx-background-color: #282C34;
 }
 
 /* Texte des onglets */
@@ -89,6 +91,35 @@
 /* Fin gestion des scrollpane */
 /*                            */
 
+/*                            */
+/*  Gestion des radiobuttons  */
+/*                            */
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-darkest-grey-color;
+    -fx-background-color: white;
+    -fx-border-radius: 50px;
+    -fx-padding: 10px;
+}
+.radio-button .radio:selected {
+    -fx-background-color: white;
+}
+.radio-button -radio:armed {
+    -fx-background-color: white;
+}
+.radio-button -radio:determinate {
+    -fx-background-color: white;
+}
+.radio-button -radio:indeterminate {
+    -fx-background-color: white;
+}
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+/*                               */
+/* fin Gestion des radiobuttons  */
+/*                               */
 /*                         */
 /*         Divers          */
 /*                         */
