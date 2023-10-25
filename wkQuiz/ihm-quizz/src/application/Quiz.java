@@ -21,7 +21,7 @@ import javafx.scene.image.Image;
  * 
  * TODO A enlever à la fin
  * Mettre dans les "VM argument" : 
- * --module-path /path/to/javafx-sdk-20/lib --add-modules javafx.controls,javafx.fxml
+ *  --module-path /path/to/javafx-sdk-20/lib --add-modules javafx.controls,javafx.fxml
  * 
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -40,29 +40,28 @@ public class Quiz extends Application {
 	private static Scene sceneSolution;	
 	private static Scene sceneEdition;
 	private static Scene sceneImporterQuestion;	
-	private static Scene sceneEditerCategorie;
-	private static Scene sceneEditerQuestion;
+	private static Scene sceneCreationQuestionEtCategorie;
 	private static Scene sceneModeEnLigne;
 	private static Scene scenePartagerQuestions;
 	private static Scene sceneChoixPartageQuestions;
 	private static Scene sceneRecevoirQuestions;
-	private static Scene sceneCreationQuestionEtCategorie;
 
 
 	//TODO Utiliser un HashMap<NomDuFichier, Scene> ?
 	public static Scene[] scenes = {
-			sceneAcceuil, sceneAide, sceneParametrePartie, sceneQuestion, sceneResultat,
-			sceneSolution, sceneEdition, sceneImporterQuestion, sceneEditerCategorie, 
-			sceneEditerQuestion,sceneModeEnLigne, scenePartagerQuestions, 
-			sceneChoixPartageQuestions, sceneRecevoirQuestions, sceneCreationQuestionEtCategorie
+			sceneAcceuil, sceneAide, sceneParametrePartie, 
+			sceneQuestion, sceneResultat,sceneSolution,
+			sceneEdition, sceneImporterQuestion, sceneCreationQuestionEtCategorie,
+			sceneModeEnLigne, scenePartagerQuestions, sceneChoixPartageQuestions, 
+			sceneRecevoirQuestions
 	};
 		
 	private static String[] ressources = {
 			"Acceuil.fxml", "Aide.fxml", "ParametrePartie.fxml",
 			"Question.fxml", "Resultat.fxml", "Solution.fxml",
-			"Editeur.fxml", "ImporterQuestion.fxml", "EditerCategorie.fxml", 
-			"EditerQuestion.fxml", "ModeEnLigne.fxml", "PartagerQuestions.fxml",
-			"ChoixPartagerQuestions.fxml", "RecevoirQuestions.fxml","CreationQuestionetCategorie.fxml"
+			"Editeur.fxml", "ImporterQuestion.fxml", "CreationQuestionetCategorie.fxml",
+			"ModeEnLigne.fxml", "PartagerQuestions.fxml", "ChoixPartagerQuestions.fxml", 
+			"RecevoirQuestions.fxml",
 	};
 
 	/**
@@ -84,6 +83,7 @@ public class Quiz extends Application {
                 FXMLLoader chargeurFXMLCourant = new FXMLLoader();
                 chargeurFXMLCourant.setLocation(
                 		GestionVues.class.getResource(ressources[indiceScene]));
+                System.out.println("Chemin de la ressource " +  ressources[indiceScene]);
                 Parent conteneur = chargeurFXMLCourant.load();
                 
                 /* Création de la scène correspondante à la vue chargée */
@@ -92,7 +92,7 @@ public class Quiz extends Application {
                 System.err.println("Nous n'avons pas pu loadé : " + ressources[indiceScene]);
             }
         }
-        
+
         // on définit le titre, la hauteur et la largeur de la fenêtre principale
         primaryStage.setTitle("Quizéo - Menu principal");
 
@@ -109,7 +109,7 @@ public class Quiz extends Application {
          * dans les méthodes activer... Celles qui permettent de rendre active
          * l'une des 3 scènes
          */
-        primaryStage.setScene(scenes[0]);
+        primaryStage.setScene(scenes[6]);
         fenetrePrincipale = primaryStage;
         fenetrePrincipale.setResizable(false);
         primaryStage.show();

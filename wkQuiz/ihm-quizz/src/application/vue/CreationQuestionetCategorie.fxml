@@ -24,7 +24,7 @@
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#retourAcceuil" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
                   <Group layoutX="18.0" layoutY="18.0">
                      <children>
@@ -33,7 +33,7 @@
                               <Image url="@images/IconeRetour.png" />
                            </image>
                         </ImageView>
-                        <Label layoutY="70.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+                        <Label layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                            <font>
                               <Font name="Open Sans" size="32.0" />
                            </font>
@@ -45,13 +45,13 @@
                         <Font name="Open Sans" size="40.0" />
                      </font>
                   </Label>
-                  <Label layoutX="116.0" layoutY="160.0" prefHeight="51.0" prefWidth="338.0" text="Catégorie : " textFill="WHITE">
+                  <Label layoutX="116.0" layoutY="153.0" prefHeight="51.0" prefWidth="338.0" text="Catégorie : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="105.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
-                  <Label layoutX="116.0" layoutY="261.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la question : " textFill="WHITE">
+                  <ComboBox fx:id="selectCategorie" layoutX="105.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
+                  <Label layoutX="116.0" layoutY="256.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la question : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -66,7 +66,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="803.0" layoutY="361.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
+                  <TextField layoutX="803.0" layoutY="362.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
                      <font>
                         <Font name="Open Sans" size="20.0" />
                      </font>
@@ -125,7 +125,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="114.0" layoutY="421.0" mnemonicParsing="false" text="1" textFill="WHITE">
+                  <RadioButton layoutX="118.0" layoutY="421.0" mnemonicParsing="false" text="1" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="difficulte" />
                      </toggleGroup>
@@ -133,12 +133,12 @@
                         <Font size="25.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="217.0" layoutY="421.0" mnemonicParsing="false" text="2" textFill="#fffdfd" toggleGroup="$difficulte">
+                  <RadioButton layoutX="221.0" layoutY="421.0" mnemonicParsing="false" text="2" textFill="#fffdfd" toggleGroup="$difficulte">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="323.0" layoutY="421.0" mnemonicParsing="false" text="3" textFill="WHITE" toggleGroup="$difficulte">
+                  <RadioButton layoutX="327.0" layoutY="421.0" mnemonicParsing="false" text="3" textFill="WHITE" toggleGroup="$difficulte">
                      <font>
                         <Font size="25.0" />
                      </font>

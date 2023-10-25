@@ -63,7 +63,7 @@
                   <Image url="@images/IconeQuitter.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutX="-1.0" layoutY="71.0" prefHeight="57.0" prefWidth="128.0" text="Quitter" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Quitter" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -77,7 +77,7 @@
                   <Image url="@images/IconeAide.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutX="18.0" layoutY="74.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="75.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
