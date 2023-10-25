@@ -89,7 +89,7 @@ public class Quiz extends Application {
                 /* Création de la scène correspondante à la vue chargée */
                 scenes[indiceScene] = new Scene(conteneur); // TODO: Vérifier que ca va pas ne poser de pb avec les scenes qui ont une taille spécialle
             } catch (IOException e) {
-                System.err.println("Nous n'avons pas pu loadé : " + ressources[indiceScene]);
+                System.err.println("Nous n'avons pas pu loader : " + ressources[indiceScene]);
             }
         }
 
