@@ -152,8 +152,11 @@ public class Question implements Serializable {
         
     }
     
-    /** Change la valeur de this.libelle en nouveau*/
-    public void setLibelle(final String nouveauIntitulle) {
+    /** 
+     * Change le libelle de la question
+     * @param nouveauIntitulle
+     */
+    public void setLibelle(String nouveauIntitulle) {
         if (nouveauIntitulle.equals("")) {
             throw new IllegalArgumentException("Intitule vide");
         }
@@ -161,12 +164,19 @@ public class Question implements Serializable {
         this.libelle = nouveauIntitulle;
     }
 
-    /** change la valeur de this.categorie en nouvelleCategorie */
-    public void setCatgorie(final Categorie nouvelleCategorie) {
+    /** 
+     * change la categorie de la question
+     * @param nouvelleCategorie
+     */
+    public void setCatgorie(Categorie nouvelleCategorie) {
         this.categorie = nouvelleCategorie ;
     }
 
-    public void setDifficulte(final int nouvelleDifficulte) {
+    /**
+     * change la difficultée de la question
+     * @param nouvelleDifficulte
+     */
+    public void setDifficulte(int nouvelleDifficulte) {
     	if (nouvelleDifficulte < DIFFICULTE_MINIMALE 
             || nouvelleDifficulte > DIFFICULTE_MAXIMALE) {
             throw new IllegalArgumentException("Le niveau est compris "
@@ -175,7 +185,11 @@ public class Question implements Serializable {
     	this.difficulte = nouvelleDifficulte;
     }
 
-    public void setBonneReponse(final String nouvelleBonneReponse) {
+    /**
+     * change la bonne réponse de la question
+     * @param nouvelleBonneReponse
+     */
+    public void setBonneReponse(String nouvelleBonneReponse) {
         if (nouvelleBonneReponse.equals("")) {
             throw new IllegalArgumentException("Bonne réponse vide");
         }
@@ -183,14 +197,24 @@ public class Question implements Serializable {
         this.reponseJuste = nouvelleBonneReponse;
     }
 
+    /**
+     * changes les mauvaises réponses de la question
+     * @param nouvellesMauvaisesReponses
+     */
     public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
     }
     
+    /**
+     * change le feedback de la question
+     * @param feedback
+     */
     public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
 
-	/** @return valeur de mauvaisesReponses */
+	/** 
+	 * @return ArrayList contenant les mauvais réponses
+	 */
     public ArrayList<String> getMauvaisesReponses() {
         return mauvaisesReponses;
     }
@@ -210,12 +234,12 @@ public class Question implements Serializable {
         return this.libelle;
     }
     
-    /** @returrn reponse juste de la question (this)*/
+    /** @return reponse juste de la question (this)*/
     public String getReponseJuste() {
     	return this.reponseJuste;
     }
     
-    /** @retrun feedback de la question */
+    /** @return feedback de la question */
     public String getFeedback() {
     	return this.feedback;
     }

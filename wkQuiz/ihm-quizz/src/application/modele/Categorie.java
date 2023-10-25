@@ -55,7 +55,7 @@ public class Categorie implements Serializable{
 
     /**
      * getter du nom de la catégorie
-     * @return
+     * @return nom de la categorie
      */
     public String getNom() {
         return this.nom;
