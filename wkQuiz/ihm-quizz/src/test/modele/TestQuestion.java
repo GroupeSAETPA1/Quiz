@@ -199,7 +199,7 @@ class TestQuestion {
         		
         questionValide.get(0).setCatgorie(categoriesValides[1]);
         
-        assertEquals("test" , questionValide.get(1).getCategorie());
+        assertEquals("test" , questionValide.get(0).getCategorie());
         assertNotEquals("Commentaire", questionValide.get(0).getCategorie());
     }
     
