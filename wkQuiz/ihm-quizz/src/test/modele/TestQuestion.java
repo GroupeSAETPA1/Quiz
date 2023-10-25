@@ -360,6 +360,8 @@ class TestQuestion {
     			- le delimiteur //
     			- le délimiteur (*
     			Bonne réponse : le délimiteur /**""";
+
+        assertDoesNotThrow(()-> questionValide.get(0).toString());
         assertEquals(valide, questionValide.get(0).toString());
     }
 
