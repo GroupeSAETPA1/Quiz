@@ -2,6 +2,7 @@ package application.modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -75,6 +76,7 @@ public class Question implements Serializable {
      *       (case ignorée) </li>
      *  <li> reponseFausses contient une chaine egale a reponse juste
      *       (case ignorée) </li>
+     *  <li> reponseFausse contient uniquement des chaines vides </li>
      * </ul>
      */
     public Question(String libelle,Categorie categorie,int difficulte,
@@ -90,7 +92,7 @@ public class Question implements Serializable {
         if (reponseJuste.equals("")) {
             throw new IllegalArgumentException("La réponse juste est vide");
         }
-        if (reponsesFausse.size() == 0) {
+        if (reponsesFausse.isEmpty()) {
             throw new IllegalArgumentException("La liste des mauvaises reponses "
                     + "ne doit pas etre vide");
         }
@@ -179,11 +181,36 @@ public class Question implements Serializable {
         if (nouvelleBonneReponse.equals("")) {
             throw new IllegalArgumentException("Bonne réponse vide");
         }
+        if (reponseFausseContientReponseJuste(mauvaisesReponses, 
+            nouvelleBonneReponse)) {
+            throw new IllegalArgumentException("Impossible de set une bonne "
+                    + "reponse si la valeur est deja contenu "
+                    + "dans mauvaiseReponse ");
+        }
         //else
         this.reponseJuste = nouvelleBonneReponse;
     }
 
     public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
+        if (nouvellesMauvaisesReponses.isEmpty()) {
+            throw new IllegalArgumentException("Impossible de modifier "
+                    + "avec une liste vide");
+        }
+        if (reponseFausseContientReponseJuste(nouvellesMauvaisesReponses, 
+            reponseJuste)) {
+            
+            throw new IllegalArgumentException("Impossible de modifier si "
+                    + ""
+                    + "la liste de mauvaise reponse contient une possibilité "
+                    + "égale a la bonne reponse (case ignorée)");
+            
+        }
+        if (!reponsesFausseSansDoublon(nouvellesMauvaisesReponses)) {
+            throw new IllegalArgumentException("Impossible de modifier si la "
+                    + "liste contient des valeurs en doublon (case ignorée)");
+        }
+        //else 
+        mauvaisesReponses = nouvellesMauvaisesReponses;
     }
     
     public void setFeedback(String feedback) {
@@ -237,4 +264,23 @@ public class Question implements Serializable {
     	}
     	return aRetouner; 	
     }
+
+
+    /* non javadoc - @see java.lang.Object#equals(java.lang.Object) */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Question other = (Question) obj;
+        return categorie.equals(other.categorie) 
+                && libelle.equals(other.libelle)
+                && mauvaisesReponses.equals(other.mauvaisesReponses)
+                && reponseJuste.equals(other.reponseJuste);
+    }
+    
+
 }

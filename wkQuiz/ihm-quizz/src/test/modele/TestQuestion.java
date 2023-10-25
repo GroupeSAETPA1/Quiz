@@ -33,6 +33,7 @@ class TestQuestion {
     private ArrayList<String> mauvaiseReponseDoublon;
     private Categorie[] categoriesValides = {new Categorie("Commentaire"), new Categorie("test")};
     private ArrayList<String> mauvaiseReponseVide;
+    private ArrayList<String> mauvaiseReponseJusteChaineVide;
     
     @BeforeEach
     void genererJeuxDeTest() {
@@ -43,7 +44,12 @@ class TestQuestion {
         mauvaiseReponse4 = new ArrayList<String>();
         mauvaiseReponseVide =  new ArrayList<String>();
         mauvaiseReponseDoublon = new ArrayList<String>();
+        mauvaiseReponseJusteChaineVide = new ArrayList<String>();
                 
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
         
         mauvaiseReponse1.add("le délimiteur /*");
         mauvaiseReponse1.add("le delimiteur //");
@@ -152,6 +158,11 @@ class TestQuestion {
        assertThrows(IllegalArgumentException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                        "LE delIMIteur //",mauvaiseReponse1 , ""));
+       
+       //La liste ne contient que des chaine vide
+       assertThrows(IllegalArgumentException.class,
+               ()->new Question("Libelle non vide" , categoriesValides[0],2,
+                       "non vide",mauvaiseReponseJusteChaineVide , ""));
         
     }
 
@@ -257,6 +268,8 @@ class TestQuestion {
     void testSetBonneReponse() {
         assertThrows(IllegalArgumentException.class,
                 ()-> questionValide.get(0).setBonneReponse(""));
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setBonneReponse("le délimiteur /*"));
         assertDoesNotThrow(()-> questionValide.get(0).setBonneReponse("test1"));
         assertEquals("test1" , questionValide.get(0).getReponseJuste());
     }
@@ -269,21 +282,73 @@ class TestQuestion {
         questionValide.get(2).setBonneReponse("test45");
         assertEquals("test45" , questionValide.get(2).getReponseJuste());
     }
-    /**
-     * Test method for {@link application.modele.Question#setMauvaiseReponse(java.util.ArrayList)}.
-     */
+
+    
     @Test
     void testSetMauvaiseReponse() {
-        fail("Not yet implemented");
+        ArrayList<String> mauvaiseReponseContientJuste = new ArrayList<String>();
+        mauvaiseReponseContientJuste.add("reponseOk");
+        mauvaiseReponseContientJuste.add("reponseOK2");
+        mauvaiseReponseContientJuste.add("le délimiteur /**");
+        ArrayList<String> test1 = new ArrayList<String>();
+        test1.add("test1");
+        test1.add("test2");
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseVide));
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
+        assertThrows(IllegalArgumentException.class,
+                ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseJusteChaineVide));
+        assertDoesNotThrow(()-> questionValide.get(0).setMauvaiseReponse(test1));
+        assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
     }
 
     
     @Test
     void testEquals() {
-        fail("Not yet implemented");
+        Question question1Egale = new Question("Quel est le délimiteur de début "
+                                      + "d'un commentaire Javadoc ?" , 
+                                      categoriesValides[0] , 0 , 
+                                      "le délimiteur /**" ,mauvaiseReponse1 ,"");
+        Question question2Egale = new Question("A quoi correspond l'expression : "
+                                                + "@author Dupont ?" ,categoriesValides[0],
+                                                2 , "une balise reconnue par Javadoc" , 
+                                                mauvaiseReponse2 , "");
+        Question question3Egale = new Question("A quoi correspond l'expression : "
+                + "@author Dupont ?" ,categoriesValides[0],
+                3 , "une balise reconnue par Javadoc" , 
+                mauvaiseReponse2 , "");
+        // 2 question complement differente
+        assertNotEquals(questionValide.get(0), questionValide.get(1));
+        
+        // 2 question identique
+        assertEquals(questionValide.get(0), question1Egale);
+        
+        // 2 question dont 1 feedback l'autre non
+        assertEquals(question2Egale, questionValide.get(1));
+        
+        // 2 question exactemet pareil mais difficulté différente
+        assertEquals(question3Egale, questionValide.get(1));
+        
     }
 
-    
+    @Test
+    void testGetMauvaiseReponse() {
+        ArrayList<String> test1 = new ArrayList<String>();
+        ArrayList<String> test2 = new ArrayList<String>();
+        test1.add("le délimiteur /*");
+        test1.add("le delimiteur //");
+        test1.add("le délimiteur (*");
+        
+        test2.add("une façon de présenter le code choisie par "
+                             + "le programmeur nommé Dupont");
+        test2.add("un texte sans signification particulière");
+        assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
+        questionValide.get(0).setMauvaiseReponse(test2);
+        assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
+    }
     @Test
     void testToString() {
     	String valide = """ 
