@@ -53,6 +53,7 @@ public class Quiz extends Application {
 
 		ressources.add("Acceuil.fxml");
 		ressources.add("Editeur.fxml");
+		ressources.add("CreationQuestionetCategorie.fxml");
 
 		for (String element : ressources) {
 			try {
@@ -60,6 +61,7 @@ public class Quiz extends Application {
 				scenes.put(element, new Scene(racine));
 			} catch (IOException e) {
 				System.err.println("Nous n'avons pas pu loader : " + element);
+				e.printStackTrace();
 			}
 		}
 
@@ -69,7 +71,7 @@ public class Quiz extends Application {
             System.err.println("Erreur : L'îcone est introuvables");
          }
 		primaryStage.setTitle("Quizéo - Acceuil");
-		primaryStage.setScene(scenes.get("Acceuil.fxml"));
+		primaryStage.setScene(scenes.get("CreationQuestionetCategorie.fxml"));
 		primaryStage.show();
 	}
 
