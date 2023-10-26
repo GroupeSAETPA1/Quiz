@@ -78,7 +78,7 @@ public class Categorie implements Serializable{
     		return false;
     	}
     	Categorie categorie = (Categorie) obj;
-		return categorie.getNom() == this.getNom();
+		return categorie.getNom().equalsIgnoreCase(this.getNom());
     }
 
 }

@@ -108,7 +108,6 @@ public class BanqueQuestion {
      * en ignorant la casse
      */
     public ArrayList<Question> getQuestionsLibelle(String nom) {
-        // TODO Auto-generated return
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
             if (question.getLibelle().contains(nom.toLowerCase())) resultat.add(question);
