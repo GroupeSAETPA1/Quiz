@@ -115,40 +115,46 @@ class testModelePrincipale {
         
         // Question de "reference"
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[0], 
+                + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
         
         // Test ajout de question avec seulement categorie differente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[1], 
+                + "début d'un commentaire Javadoc ", "Javadoc", 
                 1, "non vide", mauvaiseReponse1, ""));
         
         // Test ajout de question avec seulement libelle différent
-        assertTrue(modele.creerQuestion("libelle different",categoriesValides[0], 
+        assertTrue(modele.creerQuestion("libelle different","Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
         
         //Test ajout de question avec seulement mauvaise reponse differente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[0], 
+                + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse2, ""));
         
         //Test ajout de question avec seulement bonne reponse differente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[0], 
+                + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "different", mauvaiseReponse1, ""));
-        
-        
-        //Test ajout de question identique mais espace supplementaire dans le libelle
-        //TODO a fixer
-        assertFalse(modele.creerQuestion("           Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[0], 
-                1, "different", mauvaiseReponse1, ""));
-        
         
         // Test de non ajout d'une question deja existante
         assertFalse(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", categoriesValides[0], 
+                + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
+        
+        
+        /* verification de l'exception propager si la question a  creer 
+         * est invalide (tous les paramètres faux)
+         */
+
+        assertThrows(IllegalArgumentException.class , 
+               ()-> modele.creerQuestion("", "", 1, "",mauvaiseReponseVide, ""));
+        
+        // Ajout avec une categorie inexistance
+        assertTrue(modele.creerQuestion("Quel est le délimiteur de "
+                + "début d'un commentaire Javadoc ", "categorieTest", 
+                1, "non vide", mauvaiseReponse1, ""));
+        
         
         
 
