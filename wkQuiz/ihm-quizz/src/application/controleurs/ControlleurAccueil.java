@@ -16,27 +16,46 @@ import javafx.fxml.FXML;
 
 public class ControlleurAccueil {
 	
-	
+	/**
+	 * Methodes liée au bouton jouer , 
+	 * qui devra renvoyer vers la page ParametrePartie.fxml 
+	 */
 	@FXML 
 	private void jouer() {
 		System.out.println("Button jouer");
 	}
 	
+	/**
+	 * Methodes liée au bouton éditer, 
+	 * qui devra envoyer vers la page Editeur.fxml 
+	 */
 	@FXML 
 	private void editer() {
 		System.out.println("Button editer");
 	}
 	
+	/**
+	 * Méthodes liée au boutons online,
+	 * qui devra envoyer vers la page ModeEnligne.fxml
+	 */
 	@FXML 
 	private void online() {
 		System.out.println("Button en ligne");
 	}
 	
+	/**
+	 * Méthodes liée au group quitter,
+	 * qui devra fermer l'application
+	 */
 	@FXML
 	private void quitter() {
 		System.out.println("Quitter");
 	}
 	
+	/**
+	 * Méthodes liée au groupe aider,
+	 * qui devra envoyer vers la page Aide.fxml
+	 */
 	@FXML
 	private void aider() {
 		System.out.println("Aider");

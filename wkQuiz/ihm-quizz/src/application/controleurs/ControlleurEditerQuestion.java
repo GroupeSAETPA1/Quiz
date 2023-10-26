@@ -15,11 +15,18 @@ import javafx.fxml.FXML;
 
 public class ControlleurEditerQuestion {
 	
+	/**
+	 * Méthodes liée au group retour 
+	 * qui devra renvoyer vers la page précedentes 
+	 */
 	@FXML 
 	private void retour() {
 		System.out.println("Retour en arriere ");
 	}
-	
+	/**
+	 * Méthodes liée au button Créer Question
+	 * qui devra renvoyer vers la page CreationQuestionEtCategorie.fxml
+	 */
 	@FXML 
 	private void versCreerQuestion() {
 		System.out.println("swalalala nous sommes partie pour créer");
