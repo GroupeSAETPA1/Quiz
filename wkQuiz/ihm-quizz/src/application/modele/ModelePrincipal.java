@@ -15,24 +15,27 @@ public class ModelePrincipal {
     
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
-    private BanqueCatgorie banqueCategorie;
+    private BanqueCategorie banqueCategorie;
     
     private ModelePrincipal() {
         //TODO instancier les banques 
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
-        this.banqueCategorie = new BanqueCatgorie();
+        this.banqueCategorie = new BanqueCategorie();
     }
     
     /**
      */
     public static ModelePrincipal  getInstance() {
-        if (modele==null) {
-            ModelePrincipal  modele = new ModelePrincipal();
+        if (ModelePrincipal.modele == null) {
+            ModelePrincipal.modele = new ModelePrincipal();
         }
         return modele;
     }
     
+    public BanqueQuestion getBanqueQuestion() {
+        return banqueQuestion;
+    }
     /**
      * 
      * TODO comment method role
@@ -42,6 +45,7 @@ public class ModelePrincipal {
     int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
     String feedback) {
         
+        boolean questionAjout = false ;
         ArrayList<Question> listeQuestion = banqueQuestion.getQuestions(); 
         
         //  exception propager 
@@ -53,13 +57,15 @@ public class ModelePrincipal {
             banqueCategorie.getCategories().add(categorie);
         }
         
+        
         // on verifie si la question a creer existe si non on l'ajoute 
         if (!listeQuestion.contains(questionAajouter)) {
-            listeQuestion.add(questionAajouter);            
+            listeQuestion.add(questionAajouter);
+            questionAjout  = true ; 
         }
         
         // true question bien ajouter , false sinon
-        return listeQuestion.contains(questionAajouter);
+        return questionAjout;
         
     }
 }

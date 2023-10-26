@@ -301,9 +301,9 @@ public class Question implements Serializable {
             return false;
         Question other = (Question) obj;
         return categorie.equals(other.categorie) 
-                && libelle.equals(other.libelle)
+                && libelle.equalsIgnoreCase(other.libelle)
                 && mauvaisesReponses.equals(other.mauvaisesReponses)
-                && reponseJuste.equals(other.reponseJuste);
+                && reponseJuste.equalsIgnoreCase(other.reponseJuste);
     }
     
 
