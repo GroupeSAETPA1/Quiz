@@ -13,6 +13,10 @@ import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.Question;
 
+/** 
+ * Classe de test unitaire de la classe {@link application.modele.BanqueCategorie}
+ * @author Costes quentin
+ */
 class TestBanqueCategorie {
 	
 	private ArrayList<Categorie> ensembleCategories;

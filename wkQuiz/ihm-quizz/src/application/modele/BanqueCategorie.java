@@ -12,7 +12,7 @@ import application.exception.HomonymeException;
 
 /**
  * Gestion de toutes les catégories présente dans l'application
- * 
+ * @author quentin costes
  */
 public class BanqueCategorie {
 	
@@ -30,6 +30,10 @@ public class BanqueCategorie {
     	categories.add(categorie);
     }
 
+    /**
+     * Permet de récupérer toutes les categories
+     * @return Toutes les categories 
+     */
     public ArrayList<Categorie> getCategories() {
         return this.categories;
     }

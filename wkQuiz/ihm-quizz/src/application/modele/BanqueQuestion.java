@@ -16,9 +16,7 @@ import application.exception.HomonymeException;
  * @author François de Saint Palais
  */
 public class BanqueQuestion {
-    /**
-     * <Saisir le texte de la note ici>
-     */
+	
     private ArrayList<Question> questions;
 
 
