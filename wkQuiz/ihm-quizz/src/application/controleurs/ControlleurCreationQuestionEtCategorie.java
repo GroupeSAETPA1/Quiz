@@ -6,6 +6,18 @@ import application.modele.Categorie;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
+/**
+ * Controlleur de la page Creation de Quetion et de Categorie.
+ * Celui-ci instance  des methodes liée au bouton de la page 
+ * 
+ * @author Néo BECOGNE
+ * @author Quentin COSTES
+ * @author François DE SAINT PALAIS
+ * @author Lucas DESCRIAUD
+ * @author Tom DOUAUD
+ */
+
+
 public class ControlleurCreationQuestionEtCategorie {
 
 	private ArrayList<Categorie> categories;
