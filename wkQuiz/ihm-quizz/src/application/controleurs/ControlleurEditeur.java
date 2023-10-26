@@ -23,7 +23,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void importer() {
 		System.out.println("Importer des question");
-		//Quiz.changerVue("ImporterQuestion.fxml");
+		Quiz.changerVue("ImporterQuestion.fxml");
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void creer() {
 		System.out.println("Creer une categorie ou une question ");
-		//Quiz.changerVue("CreationQuestionetCategorie.fxml");
+		Quiz.changerVue("CreationQuestionetCategorie.fxml");
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void editerQuestion() {
 		System.out.println("Editer une question ");
-		//Quiz.changerVue("EditerQuestion.fxml");
+		Quiz.changerVue("EditerQuestion.fxml");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void editerCategorie() {
 		System.out.println("Editer une Catégorie ");
-		//Quiz.changerVue("EditerCategorie.fxml");
+		Quiz.changerVue("EditerCategorie.fxml");
 	}
 	
 	/**
@@ -63,6 +63,6 @@ public class ControlleurEditeur {
 	@FXML 
 	private void accueil() {
 		System.out.println("Retour a l'accueil");
-		//Quiz.changerVue(" Accueile.fxml");
+		Quiz.changerVue("Acceuil.fxml");
 	}
 }

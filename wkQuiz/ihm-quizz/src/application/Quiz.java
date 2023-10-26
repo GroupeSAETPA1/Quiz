@@ -53,6 +53,7 @@ public class Quiz extends Application {
 
 		ressources.add("Acceuil.fxml");
 		ressources.add("Editeur.fxml");
+		ressources.add("CreationQuestionetCategorie.fxml");
 
 		for (String element : ressources) {
 			try { 

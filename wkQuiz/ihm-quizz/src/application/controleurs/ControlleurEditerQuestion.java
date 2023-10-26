@@ -23,7 +23,7 @@ public class ControlleurEditerQuestion {
 	@FXML 
 	private void retour() {
 		System.out.println("Retour en arriere ");
-		//Quiz.changerVue(" Editeur.fxml");
+		Quiz.changerVue("Editeur.fxml");
 	}
 	/**
 	 * Méthodes liée au button Créer Question
@@ -32,7 +32,7 @@ public class ControlleurEditerQuestion {
 	@FXML 
 	private void versCreerQuestion() {
 		System.out.println("swalalala nous sommes partie pour créer");
-		//Quiz.changerVue("CreationQuestionEtCategorie.fxml");
+		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
 	}
 
 }
