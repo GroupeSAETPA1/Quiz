@@ -26,6 +26,7 @@ public class ControlleurAccueil {
 		System.out.println("Button jouer");
 	}
 	
+	
 	/**
 	 * Methodes liée au bouton éditer, 
 	 * qui devra envoyer vers la page Editeur.fxml 
@@ -52,7 +53,6 @@ public class ControlleurAccueil {
 	@FXML
 	private void quitter() {
 		System.out.println("Quitter");
-		Quiz.P;
 	}
 	
 	/**

@@ -42,7 +42,7 @@ public class Quiz extends Application {
 
 	private ArrayList<String> ressources;
 
-	private HashMap<String, Scene> scenes;
+	private static HashMap<String, Scene> scenes;
 
 
 	@Override
@@ -53,10 +53,9 @@ public class Quiz extends Application {
 
 		ressources.add("Acceuil.fxml");
 		ressources.add("Editeur.fxml");
-		ressources.add("CreationQuestionetCategorie.fxml");
 
 		for (String element : ressources) {
-			try {
+			try { 
 				Parent racine = FXMLLoader.load(getClass().getResource("vue/" + element));
 				scenes.put(element, new Scene(racine));
 			} catch (IOException e) {
@@ -71,8 +70,16 @@ public class Quiz extends Application {
             System.err.println("Erreur : L'îcone est introuvables");
          }
 		primaryStage.setTitle("Quizéo - Acceuil");
-		primaryStage.setScene(scenes.get("CreationQuestionetCategorie.fxml"));
+		fenetrePrincipale = primaryStage;
+		primaryStage.setScene(scenes.get("Acceuil.fxml"));
+		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
+	}
+	
+	public static void changerVue(String fenetre) {
+		fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
+		fenetrePrincipale.setScene(scenes.get(fenetre));
+		fenetrePrincipale.show();
 	}
 
 	/**

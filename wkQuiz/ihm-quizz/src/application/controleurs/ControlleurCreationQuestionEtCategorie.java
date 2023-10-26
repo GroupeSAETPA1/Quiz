@@ -29,7 +29,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML 
 	private void retourAcceuil() {
 		System.out.println("Button retour à l'acceuil");
-		Quiz.changerVue("Acceuil.fxml");
 	}
 	
 	/**
