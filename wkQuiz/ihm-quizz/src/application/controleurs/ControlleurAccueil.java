@@ -1,9 +1,21 @@
 package application.controleurs;
 
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+
+/**
+ * Controlleur de la page d'accueil.
+ * Celui-ci instance  des methodes liée au bouton de la page 
+ * 
+ * @author Néo BECOGNE
+ * @author Quentin COSTES
+ * @author François DE SAINT PALAIS
+ * @author Lucas DESCRIAUD
+ * @author Tom DOUAUD
+ */
+
 
 public class ControlleurAccueil {
+	
 	
 	@FXML 
 	private void jouer() {
