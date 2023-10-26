@@ -2,7 +2,7 @@ package application.controleurs;
 
 import javafx.fxml.FXML;
 
-public class ControlleurEditerQuestion {
+public class ControlleurEditerCategorie {
 	
 	@FXML 
 	private void retour() {
@@ -10,8 +10,7 @@ public class ControlleurEditerQuestion {
 	}
 	
 	@FXML 
-	private void versCreerQuestion() {
+	private void versCreerCategorie() {
 		System.out.println("swalalala nous sommes partie pour créer");
 	}
-
 }
