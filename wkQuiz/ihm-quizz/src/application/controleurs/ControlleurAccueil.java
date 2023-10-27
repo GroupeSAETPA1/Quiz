@@ -53,6 +53,7 @@ public class ControlleurAccueil {
 	@FXML
 	private void quitter() {
 		System.out.println("Quitter");
+		Quiz.quitter();
 	}
 	
 	/**

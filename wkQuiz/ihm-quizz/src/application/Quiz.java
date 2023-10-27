@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
  *
  * TODO A enlever à la fin
  * Mettre dans les "VM argument" :
- *  --module-path /path/to/javafx-sdk-20/lib --add-modules javafx.controls,javafx.fxml
+ *  --module-path /path/to/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -40,11 +41,19 @@ public class Quiz extends Application {
 	 */
 	public static Stage fenetrePrincipale;
 
+	/**
+	 * TODO commenter
+	 */
 	private ArrayList<String> ressources;
 
+	/**
+     * TODO commenter
+     */
 	private static HashMap<String, Scene> scenes;
 
-
+    /**
+     * TODO commenter cette méthode
+     */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -77,14 +86,25 @@ public class Quiz extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * Gestion du changement de fenetre
+     * @param fenetre (String) le nom de la fenetre a charger en .fxml
+     */
 	public static void changerVue(String fenetre) {
 		fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
 		fenetrePrincipale.setScene(scenes.get(fenetre));
 		fenetrePrincipale.show();
 	}
+	
+	/**
+     * Fonction appelée par les controleurs permettant de quitter l'application
+     */
+	public static void quitter( ) {
+	    Platform.exit();
+	}
 
 	/**
-	 * Programme principal
+	 * Fonction Main qui lance la fenetre JavaFX et instancie les différents modèles
 	 * @param args non utilisé
 	 */
 	public static void main(String args[]) {
