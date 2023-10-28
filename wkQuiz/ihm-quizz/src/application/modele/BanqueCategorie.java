@@ -60,15 +60,33 @@ public class BanqueCategorie {
     }
 
     /**
-     * Permet de récupérer les Categories qui ont le libellé passé en paramètre
+     * Récupere les Categories qui contiennent le libellé passé en paramètre
      * (on vérifie que le libellé contient la string passée en paramètres)
      * @param libelle (String) le libellé recherché
-     * @return une ArrayList des différentes catégories qui ont ce libellé
+     * @return une ArrayList des différentes catégories qui contiennent ce libellé
      */
     public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
     	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
         for (Categorie categorie : categories) {
-            if (categorie.getNom().contains(libelle.toLowerCase())) resultat.add(categorie);
+            if (categorie.getNom().contains(libelle.toLowerCase())) {
+                resultat.add(categorie);
+            } 
+        }
+        return resultat;
+    }
+
+    /**
+     * Récupere les Categories qui ont exactement le libellé passé en paramètre
+     * (on vérifie que le libellé est égal à la string passée en paramètres)
+     * @param libelle (String) le libellé recherché
+     * @return une ArrayList des différentes catégories qui ont ce libellé exact
+     */
+    public ArrayList<Categorie> getExactCategoriesLibelle(String libelle) {
+    	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
+        for (Categorie categorie : categories) {
+            if (categorie.getNom().equals(libelle.toLowerCase())) {
+                resultat.add(categorie);
+            } 
         }
         return resultat;
     }

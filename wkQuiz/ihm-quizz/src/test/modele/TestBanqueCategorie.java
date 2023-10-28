@@ -104,7 +104,7 @@ class TestBanqueCategorie {
 	 * Test de la méthode getCategoriesLibelle et vérifie qu'on puisse
 	 * bien accéder a une catégorie par son nom (insensible à la casse)
 	 * @throws HomonymeException si jamais une catégorie est déjà présente
-	 * @throws InvalidNameException 
+	 * @throws InvalidNameException si jamais le nom de la catégorie est invalide
 	 */
 	@Test
 	void testGetCategoriesLibelle() throws HomonymeException, InvalidNameException {
@@ -123,6 +123,37 @@ class TestBanqueCategorie {
 				banqueCategorie.getCategoriesLibelle("premiere"));
         assertIterableEquals(ensembleCategorieLibelleNom, 
         					 banqueCategorie.getCategoriesLibelle("preMiERe"));
+	}
+
+	/**
+	 * Test de la méthode getExactCategoriesLibelle et vérifie qu'on puisse
+	 * bien accéder a une catégorie par son nom exact (insensible à la casse)
+	 * @throws HomonymeException si jamais une catégorie est déjà présente
+	 * @throws InvalidNameException si jamais le nom de la catégorie est invalide
+	 */
+	@Test
+	void testGetExactCategoriesLibelle() 
+	throws HomonymeException, InvalidNameException {
+		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
+		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
+		
+		assertIterableEquals(ensembleCategorieLibelleNom, 
+				banqueCategorie.getExactCategoriesLibelle("premiere"));
+        assertIterableEquals(ensembleCategorieLibelleNom, 
+        					banqueCategorie.getExactCategoriesLibelle("preMiERe"));
+        
+        
+        ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
+        banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
+        
+        ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
+        ArrayList<Categorie> listeUneCategorie = new ArrayList<Categorie>();
+        listeUneCategorie.add(new Categorie("premiere categorie"));
+
+
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("categorie"), listeVide);
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("premiere categorie").get(0), 
+		        listeUneCategorie.get(0));
 	}
 
 	/**
