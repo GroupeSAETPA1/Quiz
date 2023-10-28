@@ -1,15 +1,24 @@
 package application.exception;
 
+/**
+ * Exception levée lorsqu'un libellé est déjà utilisé
+ */
 public class HomonymeException extends Exception {
 
     /** 
-     * TODO comment initial state properties
-     * @param string
+     * Constructeur de la classe HomonymeException
+     * @param string Le message d'erreur
      */
-    public HomonymeException(String string) {
-        // TODO Auto-generated constructor stub
+    public HomonymeException(String messageErreur) {
+        super(messageErreur);
+    }
+    
+    /** 
+     * Constructeur de la classe HomonymeException par défaut
+     */
+    public HomonymeException() {
+        super();
     }
 
-    /** TODO comment field role (attribute, associative role) */
     private static final long serialVersionUID = 1L;
 }

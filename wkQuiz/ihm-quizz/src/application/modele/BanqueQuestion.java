@@ -5,25 +5,34 @@
 
 package application.modele;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import application.exception.HomonymeException;
+import application.exception.InvalidFormatException;
 
 /**
  * Gestion de toutes les questions présentes  
  * dans l’application
  * @author François de Saint Palais
+ * @author Tom Douaud
  */
 public class BanqueQuestion {
 	
+    /** Liste des questions */
     private ArrayList<Question> questions;
 
-
+    /**
+     * Constructeur de la classe BanqueQuestion
+     */
     public BanqueQuestion() {
         questions = new ArrayList<Question>();
     }
 
+    /**
+     * Permet d'ajouter une question à la liste des questions
+     * @param question La question à ajouter
+     * @throws HomonymeException Si la question existe déjà
+     */
     public void ajouter(Question question) throws HomonymeException {
         if (questions.contains(question)) {
             throw new HomonymeException("La question existe déjà.");
@@ -32,11 +41,13 @@ public class BanqueQuestion {
     }
 
     /**
-     * Permet de récupérer une question précise avec son indice dans l’array qui stocke toute les Questions
-     * @param id L'indice de la question voulue
+     * Permet de récupérer une question précise 
+     * avec son indice dans l’array qui stocke toutes les Questions
+     * @param id (int) L'indice de la question voulue
      * @return La question à l'indice demandé
+     * @throws IndexOutOfBoundsException Si l'indice est incorrect
      */
-    public Question getQuestion(int id) {
+    public Question getQuestion(int id) throws IndexOutOfBoundsException {
         if (id < 0 || questions.size() <= id) {
             throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
                     + "hors de la liste de taile %s", id, questions.size()));
@@ -47,12 +58,18 @@ public class BanqueQuestion {
     /**
      * Récupère les questions qui on le nombre de fausses réponses 
      * passées en paramètres
-     * @param nb Le nombre possible de mauvaise réponse
-     * @return
+     * @param nb (int) Le nombre de mauvaises réponses demandé (entre 1 et 4)
+     * @return Les questions qui ont le nombre 
+     * de mauvaises réponses demandé (ArrayList)
+     * @throws InvalidFormatException Si le nombre de mauvaises 
+     * réponses est incorrect
      */
-    public ArrayList<Question> getQuestionsNbFausseReponse(int nb) {
-        if (nb <= 0 || 4 <= nb) {
-            throw new IllegalArgumentException(String.format("Erreur : %d n'est pas un nombre correct de mauvaise réponse.",nb));
+    public ArrayList<Question> getQuestionsNbFausseReponse(int nb)
+    throws InvalidFormatException {
+        if (nb <= 0 || 5 <= nb) { 
+            throw new InvalidFormatException(
+                String.format("Erreur : %d n'est pas un nombre correct " 
+                            + "de mauvaise réponse.",nb));
         }
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
@@ -65,7 +82,7 @@ public class BanqueQuestion {
 
     /**
      * Permet de récupérer toutes les questions
-     * @return Toutes les questions 
+     * @return Toutes les questions (ArrayList)
      */
     public ArrayList<Question> getQuestions() {
         return questions;
@@ -73,8 +90,8 @@ public class BanqueQuestion {
 
     /**
      * Permet de récupérer les questions qui on la catégorie passé en paramètres.
-     * @param categorie 
-     * @return
+     * @param categorie la catégorie des questions à récupérer
+     * @return null
      */
     public ArrayList<Question> getQuestions(Categorie categorie) {
         ArrayList<Question> resultat = new ArrayList<Question>();
@@ -87,11 +104,16 @@ public class BanqueQuestion {
     }
 
     /**
-     * Permet de récupérer les questions qui ont la difficultée passée en paramètre
+     * Permet de récupérer les questions qui ont 
+     * la difficultée passée en paramètre
+     * @param difficulte (int) La difficulté des questions à récupérer
+     * @return resultat Les questions qui ont la difficulté passée en paramètre
      */
-    public ArrayList<Question> getQuestionsDifficulte(int difficulte) {
+    public ArrayList<Question> getQuestionsDifficulte(int difficulte)
+    throws InvalidFormatException {
         if (difficulte < 1 || 3 < difficulte) {
-            throw new IllegalArgumentException("Une difficulte est comprise entre 1 et 3");
+            throw new InvalidFormatException("Une difficulte est comprise " 
+                                           + "entre 1 et 3");
         }
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
@@ -104,11 +126,15 @@ public class BanqueQuestion {
      * Permet de récupérer les questions qui on le libellé passé en paramètre 
      * (on vérifie que le libellé contient la string passée en paramètres)
      * en ignorant la casse
+     * @param nom (String) Le libellé des questions à récupérer
+     * @return resultat Les questions qui ont le libellé passé en paramètre
      */
     public ArrayList<Question> getQuestionsLibelle(String nom) {
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
-            if (question.getLibelle().contains(nom.toLowerCase())) resultat.add(question);
+            if (question.getLibelle().contains(nom.toLowerCase())) {
+                resultat.add(question);
+            }
         }
         return resultat;
     }
@@ -125,7 +151,4 @@ public class BanqueQuestion {
         }
         return resultat.toString();
     }
-    
-    
-
 }

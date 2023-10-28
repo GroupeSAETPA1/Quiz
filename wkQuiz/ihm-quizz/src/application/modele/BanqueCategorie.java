@@ -6,23 +6,30 @@
 package application.modele;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import application.exception.HomonymeException;
 
 /**
  * Gestion de toutes les catégories présente dans l'application
- * @author quentin costes
+ * @author Quentin Costes
+ * @author Tom Douaud
  */
 public class BanqueCategorie {
 	
-	
+    /* La liste des catégories */
     private ArrayList<Categorie> categories;
     
+    /**
+     * Constructeur de BanqueCategorie
+     */
     public BanqueCategorie() {
     	categories = new ArrayList<Categorie>();
     }
     
+    /**
+     * Ajout d'une catégorie dans la banque de catégorie
+     * @param categorie, la categorie a rajouter
+     * @throws HomonymeException si la catégorie est déja dans la liste
+     */
     public void ajouter(Categorie categorie) throws HomonymeException {
     	if (categories.contains(categorie)) {
             throw new HomonymeException("La categorie existe déjà.");
@@ -32,16 +39,16 @@ public class BanqueCategorie {
 
     /**
      * Permet de récupérer toutes les categories
-     * @return Toutes les categories 
+     * @return Une ArrayList de toutes les categories 
      */
     public ArrayList<Categorie> getCategories() {
         return this.categories;
     }
 
     /**
-     *  Permet de récupérer une categorie précise avec son indice dans l’array qui stocke toute les Categories
-     * @param id L'indice de la categorie voulue
-     * @return La categorie à l'indice demandé
+     * Permet de récupérer une categorie précise avec son indice dans l’array qui stocke toute les Categories
+     * @param id (int) L'indice de la categorie voulue
+     * @return La categorie à l'indice demandé (int)
      */
     public Categorie getCategorie(int id) {
     	if (id < 0 || categories.size() <= id) {
@@ -52,8 +59,10 @@ public class BanqueCategorie {
     }
 
     /**
-     * Permet de récupérer les Categories qui on le libellé passé 
-     * en paramètre(on vérifie que le libellé contient la string passée en paramètres)
+     * Permet de récupérer les Categories qui ont le libellé passé en paramètre
+     * (on vérifie que le libellé contient la string passée en paramètres)
+     * @param libelle (String) le libellé recherché
+     * @return une ArrayList des différentes catégories qui ont ce libellé
      */
     public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
     	ArrayList<Categorie> resultat = new ArrayList<Categorie>();

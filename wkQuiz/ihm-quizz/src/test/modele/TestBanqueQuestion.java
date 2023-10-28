@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import application.exception.HomonymeException;
+import application.exception.InvalidFormatException;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.Question;
@@ -20,6 +21,7 @@ import application.modele.Question;
 /** 
  * Classe de test unitaire de la classe {@link application.modele.BanqueQuestion}
  * @author Francois de Saint Palais
+ * @author Tom Douaud
  */
 class TestBanqueQuestion {
     
@@ -29,6 +31,9 @@ class TestBanqueQuestion {
     private ArrayList<Question> ensembleQuestionLibelleNom;
     private BanqueQuestion banqueQuestion;
     
+    /**
+     * Génère une question valide pour les tests
+     */
     @BeforeEach
     void genererQuestionValide() {
         ArrayList<String> reponsesFausses = new ArrayList<String>();
@@ -51,18 +56,20 @@ class TestBanqueQuestion {
 
 
     /**
-     * Test method for {@link application.modele.BanqueQuestion#ajouter(application.modele.Question)}.
+     * Méthode de test pour ajouter
+     * {@link application.modele.BanqueQuestion#ajouter(application.modele.Question)}.
      */
     @Test
     void testAjouter() {
         assertDoesNotThrow(()->banqueQuestion.ajouter(ensembleQuestion.get(0)));
-        //Question déjà présente
+        // Question déjà présente
         assertThrows(HomonymeException.class, 
                 ()->banqueQuestion.ajouter(ensembleQuestion.get(0)));
     }
 
     /**
-     * Test method for {@link application.modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
+     * Méthode de test pour le constructeur
+     * {@link application.modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
      */
     @Test
     void testBanqueQuestion() {
@@ -70,11 +77,13 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link application.modele.BanqueQuestion#getQuestion(int)}.
-     * @throws HomonymeException 
+     * Méthode de test pour getQuestion
+     * {@link application.modele.BanqueQuestion#getQuestion(int)}.
+     * @throws IndexOutOfBoundsException 
+     * @throws HomonymeException
      */
     @Test
-    void testGetQuestion() throws HomonymeException {
+    void testGetQuestion() throws IndexOutOfBoundsException, HomonymeException {
         assertThrows(IndexOutOfBoundsException.class, ()->banqueQuestion.getQuestion(-1));
         
         banqueQuestion.ajouter(ensembleQuestion.get(0));
@@ -83,16 +92,18 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
+     * Méthode de test pour getQuestionsNbFausseReponse
+     * {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
      * @throws HomonymeException 
+     * @throws InvalidFormatException 
      */
     @Test
-    void testGetQuestionNbFausseReponse() throws HomonymeException {
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(Integer.MIN_VALUE));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(-1));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(0));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(5));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(Integer.MAX_VALUE));
+    void testGetQuestionNbFausseReponse() throws HomonymeException,  InvalidFormatException {
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(Integer.MIN_VALUE));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(-1));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(0));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(5));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsNbFausseReponse(Integer.MAX_VALUE));
         
         banqueQuestion.ajouter(ensembleQuestion.get(0));
         assertEquals(ensembleQuestion.get(0), 
@@ -100,7 +111,8 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for {@link application.modele.BanqueQuestion#getQuestions()}.
+     * Méthode de test pour getQuestions
+     * {@link application.modele.BanqueQuestion#getQuestions()}.
      * @throws HomonymeException 
      */
     @Test
@@ -116,7 +128,7 @@ class TestBanqueQuestion {
 
 
     /**
-     * Test method for 
+     * Méthode de test pour getQuestionsCategorie
      * {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
      * @throws HomonymeException 
      */
@@ -128,17 +140,18 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for 
+     * Méthode de test pour getQuestionsDifficulte
      * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
      * @throws HomonymeException 
+     * TODO FIXME
      */
     @Test
-    void testGetQuestionsDifficulte() throws HomonymeException {
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(-1));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(0));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(4));
-        assertThrows(IllegalArgumentException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MAX_VALUE));
+    void testGetQuestionsDifficulte() throws InvalidFormatException, HomonymeException {
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(-1));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(0));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(4));
+        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MAX_VALUE));
         
         banqueQuestion.ajouter(ensembleQuestionDifficulteFacile.get(0));
         assertIterableEquals(ensembleQuestionDifficulteFacile, 
@@ -146,7 +159,7 @@ class TestBanqueQuestion {
     }
 
     /**
-     * Test method for 
+     * Méthode de test pour getQuestionsLibelle
      * {@link application.modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
      * @throws HomonymeException 
      */
@@ -162,7 +175,13 @@ class TestBanqueQuestion {
         assertIterableEquals(ensembleQuestionLibelleNom, 
                 banqueQuestion.getQuestionsLibelle(""));
     }
-    
-    
 
+    /**
+     * Méthode de test pour toString de BanqueQuestion
+     * {@link application.modele.BanqueQuestion#toString()}.
+     */
+    @Test
+    void testToString() {
+        assertTrue(banqueQuestion.toString() instanceof String);
+    }
 }
