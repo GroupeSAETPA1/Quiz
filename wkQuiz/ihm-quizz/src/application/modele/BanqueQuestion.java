@@ -5,7 +5,6 @@
 
 package application.modele;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import application.exception.HomonymeException;
@@ -79,15 +78,15 @@ public class BanqueQuestion {
     public ArrayList<Question> getQuestions(Categorie categorie) {
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
-            if (question.getCategorie().equals(categorie)) {
+            if (question.getCategorie().equals(categorie.getNom())) {
                 resultat.add(question);
             }
         }
-        return null;
+        return resultat;
     }
 
     /**
-     * Permet de récupérer les questions qui ont la difficultée passée en paramètre
+     * Permet de récupérer les questions qui ont la difficulté passée en paramètre
      */
     public ArrayList<Question> getQuestionsDifficulte(int difficulte) {
         if (difficulte < 1 || 3 < difficulte) {
@@ -108,7 +107,9 @@ public class BanqueQuestion {
     public ArrayList<Question> getQuestionsLibelle(String nom) {
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
-            if (question.getLibelle().contains(nom.toLowerCase())) resultat.add(question);
+            if (question.getLibelle().toLowerCase().contains(nom.toLowerCase())) {
+                resultat.add(question);                
+            }
         }
         return resultat;
     }
