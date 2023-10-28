@@ -108,6 +108,7 @@ public class BanqueQuestion {
      * la difficultée passée en paramètre
      * @param difficulte (int) La difficulté des questions à récupérer
      * @return resultat Les questions qui ont la difficulté passée en paramètre
+     * @throws InvalidFormatException si la difficultée est invalide
      */
     public ArrayList<Question> getQuestionsDifficulte(int difficulte)
     throws InvalidFormatException {

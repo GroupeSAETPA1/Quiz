@@ -49,6 +49,7 @@ public class BanqueCategorie {
      * Permet de récupérer une categorie précise avec son indice dans l’array qui stocke toute les Categories
      * @param id (int) L'indice de la categorie voulue
      * @return La categorie à l'indice demandé (int)
+     * @throws IndexOutOfBoundsException si l'index de la catégorie n'est pas bon
      */
     public Categorie getCategorie(int id) {
     	if (id < 0 || categories.size() <= id) {

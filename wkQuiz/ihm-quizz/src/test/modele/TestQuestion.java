@@ -7,16 +7,17 @@ package test.modele;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import application.modele.Categorie;
 import application.modele.Question;
+
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 
 /** 
  * Lancement des tests pour la classe Question
@@ -31,12 +32,30 @@ class TestQuestion {
     private ArrayList<String> mauvaiseReponse3;
     private ArrayList<String> mauvaiseReponse4;
     private ArrayList<String> mauvaiseReponseDoublon;
-    private Categorie[] categoriesValides = {new Categorie("Commentaire"), new Categorie("test")};
+    private Categorie[] categoriesValides; // j'ai du déplacer l'instanciation 
+                                           // car sinon il y avait une erreur 
+                                           // par rapport à la 
+                                           // gestion des exceptions
     private ArrayList<String> mauvaiseReponseVide;
     private ArrayList<String> mauvaiseReponseJusteChaineVide;
     
+    /**
+     * Génère des jeux de test pour les tests unitaires
+     * @throws ReponseException si les réponses sont invalides
+     * @throws InvalidFormatException si le format est invalide
+     * @throws InvalidNameException si le nom est invalide
+     */
     @BeforeEach
-    void genererJeuxDeTest() {
+    void genererJeuxDeTest() 
+    throws InvalidFormatException, InvalidNameException, ReponseException {
+        // Try catch pour la gestion des exceptions de Catégorie (FIXME)
+        try {
+            categoriesValides = new Categorie[] {
+                new Categorie("Commentaire"), 
+                new Categorie("test")};
+        } catch (InvalidNameException e) {
+                e.printStackTrace();
+        }
         questionValide = new ArrayList<Question>();
         mauvaiseReponse1 = new ArrayList<String>();
         mauvaiseReponse2 = new ArrayList<String>();
@@ -45,7 +64,7 @@ class TestQuestion {
         mauvaiseReponseVide =  new ArrayList<String>();
         mauvaiseReponseDoublon = new ArrayList<String>();
         mauvaiseReponseJusteChaineVide = new ArrayList<String>();
-                
+
         mauvaiseReponseJusteChaineVide.add("");
         mauvaiseReponseJusteChaineVide.add("");
         mauvaiseReponseJusteChaineVide.add("");
@@ -101,38 +120,45 @@ class TestQuestion {
                           ""));
     }
     
+    /**
+     * Teste le constructeur de la classe Question
+     * @see {@link application.modele.Question#Question(String, Categorie, int, String, ArrayList, String)}
+     * @throws ReponseException si les réponses sont invalides
+     * @throws InvalidFormatException si le format est invalide
+     * @throws InvalidNameException si le nom est invalide
+     */
     @Test
     void testConstructeur() {
         //Le Libelle est vide
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidNameException.class,
                 () -> new Question("" , categoriesValides[0] , 3 ,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
         
         //La difficulté est negative
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidFormatException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],-1,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidFormatException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                         -999999,
                         "le délimiteur /**" , mauvaiseReponse1 ,""));
         
         //La difficulté est strictement supérieur à 3
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidFormatException.class,
                 ()-> new Question("libelle non vide" , categoriesValides[0],4,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidFormatException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                                     9999999,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
         
         // La réponse juste est vide
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidNameException.class,
                 ()-> new Question("libelle non vide" , categoriesValides[0],1,
                                   "" , mauvaiseReponse3 , ""));
         
-        //La liste des mauvaise réponse est vide
-        assertThrows(IllegalArgumentException.class,
+        // La liste des mauvaise réponses est vide
+        assertThrows(InvalidFormatException.class,
                 ()-> new Question("Libelle non  vide" , categoriesValides[0],1,
                                   "reponse juste non vide" ,
                                   mauvaiseReponseVide , ""));
@@ -140,34 +166,39 @@ class TestQuestion {
                            categoriesValides[0] , 3 ,"le délimiteur /**" , 
                            mauvaiseReponse1 ,""));
         
-        //La liste des mauvaise réponse contient un doublon
-        assertThrows(IllegalArgumentException.class,
+        // La liste des mauvaise réponses contient un doublon
+        assertThrows(ReponseException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                         "reponse juste non vide" , mauvaiseReponseDoublon ,""));
         
-        //La reponse juste est présente dans les reponses fausses 
-       assertThrows(IllegalArgumentException.class,
+        // La réponse juste est présente dans les réponses fausses 
+        assertThrows(ReponseException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                        "le délimiteur /*",mauvaiseReponse1 , ""));        
-       assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                        "LE DELIMITEUR //",mauvaiseReponse1 , ""));
-       assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                        "LE DELimiTEUR //",mauvaiseReponse1 , ""));        
-       assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()->new Question("libelle non vide" , categoriesValides[0],3,
                        "LE delIMIteur //",mauvaiseReponse1 , ""));
        
-       //La liste ne contient que des chaine vide
-       assertThrows(IllegalArgumentException.class,
-               ()->new Question("Libelle non vide" , categoriesValides[0],2,
-                       "non vide",mauvaiseReponseJusteChaineVide , ""));
+        // La liste ne contient que des chaines vide
+        assertThrows(ReponseException.class,
+                ()->new Question("Libelle non vide" , categoriesValides[0],2,
+                    "non vide",mauvaiseReponseJusteChaineVide , ""));
         
     }
 
+    /**
+     * Teste la méthode getLibelle de la classe Question
+     * @see {@link application.modele.Question#getLibelle()}
+     * @throws InvalidNameException si le nom est invalide
+     */
      @Test
-     void testGetLibelle() {
+     void testGetLibelle() throws InvalidNameException {
          
          // Recuperer un libelle existant
          assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?" , 
@@ -183,18 +214,18 @@ class TestQuestion {
          
          //Recupere un libelle apres modification
          questionValide.get(0).setLibelle("nouveau libelle");
-         assertEquals("nouveau libelle" , questionValide.get(0).getLibelle());
-         
-         
-         
-     
+         assertEquals("nouveau libelle" , questionValide.get(0).getLibelle());     
      }
     
-     
+    /**
+     * Teste la méthode setLibelle de la classe Question
+     * @see {@link application.modele.Question#setLibelle(String)}
+     * @throws InvalidNameException si le nom est invalide
+     */
     @Test
     void testSetLibelle() {
         
-        assertThrows(IllegalArgumentException.class ,
+        assertThrows(InvalidNameException.class,
                 ()-> questionValide.get(0).setLibelle(""));
         
         assertDoesNotThrow(() -> questionValide.get(0).setLibelle("test1"));
@@ -202,7 +233,10 @@ class TestQuestion {
         
     }
 
-    
+    /**
+     * Teste la méthode getCategorie de la classe Question
+     * @see {@link application.modele.Question#getCategorie()}
+     */
     @Test
     void testGetCategorie() {
         assertEquals("Commentaire", questionValide.get(0).getCategorie());
@@ -214,7 +248,10 @@ class TestQuestion {
         assertNotEquals("Commentaire", questionValide.get(0).getCategorie());
     }
     
-    
+    /**
+     * Teste la méthode setCatgorie de la classe Question
+     * @see {@link application.modele.Question#setCatgorie(Categorie)}
+     */
     @Test
     void testSetCatgorie() {
     	// on verifie que la méthode ne leve pas d'exception
@@ -223,6 +260,10 @@ class TestQuestion {
         assertEquals("test", questionValide.get(0).getCategorie());
     }
     
+    /**
+     * Teste la méthode getDifficulte de la classe Question
+     * @see {@link application.modele.Question#getDifficulte()}
+     */
     @Test
     void testGetDifficulte() {
     	assertEquals(0, questionValide.get(0).getDifficulte());
@@ -232,17 +273,24 @@ class TestQuestion {
     	assertNotEquals(0, questionValide.get(1).getDifficulte());
     }
     
-    
+    /**
+     * Teste la méthode setDifficulte de la classe Question
+     * @see {@link application.modele.Question#setDifficulte(int)}
+     */
     @Test
     void testSetDifficulte() {
     	assertDoesNotThrow(()->questionValide.get(0).setDifficulte(3));
-    	assertThrows(IllegalArgumentException.class, 
-    				 ()-> questionValide.get(0).setDifficulte(6));
-    	assertThrows(IllegalArgumentException.class, 
-				 ()-> questionValide.get(0).setDifficulte(-5));
+    	assertThrows(InvalidFormatException.class, 
+    				()-> questionValide.get(0).setDifficulte(6));
+    	assertThrows(InvalidFormatException.class, 
+				    ()-> questionValide.get(0).setDifficulte(-5));
     	assertEquals(3, questionValide.get(0).getDifficulte());
     }
     
+    /**
+     * Teste la méthode getFeedback de la classe Question
+     * @see {@link application.modele.Question#getFeedback()}
+     */
     @Test
     void testGetFeedback() {
     	assertEquals("", questionValide.get(0).getFeedback());
@@ -254,6 +302,10 @@ class TestQuestion {
 			     , questionValide.get(1).getFeedback());
     }
     
+    /**
+     * Teste la méthode setFeedback de la classe Question
+     * @see {@link application.modele.Question#setFeedback(String)}
+     */
     @Test
     void testSetFeedback() {
     	// on verifie que la méthode ne leve pas d'exception
@@ -263,19 +315,28 @@ class TestQuestion {
         assertEquals("test", questionValide.get(0).getFeedback());
     }
 
-    
+    /**
+     * Teste la méthode testSetBonneReponse de la classe Question
+     * @see {@link application.modele.Question#setBonneReponse()}
+     */
     @Test
     void testSetBonneReponse() {
-        assertThrows(IllegalArgumentException.class,
-                ()-> questionValide.get(0).setBonneReponse(""));
-        assertThrows(IllegalArgumentException.class,
-                ()-> questionValide.get(0).setBonneReponse("le délimiteur /*"));
+        assertThrows(InvalidNameException.class,
+            ()-> questionValide.get(0).setBonneReponse(""));
+        assertThrows(ReponseException.class,
+            ()-> questionValide.get(0).setBonneReponse("le délimiteur /*"));
         assertDoesNotThrow(()-> questionValide.get(0).setBonneReponse("test1"));
         assertEquals("test1" , questionValide.get(0).getReponseJuste());
     }
 
+    /**
+     * Teste la méthode getBonneReponse de la classe Question
+     * @see {@link application.modele.Question#getBonneReponse()}
+     * @throws ReponseException si les réponses sont invalides
+     * @throws InvalidNameException si le nom est invalide
+     */
     @Test
-    void testGetBonneReponse() {
+    void testGetBonneReponse() throws InvalidNameException, ReponseException {
         //Reponse juste deja existante
         assertEquals("/* commentaire */",questionValide.get(2).getReponseJuste());
         //Reponse juste apres un changement
@@ -283,7 +344,10 @@ class TestQuestion {
         assertEquals("test45" , questionValide.get(2).getReponseJuste());
     }
 
-    
+    /**
+     * Teste la méthode setMauvaiseReponse de la classe Question
+     * @see {@link application.modele.Question#setMauvaiseReponse(ArrayList)}
+     */
     @Test
     void testSetMauvaiseReponse() {
         ArrayList<String> mauvaiseReponseContientJuste = new ArrayList<String>();
@@ -293,21 +357,27 @@ class TestQuestion {
         ArrayList<String> test1 = new ArrayList<String>();
         test1.add("test1");
         test1.add("test2");
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidFormatException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseVide));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(ReponseException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseJusteChaineVide));
         assertDoesNotThrow(()-> questionValide.get(0).setMauvaiseReponse(test1));
         assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
     }
 
-    
+    /**
+     * Teste la méthode equals de la classe Question
+     * @see {@link application.modele.Question#equals()}
+     * @throws InvalidFormatException si le format est invalide
+     * @throws ReponseException si les réponses sont invalides
+     * @throws InvalidNameException si le nom est invalide
+     */
     @Test
-    void testEquals() {
+    void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException {
         Question question1Egale = new Question("Quel est le délimiteur de début "
                                       + "d'un commentaire Javadoc ?" , 
                                       categoriesValides[0] , 0 , 
@@ -331,11 +401,27 @@ class TestQuestion {
         
         // 2 question exactemet pareil mais difficulté différente
         assertEquals(question3Egale, questionValide.get(1));
+
+        // 2 fois exactement la meme question
+        assertEquals(question2Egale, question2Egale);
+
+        // 1 question et un objet null
+        assertNotEquals(questionValide.get(0), null);
+
+        // 1 question et un objet d'une autre classe
+        assertNotEquals(questionValide.get(0), new String("test"));
         
     }
 
+    /**
+     * Teste la méthode getMauvaisesReponses de la classe Question
+     * @see {@link application.modele.Question#getMauvaisesReponses()}
+     * @throws ReponseException si les réponses sont invalides
+     * @throws InvalidFormatException si le format est invalide
+     */
     @Test
-    void testGetMauvaiseReponse() {
+    void testGetMauvaisesReponses() 
+    throws InvalidFormatException, ReponseException {
         ArrayList<String> test1 = new ArrayList<String>();
         ArrayList<String> test2 = new ArrayList<String>();
         test1.add("le délimiteur /*");
@@ -349,6 +435,11 @@ class TestQuestion {
         questionValide.get(0).setMauvaiseReponse(test2);
         assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
     }
+
+    /**
+     * Teste la méthode toString de la classe Question
+     * @see {@link application.modele.Question#toString()}
+     */
     @Test
     void testToString() {
     	String valide = """ 
@@ -363,6 +454,11 @@ class TestQuestion {
 
         assertDoesNotThrow(()-> questionValide.get(0).toString());
         assertEquals(valide, questionValide.get(0).toString());
+
+        // deuxième test avec une question qui a un feedback non vide
+        assertDoesNotThrow(()-> questionValide.get(1).toString());
+        assertEquals(valide, questionValide.get(1).toString());
+
     }
 
 }

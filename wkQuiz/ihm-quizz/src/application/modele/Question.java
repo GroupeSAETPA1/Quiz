@@ -2,11 +2,15 @@ package application.modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
+
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 
 
 /**
  * TODO comment class responsibility (SRP)
+ * Classe représentant une question du quiz.
  * @author Lucas
  */
 
@@ -66,7 +70,9 @@ public class Question implements Serializable {
      *  <li>la liste des mauvaises propositions</li>
      *  <li>le feedback</li>
      * </ul>
-     * @throw IllegalArgumentException si
+     * @throws InvalidFormatException ,
+     * @throws InvalidNameException ,
+     * @throws ReponseException si
      * <ul>
      *  <li> le libellé est une chaîne vide</li> 
      *  <li> la reponseJuste est une chaîne vide</li>
@@ -81,29 +87,30 @@ public class Question implements Serializable {
      */
     public Question(String libelle,Categorie categorie,int difficulte,
                     String reponseJuste,ArrayList<String> reponsesFausse,
-                    String feedback) {
+                    String feedback) throws InvalidFormatException, 
+                    InvalidNameException, ReponseException {
         if (libelle.equals("")) {
-            throw new IllegalArgumentException("Le libelle est vide");
+            throw new InvalidNameException("Le libelle est vide");
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
-            throw new IllegalArgumentException("Le niveau est compris "
+            throw new InvalidFormatException("Le niveau est compris "
                                                + "entre 1 et 3");
         }
         if (reponseJuste.equals("")) {
-            throw new IllegalArgumentException("La réponse juste est vide");
+            throw new InvalidNameException("La réponse juste est vide");
         }
         if (reponsesFausse.isEmpty()) {
-            throw new IllegalArgumentException("La liste des mauvaises reponses "
+            throw new InvalidFormatException("La liste des mauvaises reponses "
                     + "ne doit pas etre vide");
         }
         if (!reponsesFausseSansDoublon(reponsesFausse)) {
-            throw new IllegalArgumentException("La liste des mauvaises reponses "
+            throw new ReponseException("La liste des mauvaises reponses "
                     + "ne peut pas contenir de valeurs "
                     + "en double (casse ignoré)");
         }
         
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
-            throw new IllegalArgumentException("La liste des reponses fausses "
+            throw new ReponseException("La liste des reponses fausses "
                     + "contient une ou plusieurs propositions égale "
                     + "a la réponse juste (casse ignorée");
         }
@@ -118,27 +125,28 @@ public class Question implements Serializable {
     }
     
     /**
-     * verifie la validité d'une ArrayList pour le constructeur de question
-     * @param aTester : ArrayList dont on veux verifier la validité
+     * Vérifie la validité d'une ArrayList pour le constructeur de question
+     * @param aTester : ArrayList dont on veux vérifier la validité
      * @return true si aTester n'est pas vide et qu'elle n'a que des valeurs
      *         distinctes (casse ignoré)
      *         false sinon
      */
     private static boolean reponsesFausseSansDoublon(ArrayList<String>aTester) {
-        boolean sansDoublon = true ;
+        boolean sansDoublon = true;
         String precedent;
-        for (int i = 0 ; i < aTester.size() && sansDoublon ; i++) {
+        for (int i = 0 ; i < aTester.size() && sansDoublon; i++) {
             precedent = aTester.get(i);
-            for (int j = 0 ; j < aTester.size() && sansDoublon ; j++) {
+            for (int j = 0 ; j < aTester.size() && sansDoublon; j++) {
                 if (i != j) {
                     sansDoublon = !precedent.equalsIgnoreCase(aTester.get(j));                    
                 }
             }           
         }
         return sansDoublon;
-        
     }
+
     /**
+     * Vérifie si une réponse juste est parmis les mauvaises réponses
      * @param aTester : ArrayList dont on veux verifier la validité
      * @return true si aTester contient une chaine de caractère identique ,
      *         la casse est ignorée des deux cotées.
@@ -146,58 +154,65 @@ public class Question implements Serializable {
      */
     private static boolean reponseFausseContientReponseJuste
     (ArrayList<String> aTester ,  String reponseJuste) {
-        boolean fauxContientJuste = false ;
-        for (int i = 0 ; i < aTester.size() && !fauxContientJuste  ; i++) {
+        boolean fauxContientJuste = false;
+        for (int i = 0; i < aTester.size() && !fauxContientJuste; i++) {
             fauxContientJuste =  reponseJuste.equalsIgnoreCase(aTester.get(i));
         }
-        return fauxContientJuste ;
+        return fauxContientJuste;
         
     }
     
     /** 
      * Change le libelle de la question
-     * @param nouveauIntitulle
+     * @param nouveauIntitulle (String)
+     * @throws InvalidNameException si nouveauIntitulle est une chaine vide
      */
-    public void setLibelle(String nouveauIntitulle) {
+    public void setLibelle(String nouveauIntitulle) 
+    throws InvalidNameException {
         if (nouveauIntitulle.equals("")) {
-            throw new IllegalArgumentException("Intitule vide");
+            throw new InvalidNameException("Intitule vide");
         }
         //else
         this.libelle = nouveauIntitulle;
     }
 
     /** 
-     * change la categorie de la question
-     * @param nouvelleCategorie
+     * Change la categorie de la question
+     * @param nouvelleCategorie la categorie qui remplace l'ancienne
      */
     public void setCatgorie(Categorie nouvelleCategorie) {
         this.categorie = nouvelleCategorie ;
     }
 
     /**
-     * change la difficultée de la question
-     * @param nouvelleDifficulte
+     * Change la difficultée de la question
+     * @param nouvelleDifficulte (int) la nouvelle difficultée
+     * @throws InvalidFormatException si nouvelleDifficulte n'est pas entre 1 et 3
      */
-    public void setDifficulte(int nouvelleDifficulte) {
+    public void setDifficulte(int nouvelleDifficulte) 
+    throws InvalidFormatException {
     	if (nouvelleDifficulte < DIFFICULTE_MINIMALE 
             || nouvelleDifficulte > DIFFICULTE_MAXIMALE) {
-            throw new IllegalArgumentException("Le niveau est compris "
-                                               + "entre 1 et 3");
+            throw new InvalidFormatException("Le niveau est compris "
+                                           + "entre 1 et 3");
         }
     	this.difficulte = nouvelleDifficulte;
     }
 
     /**
-     * change la bonne réponse de la question
-     * @param nouvelleBonneReponse
+     * Change la bonne réponse de la question
+     * @param nouvelleBonneReponse (String) la nouvelle bonne réponse
+     * @throws InvalidNameException si nouvelleBonneReponse est une chaine vide
+     * @throws ReponseException si nouvelleBonneReponse est contenu dans mauvaiseReponse
      */
-    public void setBonneReponse(String nouvelleBonneReponse) {
+    public void setBonneReponse(String nouvelleBonneReponse) 
+    throws InvalidNameException, ReponseException {
         if (nouvelleBonneReponse.equals("")) {
-            throw new IllegalArgumentException("Bonne réponse vide");
+            throw new InvalidNameException("Bonne réponse vide");
         }
         if (reponseFausseContientReponseJuste(mauvaisesReponses, 
             nouvelleBonneReponse)) {
-            throw new IllegalArgumentException("Impossible de set une bonne "
+            throw new ReponseException("Impossible de set une bonne "
                     + "reponse si la valeur est deja contenu "
                     + "dans mauvaiseReponse ");
         }
@@ -206,71 +221,97 @@ public class Question implements Serializable {
     }
 
     /**
-     * changes les mauvaises réponses de la question
-     * @param nouvellesMauvaisesReponses
+     * Change les mauvaises réponses de la question
+     * @param nouvellesMauvaisesReponses (ArrayList<String>) la nouvelle liste des mauvaises réponses
+     * @throws InvalidFormatException si nouvellesMauvaisesReponses est vide
+     * @throws ReponseException si nouvellesMauvaisesReponses 
+     * contient une valeur en double ou 
+     * si elle contient une valeur égale à la bonne réponse
      */
-    public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses){
+    public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses) 
+    throws InvalidFormatException, ReponseException {
         if (nouvellesMauvaisesReponses.isEmpty()) {
-            throw new IllegalArgumentException("Impossible de modifier "
-                    + "avec une liste vide");
+            throw new InvalidFormatException("Impossible de modifier "
+                                           + "avec une liste vide");
         }
         if (reponseFausseContientReponseJuste(nouvellesMauvaisesReponses, 
             reponseJuste)) {
             
-            throw new IllegalArgumentException("Impossible de modifier si "
-                    + ""
-                    + "la liste de mauvaise reponse contient une possibilité "
-                    + "égale a la bonne reponse (case ignorée)");
+            throw new ReponseException("Impossible de modifier si "
+                                     + "la liste de mauvaise reponse " 
+                                     + "contient une possibilité "
+                                     + "égale a la bonne reponse (case ignorée)");
             
         }
         if (!reponsesFausseSansDoublon(nouvellesMauvaisesReponses)) {
-            throw new IllegalArgumentException("Impossible de modifier si la "
-                    + "liste contient des valeurs en doublon (case ignorée)");
+            throw new ReponseException("Impossible de modifier si la "
+                                     + "liste contient des valeurs en doublon " 
+                                     + "(case ignorée)");
         }
         //else 
         mauvaisesReponses = nouvellesMauvaisesReponses;
     }
     
     /**
-     * change le feedback de la question
-     * @param feedback
+     * Change le feedback de la question
+     * @param feedback (String) le nouveau feedback
      */
     public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
 
 	/** 
+     * Getter des mauvaises réponses de la question
 	 * @return ArrayList contenant les mauvais réponses
 	 */
     public ArrayList<String> getMauvaisesReponses() {
         return mauvaisesReponses;
     }
 
-    /** @return nom de la categorie */
+    /**
+     * Getter de la catégorie de la question
+     *  @return nom de la categorie (String)
+     */
     public String getCategorie() {
         return categorie.getNom();
     }
 
-    /** @return difficultée de la question*/
+    /**
+     * Getter de la difficultée de la question
+     * @return la difficultée de la question (int)
+     */
     public int getDifficulte() {
         return this.difficulte;
     }
 
-    /** @return libelle de la question (this) */
+    /** 
+     * Getter du libelle de la question
+     * @return le libelle de la question (String) 
+     */
     public String getLibelle() {
         return this.libelle;
     }
     
-    /** @return reponse juste de la question (this)*/
+    /** 
+     * Getter de la bonne réponse de la question
+     * @return la réponse juste de la question (String)
+     */
     public String getReponseJuste() {
     	return this.reponseJuste;
     }
     
-    /** @return feedback de la question */
+    /** 
+     * Getter du feedback de la question
+     * @return le feedback de la question (String)
+     */
     public String getFeedback() {
     	return this.feedback;
     }
     
+    /**
+     * Override de la méthode toString
+     * @return une chaine de caractère contenant les informations de la question
+     */
     @Override
     public String toString() {
     	String aRetouner =  "difficulté de la question : " + this.getDifficulte()
@@ -305,6 +346,4 @@ public class Question implements Serializable {
                 && mauvaisesReponses.equals(other.mauvaisesReponses)
                 && reponseJuste.equalsIgnoreCase(other.reponseJuste);
     }
-    
-
 }
