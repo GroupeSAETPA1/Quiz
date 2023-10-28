@@ -107,7 +107,7 @@ class TestBanqueQuestion {
         
         banqueQuestion.ajouter(ensembleQuestion.get(0));
         assertEquals(ensembleQuestion.get(0), 
-                banqueQuestion.getQuestionsNbFausseReponse(1));
+                banqueQuestion.getQuestionsNbFausseReponse(1).get(0));
     }
 
     /**
@@ -136,7 +136,7 @@ class TestBanqueQuestion {
     void testGetQuestionsCategorie() throws HomonymeException {
         banqueQuestion.ajouter(ensembleQuestionCategorieNom.get(0));
         assertEquals(ensembleQuestionCategorieNom.get(0), 
-                banqueQuestion.getQuestions(new Categorie("Nom")));
+                banqueQuestion.getQuestions(new Categorie("Nom")).get(0));
     }
 
     /**
@@ -166,11 +166,13 @@ class TestBanqueQuestion {
     @Test
     void testGetQuestionsLibelle() throws HomonymeException {
         banqueQuestion.ajouter(ensembleQuestionLibelleNom.get(0));
-        
+
+        assertIterableEquals(ensembleQuestionLibelleNom,
+                banqueQuestion.getQuestionsLibelle("Libelle"));
         assertIterableEquals(ensembleQuestionLibelleNom, 
-                banqueQuestion.getQuestionsLibelle("Nom"));
+                banqueQuestion.getQuestionsLibelle("libelle"));
         assertIterableEquals(ensembleQuestionLibelleNom, 
-                banqueQuestion.getQuestionsLibelle("nom"));
+                banqueQuestion.getQuestionsLibelle("LIBELLE"));
         //On attend toutes les questions
         assertIterableEquals(ensembleQuestionLibelleNom, 
                 banqueQuestion.getQuestionsLibelle(""));
