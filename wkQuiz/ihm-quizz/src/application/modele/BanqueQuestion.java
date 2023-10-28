@@ -96,11 +96,11 @@ public class BanqueQuestion {
     public ArrayList<Question> getQuestions(Categorie categorie) {
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
-            if (question.getCategorie().equals(categorie)) {
+            if (question.getCategorie().equals(categorie.getNom())) {
                 resultat.add(question);
             }
         }
-        return null;
+        return resultat;
     }
 
     /**
@@ -132,8 +132,8 @@ public class BanqueQuestion {
     public ArrayList<Question> getQuestionsLibelle(String nom) {
         ArrayList<Question> resultat = new ArrayList<Question>();
         for (Question question : questions) {
-            if (question.getLibelle().contains(nom.toLowerCase())) {
-                resultat.add(question);
+            if (question.getLibelle().toLowerCase().contains(nom.toLowerCase())) {
+                resultat.add(question);                
             }
         }
         return resultat;
