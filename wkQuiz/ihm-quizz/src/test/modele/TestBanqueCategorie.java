@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import application.exception.HomonymeException;
+import application.exception.InvalidNameException;
 import application.modele.BanqueCategorie;
 import application.modele.Categorie;
 
@@ -28,9 +29,10 @@ class TestBanqueCategorie {
 	 * Avant chaque test, initialise la banque de catégorie 
 	 * et les catégories a ajouter dans la banque pour les tests suivant
 	 * {@link application.modele.BanqueCategorie}
+	 * @throws InvalidNameException 
 	 */
 	@BeforeEach
-	void genererBanque() {
+	void genererBanque() throws InvalidNameException {
 		banqueCategorie = new BanqueCategorie();
 		ensembleCategories = new ArrayList<Categorie>();
 		ensembleCategorieLibelleNom = new ArrayList<Categorie>();
@@ -102,9 +104,10 @@ class TestBanqueCategorie {
 	 * Test de la méthode getCategoriesLibelle et vérifie qu'on puisse
 	 * bien accéder a une catégorie par son nom (insensible à la casse)
 	 * @throws HomonymeException si jamais une catégorie est déjà présente
+	 * @throws InvalidNameException 
 	 */
 	@Test
-	void testGetCategoriesLibelle() throws HomonymeException {
+	void testGetCategoriesLibelle() throws HomonymeException, InvalidNameException {
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 		

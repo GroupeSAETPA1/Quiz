@@ -1,5 +1,5 @@
 /*
- * testModelePrincipale.java                                    26 oct. 2023
+ * TestModelePrincipale.java                                    26 oct. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -20,7 +23,7 @@ import application.modele.Question;
  * TODO comment class responsibility (SRP)
  * @author Lucas
  */
-class testModelePrincipale {
+class TestModelePrincipale {
     
     private ArrayList<Question> questionValide;
     private  ArrayList<String> mauvaiseReponse1;
@@ -28,12 +31,12 @@ class testModelePrincipale {
     private ArrayList<String> mauvaiseReponse3;
     private ArrayList<String> mauvaiseReponse4;
     private ArrayList<String> mauvaiseReponseDoublon;
-    private Categorie[] categoriesValides = {new Categorie("Commentaire"), new Categorie("test")};
+    private Categorie[] categoriesValides = new Categorie[2];
     private ArrayList<String> mauvaiseReponseVide;
     private ArrayList<String> mauvaiseReponseJusteChaineVide;
     
     @BeforeEach
-    void genererJeuxDeTest() {
+    void genererJeuxDeTest() throws InvalidFormatException, InvalidNameException, ReponseException {
         questionValide = new ArrayList<Question>();
         mauvaiseReponse1 = new ArrayList<String>();
         mauvaiseReponse2 = new ArrayList<String>();
@@ -42,6 +45,9 @@ class testModelePrincipale {
         mauvaiseReponseVide =  new ArrayList<String>();
         mauvaiseReponseDoublon = new ArrayList<String>();
         mauvaiseReponseJusteChaineVide = new ArrayList<String>();
+        
+        categoriesValides[0] = new Categorie("Commentaire");
+        categoriesValides[1] = new Categorie("test");
                 
         mauvaiseReponseJusteChaineVide.add("");
         mauvaiseReponseJusteChaineVide.add("");
@@ -108,17 +114,20 @@ class testModelePrincipale {
 
     /**
      * Test method for {@link application.modele.ModelePrincipal#creerQuestion(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList, java.lang.String)}.
+     * @throws ReponseException 
+     * @throws InvalidFormatException 
      */
     @Test
-    void testCreerQuestion() {
+    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException{
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
+        //TODO assertDoesNotThrow à la place d'assertTrue
         // Question de "reference"
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
         
-        // Test ajout de question avec seulement categorie differente
+        // Test ajout de question avec seulement catégorie différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "Javadoc", 
                 1, "non vide", mauvaiseReponse1, ""));
@@ -127,36 +136,33 @@ class testModelePrincipale {
         assertTrue(modele.creerQuestion("libelle different","Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
         
-        //Test ajout de question avec seulement mauvaise reponse differente
+        //Test ajout de question avec seulement mauvaise réponse différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse2, ""));
         
-        //Test ajout de question avec seulement bonne reponse differente
+        //Test ajout de question avec seulement bonne réponse différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "different", mauvaiseReponse1, ""));
         
-        // Test de non ajout d'une question deja existante
+        // Test de non ajout d'une question déjà existante
         assertFalse(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "Commentaire", 
                 1, "non vide", mauvaiseReponse1, ""));
         
         
-        /* verification de l'exception propager si la question a  creer 
+        /* verification de l'exception propager si la question a  créer 
          * est invalide (tous les paramètres faux)
          */
 
         assertThrows(IllegalArgumentException.class , 
                ()-> modele.creerQuestion("", "", 1, "",mauvaiseReponseVide, ""));
         
-        // Ajout avec une categorie inexistance
+        // Ajout avec une catégorie inexistante
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", "categorieTest", 
                 1, "non vide", mauvaiseReponse1, ""));
-        
-        
-        
 
     }
     

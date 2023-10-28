@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.Question;
@@ -33,9 +35,12 @@ class TestBanqueQuestion {
     
     /**
      * Génère une question valide pour les tests
+     * @throws ReponseException 
+     * @throws InvalidNameException 
+     * @throws InvalidFormatException 
      */
     @BeforeEach
-    void genererQuestionValide() {
+    void genererQuestionValide() throws InvalidFormatException, InvalidNameException, ReponseException {
         ArrayList<String> reponsesFausses = new ArrayList<String>();
         reponsesFausses.add("Faux");
         Question question1 = new Question("Libelle", new Categorie("Nom"), 1,
@@ -131,9 +136,10 @@ class TestBanqueQuestion {
      * Méthode de test pour getQuestionsCategorie
      * {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
      * @throws HomonymeException 
+     * @throws InvalidNameException 
      */
     @Test
-    void testGetQuestionsCategorie() throws HomonymeException {
+    void testGetQuestionsCategorie() throws HomonymeException, InvalidNameException {
         banqueQuestion.ajouter(ensembleQuestionCategorieNom.get(0));
         assertEquals(ensembleQuestionCategorieNom.get(0), 
                 banqueQuestion.getQuestions(new Categorie("Nom")).get(0));

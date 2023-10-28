@@ -7,6 +7,10 @@ package application.modele;
 
 import java.util.ArrayList;
 
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
+
 /** 
  * TODO comment class responsibility (SRP)
  * @author Lucas 
@@ -42,18 +46,21 @@ public class ModelePrincipal {
      * Si la catégorie n'existe pas elle est également créer grace au 
      * de Categorie
      * @param libelle : libelle de la question
-     * @param categorie : categorie de la question
-     * @param difficulte : difficulte de la question
-     * @param reponseFausse : liste de mauvaise reponse
+     * @param categorie : catégorie de la question
+     * @param difficulte : difficulté de la question
+     * @param reponseFausse : liste de mauvaise réponse
      * @param feedback : feedback de la question
-     * @param reponseJuste : bonne reponse de la question
-     * @throw IllegalArgumentException : propage une eventuelle exception 
-     *        leve par le constructeur si un des paramètres est valide
-     * @return true si la question a ete creer , false sinon
+     * @param reponseJuste : bonne réponse de la question
+     * @throw IllegalArgumentException : propage une éventuelle exception 
+     *        lève par le constructeur si un des paramètres est valide
+     * @throws ReponseException 
+     * @throws InvalidNameException 
+     * @throws InvalidFormatException 
+     * @return true si la question a été créer , false sinon
      */
     public boolean creerQuestion(String libelle ,String categorie ,
     int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
-    String feedback) {
+    String feedback) throws InvalidFormatException, InvalidNameException, ReponseException {
         
         boolean questionAjout = false ;
         boolean categorieExistante = categorieValide(categorie);

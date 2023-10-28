@@ -27,7 +27,7 @@ public class Categorie implements Serializable {
     	if (nomValide(nom)) {
     		this.nom = nom;
     	} else {
-    		throw new InvalidNameException("le nom est invalide");
+    		throw new InvalidNameException("Le nom saisie est vide");
     	}
     }
     
@@ -49,7 +49,7 @@ public class Categorie implements Serializable {
     	if (nomValide(nom)) {
     		this.nom = nom;
     	} else {
-    		throw new InvalidNameException("le nom est invalide");
+    		throw new InvalidNameException("Le nom saisie est vide");
     	}
     }
 
