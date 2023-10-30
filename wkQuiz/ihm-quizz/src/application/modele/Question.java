@@ -11,7 +11,7 @@ import application.exception.ReponseException;
 /**
  * TODO comment class responsibility (SRP)
  * Classe représentant une question du quiz.
- * @author Lucas
+ * @author Lucas Descriaud
  */
 
 public class Question implements Serializable {

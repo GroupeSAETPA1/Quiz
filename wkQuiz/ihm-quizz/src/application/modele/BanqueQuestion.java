@@ -5,6 +5,7 @@
 
 package application.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import application.exception.HomonymeException;
@@ -16,8 +17,11 @@ import application.exception.InvalidFormatException;
  * @author François de Saint Palais
  * @author Tom Douaud
  */
-public class BanqueQuestion {
+public class BanqueQuestion implements Serializable{
 	
+    /** TODO comment field role (attribute, associative role) */
+    private static final long serialVersionUID = 1685481789337969601L;
+    
     /** Liste des questions */
     private ArrayList<Question> questions;
 
