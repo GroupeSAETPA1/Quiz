@@ -24,6 +24,7 @@ public class ModelePrincipal {
     private BanqueCategorie banqueCategorie;
     
     private Question questionAModifier;
+    private Categorie catgorieAModifier;
     
     private ModelePrincipal() {
         //TODO instancier les banques 
@@ -157,6 +158,7 @@ public class ModelePrincipal {
     /**
      * Pour garder l'instance de la question que l'on veux modifier, 
      * on garde l'instance de la question dans cet classe
+     * @param questionAModifier nouvelle valeur pour questionAModifier
      */
     public void setQuestionAModifier(Question questionAModifier) {
         this.questionAModifier = questionAModifier;
@@ -169,7 +171,13 @@ public class ModelePrincipal {
 
     /**
      * Modifie la questionAModifier
-     * @return
+     * @param libelle Le nouveau nom de la question
+     * @param categorie La nouvelle Categoriede la question
+     * @param difficulte La nouvelle difficulte de la question
+     * @param reponseJuste La nouvelle réponse juste de la question
+     * @param reponseFausses Les nouvelles reponse fausse de la question
+     * @param feedback Le nouveau feedback de la question
+     * @return true si la modification a pu être faite
      */
     public boolean modifierQuestion(String libelle ,String categorie ,
             int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
@@ -177,5 +185,19 @@ public class ModelePrincipal {
         return false; //STUB
     }
 
+    /** @return valeur de catgorieAModifier */
+    public Categorie getCatgorieAModifier() {
+        return catgorieAModifier;
+    }
+
+    /**
+     * Pour garder l'instance de la catégorie que l'on veux modifier, 
+     * on garde l'instance de la catégorie dans cet classe 
+     * @param catgorieAModifier nouvelle valeur de catgorieAModifier 
+     */
+    public void setCatgorieAModifier(Categorie catgorieAModifier) {
+        this.catgorieAModifier = catgorieAModifier;
+    }
+    
 }
 
