@@ -34,3 +34,6 @@ wkQuiz/ihm-quizz/build.fxbuild
 #Modelio
 Modelio/Cas d utilisation/.runtime/
 Modelio/Digramme de classe/.runtime/
+
+#sonarLint
+.sonarlint/
