@@ -7,6 +7,7 @@ package application.modele;
 
 import java.util.ArrayList;
 
+import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
@@ -27,7 +28,6 @@ public class ModelePrincipal {
     private Categorie catgorieAModifier;
     
     private ModelePrincipal() {
-        //TODO instancier les banques 
         //TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
@@ -59,35 +59,25 @@ public class ModelePrincipal {
      * @param reponseFausse : liste de mauvaise réponse
      * @param feedback : feedback de la question
      * @param reponseJuste : bonne réponse de la question
-     * @throw IllegalArgumentException : propage une éventuelle exception 
-     *        lève par le constructeur si un des paramètres est valide
-     * @throws ReponseException 
-     * @throws InvalidNameException 
-     * @throws InvalidFormatException 
      * @return true si la question a été créer , false sinon
+     * @throws HomonymeException 
      */
-    public boolean creerQuestion(String libelle ,String categorie ,
+    public boolean creerQuestion(String libelle ,int categorie ,
     int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
-    String feedback) throws InvalidFormatException, InvalidNameException, ReponseException {
+    String feedback) throws InvalidFormatException, 
+    InvalidNameException, ReponseException, HomonymeException {
         
-        boolean questionEstAjoute = false ;
-        boolean categorieExistante = categorieValide(categorie);
-        ArrayList<Question> listeQuestion = banqueQuestion.getQuestions();
+        boolean ajouter ;
+        // categorie existe toujours donc aucune exception
+        Categorie categorieQuestion = banqueCategorie.getCategorie(categorie);
         
-
-        
-        if (categorieValide(categorie)) {
-          //TODO recuperer LA categorie qui a pour nom exactement categorie
-          Question questionAajouter = new Question(libelle , null , 
-                    difficulte , reponseJuste , reponseFausses , feedback);
-        // on verifie si la question a creer existe si non on l'ajoute 
-          if (!listeQuestion.contains(questionAajouter)) {
-              listeQuestion.add(questionAajouter);
-              questionEstAjoute  = true ; 
-           }
-        }
-        // true question bien ajouter , false sinon
-        return questionEstAjoute;
+        // Si exception on propage au controlleur appellant
+        Question aAjouter = new Question(libelle , categorieQuestion , 
+                difficulte , reponseJuste , reponseFausses , feedback);
+       
+        // On propage l'exception a l'appelant
+        banqueQuestion.ajouter(aAjouter);
+        return true;
         
     }
     
@@ -185,8 +175,8 @@ public class ModelePrincipal {
         return false; //STUB
     }
 
-    /** @return valeur de catgorieAModifier */
-    public Categorie getCatgorieAModifier() {
+    /** @return valeur de categorieAModifier */
+    public Categorie getCategorieAModifier() {
         return catgorieAModifier;
     }
 
@@ -195,7 +185,7 @@ public class ModelePrincipal {
      * on garde l'instance de la catégorie dans cet classe 
      * @param catgorieAModifier nouvelle valeur de catgorieAModifier 
      */
-    public void setCatgorieAModifier(Categorie catgorieAModifier) {
+    public void setCategorieAModifier(Categorie catgorieAModifier) {
         this.catgorieAModifier = catgorieAModifier;
     }
     
