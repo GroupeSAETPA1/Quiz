@@ -39,7 +39,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML 
 	private void annuler() {
 		System.out.println("Annuler");
-		Quiz.changerVue("Acceuil");
+		Quiz.changerVue("Acceuil.fxml");
 	}
 	
 	/**

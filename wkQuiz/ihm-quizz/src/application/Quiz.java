@@ -60,10 +60,13 @@ public class Quiz extends Application {
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();
 
-		ressources.add("Acceuil.fxml");
+		ressources.add("Accueil.fxml");
 		ressources.add("Editeur.fxml");
-		ressources.add("CreationQuestionetCategorie.fxml");
+		ressources.add("CreationQuestionEtCategorie.fxml");
+		ressources.add("EditerCategorie.fxml");
+	    ressources.add("EditerQuestion.fxml");
 
+		
 		for (String element : ressources) {
 			try { 
 				Parent racine = FXMLLoader.load(getClass().getResource("vue/" + element));
@@ -79,9 +82,9 @@ public class Quiz extends Application {
          } catch (Exception e) {
             System.err.println("Erreur : L'îcone est introuvables");
          }
-		primaryStage.setTitle("Quizéo - Acceuil");
+		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Acceuil.fxml"));
+		primaryStage.setScene(scenes.get("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 	}
