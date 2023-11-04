@@ -12,98 +12,92 @@ import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
 
-/** 
- * Permet l'interaction entre les classes du modèle et les controlleurs.
- * C'est une classe Singleton
+/**
+ * Permet l'interaction entre les classes du modèle et les controlleurs. C'est
+ * une classe Singleton
+ * 
  * @author Lucas Descriaud
  * @author François de Saint Palais
  */
 public class ModelePrincipal {
-    
+
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
     private BanqueCategorie banqueCategorie;
-    
+
     private Question questionAModifier;
     private Categorie catgorieAModifier;
-    
+
     private ModelePrincipal() {
-        //TODO lire les fichiers serialisé
+        // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
     }
-    
+
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
      */
-    public static ModelePrincipal  getInstance() {
+    public static ModelePrincipal getInstance() {
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
         return modele;
     }
-    
+
     public BanqueQuestion getBanqueQuestion() {
-        //TODO Je pense que l'on peux changer la visibilité de certaine méthode de Question. Pour éviter les effet de bord.s
+        // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
+        // Question. Pour éviter les effet de bord.s
         return banqueQuestion;
     }
-    
+
     /**
-     * Ajoute une question a la modele.banqueQuestion en appelant le
-     * constructeur de question. 
-     * Si la catégorie n'existe pas elle est également créer grace au 
-     * de Categorie
-     * @param libelle : libelle de la question
-     * @param categorie : catégorie de la question
-     * @param difficulte : difficulté de la question
+     * Ajoute une question a la modele.banqueQuestion en appelant le constructeur de
+     * question.
+     * 
+     * @param libelle       : libelle de la question
+     * @param idCategorie   : catégorie de la question
+     * @param difficulte    : difficulté de la question
      * @param reponseFausse : liste de mauvaise réponse
-     * @param feedback : feedback de la question
-     * @param reponseJuste : bonne réponse de la question
+     * @param feedback      : feedback de la question
+     * @param reponseJuste  : bonne réponse de la question
      * @return true si la question a été créer , false sinon
-     * @throws HomonymeException 
+     * @throws HomonymeException
      */
-    public boolean creerQuestion(String libelle ,int categorie ,
-    int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
-    String feedback) throws InvalidFormatException, 
-    InvalidNameException, ReponseException, HomonymeException {
-        
-        boolean ajouter ;
-        // categorie existe toujours donc aucune exception
-        Categorie categorieQuestion = banqueCategorie.getCategorie(categorie);
-        
-        // Si exception on propage au controlleur appellant
-        Question aAjouter = new Question(libelle , categorieQuestion , 
-                difficulte , reponseJuste , reponseFausses , feedback);
-       
-        // On propage l'exception a l'appelant
+    public boolean creerQuestion(String libelle, int idCategorie, int difficulte, String reponseJuste,
+            ArrayList<String> reponseFausses, String feedback)
+            throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException {
+
+        // La categorie de la question existera toujours donc aucune vérification d'existence n'est nécessaire
+        Categorie categorieQuestion = banqueCategorie.getCategorie(idCategorie);
+
+        // Si exception apparais on propage au controlleur appellant
+        Question aAjouter = new Question(libelle, categorieQuestion, difficulte, 
+                reponseJuste, reponseFausses, feedback);
+
+        // Si exception apparais on propage l'exception à l'appelant
         banqueQuestion.ajouter(aAjouter);
         return true;
-        
-    }
-    
-    /**
-     * Créer une Categorie. Si la création a été un sucés on revoie true sinon false
-     * @param nom Le nom que vous voulait donnée à la Catgorie.
-     * @return true si la création est un sucés false sinon
-     */
-    public boolean creerCategorie(String nom) {
-        return false; //STUB
+
     }
 
-    /** 
-     * Verifier l'existence d'une categorie ayant pour nom categorie 
-     * @param categorie nom a chercher
-     * @return 
+    /**
+     * Créer une Categorie et l'ajoute au banque de catégorie. Si la création a été
+     * un sucés on revoie true
+     * 
+     * @param nom Le nom que vous voulait donnée à la Categorie.
+     * @return true si la création est un sucés false sinon
+     * @throws InvalidNameException Si le nom choisie est invalide
+     * @throws HomonymeException    Si la catégorie existe déjà
      */
-    private  boolean categorieValide(String categorie) {
-        ArrayList<Categorie> categorieExistante = banqueCategorie.getCategoriesLibelle(categorie);
-        if (!categorieExistante.contains(categorie)) {
-            //TODO creer la categorie
-        }
-        return true; //stub
+    public boolean creerCategorie(String nom) throws InvalidNameException, HomonymeException {
+        // On propage a l'appelant les éventuelle exception lié à la création
+        Categorie aAjouter = new Categorie(nom);
+
+        // On propage a l'appelant les éventuelle exception lié à la création
+        banqueCategorie.ajouter(aAjouter);
+        return true;
     }
-    
-    
+
     /**
      * @return Une liste des categories
      * @throws InvalidNameException //STUB
@@ -113,47 +107,56 @@ public class ModelePrincipal {
         resultat.add(new Categorie("Premier bouchon"));
         resultat.add(new Categorie("Second bouchon"));
         resultat.add(new Categorie("Troisieme bouchon"));
-        
-        return resultat; //STUB
+
+        return resultat; // STUB
     }
-    
+
     /**
-     * Supprime de la banque de question la question passé en paramètre.
-     * Si la suppression est un sucés alors on revoie true false sinon
+     * Supprime de la banque de question la question passé en paramètre. Si la
+     * suppression est un sucés alors on revoie true false sinon
+     * 
      * @param questionASuprimer
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
-        return false; //STUB
+        return false; // STUB
     }
-    
+
     /**
-     * @param categorie
-     * @return revoie true si la categorie contient des question false sinon
+     * @param categorie La Categorie pour laquelle on cherche
+     * @return revoie true si la categorie contient des question, false sinon
      */
     public boolean categorieContientQuestion(Categorie categorie) {
-        return false; //STUB
+        ArrayList<Question> questionExistante = banqueQuestion.getQuestions();
+        boolean categorieVide = true;
+        for (int i = 0; i < questionExistante.size() && categorieVide; i++) {
+            categorieVide = !questionExistante.get(i).getCategorie()
+                            .equals(categorie.getNom());
+        }
+        return categorieVide;
     }
-    
+
     /**
-     * Supprimer de la banque de categorie la categorie passé en paramètre.
-     * Si la categorie a supprimer est la categorie "Général", la suppression est annulé
+     * Supprimer de la banque de categorie la categorie passé en paramètre. Si la
+     * categorie a supprimer est la categorie "Général", la suppression est annulé
+     * 
      * @param categorieASupprimer
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
-        return false; //STUB
+        return false; // STUB
     }
-    
+
     /**
-     * Pour garder l'instance de la question que l'on veux modifier, 
-     * on garde l'instance de la question dans cet classe
+     * Pour garder l'instance de la question que l'on veux modifier, on garde
+     * l'instance de la question dans cet classe
+     * 
      * @param questionAModifier nouvelle valeur pour questionAModifier
      */
     public void setQuestionAModifier(Question questionAModifier) {
         this.questionAModifier = questionAModifier;
     }
-    
+
     /** @return valeur de questionAModifier */
     public Question getQuestionAModifier() {
         return questionAModifier;
@@ -161,18 +164,18 @@ public class ModelePrincipal {
 
     /**
      * Modifie la questionAModifier
-     * @param libelle Le nouveau nom de la question
-     * @param categorie La nouvelle Categoriede la question
-     * @param difficulte La nouvelle difficulte de la question
-     * @param reponseJuste La nouvelle réponse juste de la question
+     * 
+     * @param libelle        Le nouveau nom de la question
+     * @param categorie      La nouvelle Categoriede la question
+     * @param difficulte     La nouvelle difficulte de la question
+     * @param reponseJuste   La nouvelle réponse juste de la question
      * @param reponseFausses Les nouvelles reponse fausse de la question
-     * @param feedback Le nouveau feedback de la question
+     * @param feedback       Le nouveau feedback de la question
      * @return true si la modification a pu être faite
      */
-    public boolean modifierQuestion(String libelle ,String categorie ,
-            int difficulte , String reponseJuste , ArrayList<String> reponseFausses , 
-            String feedback) {
-        return false; //STUB
+    public boolean modifierQuestion(String libelle, String categorie, int difficulte, String reponseJuste,
+            ArrayList<String> reponseFausses, String feedback) {
+        return false; // STUB
     }
 
     /** @return valeur de categorieAModifier */
@@ -181,13 +184,13 @@ public class ModelePrincipal {
     }
 
     /**
-     * Pour garder l'instance de la catégorie que l'on veux modifier, 
-     * on garde l'instance de la catégorie dans cet classe 
-     * @param catgorieAModifier nouvelle valeur de catgorieAModifier 
+     * Pour garder l'instance de la catégorie que l'on veux modifier, on garde
+     * l'instance de la catégorie dans cet classe
+     * 
+     * @param catgorieAModifier nouvelle valeur de catgorieAModifier
      */
     public void setCategorieAModifier(Categorie catgorieAModifier) {
         this.catgorieAModifier = catgorieAModifier;
     }
-    
-}
 
+}

@@ -124,31 +124,31 @@ class TestModelePrincipale {
         //TODO assertDoesNotThrow à la place d'assertTrue
         // Question de "reference"
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "Commentaire", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         // Test ajout de question avec seulement catégorie différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "Javadoc", 
+                + "début d'un commentaire Javadoc ", 1, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         // Test ajout de question avec seulement libelle différent
-        assertTrue(modele.creerQuestion("libelle different","Commentaire", 
+        assertTrue(modele.creerQuestion("libelle different",0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         //Test ajout de question avec seulement mauvaise réponse différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "Commentaire", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse2, ""));
         
         //Test ajout de question avec seulement bonne réponse différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "Commentaire", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "different", mauvaiseReponse1, ""));
         
         // Test de non ajout d'une question déjà existante
         assertFalse(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "Commentaire", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         
@@ -157,7 +157,7 @@ class TestModelePrincipale {
          */
 
         assertThrows(IllegalArgumentException.class , 
-               ()-> modele.creerQuestion("", "", 1, "",mauvaiseReponseVide, ""));
+               ()-> modele.creerQuestion("", -1, 1, "",mauvaiseReponseVide, ""));
         
         // Ajout avec une catégorie inexistante
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
