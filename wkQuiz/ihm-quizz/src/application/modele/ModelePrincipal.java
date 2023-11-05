@@ -103,12 +103,7 @@ public class ModelePrincipal {
      * @throws InvalidNameException //STUB
      */
     public ArrayList<Categorie> getCategories() throws InvalidNameException {
-        ArrayList<Categorie> resultat = new ArrayList<Categorie>(3);
-        resultat.add(new Categorie("Premier bouchon"));
-        resultat.add(new Categorie("Second bouchon"));
-        resultat.add(new Categorie("Troisieme bouchon"));
-
-        return resultat; // STUB
+        return banqueCategorie.getCategories();
     }
 
     /**
@@ -124,17 +119,18 @@ public class ModelePrincipal {
     }
 
     /**
+     * Vérifie si une Catégorie contient des Questions
      * @param categorie La Categorie pour laquelle on cherche
      * @return revoie true si la categorie contient des question, false sinon
      */
     public boolean categorieContientQuestion(Categorie categorie) {
         ArrayList<Question> questionExistante = banqueQuestion.getQuestions();
-        boolean categorieVide = true;
+        boolean categorieVide = questionExistante.size() != 0;
         for (int i = 0; i < questionExistante.size() && categorieVide; i++) {
             categorieVide = !questionExistante.get(i).getCategorie()
                             .equals(categorie.getNom());
         }
-        return categorieVide;
+        return !categorieVide;
     }
 
     /**
@@ -147,7 +143,7 @@ public class ModelePrincipal {
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
         //TODO a tester
         boolean estSupprimer = false;
-        if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
+        if (categorieASupprimer.equals(banqueCategorie)) {
             estSupprimer = false;
         }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
             estSupprimer = 

@@ -191,6 +191,57 @@ class TestModelePrincipale {
         assertThrows(NullPointerException.class,() -> modele.supprimerCategorie(null));
     }
     
+    @Test
+    void testCategorieContientQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        
+        modele.creerCategorie(categoriesValides[0].getNom());
+        modele.creerCategorie(categoriesValides[1].getNom());
+        
+        int c = 1;
+        for (Question q : questionValide) {
+            modele.creerQuestion(q.getLibelle(), c%2+1, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1, null);
+            c ++;
+        }
+        
+
+        //Il existe des question avec cette catégorie sélectionné
+        assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
+        assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
+        
+        Categorie uneAutre = new Categorie("Une Nouvelle Categorie Totalement Unique");
+        modele.creerCategorie(uneAutre.getNom());
+        //La catégorie n'a pas de de question
+        assertFalse(modele.categorieContientQuestion(uneAutre));
+        
+        int index = indexOf(uneAutre, modele.getCategories());
+        
+        modele.creerQuestion(
+                "Que doit décrire le texte écrit dans le commentaire Javadoc "
+                + "situé juste avant la ligne \"public class ...\" ?",
+                index, 0, "Le rôle du programme, en explicitant de manière précise"
+                        + " ce rôle", mauvaiseReponse1, null);
+        System.out.println(modele.getBanqueQuestion());
+        assertTrue(modele.categorieContientQuestion(uneAutre));
+        
+    }
+
+    /** 
+     * Renvoie l'indice de la categorie dans une liste
+     * @param categorie
+     * @param categories
+     * @return
+     */
+    private int indexOf(Categorie categorie, ArrayList<Categorie> categories) {
+        // TODO Auto-generated method stub
+        int i = 0;
+        for (Categorie categorieListe : categories) {
+            if (categorieListe.equals(categorie)) return i;
+            i++;
+        }
+        return -1;
+    }
+    
     
 
 }
