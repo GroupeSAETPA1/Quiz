@@ -113,12 +113,13 @@ public class ModelePrincipal {
 
     /**
      * Supprime de la banque de question la question passé en paramètre. Si la
-     * suppression est un sucés alors on revoie true false sinon
+     * suppression est un succès alors on revoie true false sinon
      * 
-     * @param questionASuprimer
+     * @param questionASuprimer La question a supprimer
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
+        //TODO
         return false; // STUB
     }
 
@@ -144,7 +145,17 @@ public class ModelePrincipal {
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
-        return false; // STUB
+        //TODO a tester
+        boolean estSupprimer = false;
+        if (categorieASupprimer.getNom().equalsIgnoreCase("Général")) {
+            estSupprimer = false;
+        }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
+            estSupprimer = 
+                    banqueCategorie.getCategories().remove(categorieASupprimer);
+        } else {
+            estSupprimer = false;
+        }
+        return estSupprimer;
     }
 
     /**
@@ -175,6 +186,7 @@ public class ModelePrincipal {
      */
     public boolean modifierQuestion(String libelle, String categorie, int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) {
+      //TODO
         return false; // STUB
     }
 
