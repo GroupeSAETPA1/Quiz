@@ -74,14 +74,15 @@ class TestBanqueCategorie {
 	 * la liste initialisé est vide
 	 * {@link application.modele.BanqueCategorie#getCategories()}
 	 * @throws HomonymeException si jamais une catégorie est déjà présente
+	 * @throws InvalidNameException 
 	 */
 	@Test
-	void testGetCategories() throws HomonymeException {
+	void testGetCategories() throws HomonymeException, InvalidNameException {
         ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
-        assertIterableEquals(listeVide, banqueCategorie.getCategories());
         for (Categorie categorie : ensembleCategories) {
         	banqueCategorie.ajouter(categorie);
         }
+        ensembleCategories.add(0,new Categorie("Général"));
         assertIterableEquals(ensembleCategories, banqueCategorie.getCategories());
 	}
 
@@ -97,7 +98,7 @@ class TestBanqueCategorie {
         
         banqueCategorie.ajouter(ensembleCategories.get(0));
         assertThrows(IndexOutOfBoundsException.class, ()->banqueCategorie.getCategorie(ensembleCategories.size()));
-        assertEquals(ensembleCategories.get(0), banqueCategorie.getCategorie(0));
+        assertEquals(ensembleCategories.get(0), banqueCategorie.getCategorie(1));
 	}
 
 	/**

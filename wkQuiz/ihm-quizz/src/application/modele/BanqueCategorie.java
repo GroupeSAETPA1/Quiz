@@ -7,6 +7,7 @@ package application.modele;
 
 import java.util.ArrayList;
 import application.exception.HomonymeException;
+import application.exception.InvalidNameException;
 
 /**
  * Gestion de toutes les catégories présente dans l'application
@@ -18,11 +19,19 @@ public class BanqueCategorie {
     /* La liste des catégories */
     private ArrayList<Categorie> categories;
     
+    protected Categorie categorieGeneral;
+    
     /**
      * Constructeur de BanqueCategorie
      */
     public BanqueCategorie() {
-    	categories = new ArrayList<Categorie>();
+    	try {
+            categorieGeneral = new Categorie("Général");
+        } catch (InvalidNameException e) {
+            throw new InternalError("La création de la categorie Général à généré une erreur");
+        }
+        categories = new ArrayList<Categorie>();
+        categories.add(categorieGeneral);
     }
     
     /**
@@ -103,9 +112,4 @@ public class BanqueCategorie {
         }
         return resultat.toString();
     }
-
-    
-
-    
-
 }
