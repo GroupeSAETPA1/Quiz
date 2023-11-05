@@ -149,7 +149,7 @@ public class BanqueQuestion implements Serializable{
     public String toString() {
         StringBuilder resultat = new StringBuilder();
         for (Question question : questions) {
-            resultat.append(question);
+            resultat.append(question.toString());
             resultat.append("\n\n"
                             + "--------------------------------------------"
                             + "\n\n");

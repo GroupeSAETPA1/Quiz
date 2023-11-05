@@ -443,7 +443,7 @@ class TestQuestion {
     @Test
     void testToString() {
     	String valide = """ 
-    			difficulté de la question : 0
+    			Difficulté de la question : 0
     			Categorie de la question : Commentaire
     			Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
     			Mauvaise réponses :
@@ -451,13 +451,25 @@ class TestQuestion {
     			- le delimiteur //
     			- le délimiteur (*
     			Bonne réponse : le délimiteur /**""";
+    	
+    	String valide2 = 
+"""
+Difficulté de la question : 2
+Categorie de la question : Commentaire
+Intiltulé de la question : A quoi correspond l'expression : @author Dupont ?
+Mauvaise réponses :
+- une façon de présenter le code choisie par le programmeur nommé Dupont
+- un texte sans signification particulière
+Bonne réponse : une balise reconnue par Javadoc
+Feedback : Les balises Javadoc commencent par le  caractère @""";
 
+    	System.out.println(questionValide.get(1).toString());
         assertDoesNotThrow(()-> questionValide.get(0).toString());
         assertEquals(valide, questionValide.get(0).toString());
 
         // deuxième test avec une question qui a un feedback non vide
         assertDoesNotThrow(()-> questionValide.get(1).toString());
-        assertEquals(valide, questionValide.get(1).toString());
+        assertEquals(valide2, questionValide.get(1).toString());
 
     }
 

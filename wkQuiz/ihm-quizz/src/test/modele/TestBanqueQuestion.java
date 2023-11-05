@@ -191,5 +191,6 @@ class TestBanqueQuestion {
     @Test
     void testToString() {
         assertTrue(banqueQuestion.toString() instanceof String);
+        //System.out.println(ensembleQuestion.toString());
     }
 }

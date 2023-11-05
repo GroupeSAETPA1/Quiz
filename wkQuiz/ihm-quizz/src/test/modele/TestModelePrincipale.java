@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
@@ -116,9 +117,10 @@ class TestModelePrincipale {
      * Test method for {@link application.modele.ModelePrincipal#creerQuestion(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList, java.lang.String)}.
      * @throws ReponseException 
      * @throws InvalidFormatException 
+     * @throws HomonymeException 
      */
     @Test
-    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException{
+    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException{
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
         //TODO assertDoesNotThrow à la place d'assertTrue
@@ -161,7 +163,7 @@ class TestModelePrincipale {
         
         // Ajout avec une catégorie inexistante
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "categorieTest", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
 
     }
