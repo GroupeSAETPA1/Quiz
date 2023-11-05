@@ -78,7 +78,6 @@ class TestBanqueCategorie {
 	 */
 	@Test
 	void testGetCategories() throws HomonymeException, InvalidNameException {
-        ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
         for (Categorie categorie : ensembleCategories) {
         	banqueCategorie.ajouter(categorie);
         }

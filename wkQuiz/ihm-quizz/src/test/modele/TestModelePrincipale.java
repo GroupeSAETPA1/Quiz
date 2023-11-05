@@ -129,6 +129,8 @@ class TestModelePrincipale {
                 + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
+        modele.creerCategorie("Autre Nom");
+        
         // Test ajout de question avec seulement catégorie différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", 1, 
@@ -148,9 +150,10 @@ class TestModelePrincipale {
                 + "début d'un commentaire Javadoc ", 0, 
                 1, "different", mauvaiseReponse1, ""));
         
+        
         // Test de non ajout d'une question déjà existante
-        assertFalse(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", 0, 
+        assertThrows(HomonymeException.class,() -> modele.creerQuestion("Quel "
+                + "est le délimiteur de début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         
@@ -167,6 +170,27 @@ class TestModelePrincipale {
                 1, "non vide", mauvaiseReponse1, ""));
 
     }
+    
+    @Test
+    void testSupprimerCategorie() throws InvalidNameException, HomonymeException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        
+        Categorie uneCategorie = new Categorie("Truc");
+        modele.creerCategorie(uneCategorie.getNom());
+        //Suppression d'une catégorie existante
+        assertTrue(modele.supprimerCategorie(uneCategorie));
+        
+        //Suppression d'une catégorie inexistante
+        assertFalse(modele.supprimerCategorie(uneCategorie));
+        
+        
+        Categorie categorieGeneral = new Categorie("Général");
+        //Suppression de la catégorie Général
+        assertFalse(modele.supprimerCategorie(categorieGeneral));
+        
+        assertThrows(NullPointerException.class,() -> modele.supprimerCategorie(null));
+    }
+    
     
 
 }

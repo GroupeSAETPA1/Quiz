@@ -147,7 +147,7 @@ public class ModelePrincipal {
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
         //TODO a tester
         boolean estSupprimer = false;
-        if (categorieASupprimer.getNom().equalsIgnoreCase("Général")) {
+        if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
             estSupprimer = false;
         }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
             estSupprimer = 
