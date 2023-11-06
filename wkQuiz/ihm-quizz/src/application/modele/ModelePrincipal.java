@@ -6,6 +6,7 @@
 package application.modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -20,6 +21,9 @@ import application.exception.ReponseException;
  * @author François de Saint Palais
  */
 public class ModelePrincipal {
+    
+    public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT 
+    = new HashMap<String, Integer>();
 
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
@@ -32,6 +36,11 @@ public class ModelePrincipal {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
+        
+        
+        LABEL_DIFFICULTE_TO_INT.put("Facile", 1);
+        LABEL_DIFFICULTE_TO_INT.put("Moyen", 2);
+        LABEL_DIFFICULTE_TO_INT.put("Difficile", 3);
     }
 
     /**
@@ -102,7 +111,7 @@ public class ModelePrincipal {
      * @return Une liste des categories
      * @throws InvalidNameException //STUB
      */
-    public ArrayList<Categorie> getCategories() throws InvalidNameException {
+    public ArrayList<Categorie> getCategories() {
         return banqueCategorie.getCategories();
     }
 

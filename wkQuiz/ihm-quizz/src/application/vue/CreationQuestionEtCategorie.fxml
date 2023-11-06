@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.Separator?>
 
-<TabPane prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
+<TabPane prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#retourAcceuil" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
                   <Group layoutX="18.0" layoutY="18.0" onMouseClicked="#retourAcceuil">
                      <children>
@@ -54,7 +55,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="105.0" layoutY="301.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez le nom de votre question" style="-fx-background-radius: 32px;">
+                  <TextField fx:id="saisieLibeleQuestion" layoutX="105.0" layoutY="301.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez le nom de votre question" style="-fx-background-radius: 32px;">
                      <font>
                         <Font name="Open Sans" size="20.0" />
                      </font>
@@ -64,12 +65,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="803.0" layoutY="362.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" onAction="#annuler" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -81,7 +77,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" onAction="#valider" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onAction="#valider" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -93,60 +89,76 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <TextField fx:id="saisieReponseVrai" layoutX="803.0" layoutY="236.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre Bonne réponse " style="-fx-background-radius: 32px;">
+                     <font>
+                        <Font name="Open Sans" size="20.0" />
+                     </font>
+                  </TextField>
                   <Label layoutX="803.0" layoutY="312.0" prefHeight="51.0" prefWidth="338.0" text="Réponse Fausse : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="803.0" layoutY="437.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre deuxième mauvaise réponse " style="-fx-background-radius: 32px;">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="803.0" layoutY="515.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre troisième mauvaise réponse " style="-fx-background-radius: 32px;">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="803.0" layoutY="600.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre quatrième mauvaise réponse " style="-fx-background-radius: 32px;">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="803.0" layoutY="236.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre Bonne réponse " style="-fx-background-radius: 32px;">
-                     <font>
-                        <Font name="Open Sans" size="20.0" />
-                     </font>
-                  </TextField>
+                  <VBox layoutX="803.0" layoutY="384.0" prefHeight="240.0" prefWidth="424.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="saisiePremiereReponseFausse" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre première mauvaise réponse " style="-fx-background-radius: 32px;">
+                           <font>
+                              <Font name="Open Sans" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="saisieSecondeReponseFausse" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre deuxième mauvaise réponse " style="-fx-background-radius: 32px;">
+                           <font>
+                              <Font name="Open Sans" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="saisieTroisiemeReponseFausse" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre troisième mauvaise réponse " style="-fx-background-radius: 32px;">
+                           <font>
+                              <Font name="Open Sans" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="saisieQuatriemeReponseFausse" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre quatrième mauvaise réponse " style="-fx-background-radius: 32px;">
+                           <font>
+                              <Font name="Open Sans" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </VBox>
                   <Label layoutX="116.0" layoutY="360.0" prefHeight="51.0" prefWidth="169.0" text="Difficultée :" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="118.0" layoutY="421.0" mnemonicParsing="false" text="1" textFill="WHITE">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="difficulte" />
-                     </toggleGroup>
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="221.0" layoutY="421.0" mnemonicParsing="false" text="2" textFill="#fffdfd" toggleGroup="$difficulte">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton layoutX="327.0" layoutY="421.0" mnemonicParsing="false" text="3" textFill="WHITE" toggleGroup="$difficulte">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </RadioButton>
+                  <HBox layoutX="112.0" layoutY="413.0" prefHeight="36.0" prefWidth="426.0" spacing="30.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Facile" textFill="WHITE">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="difficulte" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Moyen" textFill="#fffdfd" toggleGroup="$difficulte">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Difficile" textFill="WHITE" toggleGroup="$difficulte">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
                   <Label layoutX="116.0" layoutY="478.0" prefHeight="51.0" prefWidth="169.0" text="FeedBack : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="105.0" layoutY="523.0" prefHeight="124.0" prefWidth="412.0" promptText="Ecrivez votre FeddBack">
+                  <TextArea fx:id="saisieFeedback" layoutX="105.0" layoutY="523.0" prefHeight="124.0" prefWidth="412.0" promptText="Ecrivez votre FeddBack">
                      <font>
                         <Font size="20.0" />
                      </font>
