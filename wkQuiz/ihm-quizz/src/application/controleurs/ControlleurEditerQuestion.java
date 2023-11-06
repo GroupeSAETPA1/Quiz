@@ -48,18 +48,7 @@ public class ControlleurEditerQuestion {
 	
 	@FXML
 	public void initialize() throws InvalidNameException {
-		// TODO: changer categorie pour qu'elle contiene les vraie categories
-		// BanqueCategorie.getCategories();
-	    // STUB
-        categories = new ArrayList<>();
-        categories.add(new Categorie("test 1"));
-        categories.add(new Categorie("test 2"));
-        categories.add(new Categorie("test 3"));
-
-        for (Categorie categorie : categories) {
-        	 selectCategorie.getItems().add(categorie);
-		}
-
+		
     }
 
 }
