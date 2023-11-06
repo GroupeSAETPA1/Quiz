@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="application.controleurs.ControlleurEditerCategorie">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditerCategorie">
    <children>
       <Group layoutX="18.0" layoutY="18.0">
          <children>
@@ -35,7 +35,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+      <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
@@ -47,12 +47,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
+      <TextField fx:id="input" layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+      <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#valider" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>

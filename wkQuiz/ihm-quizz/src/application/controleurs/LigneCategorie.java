@@ -3,6 +3,7 @@ package application.controleurs;
 import javafx.beans.property.SimpleStringProperty;
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.vue.AlertBox;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
@@ -56,5 +57,15 @@ public class LigneCategorie {
     public void supprimerCategorie() {
         // Action de suppression
     	System.out.println("suppresion de " + nomProperty.get());
+    	boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
+    	if (result) {
+    		if (ModelePrincipal.getInstance().getBanqueCategorie().supprimerCategorieLibelle(getNomProperty())) {
+    			AlertBox.showSuccessBox("suppresion effectuée");
+    		} else {
+    			AlertBox.showErrorBox("suppression échouée");
+    		}
+    	} else {
+    		AlertBox.showErrorBox("suppression annulée");
+    	}
     }
 }

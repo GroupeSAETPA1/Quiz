@@ -99,6 +99,23 @@ public class BanqueCategorie {
 		return null;
     }
     
+    /**
+     * supprimee la categorie avec le libellé exeact si elle existe
+     * @param libelle (String) le libellé de la catgorie a supprimer
+     * @return true si une categorie supprimée false sinon
+     */
+    public boolean supprimerCategorieLibelle(String libelle) {
+    	int indice = 0;
+    	for (Categorie categorie : categories) {
+            if (categorie.getNom().equals(libelle.toLowerCase())) {
+            	categories.remove(indice);
+                return true;
+            } 
+            indice ++;
+        }
+		return false;
+    }
+    
     /* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {

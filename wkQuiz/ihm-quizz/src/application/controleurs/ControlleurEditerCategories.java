@@ -51,8 +51,6 @@ public class ControlleurEditerCategories {
 	
 	@FXML
 	public void initialize() throws InvalidNameException {
-		System.out.println("ici");
-		
 		TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 		nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 
