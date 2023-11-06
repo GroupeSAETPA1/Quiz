@@ -53,7 +53,7 @@ public class ControlleurEditerCategorie {
 	
 	@FXML
 	private void annuler() {
-		System.out.println("annuler");
+		AlertBox.showErrorBox("modification annulée");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 

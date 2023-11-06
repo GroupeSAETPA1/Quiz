@@ -48,21 +48,17 @@ public class LigneCategorie {
     }
 
     public void editerCategorie() {
-        // Action d'édition
-    	System.out.println("edition de " + nomProperty.get());
     	ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
     	Quiz.changerVue("EditerCategorie.fxml");
     }
 
     public void supprimerCategorie() {
-        // Action de suppression
-    	System.out.println("suppresion de " + nomProperty.get());
     	boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
     	if (result) {
     		if (ModelePrincipal.getInstance().getBanqueCategorie().supprimerCategorieLibelle(getNomProperty())) {
     			AlertBox.showSuccessBox("suppresion effectuée");
     		} else {
-    			AlertBox.showErrorBox("suppression échouée");
+    			AlertBox.showErrorBox("suppression échouée de " + getNomProperty());
     		}
     	} else {
     		AlertBox.showErrorBox("suppression annulée");
