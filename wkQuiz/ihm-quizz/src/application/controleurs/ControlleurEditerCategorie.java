@@ -1,6 +1,18 @@
 package application.controleurs;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import application.modele.Categorie;
+import application.modele.ModelePrincipal;
+
+import java.util.ArrayList;
+
+import application.Quiz;
+import application.exception.InvalidNameException;
 
 /**
  * Controlleur de la page d'édition des catégories.
@@ -15,6 +27,10 @@ import javafx.fxml.FXML;
 
 public class ControlleurEditerCategorie {
 	
+	@FXML
+	private TableView<LigneCategorie> table;
+
+		
 	/**
 	 * Méthodes liée au group retour 
 	 * qui devra renvoyer vers la page precedente
@@ -22,7 +38,7 @@ public class ControlleurEditerCategorie {
 	
 	@FXML 
 	private void retour() {
-		System.out.println("Retour en arriere ");
+		Quiz.changerVue("EditerCategories.fxml");
 	}
 	/**
 	 * Méthodes liée au bouton Créer Categorie 
@@ -30,6 +46,12 @@ public class ControlleurEditerCategorie {
 	 */
 	@FXML 
 	private void versCreerCategorie() {
-		System.out.println("swalalala nous sommes partie pour créer");
+		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
+	}
+	
+	@FXML
+	public void initialize() throws InvalidNameException {
+		
+		// TODO afficher le prédent nom
 	}
 }

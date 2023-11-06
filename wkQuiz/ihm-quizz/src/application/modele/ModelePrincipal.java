@@ -49,6 +49,12 @@ public class ModelePrincipal {
         // Question. Pour éviter les effet de bord.s
         return banqueQuestion;
     }
+    
+    public BanqueCategorie getBanqueCategorie() {
+        // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
+        // Question. Pour éviter les effet de bord.s
+        return banqueCategorie;
+    }
 
     /**
      * Ajoute une question a la modele.banqueQuestion en appelant le constructeur de

@@ -85,19 +85,18 @@ public class BanqueCategorie {
     }
 
     /**
-     * Récupere les Categories qui ont exactement le libellé passé en paramètre
-     * (on vérifie que le libellé est égal à la string passée en paramètres)
+     * renvoie la categorie qui a le meme libellé que passé en pramatre
+     * si il n'y en a pas cela renvoie null
      * @param libelle (String) le libellé recherché
-     * @return une ArrayList des différentes catégories qui ont ce libellé exact
+     * @return categorie avec le libellé voulu
      */
-    public ArrayList<Categorie> getExactCategoriesLibelle(String libelle) {
-    	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
+    public Categorie getExactCategoriesLibelle(String libelle) {
         for (Categorie categorie : categories) {
             if (categorie.getNom().equals(libelle.toLowerCase())) {
-                resultat.add(categorie);
+                return categorie;
             } 
         }
-        return resultat;
+		return null;
     }
     
     /* non javadoc - @see java.lang.Object#toString() */

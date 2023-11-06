@@ -64,6 +64,7 @@ public class Quiz extends Application {
 		ressources.add("Editeur.fxml");
 		ressources.add("CreationQuestionEtCategorie.fxml");
 		ressources.add("EditerCategorie.fxml");
+		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
 
 		

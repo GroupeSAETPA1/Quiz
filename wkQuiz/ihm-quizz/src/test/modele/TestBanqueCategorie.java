@@ -134,6 +134,7 @@ class TestBanqueCategorie {
 	@Test
 	void testGetExactCategoriesLibelle() 
 	throws HomonymeException, InvalidNameException {
+		// TODO, modifier car la méthode a changer
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 		
