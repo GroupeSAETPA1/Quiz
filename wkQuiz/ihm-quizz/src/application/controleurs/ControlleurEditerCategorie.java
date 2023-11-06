@@ -26,11 +26,7 @@ import application.exception.InvalidNameException;
  */
 
 public class ControlleurEditerCategorie {
-	
-	@FXML
-	private TableView<LigneCategorie> table;
-
-		
+			
 	/**
 	 * Méthodes liée au group retour 
 	 * qui devra renvoyer vers la page precedente
@@ -40,14 +36,7 @@ public class ControlleurEditerCategorie {
 	private void retour() {
 		Quiz.changerVue("EditerCategories.fxml");
 	}
-	/**
-	 * Méthodes liée au bouton Créer Categorie 
-	 * qui devra envoyer vers la page CreationQuestionEtCategorie.fxml
-	 */
-	@FXML 
-	private void versCreerCategorie() {
-		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
-	}
+
 	
 	@FXML
 	public void initialize() throws InvalidNameException {
