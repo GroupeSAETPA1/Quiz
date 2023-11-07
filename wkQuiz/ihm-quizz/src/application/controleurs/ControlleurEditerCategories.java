@@ -3,6 +3,8 @@ package application.controleurs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -51,27 +53,47 @@ public class ControlleurEditerCategories {
 		// TODO refresh la page chargée
 	}
 	
-	@FXML
 	public void initialize() throws InvalidNameException {
-		TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
-		nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
+	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
+	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
+	    nomColumn.setCellFactory(tc -> {
+	        TableCell<LigneCategorie, String> cell = new TableCell<>();
+	        cell.setAlignment(Pos.CENTER);
+	        cell.textProperty().bind(cell.itemProperty());
+	        cell.setStyle("-fx-font-size: 30px");
+	        return cell;
+	    });
 
-		TableColumn<LigneCategorie, Integer> nbColumn = new TableColumn<>("Nombre de questions contenues");
-		nbColumn.setCellValueFactory(new PropertyValueFactory<>("nbProperty"));
+	    TableColumn<LigneCategorie, Integer> nbColumn = new TableColumn<>("Nombre de questions contenues");
+	    nbColumn.setCellValueFactory(new PropertyValueFactory<>("nbProperty"));
+	    nbColumn.setCellFactory(tc -> {
+	        TableCell<LigneCategorie, Integer> cell = new TableCell<>();
+	        cell.setAlignment(Pos.CENTER);
+		    cell.textProperty().bind(cell.itemProperty().asString());
+		    cell.setStyle("-fx-font-size: 30px");
+	        return cell;
+	    });
 
-		TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier la categorie");
-		modifColumn.setCellFactory(new EditerButtonCellFactory());
+	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier la categorie");
+	    modifColumn.setCellFactory(new EditerButtonCellFactory());
 
-		TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer la categorie");
-		supColumn.setCellFactory(new SupprimerButtonCellFactory());
+	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer la categorie");
+	    supColumn.setCellFactory(new SupprimerButtonCellFactory());
 
-		table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
-		
-        ObservableList<LigneCategorie> data = table.getItems();
-        LigneCategorie nouvelleLigne = new LigneCategorie("test 1", 0);
-        data.add(nouvelleLigne);
-        nouvelleLigne = new LigneCategorie("test 2", 1);
-        data.add(nouvelleLigne);
-        // TODO modifier pour que ça soit les vrais carégories affichées
+	    /** style de la table */
+	    double tableWidth = 1272;
+	    nomColumn.setPrefWidth(tableWidth * 0.45);  
+	    nbColumn.setPrefWidth(tableWidth * 0.25);
+	    modifColumn.setPrefWidth(tableWidth * 0.15);
+	    supColumn.setPrefWidth(tableWidth * 0.14);
+
+	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
+
+	    ObservableList<LigneCategorie> data = table.getItems();
+	    LigneCategorie nouvelleLigne = new LigneCategorie("test 1", 0);
+	    data.add(nouvelleLigne);
+	    nouvelleLigne = new LigneCategorie("test 2", 1);
+	    data.add(nouvelleLigne);
+	    // TODO modifier pour que ça soit les vrais carégories affichées
 	}
 }

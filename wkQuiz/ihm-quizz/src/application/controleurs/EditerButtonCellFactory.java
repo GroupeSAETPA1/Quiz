@@ -3,6 +3,8 @@ package application.controleurs;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 public class EditerButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
@@ -18,7 +20,10 @@ public class EditerButtonCellFactory implements Callback<TableColumn<LigneCatego
                     setText(null);
                     setGraphic(null);
                 } else {
-                    Button editerButton = new Button("Éditer");
+                    Button editerButton = new Button("");
+                    Image image = new Image(getClass().getResource("/application/vue/images/IconeEdition.png").toExternalForm());
+                    editerButton.setGraphic(new ImageView(image));
+                    editerButton.setStyle("-fx-background-color: transparent;");
                     editerButton.setOnAction(event -> {
                         LigneCategorie ligne = getTableView().getItems().get(getIndex());
                         ligne.editerCategorie();
