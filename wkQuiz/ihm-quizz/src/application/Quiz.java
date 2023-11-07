@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import application.exception.HomonymeException;
+import application.exception.InvalidNameException;
+import application.modele.Categorie;
+import application.modele.ModelePrincipal;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +44,8 @@ public class Quiz extends Application {
 	 * des clics de l'utilisateur.
 	 */
 	public static Stage fenetrePrincipale;
+	
+	private static Quiz instance;
 
 	/**
 	 * TODO commenter
@@ -53,14 +59,27 @@ public class Quiz extends Application {
 
     /**
      * TODO commenter cette méthode
+     * @throws InvalidNameException 
+     * @throws HomonymeException 
      */
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException {
 
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();
 
-		ressources.add("Accueil.fxml");
+		// TODO c'est temporaire, c'est pour tester
+		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
+	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+	    
+	    ressources.add("Accueil.fxml");
 		ressources.add("Editeur.fxml");
 		ressources.add("CreationQuestionEtCategorie.fxml");
 		ressources.add("EditerCategorie.fxml");
@@ -69,13 +88,7 @@ public class Quiz extends Application {
 
 		
 		for (String element : ressources) {
-			try { 
-				Parent racine = FXMLLoader.load(getClass().getResource("vue/" + element));
-				scenes.put(element, new Scene(racine));
-			} catch (IOException e) {
-				System.err.println("Nous n'avons pas pu loader : " + element);
-				e.printStackTrace();
-			}
+			charger(element);
 		}
 
 		 try {
@@ -83,11 +96,18 @@ public class Quiz extends Application {
          } catch (Exception e) {
             System.err.println("Erreur : L'îcone est introuvables");
          }
+		 
+		 instance = this;
+		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
 		primaryStage.setScene(scenes.get("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
+
+		
+
+	    
 	}
 	
 	/**
@@ -100,6 +120,10 @@ public class Quiz extends Application {
 		fenetrePrincipale.show();
 	}
 	
+	public static Quiz getInstance() {
+		return instance;
+	}
+
 	/**
      * Fonction appelée par les controleurs permettant de quitter l'application
      */
@@ -114,5 +138,22 @@ public class Quiz extends Application {
 	public static void main(String args[]) {
 		launch(args);
 		// new ControleurPrincipal();	FIXME
+	}
+	
+	public void charger(String vue) {
+		try {
+			Parent racine = FXMLLoader.load(getClass().getResource("vue/" + vue));
+			if (scenes.containsKey(vue)) {
+				scenes.remove(vue);
+				scenes.put(vue, new Scene(racine));
+			} else {
+				scenes.put(vue, new Scene(racine));
+			}
+		} catch (IOException e) {
+			System.err.println("chargement impossible de : " + vue);
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

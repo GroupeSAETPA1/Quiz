@@ -14,6 +14,7 @@ import application.vue.AlertBox;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 
 /**
@@ -45,10 +46,17 @@ public class ControlleurEditerCategorie {
 	
 	@FXML
 	private void valider() throws InvalidNameException {
-		System.out.println("pour l'instant ça ne marche pas car la categorie n'existe pas vraiment");
-		ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(ModelePrincipal.getInstance().getCategorieAModifier().getNom()).setNom(input.getText());
+		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
+		ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(aModifier.getNom()).setNom(input.getText());
 		AlertBox.showSuccessBox("categorie modifiée avec succées");
+		try {
+			Quiz.getInstance().charger("EditerCategories.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		Quiz.changerVue("EditerCategories.fxml");
+		
 		// TODO je pense qu'il faut recharger la vue non ?
 	}
 	
@@ -61,8 +69,9 @@ public class ControlleurEditerCategorie {
 	
 	@FXML
 	public void initialize(){
-		if (ModelePrincipal.getInstance().getCategorieAModifier() != null) {
-			input.setText(ModelePrincipal.getInstance().getCategorieAModifier().getNom());
-		}	
+		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
+		if (aModifier != null) {
+			input.setText(aModifier.getNom());
+		}
 	}
 }
