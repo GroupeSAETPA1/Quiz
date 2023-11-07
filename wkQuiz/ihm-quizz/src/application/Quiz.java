@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.exception.HomonymeException;
+import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -61,9 +64,11 @@ public class Quiz extends Application {
      * TODO commenter cette méthode
      * @throws InvalidNameException 
      * @throws HomonymeException 
+     * @throws ReponseException 
+     * @throws InvalidFormatException 
      */
 	@Override
-	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException {
+	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException {
 
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();
@@ -78,6 +83,11 @@ public class Quiz extends Application {
 	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
 	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
 	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+	    
+	    ArrayList<String> rep = new ArrayList<>();
+	    rep.add("coubeh");
+	    
+	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, null));
 	    
 	    ressources.add("Accueil.fxml");
 		ressources.add("Editeur.fxml");
