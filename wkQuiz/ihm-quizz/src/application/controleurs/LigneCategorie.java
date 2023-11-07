@@ -1,10 +1,12 @@
 package application.controleurs;
 
 import javafx.beans.property.SimpleStringProperty;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 public class LigneCategorie {
@@ -47,21 +49,33 @@ public class LigneCategorie {
         return supprimerButton;
     }
 
-    public void editerCategorie() {
-    	ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
-    	Quiz.changerVue("EditerCategorie.fxml");
+    public void editerCategorie(){
+    	if (this.getNomProperty() != "Général") {
+    		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
+    		Quiz.getInstance().charger("EditerCategorie.fxml");
+    		Quiz.changerVue("EditerCategorie.fxml");	
+    	} else {
+    		AlertBox.showErrorBox("la catégorie générale ne peut pas etre modifiée");
+    	}
+    	
     }
 
     public void supprimerCategorie() {
-    	boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
-    	if (result) {
-    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
-    			AlertBox.showSuccessBox("suppresion effectuée");
-    		} else {
-    			AlertBox.showErrorBox("suppression échouée de " + getNomProperty());
-    		}
-    	} else {
-    		AlertBox.showErrorBox("suppression annulée");
+    	if (this.getNomProperty() != "Général") {
+    		boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
+	    	if (result) {
+	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
+	    			AlertBox.showSuccessBox("suppresion effectuée");
+	    			Quiz.getInstance().charger("EditerCategories.fxml");
+	        		Quiz.changerVue("EditerCategories.fxml");
+	    		} else {
+	    			AlertBox.showErrorBox("suppression échouée de " + getNomProperty());
+	    		}
+	    	} else {
+	    		AlertBox.showErrorBox("suppression annulée");
+	    	}
+    	} else {	
+	    	AlertBox.showErrorBox("Vous ne pouvez modifier la catégorie principale");
     	}
     }
 }

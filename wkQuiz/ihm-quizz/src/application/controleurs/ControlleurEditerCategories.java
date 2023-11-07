@@ -14,6 +14,7 @@ import application.modele.ModelePrincipal;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 
 /**
@@ -53,7 +54,7 @@ public class ControlleurEditerCategories {
 		// TODO refresh la page chargée
 	}
 	
-	public void initialize() throws InvalidNameException {
+	public void initialize() throws InvalidNameException, HomonymeException {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
@@ -84,16 +85,17 @@ public class ControlleurEditerCategories {
 	    double tableWidth = 1272;
 	    nomColumn.setPrefWidth(tableWidth * 0.45);  
 	    nbColumn.setPrefWidth(tableWidth * 0.25);
-	    modifColumn.setPrefWidth(tableWidth * 0.15);
+	    modifColumn.setPrefWidth(tableWidth * 0.13);
 	    supColumn.setPrefWidth(tableWidth * 0.14);
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
-
+	    
 	    ObservableList<LigneCategorie> data = table.getItems();
-	    LigneCategorie nouvelleLigne = new LigneCategorie("test 1", 0);
-	    data.add(nouvelleLigne);
-	    nouvelleLigne = new LigneCategorie("test 2", 1);
-	    data.add(nouvelleLigne);
-	    // TODO modifier pour que ça soit les vrais carégories affichées
+	    
+	    ArrayList<Categorie> categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+	    for (Categorie categorie : categories) {
+			data.add(new LigneCategorie(categorie.getNom()
+					, ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
+		}
 	}
 }
