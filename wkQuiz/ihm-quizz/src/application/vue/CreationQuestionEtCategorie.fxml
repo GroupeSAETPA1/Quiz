@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
@@ -168,7 +168,7 @@
             </Pane>
          </content>
       </Tab>
-      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
+      <Tab fx:id="saisieNomCategorie" closable="false" text="Création Catégorie">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
@@ -208,12 +208,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
+                  <TextField fx:id="saisieNomCategorie" layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onAction="#validerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>

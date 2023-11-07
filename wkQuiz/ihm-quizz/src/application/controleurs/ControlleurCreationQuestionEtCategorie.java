@@ -50,6 +50,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML private TextField saisieSecondeReponseFausse;
 	@FXML private TextField saisieTroisiemeReponseFausse;
 	@FXML private TextField saisieQuatriemeReponseFausse;
+	@FXML private TextField saisieNomCategorie;
 	
 	@FXML private TextArea saisieFeedback;
 	
@@ -194,6 +195,43 @@ public class ControlleurCreationQuestionEtCategorie {
         }
 		if (questionCreer) {
             AlertBox.showSuccessBox("Question créer !");
+        }
+    }
+    
+    /**
+     * Méthodes liée au bouton valider,
+     * qui devra enregistrer les champs  dans la banques Catégori
+     */
+	@FXML
+    private void validerCategorie() {
+	    
+		System.out.println("Valider");
+		
+		boolean categorieCreer = false;
+
+        String nom = saisieNomCategorie.getText();
+		System.out.println("Nom de la catégorie : " + nom);
+
+		creerEtGererCategorie( categorieCreer, nom);
+    }
+	
+    /** 
+     * Créer une catégorie dans le modèle et gère les possibles exceptions qui 
+     * peuvent apparaître
+     * @param categorieCreer
+     * @param nom
+     */
+	private void creerEtGererCategorie(boolean categorieCreer,String nom) {
+		try {
+            categorieCreer = modele.creerCategorie(nom);
+            
+        } catch (InvalidNameException e) {
+            AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide ");
+        } catch (HomonymeException e) {
+            AlertBox.showWarningBox("La categorie saisie existe déjà");
+        }
+		if (categorieCreer) {
+            AlertBox.showSuccessBox("Categorie créer !");
         }
     }
 }
