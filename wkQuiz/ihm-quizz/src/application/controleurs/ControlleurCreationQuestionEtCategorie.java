@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -52,6 +54,9 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML private TextArea saisieFeedback;
 	
 	@FXML private ToggleGroup difficulte;
+	
+	@FXML TabPane tapPane;
+	@FXML Tab tabCategorie;
 
 	/**
 	 * Méthodes liée au bouton annuler,
@@ -70,6 +75,12 @@ public class ControlleurCreationQuestionEtCategorie {
 	    modele = ModelePrincipal.getInstance();
 
 	    miseAJourListeCategorie();
+	    
+	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
+	    	System.out.println("ici");
+	    	tapPane.getSelectionModel().select(tabCategorie);
+	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
+	    }
     }
 
     /** 
@@ -185,6 +196,4 @@ public class ControlleurCreationQuestionEtCategorie {
             AlertBox.showSuccessBox("Question créer !");
         }
     }
-
-
 }

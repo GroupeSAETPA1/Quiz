@@ -31,8 +31,17 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     private Categorie catgorieAModifier;
+    private boolean displayCategoriePane;
 
-    private ModelePrincipal() {
+    public boolean isDisplayCategoriePane() {
+		return displayCategoriePane;
+	}
+
+	public void setDisplayCategoriePane(boolean displayCategoriePane) {
+		this.displayCategoriePane = displayCategoriePane;
+	}
+
+	private ModelePrincipal() {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();

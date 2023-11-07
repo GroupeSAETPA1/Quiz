@@ -39,6 +39,7 @@ public class ControlleurEditerCategorie {
 	
 	@FXML 
 	private void retour() {
+		System.out.println("sortir");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 	

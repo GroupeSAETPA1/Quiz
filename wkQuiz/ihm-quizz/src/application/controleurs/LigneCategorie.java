@@ -55,7 +55,7 @@ public class LigneCategorie {
     public void supprimerCategorie() {
     	boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
     	if (result) {
-    		if (ModelePrincipal.getInstance().getBanqueCategorie().supprimerCategorieLibelle(getNomProperty())) {
+    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
     			AlertBox.showSuccessBox("suppresion effectuée");
     		} else {
     			AlertBox.showErrorBox("suppression échouée de " + getNomProperty());

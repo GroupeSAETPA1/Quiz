@@ -46,7 +46,9 @@ public class ControlleurEditerCategories {
 	 */
 	@FXML 
 	private void versCreerCategorie() {
+		ModelePrincipal.getInstance().setDisplayCategoriePane(true);
 		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
+		// TODO refresh la page chargée
 	}
 	
 	@FXML
