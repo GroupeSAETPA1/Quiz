@@ -67,7 +67,7 @@ public class Categorie implements Serializable {
      */
     @Override
     public String toString() {
-    	return "Nom de la catégorie : " + this.nom;
+    	return this.nom;
     }
     
     /**

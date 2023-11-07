@@ -51,6 +51,9 @@ public class BanqueCategorie {
      * @return Une ArrayList de toutes les categories 
      */
     public ArrayList<Categorie> getCategories() {
+        for (Categorie categorie : categories) {
+            System.out.println(categorie);
+        }
         return this.categories;
     }
 

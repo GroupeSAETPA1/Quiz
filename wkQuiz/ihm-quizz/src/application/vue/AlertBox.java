@@ -60,4 +60,19 @@ public abstract class AlertBox extends Application {
 
         alert.showAndWait();
     }
+
+    /**
+     * alert box pour afficher une erreur
+     * @param message
+     */
+    public static void showWarningBox(String message) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.setTitle("Attention");
+        
+        alert.showAndWait();
+    }
+    
+    
 }
