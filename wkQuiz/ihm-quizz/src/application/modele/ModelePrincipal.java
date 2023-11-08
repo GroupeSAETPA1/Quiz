@@ -31,6 +31,7 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     private Categorie catgorieAModifier;
+    
     private boolean displayCategoriePane;
 
     public boolean isDisplayCategoriePane() {
@@ -235,6 +236,14 @@ public class ModelePrincipal {
     public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
         catgorieAModifier.setNom(nouveauNom);
         return true;
+    }
+    
+    /**
+     * @param categorie La catégorie dont on veut connaître le nombre de question
+     * @return le nombre de question présente dans une catégorie
+     */
+    public int getNombreQuestionCategorie(Categorie categorie) {
+        return getBanqueQuestion().getQuestions(categorie).size();
     }
 
 }
