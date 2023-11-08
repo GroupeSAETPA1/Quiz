@@ -1,7 +1,6 @@
 package application.controleurs.factories;
 
-import application.controleurs.lignes.LigneCategorie;
-import javafx.geometry.Pos;
+import application.controleurs.lignes.LigneQuestion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -9,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-public class EditerButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
+public class EditerQuestionButtonCellFactory implements Callback<TableColumn<LigneQuestion, String>, TableCell<LigneQuestion, String>> {
 
     @Override
-    public TableCell<LigneCategorie, String> call(TableColumn<LigneCategorie, String> param) {
-        return new TableCell<LigneCategorie, String>() {
+    public TableCell<LigneQuestion, String> call(TableColumn<LigneQuestion, String> param) {
+        return new TableCell<LigneQuestion, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -27,8 +26,8 @@ public class EditerButtonCellFactory implements Callback<TableColumn<LigneCatego
                     editerButton.setGraphic(new ImageView(image));
                     editerButton.setStyle("-fx-background-color: transparent;");
                     editerButton.setOnAction(event -> {
-                        LigneCategorie ligne = getTableView().getItems().get(getIndex());
-                        ligne.editerCategorie();
+                        LigneQuestion ligne = getTableView().getItems().get(getIndex());
+                        ligne.editerQuestion();
                     });
 
                     setGraphic(editerButton);
