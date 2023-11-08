@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditerCategorie">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditerCategorie">
    <children>
       <Group layoutX="18.0" layoutY="18.0" onMouseClicked="#retour">
          <children>
@@ -25,17 +25,17 @@
             </Label>
          </children>
       </Group>
-      <Label layoutX="337.0" layoutY="24.0" prefHeight="58.0" prefWidth="327.0" text="Editez la catégorie" textFill="WHITE">
+      <Label layoutX="474.0" layoutY="18.0" prefHeight="58.0" prefWidth="439.0" text="Editez la catégorie" textFill="WHITE">
          <font>
             <Font name="Open Sans" size="40.0" />
          </font>
       </Label>
-      <Label layoutX="216.0" layoutY="190.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
+      <Label layoutX="277.0" layoutY="300.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="194.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+      <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
@@ -47,12 +47,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="input" layoutX="194.0" layoutY="260.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
+      <TextField fx:id="input" layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="637.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#valider" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+      <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#valider" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
