@@ -59,8 +59,7 @@ public class LigneCategorie {
     	if (this.getNomProperty() != "Général") {
     		// si la quesiotn n'est pas général
     		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
-    		Quiz.getInstance().charger("EditerCategorie.fxml");
-    		Quiz.changerVue("EditerCategorie.fxml");	
+    		Quiz.chargerEtChangerVue("EditerCategorie.fxml");	
     	} else {
     		AlertBox.showErrorBox("la catégorie générale ne peut pas etre modifiée");
     	}
@@ -73,9 +72,8 @@ public class LigneCategorie {
 	    	if (result) {
 	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
 	    			AlertBox.showSuccessBox("suppresion effectuée");
-	    			Quiz.getInstance().charger("EditerCategories.fxml");
-	        		Quiz.changerVue("EditerCategories.fxml");
-	    		} else {
+	        		Quiz.chargerEtChangerVue("EditerCategories.fxml");
+	    		} else { 
 	    			AlertBox.showErrorBox("suppression échouée de " + getNomProperty());
 	    		}
 	    	} else {

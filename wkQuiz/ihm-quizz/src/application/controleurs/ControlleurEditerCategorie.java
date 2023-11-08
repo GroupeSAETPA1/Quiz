@@ -54,10 +54,7 @@ public class ControlleurEditerCategorie {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		Quiz.changerVue("EditerCategories.fxml");
-		
-		// TODO je pense qu'il faut recharger la vue non ?
+		Quiz.chargerEtChangerVue("EditerCategories.fxml");
 	}
 	
 	@FXML
