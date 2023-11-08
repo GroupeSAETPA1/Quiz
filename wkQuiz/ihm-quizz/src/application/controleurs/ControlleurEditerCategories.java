@@ -15,8 +15,8 @@ import application.modele.ModelePrincipal;
 import java.util.ArrayList;
 
 import application.Quiz;
-import application.controleurs.factories.EditerButtonCellFactory;
-import application.controleurs.factories.SupprimerButtonCellFactory;
+import application.controleurs.factories.EditerCategorieButtonCellFactory;
+import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
 import application.controleurs.lignes.LigneCategorie;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
@@ -78,10 +78,10 @@ public class ControlleurEditerCategories {
 	    });
 
 	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier");
-	    modifColumn.setCellFactory(new EditerButtonCellFactory());
+	    modifColumn.setCellFactory(new EditerCategorieButtonCellFactory());
 
 	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer");
-	    supColumn.setCellFactory(new SupprimerButtonCellFactory());
+	    supColumn.setCellFactory(new SupprimerCategorieButtonCellFactory());
 
 	    /* style initial de la table (avec ajouts via mainStyle.css) */
 	    double tableWidth = 1272;
