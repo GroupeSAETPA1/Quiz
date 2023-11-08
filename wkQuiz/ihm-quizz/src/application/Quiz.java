@@ -153,17 +153,10 @@ public class Quiz extends Application {
 	public void charger(String vue) {
 		try {
 			Parent racine = FXMLLoader.load(getClass().getResource("vue/" + vue));
-			if (scenes.containsKey(vue)) {
-				scenes.remove(vue);
-				scenes.put(vue, new Scene(racine));
-			} else {
-				scenes.put(vue, new Scene(racine));
-			}
+			scenes.put(vue, new Scene(racine));
 		} catch (IOException e) {
-			System.err.println("chargement impossible de : " + vue);
-			e.printStackTrace();
+			System.err.println("Chargement impossible de : " + vue);
+//			e.printStackTrace();
 		}
-		
-		
 	}
 }
