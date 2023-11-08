@@ -41,17 +41,71 @@ public class LigneQuestion {
         this.editerButton = new Button("Éditer");
         this.supprimerButton = new Button("Supprimer");
         editerButton.setOnAction(event -> editerQuestion());
-        supprimerButton.setOnAction(event -> supprimerQuestion()));
+        supprimerButton.setOnAction(event -> supprimerQuestion());
     }
 
-    public void editerQuestion(){
+    
+    public SimpleStringProperty getCategorie() {
+		return categorie;
+	}
+
+
+	public SimpleStringProperty getNomQuestion() {
+		return nomQuestion;
+	}
+
+
+	public SimpleStringProperty getReponseJuste() {
+		return reponseJuste;
+	}
+
+
+	public SimpleStringProperty getReponsesFausses() {
+		return reponsesFausses;
+	}
+
+
+	public SimpleStringProperty getFeedback() {
+		return feedback;
+	}
+
+
+	public Button getEditerButton() {
+		return editerButton;
+	}
+
+
+	public Button getSupprimerButton() {
+		return supprimerButton;
+	}
+
+
+	public void editerQuestion(){
     	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
     	
     	
     }
 
-    public void supprimerQuesion() {
+    public void supprimerQuestion() {
     	// méthode appelée lors de l'appuie sur le bouton de suppression de la categorie
+
+        // on demande confirmation à l'utilisateur
+        boolean result = AlertBox.showConfirmationBox("Êtes-vous sûr de vouloir supprimer la question " + this.getNomQuestion() + " ?");
+        if (result) {
+        	// si l'utilisateur confirme
+        	// on supprime la question
+        	if (ModelePrincipal.getInstance().supprimerQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(this.getNomQuestion().get()).get(0))) {
+        		// si la suppression a réussi
+        		AlertBox.showSuccessBox("Suppression effectuée");
+        		Quiz.chargerEtChangerVue("EditerQuestions.fxml");
+        	} else {
+        		// si la suppression a échoué
+        		AlertBox.showErrorBox("Suppression échouée");
+        	}
+        } else {
+        	// si l'utilisateur annule
+        	AlertBox.showErrorBox("Suppression annulée");
+        }
     	
     }
 }
