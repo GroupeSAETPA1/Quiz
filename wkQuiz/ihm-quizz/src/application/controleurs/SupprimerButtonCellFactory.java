@@ -1,5 +1,6 @@
-package application.controleurs;
+package application.controleurs.factories;
 
+import application.controleurs.lignes.LigneCategorie;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;

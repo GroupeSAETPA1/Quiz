@@ -1,4 +1,4 @@
-package application.controleurs;
+package application.controleurs.lignes;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -9,7 +9,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
+/**
+ * classe permettant l'affichage des lignes dans la tableView de la vue EditerCategories
+ * @author quentin COSTES
+ */
 public class LigneCategorie {
+	
     private final SimpleStringProperty nomProperty;
     private final SimpleIntegerProperty nbProperty;
     private final Button editerButton;
@@ -50,7 +55,9 @@ public class LigneCategorie {
     }
 
     public void editerCategorie(){
+    	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
     	if (this.getNomProperty() != "Général") {
+    		// si la quesiotn n'est pas général
     		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
     		Quiz.getInstance().charger("EditerCategorie.fxml");
     		Quiz.changerVue("EditerCategorie.fxml");	
