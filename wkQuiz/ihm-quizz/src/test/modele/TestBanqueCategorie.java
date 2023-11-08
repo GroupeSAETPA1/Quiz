@@ -138,10 +138,10 @@ class TestBanqueCategorie {
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 		
-		assertIterableEquals(ensembleCategorieLibelleNom, 
-				banqueCategorie.getExactCategoriesLibelle("premiere"));
-        assertIterableEquals(ensembleCategorieLibelleNom, 
-        					banqueCategorie.getExactCategoriesLibelle("preMiERe"));
+		assertTrue(ensembleCategorieLibelleNom.contains( 
+				banqueCategorie.getExactCategoriesLibelle("premiere")));
+        assertTrue(ensembleCategorieLibelleNom.contains(
+        					banqueCategorie.getExactCategoriesLibelle("preMiERe")));
         
         
         ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
@@ -152,8 +152,8 @@ class TestBanqueCategorie {
         listeUneCategorie.add(new Categorie("premiere categorie"));
 
 
-		assertEquals(banqueCategorie.getExactCategoriesLibelle("categorie"), listeVide);
-		assertEquals(banqueCategorie.getExactCategoriesLibelle("premiere categorie").get(0), 
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("categorie"), null);
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("premiere categorie"), 
 		        listeUneCategorie.get(0));
 	}
 
