@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
@@ -14,8 +15,8 @@ import application.modele.ModelePrincipal;
 import java.util.ArrayList;
 
 import application.Quiz;
-import application.controleurs.factories.EditerButtonCellFactory;
-import application.controleurs.factories.SupprimerButtonCellFactory;
+import application.controleurs.factories.EditerCategorieButtonCellFactory;
+import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
 import application.controleurs.lignes.LigneCategorie;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
@@ -32,7 +33,9 @@ public class ControlleurEditerCategories {
 	@FXML
 	private TableView<LigneCategorie> table;
 
-		
+	@FXML
+	private TextField barreRecherche;
+	
 	/**
 	 * Méthodes liée au group retour 
 	 * qui devra renvoyer vers la page precedente
@@ -42,6 +45,8 @@ public class ControlleurEditerCategories {
 	private void retour() {
 		Quiz.changerVue("Editeur.fxml");
 	}
+	
+	static boolean filtre = false ;
 	/**
 	 * Méthodes liée au bouton Créer Categorie 
 	 * qui devra envoyer vers la page CreationQuestionEtCategorie.fxml
@@ -71,11 +76,19 @@ public class ControlleurEditerCategories {
 	        return cell;
 	    });
 
+<<<<<<< HEAD
 	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier");
 	    modifColumn.setCellFactory(new EditerButtonCellFactory());
 
 	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer");
 	    supColumn.setCellFactory(new SupprimerButtonCellFactory());
+=======
+	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier la categorie");
+	    modifColumn.setCellFactory(new EditerCategorieButtonCellFactory());
+
+	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer la categorie");
+	    supColumn.setCellFactory(new SupprimerCategorieButtonCellFactory());
+>>>>>>> ae09d9902bfc6ba65b76f576bb0266ae06f130dd
 
 	    /* style initial de la table (avec ajouts via mainStyle.css) */
 	    double tableWidth = 1272;
@@ -90,12 +103,37 @@ public class ControlleurEditerCategories {
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
 	    
-	    ObservableList<LigneCategorie> data = table.getItems();
+	    miseAJourTableau();
 	    
-	    ArrayList<Categorie> categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+	    //if (filtre) {
+	        //System.out.println(data);
+	      //  data.removeLast();
+	        //Quiz.charger("EditerCategories.fxml");
+	        
+	    //}
+	    
+	}
+
+    /** 
+     * TODO comment method role
+     */
+    private void miseAJourTableau() {
+        ObservableList<LigneCategorie> data = table.getItems();
+	    ArrayList<Categorie> categories ;
+	    if (filtre) {
+	        data.clear();
+	        categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesLibelle(barreRecherche.getText().strip());
+	    } else {
+	        categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+	    } 
 	    for (Categorie categorie : categories) {
 			data.add(new LigneCategorie(categorie.getNom()
 					, ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
 		}
+    }
+	
+	public void filtrer() {
+	    filtre = true ;
+	    miseAJourTableau();
 	}
 }
