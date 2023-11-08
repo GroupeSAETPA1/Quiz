@@ -31,6 +31,7 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     private Categorie catgorieAModifier;
+    
     private boolean displayCategoriePane;
 
     public boolean isDisplayCategoriePane() {
@@ -92,7 +93,12 @@ public class ModelePrincipal {
             throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException {
 
         // La categorie de la question existera toujours donc aucune vérification d'existence n'est nécessaire
-        Categorie categorieQuestion = banqueCategorie.getCategorie(idCategorie);
+        Categorie categorieQuestion;
+        try {
+             categorieQuestion = banqueCategorie.getCategorie(idCategorie);            
+        } catch (IndexOutOfBoundsException e) {
+            categorieQuestion = banqueCategorie.categorieGeneral;
+        }
 
         // Si exception apparais on propage au controlleur appellant
         Question aAjouter = new Question(libelle, categorieQuestion, difficulte, 
@@ -167,7 +173,7 @@ public class ModelePrincipal {
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
         //TODO a tester
         boolean estSupprimer = false;
-        if (categorieASupprimer.equals(banqueCategorie)) {
+        if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
             estSupprimer = false;
         }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
             estSupprimer = 
@@ -248,6 +254,14 @@ public class ModelePrincipal {
     public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
         catgorieAModifier.setNom(nouveauNom);
         return true;
+    }
+    
+    /**
+     * @param categorie La catégorie dont on veut connaître le nombre de question
+     * @return le nombre de question présente dans une catégorie
+     */
+    public int getNombreQuestionCategorie(Categorie categorie) {
+        return getBanqueQuestion().getQuestions(categorie).size();
     }
 
 }

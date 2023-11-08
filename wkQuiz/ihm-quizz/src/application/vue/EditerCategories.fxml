@@ -34,7 +34,7 @@
       </Text>
       <ScrollPane layoutX="80.0" layoutY="280.0" prefHeight="471.0" prefWidth="1290.0">
          <content>
-            <TableView fx:id="table" prefHeight="466.0" prefWidth="1274.0" />
+            <TableView fx:id="table" prefHeight="0.0" prefWidth="1274.0" />
          </content>
       </ScrollPane>
       <Text fill="WHITE" layoutX="84.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la Catégorie :">
@@ -42,7 +42,7 @@
             <Font name="Open Sans Regular" size="24.0" />
          </font>
       </Text>
-      <TextField layoutX="83.0" layoutY="206.0" prefHeight="52.0" prefWidth="445.0" promptText="Nom de la Catégorie" style="-fx-background-radius: 20px;">
+      <TextField fx:id="barreRecherche" layoutX="83.0" layoutY="206.0" onKeyReleased="#filtrer" prefHeight="52.0" prefWidth="445.0" promptText="Nom de la Catégorie" style="-fx-background-radius: 20px;">
          <font>
             <Font size="20.0" />
          </font>

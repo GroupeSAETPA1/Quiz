@@ -110,7 +110,9 @@ class TestModelePrincipale {
      */
     @Test
     void testGetInstance() {
-        fail("Not yet implemented");
+        ModelePrincipal modele1 = ModelePrincipal.getInstance();
+        ModelePrincipal modele2 = ModelePrincipal.getInstance();
+        assertSame(modele1, modele2);
     }
 
     /**
@@ -159,14 +161,20 @@ class TestModelePrincipale {
         
         /* verification de l'exception propager si la question a  créer 
          * est invalide (tous les paramètres faux)
+         * 
          */
-
-        assertThrows(IllegalArgumentException.class , 
-               ()-> modele.creerQuestion("", -1, 1, "",mauvaiseReponseVide, ""));
+//        assertThrows(IllegalArgumentException.class , 
+//               ()-> modele.creerQuestion("", -1, 1, "",mauvaiseReponseVide, ""));
+        boolean testReussi = false;
+        try {
+            modele.creerQuestion("", -1, 1, "",mauvaiseReponseVide, "");
+        } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException e) {
+            testReussi = true;
+        }
+        assertTrue(testReussi);
         
         // Ajout avec une catégorie inexistante
-        assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", 0, 
+        assertTrue(modele.creerQuestion("Question inexistante", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
 
     }

@@ -83,6 +83,9 @@ public class Quiz extends Application {
     	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
     	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
     	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("java1"));
+            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("java2"));
+            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("java3"));
     	    
     	    ArrayList<String> rep = new ArrayList<>();
     	    rep.add("coubeh");
