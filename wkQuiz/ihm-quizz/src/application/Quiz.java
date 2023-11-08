@@ -96,6 +96,7 @@ public class Quiz extends Application {
 		ressources.add("EditerCategorie.fxml");
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
+	    ressources.add("EditerQuestions.fxml");
 
 		
 		for (String element : ressources) {
@@ -162,7 +163,7 @@ public class Quiz extends Application {
 			scenes.put(vue, new Scene(racine));
 		} catch (IOException e) {
 			System.err.println("Chargement impossible de : " + vue);
-//			e.printStackTrace();
+ 			e.printStackTrace();
 		}
 	}
 	

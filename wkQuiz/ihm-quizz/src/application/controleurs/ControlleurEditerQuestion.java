@@ -33,7 +33,6 @@ public class ControlleurEditerQuestion {
 	 */
 	@FXML 
 	private void retour() {
-		System.out.println("Retour en arriere ");
 		Quiz.changerVue("Editeur.fxml");
 	}
 	/**
@@ -42,7 +41,6 @@ public class ControlleurEditerQuestion {
 	 */
 	@FXML 
 	private void versCreerQuestion() {
-		System.out.println("swalalala nous sommes partie pour créer");
 		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
