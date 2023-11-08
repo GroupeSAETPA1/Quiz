@@ -29,6 +29,11 @@ bin/
 .settings/
 .classpath
 .project
-Modelio/Cas d utilisation/.runtime/.save
+wkQuiz/ihm-quizz/build.fxbuild
 
+#Modelio
+Modelio/Cas d utilisation/.runtime/
 Modelio/Digramme de classe/.runtime/
+
+#sonarLint
+.sonarlint/

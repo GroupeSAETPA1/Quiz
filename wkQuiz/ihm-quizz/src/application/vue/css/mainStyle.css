@@ -1,0 +1,158 @@
+/* Fichier CSS général de l'application Quizéo fait avec JavaFX */
+
+/*                               */
+/* Gestion des onglets (tabview) */
+/*                               */
+
+/* Réglage de la taille des onglets */
+.tab-pane {
+    -fx-tab-min-width: 100px;
+    -fx-tab-min-height: 66px;
+    -fx-tab-max-height: 66px;
+}
+
+/* Réglage de la zone derriere les boutons */
+.tab-header-area .tab-header-background {
+    -fx-background-color: #696969; /* Couleur barre onglet (meme couleur que l'application) */
+}
+
+/* les onglets */
+.tab {
+    -fx-background-color: #060608; /* Couleur onglet par défault */
+    -fx-font-size: 30px;  /* Taille texte onglet */
+    -fx-background-radius: 10 10 0 0; /* Arrondi onglet */
+    -fx-padding: 0 10 0 10;
+    
+}
+/* Onglet selectionné */
+.tab:selected {
+    -fx-background-color: #282C34;
+}
+
+/* Texte des onglets */
+.tab-label { 
+   -fx-alignment: CENTER;
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-padding: 0 10 0 10;
+}
+
+/* Enleve l'outline dégeulasse quand séléctionné */
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+   -fx-border-insets: 0 0 0 0;
+   -fx-border-radius: 0;
+}
+
+/*                         */
+/* Fin gestion des onglets */
+/*                         */
+
+
+/*                         */
+/* Gestion des scrollpane  */
+/*                         */
+
+/* Gestion de la couleur de fond des scrollpane et de leur taille*/
+.scroll-pane {
+    -fx-background-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
+    -fx-border-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-border-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
+    -fx-background-color: #282C34; /* meme couleur que l'application) */
+    /* Augmente la taille de la barre de scroll */
+    -fx-pref-width: 30px;
+} 
+
+/* Gestion de la barre de scroll */
+.thumb {
+    /* Couleur de la barre de scroll */
+    -fx-background-color: #5c6169;
+    /* Arrondi de la barre de scroll */
+    -fx-background-radius: 15px;
+}
+
+/* Gestion des fleches de scroll oblgié de faire en deux fois sinon ca marche po */
+.increment-arrow {
+    /* Enleve les fleches de scroll */
+    -fx-background-color: transparent;
+}
+
+.decrement-arrow {
+    /* Enleve les fleches de scroll */
+    -fx-background-color: transparent;
+}
+
+/*                            */
+/* Fin gestion des scrollpane */
+/*                            */
+
+/*                            */
+/*  Gestion des radiobuttons  */
+/*                            */
+.radio-button .radio {
+    -fx-border-width: 1px;
+    -fx-border-color: #282C34;
+    -fx-background-color: white;
+    -fx-border-radius: 50px;
+    -fx-padding: 10px;
+}
+.radio-button .radio:selected {
+    -fx-background-color: white;
+}
+.radio-button -radio:armed {
+    -fx-background-color: white;
+}
+.radio-button -radio:determinate {
+    -fx-background-color: white;
+}
+.radio-button -radio:indeterminate {
+    -fx-background-color: white;
+}
+.radio-button .dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+/*                               */
+/* fin Gestion des radiobuttons  */
+/*                               */
+/*                            */
+/*  Gestion des tableView     */
+/*                            */
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #282C34; 
+    -fx-border-color: #282C34;
+}
+.table-view .column-header .label{
+   -fx-text-fill: white;
+   -fx-font-size: 25px; 
+}
+.table-view .cell{
+  /* -fx-cell-size: 35; */
+  -fx-text-fill: white;
+  -fx-background-color: #282C34;
+  -fx-border-color: #5C6169;
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: CENTER_LEFT;
+}
+.table-view .cell:odd{
+  -fx-text-fill: white;
+  -fx-background-color: #3E4451;
+  -fx-border-color: #5C6169;
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: CENTER_LEFT;
+}
+/*                               */
+/* fin Gestion des tableView     */
+/*                               */
+
+/*                         */
+/*         Divers          */
+/*                         */
+
+.combo-box {
+    -fx-font-size: 20px;
+}

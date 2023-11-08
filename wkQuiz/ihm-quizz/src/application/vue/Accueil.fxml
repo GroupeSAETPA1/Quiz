@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurAccueil">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="412.0" layoutY="58.0" prefHeight="57.0" prefWidth="243.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Button layoutX="375.0" layoutY="207.0" mnemonicParsing="false" onAction="#jouer" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Jouer" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="397.68" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeJouer.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="272.0" layoutY="330.0" mnemonicParsing="false" onAction="#editer" prefHeight="80.0" prefWidth="460.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Éditeur de questions" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="289.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeEdition.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="322.0" layoutY="453.0" mnemonicParsing="false" onAction="#online" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Mode en-ligne" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="333.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconEnligne.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Group layoutX="33.0" layoutY="15.0" onMouseClicked="#quitter">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeQuitter.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Quitter" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group fx:id="aide" layoutX="890.0" layoutY="20.0" onMouseClicked="#aider">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAide.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="75.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+   </children>
+</Pane>
