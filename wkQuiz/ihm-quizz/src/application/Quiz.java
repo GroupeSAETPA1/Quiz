@@ -69,25 +69,26 @@ public class Quiz extends Application {
      */
 	@Override
 	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException {
-
+        instance = this;
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();
-
-		// TODO c'est temporaire, c'est pour tester
-		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
-	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
-	    
-	    ArrayList<String> rep = new ArrayList<>();
-	    rep.add("coubeh");
-	    
-	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, null));
+		
+		{	// TODO c'est temporaire, c'est pour tester
+    		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+    	    
+    	    ArrayList<String> rep = new ArrayList<>();
+    	    rep.add("coubeh");
+    	    
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, null));
+		}
 	    
 	    ressources.add("Accueil.fxml");
 		ressources.add("Editeur.fxml");
@@ -107,7 +108,6 @@ public class Quiz extends Application {
             System.err.println("Erreur : L'îcone est introuvables");
          }
 		 
-		 instance = this;
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
@@ -150,13 +150,28 @@ public class Quiz extends Application {
 		// new ControleurPrincipal();	FIXME
 	}
 	
-	public void charger(String vue) {
+	/**
+	 * Charge la vue indiquer
+	 * TODO comment method role
+	 * @param vue
+	 */
+	public static void charger(String vue) {
+	    Quiz quiz = Quiz.getInstance();
 		try {
-			Parent racine = FXMLLoader.load(getClass().getResource("vue/" + vue));
+			Parent racine = FXMLLoader.load(quiz.getClass().getResource("vue/" + vue));
 			scenes.put(vue, new Scene(racine));
 		} catch (IOException e) {
 			System.err.println("Chargement impossible de : " + vue);
 //			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Recharge une vue et l'affiche
+	 * @param vue Le nom de la vue
+	 */
+	public static void chargerEtChangerVue(String vue) {
+	    charger(vue);
+	    changerVue(vue);
 	}
 }

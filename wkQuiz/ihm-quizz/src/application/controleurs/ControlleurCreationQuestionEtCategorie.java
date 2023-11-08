@@ -107,7 +107,7 @@ public class ControlleurCreationQuestionEtCategorie {
      * qui devra enregistrer les champs  dans la banques de question
      */
 	@FXML
-	private void valider() {
+	private void validerQuestion() {
 	    //TODO Refactor pour avoir une fonction par action
 		System.out.println("Valider");
 
