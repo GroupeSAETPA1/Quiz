@@ -7,6 +7,7 @@ package application.modele;
 
 import java.util.ArrayList;
 import application.exception.HomonymeException;
+import application.exception.InvalidNameException;
 
 /**
  * Gestion de toutes les catégories présente dans l'application
@@ -18,11 +19,19 @@ public class BanqueCategorie {
     /* La liste des catégories */
     private ArrayList<Categorie> categories;
     
+    protected Categorie categorieGeneral;
+    
     /**
      * Constructeur de BanqueCategorie
      */
     public BanqueCategorie() {
-    	categories = new ArrayList<Categorie>();
+    	try {
+            categorieGeneral = new Categorie("Général");
+        } catch (InvalidNameException e) {
+            throw new InternalError("La création de la categorie Général à généré une erreur");
+        }
+        categories = new ArrayList<Categorie>();
+        categories.add(categorieGeneral);
     }
     
     /**
@@ -42,6 +51,9 @@ public class BanqueCategorie {
      * @return Une ArrayList de toutes les categories 
      */
     public ArrayList<Categorie> getCategories() {
+        for (Categorie categorie : categories) {
+            System.out.println(categorie);
+        }
         return this.categories;
     }
 
@@ -76,20 +88,20 @@ public class BanqueCategorie {
     }
 
     /**
-     * Récupere les Categories qui ont exactement le libellé passé en paramètre
-     * (on vérifie que le libellé est égal à la string passée en paramètres)
+     * renvoie la categorie qui a le meme libellé que passé en pramatre
+     * si il n'y en a pas cela renvoie null
      * @param libelle (String) le libellé recherché
-     * @return une ArrayList des différentes catégories qui ont ce libellé exact
+     * @return categorie avec le libellé voulu
      */
-    public ArrayList<Categorie> getExactCategoriesLibelle(String libelle) {
-    	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
+    public Categorie getExactCategoriesLibelle(String libelle) {
         for (Categorie categorie : categories) {
             if (categorie.getNom().equals(libelle.toLowerCase())) {
-                resultat.add(categorie);
+                return categorie;
             } 
         }
-        return resultat;
+		return null;
     }
+    
     
     /* non javadoc - @see java.lang.Object#toString() */
     @Override
@@ -103,9 +115,4 @@ public class BanqueCategorie {
         }
         return resultat.toString();
     }
-
-    
-
-    
-
 }

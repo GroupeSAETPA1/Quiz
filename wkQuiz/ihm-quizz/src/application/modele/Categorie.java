@@ -15,6 +15,9 @@ import application.exception.InvalidNameException;
  */
 public class Categorie implements Serializable {
 	
+    /** TODO comment field role (attribute, associative role) */
+    private static final long serialVersionUID = 1L;
+    
     /** Le nom de la catégorie */
     private String nom;
 
@@ -67,7 +70,7 @@ public class Categorie implements Serializable {
      */
     @Override
     public String toString() {
-    	return "Nom de la catégorie : " + this.nom;
+    	return this.nom;
     }
     
     /**

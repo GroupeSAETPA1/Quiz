@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
@@ -116,9 +117,10 @@ class TestModelePrincipale {
      * Test method for {@link application.modele.ModelePrincipal#creerQuestion(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList, java.lang.String)}.
      * @throws ReponseException 
      * @throws InvalidFormatException 
+     * @throws HomonymeException 
      */
     @Test
-    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException{
+    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException{
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
         //TODO assertDoesNotThrow à la place d'assertTrue
@@ -126,6 +128,8 @@ class TestModelePrincipale {
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
                 + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
+        
+        modele.creerCategorie("Autre Nom");
         
         // Test ajout de question avec seulement catégorie différente
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
@@ -146,9 +150,10 @@ class TestModelePrincipale {
                 + "début d'un commentaire Javadoc ", 0, 
                 1, "different", mauvaiseReponse1, ""));
         
+        
         // Test de non ajout d'une question déjà existante
-        assertFalse(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", 0, 
+        assertThrows(HomonymeException.class,() -> modele.creerQuestion("Quel "
+                + "est le délimiteur de début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
         
         
@@ -161,10 +166,82 @@ class TestModelePrincipale {
         
         // Ajout avec une catégorie inexistante
         assertTrue(modele.creerQuestion("Quel est le délimiteur de "
-                + "début d'un commentaire Javadoc ", "categorieTest", 
+                + "début d'un commentaire Javadoc ", 0, 
                 1, "non vide", mauvaiseReponse1, ""));
 
     }
+    
+    @Test
+    void testSupprimerCategorie() throws InvalidNameException, HomonymeException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        
+        Categorie uneCategorie = new Categorie("Truc");
+        modele.creerCategorie(uneCategorie.getNom());
+        //Suppression d'une catégorie existante
+        assertTrue(modele.supprimerCategorie(uneCategorie));
+        
+        //Suppression d'une catégorie inexistante
+        assertFalse(modele.supprimerCategorie(uneCategorie));
+        
+        
+        Categorie categorieGeneral = new Categorie("Général");
+        //Suppression de la catégorie Général
+        assertFalse(modele.supprimerCategorie(categorieGeneral));
+        
+        assertThrows(NullPointerException.class,() -> modele.supprimerCategorie(null));
+    }
+    
+    @Test
+    void testCategorieContientQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        
+        modele.creerCategorie(categoriesValides[0].getNom());
+        modele.creerCategorie(categoriesValides[1].getNom());
+        
+        int c = 1;
+        for (Question q : questionValide) {
+            modele.creerQuestion(q.getLibelle(), c%2+1, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1, null);
+            c ++;
+        }
+        
+
+        //Il existe des question avec cette catégorie sélectionné
+        assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
+        assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
+        
+        Categorie uneAutre = new Categorie("Une Nouvelle Categorie Totalement Unique");
+        modele.creerCategorie(uneAutre.getNom());
+        //La catégorie n'a pas de de question
+        assertFalse(modele.categorieContientQuestion(uneAutre));
+        
+        int index = indexOf(uneAutre, modele.getCategories());
+        
+        modele.creerQuestion(
+                "Que doit décrire le texte écrit dans le commentaire Javadoc "
+                + "situé juste avant la ligne \"public class ...\" ?",
+                index, 0, "Le rôle du programme, en explicitant de manière précise"
+                        + " ce rôle", mauvaiseReponse1, null);
+        System.out.println(modele.getBanqueQuestion());
+        assertTrue(modele.categorieContientQuestion(uneAutre));
+        
+    }
+
+    /** 
+     * Renvoie l'indice de la categorie dans une liste
+     * @param categorie
+     * @param categories
+     * @return
+     */
+    private int indexOf(Categorie categorie, ArrayList<Categorie> categories) {
+        // TODO Auto-generated method stub
+        int i = 0;
+        for (Categorie categorieListe : categories) {
+            if (categorieListe.equals(categorie)) return i;
+            i++;
+        }
+        return -1;
+    }
+    
     
 
 }

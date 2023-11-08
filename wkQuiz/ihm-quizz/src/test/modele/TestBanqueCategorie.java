@@ -74,14 +74,14 @@ class TestBanqueCategorie {
 	 * la liste initialisé est vide
 	 * {@link application.modele.BanqueCategorie#getCategories()}
 	 * @throws HomonymeException si jamais une catégorie est déjà présente
+	 * @throws InvalidNameException 
 	 */
 	@Test
-	void testGetCategories() throws HomonymeException {
-        ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
-        assertIterableEquals(listeVide, banqueCategorie.getCategories());
+	void testGetCategories() throws HomonymeException, InvalidNameException {
         for (Categorie categorie : ensembleCategories) {
         	banqueCategorie.ajouter(categorie);
         }
+        ensembleCategories.add(0,new Categorie("Général"));
         assertIterableEquals(ensembleCategories, banqueCategorie.getCategories());
 	}
 
@@ -97,7 +97,7 @@ class TestBanqueCategorie {
         
         banqueCategorie.ajouter(ensembleCategories.get(0));
         assertThrows(IndexOutOfBoundsException.class, ()->banqueCategorie.getCategorie(ensembleCategories.size()));
-        assertEquals(ensembleCategories.get(0), banqueCategorie.getCategorie(0));
+        assertEquals(ensembleCategories.get(0), banqueCategorie.getCategorie(1));
 	}
 
 	/**
@@ -134,25 +134,25 @@ class TestBanqueCategorie {
 	@Test
 	void testGetExactCategoriesLibelle() 
 	throws HomonymeException, InvalidNameException {
+		// TODO, modifier car la méthode a changer
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 		
-		assertIterableEquals(ensembleCategorieLibelleNom, 
-				banqueCategorie.getExactCategoriesLibelle("premiere"));
-        assertIterableEquals(ensembleCategorieLibelleNom, 
-        					banqueCategorie.getExactCategoriesLibelle("preMiERe"));
+		assertTrue(ensembleCategorieLibelleNom.contains( 
+				banqueCategorie.getExactCategoriesLibelle("premiere")));
+        assertTrue(ensembleCategorieLibelleNom.contains(
+        					banqueCategorie.getExactCategoriesLibelle("preMiERe")));
         
         
         ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
         banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
         
-        ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
         ArrayList<Categorie> listeUneCategorie = new ArrayList<Categorie>();
         listeUneCategorie.add(new Categorie("premiere categorie"));
 
 
-		assertEquals(banqueCategorie.getExactCategoriesLibelle("categorie"), listeVide);
-		assertEquals(banqueCategorie.getExactCategoriesLibelle("premiere categorie").get(0), 
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("categorie"), null);
+		assertEquals(banqueCategorie.getExactCategoriesLibelle("premiere categorie"), 
 		        listeUneCategorie.get(0));
 	}
 

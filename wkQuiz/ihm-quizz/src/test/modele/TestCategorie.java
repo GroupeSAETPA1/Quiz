@@ -100,11 +100,11 @@ class TestCategorie {
 	void testToString() throws InvalidNameException {
 		Categorie test = new Categorie("test");
 		
-		assertEquals("Nom de la catégorie : test", test.toString());
-		assertNotEquals("Nom de la catégorie : test2", test.toString());
+		assertEquals("test", test.toString());
+		assertNotEquals("test2", test.toString());
 		
 		test.setNom("test2");
-		assertEquals("Nom de la catégorie : test2", test.toString());
-		assertNotEquals("Nom de la catégorie : test", test.toString());
+		assertEquals("test2", test.toString());
+		assertNotEquals("test", test.toString());
 	}
 }

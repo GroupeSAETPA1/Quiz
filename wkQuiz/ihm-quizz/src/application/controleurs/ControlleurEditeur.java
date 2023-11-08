@@ -23,7 +23,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void importer() {
 		System.out.println("Importer des question");
-		Quiz.changerVue("ImporterQuestion.fxml");
+//		Quiz.changerVue("ImporterQuestion.fxml");
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void editerCategorie() {
 		System.out.println("Editer une Catégorie ");
-		Quiz.changerVue("EditerCategorie.fxml");
+		Quiz.changerVue("EditerCategories.fxml");
 	}
 	
 	/**

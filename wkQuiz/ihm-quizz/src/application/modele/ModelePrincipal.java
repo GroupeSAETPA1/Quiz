@@ -6,6 +6,7 @@
 package application.modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -20,6 +21,9 @@ import application.exception.ReponseException;
  * @author François de Saint Palais
  */
 public class ModelePrincipal {
+    
+    public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT 
+    = new HashMap<String, Integer>();
 
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
@@ -27,11 +31,25 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     private Categorie catgorieAModifier;
+    private boolean displayCategoriePane;
 
-    private ModelePrincipal() {
+    public boolean isDisplayCategoriePane() {
+		return displayCategoriePane;
+	}
+
+	public void setDisplayCategoriePane(boolean displayCategoriePane) {
+		this.displayCategoriePane = displayCategoriePane;
+	}
+
+	private ModelePrincipal() {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
+        
+        
+        LABEL_DIFFICULTE_TO_INT.put("Facile", 1);
+        LABEL_DIFFICULTE_TO_INT.put("Moyen", 2);
+        LABEL_DIFFICULTE_TO_INT.put("Difficile", 3);
     }
 
     /**
@@ -48,6 +66,12 @@ public class ModelePrincipal {
         // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
         // Question. Pour éviter les effet de bord.s
         return banqueQuestion;
+    }
+    
+    public BanqueCategorie getBanqueCategorie() {
+        // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
+        // Question. Pour éviter les effet de bord.s
+        return banqueCategorie;
     }
 
     /**
@@ -102,20 +126,15 @@ public class ModelePrincipal {
      * @return Une liste des categories
      * @throws InvalidNameException //STUB
      */
-    public ArrayList<Categorie> getCategories() throws InvalidNameException {
-        ArrayList<Categorie> resultat = new ArrayList<Categorie>(3);
-        resultat.add(new Categorie("Premier bouchon"));
-        resultat.add(new Categorie("Second bouchon"));
-        resultat.add(new Categorie("Troisieme bouchon"));
-
-        return resultat; // STUB
+    public ArrayList<Categorie> getCategories() {
+        return banqueCategorie.getCategories();
     }
 
     /**
      * Supprime de la banque de question la question passé en paramètre. Si la
-     * suppression est un sucés alors on revoie true false sinon
+     * suppression est un succès alors on revoie true false sinon
      * 
-     * @param questionASuprimer
+     * @param questionASuprimer La question a supprimer
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
@@ -124,17 +143,18 @@ public class ModelePrincipal {
     }
 
     /**
+     * Vérifie si une Catégorie contient des Questions
      * @param categorie La Categorie pour laquelle on cherche
      * @return revoie true si la categorie contient des question, false sinon
      */
     public boolean categorieContientQuestion(Categorie categorie) {
         ArrayList<Question> questionExistante = banqueQuestion.getQuestions();
-        boolean categorieVide = true;
+        boolean categorieVide = questionExistante.size() != 0;
         for (int i = 0; i < questionExistante.size() && categorieVide; i++) {
             categorieVide = !questionExistante.get(i).getCategorie()
                             .equals(categorie.getNom());
         }
-        return categorieVide;
+        return !categorieVide;
     }
 
     /**
@@ -145,7 +165,17 @@ public class ModelePrincipal {
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
-        return false; // STUB
+        //TODO a tester
+        boolean estSupprimer = false;
+        if (categorieASupprimer.equals(banqueCategorie)) {
+            estSupprimer = false;
+        }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
+            estSupprimer = 
+                    banqueCategorie.getCategories().remove(categorieASupprimer);
+        } else {
+            estSupprimer = false;
+        }
+        return estSupprimer;
     }
 
     /**
@@ -176,6 +206,7 @@ public class ModelePrincipal {
      */
     public boolean modifierQuestion(String libelle, String categorie, int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) {
+      //TODO
         return false; // STUB
     }
 

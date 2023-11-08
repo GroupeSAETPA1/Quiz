@@ -15,6 +15,7 @@ public class AlertBoxTest extends Application {
         Button confirmationButton = new Button("Afficher Confirmation");
         Button successButton = new Button("Afficher Succès");
         Button errorButton = new Button("Afficher Erreur");
+        Button warningButton = new Button("Afficher Warning");
 
         confirmationButton.setOnAction(e -> {
             String message = "Voulez-vous continuer ?";
@@ -32,8 +33,13 @@ public class AlertBoxTest extends Application {
             AlertBox.showErrorBox(message);
         });
 
+        warningButton.setOnAction(e -> {
+            String message = "Ceci est un warning ";
+            AlertBox.showWarningBox(message);
+        });
+
         VBox vbox = new VBox(10);
-        vbox.getChildren().addAll(confirmationButton, successButton, errorButton);
+        vbox.getChildren().addAll(confirmationButton, successButton, errorButton,warningButton);
         vbox.setSpacing(10);
 
         Scene scene = new Scene(vbox, 300, 200);
@@ -43,6 +49,7 @@ public class AlertBoxTest extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println("mgoeh");
         launch(args);
     }
 }
