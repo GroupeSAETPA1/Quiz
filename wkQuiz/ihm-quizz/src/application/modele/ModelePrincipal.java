@@ -138,8 +138,8 @@ public class ModelePrincipal {
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
-        //TODO
-        return false; // STUB
+        banqueQuestion.getQuestions().remove(questionASuprimer);
+        return banqueQuestion.getQuestions().contains(questionASuprimer);
     }
 
     /**
