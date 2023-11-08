@@ -224,5 +224,17 @@ public class ModelePrincipal {
     public void setCategorieAModifier(Categorie catgorieAModifier) {
         this.catgorieAModifier = catgorieAModifier;
     }
+    
+    /**
+     * 
+     * TODO comment method role
+     * @param nouveauNom
+     * @return
+     * @throws InvalidNameException 
+     */
+    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
+        catgorieAModifier.setNom(nouveauNom);
+        return true;
+    }
 
 }
