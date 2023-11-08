@@ -1,6 +1,7 @@
 package application.controleurs.factories;
 
 import application.controleurs.lignes.LigneCategorie;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -8,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-public class SupprimerCategorieButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
+public class EditerButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
 
     @Override
     public TableCell<LigneCategorie, String> call(TableColumn<LigneCategorie, String> param) {
@@ -21,17 +22,16 @@ public class SupprimerCategorieButtonCellFactory implements Callback<TableColumn
                     setText(null);
                     setGraphic(null);
                 } else {
-                    // Créez le bouton de suppression pour chaque ligne et associez une action
-                    Button supprimerButton = new Button();
-                    Image image = new Image(getClass().getResource("/application/vue/images/IconeSupprimer.png").toExternalForm());
-                    supprimerButton.setGraphic(new ImageView(image));
-                    supprimerButton.setStyle("-fx-background-color: transparent;");
-                    supprimerButton.setOnAction(event -> {
+                    Button editerButton = new Button("");
+                    Image image = new Image(getClass().getResource("/application/vue/images/IconeEdition.png").toExternalForm());
+                    editerButton.setGraphic(new ImageView(image));
+                    editerButton.setStyle("-fx-background-color: transparent;");
+                    editerButton.setOnAction(event -> {
                         LigneCategorie ligne = getTableView().getItems().get(getIndex());
-                        ligne.supprimerCategorie();
+                        ligne.editerCategorie();
                     });
 
-                    setGraphic(supprimerButton);
+                    setGraphic(editerButton);
                 }
             }
         };

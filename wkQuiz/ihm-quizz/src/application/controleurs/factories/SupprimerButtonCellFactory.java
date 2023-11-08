@@ -1,6 +1,6 @@
 package application.controleurs.factories;
 
-import application.controleurs.lignes.LigneQuestion;
+import application.controleurs.lignes.LigneCategorie;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-public class SupprimerQuestionButtonCellFactory implements Callback<TableColumn<LigneQuestion, String>, TableCell<LigneQuestion, String>> {
+public class SupprimerButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
 
     @Override
-    public TableCell<LigneQuestion, String> call(TableColumn<LigneQuestion, String> param) {
-        return new TableCell<LigneQuestion, String>() {
+    public TableCell<LigneCategorie, String> call(TableColumn<LigneCategorie, String> param) {
+        return new TableCell<LigneCategorie, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -27,8 +27,8 @@ public class SupprimerQuestionButtonCellFactory implements Callback<TableColumn<
                     supprimerButton.setGraphic(new ImageView(image));
                     supprimerButton.setStyle("-fx-background-color: transparent;");
                     supprimerButton.setOnAction(event -> {
-                    	LigneQuestion ligne = getTableView().getItems().get(getIndex());
-                        ligne.supprimerQuestion();
+                        LigneCategorie ligne = getTableView().getItems().get(getIndex());
+                        ligne.supprimerCategorie();
                     });
 
                     setGraphic(supprimerButton);
