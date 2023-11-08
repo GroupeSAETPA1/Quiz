@@ -1,5 +1,9 @@
 package application.controleurs;
 
+import application.controleurs.lignes.LigneQuestion;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+
 public class ControlleurEditerQuestions {
 
         TableColumn<LigneQuestion, String> reponseJusteColumn = new TableColumn<>("réponse juste");
