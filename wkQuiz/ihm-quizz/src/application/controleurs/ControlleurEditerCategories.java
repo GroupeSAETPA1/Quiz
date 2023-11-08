@@ -14,6 +14,9 @@ import application.modele.ModelePrincipal;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.controleurs.factories.EditerButtonCellFactory;
+import application.controleurs.factories.SupprimerButtonCellFactory;
+import application.controleurs.lignes.LigneCategorie;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 
@@ -21,11 +24,7 @@ import application.exception.InvalidNameException;
  * Controlleur de la page d'édition des catégories.
  * Celui-ci instance  des methodes liée au bouton de la page 
  * 
- * @author Néo BECOGNE
  * @author Quentin COSTES
- * @author François DE SAINT PALAIS
- * @author Lucas DESCRIAUD
- * @author Tom DOUAUD
  */
 
 public class ControlleurEditerCategories {
