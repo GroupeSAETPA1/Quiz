@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
@@ -32,6 +33,11 @@ public class ControlleurEditerCategories {
 	@FXML
 	private TableView<LigneCategorie> table;
 
+	@FXML
+	private TextField barreRecherche ;
+	
+	
+	private boolean filtre = false ;
 		
 	/**
 	 * Méthodes liée au group retour 
@@ -90,12 +96,31 @@ public class ControlleurEditerCategories {
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
 	    
-	    ObservableList<LigneCategorie> data = table.getItems();
+	    miseAJourTableau();
 	    
-	    ArrayList<Categorie> categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
-	    for (Categorie categorie : categories) {
-			data.add(new LigneCategorie(categorie.getNom()
-					, ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
-		}
 	}
+	
+	public void filtrer() {
+	    filtre = true ; 
+	    miseAJourTableau ();
+	}
+    /** 
+     * Modifie le tableau des categorie
+     */
+    private void miseAJourTableau() {
+       
+        ObservableList<LigneCategorie> data = table.getItems();
+        ArrayList<Categorie> categories ; 
+        if (filtre) {
+            data.clear();
+            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesLibelle(barreRecherche.getText().strip());
+        } else {
+            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+        }
+   
+        for (Categorie categorie : categories) {
+            data.add(new LigneCategorie(categorie.getNom()
+                    , ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
+        }
+    }
 }
