@@ -109,7 +109,7 @@ public class ControlleurEditerQuestions {
         modifColumn.setPrefWidth(tableWidth * 0.1);
         supColumn.setPrefWidth(tableWidth * 0.1);
 
-        // table.getColumns().addAll
+        // table.getColumns().addAll(categorieColumn);
 	}
 
 }
