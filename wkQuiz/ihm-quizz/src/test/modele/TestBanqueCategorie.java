@@ -147,7 +147,6 @@ class TestBanqueCategorie {
         ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
         banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
         
-        ArrayList<Categorie> listeVide = new ArrayList<Categorie>();
         ArrayList<Categorie> listeUneCategorie = new ArrayList<Categorie>();
         listeUneCategorie.add(new Categorie("premiere categorie"));
 

@@ -2,18 +2,16 @@ package application.vue;
 
 import java.util.Optional;
 
-import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 
 /**
- * classe contenant les differents types d'alertbox
+ * classe contenant les différents types d'alertbox
  * 
  * @author Quentin COSTES
  */
-public abstract class AlertBox extends Application {
+public abstract class AlertBox {
 
 	/**
 	 * alert box de confirmation 

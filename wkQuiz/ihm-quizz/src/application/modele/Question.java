@@ -16,7 +16,10 @@ import application.exception.ReponseException;
 
 public class Question implements Serializable {
 	
-	/** difficultée minimale d'une question */
+	/** TODO comment field role (attribute, associative role) */
+    private static final long serialVersionUID = 1L;
+
+    /** difficultée minimale d'une question */
 	private final int DIFFICULTE_MINIMALE = 0;
 	
 	/** difficultée maximale d'une question */
