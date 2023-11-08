@@ -66,62 +66,6 @@ public class ControlleurCreationQuestionEtCategorie {
 		Quiz.changerVue("Acceuil.fxml");
 	}
 
-	/**
-     * Créer une catégorie dans le modèle et gère les possibles exceptions qui
-     * peuvent apparaître
-     * @param categorieCreer
-     * @param nom
-     */
-	private void creerEtGererCategorie(boolean categorieCreer,String nom) {
-		try {
-            categorieCreer = modele.creerCategorie(nom);
-
-        } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide ");
-        } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La categorie saisie existe déjà");
-        }
-		if (categorieCreer) {
-            AlertBox.showSuccessBox("Categorie créer !");
-        }
-    }
-
-    /**
-     * Créer une question dans le modèle et gère les possibles exceptions qui
-     * peuvent apparaître
-     * @param questionCreer
-     * @param indiceCategorieChoisie
-     * @param libeleQuestion
-     * @param valeurDifficulte
-     * @param feedback
-     * @param reponseVrai
-     * @param mauvaiseReponses
-     */
-    private void creerEtGererQuestion(boolean questionCreer, int indiceCategorieChoisie, String libeleQuestion,
-            int valeurDifficulte, String feedback, String reponseVrai, ArrayList<String> mauvaiseReponses) {
-        //Création de la question
-		try {
-            questionCreer = modele.creerQuestion(libeleQuestion,
-                    indiceCategorieChoisie, valeurDifficulte, reponseVrai,
-                    mauvaiseReponses, feedback);
-
-        } catch (InvalidFormatException e) {
-            AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
-        } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
-                    + "question ET une réponse juste.");
-        } catch (ReponseException e) {
-            AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
-                    + "pas être en double ET la bonne réponse ne peut pas être "
-                    + "une mauvaise réponse");
-        } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La question saisie existe déjà");
-        }
-		if (questionCreer) {
-            AlertBox.showSuccessBox("Question créer !");
-        }
-    }
-
 
 	@FXML
 	public void initialize() {
@@ -167,53 +111,131 @@ public class ControlleurCreationQuestionEtCategorie {
 	    //TODO Refactor pour avoir une fonction par action
 		System.out.println("Valider");
 
-		boolean questionCreer = false;
-
 		//Récupération de l'indice de la catégorie choisie
-		int indiceCategorieChoisie =
-		        selectCategorie.getSelectionModel().getSelectedIndex();
+		int indiceCategorieChoisie = getIndiceCategorieChoisie();
 		System.out.println(  "Catégorie choisie : "
 		                   + (indiceCategorieChoisie >= 0
 		                      ? categories.get(indiceCategorieChoisie)
 		                      : "Invalide"));
 
 		//Récupération du nom de la question
-		String libeleQuestion = saisieLibeleQuestion.getText();
+		String libeleQuestion = getLibeleQuestion();
 		System.out.println("Nom de la question : " + libeleQuestion);
 
 		//Récupération de la difficulté
-		int valeurDifficulte = ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-		        ((RadioButton) difficulte.getSelectedToggle()).getText());
+		int valeurDifficulte = getDifficulte();
 		System.out.println("Difficulté : " + valeurDifficulte);
 
 		//Récupération du feedback
-		String feedback = saisieFeedback.getText();
+		String feedback = getFeedback();
 		System.out.println("Feedback : " + feedback);
 
 		//Récupération de la réponse vrai
-		String reponseVrai = saisieReponseVrai.getText();
+		String reponseVrai = getReponseVrai();
 		System.out.println("Réponse vrai : " + reponseVrai);
 
 		//Récupération des réponses fausses
-		ArrayList<String> mauvaiseReponses = new ArrayList<>();
-		if (!saisiePremiereReponseFausse.getText().isBlank()) {
-		    mauvaiseReponses.add(saisiePremiereReponseFausse.getText());
-        }
-		if (!saisieSecondeReponseFausse.getText().isBlank()) {
-		    mauvaiseReponses.add(saisieSecondeReponseFausse.getText());
-		}
-		if (!saisieTroisiemeReponseFausse.getText().isBlank()) {
-		    mauvaiseReponses.add(saisieTroisiemeReponseFausse.getText());
-		}
-		if (!saisieQuatriemeReponseFausse.getText().isBlank()) {
-		    mauvaiseReponses.add(saisieQuatriemeReponseFausse.getText());
-		}
+		ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
 		System.out.println("Mauvaise réponse(s) : " + mauvaiseReponses);
 
 
-		creerEtGererQuestion(questionCreer, indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
+		creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
                 reponseVrai, mauvaiseReponses);
 	}
+
+
+
+    /** 
+     * @return La liste des mauvaise réponse choisie
+     */
+    private ArrayList<String> getMauvaiseReponse() {
+        ArrayList<String> mauvaiseReponses = new ArrayList<>();
+        if (!saisiePremiereReponseFausse.getText().isBlank()) {
+            mauvaiseReponses.add(saisiePremiereReponseFausse.getText());
+        }
+        if (!saisieSecondeReponseFausse.getText().isBlank()) {
+            mauvaiseReponses.add(saisieSecondeReponseFausse.getText());
+        }
+        if (!saisieTroisiemeReponseFausse.getText().isBlank()) {
+            mauvaiseReponses.add(saisieTroisiemeReponseFausse.getText());
+        }
+        if (!saisieQuatriemeReponseFausse.getText().isBlank()) {
+            mauvaiseReponses.add(saisieQuatriemeReponseFausse.getText());
+        }
+        return mauvaiseReponses;
+    }
+
+    /** 
+     * @return La réponse vrai
+     */
+    private String getReponseVrai() {
+        return saisieReponseVrai.getText();
+    }
+
+    /** 
+     * @return Le feedback
+     */
+    private String getFeedback() {
+        return saisieFeedback.getText();
+    }
+
+    /** 
+     * @return La difficulté
+     */
+    private Integer getDifficulte() {
+        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+		        ((RadioButton) difficulte.getSelectedToggle()).getText());
+    }
+
+    /** 
+     * @return Le libelle de la question
+     */
+    private String getLibeleQuestion() {
+        return saisieLibeleQuestion.getText();
+    }
+	
+    /**
+     * @return L'indice de la catégorie choisie.
+     */
+	private int getIndiceCategorieChoisie() {
+	    return selectCategorie.getSelectionModel().getSelectedIndex();
+	}
+	
+    /**
+     * Créer une question dans le modèle et gère les possibles exceptions qui
+     * peuvent apparaître
+     * @param indiceCategorieChoisie L'indice de la catégorie choisie
+     * @param libeleQuestion Le libelle de la question à créer
+     * @param valeurDifficulte La difficulté de la question
+     * @param feedback Le feedback de la question
+     * @param reponseVrai La réponse vrai de la question
+     * @param mauvaiseReponses La liste des mauvaise réponse de la question
+     */
+    private void creerEtGererQuestion(int indiceCategorieChoisie, String libeleQuestion,
+            int valeurDifficulte, String feedback, String reponseVrai, ArrayList<String> mauvaiseReponses) {
+        //Création de la question
+        boolean questionCreer = false;
+        try {
+            questionCreer = modele.creerQuestion(libeleQuestion,
+                    indiceCategorieChoisie, valeurDifficulte, reponseVrai,
+                    mauvaiseReponses, feedback);
+
+        } catch (InvalidFormatException e) {
+            AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
+        } catch (InvalidNameException e) {
+            AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
+                    + "question ET une réponse juste.");
+        } catch (ReponseException e) {
+            AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
+                    + "pas être en double ET la bonne réponse ne peut pas être "
+                    + "une mauvaise réponse");
+        } catch (HomonymeException e) {
+            AlertBox.showWarningBox("La question saisie existe déjà");
+        }
+        if (questionCreer) {
+            AlertBox.showSuccessBox("Question créer !");
+        }
+    }
 
     /**
      * Méthodes liée au bouton valider,
@@ -230,6 +252,29 @@ public class ControlleurCreationQuestionEtCategorie {
 		System.out.println("Nom de la catégorie : " + nom);
 
 		creerEtGererCategorie( categorieCreer, nom);
+    }
+	
+	/**
+     * Créer une catégorie dans le modèle et gère les possibles exceptions qui
+     * peuvent apparaître
+     * @param categorieCreer
+     * @param nom
+     */
+    private void creerEtGererCategorie(boolean categorieCreer,String nom) {
+        try {
+            categorieCreer = modele.creerCategorie(nom);
+
+        } catch (InvalidNameException e) {
+            AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide ");
+        } catch (HomonymeException e) {
+            AlertBox.showWarningBox("La categorie saisie existe déjà");
+        }
+        
+        if (categorieCreer) {
+            AlertBox.showSuccessBox("Categorie créer !");
+            miseAJourListeCategorie();
+            Quiz.charger("EditerCategories.fxml");
+        }
     }
 	
 	/**
