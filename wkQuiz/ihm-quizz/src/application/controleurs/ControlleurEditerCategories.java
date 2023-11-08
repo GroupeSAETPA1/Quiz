@@ -57,34 +57,36 @@ public class ControlleurEditerCategories {
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
-	        cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
 	        cell.setStyle("-fx-font-size: 30px");
 	        return cell;
 	    });
 
-	    TableColumn<LigneCategorie, Integer> nbColumn = new TableColumn<>("Nombre de questions contenues");
+	    TableColumn<LigneCategorie, Integer> nbColumn = new TableColumn<>("Nombre de questions");
 	    nbColumn.setCellValueFactory(new PropertyValueFactory<>("nbProperty"));
 	    nbColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, Integer> cell = new TableCell<>();
-	        cell.setAlignment(Pos.CENTER);
 		    cell.textProperty().bind(cell.itemProperty().asString());
 		    cell.setStyle("-fx-font-size: 30px");
 	        return cell;
 	    });
 
-	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier la categorie");
+	    TableColumn<LigneCategorie, String> modifColumn = new TableColumn<>("Modifier");
 	    modifColumn.setCellFactory(new EditerButtonCellFactory());
 
-	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer la categorie");
+	    TableColumn<LigneCategorie, String> supColumn = new TableColumn<>("Supprimer");
 	    supColumn.setCellFactory(new SupprimerButtonCellFactory());
 
-	    /** style de la table */
+	    /* style initial de la table (avec ajouts via mainStyle.css) */
 	    double tableWidth = 1272;
 	    nomColumn.setPrefWidth(tableWidth * 0.45);  
+	    nomColumn.setResizable(false);
 	    nbColumn.setPrefWidth(tableWidth * 0.25);
+	    nbColumn.setResizable(false);
 	    modifColumn.setPrefWidth(tableWidth * 0.13);
+	    modifColumn.setResizable(false);
 	    supColumn.setPrefWidth(tableWidth * 0.14);
+	    supColumn.setResizable(false);
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
 	    
