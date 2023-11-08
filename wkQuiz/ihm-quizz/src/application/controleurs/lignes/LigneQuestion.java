@@ -41,7 +41,7 @@ public class LigneQuestion {
         this.editerButton = new Button("Éditer");
         this.supprimerButton = new Button("Supprimer");
         editerButton.setOnAction(event -> editerQuestion());
-        supprimerButton.setOnAction(event -> supprimerQuestion()));
+        supprimerButton.setOnAction(event -> supprimerQuestion());
     }
 
     public void editerQuestion(){
@@ -50,7 +50,7 @@ public class LigneQuestion {
     	
     }
 
-    public void supprimerQuesion() {
+    public void supprimerQuestion() {
     	// méthode appelée lors de l'appuie sur le bouton de suppression de la categorie
     	
     }
