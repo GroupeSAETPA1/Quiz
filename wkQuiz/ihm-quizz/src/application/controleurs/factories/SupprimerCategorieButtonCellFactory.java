@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-public class EditerButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
+public class SupprimerCategorieButtonCellFactory implements Callback<TableColumn<LigneCategorie, String>, TableCell<LigneCategorie, String>> {
 
     @Override
     public TableCell<LigneCategorie, String> call(TableColumn<LigneCategorie, String> param) {
@@ -21,16 +21,17 @@ public class EditerButtonCellFactory implements Callback<TableColumn<LigneCatego
                     setText(null);
                     setGraphic(null);
                 } else {
-                    Button editerButton = new Button("");
-                    Image image = new Image(getClass().getResource("/application/vue/images/IconeEdition.png").toExternalForm());
-                    editerButton.setGraphic(new ImageView(image));
-                    editerButton.setStyle("-fx-background-color: transparent;");
-                    editerButton.setOnAction(event -> {
+                    // Créez le bouton de suppression pour chaque ligne et associez une action
+                    Button supprimerButton = new Button();
+                    Image image = new Image(getClass().getResource("/application/vue/images/IconeSupprimer.png").toExternalForm());
+                    supprimerButton.setGraphic(new ImageView(image));
+                    supprimerButton.setStyle("-fx-background-color: transparent;");
+                    supprimerButton.setOnAction(event -> {
                         LigneCategorie ligne = getTableView().getItems().get(getIndex());
-                        ligne.editerCategorie();
+                        ligne.supprimerCategorie();
                     });
 
-                    setGraphic(editerButton);
+                    setGraphic(supprimerButton);
                 }
             }
         };
