@@ -31,6 +31,7 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     private Categorie catgorieAModifier;
+    
     private boolean displayCategoriePane;
 
     public boolean isDisplayCategoriePane() {
@@ -92,7 +93,12 @@ public class ModelePrincipal {
             throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException {
 
         // La categorie de la question existera toujours donc aucune vérification d'existence n'est nécessaire
-        Categorie categorieQuestion = banqueCategorie.getCategorie(idCategorie);
+        Categorie categorieQuestion;
+        try {
+             categorieQuestion = banqueCategorie.getCategorie(idCategorie);            
+        } catch (IndexOutOfBoundsException e) {
+            categorieQuestion = banqueCategorie.categorieGeneral;
+        }
 
         // Si exception apparais on propage au controlleur appellant
         Question aAjouter = new Question(libelle, categorieQuestion, difficulte, 
@@ -139,7 +145,7 @@ public class ModelePrincipal {
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
-        return banqueQuestion.getQuestions().contains(questionASuprimer);
+        return !banqueQuestion.getQuestions().contains(questionASuprimer);
     }
 
     /**
@@ -167,7 +173,7 @@ public class ModelePrincipal {
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
         //TODO a tester
         boolean estSupprimer = false;
-        if (categorieASupprimer.equals(banqueCategorie)) {
+        if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
             estSupprimer = false;
         }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
             estSupprimer = 
@@ -203,11 +209,24 @@ public class ModelePrincipal {
      * @param reponseFausses Les nouvelles reponse fausse de la question
      * @param feedback       Le nouveau feedback de la question
      * @return true si la modification a pu être faite
+     * @throws ReponseException 
+     * @throws InvalidNameException 
+     * @throws InvalidFormatException 
      */
-    public boolean modifierQuestion(String libelle, String categorie, int difficulte, String reponseJuste,
-            ArrayList<String> reponseFausses, String feedback) {
-      //TODO
-        return false; // STUB
+    public boolean modifierQuestion(String libelle, String categorie, 
+            int difficulte, String reponseJuste,
+            ArrayList<String> reponseFausses, String feedback) 
+            throws InvalidNameException, ReponseException, InvalidFormatException {
+      Categorie nouvelleCat = banqueCategorie.getExactCategoriesLibelle(categorie);
+      questionAModifier.setLibelle(libelle);
+      questionAModifier.setCatgorie(nouvelleCat);
+      questionAModifier.setDifficulte(difficulte);
+      questionAModifier.setBonneReponse(reponseJuste);
+      questionAModifier.setMauvaiseReponse(reponseFausses);
+      questionAModifier.setFeedback(feedback);
+      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte , 
+              reponseJuste , reponseFausses , feedback);
+      return banqueQuestion.getQuestions().contains(temoinAjout); 
     }
 
     /** @return valeur de categorieAModifier */
@@ -223,6 +242,26 @@ public class ModelePrincipal {
      */
     public void setCategorieAModifier(Categorie catgorieAModifier) {
         this.catgorieAModifier = catgorieAModifier;
+    }
+    
+    /**
+     * 
+     * TODO comment method role
+     * @param nouveauNom
+     * @return
+     * @throws InvalidNameException 
+     */
+    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
+        catgorieAModifier.setNom(nouveauNom);
+        return true;
+    }
+    
+    /**
+     * @param categorie La catégorie dont on veut connaître le nombre de question
+     * @return le nombre de question présente dans une catégorie
+     */
+    public int getNombreQuestionCategorie(Categorie categorie) {
+        return getBanqueQuestion().getQuestions(categorie).size();
     }
 
 }
