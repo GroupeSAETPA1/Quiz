@@ -140,7 +140,7 @@ public class ModelePrincipal {
      */
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
-        return banqueQuestion.getQuestions().contains(questionASuprimer);
+        return !banqueQuestion.getQuestions().contains(questionASuprimer);
     }
 
     /**
@@ -204,11 +204,24 @@ public class ModelePrincipal {
      * @param reponseFausses Les nouvelles reponse fausse de la question
      * @param feedback       Le nouveau feedback de la question
      * @return true si la modification a pu être faite
+     * @throws ReponseException 
+     * @throws InvalidNameException 
+     * @throws InvalidFormatException 
      */
-    public boolean modifierQuestion(String libelle, String categorie, int difficulte, String reponseJuste,
-            ArrayList<String> reponseFausses, String feedback) {
-      //TODO
-        return false; // STUB
+    public boolean modifierQuestion(String libelle, String categorie, 
+            int difficulte, String reponseJuste,
+            ArrayList<String> reponseFausses, String feedback) 
+            throws InvalidNameException, ReponseException, InvalidFormatException {
+      Categorie nouvelleCat = banqueCategorie.getExactCategoriesLibelle(categorie);
+      questionAModifier.setLibelle(libelle);
+      questionAModifier.setCatgorie(nouvelleCat);
+      questionAModifier.setDifficulte(difficulte);
+      questionAModifier.setBonneReponse(reponseJuste);
+      questionAModifier.setMauvaiseReponse(reponseFausses);
+      questionAModifier.setFeedback(feedback);
+      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte , 
+              reponseJuste , reponseFausses , feedback);
+      return banqueQuestion.getQuestions().contains(temoinAjout); 
     }
 
     /** @return valeur de categorieAModifier */
