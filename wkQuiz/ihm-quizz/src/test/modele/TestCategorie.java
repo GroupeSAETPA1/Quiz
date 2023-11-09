@@ -24,6 +24,11 @@ class TestCategorie {
 		/* Tests avec constructeur invalide */
 		assertThrows(InvalidNameException.class, () -> new Categorie(""));
 		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
+		// 31 caractère
+		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+		// 30 caractère
+		assertDoesNotThrow(() -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+		
 	}
 
 	/**
@@ -36,6 +41,10 @@ class TestCategorie {
 		
 		assertFalse(Categorie.nomValide(""));
 		assertFalse(Categorie.nomValide("   "));
+		// 30 caractère
+		assertTrue(Categorie.nomValide("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+		// 31 caractère
+		assertFalse(Categorie.nomValide("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 	}
 
 	/**

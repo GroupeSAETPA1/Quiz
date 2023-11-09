@@ -265,7 +265,8 @@ public class ControlleurCreationQuestionEtCategorie {
             categorieCreer = modele.creerCategorie(nom);
 
         } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide ");
+            AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide "
+                    + ": entre 1 et 30 caractère maximum ");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La categorie saisie existe déjà");
         }
