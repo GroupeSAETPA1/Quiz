@@ -136,15 +136,18 @@
   -fx-background-color: #282C34;
   -fx-border-color: #5C6169;
   -fx-border-width: 0 0 1 0;
-  -fx-alignment: CENTER_LEFT;
 }
 .table-view .cell:odd{
   -fx-text-fill: white;
   -fx-background-color: #3E4451;
   -fx-border-color: #5C6169;
   -fx-border-width: 0 0 1 0;
-  -fx-alignment: CENTER_LEFT;
 }
+
+.table-view {
+	-fx-border-color: #282C34;
+}
+
 /*                               */
 /* fin Gestion des tableView     */
 /*                               */

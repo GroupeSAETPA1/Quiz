@@ -1,6 +1,7 @@
 package application.controleurs.factories;
 
 import application.controleurs.lignes.LigneCategorie;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -16,6 +17,7 @@ public class EditerCategorieButtonCellFactory implements Callback<TableColumn<Li
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+                super.setAlignment(Pos.CENTER);
 
                 if (empty || getTableRow() == null) {
                     setText(null);
@@ -25,6 +27,7 @@ public class EditerCategorieButtonCellFactory implements Callback<TableColumn<Li
                     Image image = new Image(getClass().getResource("/application/vue/images/IconeEdition.png").toExternalForm());
                     editerButton.setGraphic(new ImageView(image));
                     editerButton.setStyle("-fx-background-color: transparent;");
+                    
                     editerButton.setOnAction(event -> {
                         LigneCategorie ligne = getTableView().getItems().get(getIndex());
                         ligne.editerCategorie();

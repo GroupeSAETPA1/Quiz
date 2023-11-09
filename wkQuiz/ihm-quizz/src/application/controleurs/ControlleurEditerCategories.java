@@ -63,6 +63,7 @@ public class ControlleurEditerCategories {
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
+            cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
 	        cell.setStyle("-fx-font-size: 30px");
 	        return cell;
@@ -72,6 +73,7 @@ public class ControlleurEditerCategories {
 	    nbColumn.setCellValueFactory(new PropertyValueFactory<>("nbProperty"));
 	    nbColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, Integer> cell = new TableCell<>();
+            cell.setAlignment(Pos.CENTER);
 		    cell.textProperty().bind(cell.itemProperty().asString());
 		    cell.setStyle("-fx-font-size: 30px");
 	        return cell;
@@ -89,9 +91,9 @@ public class ControlleurEditerCategories {
 	    nomColumn.setResizable(false);
 	    nbColumn.setPrefWidth(tableWidth * 0.25);
 	    nbColumn.setResizable(false);
-	    modifColumn.setPrefWidth(tableWidth * 0.13);
+	    modifColumn.setPrefWidth(tableWidth * 0.15);
 	    modifColumn.setResizable(false);
-	    supColumn.setPrefWidth(tableWidth * 0.14);
+	    supColumn.setPrefWidth(tableWidth * 0.15);
 	    supColumn.setResizable(false);
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
