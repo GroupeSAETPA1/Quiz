@@ -1,6 +1,5 @@
 package application.controleurs;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -18,9 +17,6 @@ import application.Quiz;
 import application.controleurs.factories.EditerCategorieButtonCellFactory;
 import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
 import application.controleurs.lignes.LigneCategorie;
-import application.exception.HomonymeException;
-import application.exception.InvalidNameException;
-
 /**
  * Controlleur de la page d'édition des catégories.
  * Celui-ci instance  des methodes liée au bouton de la page 
@@ -58,7 +54,7 @@ public class ControlleurEditerCategories {
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
-	public void initialize() throws InvalidNameException, HomonymeException {
+	public void initialize() {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {

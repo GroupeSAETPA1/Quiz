@@ -1,7 +1,6 @@
 package application.controleurs;
 
 import application.Quiz;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,7 +8,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 
@@ -18,16 +16,14 @@ import application.controleurs.factories.EditerQuestionButtonCellFactory;
 import application.controleurs.factories.SupprimerQuestionButtonCellFactory;
 
 
-import application.controleurs.lignes.LigneCategorie;
 import application.controleurs.lignes.LigneQuestion;
-import application.exception.HomonymeException;
-import application.exception.InvalidNameException;
 
 public class ControlleurEditerQuestions {
 	
 	@FXML
 	private TableView<LigneQuestion> table;
-	private boolean filtre;
+	
+	private boolean filtre = false;
 	
 	/**
 	 * Méthodes liée au group retour 
@@ -113,12 +109,13 @@ public class ControlleurEditerQuestions {
         supColumn.setPrefWidth(tableWidth * 0.1);
 
         table.getColumns().addAll(categorieColumn, libelleColumn, reponseJusteColumn, reponsesFaussesColumn, feedbackColumn, modifColumn, supColumn);
-              
+        
+        miseAJourTableau();
 	}
 	
 	public void filtrer() {
 	    filtre = true ; 
-	    miseAJourTableau ();
+	    // miseAJourTableau ();
 	}
 	
 	/** 
@@ -126,7 +123,14 @@ public class ControlleurEditerQuestions {
      */
     private void miseAJourTableau() {
     	ObservableList<LigneQuestion> data = table.getItems();
-        ArrayList<Question> categories ; 
+        ArrayList<Question> questions = ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(); 
+        
+        for (Question question : questions) {
+        	System.out.println(question);
+        	LigneQuestion ligne = new LigneQuestion(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(question.getCategorie())
+        			                              , question.getLibelle(), question.getReponseJuste(), question.getMauvaisesReponses(), question.getFeedback());
+        	data.add(ligne); // erreur ici
+        }
+        
     }
-
 }
