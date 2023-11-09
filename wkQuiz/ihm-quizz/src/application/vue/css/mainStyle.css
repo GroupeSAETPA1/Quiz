@@ -20,8 +20,6 @@
 .tab {
     -fx-background-color: #060608; /* Couleur onglet par défault */
     -fx-font-size: 30px;  /* Taille texte onglet */
-    /* -fx-background-radius-top-left-radius: 10px; 
-    -fx-background-radius-top-right-radius: 10px; */
     -fx-background-radius: 10 10 0 0; /* Arrondi onglet */
     -fx-padding: 0 10 0 10;
     
@@ -96,7 +94,7 @@
 /*                            */
 .radio-button .radio {
     -fx-border-width: 1px;
-    -fx-border-color: -fx-darkest-grey-color;
+    -fx-border-color: #282C34;
     -fx-background-color: white;
     -fx-border-radius: 50px;
     -fx-padding: 10px;
@@ -120,6 +118,37 @@
 /*                               */
 /* fin Gestion des radiobuttons  */
 /*                               */
+/*                            */
+/*  Gestion des tableView     */
+/*                            */
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #282C34; 
+    -fx-border-color: #282C34;
+}
+.table-view .column-header .label{
+   -fx-text-fill: white;
+   -fx-font-size: 25px; 
+}
+.table-view .cell{
+  /* -fx-cell-size: 35; */
+  -fx-text-fill: white;
+  -fx-background-color: #282C34;
+  -fx-border-color: #5C6169;
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: CENTER_LEFT;
+}
+.table-view .cell:odd{
+  -fx-text-fill: white;
+  -fx-background-color: #3E4451;
+  -fx-border-color: #5C6169;
+  -fx-border-width: 0 0 1 0;
+  -fx-alignment: CENTER_LEFT;
+}
+/*                               */
+/* fin Gestion des tableView     */
+/*                               */
+
 /*                         */
 /*         Divers          */
 /*                         */

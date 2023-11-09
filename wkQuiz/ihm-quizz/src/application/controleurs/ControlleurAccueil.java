@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 /**
  * Controlleur de la page d'accueil.
- * Celui-ci instance  des methodes liée au bouton de la page 
+ * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -18,7 +18,7 @@ import javafx.fxml.FXML;
 public class ControlleurAccueil {
 	
 	/**
-	 * Methodes liée au bouton jouer , 
+	 * Méthode liée au bouton jouer 
 	 * qui devra renvoyer vers la page ParametrePartie.fxml 
 	 */
 	@FXML 
@@ -28,7 +28,7 @@ public class ControlleurAccueil {
 	
 	
 	/**
-	 * Methodes liée au bouton éditer, 
+	 * Methode liée au bouton éditer 
 	 * qui devra envoyer vers la page Editeur.fxml 
 	 */
 	@FXML 
@@ -38,7 +38,7 @@ public class ControlleurAccueil {
 	}
 	
 	/**
-	 * Méthodes liée au boutons online,
+	 * Méthode liée au bouton en ligne
 	 * qui devra envoyer vers la page ModeEnligne.fxml
 	 */
 	@FXML 
@@ -47,21 +47,23 @@ public class ControlleurAccueil {
 	}
 	
 	/**
-	 * Méthodes liée au group quitter,
+	 * Méthode liée au groupe quitter,
 	 * qui devra fermer l'application
 	 */
 	@FXML
 	private void quitter() {
 		System.out.println("Quitter");
+		Quiz.quitter();
 	}
 	
 	/**
-	 * Méthodes liée au groupe aider,
+	 * Méthode liée au groupe aider,
 	 * qui devra envoyer vers la page Aide.fxml
 	 */
 	@FXML
 	private void aider() {
 		System.out.println("Aider");
+		// TODO : lancer une alertBox
 	}
 
 }
