@@ -1,6 +1,7 @@
 package application.controleurs.factories;
 
 import application.controleurs.lignes.LigneQuestion;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -16,6 +17,7 @@ public class SupprimerQuestionButtonCellFactory implements Callback<TableColumn<
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+                super.setAlignment(Pos.CENTER);
 
                 if (empty || getTableRow() == null) {
                     setText(null);

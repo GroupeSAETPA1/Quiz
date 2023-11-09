@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
+
 import java.util.ArrayList;
 import application.controleurs.factories.EditerQuestionButtonCellFactory;
 import application.controleurs.factories.SupprimerQuestionButtonCellFactory;
@@ -24,7 +26,8 @@ import application.exception.InvalidNameException;
 public class ControlleurEditerQuestions {
 	
 	@FXML
-	private TableView<LigneCategorie> table;
+	private TableView<LigneQuestion> table;
+	private boolean filtre;
 	
 	/**
 	 * Méthodes liée au group retour 
@@ -109,7 +112,21 @@ public class ControlleurEditerQuestions {
         modifColumn.setPrefWidth(tableWidth * 0.1);
         supColumn.setPrefWidth(tableWidth * 0.1);
 
-        // table.getColumns().addAll
+        table.getColumns().addAll(categorieColumn, libelleColumn, reponseJusteColumn, reponsesFaussesColumn, feedbackColumn, modifColumn, supColumn);
+              
 	}
+	
+	public void filtrer() {
+	    filtre = true ; 
+	    miseAJourTableau ();
+	}
+	
+	/** 
+     * Modifie le tableau des question
+     */
+    private void miseAJourTableau() {
+    	ObservableList<LigneQuestion> data = table.getItems();
+        ArrayList<Question> categories ; 
+    }
 
 }
