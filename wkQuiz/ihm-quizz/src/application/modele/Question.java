@@ -96,7 +96,7 @@ public class Question implements Serializable {
      * </ul>
      */
     public Question(String libelle,Categorie categorie,int difficulte,
-                    String reponseJuste,ArrayList<String> reponsesFausse,
+                    String reponseJuste, ArrayList<String> reponsesFausse,
                     String feedback) throws InvalidFormatException, 
                     InvalidNameException, ReponseException {
         if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
@@ -134,7 +134,7 @@ public class Question implements Serializable {
                     erreurReponsesFaussesTropLongue(reponseFausseTropLongue);
             throw new ReponseException(messageErreur.toString());
         }
-        if (feedback.length() > LONGUEUR_MAX_FEEDBACK) {
+        if (feedback != null && feedback.length() > LONGUEUR_MAX_FEEDBACK) {
             throw new InvalidNameException("Le feedback contient " 
             + feedback.length() + " caractères . Il peut en contenir au maximum " 
                     + LONGUEUR_MAX_FEEDBACK);
