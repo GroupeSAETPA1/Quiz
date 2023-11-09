@@ -25,6 +25,13 @@ public class Question implements Serializable {
 	/** difficultée maximale d'une question */
 	private final int DIFFICULTE_MAXIMALE = 3;
 	
+	
+	private final int LONGUEUR_LIBELLE_MAX = 250;
+	
+	private final int LONGUEUR_MAX_REPONSE = 250;
+	
+	private final int LONGUEUR_MAX_FEEDBACK = 350 ;
+	
     /**
      * Intitulé de la question
      */
@@ -92,15 +99,18 @@ public class Question implements Serializable {
                     String reponseJuste,ArrayList<String> reponsesFausse,
                     String feedback) throws InvalidFormatException, 
                     InvalidNameException, ReponseException {
-        if (libelle.equals("")) {
-            throw new InvalidNameException("Le libelle est vide");
+        if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
+            throw new InvalidNameException("Le libelle contient " + libelle.length() 
+            + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
             throw new InvalidFormatException("Le niveau est compris "
                                                + "entre 1 et 3");
         }
-        if (reponseJuste.equals("")) {
-            throw new InvalidNameException("La réponse juste est vide");
+        if (reponseJuste.isBlank() || reponseJuste.length() > LONGUEUR_MAX_REPONSE) {
+            throw new InvalidNameException("La réponse juste contient" + 
+            libelle.length()  + "Il faut qu'elle contienne entre 1 et " 
+            + LONGUEUR_MAX_REPONSE);
         }
         if (reponsesFausse.isEmpty()) {
             throw new InvalidFormatException("La liste des mauvaises reponses "
@@ -117,6 +127,18 @@ public class Question implements Serializable {
                     + "contient une ou plusieurs propositions égale "
                     + "a la réponse juste (casse ignorée");
         }
+        ArrayList<String>reponseFausseTropLongue = 
+                reponseFausseLongueurInvalide(reponsesFausse);
+        if (!reponseFausseTropLongue.isEmpty()) {
+            StringBuilder messageErreur = 
+                    erreurReponsesFaussesTropLongue(reponseFausseTropLongue);
+            throw new ReponseException(messageErreur.toString());
+        }
+        if (feedback.length() > LONGUEUR_MAX_FEEDBACK) {
+            throw new InvalidNameException("Le feedback contient " 
+            + feedback.length() + " caractères . Il peut en contenir au maximum " 
+                    + LONGUEUR_MAX_FEEDBACK);
+        }
         //else
         this.libelle = libelle;
         this.categorie = categorie;
@@ -126,7 +148,44 @@ public class Question implements Serializable {
         this.feedback = feedback;
         
     }
+
+    /** 
+     * * Construire un message d'erreur a partir d'une arrayList de reponse trop
+     * longue
+     * @param reponseFausse liste des reponses fausses a ajouter dans le 
+     *        stringBuilder
+     * @return un StringBuilder 
+     */
+    private StringBuilder erreurReponsesFaussesTropLongue(ArrayList<String> reponseFausse) {
+        StringBuilder messageErreur = new StringBuilder();
+        messageErreur.append("Une reponse fausse peut contenir au maximum " 
+                + LONGUEUR_MAX_REPONSE + " caractères. Voici les reponses qui posent"
+                        + " problèmes : ");
+                for (String reponse : reponseFausse) {
+                    messageErreur.append("- " + reponse + " " + reponse.length() 
+                    + " caractères \n" );
+                }
+        return messageErreur;
+    }
     
+    /** 
+     * Construit une liste des reponses ne respectant pas la conditions 
+     * element de la liste.lenght < longueur max reponse
+     * @param reponsesFausse liste dans laquelle on veut verifier la validite
+     * @return une liste vide si tous est ok , une liste avec les element de la 
+     * liste initial dont la longueur est > longuer max reponse sinon
+     */
+    private ArrayList<String> reponseFausseLongueurInvalide(ArrayList<String> 
+    reponsesFausse) {
+        ArrayList<String> aRenvoyer = new ArrayList<String>();
+        for (String reponse : reponsesFausse) {
+            if (reponse.length() > LONGUEUR_MAX_REPONSE) {
+                aRenvoyer.add(reponse);
+            }
+        }
+        return aRenvoyer;
+    }
+
     /**
      * Vérifie la validité d'une ArrayList pour le constructeur de question
      * @param aTester : ArrayList dont on veux vérifier la validité
@@ -154,7 +213,7 @@ public class Question implements Serializable {
      * @return true si aTester contient une chaine de caractère identique ,
      *         la casse est ignorée des deux cotées.
      *         false sinon.      
-     */
+     */;
     private static boolean reponseFausseContientReponseJuste
     (ArrayList<String> aTester ,  String reponseJuste) {
         boolean fauxContientJuste = false;

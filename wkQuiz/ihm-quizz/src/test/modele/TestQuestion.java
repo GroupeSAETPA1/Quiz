@@ -190,6 +190,61 @@ class TestQuestion {
                 ()->new Question("Libelle non vide" , categoriesValides[0],2,
                     "non vide",mauvaiseReponseJusteChaineVide , ""));
         
+        // Libelle longueur (201) > longueur max libelle (200)
+        assertThrows(InvalidNameException.class,
+                ()->new Question("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        + "                                      AAAAAAAAAAAAAAA"
+                        + "AAAAAAAAAAAAAAAAAAAAAAAAAAAA                         "
+                        + "        AAAAAAAAAAAAAA",
+                        categoriesValides[0] , 2 , "non vide"  , mauvaiseReponse1 
+                        , ""));
+        
+        // Reponse juste longueur (251) > longueur max reponse (250)
+        assertThrows(InvalidNameException.class,
+                ()->new Question("non vide" , categoriesValides[0] , 1 , 
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAA                                      AAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA                                "
+                + " AAAAAAAAAAAAAA" , 
+                mauvaiseReponse2 , ""));
+        
+        // 1 reponse fausse (251) > longueur max reponse (250)
+        mauvaiseReponse1.add("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                + "        aaaaaaaaaaaaaaaaa");
+        assertThrows(ReponseException.class ,
+                ()-> new Question("non vide", categoriesValides[0], 1, "non vide", 
+                        mauvaiseReponse1, ""));
+        // plusieurs reponse fausse (251) > longueur max reponse (250)
+        mauvaiseReponse1.add("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA                ");
+        assertThrows(ReponseException.class ,
+                ()-> new Question("non vide", categoriesValides[0], 1, "non vide", 
+                        mauvaiseReponse1, ""));
+        // longueur feedback > longeur feedback (350)
+        assertThrows(InvalidNameException.class, 
+                ()-> new Question("non vide", categoriesValides[0], 1, "non vide",
+                     mauvaiseReponse2, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                             + "AAAAAAAAAA                                      "
+                             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA     "
+                             + "                            AAAAAAAAAAAAAA      "
+                             + "          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  "
+                             + "          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                             + "aaaaaaaaaaaaaaaaaaaaaaaa aaa"));
+        
+        
     }
 
     /**
