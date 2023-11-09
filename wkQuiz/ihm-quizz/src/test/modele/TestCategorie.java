@@ -5,18 +5,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import application.exception.InvalidNameException;
 import application.modele.Categorie;
 
+/**
+ * Classe de test de la classe Categorie
+ * @see {@link application.modele.Categorie}
+ */
 class TestCategorie {
 
+	/**
+	 * Test du constructeur avec argument valides et invalides
+	 * @see {@link application.modele.Categorie#Categorie(String)}
+	 */
 	@Test
 	void testCategorie() {
 		assertDoesNotThrow(() -> new Categorie("test"));
-		
-		assertThrows(IllegalArgumentException.class, () -> new Categorie(""));
-		assertThrows(IllegalArgumentException.class, () -> new Categorie("   "));
+		/* Tests avec constructeur invalide */
+		assertThrows(InvalidNameException.class, () -> new Categorie(""));
+		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
 	}
 
+	/**
+	 * Test de la méthode nomValide
+	 * @see {@link application.modele.Categorie#nomValide(String)}
+	 */
 	@Test
 	void testNomValide() {
 		assertTrue(Categorie.nomValide("test"));
@@ -25,19 +38,29 @@ class TestCategorie {
 		assertFalse(Categorie.nomValide("   "));
 	}
 
+	/**
+	 * Test de la méthode setNom
+	 * @throws InvalidNameException si le nom est invalide
+	 * @see {@link application.modele.Categorie#setNom(String)}
+	 */
 	@Test
-	void testSetNom() {
+	void testSetNom() throws InvalidNameException {
 		Categorie test = new Categorie("test");
 		
 		assertDoesNotThrow(() -> test.setNom("nom"));
 		assertEquals("nom", test.getNom());
 		
-		assertThrows(IllegalArgumentException.class, () -> test.setNom(""));
-		assertThrows(IllegalArgumentException.class, () -> test.setNom("   "));
+		assertThrows(InvalidNameException.class, () -> test.setNom(""));
+		assertThrows(InvalidNameException.class, () -> test.setNom("   "));
 	}
 
+	/**
+	 * Test de la méthode getNom
+	 * @throws InvalidNameException si le nom est invalide
+	 * @see {@link application.modele.Categorie#getNom()}
+	 */
 	@Test
-	void testGetNom() {
+	void testGetNom() throws InvalidNameException {
 		Categorie test = new Categorie("test");
 		
 		assertEquals("test", test.getNom());
@@ -48,12 +71,19 @@ class TestCategorie {
 		assertNotEquals("test", test.getNom());
 	}
 
+	/**
+	 * Test de la méthode equals
+	 * @throws InvalidNameException si le nom est invalide
+	 * @see {@link application.modele.Categorie#equals(Object)}
+	 */
 	@Test
-	void testEquals() {
+	void testEquals() throws InvalidNameException {
 		Categorie test = new Categorie("test");
 		Categorie test2 = new Categorie("test2");
 		Categorie test3 = new Categorie("test");
+		Categorie test4 = test;
 		
+		assertTrue(test.equals(test4));
 		assertTrue(test.equals(test3));
 		assertFalse(test.equals(test2));
 		
@@ -61,16 +91,20 @@ class TestCategorie {
 		assertFalse(test.equals(null));
 	}
 
+	/**
+	 * Test de la méthode toString
+	 * @throws InvalidNameException si le nom est invalide
+	 * @see {@link application.modele.Categorie#toString()}
+	 */
 	@Test
-	void testToString() {
+	void testToString() throws InvalidNameException {
 		Categorie test = new Categorie("test");
 		
-		assertEquals("Nom de la catégorie : test", test.toString());
-		assertNotEquals("Nom de la catégorie : test2", test.toString());
+		assertEquals("test", test.toString());
+		assertNotEquals("test2", test.toString());
 		
 		test.setNom("test2");
-		assertEquals("Nom de la catégorie : test2", test.toString());
-		assertNotEquals("Nom de la catégorie : test", test.toString());
+		assertEquals("test2", test.toString());
+		assertNotEquals("test", test.toString());
 	}
-
 }

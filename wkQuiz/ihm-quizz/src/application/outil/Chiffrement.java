@@ -11,6 +11,8 @@ package application.outil;
  * @author 
  */
 public class Chiffrement {
+
+    @SuppressWarnings("unused")//TODO Supprimer le SupresseWarning
     private String cleVigener;
 
     public String genererCleVigener(final int longueur) {
