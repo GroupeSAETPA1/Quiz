@@ -100,6 +100,7 @@ public class Quiz extends Application {
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
 	    ressources.add("Resultat.fxml");
+	    ressources.add("Solution.fxml");
 
 		
 		for (String element : ressources) {
@@ -115,7 +116,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Resultat.fxml"));
+		primaryStage.setScene(scenes.get("Solution.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
