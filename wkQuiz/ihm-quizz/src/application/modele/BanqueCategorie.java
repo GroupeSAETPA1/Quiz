@@ -52,7 +52,6 @@ public class BanqueCategorie {
      */
     public ArrayList<Categorie> getCategories() {
         for (Categorie categorie : categories) {
-            System.out.println(categorie);
         }
         return this.categories;
     }

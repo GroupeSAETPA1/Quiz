@@ -1,6 +1,5 @@
 package application.controleurs;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -18,9 +17,6 @@ import application.Quiz;
 import application.controleurs.factories.EditerCategorieButtonCellFactory;
 import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
 import application.controleurs.lignes.LigneCategorie;
-import application.exception.HomonymeException;
-import application.exception.InvalidNameException;
-
 /**
  * Controlleur de la page d'édition des catégories.
  * Celui-ci instance  des methodes liée au bouton de la page 
@@ -58,11 +54,12 @@ public class ControlleurEditerCategories {
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
-	public void initialize() throws InvalidNameException, HomonymeException {
+	public void initialize() {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
+            cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
 	        cell.setStyle("-fx-font-size: 30px");
 	        return cell;
@@ -72,6 +69,7 @@ public class ControlleurEditerCategories {
 	    nbColumn.setCellValueFactory(new PropertyValueFactory<>("nbProperty"));
 	    nbColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, Integer> cell = new TableCell<>();
+            cell.setAlignment(Pos.CENTER);
 		    cell.textProperty().bind(cell.itemProperty().asString());
 		    cell.setStyle("-fx-font-size: 30px");
 	        return cell;
@@ -89,9 +87,9 @@ public class ControlleurEditerCategories {
 	    nomColumn.setResizable(false);
 	    nbColumn.setPrefWidth(tableWidth * 0.25);
 	    nbColumn.setResizable(false);
-	    modifColumn.setPrefWidth(tableWidth * 0.13);
+	    modifColumn.setPrefWidth(tableWidth * 0.15);
 	    modifColumn.setResizable(false);
-	    supColumn.setPrefWidth(tableWidth * 0.14);
+	    supColumn.setPrefWidth(tableWidth * 0.15);
 	    supColumn.setResizable(false);
 
 	    table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
