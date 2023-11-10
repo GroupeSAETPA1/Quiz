@@ -62,7 +62,7 @@ public class ControlleurEditerQuestions {
 	        return cell;
 	    });
 
-		/*
+		/* On remet si la prof veut a tout prix tout les colonnes
         TableColumn<LigneQuestion, String> reponseJusteColumn = new TableColumn<>("réponse juste");
         reponseJusteColumn.setCellValueFactory(new PropertyValueFactory<>("reponseJuste"));
         reponseJusteColumn.setCellFactory(tc -> {
@@ -103,8 +103,8 @@ public class ControlleurEditerQuestions {
         double tableWidth = 1280;
         categorieColumn.setPrefWidth(tableWidth * 0.40);
         libelleColumn.setPrefWidth(tableWidth * 0.35);
-        modifColumn.setMinWidth(tableWidth * 0.1);
-        supColumn.setMinWidth(tableWidth * 0.15);
+        modifColumn.setMinWidth(tableWidth * 0.09);
+        supColumn.setMinWidth(tableWidth * 0.12);
 
         table.getColumns().addAll(categorieColumn, libelleColumn, modifColumn, supColumn);
         
