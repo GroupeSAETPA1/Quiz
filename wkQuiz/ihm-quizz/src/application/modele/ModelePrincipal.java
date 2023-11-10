@@ -22,8 +22,15 @@ import application.exception.ReponseException;
  */
 public class ModelePrincipal {
     
+    /**
+     * Lie une difficulté à sont equivalent numérique
+     * Ex : Facile -> 1
+     */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT 
     = new HashMap<String, Integer>();
+    
+    public static final char SEPARATEUR_CSV = '\t';
+    
 
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;

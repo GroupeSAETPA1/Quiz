@@ -101,6 +101,7 @@ public class Quiz extends Application {
 	    ressources.add("EditerQuestions.fxml");
 	    ressources.add("Resultat.fxml");
 	    ressources.add("Solution.fxml");
+	    ressources.add("ImporterQuestion.fxml");
 
 		
 		for (String element : ressources) {
