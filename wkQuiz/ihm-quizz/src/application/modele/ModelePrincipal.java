@@ -271,4 +271,12 @@ public class ModelePrincipal {
         return getBanqueQuestion().getQuestions(categorie).size();
     }
 
+    /** 
+     * @param nom Le nom de la catégorie recherché
+     * @return true si la catégorie existe, false sinon
+     */
+    public boolean categorieExiste(String nom) {
+        return banqueCategorie.getExactCategoriesLibelle(nom) == null;
+    }
+
 }
