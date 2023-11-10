@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurImport">
    <children>
       <Label layoutX="329.0" layoutY="56.0" text="Importer Questions" textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -46,7 +46,7 @@
             </Label>
          </children>
       </Group>
-      <Button layoutX="406.0" layoutY="489.0" mnemonicParsing="false" onAction="#validerQuestion" prefHeight="51.0" prefWidth="212.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="406.0" layoutY="489.0" mnemonicParsing="false" onAction="#valider" prefHeight="51.0" prefWidth="212.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="29.0" />
          </font>
@@ -65,12 +65,12 @@
                   <Font size="38.0" />
                </font>
             </Label>
-            <TextField prefHeight="51.0" prefWidth="799.0" promptText="Chemin absolue du fichier csv" style="-fx-background-radius: 60;">
+            <TextField fx:id="saisieCheminFichier" prefHeight="51.0" prefWidth="799.0" promptText="Chemin absolue du fichier csv" style="-fx-background-radius: 60;">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="179.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Parcourir ..." textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#parcourirExplorer" prefHeight="51.0" prefWidth="179.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Parcourir ..." textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
