@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" />
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="329.0" layoutY="56.0" text="Importer Questions" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Group fx:id="aide" layoutX="853.0" layoutY="25.0" onMouseClicked="#aider">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAide.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="16.0" layoutY="90.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="31.0" layoutY="28.0" onMouseClicked="#retour">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeRetour.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="4.0" layoutY="85.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Button layoutX="406.0" layoutY="489.0" mnemonicParsing="false" onAction="#validerQuestion" prefHeight="51.0" prefWidth="212.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" translateX="-15.0">
+               <image>
+                  <Image url="@images/IconeValider.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <VBox alignment="TOP_CENTER" layoutX="169.0" layoutY="193.0" prefHeight="215.0" prefWidth="687.0" spacing="20.0">
+         <children>
+            <Label text="Chemin vers le fichier csv" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="51.0" prefWidth="799.0" promptText="Chemin absolue du fichier csv" style="-fx-background-radius: 60;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="179.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Parcourir ..." textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>
