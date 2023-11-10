@@ -25,6 +25,7 @@ public class BanqueCategorie {
      * Constructeur de BanqueCategorie
      */
     public BanqueCategorie() {
+        //FIXME la categorie general n'est pas trouve dans les filtres et le choix lors du paramétrage
     	try {
             categorieGeneral = new Categorie("Général");
         } catch (InvalidNameException e) {
@@ -86,6 +87,14 @@ public class BanqueCategorie {
         return resultat;
     }
 
+    /** @return le nom de tous les categorie de la banque */
+    public ArrayList<String> getCategoriesNom() {
+        ArrayList<String> resultat = new ArrayList<String>();
+        for (Categorie categorie : categories) {
+            resultat.add(categorie.getNom());
+        }
+        return resultat;
+    }
     /**
      * renvoie la categorie qui a le meme libellé que passé en pramatre
      * si il n'y en a pas cela renvoie null
