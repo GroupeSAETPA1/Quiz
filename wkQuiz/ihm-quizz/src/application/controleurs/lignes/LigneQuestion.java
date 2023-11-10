@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,8 +26,8 @@ public class LigneQuestion {
     private final Button editerButton;
     private final Button supprimerButton;
 
-    public LigneQuestion(String nom, String nomQuestion, String reponseJuste, ArrayList<String> reponsesFausses, String feedback) {
-        this.categorie = new SimpleStringProperty(nom);
+    public LigneQuestion(Categorie categorie, String nomQuestion, String reponseJuste, ArrayList<String> reponsesFausses, String feedback) {
+        this.categorie = new SimpleStringProperty(categorie.getNom());
         this.nomQuestion = new SimpleStringProperty(nomQuestion);
         this.reponseJuste = new SimpleStringProperty(reponseJuste);
         this.feedback = new SimpleStringProperty(feedback);
@@ -45,28 +46,28 @@ public class LigneQuestion {
     }
 
     
-    public SimpleStringProperty getCategorie() {
-		return categorie;
+    public String getCategorie() {
+		return categorie.get();
 	}
 
 
-	public SimpleStringProperty getNomQuestion() {
-		return nomQuestion;
+	public String getNomQuestion() {
+		return nomQuestion.get();
 	}
 
 
-	public SimpleStringProperty getReponseJuste() {
-		return reponseJuste;
+	public String getReponseJuste() {
+		return reponseJuste.get();
 	}
 
 
-	public SimpleStringProperty getReponsesFausses() {
-		return reponsesFausses;
+	public String getReponsesFausses() {
+		return reponsesFausses.get();
 	}
 
 
-	public SimpleStringProperty getFeedback() {
-		return feedback;
+	public String getFeedback() {
+		return feedback.get();
 	}
 
 

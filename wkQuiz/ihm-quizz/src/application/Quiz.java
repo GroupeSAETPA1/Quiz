@@ -88,6 +88,8 @@ public class Quiz extends Application {
     	    rep.add("coubeh");
     	    
     	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, null));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "quette", rep, null));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quand ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "tin", rep, null));
 		}
 	    
 	    ressources.add("Accueil.fxml");
@@ -96,6 +98,7 @@ public class Quiz extends Application {
 		ressources.add("EditerCategorie.fxml");
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
+	    ressources.add("EditerQuestions.fxml");
 
 		
 		for (String element : ressources) {
@@ -162,7 +165,7 @@ public class Quiz extends Application {
 			scenes.put(vue, new Scene(racine));
 		} catch (IOException e) {
 			System.err.println("Chargement impossible de : " + vue);
-//			e.printStackTrace();
+ 			e.printStackTrace();
 		}
 	}
 	
