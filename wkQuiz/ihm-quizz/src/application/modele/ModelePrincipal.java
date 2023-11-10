@@ -5,8 +5,14 @@
 
 package application.modele;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;

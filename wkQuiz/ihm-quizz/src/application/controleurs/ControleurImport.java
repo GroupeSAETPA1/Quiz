@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 import application.Quiz;
 import application.exception.HomonymeException;
@@ -22,6 +23,12 @@ import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** 
  * Controlleur de Import
@@ -138,12 +145,20 @@ public class ControleurImport {
      *     <li>Colonne 7 la troisième réponse fausse</li>
      *     <li>Colonne 8 la quatrième réponse fausse</li>
      * </ul>
-     * @param fichierAVerifier Le document à vérifier
-     * @return true si le fichier est valide false sinon
+     * @param ligne La ligne de texte à vérifier
+     * @return true si la ligne est valide false sinon
      */
-    private boolean formatCSVValide(File fichierAVerifier) {
-        // TODO Auto-generated method stub
-        return true; //STUB
+    private boolean ligneCSVValide(String ligne) {
+    	Pattern fichierValide = Pattern.compile("^(.*;){2}(.+;){3}(.*;){4}", Pattern.CASE_INSENSITIVE); 	
+    	
+		Matcher matcher = fichierValide.matcher(ligne);
+		if (matcher.find()) {
+			System.out.println("Ligne valide : " + ligne);
+			return true;
+		} else {
+			System.out.println("Ligne invalide : " + ligne);
+			return false;
+		}
     }
 
     /** 
