@@ -24,6 +24,7 @@ public class ControlleurAccueil {
 	@FXML 
 	private void jouer() {
 		System.out.println("Button jouer");
+		Quiz.changerVue("ParametrePartie.fxml");
 	}
 	
 	
