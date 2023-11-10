@@ -107,9 +107,8 @@ public class LigneQuestion {
 
 
 	public void editerQuestion(){
-    	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
-    	
-    	
+		ModelePrincipal.getInstance().setQuestionAModifier(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(libelleNonFormater).get(0));
+		Quiz.chargerEtChangerVue("EditerQuestion.fxml");
     }
 
     public void supprimerQuestion() {

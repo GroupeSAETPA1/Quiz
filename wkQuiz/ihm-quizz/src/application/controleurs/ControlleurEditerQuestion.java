@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import application.Quiz;
 import application.exception.InvalidNameException;
 import application.modele.Categorie;
+import application.modele.ModelePrincipal;
+import application.modele.Question;
 import javafx.fxml.FXML;
 
 /**
@@ -48,6 +50,7 @@ public class ControlleurEditerQuestion {
 	
 	@FXML
 	public void initialize() throws InvalidNameException {
+		Question aModifier = ModelePrincipal.getInstance().getQuestionAModifier();
 		
     }
 
