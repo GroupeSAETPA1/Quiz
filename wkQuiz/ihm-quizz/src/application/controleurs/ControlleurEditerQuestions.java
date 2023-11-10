@@ -126,10 +126,9 @@ public class ControlleurEditerQuestions {
         ArrayList<Question> questions = ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(); 
         
         for (Question question : questions) {
-        	System.out.println(question);
         	LigneQuestion ligne = new LigneQuestion(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(question.getCategorie())
         			                              , question.getLibelle(), question.getReponseJuste(), question.getMauvaisesReponses(), question.getFeedback());
-        	data.add(ligne); // erreur ici
+        	data.add(ligne);
         }
         
     }

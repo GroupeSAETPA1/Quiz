@@ -95,7 +95,7 @@ public class LigneQuestion {
         if (result) {
         	// si l'utilisateur confirme
         	// on supprime la question
-        	if (ModelePrincipal.getInstance().supprimerQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(this.getNomQuestion().get()).get(0))) {
+        	if (ModelePrincipal.getInstance().supprimerQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(this.getNomQuestion()).get(0))) {
         		// si la suppression a réussi
         		AlertBox.showSuccessBox("Suppression effectuée");
         		Quiz.chargerEtChangerVue("EditerQuestions.fxml");
