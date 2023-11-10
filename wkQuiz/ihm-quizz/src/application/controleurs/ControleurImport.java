@@ -6,12 +6,19 @@
 package application.controleurs;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import application.Quiz;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** 
  * Controlleur de Import
@@ -65,9 +72,9 @@ public class ControleurImport {
             AlertBox.showErrorBox(
                   cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1)
                 + ", n'est pas un fichier CSV");     
-        } else if (formatCSVValide(fichier)) {
-            
-        }
+        } // else if (ligneCSVValide){
+//            importerFichier(fichier);
+//        }
     }
 
     /** 
@@ -82,11 +89,41 @@ public class ControleurImport {
      *     <li>Colonne 7 la troisième réponse fausse</li>
      *     <li>Colonne 7 la quatrième réponse fausse</li>
      * </ul>
-     * @param fichierAVerifier Le document à vérifier
-     * @return true si le fichier est valide false sinon
+     * @param ligne La ligne de texte à vérifier
+     * @return true si la ligne est valide false sinon
      */
-    private boolean formatCSVValide(File fichierAVerifier) {
-        // TODO Auto-generated method stub
-        return true; //STUB
+    private boolean ligneCSVValide(String ligne) {
+    	Pattern fichierValide = Pattern.compile("^(.*;){2}(.+;){3}(.*;){4}", Pattern.CASE_INSENSITIVE); 	
+    	
+		Matcher matcher = fichierValide.matcher(ligne);
+		if (matcher.find()) {
+			System.out.println("Ligne valide : " + ligne);
+			return true;
+		} else {
+			System.out.println("Ligne invalide : " + ligne);
+			return false;
+		}
     }
+
+//	private void importerQuestion(String questionAImporter) {
+//    	String[] decompositionQuestionCSV;
+//    	String categorie;
+//    	int difficulte;
+//    	decompositionQuestionCSV = questionAImporter.split(";");
+//    	
+//    	if (decompositionQuestionCSV[0].isBlank()) {
+//    		categorie = "Generale"; // Catégorie par défaut
+//    	} else {
+//    		categorie = decompositionQuestionCSV[0];
+//    	}
+//    	
+//    	if  (decompositionQuestionCSV[1].isBlank()) {
+//    		difficulte = 1; // Difficultée par défaut
+//    	} else {
+//    		difficulte = Integer.parseInt(decompositionQuestionCSV[1]);
+//    	}
+//    	
+//    	
+//		System.out.println(decompositionQuestionCSV[0] + "|" + decompositionQuestionCSV[1] + "|" + decompositionQuestionCSV[2] + "|" + decompositionQuestionCSV[3] + "|" + decompositionQuestionCSV[4]);	
+//	}
 }
