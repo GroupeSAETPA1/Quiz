@@ -20,25 +20,28 @@ public class LigneQuestion {
 	
     private final SimpleStringProperty categorie;
     private final SimpleStringProperty nomQuestion;
+    /*
     private final SimpleStringProperty reponseJuste;
     private final SimpleStringProperty reponsesFausses;
     private final SimpleStringProperty feedback;
+    */
     private final Button editerButton;
     private final Button supprimerButton;
 
     public LigneQuestion(Categorie categorie, String nomQuestion, String reponseJuste, ArrayList<String> reponsesFausses, String feedback) {
         this.categorie = new SimpleStringProperty(categorie.getNom());
         this.nomQuestion = new SimpleStringProperty(nomQuestion);
+        /*
         this.reponseJuste = new SimpleStringProperty(reponseJuste);
         this.feedback = new SimpleStringProperty(feedback);
         
         // on baillaie les reponses fausses pour les concatener dans une seule chaine de caractere
         String reponsesFaussesString = "";
         for (String reponse : reponsesFausses) {
-        	reponsesFaussesString += reponse + "\n";
+        	reponsesFaussesString += "• " + reponse + "\n";
         }
         this.reponsesFausses = new SimpleStringProperty(reponsesFaussesString);
-        
+        */
         this.editerButton = new Button("Éditer");
         this.supprimerButton = new Button("Supprimer");
         editerButton.setOnAction(event -> editerQuestion());
@@ -55,7 +58,7 @@ public class LigneQuestion {
 		return nomQuestion.get();
 	}
 
-
+	/*
 	public String getReponseJuste() {
 		return reponseJuste.get();
 	}
@@ -70,7 +73,7 @@ public class LigneQuestion {
 		return feedback.get();
 	}
 
-
+	*/
 	public Button getEditerButton() {
 		return editerButton;
 	}

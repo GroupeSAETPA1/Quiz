@@ -62,6 +62,7 @@ public class ControlleurEditerQuestions {
 	        return cell;
 	    });
 
+		/*
         TableColumn<LigneQuestion, String> reponseJusteColumn = new TableColumn<>("réponse juste");
         reponseJusteColumn.setCellValueFactory(new PropertyValueFactory<>("reponseJuste"));
         reponseJusteColumn.setCellFactory(tc -> {
@@ -91,24 +92,21 @@ public class ControlleurEditerQuestions {
             cell.setStyle("-fx-font-size: 30px");
             return cell;
         });
-
-        TableColumn<LigneQuestion, String> modifColumn = new TableColumn<>("Modifier la question");
+		*/
+        TableColumn<LigneQuestion, String> modifColumn = new TableColumn<>("Modifier");
         modifColumn.setCellFactory(new EditerQuestionButtonCellFactory());
 
-        TableColumn<LigneQuestion, String> supColumn = new TableColumn<>("Supprimer la question");
+        TableColumn<LigneQuestion, String> supColumn = new TableColumn<>("Supprimer");
         supColumn.setCellFactory(new SupprimerQuestionButtonCellFactory());
 
         /** style de la table */
-        double tableWidth = 1272;
-        categorieColumn.setPrefWidth(tableWidth * 0.15);
-        libelleColumn.setPrefWidth(tableWidth * 0.15);
-        reponseJusteColumn.setPrefWidth(tableWidth * 0.15);
-        reponsesFaussesColumn.setPrefWidth(tableWidth * 0.15);
-        feedbackColumn.setPrefWidth(tableWidth * 0.15);
-        modifColumn.setPrefWidth(tableWidth * 0.1);
-        supColumn.setPrefWidth(tableWidth * 0.1);
+        double tableWidth = 1280;
+        categorieColumn.setPrefWidth(tableWidth * 0.40);
+        libelleColumn.setPrefWidth(tableWidth * 0.35);
+        modifColumn.setMinWidth(tableWidth * 0.1);
+        supColumn.setMinWidth(tableWidth * 0.15);
 
-        table.getColumns().addAll(categorieColumn, libelleColumn, reponseJusteColumn, reponsesFaussesColumn, feedbackColumn, modifColumn, supColumn);
+        table.getColumns().addAll(categorieColumn, libelleColumn, modifColumn, supColumn);
         
         miseAJourTableau();
 	}
