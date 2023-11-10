@@ -179,4 +179,5 @@ public class Quiz extends Application {
 	    charger(vue);
 	    changerVue(vue);
 	}
+
 }

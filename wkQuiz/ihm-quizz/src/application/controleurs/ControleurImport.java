@@ -5,9 +5,19 @@
 
 package application.controleurs;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.Quiz;
+import application.exception.HomonymeException;
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
+import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -20,10 +30,13 @@ import javafx.stage.FileChooser;
  * @author François de Saint Palais
  */
 public class ControleurImport {
-    
+
     @FXML private TextField saisieCheminFichier;
-    
+
     private File fichierCSVChoisie;
+
+    private ModelePrincipal modele = ModelePrincipal.getInstance();
+
 
     @FXML
     private void parcourirExplorer () {
@@ -31,16 +44,16 @@ public class ControleurImport {
         FileChooser fichier = new FileChooser();
         fichier.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV", "*.csv"));
         fichier.setTitle("Selectionner le fichier contenant les nouvelles questions");
-        
+
         fichierCSVChoisie = fichier.showOpenDialog(null);
-        
+
         if (fichierCSVChoisie != null) {
             saisieCheminFichier.setText(fichierCSVChoisie.getAbsolutePath());
             System.out.println(fichierCSVChoisie.getAbsolutePath()); 
         }
-        
+
     }
-    
+
     @FXML
     private void aider() {
         System.out.println("Aider");
@@ -51,24 +64,67 @@ public class ControleurImport {
         System.out.println("Retour");
         Quiz.changerVue("Editeur.fxml");
     }
-    
+
     @FXML
-    private void valider() {
+    private void valider() throws IOException {
         System.out.println("Valider");
         String cheminFichierCSV = saisieCheminFichier.getText();
-        
+
         File fichier = new File(cheminFichierCSV);
-        
+
+        //Le fichier n'existe pas
         if (!fichier.exists()) {
             AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
+            
+        //Le fichier n'est pas un csv
         } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") + 1).equals("csv")) {
             AlertBox.showErrorBox(
-                  cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1)
-                + ", n'est pas un fichier CSV");     
-        } else if (formatCSVValide(fichier)) {
-            
+                    cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1)
+                    + ", n'est pas un fichier CSV");
+        
+        //Création des question
+        } else {
+            ArrayList<HashMap<String,String>> lignes = getLigneCSV(fichier);
+
+            for (HashMap<String, String> ligneHashMap : lignes) {
+                if (!modele.categorieExiste(ligneHashMap.get("categorie"))) {
+                    try {
+                        modele.creerCategorie(ligneHashMap.get("categorie"));
+                    } catch (InvalidNameException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (HomonymeException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                
+                ArrayList<String> reponseFausse = new ArrayList<String>();
+                //TODO Récupérer les réponse fausse non vide
+                
+                //TODO Récupérer l'id de la catégorie
+                
+                
+                
+                try {
+                    modele.creerQuestion(ligneHashMap.get("libelle"), 0, 0, cheminFichierCSV, null, cheminFichierCSV);
+                } catch (InvalidFormatException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (InvalidNameException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (ReponseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (HomonymeException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
 
     /** 
      * Un fichier CSV valide contient :
@@ -80,7 +136,7 @@ public class ControleurImport {
      *     <li>Colonne 5 la première réponse fausse</li>
      *     <li>Colonne 6 la deuxième réponse fausse</li>
      *     <li>Colonne 7 la troisième réponse fausse</li>
-     *     <li>Colonne 7 la quatrième réponse fausse</li>
+     *     <li>Colonne 8 la quatrième réponse fausse</li>
      * </ul>
      * @param fichierAVerifier Le document à vérifier
      * @return true si le fichier est valide false sinon
@@ -88,5 +144,70 @@ public class ControleurImport {
     private boolean formatCSVValide(File fichierAVerifier) {
         // TODO Auto-generated method stub
         return true; //STUB
+    }
+
+    /** 
+     * @param fichierCSV
+     * @return Une liste des ligne du fichier CSV
+     * @throws IOException 
+     */
+    private ArrayList<HashMap<String,String>> getLigneCSV(File fichierCSV) throws IOException {
+        String ligne;
+        ArrayList<HashMap<String,String>> resultat = new ArrayList<HashMap<String,String>>();
+        BufferedReader fichierReader 
+        = new BufferedReader(new FileReader(fichierCSV.getAbsolutePath()));
+
+        do {
+            ligne = fichierReader.readLine();
+
+            if (ligne != null) {
+                //TODO Ajouter la vérification de la ligne
+                resultat.add(getDicotionnaire(ligne));
+            }
+        } while (ligne != null);
+
+        return resultat;
+    }
+
+    /**
+     * 
+     * TODO comment method role
+     * @param ligne
+     * @return
+     */
+    private HashMap<String,String> getDicotionnaire(String ligne) {
+        HashMap<String,String> resultat = new HashMap<String,String>();
+        String[] ligneListe = ligne.split(ModelePrincipal.SEPARATEUR_CSV + "");
+        resultat.put("categorie",ligneListe[0]);
+        resultat.put("difficulte",ligneListe[1]);
+        resultat.put("libelle",ligneListe[2]);
+        resultat.put("reponseJuste",ligneListe[3]);
+        
+        try {
+            resultat.put("1reponseFausse",ligneListe[4]);
+        } catch (IndexOutOfBoundsException e) {
+            resultat.put("1reponseFausse",null);    
+        }
+        try {
+            resultat.put("2reponseFausse",ligneListe[5]);
+        } catch (IndexOutOfBoundsException e) {
+            resultat.put("2reponseFausse",null);    
+        }
+        try {
+            resultat.put("3reponseFausse",ligneListe[6]);
+        } catch (IndexOutOfBoundsException e) {
+            resultat.put("3reponseFausse",null);    
+        }
+        try {
+            resultat.put("4reponseFausse",ligneListe[7]);
+        } catch (IndexOutOfBoundsException e) {
+            resultat.put("4reponseFausse",null);    
+        }
+        try {
+            resultat.put("feedback",ligneListe[8]);
+        } catch (IndexOutOfBoundsException e) {
+            resultat.put("feedback","");    
+        }
+        return resultat;
     }
 }
