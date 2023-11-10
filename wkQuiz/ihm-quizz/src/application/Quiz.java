@@ -87,9 +87,9 @@ public class Quiz extends Application {
     	    ArrayList<String> rep = new ArrayList<>();
     	    rep.add("coubeh");
     	    
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, null));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "quette", rep, null));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quand ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "tin", rep, null));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "quette", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quand ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "tin", rep, ""));
 		}
 	    
 	    ressources.add("Accueil.fxml");
