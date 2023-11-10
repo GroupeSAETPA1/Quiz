@@ -111,6 +111,7 @@ public class Quiz extends Application {
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
+	    ressources.add("ParametrePartie.fxml");
 
 		
 		for (String element : ressources) {
