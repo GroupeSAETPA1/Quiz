@@ -76,7 +76,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	    miseAJourListeCategorie();
 
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
-	    	System.out.println("ici");
 	    	tapPane.getSelectionModel().select(tabCategorie);
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
 	    }
