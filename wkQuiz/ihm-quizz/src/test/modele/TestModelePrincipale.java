@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -37,7 +38,7 @@ class TestModelePrincipale {
     private ArrayList<String> mauvaiseReponseJusteChaineVide;
     
     @BeforeEach
-    void genererJeuxDeTest() throws InvalidFormatException, InvalidNameException, ReponseException {
+    void genererJeuxDeTest() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
         questionValide = new ArrayList<Question>();
         mauvaiseReponse1 = new ArrayList<String>();
         mauvaiseReponse2 = new ArrayList<String>();
@@ -120,9 +121,10 @@ class TestModelePrincipale {
      * @throws ReponseException 
      * @throws InvalidFormatException 
      * @throws HomonymeException 
+     * @throws DifficulteException 
      */
     @Test
-    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException{
+    void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException, DifficulteException{
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
         //TODO assertDoesNotThrow à la place d'assertTrue
@@ -200,7 +202,7 @@ class TestModelePrincipale {
     }
     
     @Test
-    void testCategorieContientQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException {
+    void testCategorieContientQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException, DifficulteException {
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
         modele.creerCategorie(categoriesValides[0].getNom());
@@ -208,7 +210,7 @@ class TestModelePrincipale {
         
         int c = 1;
         for (Question q : questionValide) {
-            modele.creerQuestion(q.getLibelle(), c%2+1, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1, null);
+            modele.creerQuestion(q.getLibelle(), c%2+1, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1, "");
             c ++;
         }
         
@@ -217,7 +219,7 @@ class TestModelePrincipale {
         assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
         assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
         
-        Categorie uneAutre = new Categorie("Une Nouvelle Categorie Totalement Unique");
+        Categorie uneAutre = new Categorie("UneNouvelleUnique");
         modele.creerCategorie(uneAutre.getNom());
         //La catégorie n'a pas de de question
         assertFalse(modele.categorieContientQuestion(uneAutre));
@@ -228,7 +230,7 @@ class TestModelePrincipale {
                 "Que doit décrire le texte écrit dans le commentaire Javadoc "
                 + "situé juste avant la ligne \"public class ...\" ?",
                 index, 0, "Le rôle du programme, en explicitant de manière précise"
-                        + " ce rôle", mauvaiseReponse1, null);
+                        + " ce rôle", mauvaiseReponse1, "");
         System.out.println(modele.getBanqueQuestion());
         assertTrue(modele.categorieContientQuestion(uneAutre));
         

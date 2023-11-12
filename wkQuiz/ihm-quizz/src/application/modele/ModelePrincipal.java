@@ -8,6 +8,7 @@ package application.modele;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -87,10 +88,11 @@ public class ModelePrincipal {
      * @param reponseJuste  : bonne réponse de la question
      * @return true si la question a été créer , false sinon
      * @throws HomonymeException
+     * @throws DifficulteException 
      */
     public boolean creerQuestion(String libelle, int idCategorie, int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback)
-            throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException {
+            throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException, DifficulteException {
 
         // La categorie de la question existera toujours donc aucune vérification d'existence n'est nécessaire
         Categorie categorieQuestion;
@@ -212,11 +214,12 @@ public class ModelePrincipal {
      * @throws ReponseException 
      * @throws InvalidNameException 
      * @throws InvalidFormatException 
+     * @throws DifficulteException 
      */
     public boolean modifierQuestion(String libelle, String categorie, 
             int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) 
-            throws InvalidNameException, ReponseException, InvalidFormatException {
+            throws InvalidNameException, ReponseException, InvalidFormatException, DifficulteException {
       Categorie nouvelleCat = banqueCategorie.getExactCategoriesLibelle(categorie);
       questionAModifier.setLibelle(libelle);
       questionAModifier.setCatgorie(nouvelleCat);

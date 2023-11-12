@@ -3,6 +3,7 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -182,9 +183,13 @@ public class ControlleurCreationQuestionEtCategorie {
     /** 
      * @return La difficulté
      */
-    private Integer getDifficulte() {
-        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-		        ((RadioButton) difficulte.getSelectedToggle()).getText());
+    private int getDifficulte() {
+        int reponse = Integer.MAX_VALUE;
+        if (difficulte.getSelectedToggle() != null) {
+            reponse = ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+        }
+        return reponse;
     }
 
     /** 
@@ -221,7 +226,7 @@ public class ControlleurCreationQuestionEtCategorie {
                     mauvaiseReponses, feedback);
 
         } catch (InvalidFormatException e) {
-            AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
                     + "question ET une réponse juste.");
@@ -231,6 +236,8 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
+        } catch (DifficulteException e) {
+            AlertBox.showErrorBox("Veillez selectionner une difficulté");
         }
         if (questionCreer) {
             AlertBox.showSuccessBox("Question créer !");
