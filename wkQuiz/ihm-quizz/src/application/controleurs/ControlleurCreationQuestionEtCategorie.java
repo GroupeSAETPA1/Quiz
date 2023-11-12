@@ -20,8 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * Controlleur de la page Creation de Quetion et de Categorie.
- * Celui-ci instance  des methodes liée au bouton de la page
+ * Controlleur de la page Creation de Question et de Catégorie.
+ * Celui-ci instance  des méthodes liée au bouton de la page
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -88,6 +88,7 @@ public class ControlleurCreationQuestionEtCategorie {
     private void miseAJourListeCategorie() {
         //Récupération puis ajout des nom de catégorie
         categories = modele.getCategories();
+        selectCategorie.getItems().clear();
         selectCategorie.getItems().addAll(categories);
     }
 
