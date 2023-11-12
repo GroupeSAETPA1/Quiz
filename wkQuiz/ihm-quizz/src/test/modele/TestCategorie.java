@@ -21,13 +21,15 @@ class TestCategorie {
 	@Test
 	void testCategorie() {
 		assertDoesNotThrow(() -> new Categorie("test"));
+		// 30 caractère
+		assertDoesNotThrow(() -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+		
 		/* Tests avec constructeur invalide */
 		assertThrows(InvalidNameException.class, () -> new Categorie(""));
 		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
 		// 31 caractère
 		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-		// 30 caractère
-		assertDoesNotThrow(() -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+		
 		
 	}
 
@@ -37,6 +39,7 @@ class TestCategorie {
 	 */
 	@Test
 	void testNomValide() {
+	    
 		assertTrue(Categorie.nomValide("test"));
 		
 		assertFalse(Categorie.nomValide(""));

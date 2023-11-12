@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -66,9 +67,10 @@ public class Quiz extends Application {
      * @throws HomonymeException 
      * @throws ReponseException 
      * @throws InvalidFormatException 
+     * @throws DifficulteException 
      */
 	@Override
-	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException {
+	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException {
         instance = this;
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();

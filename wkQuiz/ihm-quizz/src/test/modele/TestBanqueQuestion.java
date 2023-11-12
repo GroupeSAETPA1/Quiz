@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -38,9 +39,10 @@ class TestBanqueQuestion {
      * @throws ReponseException 
      * @throws InvalidNameException 
      * @throws InvalidFormatException 
+     * @throws DifficulteException 
      */
     @BeforeEach
-    void genererQuestionValide() throws InvalidFormatException, InvalidNameException, ReponseException {
+    void genererQuestionValide() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
         ArrayList<String> reponsesFausses = new ArrayList<String>();
         reponsesFausses.add("Faux");
         Question question1 = new Question("Libelle", new Categorie("Nom"), 1,
@@ -150,14 +152,15 @@ class TestBanqueQuestion {
      * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
      * @throws HomonymeException 
      * TODO FIXME
+     * @throws DifficulteException 
      */
     @Test
-    void testGetQuestionsDifficulte() throws InvalidFormatException, HomonymeException {
-        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
-        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(-1));
-        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(0));
-        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(4));
-        assertThrows(InvalidFormatException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MAX_VALUE));
+    void testGetQuestionsDifficulte() throws HomonymeException, DifficulteException {
+        assertThrows(DifficulteException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
+        assertThrows(DifficulteException.class, ()->banqueQuestion.getQuestionsDifficulte(-1));
+        assertThrows(DifficulteException.class, ()->banqueQuestion.getQuestionsDifficulte(0));
+        assertThrows(DifficulteException.class, ()->banqueQuestion.getQuestionsDifficulte(4));
+        assertThrows(DifficulteException.class, ()->banqueQuestion.getQuestionsDifficulte(Integer.MAX_VALUE));
         
         banqueQuestion.ajouter(ensembleQuestionDifficulteFacile.get(0));
         assertIterableEquals(ensembleQuestionDifficulteFacile, 
