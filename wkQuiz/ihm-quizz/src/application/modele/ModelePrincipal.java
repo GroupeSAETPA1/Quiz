@@ -21,9 +21,9 @@ import application.exception.InvalidNameException;
 import application.exception.ReponseException;
 
 /**
- * Permet l'interaction entre les classes du modèle et les controlleurs. C'est
- * une classe Singleton
- * 
+ * Controleur principale de l'application . 
+ * Permet l'interaction entre les classes du modèle et les controlleurs. 
+ * C'est une classe Singleton
  * @author Lucas Descriaud
  * @author François de Saint Palais
  */
@@ -48,6 +48,29 @@ public class ModelePrincipal {
     
     private boolean displayCategoriePane;
 
+    
+    /** 
+     * Difficulte des questions de la partie en cours
+     * La partie en cour pourra prendre des questions de niveau egal 
+     * a difficultePartie 
+     **/
+    private Integer difficultePartie; 
+    
+    
+    /** Nombre de question auquel l'utilisateur 
+     * repondra dans la partie actuelle 
+     */ 
+    private int nombreQuestionPartie ;
+    
+    
+    /**
+     * Categorie dans laquelle les questions seront tiree
+     * Initialisé a null reste a null si l'option Aléatoire est choisis dans la
+     * page de paramètre
+     */
+    private Categorie categorieQuestion ;
+    
+    
     public boolean isDisplayCategoriePane() {
 		return displayCategoriePane;
 	}
@@ -232,8 +255,8 @@ public class ModelePrincipal {
     public boolean modifierQuestion(String libelle, String categorie, 
             int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) 
-            throws InvalidNameException, ReponseException, InvalidFormatException, DifficulteException {
-      Categorie nouvelleCat = banqueCategorie.getExactCategoriesLibelle(categorie);
+            throws InvalidNameException, ReponseException, InvalidFormatException {
+      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
       questionAModifier.setLibelle(libelle);
       questionAModifier.setCatgorie(nouvelleCat);
       questionAModifier.setDifficulte(difficulte);
@@ -298,4 +321,52 @@ public class ModelePrincipal {
         return banqueCategorie.getIndice(string);
     }
 
+    /**
+     * Change la difficulte actuelle pour difficulte 
+     * @param difficulte nouvelle difficulte
+     */
+    public void setDifficultePartie(int difficulte) {
+        this.difficultePartie = difficulte ;
+    }
+    
+    /**
+     * @return la difficulte de la partie en cour
+     */
+    public Integer getDifficulte() {
+        return this.difficultePartie;
+        
+    }
+    
+    /**
+     * @return le nombre de question dans la partie en cour 
+     */
+    public int getNombreQuestion() {
+        return this.nombreQuestionPartie;
+    }
+    
+    /**
+     * Change le nombre de question de la partie en cours
+     * @param nombreQuestion nouveau nombre de question
+     */
+    public void setNombreQuestion(int nombreQuestion) {
+        this.nombreQuestionPartie = nombreQuestion ;
+    }
+    
+    /**
+     * Change la categorie de la partie actuelle
+     */
+    public void setCategoriePartie(String choisis) {
+        System.out.println(choisis);
+        System.out.println(banqueCategorie.getCategories());
+        this.categorieQuestion = 
+                banqueCategorie.getCategorieLibelleExact(choisis);
+    }
+    /**
+     * @return la categorie dans lequelle seront 
+     * tirés les questions de la partie  
+     */
+    public Categorie getCategoriePartie() {
+        return this.categorieQuestion;          
+    }
 }
+
