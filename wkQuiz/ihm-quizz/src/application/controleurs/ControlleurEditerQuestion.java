@@ -88,7 +88,7 @@ public class ControlleurEditerQuestion {
 			default:
 				break;
 			}
-		    selectCategorie.getSelectionModel().select(modele.getBanqueCategorie().getExactCategoriesLibelle(questionAModifier.getCategorie()));
+		    selectCategorie.getSelectionModel().select(modele.getBanqueCategorie().getCategorieLibelleExact(questionAModifier.getCategorie()));
 	    }
 
 	    

@@ -255,7 +255,7 @@ public class ModelePrincipal {
     public boolean modifierQuestion(String libelle, String categorie, 
             int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) 
-            throws InvalidNameException, ReponseException, InvalidFormatException {
+            throws InvalidNameException, ReponseException, InvalidFormatException, DifficulteException {
       Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
       questionAModifier.setLibelle(libelle);
       questionAModifier.setCatgorie(nouvelleCat);
@@ -308,7 +308,7 @@ public class ModelePrincipal {
      * @return true si la catégorie existe, false sinon
      */
     public boolean categorieExiste(String nom) {
-        return banqueCategorie.getExactCategoriesLibelle(nom) == null;
+        return banqueCategorie.getCategorieLibelleExact(nom) == null;
     }
     
     /**

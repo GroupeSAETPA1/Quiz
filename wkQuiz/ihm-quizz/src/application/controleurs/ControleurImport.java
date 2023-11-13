@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.io.FileNotFoundException;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -162,6 +163,8 @@ public class ControleurImport {
                         + "pas être en double ET la bonne réponse ne peut pas être " + "une mauvaise réponse");
             } catch (HomonymeException e) {
                 AlertBox.showWarningBox("La question saisie existe déjà");
+            } catch (DifficulteException e) {
+                AlertBox.showErrorBox("Erreur sur la difficulte");
             }
             if (questionCreer) {
                 AlertBox.showSuccessBox("Question créer !");
