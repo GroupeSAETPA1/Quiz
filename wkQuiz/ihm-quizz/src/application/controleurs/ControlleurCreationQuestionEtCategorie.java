@@ -70,7 +70,6 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	@FXML
 	public void initialize() {
-	    System.out.println("Instanciation de Création");
         // On récupère l'instance du Modèle
 	    modele = ModelePrincipal.getInstance();
 

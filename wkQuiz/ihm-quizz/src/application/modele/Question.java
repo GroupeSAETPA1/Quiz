@@ -21,7 +21,7 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** difficultée minimale d'une question */
-	private final int DIFFICULTE_MINIMALE = 0;
+	private final int DIFFICULTE_MINIMALE = 1;
 	
 	/** difficultée maximale d'une question */
 	private final int DIFFICULTE_MAXIMALE = 3;
