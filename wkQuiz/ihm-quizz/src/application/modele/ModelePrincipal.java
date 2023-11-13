@@ -5,8 +5,14 @@
 
 package application.modele;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
@@ -23,8 +29,15 @@ import application.exception.ReponseException;
  */
 public class ModelePrincipal {
     
+    /**
+     * Lie une difficulté à sont equivalent numérique
+     * Ex : Facile -> 1
+     */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT 
     = new HashMap<String, Integer>();
+    
+    public static final char SEPARATEUR_CSV = '\t';
+    
 
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
@@ -265,6 +278,24 @@ public class ModelePrincipal {
      */
     public int getNombreQuestionCategorie(Categorie categorie) {
         return getBanqueQuestion().getQuestions(categorie).size();
+    }
+
+    /** 
+     * @param nom Le nom de la catégorie recherché
+     * @return true si la catégorie existe, false sinon
+     */
+    public boolean categorieExiste(String nom) {
+        return banqueCategorie.getExactCategoriesLibelle(nom) == null;
+    }
+    
+    /**
+     * Retourne l'indice de la catégorie dans la liste des catégories
+     * @param string catégorie recherché
+     * @return L'indice de la catégorie
+     */
+    public int getIndice(String string) {
+        
+        return banqueCategorie.getIndice(string);
     }
 
 }
