@@ -58,7 +58,7 @@ public class LigneCategorie {
     	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
     	if (this.getNomProperty() != "Général") {
     		// si la quesiotn n'est pas général
-    		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
+    		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(getNomProperty()));
     		Quiz.chargerEtChangerVue("EditerCategorie.fxml");	
     	} else {
     		AlertBox.showErrorBox("la catégorie générale ne peut pas etre modifiée");
@@ -70,7 +70,7 @@ public class LigneCategorie {
     	if (this.getNomProperty() != "Général") {
     		boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
 	    	if (result) {
-	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
+	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(getNomProperty()))) {
 	    			AlertBox.showSuccessBox("suppresion effectuée");
 	        		Quiz.chargerEtChangerVue("EditerCategories.fxml");
 	    		} else { 

@@ -79,27 +79,37 @@ public class BanqueCategorie {
     public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
     	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
         for (Categorie categorie : categories) {
-            if (categorie.getNom().contains(libelle.toLowerCase())) {
+            if (categorie.getNom().toLowerCase().contains(libelle.toLowerCase())) {
                 resultat.add(categorie);
             } 
         }
         return resultat;
     }
 
+    /** @return le nom de tous les categorie de la banque */
+    public ArrayList<String> getCategoriesNom() {
+        ArrayList<String> resultat = new ArrayList<String>();
+        for (Categorie categorie : categories) {
+            resultat.add(categorie.getNom());
+        }
+        return resultat;
+    }
     /**
      * renvoie la categorie qui a le meme libellé que passé en pramatre
      * si il n'y en a pas cela renvoie null
      * @param libelle (String) le libellé recherché
      * @return categorie avec le libellé voulu
      */
-    public Categorie getExactCategoriesLibelle(String libelle) {
+    public Categorie getCategorieLibelleExact(String libelle) {
         for (Categorie categorie : categories) {
-            if (categorie.getNom().equals(libelle.toLowerCase())) {
+            if (categorie.getNom().equals(libelle)) {
                 return categorie;
             } 
         }
 		return null;
     }
+    
+    
     
     
     /* non javadoc - @see java.lang.Object#toString() */
@@ -113,5 +123,20 @@ public class BanqueCategorie {
                             + "\n\n");
         }
         return resultat.toString();
+    }
+
+    /**
+     * Retourne l'indice de la catégorie dans la liste des catégories
+     * @param string catégorie recherché
+     * @return L'indice de la catégorie
+     */
+    public int getIndice(String string) {
+        int reponse = 0;
+        for (int i = 0; i < categories.size(); i++) {
+            if (string.equals(categories.get(i).getNom())) {
+                reponse = i;
+            }
+        }
+        return reponse;
     }
 }

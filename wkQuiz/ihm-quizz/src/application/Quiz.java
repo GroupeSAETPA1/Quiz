@@ -101,9 +101,9 @@ public class Quiz extends Application {
     	    rep250.add(char250 + "3");
     	    rep250.add(char250 + "4");
     	    
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 1, "feur", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 2, "quette", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 1, "feur", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 2, "quette", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
 		}
 	    
 	    ressources.add("Accueil.fxml");
@@ -113,6 +113,9 @@ public class Quiz extends Application {
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
+	    ressources.add("Resultat.fxml");
+	    ressources.add("Solution.fxml");
+	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
 
 		
@@ -129,7 +132,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Accueil.fxml"));
+		primaryStage.setScene(scenes.get("ImporterQuestion.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
@@ -192,4 +195,5 @@ public class Quiz extends Application {
 	    charger(vue);
 	    changerVue(vue);
 	}
+
 }

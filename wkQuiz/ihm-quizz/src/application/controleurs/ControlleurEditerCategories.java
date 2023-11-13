@@ -112,6 +112,7 @@ public class ControlleurEditerCategories {
         if (filtre) {
             data.clear();
             categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesLibelle(barreRecherche.getText().strip());
+          
         } else {
             categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
         }
