@@ -51,9 +51,7 @@ public class ControlleurEditerCategories {
 	@FXML 
 	private void versCreerCategorie() {
 		ModelePrincipal.getInstance().setDisplayCategoriePane(true);
-		System.out.print("Test2");
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
-		System.out.print("Test3");
 	}
 	
 	public void initialize() {
