@@ -99,9 +99,9 @@ public class Quiz extends Application {
     	    rep250.add(char250 + "3");
     	    rep250.add(char250 + "4");
     	    
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test1"), 0, "feur", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("test2"), 0, "quette", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 2, char250, rep250, char250));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 0, "feur", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 0, "quette", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 2, char250, rep250, char250));
 		}
 	    
 	    ressources.add("Accueil.fxml");

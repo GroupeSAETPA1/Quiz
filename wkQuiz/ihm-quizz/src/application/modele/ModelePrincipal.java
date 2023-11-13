@@ -240,7 +240,7 @@ public class ModelePrincipal {
             int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback) 
             throws InvalidNameException, ReponseException, InvalidFormatException {
-      Categorie nouvelleCat = banqueCategorie.getExactCategoriesLibelle(categorie);
+      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
       questionAModifier.setLibelle(libelle);
       questionAModifier.setCatgorie(nouvelleCat);
       questionAModifier.setDifficulte(difficulte);
@@ -322,8 +322,10 @@ public class ModelePrincipal {
      * Change la categorie de la partie actuelle
      */
     public void setCategoriePartie(String choisis) {
+        System.out.println(choisis);
+        System.out.println(banqueCategorie.getCategories());
         this.categorieQuestion = 
-                banqueCategorie.getExactCategoriesLibelle(choisis);
+                banqueCategorie.getCategorieLibelleExact(choisis);
     }
     /**
      * @return la categorie dans lequelle seront 

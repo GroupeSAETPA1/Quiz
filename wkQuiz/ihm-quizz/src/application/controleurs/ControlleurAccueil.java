@@ -1,6 +1,7 @@
 package application.controleurs;
 
 import application.Quiz;
+import application.modele.ModelePrincipal;
 import javafx.fxml.FXML;
 
 /**

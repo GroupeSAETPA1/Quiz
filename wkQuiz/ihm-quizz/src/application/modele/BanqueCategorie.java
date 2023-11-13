@@ -25,7 +25,6 @@ public class BanqueCategorie {
      * Constructeur de BanqueCategorie
      */
     public BanqueCategorie() {
-        //FIXME la categorie general n'est pas trouve dans les filtres et le choix lors du paramétrage
     	try {
             categorieGeneral = new Categorie("Général");
         } catch (InvalidNameException e) {
@@ -80,7 +79,7 @@ public class BanqueCategorie {
     public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
     	ArrayList<Categorie> resultat = new ArrayList<Categorie>();
         for (Categorie categorie : categories) {
-            if (categorie.getNom().contains(libelle.toLowerCase())) {
+            if (categorie.getNom().toLowerCase().contains(libelle.toLowerCase())) {
                 resultat.add(categorie);
             } 
         }
@@ -101,9 +100,9 @@ public class BanqueCategorie {
      * @param libelle (String) le libellé recherché
      * @return categorie avec le libellé voulu
      */
-    public Categorie getExactCategoriesLibelle(String libelle) {
+    public Categorie getCategorieLibelleExact(String libelle) {
         for (Categorie categorie : categories) {
-            if (categorie.getNom().equals(libelle.toLowerCase())) {
+            if (categorie.getNom().equals(libelle)) {
                 return categorie;
             } 
         }

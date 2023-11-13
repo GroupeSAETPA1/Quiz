@@ -47,7 +47,7 @@ public class ControlleurEditerCategorie {
 	@FXML
 	private void valider() throws InvalidNameException {
 		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
-		ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(aModifier.getNom()).setNom(input.getText());
+		ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
 		AlertBox.showSuccessBox("categorie modifiée avec succées");
 		try {
 			Quiz.getInstance().charger("EditerCategories.fxml");
