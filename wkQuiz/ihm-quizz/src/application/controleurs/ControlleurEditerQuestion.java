@@ -99,7 +99,6 @@ public class ControlleurEditerQuestion {
 	@FXML
 	private void valider() {
 		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
-		ObservableList<Toggle> toggles = difficulte.getToggles();
 		
 		try {
 			aModifier.setCatgorie(selectCategorie.getValue());
