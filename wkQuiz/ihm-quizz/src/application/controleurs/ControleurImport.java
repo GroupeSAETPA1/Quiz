@@ -106,24 +106,21 @@ public class ControleurImport {
         }
     }
 
-    /** 
+    /**
      * TODO comment method role
+     * 
      * @param lignes
      */
     private void creerEtGererQuestionCategorie(ArrayList<HashMap<String, String>> lignes) {
         // Création des nouvelles catégories et des nouvelles questions
+        int indiceLigne = 0;
+        int nombreQuestionCreer = 0;
         for (HashMap<String, String> ligneHashMap : lignes) {
-            // Si la catégorie n'existe pas on la créer
-            if (!modele.categorieExiste(ligneHashMap.get("categorie"))) {
-                try {
-                    modele.creerCategorie(ligneHashMap.get("categorie"));
-                } catch (InvalidNameException e) {
-                    AlertBox.showErrorBox(ligneHashMap.get("categorie") + " : nom de catégorie invalide");
-                    e.printStackTrace();
-                    continue;
-                } catch (HomonymeException e) {
-                    // Si la catégorie existe déjà on ne fais rien
-                }
+
+            try {
+                creerCategorieSiAbsent(ligneHashMap.get("categorie"));
+            } catch (InvalidNameException e) {
+                continue;
             }
 
             ArrayList<String> reponseFausse = new ArrayList<String>();
@@ -140,31 +137,51 @@ public class ControleurImport {
                 reponseFausse.add(ligneHashMap.get("4reponseFausse"));
             }
 
-            // TODO Récupérer l'indice de la catégorie
             int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
 
             int difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));
 
             boolean questionCreer = false;
-
             try {
-                questionCreer = modele.creerQuestion(
-                        ligneHashMap.get("libelle"), indiceCategorie, 
-                        difficulte, ligneHashMap.get("reponseJuste"), 
-                        reponseFausse, ligneHashMap.get("feedback"));
-            } catch (InvalidFormatException e) {
-                AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
-            } catch (InvalidNameException e) {
-                AlertBox.showErrorBox(
-                        "Attention, veuillez saisir le nom de la " + "question ET une réponse juste.");
-            } catch (ReponseException e) {
-                AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
-                        + "pas être en double ET la bonne réponse ne peut pas être " + "une mauvaise réponse");
-            } catch (HomonymeException e) {
-                AlertBox.showWarningBox("La question saisie existe déjà");
+                questionCreer = modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
+                        ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
+                nombreQuestionCreer++;
+            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException e) {
+                System.err.println("Question n°" + indiceLigne +e.getMessage());
+                AlertBox.showErrorBox("Erreur de création de la question n°" 
+                                      + indiceLigne + "\nPour plus "
+                                      + "d'information consulter la page d'aide");
             }
-            if (questionCreer) {
-                AlertBox.showSuccessBox("Question créer !");
+
+            indiceLigne++;
+        }
+
+        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne 
+                                + " questions créer");
+        System.out.println(modele.getCategories());
+        Quiz.charger("EditerQuestions.fxml");
+        Quiz.charger("EditerCategories.fxml");
+    }
+
+    /**
+     * Vérifie si une catégorie est présente dans le modèle et si elle n'est pas
+     * présente, elle est créer.
+     * 
+     * @param nomCategorie
+     * @return
+     * @throws InvalidNameException
+     */
+    private void creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
+        // Si la catégorie n'existe pas on la créer
+        if (!modele.categorieExiste(nomCategorie)) {
+            try {
+                modele.creerCategorie(nomCategorie);
+            } catch (InvalidNameException e) {
+                AlertBox.showErrorBox(nomCategorie + " : nom de catégorie invalide\nL'insertion de la ");
+                e.printStackTrace();
+                throw e;
+            } catch (HomonymeException e) {
+                // Si la catégorie existe déjà on ne fais rien
             }
         }
     }
