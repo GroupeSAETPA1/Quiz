@@ -7,10 +7,7 @@ import application.exception.InvalidNameException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
-<<<<<<< Updated upstream
-=======
 import javafx.collections.ObservableList;
->>>>>>> Stashed changes
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -91,7 +88,6 @@ public class ControlleurEditerQuestion {
 			default:
 				break;
 			}
-		    
 		    selectCategorie.getSelectionModel().select(modele.getBanqueCategorie().getExactCategoriesLibelle(questionAModifier.getCategorie()));
 	    }
 
@@ -130,14 +126,5 @@ public class ControlleurEditerQuestion {
 		System.out.println("swalalala nous sommes partie pour créer");
 		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
 	}
-<<<<<<< Updated upstream
-	
-	@FXML
-	public void initialize() throws InvalidNameException {
-		Question aModifier = ModelePrincipal.getInstance().getQuestionAModifier();
-		
-    }
 
-=======
->>>>>>> Stashed changes
 }
