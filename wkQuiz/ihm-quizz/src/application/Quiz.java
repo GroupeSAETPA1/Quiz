@@ -113,6 +113,9 @@ public class Quiz extends Application {
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
+	    ressources.add("Resultat.fxml");
+	    ressources.add("Solution.fxml");
+	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
 
 		
@@ -129,7 +132,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Accueil.fxml"));
+		primaryStage.setScene(scenes.get("ImporterQuestion.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
@@ -192,4 +195,5 @@ public class Quiz extends Application {
 	    charger(vue);
 	    changerVue(vue);
 	}
+
 }

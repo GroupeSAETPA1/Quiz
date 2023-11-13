@@ -35,16 +35,20 @@ public class ControlleurEditerCategorie {
 	private TextField input;
 			
 	/**
-	 * Méthodes liée au group retour 
-	 * qui devra renvoyer vers la page precedente
+	 * Méthode liée au groupe retour 
+	 * qui devra renvoyer sur EditerCategories.fxml
 	 */
-	
 	@FXML 
 	private void retour() {
-		System.out.println("sortir");
+		System.out.println("Groupe retour cliqué");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 	
+	/**
+	 * Méthode pour valider et modifier le libellé de la catégorie
+	 * @throws InvalidNameException si le libellé est invalide (voir Categorie.java)
+	 * et qui renvoie sur EditerCategories.fxml
+	 */
 	@FXML
 	private void valider() throws InvalidNameException {
 		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
@@ -62,13 +66,19 @@ public class ControlleurEditerCategorie {
 		}
 	}
 	
+    /**
+     * Méthode pour annuler la modification du libellé
+     * et qui renvoie sur EditerCategories.fxml
+     */
 	@FXML
 	private void annuler() {
-		AlertBox.showErrorBox("modification annulée");
+		AlertBox.showErrorBox("Modification annulée");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 
-	
+	/**
+	 * Méthode qui se lance au chargement de la page pour récuperer la catégorie à éditer
+	 */
 	@FXML
 	public void initialize(){
 		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();

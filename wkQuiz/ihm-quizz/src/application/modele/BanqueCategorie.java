@@ -102,6 +102,8 @@ public class BanqueCategorie {
     }
     
     
+    
+    
     /* non javadoc - @see java.lang.Object#toString() */
     @Override
     public String toString() {
@@ -113,5 +115,20 @@ public class BanqueCategorie {
                             + "\n\n");
         }
         return resultat.toString();
+    }
+
+    /**
+     * Retourne l'indice de la catégorie dans la liste des catégories
+     * @param string catégorie recherché
+     * @return L'indice de la catégorie
+     */
+    public int getIndice(String string) {
+        int reponse = 0;
+        for (int i = 0; i < categories.size(); i++) {
+            if (string.equals(categories.get(i).getNom())) {
+                reponse = i;
+            }
+        }
+        return reponse;
     }
 }
