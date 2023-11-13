@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
+import application.modele.ModelePrincipal;
 
 import java.util.ArrayList;
 
@@ -47,14 +48,18 @@ public class ControlleurEditerCategorie {
 	@FXML
 	private void valider() throws InvalidNameException {
 		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
-		ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(aModifier.getNom()).setNom(input.getText());
-		AlertBox.showSuccessBox("categorie modifiée avec succées");
-		try {
-			Quiz.getInstance().charger("EditerCategories.fxml");
-		} catch (Exception e) {
-			e.printStackTrace();
+		if( input.getText() == modele.getInstance().) {
+			AlertBox.showErrorBox("La Catégorie Générale est déjà existante ");
+		}else {
+			ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(aModifier.getNom()).setNom(input.getText());
+			AlertBox.showSuccessBox("categorie modifiée avec succées");
+			try {
+				Quiz.getInstance().charger("EditerCategories.fxml");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Quiz.chargerEtChangerVue("EditerCategories.fxml");
 		}
-		Quiz.chargerEtChangerVue("EditerCategories.fxml");
 	}
 	
 	@FXML
