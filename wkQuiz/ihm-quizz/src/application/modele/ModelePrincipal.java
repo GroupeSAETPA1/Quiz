@@ -284,5 +284,15 @@ public class ModelePrincipal {
     public boolean categorieExiste(String nom) {
         return banqueCategorie.getExactCategoriesLibelle(nom) == null;
     }
+    
+    /**
+     * Retourne l'indice de la catégorie dans la liste des catégories
+     * @param string catégorie recherché
+     * @return L'indice de la catégorie
+     */
+    public int getIndice(String string) {
+        
+        return banqueCategorie.getIndice(string);
+    }
 
 }
