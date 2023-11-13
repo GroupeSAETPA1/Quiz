@@ -120,38 +120,45 @@ public class ControlleurCreationQuestionEtCategorie {
 	private void validerQuestion() {
 	    //TODO Refactor pour avoir une fonction par action
 		System.out.println("Valider");
-
-		//Récupération de l'indice de la catégorie choisie
-		int indiceCategorieChoisie = getIndiceCategorieChoisie();
+		
+		try {
+			//Récupération de l'indice de la catégorie choisie
+			int indiceCategorieChoisie = getIndiceCategorieChoisie();
 //		System.out.println(  "Catégorie choisie : "
 //		                   + (indiceCategorieChoisie >= 0
 //		                      ? categories.get(indiceCategorieChoisie)
 //		                      : "Invalide"));
-
-		//Récupération du nom de la question
-		String libeleQuestion = getLibeleQuestion();
-		System.out.println("Nom de la question : " + libeleQuestion);
-
-		//Récupération de la difficulté
-		int valeurDifficulte = getDifficulte();
-		System.out.println("Difficulté : " + valeurDifficulte);
-
-		//Récupération du feedback
-		String feedback = getFeedback();
-		System.out.println("Feedback : " + feedback);
-
-		//Récupération de la réponse vrai
-		String reponseVrai = getReponseVrai();
-		System.out.println("Réponse vrai : " + reponseVrai);
-
-		//Récupération des réponses fausses
-		ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
-		System.out.println("Mauvaise réponse(s) : " + mauvaiseReponses);
-
-
-		creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
-                reponseVrai, mauvaiseReponses);
-		Quiz.charger("EditerQuestions.fxml");
+			
+			//Récupération du nom de la question
+			String libeleQuestion = getLibeleQuestion();
+			System.out.println("Nom de la question : " + libeleQuestion);
+			
+			//Récupération de la difficulté
+			int valeurDifficulte = getDifficulte();
+			System.out.println("Difficulté : " + valeurDifficulte);
+			
+			//Récupération du feedback
+			String feedback = getFeedback();
+			System.out.println("Feedback : " + feedback);
+			
+			//Récupération de la réponse vrai
+			String reponseVrai = getReponseVrai();
+			System.out.println("Réponse vrai : " + reponseVrai);
+			
+			//Récupération des réponses fausses
+			ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
+			System.out.println("Mauvaise réponse(s) : " + mauvaiseReponses);
+			
+			
+			creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
+					reponseVrai, mauvaiseReponses);
+			
+		} catch (NullPointerException e) {
+        	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
+        }
+		
+		// Quiz.charger("EditerQuestions.fxml"); crash l'appli
+		
 	}
 
 
@@ -242,9 +249,8 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
-        } catch (NullPointerException e) {
-        	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
-        }
+        } 
+        
         if (questionCreer) {
             AlertBox.showSuccessBox("Question crée !");
             viderChampsQuestion();
@@ -261,11 +267,13 @@ public class ControlleurCreationQuestionEtCategorie {
 		System.out.println("Valider");
 
 		boolean categorieCreer = false;
-
-        String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
-
-		creerEtGererCategorie(categorieCreer, nom);
+		try  {
+			String nom = saisieNomCategorie.getText().strip();
+			System.out.println("Nom de la catégorie : " + nom);
+			creerEtGererCategorie(categorieCreer, nom);
+		} catch (NullPointerException e) {
+        	AlertBox.showErrorBox("Le Libellé de la catégorie est vide ! ");
+        }
     }
 	
 	/**
@@ -283,8 +291,6 @@ public class ControlleurCreationQuestionEtCategorie {
                     + ": entre 1 et 30 caractère maximum ");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La categorie saisie existe déjà");
-        } catch (NullPointerException e) {
-        	AlertBox.showErrorBox("Le Libellé de la catégorie est vide ! ");
         }
         
         if (categorieCreer) {
