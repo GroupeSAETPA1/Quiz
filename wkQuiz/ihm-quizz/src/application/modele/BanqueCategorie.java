@@ -26,7 +26,7 @@ public class BanqueCategorie {
      */
     public BanqueCategorie() {
     	try {
-            categorieGeneral = new Categorie("Général");
+            categorieGeneral = new Categorie("General");
         } catch (InvalidNameException e) {
             throw new InternalError("La création de la categorie Général à généré une erreur");
         }
