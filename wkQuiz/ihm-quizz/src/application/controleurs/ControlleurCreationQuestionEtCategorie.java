@@ -54,7 +54,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML private TextField saisieNomCategorie;
 
 	@FXML Tab tabCategorie;
-	@FXML TabPane tapPane;
+	@FXML TabPane tabPane;
 
 	/**
 	 * Méthodes liée au bouton annuler,
@@ -87,7 +87,11 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
 	    	System.out.println("ici");
-	    	tapPane.getSelectionModel().select(tabCategorie);
+	    	try {
+	    		tabPane.getSelectionModel().select(tabCategorie);
+	    	} catch (NullPointerException e) {
+	    		System.out.println("Erreur : " + e);
+	    	}
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
 	    }
     }
