@@ -42,6 +42,8 @@ public class LigneQuestion {
         			nomQuestion += "\n";
         		}
         	}
+        } else {
+        	nomQuestion = libelle;
         }
         
         this.nomQuestion = new SimpleStringProperty(nomQuestion);
@@ -107,11 +109,7 @@ public class LigneQuestion {
 
 
 	public void editerQuestion(){
-<<<<<<< Updated upstream
 		ModelePrincipal.getInstance().setQuestionAModifier(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(libelleNonFormater).get(0));
-=======
-		ModelePrincipal.getInstance().setQuestionAModifier(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(getNomQuestion()).get(0));
->>>>>>> Stashed changes
 		Quiz.chargerEtChangerVue("EditerQuestion.fxml");
     }
 

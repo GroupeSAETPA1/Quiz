@@ -10,7 +10,6 @@ import application.exception.ReponseException;
 
 
 /**
- * TODO comment class responsibility (SRP)
  * Classe représentant une question du quiz.
  * @author Lucas Descriaud
  */
@@ -277,7 +276,7 @@ public class Question implements Serializable {
         }
         if (reponseFausseContientReponseJuste(mauvaisesReponses, 
             nouvelleBonneReponse)) {
-            throw new ReponseException("Impossible de set une bonne "
+            throw new ReponseException("Impossible de mettre une bonne "
                     + "reponse si la valeur est deja contenu "
                     + "dans mauvaiseReponse ");
         }

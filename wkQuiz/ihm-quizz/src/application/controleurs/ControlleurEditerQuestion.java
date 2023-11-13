@@ -3,16 +3,17 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
+import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
-<<<<<<< Updated upstream
-=======
+import application.vue.AlertBox;
 import javafx.collections.ObservableList;
->>>>>>> Stashed changes
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -94,16 +95,53 @@ public class ControlleurEditerQuestion {
 		    
 		    selectCategorie.getSelectionModel().select(modele.getBanqueCategorie().getExactCategoriesLibelle(questionAModifier.getCategorie()));
 	    }
-
-	    
-	    
-	    
-	    
-
     }
 	
+	@FXML
+	private void valider() {
+		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
+		ObservableList<Toggle> toggles = difficulte.getToggles();
+		
+		try {
+			aModifier.setCatgorie(selectCategorie.getValue());
+			aModifier.setBonneReponse(saisieReponseVrai.getText());
+			aModifier.setFeedback(saisieFeedback.getText());
+			aModifier.setLibelle(saisieLibeleQuestion.getText());
+			
+			ArrayList<String> reponseFausses = new ArrayList<>();
+			if (!saisiePremiereReponseFausse.getText().isBlank()) {
+				reponseFausses.add(saisiePremiereReponseFausse.getText());
+			}
+			if (!saisieSecondeReponseFausse.getText().isBlank()) {
+				reponseFausses.add(saisieSecondeReponseFausse.getText());
+			}
+			if (!saisieTroisiemeReponseFausse.getText().isBlank()) {
+				reponseFausses.add(saisieTroisiemeReponseFausse.getText());
+			}
+			if (!saisieQuatriemeReponseFausse.getText().isBlank()) {
+				reponseFausses.add(saisieQuatriemeReponseFausse.getText());
+			}
+			aModifier.setMauvaiseReponse(reponseFausses);
+			
+			int reponse = 0;
+	        if (difficulte.getSelectedToggle() != null) {
+	            reponse = ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+	                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+	        }
+	        
+	        aModifier.setDifficulte(reponse);
+			
+			AlertBox.showSuccessBox("catégorie modifiée avec succé");
+			Quiz.chargerEtChangerVue("EditerQuestions.fxml");
+			
+		} catch (ReponseException | InvalidNameException | InvalidFormatException e) {
+			AlertBox.showErrorBox(e.getMessage());
+		}
+		
+	}
+	
 	/**
-     * TODO comment method role
+     * met a jour la liste des categories
      * @throws InvalidNameException
      */
     private void miseAJourListeCategorie() {
@@ -118,26 +156,7 @@ public class ControlleurEditerQuestion {
 	 */
 	@FXML 
 	private void retour() {
-		System.out.println("Retour en arriere ");
 		Quiz.changerVue("EditerQuestions.fxml");
 	}
-	/**
-	 * Méthodes liée au button Créer Question
-	 * qui devra renvoyer vers la page CreationQuestionEtCategorie.fxml
-	 */
-	@FXML 
-	private void versCreerQuestion() {
-		System.out.println("swalalala nous sommes partie pour créer");
-		Quiz.changerVue("CreationQuestionEtCategorie.fxml");
-	}
-<<<<<<< Updated upstream
 	
-	@FXML
-	public void initialize() throws InvalidNameException {
-		Question aModifier = ModelePrincipal.getInstance().getQuestionAModifier();
-		
-    }
-
-=======
->>>>>>> Stashed changes
 }
