@@ -51,14 +51,18 @@ public class ControlleurEditerCategorie {
 	 */
 	@FXML
 	private void valider() throws InvalidNameException {
+		ModelePrincipal modele = ModelePrincipal.getInstance();
 		Categorie aModifier = ModelePrincipal.getInstance().getCategorieAModifier();
-		if( input.getText() == modele.getInstance().) {
-			AlertBox.showErrorBox("La Catégorie Générale est déjà existante ");
+		System.out.println(modele.getCategories());
+		if( modele.categorieExiste(input.getText()) 
+			||  !modele.getCategorieAModifier().getNom().equalsIgnoreCase(input.getText())) {
+			
+			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
 			ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(aModifier.getNom()).setNom(input.getText());
 			AlertBox.showSuccessBox("categorie modifiée avec succées");
 			try {
-				Quiz.getInstance().charger("EditerCategories.fxml");
+				Quiz.charger("EditerCategories.fxml");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
