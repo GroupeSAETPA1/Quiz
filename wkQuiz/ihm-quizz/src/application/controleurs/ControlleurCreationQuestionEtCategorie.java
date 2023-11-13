@@ -38,32 +38,42 @@ public class ControlleurCreationQuestionEtCategorie {
 
     private ModelePrincipal modele;
     
+    @FXML private ComboBox<Categorie> selectCategorie;
+    
     @FXML private ToggleGroup difficulte;
 
 	@FXML private TextArea saisieFeedback;
 	
 	@FXML private TextField saisieLibeleQuestion;
-	@FXML private TextField saisieNomCategorie;
 	@FXML private TextField saisieReponseVrai;
-
 	@FXML private TextField saisiePremiereReponseFausse;
 	@FXML private TextField saisieSecondeReponseFausse;
 	@FXML private TextField saisieTroisiemeReponseFausse;
 	@FXML private TextField saisieQuatriemeReponseFausse;
 
-	@FXML private ComboBox<Categorie> selectCategorie;
+	@FXML private TextField saisieNomCategorie;
 
 	@FXML Tab tabCategorie;
 	@FXML TabPane tapPane;
 
 	/**
 	 * Méthodes liée au bouton annuler,
-	 * qui devra vider les champs et renvoyer vers la page Accueil.fxml
+	 * qui devra vider les champs 
 	 */
 	@FXML
-	private void annuler() {
-		System.out.println("Annuler");
-		Quiz.changerVue("Acceuil.fxml");
+	private void annulerQuestion() {
+		System.out.println("AnnulerQuestion");
+		viderChampsQuestion();
+	}
+	
+	/**
+	 * Méthodes liée au bouton annuler,
+	 * qui devra vider les champs 
+	 */
+	@FXML
+	private void annulerCategorie() {
+		System.out.println("AnnulerCategorie");
+		viderChampsCategorie();
 	}
 
 
@@ -232,9 +242,12 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
+        } catch (NullPointerException e) {
+        	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
         }
         if (questionCreer) {
-            AlertBox.showSuccessBox("Question créer !");
+            AlertBox.showSuccessBox("Question crée !");
+            viderChampsQuestion();
         }
     }
 
@@ -252,7 +265,7 @@ public class ControlleurCreationQuestionEtCategorie {
         String nom = saisieNomCategorie.getText();
 		System.out.println("Nom de la catégorie : " + nom);
 
-		creerEtGererCategorie( categorieCreer, nom);
+		creerEtGererCategorie(categorieCreer, nom);
     }
 	
 	/**
@@ -270,26 +283,41 @@ public class ControlleurCreationQuestionEtCategorie {
                     + ": entre 1 et 30 caractère maximum ");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La categorie saisie existe déjà");
+        } catch (NullPointerException e) {
+        	AlertBox.showErrorBox("Le Libellé de la catégorie est vide ! ");
         }
         
         if (categorieCreer) {
-            AlertBox.showSuccessBox("Categorie créer !");
+            AlertBox.showSuccessBox("Categorie crée !");
             miseAJourListeCategorie();
             Quiz.charger("EditerCategories.fxml");
+            viderChampsCategorie();
         }
     }
 	
 	/**
-	 * VIde les champs de la créationQuestion
+	 * Vide les champs de la créationQuestion
 	 */
 	private void viderChampsQuestion() {
-	    //TODO
+	    difficulte.selectToggle(null);
+	    saisieFeedback.setText("");
+	    saisieLibeleQuestion.setText("");
+	    saisieReponseVrai.setText("");
+	    saisiePremiereReponseFausse.setText("");
+	    saisieSecondeReponseFausse.setText("");
+	    saisieTroisiemeReponseFausse.setText("");
+	    saisieQuatriemeReponseFausse.setText("");
+	    /* 
+	     * Nous sommes obligés de garder la value de la combobox 
+	     * meme si ce n'est pas le plus optimal pour l'utilisateur
+	     * car la combo box ne prends que des catégories et non une String
+	     */
 	}
 
 	/**
-	 * VIde les champs de la créationCategorie
+	 * Vide les champs de la créationCategorie
 	 */
 	private void viderChampsCategorie() {
-	    //TODO
+	    saisieNomCategorie.setText("");
 	}
 }
