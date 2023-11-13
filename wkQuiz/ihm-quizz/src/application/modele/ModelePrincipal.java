@@ -39,9 +39,9 @@ public class ModelePrincipal {
      * Difficulte des questions de la partie en cours
      * La partie en cour pourra prendre des questions de niveau egal 
      * a difficultePartie 
-     * Si choix non spécifié = "indifférent" on prend n'importe quelle question
      **/
-    private int difficultePartie; 
+    private Integer difficultePartie; 
+    
     
     /** Nombre de question auquel l'utilisateur 
      * repondra dans la partie actuelle 
@@ -298,7 +298,7 @@ public class ModelePrincipal {
     /**
      * @return la difficulte de la partie en cour
      */
-    public int getDifficulte() {
+    public Integer getDifficulte() {
         return this.difficultePartie;
         
     }

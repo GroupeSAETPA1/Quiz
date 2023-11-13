@@ -23,8 +23,7 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void jouer() {
-		System.out.println("Button jouer");
-		Quiz.changerVue("ParametrePartie.fxml");
+		Quiz.chargerEtChangerVue("ParametrePartie.fxml");
 	}
 	
 	
@@ -34,7 +33,6 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void editer() {
-		System.out.println("Button editer");
 		Quiz.changerVue("Editeur.fxml");
 	}
 	
@@ -53,7 +51,6 @@ public class ControlleurAccueil {
 	 */
 	@FXML
 	private void quitter() {
-		System.out.println("Quitter");
 		Quiz.quitter();
 	}
 	

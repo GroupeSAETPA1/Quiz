@@ -7,17 +7,15 @@ package application.controleurs;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 /** 
- * 
  * Controller de la page fxml parametre partie
  * @author Lucas
- * TODO gerer les exception lie a la non selection de nombre de question
- *      gerer exception si aucune categorie choisi
  */
 public class ControlleurParametres {
 
@@ -29,6 +27,16 @@ public class ControlleurParametres {
     
     @FXML
     private ToggleGroup difficulte ;
+    
+    @FXML
+    public void initialize() {
+        selecteurCategorie.getItems().add("Aléatoire");
+        // Ajoute les categorie de banque categorie dans la combo box
+        selecteurCategorie.getItems().
+        addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());
+    }
+    
+    
     /*
      * Fonction lié au bouton de retour a la page d'accueil
      */
@@ -42,7 +50,11 @@ public class ControlleurParametres {
      */
     @FXML
     public void commencerPartie() {
-        modifierParametrePartie();
+        try {
+            modifierParametrePartie();
+        } catch (Exception e) {
+            AlertBox.showErrorBox(e.getMessage());
+        }
         System.out.println("non implémenté");
         
     }
@@ -51,40 +63,40 @@ public class ControlleurParametres {
      * Met a jour les paramètre de la partie
      */
     private void modifierParametrePartie() {
-        ModelePrincipal.getInstance()
-        .setCategoriePartie(selecteurCategorie.getValue());
-        //System.out.println(ModelePrincipal.getInstance().getCategoriePartie());
+        if (selecteurCategorie.getValue() != null ) {
+            ModelePrincipal.getInstance()
+            .setCategoriePartie(selecteurCategorie.getValue());
+        } else {
+            throw new NullPointerException("Categorie non selectionné  ! ");
+        }
         ModelePrincipal.getInstance().setNombreQuestion(getNbQuestion());
-        //System.out.println(ModelePrincipal.getInstance().getNombreQuestion());
-        //System.out.println(ModelePrincipal.getInstance().getBanqueCategorie());
-        ModelePrincipal.getInstance().setDifficultePartie(getDifficulte());
-        System.out.println(ModelePrincipal.getInstance());
+        /* Si null l'attribut de la classe reste a null 
+         * et on choisis des questions de niveau aléatoire
+         */
+        if (difficulte.getSelectedToggle() != null) {
+            ModelePrincipal.getInstance().setDifficultePartie(getDifficulte());
+        }
+        
     }
 
     /** 
      * @return La difficulte choisis
      */
     private Integer getDifficulte() {
-        if (difficulte.getSelectedToggle() == null) {
-            return null;
-        }
-        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-                ((RadioButton) difficulte.getSelectedToggle()).getText());
+            return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+
     }
 
     /**
      * @return la valeur choisis pour le nombre de question
      */
     private int getNbQuestion() {
+        if (nombreQuestions.getSelectedToggle() == null) {
+            throw new NullPointerException("Nombre de question non selectionné ! ");
+        }
+        //else
         return Integer.parseInt((
                 (RadioButton) nombreQuestions.getSelectedToggle()).getText()); 
-    }
-
-    @FXML
-    public void initialize() {
-        selecteurCategorie.getItems().add("Aléatoire");
-        // Ajoute les categorie de banque categorie dans la combo box
-        selecteurCategorie.getItems().
-        addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());
     }
 }
