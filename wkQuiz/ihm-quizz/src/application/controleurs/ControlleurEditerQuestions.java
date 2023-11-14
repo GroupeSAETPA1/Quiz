@@ -41,6 +41,7 @@ public class ControlleurEditerQuestions {
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
+	@FXML
 	public void initialize() {
 		TableColumn<LigneQuestion, String> categorieColumn = new TableColumn<>("categorie");
 		categorieColumn.setCellValueFactory(new PropertyValueFactory<>("categorie"));

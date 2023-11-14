@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -19,7 +26,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
@@ -65,7 +72,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerQuestion" prefHeight="50.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -168,7 +175,7 @@
             </Pane>
          </content>
       </Tab>
-      <Tab closable="false" text="Création Catégorie">
+      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
@@ -196,7 +203,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
