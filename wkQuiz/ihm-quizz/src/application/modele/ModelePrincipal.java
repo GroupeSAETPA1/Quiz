@@ -176,13 +176,21 @@ public class ModelePrincipal {
         if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
             estSupprimer = false;
         } else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
-        	for (int i = 0; i < banqueQuestion.getQuestions().size(); i++) {
-        		if (banqueQuestion.getQuestions().get(i).getCategorie() == categorieASupprimer.getNom()) {
-        			System.out.println(banqueQuestion.getQuestions().get(i).getLibelle() + " Est supprimée !!!!");
-        			banqueQuestion.getQuestions().remove(i);
-        			i--;
-        		}
-        	}
+        	/*
+        	 *  On parcours la Banque des Questions et on ajoute toutes les questions
+        	 *  qui ont la meme catégorie que celle qu'on veut supprimer
+        	 *  dans une ArrayList pour apres pouvoir les supprimer 
+        	 *  de la Banque de questions
+        	 */
+        	ArrayList<Question> questionsASupprimer = new ArrayList<Question>();
+        	
+        	for (Question question : banqueQuestion.getQuestions()) {
+				if (question.getCategorie() == categorieASupprimer.toString()) {
+					questionsASupprimer.add(question);
+				}
+			}
+        	
+        	banqueQuestion.getQuestions().removeAll(questionsASupprimer);
             estSupprimer = banqueCategorie.getCategories().remove(categorieASupprimer);
         } else {
             estSupprimer = false;
