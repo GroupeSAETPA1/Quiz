@@ -138,7 +138,13 @@ public class ControleurImport {
 
             int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
 
-            int difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));
+            int difficulte;
+            try {
+            	System.out.println(ligneHashMap.get("difficulte"));
+            	difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
+			} catch (NumberFormatException e) {
+				continue;
+			}
 
             try {
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
@@ -207,7 +213,7 @@ public class ControleurImport {
             numeroLigne++;
         } while (ligne != null);
         fichierReader.close();
-        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes correctes.");
+        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé.");
         return resultat;
     }
 
