@@ -144,7 +144,7 @@ public class ControleurImport {
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
                         ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
                 nombreQuestionCreer++;
-            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException e) {
+            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException | DifficulteException e) {
                 System.err.println("Question n°" + indiceLigne + e.getMessage());
                 AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
                         + "d'information consulter la page d'aide");
