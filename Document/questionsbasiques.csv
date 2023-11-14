@@ -1,6 +1,6 @@
 Catégorie	Niveau	Libellé	juste	faux1	faux2	faux3	faux4	feedback
-Commentaire	1	Quel est le délimiteur de début d'un commentaire Javadoc ?	le délimiteur /**	le délimiteur /*	le délimiteur //		le délimiteur (*	
-Commentaire	1	Laquelle des propositions suivantes n'est pas un commentaire dans la syntaxe du langage Java ?	<*  commentaire *>	 /* commentaire */	 // commentaire			feedback
+Commentaire	1	Quel est le délimiteur de début d'un commentaire Javadoc ?	le délimiteur /**	le délimiteur /*	le délimiteur //	le délimiteur (*		
+Commentaire	1	Laquelle des propositions suivantes n'est pas un commentaire dans la syntaxe du langage Java ?	<*  commentaire *>	 /* commentaire */	 // commentaire			
 Commentaire	1	Si un commentaire est écrit sur plusieurs lignes, quel délimiteur de commentaire est-il préférable d'utiliser ?	 /* commentaire */	 // commentaire		 		
 Commentaire	2	Il est conseillé d'écrire un commentaire au tout début du programme (avant la ligne comportant l'instruction package). Ce 1er commentaire est-il un commentaire Javadoc ?	non	oui				
 Commentaire	3	Où le premier commentaire Javadoc est-il écrit ?	"juste avant la ligne ""public class ?"""	"avant la ligne ""package ..."""	"entre les lignes ""package ..."" et ""import ..."""	"juste après la ligne ""public class ?"""		
@@ -22,7 +22,7 @@ Affectation	1	On suppose que la variable entier est de type entier. Quelle sera 
 Type	1	On suppose que le type de la variable entier est int. Quelles valeurs pourra-t-on affecter à entier ?	des entiers négatifs ou positifs, y compris 0	seulement des entiers positifs y compris 0	seulement des entiers strictement positifs	seulement des entiers strictement négatifs	seulement des entiers négatifs et aussi 0	
 Type	1	On suppose que le type de la variable entier est int. Peut-on affecter à cette variable la valeur 2,5 ?	non	oui				
 Saisie	1	On souhaite que effectuer une saisie au clavier d'un nombre entier et stocker celui-ci dans une variable nommée entier. Que faut-il écrire ?	entier = entree.nextInt();	entier = nexInt();	entier = entree.nextInt;	entier = entree.nextint();	entier = entree.Nextint;	
-if	2	Dans une instruction if, la branche else est facultative ? Ou autrement dit, on peut écrire :                              if ( condition ) {                                                  instructions                                                                       }	oui	non				
+if	2	Dans une instruction if, la branche else est facultative ? Ou autrement dit, on peut écrire :    if ( condition ) {     instructions    }	oui	non				
 if 	1	Dans une instruction if, les paranthèses autour de la condition sont obligatoires :                                           if ( condition ) { 	oui	non				
 condition	2	La condition suivante    age < 0  && age > 115   est 	toujours fausse	toujours vraie	vraie ou fausse selon la valeur de la variable age			
 condition	1	La condition suivante 100 <= quantite <= 200   est correctement écrite	 faux	 vrai				
