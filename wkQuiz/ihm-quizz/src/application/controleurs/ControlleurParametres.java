@@ -7,6 +7,7 @@ package application.controleurs;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -52,13 +53,33 @@ public class ControlleurParametres {
     public void commencerPartie() {
         try {
             modifierParametrePartie();
+            
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
         }
+        verifierNombreQuestion();
         System.out.println("non implémenté");
         
     }
     
+    /** 
+     * Ajoute a la liste de questions dans laquelle seront tirés celle de la partie
+     * toutes les questions correspondant au parametre
+     * @return le nombre de question repondant au parametre
+     */
+    private int verifierNombreQuestion() {
+        for (Question question : ModelePrincipal.getInstance().
+             getBanqueQuestion().getQuestions()) {
+            // si correspont au parametre ou parametre null on ajoute
+            
+           
+            
+        }
+        return 0;
+        
+    }
+
+
     /** 
      * Met a jour les paramètre de la partie
      */
@@ -73,7 +94,8 @@ public class ControlleurParametres {
         /* Si null l'attribut de la classe reste a null 
          * et on choisis des questions de niveau aléatoire
          */
-        if (difficulte.getSelectedToggle() != null) {
+        Integer difficulte = getDifficulte();
+        if (difficulte != null) {
             ModelePrincipal.getInstance().setDifficultePartie(getDifficulte());
         }
         
@@ -83,8 +105,11 @@ public class ControlleurParametres {
      * @return La difficulte choisis
      */
     private Integer getDifficulte() {
-            return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+        if (difficulte.getSelectedToggle() == null) {
+            throw new NullPointerException("Aucunes difficulte selectionee");
+        }
+        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+               ((RadioButton) difficulte.getSelectedToggle()).getText());
 
     }
 

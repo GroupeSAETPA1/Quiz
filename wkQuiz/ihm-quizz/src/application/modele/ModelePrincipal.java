@@ -56,6 +56,11 @@ public class ModelePrincipal {
      */
     private Categorie categorieQuestion ;
     
+    /**
+     * Liste de question correspondant au parametre 
+     * selectionne par l'utilisateur
+     */
+    private ArrayList<Question> questionsPossibles ;
     
     public boolean isDisplayCategoriePane() {
 		return displayCategoriePane;
@@ -320,10 +325,9 @@ public class ModelePrincipal {
     
     /**
      * Change la categorie de la partie actuelle
+     * @param choisis la categorie dans laquelle on veut prendre des questions
      */
     public void setCategoriePartie(String choisis) {
-        System.out.println(choisis);
-        System.out.println(banqueCategorie.getCategories());
         this.categorieQuestion = 
                 banqueCategorie.getCategorieLibelleExact(choisis);
     }
@@ -334,5 +338,20 @@ public class ModelePrincipal {
     public Categorie getCategoriePartie() {
         return this.categorieQuestion;          
     }
+    
+    /**
+     * @return la liste de question possible correspondant au parametre
+     */
+    public ArrayList<Question> getQuestionPossible() {
+        return this.questionsPossibles;
+    }
+    
+    
+    /**
+     * Modifie la liste des questionPossible pour la prochaine partie
+     * @param nouvelle liste de questions
+     */
+    public void setQuestionPossible(ArrayList<Question> aChanger) {
+        this.questionsPossibles = aChanger ;   
+    }
 }
-
