@@ -42,35 +42,14 @@ public class ModelePrincipal {
     private static ModelePrincipal modele;
     private BanqueQuestion banqueQuestion;
     private BanqueCategorie banqueCategorie;
+    private Partie partie;
 
-    private Question questionAModifier;
+	private Question questionAModifier;
     private Categorie catgorieAModifier;
     
     private boolean displayCategoriePane;
 
-    
-    /** 
-     * Difficulte des questions de la partie en cours
-     * La partie en cour pourra prendre des questions de niveau egal 
-     * a difficultePartie 
-     **/
-    private Integer difficultePartie; 
-    
-    
-    /** Nombre de question auquel l'utilisateur 
-     * repondra dans la partie actuelle 
-     */ 
-    private int nombreQuestionPartie ;
-    
-    
-    /**
-     * Categorie dans laquelle les questions seront tiree
-     * Initialisé a null reste a null si l'option Aléatoire est choisis dans la
-     * page de paramètre
-     */
-    private Categorie categorieQuestion ;
-    
-    
+
     public boolean isDisplayCategoriePane() {
 		return displayCategoriePane;
 	}
@@ -83,6 +62,7 @@ public class ModelePrincipal {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
+        
         
         
         LABEL_DIFFICULTE_TO_INT.put("Facile", 1);
@@ -329,44 +309,11 @@ public class ModelePrincipal {
         this.difficultePartie = difficulte ;
     }
     
-    /**
-     * @return la difficulte de la partie en cour
-     */
-    public Integer getDifficulte() {
-        return this.difficultePartie;
-        
-    }
-    
-    /**
-     * @return le nombre de question dans la partie en cour 
-     */
-    public int getNombreQuestion() {
-        return this.nombreQuestionPartie;
-    }
-    
-    /**
-     * Change le nombre de question de la partie en cours
-     * @param nombreQuestion nouveau nombre de question
-     */
-    public void setNombreQuestion(int nombreQuestion) {
-        this.nombreQuestionPartie = nombreQuestion ;
-    }
-    
-    /**
-     * Change la categorie de la partie actuelle
-     */
-    public void setCategoriePartie(String choisis) {
-        System.out.println(choisis);
-        System.out.println(banqueCategorie.getCategories());
-        this.categorieQuestion = 
-                banqueCategorie.getCategorieLibelleExact(choisis);
-    }
-    /**
-     * @return la categorie dans lequelle seront 
-     * tirés les questions de la partie  
-     */
-    public Categorie getCategoriePartie() {
-        return this.categorieQuestion;          
-    }
-}
+    public Partie getPartie() {
+		return partie;
+	}
 
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+}

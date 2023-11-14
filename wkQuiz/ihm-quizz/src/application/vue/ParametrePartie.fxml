@@ -101,27 +101,35 @@
                <font>
                   <Font size="25.0" />
                </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
                <toggleGroup>
                   <ToggleGroup fx:id="difficulte" />
                </toggleGroup>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </RadioButton>
             <RadioButton mnemonicParsing="false" prefHeight="36.0" prefWidth="123.0" text="Moyen" textFill="WHITE" toggleGroup="$difficulte">
                <font>
                   <Font size="25.0" />
                </font>
                <HBox.margin>
-                  <Insets left="120.0" />
+                  <Insets left="40.0" />
                </HBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Difficile" textFill="WHITE" toggleGroup="$difficulte">
+            <RadioButton mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Difficile" textFill="WHITE" toggleGroup="$difficulte">
                <font>
                   <Font size="25.0" />
                </font>
                <HBox.margin>
-                  <Insets left="120.0" />
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Tous" textFill="WHITE" toggleGroup="$difficulte">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="40.0" />
                </HBox.margin>
             </RadioButton>
          </children>
