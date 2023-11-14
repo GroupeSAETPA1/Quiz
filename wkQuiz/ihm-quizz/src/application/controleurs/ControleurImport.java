@@ -179,6 +179,7 @@ public class ControleurImport {
         if (!modele.categorieExiste(nomCategorie)) {
             try {
                 modele.creerCategorie(nomCategorie);
+                System.out.println("nouvelle categorie" + modele.getBanqueCategorie().getCategorieLibelleExact(nomCategorie));
             } catch (InvalidNameException e) {
                 AlertBox.showErrorBox(
                         nomCategorie + " : nom de catégorie invalide\nL'insertion de la catégorie est impossible");
