@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="789.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Group layoutX="32.0" layoutY="20.0">
          <children>
@@ -46,23 +45,18 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Button layoutX="60.0" layoutY="150.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Retour a la question precedente" textFill="WHITE">
+      <Button layoutX="32.0" layoutY="706.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="267.0" style="-fx-background-radius: 60; -fx-background-color: #848484;" text="Question precedente" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="660.0" layoutY="150.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #ffffff;" text="Passer" textFill="#2f76ff">
+      <Button layoutX="773.0" layoutY="706.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #E00000;" text="Passer" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <VBox layoutX="361.0" layoutY="197.0" prefHeight="310.0" prefWidth="278.0" spacing="30.0">
+      <VBox layoutX="216.0" layoutY="331.0" prefHeight="310.0" prefWidth="569.0" spacing="30.0">
          <children>
-            <Label layoutX="315.0" text="*Intitulé Question :*" textFill="WHITE">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
             <RadioButton mnemonicParsing="false" text="Choix 1" textFill="WHITE">
                <font>
                   <Font size="20.0" />
@@ -90,10 +84,25 @@
             </RadioButton>
          </children>
       </VBox>
-      <Button layoutX="400.0" layoutY="594.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Continuer" textFill="WHITE">
+      <Button layoutX="400.0" layoutY="706.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #004F08;" text="Valider" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
          </font>
       </Button>
+      <Label layoutX="361.0" layoutY="242.0" text="*Intitulé Question :*" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="167.0" text="*Catégorie Question :*" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="667.0" layoutY="182.0" text="*Difficulté Question :*" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
