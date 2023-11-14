@@ -175,7 +175,7 @@
             </Pane>
          </content>
       </Tab>
-      <Tab closable="false" text="Création Catégorie">
+      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>

@@ -86,12 +86,8 @@ public class ControlleurCreationQuestionEtCategorie {
 	    miseAJourListeCategorie();
 
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
-	    	try {
-	    		tabPane.getSelectionModel().select(tabCategorie);
-	    		ModelePrincipal.getInstance().setDisplayCategoriePane(false);
-	    	} catch (NullPointerException e) {
-	    		System.out.println("Erreur : " + e);
-	    	}
+	    	tabPane.getSelectionModel().select(tabCategorie);
+	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
 	    }
     }
 
