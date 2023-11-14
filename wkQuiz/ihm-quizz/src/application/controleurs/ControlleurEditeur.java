@@ -43,7 +43,7 @@ public class ControlleurEditeur {
 	@FXML 
 	private void editerQuestion() {
 		System.out.println("Editer une question ");
-		Quiz.changerVue("EditerQuestions.fxml");
+		Quiz.chargerEtChangerVue("EditerQuestions.fxml");
 	}
 	
 	/**
