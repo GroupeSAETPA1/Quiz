@@ -39,7 +39,7 @@ import javafx.stage.Stage;
  * @author Lucas DESCRIAUD
  * @author Tom DOUAUD
  */
-public class Quiz extends Application {
+public class Quiz extends Application { 
 
 	/**
 	 * Fenêtre principale de l'application
@@ -132,7 +132,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("ImporterQuestion.fxml"));
+		primaryStage.setScene(scenes.get("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
@@ -167,6 +167,9 @@ public class Quiz extends Application {
 	 * @param args non utilisé
 	 */
 	public static void main(String args[]) {
+	    System.out.println("coucou");
+
+	    
 		launch(args);
 		// new ControleurPrincipal();	FIXME
 	}

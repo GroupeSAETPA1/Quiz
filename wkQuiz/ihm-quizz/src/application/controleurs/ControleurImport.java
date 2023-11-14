@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.FileNotFoundException;
 
 import application.Quiz;
 import application.exception.DifficulteException;
@@ -25,9 +24,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,7 +64,7 @@ public class ControleurImport {
     @FXML
     private void aider() {
         System.out.println("Aider");
-        // TODO rediriger vers Aide.fxml
+        Quiz.changerVue("Aide.fxml");
     }
 
     @FXML
@@ -107,24 +103,23 @@ public class ControleurImport {
         }
     }
 
-    /** 
-     * TODO comment method role
-     * @param lignes
+    /**
+     * Créer une question (et sa catégorie correspondante si nécessaire) Et gère les
+     * exceptions lié à la création.
+     * 
+     * @param lignes Une liste de HashMap où chaque ligne est une ligne du CSV
      */
-    private void creerEtGererQuestionCategorie(ArrayList<HashMap<String, String>> lignes) {
+    private static void creerEtGererQuestionCategorie(ArrayList<HashMap<String, String>> lignes) {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
         // Création des nouvelles catégories et des nouvelles questions
+        int indiceLigne = 0;
+        int nombreQuestionCreer = 0;
         for (HashMap<String, String> ligneHashMap : lignes) {
-            // Si la catégorie n'existe pas on la créer
-            if (!modele.categorieExiste(ligneHashMap.get("categorie"))) {
-                try {
-                    modele.creerCategorie(ligneHashMap.get("categorie"));
-                } catch (InvalidNameException e) {
-                    AlertBox.showErrorBox(ligneHashMap.get("categorie") + " : nom de catégorie invalide");
-                    e.printStackTrace();
-                    continue;
-                } catch (HomonymeException e) {
-                    // Si la catégorie existe déjà on ne fais rien
-                }
+
+            try {
+                creerCategorieSiAbsent(ligneHashMap.get("categorie"));
+            } catch (InvalidNameException e) {
+                continue;
             }
 
             ArrayList<String> reponseFausse = new ArrayList<String>();
@@ -141,63 +136,51 @@ public class ControleurImport {
                 reponseFausse.add(ligneHashMap.get("4reponseFausse"));
             }
 
-            // TODO Récupérer l'indice de la catégorie
             int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
 
             int difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));
 
-            boolean questionCreer = false;
-
             try {
-                questionCreer = modele.creerQuestion(
-                        ligneHashMap.get("libelle"), indiceCategorie, 
-                        difficulte, ligneHashMap.get("reponseJuste"), 
-                        reponseFausse, ligneHashMap.get("feedback"));
-            } catch (InvalidFormatException e) {
-                AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
-            } catch (InvalidNameException e) {
-                AlertBox.showErrorBox(
-                        "Attention, veuillez saisir le nom de la " + "question ET une réponse juste.");
-            } catch (ReponseException e) {
-                AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
-                        + "pas être en double ET la bonne réponse ne peut pas être " + "une mauvaise réponse");
-            } catch (HomonymeException e) {
-                AlertBox.showWarningBox("La question saisie existe déjà");
-            } catch (DifficulteException e) {
-                AlertBox.showErrorBox("Erreur sur la difficulte");
+                modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
+                        ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
+                nombreQuestionCreer++;
+            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException e) {
+                System.err.println("Question n°" + indiceLigne + e.getMessage());
+                AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
+                        + "d'information consulter la page d'aide");
             }
-            if (questionCreer) {
-                AlertBox.showSuccessBox("Question créer !");
-            }
+
+            indiceLigne++;
         }
+
+        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne + " questions créer");
+        System.out.println(modele.getCategories());
+        Quiz.charger("EditerQuestions.fxml");
+        Quiz.charger("EditerCategories.fxml");
     }
 
     /**
-     * Un fichier CSV valide contient :
-     * <ul>
-     * <li>Colonne 1 la catégorie</li>
-     * <li>Colonne 2 la difficulté</li>
-     * <li>Colonne 3 le libellé</li>
-     * <li>Colonne 4 la réponse juste</li>
-     * <li>Colonne 5 la première réponse fausse</li>
-     * <li>Colonne 6 la deuxième réponse fausse</li>
-     * <li>Colonne 7 la troisième réponse fausse</li>
-     * <li>Colonne 8 la quatrième réponse fausse</li>
-     * </ul>
+     * Vérifie si une catégorie est présente dans le modèle et si elle n'est pas
+     * présente, elle est créer.
      * 
-     * @param ligne La ligne de texte à vérifier
-     * @return true si la ligne est valide false sinon
+     * @param nomCategorie
+     * @return
+     * @throws InvalidNameException
      */
-    private boolean ligneCSVValide(String ligne) {
-        Pattern fichierValide = Pattern.compile("^(.*;){2}(.+;){3}(.*;){4}", Pattern.CASE_INSENSITIVE);
-
-        Matcher matcher = fichierValide.matcher(ligne);
-        if (matcher.find()) {
-            System.out.println("Ligne valide : " + ligne);
-            return true;
-        } else {
-            System.out.println("Ligne invalide : " + ligne);
-            return false;
+    private static void creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        // Si la catégorie n'existe pas on la créer
+        if (!modele.categorieExiste(nomCategorie)) {
+            try {
+                modele.creerCategorie(nomCategorie);
+            } catch (InvalidNameException e) {
+                AlertBox.showErrorBox(
+                        nomCategorie + " : nom de catégorie invalide\nL'insertion de la catégorie est impossible");
+                e.printStackTrace();
+                throw e;
+            } catch (HomonymeException e) {
+                // Si la catégorie existe déjà on ne fais rien
+            }
         }
     }
 
@@ -206,31 +189,37 @@ public class ControleurImport {
      * @return Une liste des ligne du fichier CSV
      * @throws IOException
      */
-    private ArrayList<HashMap<String, String>> getLigneCSV(File fichierCSV) throws IOException {
+    private static ArrayList<HashMap<String, String>> getLigneCSV(File fichierCSV) throws IOException {
         String ligne;
         ArrayList<HashMap<String, String>> resultat = new ArrayList<HashMap<String, String>>();
         BufferedReader fichierReader = new BufferedReader(new FileReader(fichierCSV.getAbsolutePath()));
 
+        int numeroLigne = 1;
+        int nombreQuestionAjoute = 0;
         do {
             ligne = fichierReader.readLine();
 
             if (ligne != null) {
-                // TODO Ajouter la vérification de la ligne
-                resultat.add(getDicotionnaire(ligne));
+                HashMap<String, String> dicoLigne = getDicotionnaire(ligne);
+                resultat.add(dicoLigne);
+                nombreQuestionAjoute ++;
             }
+            numeroLigne++;
         } while (ligne != null);
-
+        fichierReader.close();
+        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes correctes.");
         return resultat;
     }
 
     /**
      * 
-     * TODO comment method role
+     * Récupère une ligne du CSV et retourne une HashMap associant chaque élément
+     * d'une question
      * 
      * @param ligne
      * @return
      */
-    private HashMap<String, String> getDicotionnaire(String ligne) {
+    private static HashMap<String, String> getDicotionnaire(String ligne) {
         HashMap<String, String> resultat = new HashMap<String, String>();
         String[] ligneListe = ligne.split(ModelePrincipal.SEPARATEUR_CSV + "");
         resultat.put("categorie", ligneListe[0]);
