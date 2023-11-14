@@ -3,7 +3,7 @@ package application.exception;
 /**
  * Exception levée lorsqu'un format n'est pas respecté
  */
-public class InvalidFormatException extends Exception {
+public class InvalidFormatException extends CreerQuestionException {
 
     /** 
      * Constructeur de la classe InvalidFormatException

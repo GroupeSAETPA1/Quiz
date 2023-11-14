@@ -20,6 +20,7 @@ public class LigneQuestion {
 	
     private final SimpleStringProperty categorie;
     private final SimpleStringProperty nomQuestion;
+    private final String libelleNonFormater;
     /*
     private final SimpleStringProperty reponseJuste;
     private final SimpleStringProperty reponsesFausses;
@@ -28,10 +29,29 @@ public class LigneQuestion {
     private final Button editerButton;
     private final Button supprimerButton;
 
-    public LigneQuestion(Categorie categorie, String nomQuestion, String reponseJuste, ArrayList<String> reponsesFausses, String feedback) {
+    public LigneQuestion(Categorie categorie, String libelle, String reponseJuste, ArrayList<String> reponsesFausses, String feedback) {
         this.categorie = new SimpleStringProperty(categorie.getNom());
+        
+        // si la question est trop longue, on met des \n tout les 31 char
+        String nomQuestion = "";
+        
+        if (libelle.length() > 31) {
+        	for (int i = 0; i <= libelle.length() - 1; i ++) {
+        		nomQuestion += libelle.charAt(i);
+        		if (i % 31 == 0 && i != 0) {
+        			nomQuestion += "\n";
+        		}
+        	}
+        } else {
+        	nomQuestion = libelle;
+        }
+        
         this.nomQuestion = new SimpleStringProperty(nomQuestion);
-        /*
+		this.libelleNonFormater = libelle;
+        
+        
+        
+        /* On remet si la prof veut a tout prix tout les colonnes
         this.reponseJuste = new SimpleStringProperty(reponseJuste);
         this.feedback = new SimpleStringProperty(feedback);
         
@@ -58,7 +78,7 @@ public class LigneQuestion {
 		return nomQuestion.get();
 	}
 
-	/*
+	/* On remet si la prof veut a tout prix tout les colonnes
 	public String getReponseJuste() {
 		return reponseJuste.get();
 	}
@@ -83,11 +103,14 @@ public class LigneQuestion {
 		return supprimerButton;
 	}
 
+	public String getLibelleNonFormater() {
+		return libelleNonFormater;
+	}
+
 
 	public void editerQuestion(){
-    	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
-    	
-    	
+		ModelePrincipal.getInstance().setQuestionAModifier(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(libelleNonFormater).get(0));
+		Quiz.chargerEtChangerVue("EditerQuestion.fxml");
     }
 
     public void supprimerQuestion() {
@@ -98,7 +121,7 @@ public class LigneQuestion {
         if (result) {
         	// si l'utilisateur confirme
         	// on supprime la question
-        	if (ModelePrincipal.getInstance().supprimerQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(this.getNomQuestion()).get(0))) {
+        	if (ModelePrincipal.getInstance().supprimerQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestionsLibelle(this.getLibelleNonFormater()).get(0))) {
         		// si la suppression a réussi
         		AlertBox.showSuccessBox("Suppression effectuée");
         		Quiz.chargerEtChangerVue("EditerQuestions.fxml");

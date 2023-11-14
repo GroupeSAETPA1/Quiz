@@ -20,7 +20,7 @@
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <ImageView fitHeight="96.0" fitWidth="96.0" onMouseClicked="#retour">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import application.modele.Categorie;
 import application.modele.Question;
-
+import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
@@ -44,10 +44,11 @@ class TestQuestion {
      * @throws ReponseException si les réponses sont invalides
      * @throws InvalidFormatException si le format est invalide
      * @throws InvalidNameException si le nom est invalide
+     * @throws DifficulteException 
      */
     @BeforeEach
     void genererJeuxDeTest() 
-    throws InvalidFormatException, InvalidNameException, ReponseException {
+    throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
         // Try catch pour la gestion des exceptions de Catégorie (FIXME)
         try {
             categoriesValides = new Categorie[] {
@@ -135,19 +136,19 @@ class TestQuestion {
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
         
         //La difficulté est negative
-        assertThrows(InvalidFormatException.class,
+        assertThrows(DifficulteException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],-1,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
-        assertThrows(InvalidFormatException.class,
+        assertThrows(DifficulteException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                         -999999,
                         "le délimiteur /**" , mauvaiseReponse1 ,""));
         
         //La difficulté est strictement supérieur à 3
-        assertThrows(InvalidFormatException.class,
+        assertThrows(DifficulteException.class,
                 ()-> new Question("libelle non vide" , categoriesValides[0],4,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
-        assertThrows(InvalidFormatException.class,
+        assertThrows(DifficulteException.class,
                 ()->  new Question("libelle non vide" , categoriesValides[0],
                                     9999999,
                                    "le délimiteur /**" , mauvaiseReponse1 ,""));
@@ -430,9 +431,10 @@ class TestQuestion {
      * @throws InvalidFormatException si le format est invalide
      * @throws ReponseException si les réponses sont invalides
      * @throws InvalidNameException si le nom est invalide
+     * @throws DifficulteException 
      */
     @Test
-    void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException {
+    void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
         Question question1Egale = new Question("Quel est le délimiteur de début "
                                       + "d'un commentaire Javadoc ?" , 
                                       categoriesValides[0] , 0 , 

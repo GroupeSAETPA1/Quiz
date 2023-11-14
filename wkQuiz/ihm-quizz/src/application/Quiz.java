@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -38,7 +39,7 @@ import javafx.stage.Stage;
  * @author Lucas DESCRIAUD
  * @author Tom DOUAUD
  */
-public class Quiz extends Application {
+public class Quiz extends Application { 
 
 	/**
 	 * Fenêtre principale de l'application
@@ -66,9 +67,10 @@ public class Quiz extends Application {
      * @throws HomonymeException 
      * @throws ReponseException 
      * @throws InvalidFormatException 
+     * @throws DifficulteException 
      */
 	@Override
-	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException {
+	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException {
         instance = this;
 		ressources = new ArrayList<>();
 		scenes = new HashMap<>();
@@ -91,7 +93,7 @@ public class Quiz extends Application {
     	    
     	   
     	    
-    	    String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolo\n Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
+    	    String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
     	    String char350 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.";
     	    ArrayList<String> rep250 = new ArrayList<>();
     	    rep250.add(char250 + "1");
@@ -99,9 +101,9 @@ public class Quiz extends Application {
     	    rep250.add(char250 + "3");
     	    rep250.add(char250 + "4");
     	    
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 0, "feur", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 0, "quette", rep, ""));
-    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 2, char250, rep250, char250));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 1, "feur", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 2, "quette", rep, ""));
+    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
 		}
 	    
 	    ressources.add("Accueil.fxml");
@@ -111,6 +113,9 @@ public class Quiz extends Application {
 		ressources.add("EditerCategories.fxml");
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
+	    ressources.add("Resultat.fxml");
+	    ressources.add("Solution.fxml");
+	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
 
 		
@@ -162,6 +167,9 @@ public class Quiz extends Application {
 	 * @param args non utilisé
 	 */
 	public static void main(String args[]) {
+	    System.out.println("coucou");
+
+	    
 		launch(args);
 		// new ControleurPrincipal();	FIXME
 	}
@@ -190,4 +198,5 @@ public class Quiz extends Application {
 	    charger(vue);
 	    changerVue(vue);
 	}
+
 }

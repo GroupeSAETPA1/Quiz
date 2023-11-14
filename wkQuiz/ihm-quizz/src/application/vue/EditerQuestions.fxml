@@ -2,7 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditerQuestions">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditerQuestions">
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <ImageView fitHeight="96.0" fitWidth="96.0" onMouseClicked="#retour">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
@@ -63,21 +63,21 @@
             <Font name="Open Sans Regular" size="24.0" />
          </font>
       </Text>
-      <RadioButton layoutX="917.0" layoutY="213.0" mnemonicParsing="false" text="Facile" textFill="WHITE">
+      <CheckBox layoutX="917.0" layoutY="213.0" mnemonicParsing="false" text="Facile" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="1057.0" layoutY="213.0" mnemonicParsing="false" text="Moyen" textFill="WHITE">
+      </CheckBox>
+      <CheckBox layoutX="1057.0" layoutY="213.0" mnemonicParsing="false" text="Moyen" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>
-      </RadioButton>
-      <RadioButton layoutX="1204.0" layoutY="213.0" mnemonicParsing="false" text="Difficile" textFill="WHITE">
+      </CheckBox>
+      <CheckBox layoutX="1204.0" layoutY="213.0" mnemonicParsing="false" text="Difficile" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>
-      </RadioButton>
+      </CheckBox>
       <Button fx:id="CreerQuestionBouton" layoutX="1010.0" layoutY="28.0" mnemonicParsing="false" onAction="#versCreerQuestion" onMouseClicked="#versCreerQuestion" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Créer une Question" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />

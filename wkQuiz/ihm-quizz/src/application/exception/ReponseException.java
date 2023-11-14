@@ -3,7 +3,7 @@ package application.exception;
 /**
  * Exception levée lorsqu'une réponse (fausse ou bonne) est non valide
  */
-public class ReponseException extends Exception {
+public class ReponseException extends CreerQuestionException {
 
     /** 
      * Constructeur de la classe ReponseException

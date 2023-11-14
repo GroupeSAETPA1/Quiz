@@ -8,6 +8,7 @@ package application.modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 
@@ -115,9 +116,9 @@ public class BanqueQuestion implements Serializable{
      * @throws InvalidFormatException si la difficultée est invalide
      */
     public ArrayList<Question> getQuestionsDifficulte(int difficulte)
-    throws InvalidFormatException {
+    throws DifficulteException {
         if (difficulte < 1 || 3 < difficulte) {
-            throw new InvalidFormatException("Une difficulte est comprise " 
+            throw new DifficulteException("Une difficulte est comprise " 
                                            + "entre 1 et 3");
         }
         ArrayList<Question> resultat = new ArrayList<Question>();
