@@ -175,9 +175,15 @@ public class ModelePrincipal {
         boolean estSupprimer = false;
         if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
             estSupprimer = false;
-        }else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
-            estSupprimer = 
-                    banqueCategorie.getCategories().remove(categorieASupprimer);
+        } else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
+        	for (int i = 0; i < banqueQuestion.getQuestions().size(); i++) {
+        		if (banqueQuestion.getQuestions().get(i).getCategorie() == categorieASupprimer.getNom()) {
+        			System.out.println(banqueQuestion.getQuestions().get(i).getLibelle() + " Est supprimée !!!!");
+        			banqueQuestion.getQuestions().remove(i);
+        			i--;
+        		}
+        	}
+            estSupprimer = banqueCategorie.getCategories().remove(categorieASupprimer);
         } else {
             estSupprimer = false;
         }
