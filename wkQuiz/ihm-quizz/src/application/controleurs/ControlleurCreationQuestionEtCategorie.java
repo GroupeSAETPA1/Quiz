@@ -127,10 +127,13 @@ public class ControlleurCreationQuestionEtCategorie {
 		try {
 			//Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
-//		System.out.println(  "Catégorie choisie : "
-//		                   + (indiceCategorieChoisie >= 0
+//			System.out.println("Catégorie choisie : "
+//		                   	  + (indiceCategorieChoisie >= 0
 //		                      ? categories.get(indiceCategorieChoisie)
 //		                      : "Invalide"));
+			if (indiceCategorieChoisie <= 0) {
+				throw new NullPointerException("Il n'y a pas de Catégorie choisie");
+			}
 			
 			//Récupération du nom de la question
 			String libeleQuestion = getLibeleQuestion();
