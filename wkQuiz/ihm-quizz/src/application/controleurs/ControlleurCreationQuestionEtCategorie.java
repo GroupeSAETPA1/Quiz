@@ -98,7 +98,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	 */
 	@FXML
 	private void retourAcceuil() {
-		System.out.println("Bouton retour à l'acceuil");
 		Quiz.changerVue("Editeur.fxml");
 	}
 
@@ -109,7 +108,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML
 	private void validerQuestion() {
 	    //TODO Refactor pour avoir une fonction par action
-		System.out.println("Valider");
 
 		//Récupération de l'indice de la catégorie choisie
 		int indiceCategorieChoisie = getIndiceCategorieChoisie();
@@ -251,12 +249,9 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML
     private void validerCategorie() {
 
-		System.out.println("Valider");
-
 		boolean categorieCreer = false;
 
         String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
 
 		creerEtGererCategorie( categorieCreer, nom);
     }
