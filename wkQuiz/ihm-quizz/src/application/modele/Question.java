@@ -121,7 +121,7 @@ public class Question implements Serializable {
         if (!reponsesFausseSansDoublon(reponsesFausse)) {
             throw new ReponseException("La liste des mauvaises reponses "
                     + "ne peut pas contenir de valeurs "
-                    + "en double (casse ignoré)");
+                    + "en double");
         }
         
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
@@ -202,7 +202,7 @@ public class Question implements Serializable {
             precedent = aTester.get(i);
             for (int j = 0 ; j < aTester.size() && sansDoublon; j++) {
                 if (i != j) {
-                    sansDoublon = !precedent.equalsIgnoreCase(aTester.get(j));                    
+                    sansDoublon = !precedent.equals(aTester.get(j));                    
                 }
             }           
         }
