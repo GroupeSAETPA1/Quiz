@@ -1,6 +1,7 @@
 package application.controleurs;
 
 import application.Quiz;
+import application.modele.ModelePrincipal;
 import javafx.fxml.FXML;
 
 /**
@@ -23,7 +24,7 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void jouer() {
-		System.out.println("Button jouer");
+		Quiz.chargerEtChangerVue("ParametrePartie.fxml");
 	}
 	
 	
@@ -33,7 +34,6 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void editer() {
-		System.out.println("Button editer");
 		Quiz.changerVue("Editeur.fxml");
 	}
 	
@@ -52,7 +52,6 @@ public class ControlleurAccueil {
 	 */
 	@FXML
 	private void quitter() {
-		System.out.println("Quitter");
 		Quiz.quitter();
 	}
 	

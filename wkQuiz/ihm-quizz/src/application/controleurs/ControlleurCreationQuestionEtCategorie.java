@@ -3,6 +3,7 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -20,8 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * Controlleur de la page Creation de Quetion et de Categorie.
- * Celui-ci instance  des methodes liée au bouton de la page
+ * Controlleur de la page Creation de Question et de Catégorie.
+ * Celui-ci instance  des méthodes liée au bouton de la page
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -69,14 +70,12 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	@FXML
 	public void initialize() {
-	    System.out.println("Instanciation de Création");
         // On récupère l'instance du Modèle
 	    modele = ModelePrincipal.getInstance();
 
 	    miseAJourListeCategorie();
 
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
-	    	System.out.println("ici");
 	    	tapPane.getSelectionModel().select(tabCategorie);
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
 	    }
@@ -89,6 +88,7 @@ public class ControlleurCreationQuestionEtCategorie {
     private void miseAJourListeCategorie() {
         //Récupération puis ajout des nom de catégorie
         categories = modele.getCategories();
+        selectCategorie.getItems().clear();
         selectCategorie.getItems().addAll(categories);
     }
 
@@ -98,7 +98,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	 */
 	@FXML
 	private void retourAcceuil() {
-		System.out.println("Bouton retour à l'acceuil");
 		Quiz.changerVue("Editeur.fxml");
 	}
 
@@ -109,7 +108,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML
 	private void validerQuestion() {
 	    //TODO Refactor pour avoir une fonction par action
-		System.out.println("Valider");
 
 		//Récupération de l'indice de la catégorie choisie
 		int indiceCategorieChoisie = getIndiceCategorieChoisie();
@@ -141,6 +139,7 @@ public class ControlleurCreationQuestionEtCategorie {
 
 		creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
                 reponseVrai, mauvaiseReponses);
+		Quiz.charger("EditerQuestions.fxml");
 	}
 
 
@@ -182,9 +181,13 @@ public class ControlleurCreationQuestionEtCategorie {
     /** 
      * @return La difficulté
      */
-    private Integer getDifficulte() {
-        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-		        ((RadioButton) difficulte.getSelectedToggle()).getText());
+    private int getDifficulte() {
+        int reponse = Integer.MAX_VALUE;
+        if (difficulte.getSelectedToggle() != null) {
+            reponse = ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+        }
+        return reponse;
     }
 
     /** 
@@ -221,7 +224,7 @@ public class ControlleurCreationQuestionEtCategorie {
                     mauvaiseReponses, feedback);
 
         } catch (InvalidFormatException e) {
-            AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
                     + "question ET une réponse juste.");
@@ -231,6 +234,8 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
+        } catch (DifficulteException e) {
+            AlertBox.showErrorBox("Veillez selectionner une difficulté");
         }
         if (questionCreer) {
             AlertBox.showSuccessBox("Question créer !");
@@ -244,12 +249,9 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML
     private void validerCategorie() {
 
-		System.out.println("Valider");
-
 		boolean categorieCreer = false;
 
         String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
 
 		creerEtGererCategorie( categorieCreer, nom);
     }

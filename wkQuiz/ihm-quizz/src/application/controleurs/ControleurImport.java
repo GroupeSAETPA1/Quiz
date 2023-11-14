@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -137,13 +138,19 @@ public class ControleurImport {
 
             int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
 
-            int difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));
+            int difficulte;
+            try {
+            	System.out.println(ligneHashMap.get("difficulte"));
+            	difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
+			} catch (NumberFormatException e) {
+				continue;
+			}
 
             try {
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
                         ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
                 nombreQuestionCreer++;
-            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException e) {
+            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException | DifficulteException e) {
                 System.err.println("Question n°" + indiceLigne + e.getMessage());
                 AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
                         + "d'information consulter la page d'aide");
@@ -206,7 +213,7 @@ public class ControleurImport {
             numeroLigne++;
         } while (ligne != null);
         fichierReader.close();
-        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes correctes.");
+        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé.");
         return resultat;
     }
 

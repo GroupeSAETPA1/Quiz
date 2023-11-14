@@ -3,13 +3,13 @@ package application.modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
 
 
 /**
- * TODO comment class responsibility (SRP)
  * Classe représentant une question du quiz.
  * @author Lucas Descriaud
  */
@@ -20,7 +20,7 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** difficultée minimale d'une question */
-	private final int DIFFICULTE_MINIMALE = 0;
+	private final int DIFFICULTE_MINIMALE = 1;
 	
 	/** difficultée maximale d'une question */
 	private final int DIFFICULTE_MAXIMALE = 3;
@@ -94,18 +94,20 @@ public class Question implements Serializable {
      *       (case ignorée) </li>
      *  <li> reponseFausse contient uniquement des chaines vides </li>
      * </ul>
+     * @throws DifficulteException 
      */
     public Question(String libelle,Categorie categorie,int difficulte,
-                    String reponseJuste,ArrayList<String> reponsesFausse,
+                    String reponseJuste, ArrayList<String> reponsesFausse,
                     String feedback) throws InvalidFormatException, 
-                    InvalidNameException, ReponseException {
+                    InvalidNameException, ReponseException, DifficulteException {
+        
         if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
             throw new InvalidNameException("Le libelle contient " + libelle.length() 
             + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
-            throw new InvalidFormatException("Le niveau est compris "
-                                               + "entre 1 et 3");
+            throw new DifficulteException("Le niveau de difficulté doit être "
+                                             + "compris entre 1 et 3");
         }
         if (reponseJuste.isBlank() || reponseJuste.length() > LONGUEUR_MAX_REPONSE) {
             throw new InvalidNameException("La réponse juste contient" + 
@@ -134,7 +136,7 @@ public class Question implements Serializable {
                     erreurReponsesFaussesTropLongue(reponseFausseTropLongue);
             throw new ReponseException(messageErreur.toString());
         }
-        if (feedback.length() > LONGUEUR_MAX_FEEDBACK) {
+        if (feedback != null && feedback.length() > LONGUEUR_MAX_FEEDBACK) {
             throw new InvalidNameException("Le feedback contient " 
             + feedback.length() + " caractères . Il peut en contenir au maximum " 
                     + LONGUEUR_MAX_FEEDBACK);
@@ -274,7 +276,7 @@ public class Question implements Serializable {
         }
         if (reponseFausseContientReponseJuste(mauvaisesReponses, 
             nouvelleBonneReponse)) {
-            throw new ReponseException("Impossible de set une bonne "
+            throw new ReponseException("Impossible de mettre une bonne "
                     + "reponse si la valeur est deja contenu "
                     + "dans mauvaiseReponse ");
         }
