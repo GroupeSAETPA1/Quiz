@@ -24,8 +24,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Controlleur de Import Gère le fichier CSV et créer les nouvelles questions et
@@ -40,7 +38,6 @@ public class ControleurImport {
 
     private File fichierCSVChoisie;
 
-    private ModelePrincipal modele = ModelePrincipal.getInstance();
 
     @FXML
     private void parcourirExplorer() {
@@ -82,16 +79,16 @@ public class ControleurImport {
         File fichier = new File(cheminFichierCSV);
 
         if (cheminFichierCSV.isBlank()) {
-            AlertBox.showWarningBox("Aucun fichier selectionner");
+//            AlertBox.showWarningBox("Aucun fichier selectionner");
 
             // Le fichier n'existe pas
         } else if (!fichier.exists()) {
-            AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
+//            AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
 
             // Le fichier n'est pas un csv
         } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") + 1).equals("csv")) {
-            AlertBox.showErrorBox(
-                    cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
+//            AlertBox.showErrorBox(
+//                    cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
 
             // Création des question
         } else {
@@ -123,16 +120,16 @@ public class ControleurImport {
             }
 
             ArrayList<String> reponseFausse = new ArrayList<String>();
-            if (ligneHashMap.get("1reponseFausse") != null) {
+            if (!ligneHashMap.get("1reponseFausse").isBlank()) {
                 reponseFausse.add(ligneHashMap.get("1reponseFausse"));
             }
-            if (ligneHashMap.get("2reponseFausse") != null) {
+            if (!ligneHashMap.get("2reponseFausse").isBlank()) {
                 reponseFausse.add(ligneHashMap.get("2reponseFausse"));
             }
-            if (ligneHashMap.get("3reponseFausse") != null) {
+            if (!ligneHashMap.get("3reponseFausse").isBlank()) {
                 reponseFausse.add(ligneHashMap.get("3reponseFausse"));
             }
-            if (ligneHashMap.get("4reponseFausse") != null) {
+            if (!ligneHashMap.get("4reponseFausse").isBlank()) {
                 reponseFausse.add(ligneHashMap.get("4reponseFausse"));
             }
 
@@ -140,12 +137,12 @@ public class ControleurImport {
 
             int difficulte;
             try {
-            	System.out.println(ligneHashMap.get("difficulte"));
+            	//System.out.println(ligneHashMap.get("difficulte"));
             	difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
 			} catch (NumberFormatException e) {
 				continue;
 			}
-
+            
             try {
             	System.out.println(difficulte);
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
@@ -153,15 +150,16 @@ public class ControleurImport {
                 nombreQuestionCreer++;
             } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException | DifficulteException e) {
                 System.err.println("Question n°" + indiceLigne + e.getMessage());
-                AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
-                        + "d'information consulter la page d'aide");
+                System.out.println(ligneHashMap.get("libelle")+" || "+ indiceCategorie+" || "+ difficulte+ " || "+
+                        ligneHashMap.get("reponseJuste")+ reponseFausse+ ligneHashMap.get("feedback"));
+//                AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
+//                        + "d'information consulter la page d'aide");
             }
 
             indiceLigne++;
         }
 
-        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne + " questions créer");
-        System.out.println(modele.getCategories());
+//        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne + " questions créer");
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
     }
@@ -181,8 +179,8 @@ public class ControleurImport {
             try {
                 modele.creerCategorie(nomCategorie);
             } catch (InvalidNameException e) {
-                AlertBox.showErrorBox(
-                        nomCategorie + " : nom de catégorie invalide\nL'insertion de la catégorie est impossible");
+//                AlertBox.showErrorBox(
+//                        nomCategorie + " : nom de catégorie invalide\nL'insertion de la catégorie est impossible");
                 e.printStackTrace();
                 throw e;
             } catch (HomonymeException e) {
@@ -201,7 +199,6 @@ public class ControleurImport {
         ArrayList<HashMap<String, String>> resultat = new ArrayList<HashMap<String, String>>();
         BufferedReader fichierReader = new BufferedReader(new FileReader(fichierCSV.getAbsolutePath()));
 
-        int numeroLigne = 1;
         int nombreQuestionAjoute = 0;
         do {
             ligne = fichierReader.readLine();
@@ -209,12 +206,12 @@ public class ControleurImport {
             if (ligne != null) {
                 HashMap<String, String> dicoLigne = getDicotionnaire(ligne);
                 resultat.add(dicoLigne);
+                System.out.println(dicoLigne);
                 nombreQuestionAjoute ++;
             }
-            numeroLigne++;
         } while (ligne != null);
         fichierReader.close();
-        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé.");
+        //AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé.");
         return resultat;
     }
 
@@ -237,22 +234,22 @@ public class ControleurImport {
         try {
             resultat.put("1reponseFausse", ligneListe[4]);
         } catch (IndexOutOfBoundsException e) {
-            resultat.put("1reponseFausse", null);
+            resultat.put("1reponseFausse", "");
         }
         try {
             resultat.put("2reponseFausse", ligneListe[5]);
         } catch (IndexOutOfBoundsException e) {
-            resultat.put("2reponseFausse", null);
+            resultat.put("2reponseFausse", "");
         }
         try {
             resultat.put("3reponseFausse", ligneListe[6]);
         } catch (IndexOutOfBoundsException e) {
-            resultat.put("3reponseFausse", null);
+            resultat.put("3reponseFausse", "");
         }
         try {
             resultat.put("4reponseFausse", ligneListe[7]);
         } catch (IndexOutOfBoundsException e) {
-            resultat.put("4reponseFausse", null);
+            resultat.put("4reponseFausse", "");
         }
         try {
             resultat.put("feedback", ligneListe[8]);

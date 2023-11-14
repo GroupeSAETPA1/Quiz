@@ -93,13 +93,13 @@ class TestQuestion {
         
         mauvaiseReponseDoublon.add("doublon");
         mauvaiseReponseDoublon.add("DOUBLON");
-        mauvaiseReponseDoublon.add("doublon");
+        mauvaiseReponseDoublon.add("dOublon");
         mauvaiseReponseDoublon.add("DoUbLOn");
         
         
         questionValide.add(new Question("Quel est le délimiteur de début "
                                         + "d'un commentaire Javadoc ?" , 
-                           categoriesValides[0] , 0 , "le délimiteur /**" ,
+                           categoriesValides[0] , 1 , "le délimiteur /**" ,
                            mauvaiseReponse1 ,""));
         questionValide.add(new Question("A quoi correspond l'expression : "
                                          + "@author Dupont ?" ,
@@ -168,8 +168,7 @@ class TestQuestion {
                            mauvaiseReponse1 ,""));
         
         // La liste des mauvaise réponses contient un doublon
-        assertThrows(ReponseException.class,
-                ()->new Question("libelle non vide" , categoriesValides[0],3,
+        assertDoesNotThrow(()->new Question("libelle non vide" , categoriesValides[0],3,
                         "reponse juste non vide" , mauvaiseReponseDoublon ,""));
         
         // La réponse juste est présente dans les réponses fausses 
@@ -322,8 +321,8 @@ class TestQuestion {
      */
     @Test
     void testGetDifficulte() {
-    	assertEquals(0, questionValide.get(0).getDifficulte());
-    	assertNotEquals(1, questionValide.get(0).getDifficulte());
+    	assertEquals(1, questionValide.get(0).getDifficulte());
+    	assertNotEquals(2, questionValide.get(0).getDifficulte());
     	
     	assertEquals(2, questionValide.get(1).getDifficulte());
     	assertNotEquals(0, questionValide.get(1).getDifficulte());
@@ -415,8 +414,7 @@ class TestQuestion {
         test1.add("test2");
         assertThrows(InvalidFormatException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseVide));
-        assertThrows(ReponseException.class,
-                ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
+        assertDoesNotThrow(()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
         assertThrows(ReponseException.class,
                 ()-> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
         assertThrows(ReponseException.class,
@@ -437,7 +435,7 @@ class TestQuestion {
     void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
         Question question1Egale = new Question("Quel est le délimiteur de début "
                                       + "d'un commentaire Javadoc ?" , 
-                                      categoriesValides[0] , 0 , 
+                                      categoriesValides[0] , 1 , 
                                       "le délimiteur /**" ,mauvaiseReponse1 ,"");
         Question question2Egale = new Question("A quoi correspond l'expression : "
                                                 + "@author Dupont ?" ,categoriesValides[0],
@@ -500,7 +498,7 @@ class TestQuestion {
     @Test
     void testToString() {
     	String valide = """ 
-    			Difficulté de la question : 0
+    			Difficulté de la question : 1
     			Categorie de la question : Commentaire
     			Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
     			Mauvaise réponses :

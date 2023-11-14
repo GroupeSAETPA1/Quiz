@@ -308,7 +308,7 @@ public class ModelePrincipal {
      * @return true si la catégorie existe, false sinon
      */
     public boolean categorieExiste(String nom) {
-        return banqueCategorie.getCategorieLibelleExact(nom) == null;
+        return banqueCategorie.getCategorieLibelleExact(nom) != null;
     }
     
     /**
