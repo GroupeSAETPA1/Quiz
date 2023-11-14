@@ -147,6 +147,7 @@ public class ControleurImport {
 			}
 
             try {
+            	System.out.println(difficulte);
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
                         ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
                 nombreQuestionCreer++;
