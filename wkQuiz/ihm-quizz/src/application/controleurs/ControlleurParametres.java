@@ -5,6 +5,8 @@
 
 package application.controleurs;
 
+import application.modele.Partie;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -52,12 +54,14 @@ public class ControlleurParametres {
     @FXML
     public void commencerPartie() {
         try {
+        	ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
         }
         verifierNombreQuestion();
+        System.out.println(ModelePrincipal.getInstance().getPartie());
         System.out.println("non implémenté");
         
     }
@@ -85,18 +89,18 @@ public class ControlleurParametres {
      */
     private void modifierParametrePartie() {
         if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance()
+            ModelePrincipal.getInstance().getPartie()
             .setCategoriePartie(selecteurCategorie.getValue());
         } else {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }
-        ModelePrincipal.getInstance().setNombreQuestion(getNbQuestion());
+        ModelePrincipal.getInstance().getPartie().setNombreQuestion(getNbQuestion());
         /* Si null l'attribut de la classe reste a null 
          * et on choisis des questions de niveau aléatoire
          */
         Integer difficulte = getDifficulte();
         if (difficulte != null) {
-            ModelePrincipal.getInstance().setDifficultePartie(getDifficulte());
+            ModelePrincipal.getInstance().getPartie().setDifficultePartie(getDifficulte());
         }
         
     }
