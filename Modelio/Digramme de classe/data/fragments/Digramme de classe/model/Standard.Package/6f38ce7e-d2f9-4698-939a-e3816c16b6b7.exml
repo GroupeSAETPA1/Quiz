@@ -17,6 +17,7 @@
         <COMPID name="BanqueQuestion" mc="Standard.Class" uid="3cb3ae91-001c-4896-befc-021029465bb2"/>
         <COMPID name="BanqueCategorie" mc="Standard.Class" uid="022b5470-de2c-4f89-a548-963690d20935"/>
         <COMPID name="ModelePrincipale" mc="Standard.Class" uid="b644cc03-9e9c-425d-8e43-3e998720c024"/>
+        <COMPID name="Partie" mc="Standard.Class" uid="04c3a2dd-7b38-47b5-aa79-b53191d96646"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
