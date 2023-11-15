@@ -49,6 +49,7 @@ public class Partie {
      */
     public Partie () {
     	reponsesDonnees = new HashMap<>();
+    	questionsPossibles = new ArrayList<Question>();
     }
     
     /**
