@@ -254,6 +254,9 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
+        } catch (DifficulteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         if (questionCreer) {
             AlertBox.showSuccessBox("Question crée !");

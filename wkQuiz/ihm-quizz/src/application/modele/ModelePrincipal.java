@@ -320,7 +320,7 @@ public class ModelePrincipal {
      * @param difficulte nouvelle difficulte
      */
     public void setDifficultePartie(int difficulte) {
-        this.difficultePartie = difficulte ;
+        partie.setDifficultePartie(difficulte);
     }
     
     public Partie getPartie() {
