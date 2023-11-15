@@ -134,14 +134,10 @@ public class ControleurImport {
 			}
             
             try {
-            	System.out.println(difficulte);
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
                         ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
                 nombreQuestionCreer++;
             } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException | DifficulteException e) {
-                System.err.println("Question n°" + indiceLigne + e.getMessage());
-                System.out.println(ligneHashMap.get("libelle")+" || "+ indiceCategorie+" || "+ difficulte+ " || "+
-                        ligneHashMap.get("reponseJuste")+ reponseFausse+ ligneHashMap.get("feedback"));
                 erreurImportLigne.put(indiceLigne , e.getMessage());
             }
 
