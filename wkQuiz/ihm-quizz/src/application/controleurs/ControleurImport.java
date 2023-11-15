@@ -53,20 +53,17 @@ public class ControleurImport {
 
         if (fichierCSVChoisie != null) {
             saisieCheminFichier.setText(fichierCSVChoisie.getAbsolutePath());
-            System.out.println(fichierCSVChoisie.getAbsolutePath());
         }
 
     }
 
     @FXML
     private void aider() {
-        System.out.println("Aider");
         Quiz.changerVue("Aide.fxml");
     }
 
     @FXML
     private void retour() {
-        System.out.println("Retour");
         Quiz.changerVue("Editeur.fxml");
     }
 
@@ -79,21 +76,13 @@ public class ControleurImport {
         File fichier = new File(cheminFichierCSV);
 
         if (cheminFichierCSV.isBlank()) {
-//            AlertBox.showWarningBox("Aucun fichier selectionner");
-
-            // Le fichier n'existe pas
+        	AlertBox.showWarningBox("Aucun fichier selectionner");
         } else if (!fichier.exists()) {
-//            AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
-
-            // Le fichier n'est pas un csv
+        	AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
         } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") + 1).equals("csv")) {
-//            AlertBox.showErrorBox(
-//                    cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
-
-            // Création des question
+        	AlertBox.showErrorBox(
+        			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
         } else {
-
-            // Récupération des lignes du CSV
             ArrayList<HashMap<String, String>> lignes = getLigneCSV(fichier);
 
             creerEtGererQuestionCategorie(lignes);
@@ -137,13 +126,13 @@ public class ControleurImport {
 
             int difficulte;
             try {
-            	//System.out.println(ligneHashMap.get("difficulte"));
             	difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
 			} catch (NumberFormatException e) {
 				continue;
 			}
             
             try {
+            	System.out.println(difficulte);
                 modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
                         ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
                 nombreQuestionCreer++;
@@ -151,14 +140,11 @@ public class ControleurImport {
                 System.err.println("Question n°" + indiceLigne + e.getMessage());
                 System.out.println(ligneHashMap.get("libelle")+" || "+ indiceCategorie+" || "+ difficulte+ " || "+
                         ligneHashMap.get("reponseJuste")+ reponseFausse+ ligneHashMap.get("feedback"));
-//                AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
-//                        + "d'information consulter la page d'aide");
             }
 
             indiceLigne++;
         }
 
-//        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne + " questions créer");
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
     }
@@ -178,8 +164,6 @@ public class ControleurImport {
             try {
                 modele.creerCategorie(nomCategorie);
             } catch (InvalidNameException e) {
-//                AlertBox.showErrorBox(
-//                        nomCategorie + " : nom de catégorie invalide\nL'insertion de la catégorie est impossible");
                 e.printStackTrace();
                 throw e;
             } catch (HomonymeException e) {
@@ -210,7 +194,7 @@ public class ControleurImport {
             }
         } while (ligne != null);
         fichierReader.close();
-        //AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé.");
+        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysé."); // TODO changer pour mettre le truc a lucas
         return resultat;
     }
 

@@ -56,14 +56,28 @@ public class ControlleurParametres {
         try {
         	ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
-            
+            boolean lancer;
+            int nombreQuestion = verifierNombreQuestion();
+            Partie partie = ModelePrincipal.getInstance().getPartie();
+            if (nombreQuestion == 0) {
+                throw new IllegalArgumentException("Impossible de lancer un "
+                        + "quiz ! Aucunes questions trouver pour vos choix "
+                        + "de parametres"); 
+            } else if (nombreQuestion < partie.getNombreQuestion()) {
+                lancer  = AlertBox.showConfirmationBox(
+                        "Seulement " + nombreQuestion + 
+                        " questions trouvé pour votre paramétrage \n "
+                        + "voulez vous lance le quizz avec celui-ci ?");
+            } else {
+                lancer = AlertBox.showConfirmationBox(
+                        "Voulez vous lancer le quizz avec ce paramétrage");
+            }
+            if (lancer) {
+                System.out.println("TODO page de jeu");
+            }
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
         }
-        verifierNombreQuestion();
-        System.out.println(ModelePrincipal.getInstance().getPartie());
-        System.out.println("non implémenté");
-        
     }
     
     /** 
@@ -72,14 +86,26 @@ public class ControlleurParametres {
      * @return le nombre de question repondant au parametre
      */
     private int verifierNombreQuestion() {
+        Partie partie = ModelePrincipal.getInstance().getPartie();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
-            // si correspont au parametre ou parametre null on ajoute
-            
-           
-            
+            /*
+             * Categorie partie est null si aléatoire choisis donc on prendras
+             * les questions de toutes les categories
+             * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
+             * prendras les questions de tous les difficultes
+             */
+            if (
+                (question.getCategorie().equals(
+                 partie.getCategoriePartie().toString())
+                     || partie.getCategoriePartie() == null)
+               && (question.getDifficulte() == partie.getDifficulte().intValue()
+                   || partie.getDifficulte().intValue() == 0)
+               ){
+                partie.getQuestionPossible().add(question);        
+            }   
         }
-        return 0;
+        return partie.getQuestionPossible().size();
         
     }
 
@@ -95,14 +121,10 @@ public class ControlleurParametres {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }
         ModelePrincipal.getInstance().getPartie().setNombreQuestion(getNbQuestion());
-        /* Si null l'attribut de la classe reste a null 
-         * et on choisis des questions de niveau aléatoire
+        /* 
+         * difficulte partie a 0 = tous type de questions 
          */
-        Integer difficulte = getDifficulte();
-        if (difficulte != null) {
-            ModelePrincipal.getInstance().getPartie().setDifficultePartie(getDifficulte());
-        }
-        
+        ModelePrincipal.getInstance().getPartie().setDifficultePartie(getDifficulte());
     }
 
     /** 

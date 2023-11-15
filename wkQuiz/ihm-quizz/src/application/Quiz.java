@@ -167,9 +167,6 @@ public class Quiz extends Application {
 	 * @param args non utilisé
 	 */
 	public static void main(String args[]) {
-	    System.out.println("coucou");
-
-	    
 		launch(args);
 		// new ControleurPrincipal();	FIXME
 	}
