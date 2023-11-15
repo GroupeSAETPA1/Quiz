@@ -33,6 +33,7 @@ public class ControleurResultat {
 	 */
 	@FXML 
 	private void voirReponses() {
+		Quiz.changerVue("Solution.fxml");
 		System.out.println("Button voirReponses");
 		// TODO rajouter le lien vers Quiz.changerVue("Solution.fxml");
 	}
@@ -47,6 +48,11 @@ public class ControleurResultat {
 		Quiz.changerVue("Accueil.fxml");
 	}
 	
+	@FXML
+	private void nouveauQuiz() {
+		Quiz.changerVue("ParametrePartie.fxml");
+	}
+	
 	/**
 	 * Méthode exécutée au chargement de la page Resultat
 	 * pour récuperer le score et le message
@@ -57,5 +63,8 @@ public class ControleurResultat {
 		messageNBReponse.setText("Message approprié a écrire et relier (et centrer aussi ca mange pas de pain");
 		score.setText("Score = TODO/TODO");
 	}
+	
+	
+	
 
 }
