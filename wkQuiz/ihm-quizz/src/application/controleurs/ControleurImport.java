@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import application.Quiz;
 import application.exception.DifficulteException;
@@ -168,15 +169,25 @@ public class ControleurImport {
 
     /** 
      * Affiche la fenetre de retour utilisateur correspondante.
-     * Si la hashMap est vide une simple fenetre de confirmation sinon
+     * Si la hashMap est vide une simple fenetre de succes sinon
      * une fenetre d'erreur avec la ligne et l'erreur généré 
      * @param erreurImportLigne HashMap associant la ligne et 
      *        l'erreur correspondante
      */
     private static void afficherConfirmation(
             HashMap<Integer, String> erreurImportLigne) {
-        if (erreurImportLigne.isEmpty())
-        sqdsqdsqdqsdqqsdsqdq
+        StringBuilder messageErreur = new StringBuilder() ;
+        if (erreurImportLigne.isEmpty()) {
+            AlertBox.showSuccessBox("Toutes les questions ont "
+                    + "été importées avec succès");
+        } else {
+            erreurImportLigne.forEach((key , value) -> {
+                messageErreur.append("Erreur d'import a la ligne " + key + " : " 
+                                     + value +"\n");
+            });
+            AlertBox.showErrorBox(messageErreur.toString());
+        }
+
     }
 
     /**
