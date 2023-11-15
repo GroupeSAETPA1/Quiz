@@ -55,6 +55,7 @@ public abstract class AlertBox {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.setTitle("Erreur");
+        alert.setResizable(true);;
 
         alert.showAndWait();
     }

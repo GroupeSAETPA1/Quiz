@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import application.Quiz;
 import application.exception.DifficulteException;
@@ -100,6 +101,7 @@ public class ControleurImport {
         // Création des nouvelles catégories et des nouvelles questions
         int indiceLigne = 0;
         int nombreQuestionCreer = 0;
+        HashMap<Integer , String> erreurImportLigne = new HashMap<>();
         for (HashMap<String, String> ligneHashMap : lignes) {
 
             try {
@@ -140,13 +142,37 @@ public class ControleurImport {
                 System.err.println("Question n°" + indiceLigne + e.getMessage());
                 System.out.println(ligneHashMap.get("libelle")+" || "+ indiceCategorie+" || "+ difficulte+ " || "+
                         ligneHashMap.get("reponseJuste")+ reponseFausse+ ligneHashMap.get("feedback"));
+                erreurImportLigne.put(indiceLigne , e.getMessage());
             }
 
             indiceLigne++;
         }
-
+        afficherConfirmation(erreurImportLigne);
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
+    }
+
+    /** 
+     * Affiche la fenetre de retour utilisateur correspondante.
+     * Si la hashMap est vide une simple fenetre de succes sinon
+     * une fenetre d'erreur avec la ligne et l'erreur généré 
+     * @param erreurImportLigne HashMap associant la ligne et 
+     *        l'erreur correspondante
+     */
+    private static void afficherConfirmation(
+            HashMap<Integer, String> erreurImportLigne) {
+        StringBuilder messageErreur = new StringBuilder() ;
+        if (erreurImportLigne.isEmpty()) {
+            AlertBox.showSuccessBox("Toutes les questions ont "
+                    + "été importées avec succès");
+        } else {
+            erreurImportLigne.forEach((key , value) -> {
+                messageErreur.append("Erreur d'import a la ligne " + key + " : " 
+                                     + value +"\n");
+            });
+            AlertBox.showErrorBox(messageErreur.toString());
+        }
+
     }
 
     /**
