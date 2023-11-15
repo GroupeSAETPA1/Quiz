@@ -59,4 +59,25 @@ public class ControlleurRepondreQuestion {
     	
     	return libelleFormater;   	
 	}
+    
+    @FXML
+    private ToggleGroup reponseChoisi ;
+    
+    
+    @FXML
+    private void validerReponse() {
+        boolean reponseAlertBox = true ; 
+        Partie partie = ModelePrincipal.getInstance().getPartie();
+        String reponse; 
+        if (reponseChoisi.getSelectedToggle() == null) {
+           reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
+                   + "aucunes reponses.\nPar défaut cette réponse sera compté "
+                   + "comme fausse");
+        }
+        if (reponseAlertBox) {
+            reponse = ((RadioButton) reponseChoisi.getSelectedToggle()).getText();
+            partie.setReponseDonnee(partie.getActuelle(), reponse);
+            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+        }
+    }
 }
