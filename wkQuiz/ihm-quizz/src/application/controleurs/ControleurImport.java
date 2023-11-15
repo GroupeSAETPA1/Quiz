@@ -111,6 +111,7 @@ public class ControleurImport {
         // Création des nouvelles catégories et des nouvelles questions
         int indiceLigne = 0;
         int nombreQuestionCreer = 0;
+        HashMap<Integer , String> erreurImportLigne = new HashMap<>();
         for (HashMap<String, String> ligneHashMap : lignes) {
 
             try {
@@ -154,14 +155,28 @@ public class ControleurImport {
                         ligneHashMap.get("reponseJuste")+ reponseFausse+ ligneHashMap.get("feedback"));
 //                AlertBox.showErrorBox("Erreur de création de la question n°" + indiceLigne + "\nPour plus "
 //                        + "d'information consulter la page d'aide");
+                erreurImportLigne.put(indiceLigne , e.getMessage());
             }
 
             indiceLigne++;
         }
-
+        afficherConfirmation(erreurImportLigne);
 //        AlertBox.showSuccessBox(nombreQuestionCreer + "/" + indiceLigne + " questions créer");
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
+    }
+
+    /** 
+     * Affiche la fenetre de retour utilisateur correspondante.
+     * Si la hashMap est vide une simple fenetre de confirmation sinon
+     * une fenetre d'erreur avec la ligne et l'erreur généré 
+     * @param erreurImportLigne HashMap associant la ligne et 
+     *        l'erreur correspondante
+     */
+    private static void afficherConfirmation(
+            HashMap<Integer, String> erreurImportLigne) {
+        if (erreurImportLigne.isEmpty())
+        sqdsqdsqdqsdqqsdsqdq
     }
 
     /**
