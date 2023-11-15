@@ -118,8 +118,10 @@ public class ControlleurEditerCategories {
         }
    
         for (Categorie categorie : categories) {
-            data.add(new LigneCategorie(categorie.getNom()
-                    , ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
+        	if (categorie.getNom() != null) {
+        		data.add(new LigneCategorie(categorie.getNom()
+        				, String.valueOf(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size())));
+        	}
         }
     }
 }
