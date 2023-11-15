@@ -44,6 +44,11 @@ public class Partie {
     private HashMap<Question, String> reponsesDonnees;
     
     /**
+     * Question actuelle a laquelle l'utilisateur doit repondre
+     */
+    private Question actuelle ;
+    
+    /**
      * constructeur 
      * initialise tout a null sauf la hashmap
      */
@@ -121,5 +126,39 @@ public class Partie {
 				+ ", categorieQuestion=" + categorieQuestion + ", questionsPossibles=" + questionsPossibles
 				+ ", reponsesDonnees=" + reponsesDonnees + "]";
 	}
-
+	
+	/**
+	 * @return la question actuelle
+	 */
+	public Question getActuelle() {
+	    return this.actuelle;
+	}
+	
+	/**
+	 * Change la question actuelle
+	 * @param nouvelle question actuelle
+	 */
+	public void setActuelle(Question aChanger) {
+	    this.actuelle = aChanger;
+	}
+	
+	
+	/**
+	 * @return la HashMap associant les question et les reponses donnees par
+	 * l'utilisateur
+	 */
+	public HashMap<Question, String> getReponseDonnees() {
+        return this.reponsesDonnees;
+	    
+	}
+	
+	/**
+	 * Ajoute a la HashMap une question et sa reponse associe
+	 * Si une reponse existe deja elle est ecrasée
+	 * @param question cle dans la hashMap
+	 * @param reponseAssocie value dans la hashMap
+	 */
+	public void setReponseDonnee(Question question , String reponseAssocie) {
+	    reponsesDonnees.put(question, reponseAssocie);
+	}
 }
