@@ -68,6 +68,7 @@ public class ModelePrincipal {
         LABEL_DIFFICULTE_TO_INT.put("Facile", 1);
         LABEL_DIFFICULTE_TO_INT.put("Moyen", 2);
         LABEL_DIFFICULTE_TO_INT.put("Difficile", 3);
+        LABEL_DIFFICULTE_TO_INT.put("Tous" , 0);
     }
 
     /**
