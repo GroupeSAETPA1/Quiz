@@ -98,12 +98,12 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Label fx:id="categorie" layoutX="32.0" layoutY="149.0" text="*Catégorie Question :*" textFill="WHITE">
+      <Label fx:id="categorie" layoutX="35.0" layoutY="158.0" text="*Catégorie Question :*" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label fx:id="difficulte" layoutX="800.0" layoutY="149.0" prefHeight="47.0" prefWidth="200.0" text="Difficultée : " textFill="WHITE">
+      <Label fx:id="difficulte" layoutX="800.0" layoutY="158.0" prefHeight="47.0" prefWidth="200.0" text="Difficultée : " textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
