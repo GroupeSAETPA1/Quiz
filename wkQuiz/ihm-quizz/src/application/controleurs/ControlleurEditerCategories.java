@@ -3,6 +3,7 @@ package application.controleurs;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,7 +13,6 @@ import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 import application.Quiz;
 import application.controleurs.factories.EditerCategorieButtonCellFactory;
@@ -57,6 +57,7 @@ public class ControlleurEditerCategories {
 	
 	public void initialize() {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
+	    table.setPlaceholder(new Label("Pas de Catégorie trouvé"));
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
