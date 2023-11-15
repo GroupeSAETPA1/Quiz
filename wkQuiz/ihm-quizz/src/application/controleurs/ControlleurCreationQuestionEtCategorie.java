@@ -119,13 +119,13 @@ public class ControlleurCreationQuestionEtCategorie {
 	private void validerQuestion() {
 	    //TODO Refactor pour avoir une fonction par action
 		System.out.println("Valider");
-
-		//Récupération de l'indice de la catégorie choisie
-		int indiceCategorieChoisie = getIndiceCategorieChoisie();
-//		System.out.println(  "Catégorie choisie : "
-//		                   + (indiceCategorieChoisie >= 0
-//		                      ? categories.get(indiceCategorieChoisie)
-//		                      : "Invalide"));
+		try {
+			//Récupération de l'indice de la catégorie choisie
+			int indiceCategorieChoisie = getIndiceCategorieChoisie();
+	//		System.out.println(  "Catégorie choisie : "
+	//		                   + (indiceCategorieChoisie >= 0
+	//		                      ? categories.get(indiceCategorieChoisie)
+	//		                      : "Invalide"));
 			if (indiceCategorieChoisie <= 0) {
 				throw new NullPointerException("Il n'y a pas de Catégorie choisie");
 			}
