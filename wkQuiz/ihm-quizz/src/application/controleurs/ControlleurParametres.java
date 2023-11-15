@@ -95,10 +95,9 @@ public class ControlleurParametres {
              * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
              * prendras les questions de tous les difficultes
              */
-            if (
+            if (partie.getCategoriePartie() == null ||
                 (question.getCategorie().equals(
-                 partie.getCategoriePartie().toString())
-                     || partie.getCategoriePartie() == null)
+                 partie.getCategoriePartie().toString()))
                && (question.getDifficulte() == partie.getDifficulte().intValue()
                    || partie.getDifficulte().intValue() == 0)
                ){
