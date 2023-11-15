@@ -331,4 +331,6 @@ public class ModelePrincipal {
 	public void setPartie(Partie partie) {
 		this.partie = partie;
 	}
+	
+	
 }

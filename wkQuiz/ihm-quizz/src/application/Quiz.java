@@ -132,7 +132,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Accueil.fxml"));
+		primaryStage.setScene(scenes.get("Solution.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
