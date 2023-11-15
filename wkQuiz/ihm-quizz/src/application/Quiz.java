@@ -114,7 +114,7 @@ public class Quiz extends Application {
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
 	    ressources.add("Resultat.fxml");
-	    ressources.add("Solution.fxml");
+	    //ressources.add("Solution.fxml");
 	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
 

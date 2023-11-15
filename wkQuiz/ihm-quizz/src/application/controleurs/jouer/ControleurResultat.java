@@ -1,9 +1,12 @@
 package application.controleurs.jouer;
 
 import application.Quiz;
+import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  * Controlleur de la page Résultat
@@ -14,6 +17,10 @@ import javafx.scene.control.TextField;
 
 
 public class ControleurResultat {
+	
+	 ModelePrincipal model = ModelePrincipal.getInstance();
+	 
+	 final String TEXT_SCORE="Score=%s/%s";
 		
 	/**
 	 * Le texte du score réalisé par le joueur
@@ -59,9 +66,18 @@ public class ControleurResultat {
 	 */
 	@FXML
 	public void initialize() {
-		// TODO lier le score au vrai score et charger le bon texte selon la performance
-		messageNBReponse.setText("Message approprié a écrire et relier (et centrer aussi ca mange pas de pain");
-		score.setText("Score = TODO/TODO");
+		
+		if(model.getPartie() != null) {
+			Partie partie = model.getPartie();
+			
+			int nbReponse = partie.getNombreQuestion();
+			int nbReponseBonne = 0;
+			// TODO lier le score au vrai score et charger le bon texte selon la performance
+			score.setText(String.format(TEXT_SCORE,nbReponseBonne,nbReponse));
+		}else {
+			score.setText("Il n'y a pas de partie");
+			
+		}
 	}
 	
 	
