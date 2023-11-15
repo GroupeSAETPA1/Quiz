@@ -73,7 +73,7 @@ public class ControlleurParametres {
                         "Voulez vous lancer le quizz avec ce paramétrage");
             }
             if (lancer) {
-                System.out.println("TODO page de jeu");
+                Quiz.changerVue("RepondreQuestion.fxml");
             }
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
