@@ -343,4 +343,9 @@ public class ModelePrincipal {
 	public void setPartie(Partie partie) {
 		this.partie = partie;
 	}
+	
+	public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
+		return this.getBanqueCategorie().getCategoriesLibelle(libelle);
+
+	}
 }
