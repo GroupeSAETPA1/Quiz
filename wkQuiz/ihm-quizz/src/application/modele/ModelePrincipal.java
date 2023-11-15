@@ -48,6 +48,18 @@ public class ModelePrincipal {
     private Categorie catgorieAModifier;
     
     private boolean displayCategoriePane;
+    
+    private String pagePrecedente;
+    
+    public String getPagePrecendente(){
+    	return pagePrecedente;
+    }
+    
+    public void setPagePrecedente(String nomPage){
+    	this.pagePrecedente = nomPage;
+    }
+    
+    
 
 
     public boolean isDisplayCategoriePane() {

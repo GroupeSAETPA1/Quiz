@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 
 public class ControlleurAccueil {
 	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
+	
 	/**
 	 * Méthode liée au bouton jouer 
 	 * qui devra renvoyer vers la page ParametrePartie.fxml 
@@ -36,6 +38,7 @@ public class ControlleurAccueil {
 	private void editer() {
 		Quiz.changerVue("Editeur.fxml");
 	}
+	
 	
 	/**
 	 * Méthode liée au bouton en ligne
@@ -61,7 +64,10 @@ public class ControlleurAccueil {
 	 */
 	@FXML
 	private void aider() {
+		model.setPagePrecedente("Accueil.fxml");
 		System.out.println("Aider");
+		Quiz.changerVue("Aide.fxml");
+
 		// TODO : lancer une alertBox
 	}
 

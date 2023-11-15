@@ -38,6 +38,8 @@ public class ControleurImport {
     private TextField saisieCheminFichier;
 
     private File fichierCSVChoisie;
+    
+    private ModelePrincipal model = ModelePrincipal.getInstance();
 
 
     @FXML
@@ -60,6 +62,7 @@ public class ControleurImport {
 
     @FXML
     private void aider() {
+    	model.setPagePrecedente("ImporterQuestion.fxml"); 
         Quiz.changerVue("Aide.fxml");
     }
 

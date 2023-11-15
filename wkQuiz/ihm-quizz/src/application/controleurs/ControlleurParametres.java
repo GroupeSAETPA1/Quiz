@@ -21,6 +21,8 @@ import javafx.scene.control.ToggleGroup;
  * @author Lucas
  */
 public class ControlleurParametres {
+	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
 
     @FXML
     private ComboBox<String> selecteurCategorie ;
@@ -47,6 +49,11 @@ public class ControlleurParametres {
     public void retourAccueil() {
         Quiz.changerVue("Accueil.fxml");
     }
+    @FXML
+	private void aider() {
+    	model.setPagePrecedente("ParametrePartie.fxml"); 
+		Quiz.changerVue("Aide.fxml");
+	}
     
     /*
      * Fonction lié au bouton de commencement d'une partie

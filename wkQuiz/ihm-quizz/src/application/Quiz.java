@@ -114,9 +114,10 @@ public class Quiz extends Application {
 	    ressources.add("EditerQuestion.fxml");
 	    ressources.add("EditerQuestions.fxml");
 	    ressources.add("Resultat.fxml");
-	    ressources.add("Solution.fxml");
+	    //ressources.add("Solution.fxml");
 	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
+	    ressources.add("Aide.fxml");
 
 		
 		for (String element : ressources) {
@@ -132,7 +133,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Resultat.fxml"));
+		primaryStage.setScene(scenes.get("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
@@ -146,6 +147,7 @@ public class Quiz extends Application {
      * @param fenetre (String) le nom de la fenetre a charger en .fxml
      */
 	public static void changerVue(String fenetre) {
+		System.out.println(fenetre);
 		fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
 		fenetrePrincipale.setScene(scenes.get(fenetre));
 		fenetrePrincipale.show();
