@@ -1,9 +1,14 @@
 package application.controleurs;
 
+import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
+import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 public class ControlleurRepondreQuestion {	
 	
@@ -18,6 +23,10 @@ public class ControlleurRepondreQuestion {
 	
 	@FXML
 	private Label numero;
+	
+    
+    @FXML
+    private ToggleGroup reponseChoisi ;
 	
 	@FXML 
 	public void initialize() {
@@ -59,9 +68,7 @@ public class ControlleurRepondreQuestion {
     	
     	return libelleFormater;   	
 	}
-    
-    @FXML
-    private ToggleGroup reponseChoisi ;
+
     
     
     @FXML
