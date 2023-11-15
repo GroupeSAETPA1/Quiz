@@ -12,6 +12,7 @@ import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import application.Quiz;
 import application.controleurs.factories.EditerCategorieButtonCellFactory;
@@ -106,22 +107,27 @@ public class ControlleurEditerCategories {
      * Modifie le tableau des categorie
      */
     private void miseAJourTableau() {
+    	ModelePrincipal modele = ModelePrincipal.getInstance();
        
         ObservableList<LigneCategorie> data = table.getItems();
+//        FilteredList<LigneCategorie> dataFiltre = new FilteredList<>(data);
+
         ArrayList<Categorie> categories ; 
         if (filtre) {
-            data.clear();
-            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesLibelle(barreRecherche.getText().strip());
-          
+        	data.clear();
+        	categories = modele.getCategoriesLibelle(barreRecherche.getText().strip());
         } else {
-            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+            categories = modele.getBanqueCategorie().getCategories();
         }
    
         for (Categorie categorie : categories) {
-        	if (categorie.getNom() != null) {
-        		data.add(new LigneCategorie(categorie.getNom()
-        				, String.valueOf(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size())));
-        	}
+        	if (modele.getBanqueQuestion().getQuestions(categorie).size() == 0) {
+        		data.add(new LigneCategorie(categorie.getNom()));
+			} else {
+				data.add(new LigneCategorie(categorie.getNom()
+						, String.valueOf(modele.getBanqueQuestion().getQuestions(categorie).size())));
+			}
+    
         }
     }
 }

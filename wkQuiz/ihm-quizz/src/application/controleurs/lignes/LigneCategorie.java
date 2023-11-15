@@ -22,13 +22,24 @@ public class LigneCategorie {
 
     public LigneCategorie(String nom, String nb) {
         this.nomProperty = new SimpleStringProperty(nom);
-        this.nbProperty = nb == null ? new SimpleStringProperty("AAAAAAAAAAAAAA") : new SimpleStringProperty(nb);
+        this.nbProperty = new SimpleStringProperty(nb);
         this.editerButton = new Button("Éditer");
         this.supprimerButton = new Button("Supprimer");
 
         editerButton.setOnAction(event -> editerCategorie());
         supprimerButton.setOnAction(event -> supprimerCategorie());
     }
+    
+    public LigneCategorie(String nom) {
+        this.nomProperty = new SimpleStringProperty(nom);
+        this.nbProperty = new SimpleStringProperty("0");
+        this.editerButton = new Button("Éditer");
+        this.supprimerButton = new Button("Supprimer");
+
+        editerButton.setOnAction(event -> editerCategorie());
+        supprimerButton.setOnAction(event -> supprimerCategorie());
+    }
+    
 
     public String getNomProperty() {
         return nomProperty.get();
