@@ -57,7 +57,7 @@ public class ControlleurParametres {
         	ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
-            int nombreQuestion = verifierNombreQuestion();
+            int nombreQuestion = genererListeQuestionPossible();
             Partie partie = ModelePrincipal.getInstance().getPartie();
             if (nombreQuestion == 0) {
                 throw new IllegalArgumentException("Impossible de lancer un "
@@ -85,7 +85,7 @@ public class ControlleurParametres {
      * toutes les questions correspondant au parametre
      * @return le nombre de question repondant au parametre
      */
-    private int verifierNombreQuestion() {
+    private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
