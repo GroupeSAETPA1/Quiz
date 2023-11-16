@@ -97,8 +97,8 @@ public class ControlleurRepondreQuestion {
 	}
 
 	private void afficherNumeroQuestion() {
-		numero.setText("Question n°" + partie.getIndiceQuestion() + 1);
-		
+		Integer nb = partie.getIndiceQuestion() + 1;
+		numero.setText("Question n°" + nb);
 	}
 
 	/** 
@@ -115,6 +115,11 @@ public class ControlleurRepondreQuestion {
     }
 
 
+    /**
+     * permet de rajouter des \n a tout les a caracteres
+     * @param chaine 
+     * @param a
+     */
     private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
 
