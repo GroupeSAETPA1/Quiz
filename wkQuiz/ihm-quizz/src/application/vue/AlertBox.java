@@ -7,7 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
 /**
- * classe contenant les différents types d'alertbox
+ * Classe contenant les différents types d'alertbox
  * 
  * @author Quentin COSTES
  */

@@ -20,7 +20,7 @@ import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
 import application.controleurs.lignes.LigneCategorie;
 /**
  * Controlleur de la page d'édition des catégories.
- * Celui-ci instance  des methodes liée au bouton de la page 
+ * Celui-ci instance  des méthodes liée au bouton de la page 
  * 
  * @author Quentin COSTES
  */
@@ -38,16 +38,15 @@ public class ControlleurEditerCategories {
 		
 	/**
 	 * Méthodes liée au group retour 
-	 * qui devra renvoyer vers la page precedente
+	 * evoie vers la page précédente
 	 */
-	
 	@FXML 
 	private void retour() {
 		Quiz.changerVue("Editeur.fxml");
 	}
 	/**
 	 * Méthodes liée au bouton Créer Categorie 
-	 * qui devra envoyer vers la page CreationQuestionEtCategorie.fxml
+	 * envoie vers la page CreationQuestionEtCategorie.fxml
 	 */
 	@FXML 
 	private void versCreerCategorie() {
@@ -55,6 +54,7 @@ public class ControlleurEditerCategories {
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
+	//TODO Il ne manque pas le @FXML ?
 	public void initialize() {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    table.setPlaceholder(new Label("Pas de Catégorie trouvé"));
@@ -104,8 +104,9 @@ public class ControlleurEditerCategories {
 	    filtre = true ; 
 	    miseAJourTableau ();
 	}
+	
     /** 
-     * Modifie le tableau des categorie
+     * Modifie le tableau des catégories
      */
     private void miseAJourTableau() {
     	ModelePrincipal modele = ModelePrincipal.getInstance();

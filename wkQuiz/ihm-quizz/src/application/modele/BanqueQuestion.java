@@ -42,6 +42,7 @@ public class BanqueQuestion implements Serializable{
         if (questions.contains(question)) {
             throw new HomonymeException("La question existe déjà.");
         }
+        
         questions.add(question);
     }
 
@@ -57,32 +58,8 @@ public class BanqueQuestion implements Serializable{
             throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
                     + "hors de la liste de taile %s", id, questions.size()));
         }
+        
         return questions.get(id);
-    }
-
-    /**
-     * Récupère les questions qui on le nombre de fausses réponses 
-     * passées en paramètres
-     * @param nb (int) Le nombre de mauvaises réponses demandé (entre 1 et 4)
-     * @return Les questions qui ont le nombre 
-     * de mauvaises réponses demandé (ArrayList)
-     * @throws InvalidFormatException Si le nombre de mauvaises 
-     * réponses est incorrect
-     */
-    public ArrayList<Question> getQuestionsNbFausseReponse(int nb)
-    throws InvalidFormatException {
-        if (nb <= 0 || 5 <= nb) { 
-            throw new InvalidFormatException(
-                String.format("Erreur : %d n'est pas un nombre correct " 
-                            + "de mauvaise réponse.",nb));
-        }
-        ArrayList<Question> resultat = new ArrayList<Question>();
-        for (Question question : questions) {
-            if (question.getMauvaisesReponses().size() == nb) {
-                resultat.add(question);
-            }
-        }
-        return resultat;
     }
 
     /**
@@ -100,11 +77,13 @@ public class BanqueQuestion implements Serializable{
      */
     public ArrayList<Question> getQuestions(Categorie categorie) {
         ArrayList<Question> resultat = new ArrayList<Question>();
+        
         for (Question question : questions) {
             if (question.getCategorie().equals(categorie.getNom())) {
                 resultat.add(question);
             }
         }
+        
         return resultat;
     }
 
@@ -117,14 +96,18 @@ public class BanqueQuestion implements Serializable{
      */
     public ArrayList<Question> getQuestionsDifficulte(int difficulte)
     throws DifficulteException {
+        
         if (difficulte < 1 || 3 < difficulte) {
             throw new DifficulteException("Une difficulte est comprise " 
                                            + "entre 1 et 3");
         }
+        
         ArrayList<Question> resultat = new ArrayList<Question>();
+        
         for (Question question : questions) {
             if (question.getDifficulte() == difficulte) resultat.add(question);
         }
+        
         return resultat;
     }
 
@@ -137,11 +120,42 @@ public class BanqueQuestion implements Serializable{
      */
     public ArrayList<Question> getQuestionsLibelle(String nom) {
         ArrayList<Question> resultat = new ArrayList<Question>();
+        
         for (Question question : questions) {
             if (question.getLibelle().toLowerCase().contains(nom.toLowerCase())) {
                 resultat.add(question);                
             }
         }
+        
+        return resultat;
+    }
+
+    /**
+     * Récupère les questions qui on le nombre de fausses réponses 
+     * passées en paramètres
+     * @param nb (int) Le nombre de mauvaises réponses demandé (entre 1 et 4)
+     * @return Les questions qui ont le nombre 
+     * de mauvaises réponses demandé (ArrayList)
+     * @throws InvalidFormatException Si le nombre de mauvaises 
+     * réponses est incorrect
+     */
+    public ArrayList<Question> getQuestionsNbFausseReponse(int nb)
+    throws InvalidFormatException {
+        
+        if (nb <= 0 || 5 <= nb) { 
+            throw new InvalidFormatException(
+                String.format("Erreur : %d n'est pas un nombre correct " 
+                            + "de mauvaise réponse.",nb));
+        }
+        
+        ArrayList<Question> resultat = new ArrayList<Question>();
+        
+        for (Question question : questions) {
+            if (question.getMauvaisesReponses().size() == nb) {
+                resultat.add(question);
+            }
+        }
+        
         return resultat;
     }
 

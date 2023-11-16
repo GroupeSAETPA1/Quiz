@@ -55,20 +55,50 @@ public class ControlleurRepondreQuestion {
     @FXML
     private RadioButton choix5;
     
+    
     @FXML
     private Button boutonPrecedent;
+    
+    @FXML
+    private Button valider;
+    
 	@FXML 
 	public void initialize() {
 	    /*
 	     * Evite IndexOutOfBoundsException au premier chargement
-	     */
+	     */	
 	    if (partie.getQuestionPossible().size() != 0) {
-	        afficherQuestion(partie.getQuestionPossible().get(partie.getIndiceQuestion()));
-	        afficherChoixPossible(partie.getQuestionPossible().get(partie.getIndiceQuestion()));	        
+	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
+	        afficherQuestion(questionEnCour);
+	        afficherChoixPossible(questionEnCour);	
+	        afficherQuestion(questionEnCour);	
+	        afficherNumeroQuestion();	
+	        couleurBoutonPrecedent();
+	        questionDejaRepondu(questionEnCour);
+
+	        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
+	        	afficherDernierPage();
+	        }
 	    }
-		couleurBoutonPrecedent();
-		// if déja répondu, on affiche son choix;
-		//questionPossible();
+	}
+
+	/**
+	 * modification de la page si c'est la dernier quesiton
+	 */
+	private void afficherDernierPage() {
+		valider.setText("Termminer le questionnaire");
+		valider.setPrefWidth(333);
+		valider.setTranslateX(-75);
+		
+	}
+
+	/**
+	 * 
+	 * TODO comment method role
+	 */
+	private void afficherNumeroQuestion() {
+		Integer nb = partie.getIndiceQuestion() + 1;
+		numero.setText("Question n°" + nb);
 	}
 
 	/** 
@@ -85,6 +115,11 @@ public class ControlleurRepondreQuestion {
     }
 
 
+    /**
+     * permet de rajouter des \n a tout les a caracteres
+     * @param chaine 
+     * @param a
+     */
     private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
 
@@ -117,14 +152,10 @@ public class ControlleurRepondreQuestion {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            System.out.println(partie.getQuestionPossible().get(actuelle));
-            System.out.println(partie.getQuestionPossible());
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
             // TODO verifier ou on en est par rapport au parametrage
             partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
-            //System.out.println(partie.getIndiceQuestion());
-            System.out.println(partie.getReponseDonnees());
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }
     }
@@ -133,16 +164,16 @@ public class ControlleurRepondreQuestion {
     public void precedent() {
         if (partie.getIndiceQuestion() != 0) {
             partie.setIndiceQuestion(partie.getIndiceQuestion()-1);
-            System.out.println(partie.getIndiceQuestion());
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
             
         }
     }
 
-   
-    
-
-
+    /**
+     * 
+     * TODO comment method role
+     * @param question
+     */
    	private void afficherChoixPossible(Question question) {
    		ArrayList<String> reponsePossibles = new ArrayList<>();
    		
@@ -175,6 +206,11 @@ public class ControlleurRepondreQuestion {
    		
    	}
 
+   	/**
+   	 * 
+   	 * TODO comment method role
+   	 * @param question
+   	 */
    	private void afficherQuestion(Question question) {
    		
    		categorie.setText("Catégorie : " + question.getCategorie());
@@ -196,6 +232,13 @@ public class ControlleurRepondreQuestion {
 
    		}
    	
+   	/**
+   	 * 
+   	 * TODO comment method role
+   	 * @param chaine
+   	 * @param a TODO un meilleur nom pour a svp
+   	 * @return
+   	 */
    	private String formaterLibelle(String chaine, int a) {
    		String libelleFormater = "";
 
@@ -208,4 +251,35 @@ public class ControlleurRepondreQuestion {
        	
        	return libelleFormater;   	
    	}
+   	
+    /** 
+     * Sélectionne la réponse de l'utilisateur si il avait déjà répondu et 
+     * qu'il revient sur cette question 
+     * @param questionEnCour question dont ou souhaite verifier l'existence 
+     * d'une réponse
+     */
+    private void questionDejaRepondu(Question questionEnCour) {
+//        Partie parti = ModelePrincipal.getInstance().getPartie();
+        
+        if (partie.getReponseDonnees().containsKey(questionEnCour)) {
+        
+            String reponseExistante = partie.getReponseDonnees().get(questionEnCour) ;
+            RadioButton aSelectionner;
+            
+            if (choix1.getText().equals(reponseExistante)) {
+                aSelectionner = choix1 ;
+            } else if (choix2.getText().equals(reponseExistante)) {
+                 aSelectionner = choix2 ;
+            } else if (choix3.getText().equals(reponseExistante)) {
+                 aSelectionner = choix3 ;
+            } else if (choix4.getText().equals(reponseExistante)) {
+                 aSelectionner = choix4 ;
+            } else if (choix5.getText().equals(reponseExistante)) {
+                 aSelectionner = choix5 ;
+            } else {
+                aSelectionner = null ;
+            }
+            reponses.selectToggle(aSelectionner);
+        }
+    }
 }

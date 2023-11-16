@@ -22,7 +22,7 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Méthode liée au bouton jouer 
-	 * qui devra renvoyer vers la page ParametrePartie.fxml 
+	 * envoie vers la page ParametrePartie.fxml 
 	 */
 	@FXML 
 	private void jouer() {
@@ -32,7 +32,7 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Methode liée au bouton éditer 
-	 * qui devra envoyer vers la page Editeur.fxml 
+	 * envoie vers la page Editeur.fxml 
 	 */
 	@FXML 
 	private void editer() {
@@ -42,16 +42,17 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Méthode liée au bouton en ligne
-	 * qui devra envoyer vers la page ModeEnligne.fxml
+	 * envoie vers la page ModeEnligne.fxml
 	 */
 	@FXML 
 	private void online() {
 		System.out.println("Button en ligne");
+		//TODO
 	}
 	
 	/**
 	 * Méthode liée au groupe quitter,
-	 * qui devra fermer l'application
+	 * ferme l'application
 	 */
 	@FXML
 	private void quitter() {
@@ -60,15 +61,12 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Méthode liée au groupe aider,
-	 * qui devra envoyer vers la page Aide.fxml
+	 * envoie vers la page Aide.fxml
 	 */
 	@FXML
 	private void aider() {
 		model.setPagePrecedente("Accueil.fxml");
-		System.out.println("Aider");
 		Quiz.changerVue("Aide.fxml");
-
-		// TODO : lancer une alertBox
 	}
 
 }

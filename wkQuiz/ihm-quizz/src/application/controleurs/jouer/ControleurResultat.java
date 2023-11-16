@@ -12,9 +12,8 @@ import javafx.scene.control.Label;
  * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Tom DOUAUD
+ * @author Néo BECOGNE
  */
-
-
 public class ControleurResultat {
 	
 	 ModelePrincipal model = ModelePrincipal.getInstance();
@@ -27,7 +26,28 @@ public class ControleurResultat {
 	@FXML
 	private Label score;
 	
-	@FXML
+	/**
+     * Méthode exécutée au chargement de la page Resultat
+     * pour récuperer le score et le message
+     */
+    @FXML
+    public void initialize() {
+    	
+    	if(model.getPartie() != null) {
+    		Partie partie = model.getPartie();
+    		
+    		int nbReponse = partie.getNombreQuestion();
+    		int nbReponseBonne = 0; // STUB
+    		score.setText(String.format(TEXT_SCORE,nbReponseBonne,nbReponse));
+    	
+    	}else {
+    		score.setText("Il n'y a pas de partie");
+    	}
+    	
+    	messagePersonnaliser();
+    }
+
+    @FXML
 	private Label messagePrivee;
 	
 
@@ -56,57 +76,41 @@ public class ControleurResultat {
 		Quiz.changerVue("ParametrePartie.fxml");
 	}
 	
-	/**
-	 * Méthode exécutée au chargement de la page Resultat
-	 * pour récuperer le score et le message
-	 */
-	@FXML
-	public void initialize() {
-		
-		if(model.getPartie() != null) {
-			Partie partie = model.getPartie();
-			
-			int nbReponse = partie.getNombreQuestion();
-			int nbReponseBonne = 0; // STUB
-			score.setText(String.format(TEXT_SCORE,nbReponseBonne,nbReponse));
-		}else {
-			score.setText("Il n'y a pas de partie");
-		}
-		messagePersonnaliser();
-	}
-
 	public void messagePersonnaliser() {
 		String pseudo="Neo"; // STUB
 		
 		if(model.getPartie() != null) {
 			Partie partie = model.getPartie();
 			
-			int pourcentage=partie.pourcentageBonneRep();
-			if(pourcentage<0) {
-				messagePrivee.setText("C'est ratée pour cette fois ci, mieux vos réessayer "  +pseudo);
-			}else if(pourcentage>0 && pourcentage<25) {
-				messagePrivee.setText("Il va falloir revoir un peu "  +pseudo);
-			}else if(pourcentage>25 && pourcentage<50) {
-				messagePrivee.setText("Les bases sont la mais faut revoir encore un peu "  +pseudo);
-			}else if(pourcentage>50 && pourcentage<75) {
-				messagePrivee.setText("Il y a le niveau du niveau mais c'est pas encore parfait "  +pseudo);
-			}else if(pourcentage>75 && pourcentage<100) {
-				messagePrivee.setText(" Vous maîtriser vos acquis "  +pseudo);
+			int pourcentage = partie.pourcentageBonneRep();
+			
+			if(pourcentage < 0) {
+				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
+				        + "retenter " + pseudo);
+				
+			}else if(pourcentage > 0 && pourcentage < 25) {
+				messagePrivee.setText("Il va falloir revoir un peu " + pseudo);
+				
+			}else if(pourcentage > 25 && pourcentage < 50) {
+				messagePrivee.setText("Les bases sont la mais faut revoir "
+				        + "encore un peu " + pseudo);
+				
+			}else if(pourcentage > 50 && pourcentage < 75) {
+				messagePrivee.setText("Il y a du niveau mais c'est "
+				        + "pas encore parfait " + pseudo);
+				
+			}else if(pourcentage > 75 && pourcentage < 100) {
+				messagePrivee.setText("Vous maîtriser vos acquis " + pseudo);
+				
 			}else {
-				messagePrivee.setText("  Mais vous savez tous, bien joué "  +pseudo);
+				messagePrivee.setText("Mais vous savez tous, bien joué " 
+			                          + pseudo);
 			}
 			
 			
 		}else {
-			messagePrivee.setText("Il n'y a pas de partie en cours "+pseudo);
-			
+			messagePrivee.setText("Il n'y a pas de partie en cours " + pseudo);
 		}
 	}
 			
 }
-	
-	
-	
-	
-	
-

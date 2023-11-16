@@ -8,10 +8,10 @@ package application.controleurs;
 import application.modele.Partie;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import application.Quiz;
+import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import application.vue.AlertBox;
@@ -20,32 +20,32 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-/** 
+/**
  * Controller de la page fxml parametre partie
- * @author Lucas
+ * 
+ * @author Lucas Descriaud
  */
 public class ControlleurParametres {
-	
-	private ModelePrincipal model = ModelePrincipal.getInstance();
+
+    private ModelePrincipal modele = ModelePrincipal.getInstance();
 
     @FXML
-    private ComboBox<String> selecteurCategorie ;
-    
+    private ComboBox<String> selecteurCategorie;
+
     @FXML
-    private ToggleGroup nombreQuestions ;
-    
+    private ToggleGroup nombreQuestions;
+
     @FXML
-    private ToggleGroup difficulte ;
-    
+    private ToggleGroup difficulte;
+
     @FXML
     public void initialize() {
         selecteurCategorie.getItems().add("Aléatoire");
-        // Ajoute les categorie de banque categorie dans la combo box
-        selecteurCategorie.getItems().
-        addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());
+
+        // Ajoute les catégories de banqueCategorie dans la ComboBox
+        selecteurCategorie.getItems().addAll(modele.getBanqueCategorie().getCategoriesNom());
     }
-    
-    
+
     /*
      * Fonction lié au bouton de retour a la page d'accueil
      */
@@ -53,112 +53,114 @@ public class ControlleurParametres {
     public void retourAccueil() {
         Quiz.changerVue("Accueil.fxml");
     }
+
     @FXML
-	private void aider() {
-    	model.setPagePrecedente("ParametrePartie.fxml"); 
-		Quiz.changerVue("Aide.fxml");
-	}
-    
+    private void aider() {
+        modele.setPagePrecedente("ParametrePartie.fxml");
+        Quiz.changerVue("Aide.fxml");
+    }
+
     /*
      * Fonction lié au bouton de commencement d'une partie
      */
     @FXML
     public void commencerPartie() {
-        try {
-        	//ModelePrincipal.getInstance().setPartie(new Partie());
-            modifierParametrePartie();
-            boolean lancer;
-            int nombreQuestion = genererListeQuestionPossible();
-            Partie partie = ModelePrincipal.getInstance().getPartie();
-            if (nombreQuestion == 0) {
-                throw new IllegalArgumentException("Impossible de lancer un "
-                        + "quiz ! Aucunes questions trouver pour vos choix "
-                        + "de parametres"); 
-            } else if (nombreQuestion < partie.getNombreQuestion()) {
-                lancer  = AlertBox.showConfirmationBox(
-                        "Seulement " + nombreQuestion + 
-                        " questions trouvé pour votre paramétrage \n "
-                        + "voulez vous lance le quizz avec celui-ci ?");
-            } else {
-                lancer = AlertBox.showConfirmationBox(
-                        "Voulez vous lancer le quizz avec ce paramétrage");
-            }
-            if (lancer) {
-                ordreAleatoire();
-                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");;
-            }
-        } catch (Exception e) {
-            AlertBox.showErrorBox(e.getMessage());
+        // ModelePrincipal.getInstance().setPartie(new Partie());
+        modifierParametrePartie();
+
+        boolean lancer;
+        int nombreQuestion = genererListeQuestionPossible();
+        Partie partie = modele.getPartie();
+
+        if (nombreQuestion == 0) {
+            throw new IllegalArgumentException(
+                    "Impossible de lancer un " + "quiz ! Aucunes questions trouver pour vos choix " + "de parametres");
+        } else if (nombreQuestion < partie.getNombreQuestion()) {
+            lancer = AlertBox.showConfirmationBox("Seulement " + nombreQuestion
+                    + " questions trouvé pour votre paramétrage \n " + "voulez vous lance le quizz avec celui-ci ?");
+        } else {
+            lancer = AlertBox.showConfirmationBox("Voulez vous lancer le quizz avec ce paramétrage");
         }
+
+        if (lancer) {
+            ordreAleatoire();
+            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            ;
+        }
+
     }
-    
-    /** 
-     * Melange de maniere aléatoire la liste des questions possibles
+
+    /**
+     * Mélange de manière aléatoire la liste des questions possibles
      */
     private void ordreAleatoire() {
-        Partie partie = ModelePrincipal.getInstance().getPartie();
+        Partie partie = modele.getPartie();
         ArrayList<Question> listeAMelanger = partie.getQuestionPossible();
+
         Collections.shuffle(listeAMelanger);
+
         partie.setQuestionPossible(listeAMelanger);
     }
 
-
-    /** 
+    /**
      * Ajoute a la liste de questions dans laquelle seront tirés celle de la partie
-     * toutes les questions correspondant au parametre
-     * @return le nombre de question repondant au parametre
+     * toutes les questions correspondant au paramètre
+     * 
+     * @return le nombre de question répondant aux paramètres
      */
     private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
-        for (Question question : ModelePrincipal.getInstance().
-             getBanqueQuestion().getQuestions()) {
-            /*
-             * Categorie partie est null si aléatoire choisis donc on prendras
-             * les questions de toutes les categories
-             * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
-             * prendras les questions de tous les difficultes
-             */
-            if (partie.getCategoriePartie() == null ||
-                (question.getCategorie().equals(
-                 partie.getCategoriePartie().toString()))
-               && (question.getDifficulte() == partie.getDifficulte().intValue()
-                   || partie.getDifficulte().intValue() == 0)
-               ){
-                partie.getQuestionPossible().add(question);        
-            }   
+
+        // TODO créer une méthode dans le ModelePrincipal pour ne pas faire appel à une
+        // méthode de banqueQuestion
+        for (Question question : modele.getBanqueQuestion().getQuestions()) {
+
+            Categorie categorieSelectionner = partie.getCategoriePartie();
+            int difficulteSelectionner = partie.getDifficulte().intValue();
+
+            // Si l'utilisateur a sélectionner 'Tous' la difficulté de la
+            // question ne pas prise en compte dans la sélection des réponses
+            difficulteSelectionner = difficulteSelectionner == 0 
+                    ? question.getDifficulte() : difficulteSelectionner;
+
+            // On n'a pas sélectionner de catégorie mais 'Aléatoire'
+            if (categorieSelectionner == null) {
+                if (difficulteSelectionner == question.getDifficulte()) {
+                    partie.getQuestionPossible().add(question);
+                }
+                // On a sélectionner une catégorie
+            } else if (question.getCategorie().equals(categorieSelectionner.getNom())
+                    && question.getDifficulte() == difficulteSelectionner) {
+                partie.getQuestionPossible().add(question);
+            }
         }
 
         return partie.getQuestionPossible().size();
-        
     }
 
-
-    /** 
+    /**
      * Met a jour les paramètre de la partie
      */
     private void modifierParametrePartie() {
-        if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance().getPartie()
-            .setCategoriePartie(selecteurCategorie.getValue());
+        if (selecteurCategorie.getValue() != null) {
+            modele.getPartie().setCategoriePartie(selecteurCategorie.getValue());
         } else {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }
-        ModelePrincipal.getInstance().getPartie().setNombreQuestion(getNbQuestion());
-        /* 
-         * difficulte partie a 0 = tous type de questions 
+        modele.getPartie().setNombreQuestion(getNbQuestion());
+        /*
+         * difficulte partie a 0 = tous type de questions
          */
-        ModelePrincipal.getInstance().getPartie().setDifficultePartie(getDifficulte());
+        modele.getPartie().setDifficultePartie(getDifficulte());
     }
 
-    /** 
-     * @return La difficulte choisis
-     */
+    /** @return La difficulté choisis */
     private Integer getDifficulte() {
         if (difficulte.getSelectedToggle() == null) {
             throw new NullPointerException("Aucunes difficulte selectionee");
         }
         return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-               ((RadioButton) difficulte.getSelectedToggle()).getText());
+                ((RadioButton) difficulte.getSelectedToggle()).getText());
 
     }
 
@@ -169,8 +171,7 @@ public class ControlleurParametres {
         if (nombreQuestions.getSelectedToggle() == null) {
             throw new NullPointerException("Nombre de question non selectionné ! ");
         }
-        //else
-        return Integer.parseInt((
-                (RadioButton) nombreQuestions.getSelectedToggle()).getText()); 
+        // else
+        return Integer.parseInt(((RadioButton) nombreQuestions.getSelectedToggle()).getText());
     }
 }
