@@ -5,6 +5,7 @@ package application.modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * 
@@ -175,7 +176,19 @@ public class Partie {
    }   
 	
 	public int getNbBonneReponse() {
-		return 0; // Steub
+	    Set<Question> cle = reponsesDonnees.keySet();
+	    int nbBonneReponse = 0;
+	    
+	    for (Question question : cle) {
+	        
+	        String reponseSelectionner = reponsesDonnees.get(question);
+	        String reponseAttendu = question.getReponseJuste();
+	        
+            if (reponseSelectionner.equals(reponseAttendu)) {
+                nbBonneReponse ++;
+            }
+        }
+		return nbBonneReponse;
 	}
 	
 	public int pourcentageBonneRep() {
