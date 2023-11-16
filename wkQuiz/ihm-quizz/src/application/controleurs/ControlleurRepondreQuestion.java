@@ -1,13 +1,20 @@
 package application.controleurs;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class ControlleurRepondreQuestion {	
@@ -26,17 +33,25 @@ public class ControlleurRepondreQuestion {
 	
     
     @FXML
-    private ToggleGroup reponseChoisi ;
+    private ToggleGroup reponses ;
 	
 	@FXML 
 	public void initialize() {
 		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(10));
-		afficherChoixPossible();
+		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(10));
 		// if déja répondu, on affiche son choix;
 	}
 
-	private void afficherChoixPossible() {
-		// TODO Auto-generated method stub
+	private void afficherChoixPossible(Question question) {
+		ArrayList<String> reponsePossibles = new ArrayList<>();
+		
+		reponsePossibles.add(question.getReponseJuste());
+		reponsePossibles.addAll(question.getMauvaisesReponses());
+		int nbQuestion = reponsePossibles.size();
+		
+		Collections.shuffle(reponsePossibles);
+		
+		for ( int i = 0 ; i <= reponsePossibles.size() ; 
 		
 	}
 
@@ -82,15 +97,15 @@ public class ControlleurRepondreQuestion {
     private void validerReponse() {
         boolean reponseAlertBox = true ; 
         Partie partie = ModelePrincipal.getInstance().getPartie();
-        String reponse; 
-        if (reponseChoisi.getSelectedToggle() == null) {
+        String reponseChoisie; 
+        if (reponses.getSelectedToggle() == null) {
            reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
                    + "aucunes reponses.\nPar défaut cette réponse sera compté "
                    + "comme fausse");
         }
         if (reponseAlertBox) {
-            reponse = ((RadioButton) reponseChoisi.getSelectedToggle()).getText();
-            partie.setReponseDonnee(partie.getActuelle(), reponse);
+        	reponseChoisie = ((RadioButton) reponses.getSelectedToggle()).getText();
+            partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }
     }
