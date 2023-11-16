@@ -55,8 +55,13 @@ public class ControlleurRepondreQuestion {
     @FXML
     private RadioButton choix5;
     
+    
     @FXML
     private Button boutonPrecedent;
+    
+    @FXML
+    private Button valider;
+    
 	@FXML 
 	public void initialize() {
 	    /*
@@ -70,14 +75,26 @@ public class ControlleurRepondreQuestion {
 	        afficherNumeroQuestion();	
 	        couleurBoutonPrecedent();
 	        questionDejaRepondu(questionEnCour);
+
+	        if (partie.getQuestionPossible().size() -1 == partie.getIndiceQuestion()) {
+	        	afficherDernierPage();
+	        }
 	    }
-		// if déja répondu, on affiche son choix;
-		//questionPossible();
+	}
+
+	/**
+	 * modification de la page si c'est la dernier quesiton
+	 */
+	private void afficherDernierPage() {
+		valider.setText("Termminer le questionnaire");
+		valider.setPrefWidth(333);
+		valider.setTranslateX(-75);
+		
 	}
 
 	private void afficherNumeroQuestion() {
-		numero.setText("Question n°" + partie.getIndiceQuestion() + 1);
-		
+		Integer nb = partie.getIndiceQuestion() + 1;
+		numero.setText("Question n°" + nb);
 	}
 
 	/** 
@@ -94,6 +111,11 @@ public class ControlleurRepondreQuestion {
     }
 
 
+    /**
+     * permet de rajouter des \n a tout les a caracteres
+     * @param chaine 
+     * @param a
+     */
     private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
 
@@ -126,14 +148,10 @@ public class ControlleurRepondreQuestion {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            System.out.println(partie.getQuestionPossible().get(actuelle));
-            System.out.println(partie.getQuestionPossible());
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
             // TODO verifier ou on en est par rapport au parametrage
             partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
-            //System.out.println(partie.getIndiceQuestion());
-            System.out.println(partie.getReponseDonnees());
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }
     }
@@ -142,7 +160,6 @@ public class ControlleurRepondreQuestion {
     public void precedent() {
         if (partie.getIndiceQuestion() != 0) {
             partie.setIndiceQuestion(partie.getIndiceQuestion()-1);
-            System.out.println(partie.getIndiceQuestion());
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
             
         }
@@ -227,7 +244,6 @@ public class ControlleurRepondreQuestion {
     private void questionDejaRepondu(Question questionEnCour) {
         Partie parti = ModelePrincipal.getInstance().getPartie();
         if (parti.getReponseDonnees().containsKey(questionEnCour)) {
-            System.out.println(parti.getReponseDonnees().get(questionEnCour));
             String reponseExistante = parti.getReponseDonnees().get(questionEnCour) ;
             RadioButton aSelectionner;
             if (choix1.getText().equals(reponseExistante)) {
