@@ -52,7 +52,7 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Button layoutX="32.0" layoutY="815.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="267.0" style="-fx-background-radius: 60; -fx-background-color: #848484;" text="Question précédente" textFill="WHITE">
+      <Button fx:id="boutonPrecedent" layoutX="32.0" layoutY="815.0" mnemonicParsing="false" onMouseClicked="#precedent" prefHeight="51.0" prefWidth="267.0" style="-fx-background-radius: 60; -fx-background-color: #848484;" text="Question précédente" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

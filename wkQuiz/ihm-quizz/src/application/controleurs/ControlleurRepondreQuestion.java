@@ -12,6 +12,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -50,17 +51,33 @@ public class ControlleurRepondreQuestion {
     @FXML
     private RadioButton choix5;
     
+    @FXML
+    private Button boutonPrecedent;
 	@FXML 
 	public void initialize() {
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    Partie partie = modele.getPartie();
 		afficherQuestion(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
 		afficherChoixPossible(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
+		couleurBoutonPrecedent();
 		// if déja répondu, on affiche son choix;
 		//questionPossible();
 	}
 
 	/** 
+     * Change le style du bouton precedent en fonction de si il doit etre
+     * active ou non
+     */
+    private void couleurBoutonPrecedent() {
+        if (ModelePrincipal.getInstance().getPartie().getIndiceQuestion() != 0) {
+            boutonPrecedent.setStyle("-fx-background-radius: 60 ; -fx-background-color: #0900FF");
+        } else {
+            boutonPrecedent.setStyle("-fx-background-radius: 60 ; -fx-background-color: #0900FF");
+        }
+        
+    }
+
+    /** 
      * TODO comment method role
      */
     private void questionPossible() {
@@ -113,6 +130,10 @@ public class ControlleurRepondreQuestion {
         }
     }
     
+    @FXML
+    public void precedent() {
+        System.out.println("ici");
+    }
 
    
     
