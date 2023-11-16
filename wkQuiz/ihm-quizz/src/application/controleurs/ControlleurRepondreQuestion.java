@@ -35,6 +35,21 @@ public class ControlleurRepondreQuestion {
     @FXML
     private ToggleGroup reponses ;
 	
+    @FXML
+    private RadioButton choix1;
+    
+    @FXML
+    private RadioButton choix2;
+    
+    @FXML
+    private RadioButton choix3;
+    
+    @FXML
+    private RadioButton choix4;
+    
+    @FXML
+    private RadioButton choix5;
+    
 	@FXML 
 	public void initialize() {
 		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
@@ -42,41 +57,6 @@ public class ControlleurRepondreQuestion {
 		// if déja répondu, on affiche son choix;
 	}
 
-	private void afficherChoixPossible(Question question) {
-		ArrayList<String> reponsePossibles = new ArrayList<>();
-		
-		reponsePossibles.add(question.getReponseJuste());
-		reponsePossibles.addAll(question.getMauvaisesReponses());
-		int nbQuestion = reponsePossibles.size();
-		
-		Collections.shuffle(reponsePossibles);
-		
-		//for ( int i = 0 ; i <= reponsePossibles.size() ; 
-		
-	}
-
-	private void afficherQuestion(Question question) {
-		
-		categorie.setText(question.getCategorie());
-		
-		String libelle = question.getLibelle();
-		String libelleFormater = "";
-		
-		
-		if (libelle.length() > 179) {
-			intitule.setStyle("-fx-font-size: 22px;");
-			libelleFormater = formaterLIbelle(question.getLibelle(), 80);
-		} else {
-			libelleFormater = formaterLIbelle(question.getLibelle(), 60);
-		}
-		
-		intitule.setText(libelleFormater);
-		difficulte.setText("Difficultée : " + question.getDifficulte());
-		numero.setText("Question n°");// ModelePrincipal.getInstance().getPartie().getNumeroQuestion());
-	
-
-		}
-	
 	private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
 
@@ -115,28 +95,10 @@ public class ControlleurRepondreQuestion {
         }
     }
     
-    @FXML
-    private RadioButton choix1;
-	
-    @FXML
-    private RadioButton choix2;
-    
-    @FXML
-    private RadioButton choix3;
-    
-    @FXML
-    private RadioButton choix4;
-    
-    @FXML
-    private RadioButton choix5;
+
    
     
-   	@FXML 
-   	public void initialize() {
-   		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
-   		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
-   		// if déja répondu, on affiche son choix;
-   	}
+
 
    	private void afficherChoixPossible(Question question) {
    		ArrayList<String> reponsePossibles = new ArrayList<>();
@@ -206,23 +168,4 @@ public class ControlleurRepondreQuestion {
        	
        	return libelleFormater;   	
    	}
-
-       
-       
-       @FXML
-       private void validerReponse() {
-           boolean reponseAlertBox = true ; 
-           Partie partie = ModelePrincipal.getInstance().getPartie();
-           String reponseChoisie; 
-           if (reponses.getSelectedToggle() == null) {
-              reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
-                      + "aucunes reponses.\nPar défaut cette réponse sera compté "
-                      + "comme fausse");
-           }
-           if (reponseAlertBox) {
-           	reponseChoisie = ((RadioButton) reponses.getSelectedToggle()).getText();
-               // partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
-               Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
-           }
-       }
 }
