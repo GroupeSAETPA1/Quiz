@@ -61,17 +61,16 @@ public class ControlleurRepondreQuestion {
 	public void initialize() {
 	    /*
 	     * Evite IndexOutOfBoundsException au premier chargement
-	     */
-		
-		
+	     */	
 	    if (partie.getQuestionPossible().size() != 0) {
 	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
 	        afficherQuestion(questionEnCour);	
 	        afficherNumeroQuestion();	
+	        couleurBoutonPrecedent();
+	        questionDejaRepondu(questionEnCour);
 	    }
-		couleurBoutonPrecedent();
 		// if déja répondu, on affiche son choix;
 		//questionPossible();
 	}
@@ -218,4 +217,33 @@ public class ControlleurRepondreQuestion {
        	
        	return libelleFormater;   	
    	}
+   	
+    /** 
+     * Selectionne la reponse de l'utilisateur si il avait deja repondu et 
+     * qu'il revient sur cette question 
+     * @param questionEnCour question dont ou souhaite verifier l'existence 
+     * d'une reponse
+     */
+    private void questionDejaRepondu(Question questionEnCour) {
+        Partie parti = ModelePrincipal.getInstance().getPartie();
+        if (parti.getReponseDonnees().containsKey(questionEnCour)) {
+            System.out.println(parti.getReponseDonnees().get(questionEnCour));
+            String reponseExistante = parti.getReponseDonnees().get(questionEnCour) ;
+            RadioButton aSelectionner;
+            if (choix1.getText().equals(reponseExistante)) {
+                aSelectionner = choix1 ;
+            } else if (choix2.getText().equals(reponseExistante)) {
+                 aSelectionner = choix2 ;
+            } else if (choix3.getText().equals(reponseExistante)) {
+                 aSelectionner = choix3 ;
+            } else if (choix4.getText().equals(reponseExistante)) {
+                 aSelectionner = choix4 ;
+            } else if (choix5.getText().equals(reponseExistante)) {
+                 aSelectionner = choix5 ;
+            } else {
+                aSelectionner = null ;
+            }
+            reponses.selectToggle(aSelectionner);
+        }
+    }
 }
