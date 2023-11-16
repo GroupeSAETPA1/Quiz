@@ -244,7 +244,7 @@ public class Question implements Serializable {
      * Change la categorie de la question
      * @param nouvelleCategorie la categorie qui remplace l'ancienne
      */
-    public void setCatgorie(Categorie nouvelleCategorie) {
+    public void setCategorie(Categorie nouvelleCategorie) {
         this.categorie = nouvelleCategorie ;
     }
 

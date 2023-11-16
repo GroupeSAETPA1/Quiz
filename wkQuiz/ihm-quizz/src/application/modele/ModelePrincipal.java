@@ -265,7 +265,7 @@ public class ModelePrincipal {
             throws InvalidNameException, ReponseException, InvalidFormatException, DifficulteException {
       Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
       questionAModifier.setLibelle(libelle);
-      questionAModifier.setCatgorie(nouvelleCat);
+      questionAModifier.setCategorie(nouvelleCat);
       questionAModifier.setDifficulte(difficulte);
       questionAModifier.setBonneReponse(reponseJuste);
       questionAModifier.setMauvaiseReponse(reponseFausses);
