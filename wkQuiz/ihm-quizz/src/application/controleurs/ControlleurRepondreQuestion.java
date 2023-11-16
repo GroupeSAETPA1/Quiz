@@ -34,10 +34,10 @@ public class ControlleurRepondreQuestion {
     
     @FXML
     private ToggleGroup reponses ;
-    
+	
     @FXML
     private RadioButton choix1;
-	
+    
     @FXML
     private RadioButton choix2;
     
@@ -49,14 +49,56 @@ public class ControlleurRepondreQuestion {
     
     @FXML
     private RadioButton choix5;
+    
+	@FXML 
+	public void initialize() {
+		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
+		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
+		// if déja répondu, on affiche son choix;
+	}
+
+	private String formaterLIbelle(String chaine, int a) {
+		String libelleFormater = "";
+
+    	for (int i = 0; i <= chaine.length() - 1; i ++) {
+    		libelleFormater += chaine.charAt(i);
+    		if (i % a == 0 && i != 0) {
+    			System.out.println(i);
+    			libelleFormater += "\n";
+    		}
+    	}
+    	
+    	return libelleFormater;   	
+	}
+
+    
+    
+    @FXML
+    private void validerReponse() {
+        boolean reponseAlertBox = true ; 
+        Partie partie = ModelePrincipal.getInstance().getPartie();
+        String reponseChoisie; 
+        if (reponses.getSelectedToggle() == null) {
+           reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
+                   + "aucunes reponses.\nPar défaut cette réponse sera compté "
+                   + "comme fausse");
+        }
+        if (reponseAlertBox) {
+            if (reponses.getSelectedToggle() == null) {
+               reponseChoisie = ""; 
+            } else {
+                reponseChoisie = ((RadioButton) 
+                        reponses.getSelectedToggle()).getText();
+            }
+            partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
+            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+        }
+    }
+    
+
    
     
-   	@FXML 
-   	public void initialize() {
-   		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
-   		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
-   		// if déja répondu, on affiche son choix;
-   	}
+
 
    	private void afficherChoixPossible(Question question) {
    		ArrayList<String> reponsePossibles = new ArrayList<>();
@@ -126,23 +168,4 @@ public class ControlleurRepondreQuestion {
        	
        	return libelleFormater;   	
    	}
-
-       
-       
-       @FXML
-       private void validerReponse() {
-           boolean reponseAlertBox = true ; 
-           Partie partie = ModelePrincipal.getInstance().getPartie();
-           String reponseChoisie; 
-           if (reponses.getSelectedToggle() == null) {
-              reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
-                      + "aucunes reponses.\nPar défaut cette réponse sera compté "
-                      + "comme fausse");
-           }
-           if (reponseAlertBox) {
-           	reponseChoisie = ((RadioButton) reponses.getSelectedToggle()).getText();
-               // partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
-               Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
-           }
-       }
 }
