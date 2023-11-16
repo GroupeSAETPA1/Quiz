@@ -342,9 +342,9 @@ class TestQuestion {
 	 */
 	@Test
 	void testGetBonneReponse() throws InvalidNameException, ReponseException {
-		// Reponse juste deja existante
+		// Réponse juste déjà existante
 		assertEquals("/* commentaire */", questionValide.get(2).getReponseJuste());
-		// Reponse juste apres un changement
+		// Réponse juste après un changement
 		questionValide.get(2).setBonneReponse("test45");
 		assertEquals("test45", questionValide.get(2).getReponseJuste());
 	}
@@ -356,8 +356,16 @@ class TestQuestion {
 	 */
 	@Test
 	void testSetBonneReponse() {
+		// On vérifie que mettre une bonne réponse vide 
+		// renvoie une exception "InvalidNameException"
 		assertThrows(InvalidNameException.class, () -> questionValide.get(0).setBonneReponse(""));
+		// On vérifie que mettre une bonne réponse 
+		// qui fait partie des mauvaise réponses renvoie 
+		// une exception "ReponseException"
 		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le délimiteur /*"));
+		
+		// On vérifie qu'on puisse bien mettre une bonne réponse valide 
+		// et qu'elle est enregistrée
 		assertDoesNotThrow(() -> questionValide.get(0).setBonneReponse("test1"));
 		assertEquals("test1", questionValide.get(0).getReponseJuste());
 	}
@@ -369,19 +377,38 @@ class TestQuestion {
 	 */
 	@Test
 	void testSetMauvaiseReponse() {
+		// Génération d'un jeu de mauvaises réponses 
+		// qui contienent la réponse juste
 		ArrayList<String> mauvaiseReponseContientJuste = new ArrayList<String>();
 		mauvaiseReponseContientJuste.add("reponseOk");
 		mauvaiseReponseContientJuste.add("reponseOK2");
 		mauvaiseReponseContientJuste.add("le délimiteur /**");
+		
+		// Génération d'une ArrayList de mauvaise réponse
+		// avec une mauvaise réponse valide
 		ArrayList<String> test1 = new ArrayList<String>();
 		test1.add("test1");
-		test1.add("test2");
+		
+		// On vérifie que modifier les mauvaises réponses 
+		// pour mettre une liste de mauvaises réponses vide (ou une liste vide)
+		// renvoie l'exception "InvalidFormatException" ou "ReponseException"
 		assertThrows(InvalidFormatException.class, () -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseVide));
-		assertDoesNotThrow(() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
-		assertThrows(ReponseException.class,
-				() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
 		assertThrows(ReponseException.class,
 				() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseJusteChaineVide));
+		
+		// On vérifie que modifier les mauvaises réponses 
+		// afin mettre plusieurs fois 
+		// la meme mauvaise réponse ne renvoye pas d'exception
+		assertDoesNotThrow(() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
+		// On vérifie que modifier les mauvaises réponses
+		// pour mettre une liste de mauvaises réponse qui contient 
+		// la bonne réponse renvoie l'exception "ReponseException"
+		assertThrows(ReponseException.class,
+				() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
+		
+		// On vérifie que modifier les mauvaises réponses pour 
+		// mettre une mauvaise réponse valide ne renvoie pas d'exception 
+		// et que la modification est bien enregistrée
 		assertDoesNotThrow(() -> questionValide.get(0).setMauvaiseReponse(test1));
 		assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
 	}
@@ -397,22 +424,27 @@ class TestQuestion {
 	 */
 	@Test
 	void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+		// Création de plusieurs question :
+	    // - question1Egale qui est exactement parreile que questionValide[0]
+		// - question2Egale qui est une copie de questionValide[1] mais sans feedback
+		// - question3Egale qui est une copie de questionValide[2] mais avec une autre difficultée
 		Question question1Egale = new Question("Quel est le délimiteur de début " + "d'un commentaire Javadoc ?",
 				categoriesValides[0], 1, "le délimiteur /**", mauvaiseReponse1, "");
 		Question question2Egale = new Question("A quoi correspond l'expression : " + "@author Dupont ?",
 				categoriesValides[0], 2, "une balise reconnue par Javadoc", mauvaiseReponse2, "");
 		Question question3Egale = new Question("A quoi correspond l'expression : " + "@author Dupont ?",
 				categoriesValides[0], 3, "une balise reconnue par Javadoc", mauvaiseReponse2, "");
-		// 2 question complement differente
+		
+		// 2 questions complèment différentes
 		assertNotEquals(questionValide.get(0), questionValide.get(1));
 
-		// 2 question identique
+		// 2 questions identique
 		assertEquals(questionValide.get(0), question1Egale);
 
-		// 2 question dont 1 feedback l'autre non
+		// 2 questions dont 1 feedback l'autre non
 		assertEquals(question2Egale, questionValide.get(1));
 
-		// 2 question exactemet pareil mais difficulté différente
+		// 2 questions exactemet pareil mais avec une difficultée différente
 		assertEquals(question3Egale, questionValide.get(1));
 
 		// 2 fois exactement la meme question
