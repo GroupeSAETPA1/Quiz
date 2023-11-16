@@ -121,5 +121,18 @@ public class Partie {
 				+ ", categorieQuestion=" + categorieQuestion + ", questionsPossibles=" + questionsPossibles
 				+ ", reponsesDonnees=" + reponsesDonnees + "]";
 	}
-
+	
+	public int getNbBonneReponse() {
+		return 0; // Steub
+	}
+	
+	public int pourcentageBonneRep() {
+		int nbReponse=getNombreQuestion();
+		int nbReponseBonne=getNbBonneReponse();
+		int pourcentage;
+		
+		pourcentage=(nbReponseBonne/nbReponse)*100;
+		
+		return pourcentage;
+	}
 }
