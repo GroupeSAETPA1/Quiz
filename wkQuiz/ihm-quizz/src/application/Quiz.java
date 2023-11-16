@@ -117,6 +117,7 @@ public class Quiz extends Application {
 	    //ressources.add("Solution.fxml");
 	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
+	    ressources.add("RepondreQuestion.fxml");
 	    ressources.add("Aide.fxml");
 
 		
@@ -133,7 +134,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Solution.fxml"));
+		primaryStage.setScene(scenes.get("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		primaryStage.show();
 
