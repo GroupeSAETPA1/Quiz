@@ -17,6 +17,7 @@ import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
+import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -54,9 +55,6 @@ public class Quiz extends Application {
 	/** Le nom de tout les fichier fxml de l'application */
 	private ArrayList<String> ressources;
 
-	/** Associe le nom du fichier fxml à sa Scene charger avec FXMLLoader */
-	private static HashMap<String, Scene> scenes;
-
     /**
      * Fonction main qui lance la fenêtre JavaFX
      * @param args non utilisé
@@ -76,8 +74,8 @@ public class Quiz extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException {
         instance = this;
-		ressources = new ArrayList<>();
-		scenes = new HashMap<>();
+		ressources = new ArrayList<String>();
+		GestionVues.initialiserScene();
 		
 		{	// TODO c'est temporaire, c'est pour tester
     		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
@@ -126,7 +124,7 @@ public class Quiz extends Application {
 
 		
 		for (String element : ressources) {
-			charger(element);
+			GestionVues.charger(element);
 		}
 
 		 try {
@@ -141,7 +139,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("Accueil.fxml"));
+		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		
 		primaryStage.show();
@@ -150,17 +148,17 @@ public class Quiz extends Application {
 	public static Quiz getInstance() {
     	return instance;
     }
+	
+	public static void charger(String vue) {
+	    GestionVues.charger(vue);
+	}
 
     /**
 	 * Gestion du changement de fenêtre
      * @param fenetre (String) le nom de la fenêtre a charger en .fxml
      */
 	public static void changerVue(String fenetre) {
-		System.out.println(fenetre);
-		fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
-		fenetrePrincipale.setScene(scenes.get(fenetre));
-		
-		fenetrePrincipale.show();
+		GestionVues.changerVue(fenetre);
 	}
 	
 	/**
@@ -169,32 +167,14 @@ public class Quiz extends Application {
 	public static void quitter( ) {
 	    Platform.exit();
 	}
-
-	/**
-	 * Charge la vue indiquer
-	 * @param vue Le nom de la vue à charger. (garder l'extension .fxml)
-	 */
-	public static void charger(String vue) {
-	    Quiz quiz = Quiz.getInstance();
-		try {
-			Parent racine 
-			= FXMLLoader.load(quiz.getClass().getResource("vue/" + vue));
-			
-			scenes.put(vue, new Scene(racine));
-			
-		} catch (IOException e) {
-			System.err.println("Chargement impossible de : " + vue);
- 			e.printStackTrace(); //TODO Enlever
-		}
-	}
 	
 	/**
 	 * Recharge une vue et l'affiche
 	 * @param vue Le nom de la vue
 	 */
 	public static void chargerEtChangerVue(String vue) {
-	    charger(vue);
-	    changerVue(vue);
+	    GestionVues.charger(vue);
+	    GestionVues.changerVue(vue);
 	}
 
 }
