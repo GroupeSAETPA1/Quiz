@@ -66,7 +66,7 @@ public class ControlleurAccueil {
 	private void aider() {
 		model.setPagePrecedente("Accueil.fxml");
 		System.out.println("Aider");
-		Quiz.changerVue("Aide.fxml");
+		Quiz.chargerEtChangerVue("Aide.fxml");
 
 		// TODO : lancer une alertBox
 	}
