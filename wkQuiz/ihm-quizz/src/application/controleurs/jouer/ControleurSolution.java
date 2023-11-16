@@ -1,3 +1,8 @@
+/*
+ * ControleurSolution.java                               
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs.jouer;
 
 import java.util.HashMap;
@@ -37,7 +42,6 @@ public class ControleurSolution {
     private static final String TEXT_SCORE = "Score = %s/%s";
 
     private ModelePrincipal modele = ModelePrincipal.getInstance();
-
     private Partie partie = modele.getPartie();
 
     /** Le texte du score réalisé par le joueur */
@@ -99,7 +103,8 @@ public class ControleurSolution {
         Text libelle = new Text(question.getLibelle());
         Text reponseJuste = new Text(question.getReponseJuste());
         Text feedback = new Text(question.getFeedback());
-        ImageView feedbackReponse = new ImageView(bonneReponse ? BONNE_REPONSE : MAUVAISE_REPONSE);
+        ImageView feedbackReponse 
+        = new ImageView(bonneReponse ? BONNE_REPONSE : MAUVAISE_REPONSE);
     
         //On centre les éléments dans le GridPane
         GridPane.setHalignment(libelle, HPos.CENTER);
@@ -122,5 +127,4 @@ public class ControleurSolution {
     private void retour() {
         Quiz.changerVue("Resultat.fxml");
     }
-
 }
