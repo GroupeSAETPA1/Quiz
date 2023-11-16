@@ -192,11 +192,15 @@ public class Partie {
 	}
 	
 	public int pourcentageBonneRep() {
-		int nbReponse=getNombreQuestion();
-		int nbReponseBonne=getNbBonneReponse();
+		int nbReponse = getNombreQuestion();
+		int nbReponseBonne = getNbBonneReponse();
 		int pourcentage;
 		
-		pourcentage=(nbReponseBonne/nbReponse)*100;
+		//Pour éviter l'ArithmeticException, si nbReponse est nul 
+		//on le remplace par 1 
+		nbReponse = nbReponse == 0 ? 1 : nbReponse;
+		
+		pourcentage = (nbReponseBonne / nbReponse) * 100;
 		
 		return pourcentage;
 	}
