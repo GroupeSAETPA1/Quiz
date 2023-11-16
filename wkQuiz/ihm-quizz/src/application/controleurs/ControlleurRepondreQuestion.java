@@ -1,7 +1,9 @@
 package application.controleurs;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collections;import javax.naming.PartialResultException;
+
+import org.junit.jupiter.params.provider.EnumSource.Mode;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
@@ -18,7 +20,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
-public class ControlleurRepondreQuestion {	
+public class ControlleurRepondreQuestion {
+    
+    private Partie partie = ModelePrincipal.getInstance().getPartie();
 	
 	@FXML
 	private Label categorie;
@@ -55,10 +59,13 @@ public class ControlleurRepondreQuestion {
     private Button boutonPrecedent;
 	@FXML 
 	public void initialize() {
-	    ModelePrincipal modele = ModelePrincipal.getInstance();
-	    Partie partie = modele.getPartie();
-		afficherQuestion(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
-		afficherChoixPossible(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
+	    /*
+	     * Evite IndexOutOfBoundsException au premier chargement
+	     */
+	    if (partie.getQuestionPossible().size() != 0) {
+	        afficherQuestion(partie.getQuestionPossible().get(partie.getIndiceQuestion()));
+	        afficherChoixPossible(partie.getQuestionPossible().get(partie.getIndiceQuestion()));	        
+	    }
 		couleurBoutonPrecedent();
 		// if déja répondu, on affiche son choix;
 		//questionPossible();
@@ -69,21 +76,14 @@ public class ControlleurRepondreQuestion {
      * active ou non
      */
     private void couleurBoutonPrecedent() {
-        if (ModelePrincipal.getInstance().getPartie().getIndiceQuestion() != 0) {
-            boutonPrecedent.setStyle("-fx-background-radius: 60 ; -fx-background-color: #0900FF");
-        } else {
-            boutonPrecedent.setStyle("-fx-background-radius: 60 ; -fx-background-color: #0900FF");
-        }
+        String couleur = 
+            partie.getIndiceQuestion() != 0 ?
+            "#0900FF" : "#848484";
+        boutonPrecedent.setStyle("-fx-background-radius: 60 ; "
+                + "-fx-background-color: " + couleur);
         
     }
 
-    /** 
-     * TODO comment method role
-     */
-    private void questionPossible() {
-        System.out.println(ModelePrincipal.getInstance().getPartie().getQuestionPossible());
-        
-    }
 
     private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
@@ -91,7 +91,6 @@ public class ControlleurRepondreQuestion {
     	for (int i = 0; i <= chaine.length() - 1; i ++) {
     		libelleFormater += chaine.charAt(i);
     		if (i % a == 0 && i != 0) {
-    			System.out.println(i);
     			libelleFormater += "\n";
     		}
     	}
@@ -104,7 +103,6 @@ public class ControlleurRepondreQuestion {
     @FXML
     private void validerReponse() {
         boolean reponseAlertBox = true ; 
-        Partie partie = ModelePrincipal.getInstance().getPartie();
         String reponseChoisie;
         int actuelle = partie.getIndiceQuestion();
         if (reponses.getSelectedToggle() == null) {
@@ -114,25 +112,31 @@ public class ControlleurRepondreQuestion {
         }
         if (reponseAlertBox) {
             if (reponses.getSelectedToggle() == null) {
-                System.out.println("ici");
                reponseChoisie = "vide"; 
             } else {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            
+            System.out.println(partie.getQuestionPossible().get(actuelle));
+            System.out.println(partie.getQuestionPossible());
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
-            System.out.println(partie.getReponseDonnees());
             // TODO verifier ou on en est par rapport au parametrage
             partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
+            //System.out.println(partie.getIndiceQuestion());
+            System.out.println(partie.getReponseDonnees());
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }
     }
     
     @FXML
     public void precedent() {
-        System.out.println("ici");
+        if (partie.getIndiceQuestion() != 0) {
+            partie.setIndiceQuestion(partie.getIndiceQuestion()-1);
+            System.out.println(partie.getIndiceQuestion());
+            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            
+        }
     }
 
    
@@ -156,9 +160,6 @@ public class ControlleurRepondreQuestion {
    			} else {
    				reponsesAAfficher = reponsePossibles.get(i);
    			}
-   			System.out.println(i);
-   			
-   			
    			if (i == 0) {
    				choix1.setText(reponsesAAfficher);
    			} else if (i == 1) {
