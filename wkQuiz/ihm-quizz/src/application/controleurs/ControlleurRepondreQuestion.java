@@ -37,8 +37,8 @@ public class ControlleurRepondreQuestion {
 	
 	@FXML 
 	public void initialize() {
-		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(10));
-		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(10));
+		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
+		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
 		// if déja répondu, on affiche son choix;
 	}
 
@@ -51,7 +51,7 @@ public class ControlleurRepondreQuestion {
 		
 		Collections.shuffle(reponsePossibles);
 		
-		for ( int i = 0 ; i <= reponsePossibles.size() ; 
+		//for ( int i = 0 ; i <= reponsePossibles.size() ; 
 		
 	}
 
@@ -104,7 +104,12 @@ public class ControlleurRepondreQuestion {
                    + "comme fausse");
         }
         if (reponseAlertBox) {
-        	reponseChoisie = ((RadioButton) reponses.getSelectedToggle()).getText();
+            if (reponses.getSelectedToggle() == null) {
+               reponseChoisie = ""; 
+            } else {
+                reponseChoisie = ((RadioButton) 
+                        reponses.getSelectedToggle()).getText();
+            }
             partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }

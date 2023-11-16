@@ -63,25 +63,25 @@
                   <Font size="20.0" />
                </font>
                <toggleGroup>
-                  <ToggleGroup fx:id="reponseChoisi" />
+                  <ToggleGroup fx:id="reponses" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Choix 2" textFill="WHITE" toggleGroup="$reponseChoisi">
+            <RadioButton mnemonicParsing="false" text="Choix 2" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Choix 3" textFill="WHITE" toggleGroup="$reponseChoisi">
+            <RadioButton mnemonicParsing="false" text="Choix 3" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Choix 4" textFill="WHITE" toggleGroup="$reponseChoisi">
+            <RadioButton mnemonicParsing="false" text="Choix 4" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Choix 5" textFill="WHITE" toggleGroup="$reponseChoisi">
+            <RadioButton mnemonicParsing="false" text="Choix 5" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>

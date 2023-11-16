@@ -7,6 +7,10 @@ package application.controleurs;
 
 import application.modele.Partie;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -73,6 +77,7 @@ public class ControlleurParametres {
                         "Voulez vous lancer le quizz avec ce paramétrage");
             }
             if (lancer) {
+                ordreAleatoire();
                 Quiz.changerVue("RepondreQuestion.fxml");
             }
         } catch (Exception e) {
@@ -80,6 +85,17 @@ public class ControlleurParametres {
         }
     }
     
+    /** 
+     * Melange de maniere aléatoire la liste des questions possibles
+     */
+    private void ordreAleatoire() {
+        Partie partie = ModelePrincipal.getInstance().getPartie();
+        ArrayList<Question> listeAMelanger = partie.getQuestionPossible();
+        Collections.shuffle(listeAMelanger);
+        partie.setQuestionPossible(listeAMelanger);
+    }
+
+
     /** 
      * Ajoute a la liste de questions dans laquelle seront tirés celle de la partie
      * toutes les questions correspondant au parametre
