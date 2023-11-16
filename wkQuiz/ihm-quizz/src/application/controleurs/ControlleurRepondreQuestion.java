@@ -62,13 +62,23 @@ public class ControlleurRepondreQuestion {
 	    /*
 	     * Evite IndexOutOfBoundsException au premier chargement
 	     */
+		
+		
 	    if (partie.getQuestionPossible().size() != 0) {
-	        afficherQuestion(partie.getQuestionPossible().get(partie.getIndiceQuestion()));
-	        afficherChoixPossible(partie.getQuestionPossible().get(partie.getIndiceQuestion()));	        
+	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
+	        afficherQuestion(questionEnCour);
+	        afficherChoixPossible(questionEnCour);	
+	        afficherQuestion(questionEnCour);	
+	        afficherNumeroQuestion();	
 	    }
 		couleurBoutonPrecedent();
 		// if déja répondu, on affiche son choix;
 		//questionPossible();
+	}
+
+	private void afficherNumeroQuestion() {
+		numero.setText("Question n°" + partie.getIndiceQuestion() + 1);
+		
 	}
 
 	/** 
