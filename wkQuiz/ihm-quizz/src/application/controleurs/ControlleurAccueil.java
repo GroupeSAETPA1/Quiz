@@ -18,9 +18,11 @@ import javafx.fxml.FXML;
 
 public class ControlleurAccueil {
 	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
+	
 	/**
 	 * Méthode liée au bouton jouer 
-	 * qui devra renvoyer vers la page ParametrePartie.fxml 
+	 * envoie vers la page ParametrePartie.fxml 
 	 */
 	@FXML 
 	private void jouer() {
@@ -30,25 +32,27 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Methode liée au bouton éditer 
-	 * qui devra envoyer vers la page Editeur.fxml 
+	 * envoie vers la page Editeur.fxml 
 	 */
 	@FXML 
 	private void editer() {
 		Quiz.changerVue("Editeur.fxml");
 	}
 	
+	
 	/**
 	 * Méthode liée au bouton en ligne
-	 * qui devra envoyer vers la page ModeEnligne.fxml
+	 * envoie vers la page ModeEnligne.fxml
 	 */
 	@FXML 
 	private void online() {
 		System.out.println("Button en ligne");
+		//TODO
 	}
 	
 	/**
 	 * Méthode liée au groupe quitter,
-	 * qui devra fermer l'application
+	 * ferme l'application
 	 */
 	@FXML
 	private void quitter() {
@@ -57,12 +61,12 @@ public class ControlleurAccueil {
 	
 	/**
 	 * Méthode liée au groupe aider,
-	 * qui devra envoyer vers la page Aide.fxml
+	 * envoie vers la page Aide.fxml
 	 */
 	@FXML
 	private void aider() {
-		System.out.println("Aider");
-		// TODO : lancer une alertBox
+		model.setPagePrecedente("Accueil.fxml");
+		Quiz.changerVue("Aide.fxml");
 	}
 
 }

@@ -17,6 +17,7 @@ import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
+import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -35,11 +36,11 @@ import javafx.stage.Stage;
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
- * @author François DE SAINT PALAIS
+ * @author François de Saint Palais
  * @author Lucas DESCRIAUD
  * @author Tom DOUAUD
  */
-public class Quiz extends Application { 
+public class Quiz extends Application {
 
 	/**
 	 * Fenêtre principale de l'application
@@ -51,18 +52,19 @@ public class Quiz extends Application {
 	
 	private static Quiz instance;
 
-	/**
-	 * TODO commenter
-	 */
+	/** Le nom de tout les fichier fxml de l'application */
 	private ArrayList<String> ressources;
 
-	/**
-     * TODO commenter
+    /**
+     * Fonction main qui lance la fenêtre JavaFX
+     * @param args non utilisé
      */
-	private static HashMap<String, Scene> scenes;
+    public static void main(String args[]) {
+    	launch(args);
+    }
 
     /**
-     * TODO commenter cette méthode
+     * Lance l'application
      * @throws InvalidNameException 
      * @throws HomonymeException 
      * @throws ReponseException 
@@ -72,8 +74,8 @@ public class Quiz extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException {
         instance = this;
-		ressources = new ArrayList<>();
-		scenes = new HashMap<>();
+		ressources = new ArrayList<String>();
+		GestionVues.initialiserScene();
 		
 		{	// TODO c'est temporaire, c'est pour tester
     		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
@@ -118,74 +120,52 @@ public class Quiz extends Application {
 	    ressources.add("ImporterQuestion.fxml");
 	    ressources.add("ParametrePartie.fxml");
 	    ressources.add("RepondreQuestion.fxml");
+	    ressources.add("Aide.fxml");
 
 		
 		for (String element : ressources) {
-			charger(element);
+			GestionVues.charger(element);
 		}
 
 		 try {
-            primaryStage.getIcons().add(new Image("application/vue/images/IconePrincipale.png"));
+		    Image logo 
+		    = new Image("application/vue/images/IconePrincipale.png");
+		    
+            primaryStage.getIcons().add(logo);
          } catch (Exception e) {
             System.err.println("Erreur : L'îcone est introuvables");
          }
-		 
+
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-		primaryStage.setScene(scenes.get("ParametrePartie.fxml"));
+		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
-		primaryStage.show();
-
 		
-
-	    
-	}
-	
-	/**
-	 * Gestion du changement de fenetre
-     * @param fenetre (String) le nom de la fenetre a charger en .fxml
-     */
-	public static void changerVue(String fenetre) {
-		fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
-		fenetrePrincipale.setScene(scenes.get(fenetre));
-		fenetrePrincipale.show();
+		primaryStage.show();
 	}
 	
 	public static Quiz getInstance() {
-		return instance;
+    	return instance;
+    }
+	
+	public static void charger(String vue) {
+	    GestionVues.charger(vue);
 	}
 
-	/**
-     * Fonction appelée par les controleurs permettant de quitter l'application
+    /**
+	 * Gestion du changement de fenêtre
+     * @param fenetre (String) le nom de la fenêtre a charger en .fxml
      */
-	public static void quitter( ) {
-	    Platform.exit();
-	}
-
-	/**
-	 * Fonction Main qui lance la fenetre JavaFX et instancie les différents modèles
-	 * @param args non utilisé
-	 */
-	public static void main(String args[]) {
-		launch(args);
-		// new ControleurPrincipal();	FIXME
+	public static void changerVue(String fenetre) {
+		GestionVues.changerVue(fenetre);
 	}
 	
 	/**
-	 * Charge la vue indiquer
-	 * TODO comment method role
-	 * @param vue
-	 */
-	public static void charger(String vue) {
-	    Quiz quiz = Quiz.getInstance();
-		try {
-			Parent racine = FXMLLoader.load(quiz.getClass().getResource("vue/" + vue));
-			scenes.put(vue, new Scene(racine));
-		} catch (IOException e) {
-			System.err.println("Chargement impossible de : " + vue);
- 			e.printStackTrace();
-		}
+     * Fonction appelée par les controlleurs permettant de quitter l'application
+     */
+	public static void quitter( ) {
+	    Platform.exit();
 	}
 	
 	/**
@@ -193,8 +173,8 @@ public class Quiz extends Application {
 	 * @param vue Le nom de la vue
 	 */
 	public static void chargerEtChangerVue(String vue) {
-	    charger(vue);
-	    changerVue(vue);
+	    GestionVues.charger(vue);
+	    GestionVues.changerVue(vue);
 	}
 
 }

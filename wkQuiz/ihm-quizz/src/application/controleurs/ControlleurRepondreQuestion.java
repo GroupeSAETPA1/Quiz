@@ -76,7 +76,7 @@ public class ControlleurRepondreQuestion {
 	        couleurBoutonPrecedent();
 	        questionDejaRepondu(questionEnCour);
 
-	        if (partie.getQuestionPossible().size() -1 == partie.getIndiceQuestion()) {
+	        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
 	        	afficherDernierPage();
 	        }
 	    }
@@ -92,6 +92,10 @@ public class ControlleurRepondreQuestion {
 		
 	}
 
+	/**
+	 * 
+	 * TODO comment method role
+	 */
 	private void afficherNumeroQuestion() {
 		Integer nb = partie.getIndiceQuestion() + 1;
 		numero.setText("Question n°" + nb);
@@ -165,10 +169,11 @@ public class ControlleurRepondreQuestion {
         }
     }
 
-   
-    
-
-
+    /**
+     * 
+     * TODO comment method role
+     * @param question
+     */
    	private void afficherChoixPossible(Question question) {
    		ArrayList<String> reponsePossibles = new ArrayList<>();
    		
@@ -201,6 +206,11 @@ public class ControlleurRepondreQuestion {
    		
    	}
 
+   	/**
+   	 * 
+   	 * TODO comment method role
+   	 * @param question
+   	 */
    	private void afficherQuestion(Question question) {
    		
    		categorie.setText("Catégorie : " + question.getCategorie());
@@ -222,6 +232,13 @@ public class ControlleurRepondreQuestion {
 
    		}
    	
+   	/**
+   	 * 
+   	 * TODO comment method role
+   	 * @param chaine
+   	 * @param a TODO un meilleur nom pour a svp
+   	 * @return
+   	 */
    	private String formaterLibelle(String chaine, int a) {
    		String libelleFormater = "";
 
@@ -236,16 +253,19 @@ public class ControlleurRepondreQuestion {
    	}
    	
     /** 
-     * Selectionne la reponse de l'utilisateur si il avait deja repondu et 
+     * Sélectionne la réponse de l'utilisateur si il avait déjà répondu et 
      * qu'il revient sur cette question 
      * @param questionEnCour question dont ou souhaite verifier l'existence 
-     * d'une reponse
+     * d'une réponse
      */
     private void questionDejaRepondu(Question questionEnCour) {
-        Partie parti = ModelePrincipal.getInstance().getPartie();
-        if (parti.getReponseDonnees().containsKey(questionEnCour)) {
-            String reponseExistante = parti.getReponseDonnees().get(questionEnCour) ;
+//        Partie parti = ModelePrincipal.getInstance().getPartie();
+        
+        if (partie.getReponseDonnees().containsKey(questionEnCour)) {
+        
+            String reponseExistante = partie.getReponseDonnees().get(questionEnCour) ;
             RadioButton aSelectionner;
+            
             if (choix1.getText().equals(reponseExistante)) {
                 aSelectionner = choix1 ;
             } else if (choix2.getText().equals(reponseExistante)) {

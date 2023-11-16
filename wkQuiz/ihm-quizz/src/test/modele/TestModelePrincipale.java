@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -38,7 +39,9 @@ class TestModelePrincipale {
     private ArrayList<String> mauvaiseReponseJusteChaineVide;
     
     @BeforeEach
-    void genererJeuxDeTest() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+    void genererJeuxDeTest() 
+            throws CreerQuestionException, InvalidNameException{
+        
         questionValide = new ArrayList<Question>();
         mauvaiseReponse1 = new ArrayList<String>();
         mauvaiseReponse2 = new ArrayList<String>();
@@ -84,7 +87,7 @@ class TestModelePrincipale {
         
         questionValide.add(new Question("Quel est le délimiteur de début "
                                         + "d'un commentaire Javadoc ?" , 
-                           categoriesValides[0] , 0 , "le délimiteur /**" ,
+                           categoriesValides[0] , 1 , "le délimiteur /**" ,
                            mauvaiseReponse1 ,""));
         questionValide.add(new Question("A quoi correspond l'expression : "
                                          + "@author Dupont ?" ,
@@ -202,7 +205,9 @@ class TestModelePrincipale {
     }
     
     @Test
-    void testCategorieContientQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException, DifficulteException {
+    void testCategorieContientQuestion() 
+            throws CreerQuestionException, InvalidNameException, HomonymeException {
+        
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
         modele.creerCategorie(categoriesValides[0].getNom());
@@ -229,7 +234,7 @@ class TestModelePrincipale {
         modele.creerQuestion(
                 "Que doit décrire le texte écrit dans le commentaire Javadoc "
                 + "situé juste avant la ligne \"public class ...\" ?",
-                index, 0, "Le rôle du programme, en explicitant de manière précise"
+                index, 1, "Le rôle du programme, en explicitant de manière précise"
                         + " ce rôle", mauvaiseReponse1, "");
         System.out.println(modele.getBanqueQuestion());
         assertTrue(modele.categorieContientQuestion(uneAutre));

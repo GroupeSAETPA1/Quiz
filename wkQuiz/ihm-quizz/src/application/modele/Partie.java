@@ -5,6 +5,7 @@ package application.modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * 
@@ -173,4 +174,34 @@ public class Partie {
    public HashMap<Question, String> getReponseDonnees() {
        return this.reponsesDonnees;
    }   
+	
+	public int getNbBonneReponse() {
+	    Set<Question> cle = reponsesDonnees.keySet();
+	    int nbBonneReponse = 0;
+	    
+	    for (Question question : cle) {
+	        
+	        String reponseSelectionner = reponsesDonnees.get(question);
+	        String reponseAttendu = question.getReponseJuste();
+	        
+            if (reponseSelectionner.equals(reponseAttendu)) {
+                nbBonneReponse ++;
+            }
+        }
+		return nbBonneReponse;
+	}
+	
+	public int pourcentageBonneRep() {
+		int nbReponse = getNombreQuestion();
+		int nbReponseBonne = getNbBonneReponse();
+		int pourcentage;
+		
+		//Pour éviter l'ArithmeticException, si nbReponse est nul 
+		//on le remplace par 1 
+		nbReponse = nbReponse == 0 ? 1 : nbReponse;
+		
+		pourcentage = (nbReponseBonne / nbReponse) * 100;
+		
+		return pourcentage;
+	}
 }

@@ -81,7 +81,7 @@ class TestBanqueCategorie {
         for (Categorie categorie : ensembleCategories) {
         	banqueCategorie.ajouter(categorie);
         }
-        ensembleCategories.add(0,new Categorie("Général"));
+        ensembleCategories.add(0,new Categorie("General"));
         assertIterableEquals(ensembleCategories, banqueCategorie.getCategories());
 	}
 

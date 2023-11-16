@@ -11,9 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import application.Quiz;
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -34,10 +34,11 @@ import javafx.stage.FileChooser;
  */
 public class ControleurImport {
 
-    @FXML
-    private TextField saisieCheminFichier;
+    @FXML private TextField saisieCheminFichier;
 
     private File fichierCSVChoisie;
+    
+    private static ModelePrincipal modele = ModelePrincipal.getInstance();
 
 
     @FXML
@@ -46,10 +47,16 @@ public class ControleurImport {
 
         FileChooser fichier = new FileChooser();
 
-        fichier.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-        fichier.setTitle("Selectionner le fichier contenant les nouvelles questions");
+        //Ajout d'un filtre sur l'extensions des fichier sélectionnable
+        fichier.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV", "*.csv"));
+        //Le titre de la fenêtre pour sélectionner le fichier
+        fichier.setTitle("Selectionner le fichier contenant les nouvelles "
+                + "questions");
+        //On sélectionne le chemin de départ de la fenêtre
         fichier.setInitialDirectory(new File(System.getProperty("user.home")));
 
+        //Ouvre une fenêtre pour sélectionner un fichier
         fichierCSVChoisie = fichier.showOpenDialog(null);
 
         if (fichierCSVChoisie != null) {
@@ -60,6 +67,7 @@ public class ControleurImport {
 
     @FXML
     private void aider() {
+    	modele.setPagePrecedente("ImporterQuestion.fxml"); 
         Quiz.changerVue("Aide.fxml");
     }
 
@@ -84,91 +92,86 @@ public class ControleurImport {
         	AlertBox.showErrorBox(
         			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
         } else {
+            
             ArrayList<HashMap<String, String>> lignes = getLigneCSV(fichier);
-
             creerEtGererQuestionCategorie(lignes);
+        
         }
     }
 
     /**
-     * Créer une question (et sa catégorie correspondante si nécessaire) Et gère les
-     * exceptions lié à la création.
+     * Créer une question (et sa catégorie correspondante si nécessaire) 
+     * Et gère les exceptions lié à la création.
      * 
      * @param lignes Une liste de HashMap où chaque ligne est une ligne du CSV
      */
-    private static void creerEtGererQuestionCategorie(ArrayList<HashMap<String, String>> lignes) {
-        ModelePrincipal modele = ModelePrincipal.getInstance();
-        // Création des nouvelles catégories et des nouvelles questions
+    private static void creerEtGererQuestionCategorie(
+            ArrayList<HashMap<String, String>> lignes) {
+
         int indiceLigne = 0;
-        int nombreQuestionCreer = 0;
+        boolean erreurCreationCategorie = false;
+
         HashMap<Integer , String> erreurImportLigne = new HashMap<>();
+        
+        //Parcours des lignes du CSV
         for (HashMap<String, String> ligneHashMap : lignes) {
 
             try {
-                creerCategorieSiAbsent(ligneHashMap.get("categorie"));
+                
+                erreurCreationCategorie 
+                = !creerCategorieSiAbsent(ligneHashMap.get("categorie"));
+                
             } catch (InvalidNameException e) {
-                continue;
-            }
-
-            ArrayList<String> reponseFausse = new ArrayList<String>();
-            if (!ligneHashMap.get("1reponseFausse").isBlank()) {
-                reponseFausse.add(ligneHashMap.get("1reponseFausse"));
-            }
-            if (!ligneHashMap.get("2reponseFausse").isBlank()) {
-                reponseFausse.add(ligneHashMap.get("2reponseFausse"));
-            }
-            if (!ligneHashMap.get("3reponseFausse").isBlank()) {
-                reponseFausse.add(ligneHashMap.get("3reponseFausse"));
-            }
-            if (!ligneHashMap.get("4reponseFausse").isBlank()) {
-                reponseFausse.add(ligneHashMap.get("4reponseFausse"));
-            }
-
-            int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
-
-            int difficulte;
-            try {
-            	difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
-			} catch (NumberFormatException e) {
-				continue;
-			}
-            
-            try {
-                modele.creerQuestion(ligneHashMap.get("libelle"), indiceCategorie, difficulte,
-                        ligneHashMap.get("reponseJuste"), reponseFausse, ligneHashMap.get("feedback"));
-                nombreQuestionCreer++;
-            } catch (InvalidFormatException | InvalidNameException | ReponseException | HomonymeException | DifficulteException e) {
+                //Si on n'arrive pas à créer une nouvelle catégorie 
+                //car le nom est invalide, on passe à la question suivante
                 erreurImportLigne.put(indiceLigne , e.getMessage());
+                erreurCreationCategorie = true;
+            }
+
+            if (!erreurCreationCategorie) {
+                ArrayList<String> reponseFausse = new ArrayList<String>();
+                if (!ligneHashMap.get("1reponseFausse").isBlank()) {
+                    reponseFausse.add(ligneHashMap.get("1reponseFausse"));
+                }
+                if (!ligneHashMap.get("2reponseFausse").isBlank()) {
+                    reponseFausse.add(ligneHashMap.get("2reponseFausse"));
+                }
+                if (!ligneHashMap.get("3reponseFausse").isBlank()) {
+                    reponseFausse.add(ligneHashMap.get("3reponseFausse"));
+                }
+                if (!ligneHashMap.get("4reponseFausse").isBlank()) {
+                    reponseFausse.add(ligneHashMap.get("4reponseFausse"));
+                }
+                
+                int indiceCategorie = modele.getIndice(ligneHashMap.get("categorie"));
+                
+                int difficulte;
+                try {
+                    difficulte = Integer.parseInt(ligneHashMap.get("difficulte"));				
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+                
+                try {
+                    modele.creerQuestion(
+                            ligneHashMap.get("libelle"), 
+                            indiceCategorie, difficulte,
+                            ligneHashMap.get("reponseJuste"), 
+                            reponseFausse, 
+                            ligneHashMap.get("feedback"));
+                    
+                } catch (CreerQuestionException | InvalidNameException | HomonymeException e) {
+                    erreurImportLigne.put(indiceLigne , e.getMessage());
+                }
             }
 
             indiceLigne++;
         }
         afficherConfirmation(erreurImportLigne);
+        
+        //On met à jour les pages d'Édition
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
-    }
-
-    /** 
-     * Affiche la fenetre de retour utilisateur correspondante.
-     * Si la hashMap est vide une simple fenetre de succes sinon
-     * une fenetre d'erreur avec la ligne et l'erreur généré 
-     * @param erreurImportLigne HashMap associant la ligne et 
-     *        l'erreur correspondante
-     */
-    private static void afficherConfirmation(
-            HashMap<Integer, String> erreurImportLigne) {
-        StringBuilder messageErreur = new StringBuilder() ;
-        if (erreurImportLigne.isEmpty()) {
-            AlertBox.showSuccessBox("Toutes les questions ont "
-                    + "été importées avec succès");
-        } else {
-            erreurImportLigne.forEach((key , value) -> {
-                messageErreur.append("Erreur d'import a la ligne " + key + " : " 
-                                     + value +"\n");
-            });
-            AlertBox.showErrorBox(messageErreur.toString());
-        }
-
     }
 
     /**
@@ -179,19 +182,21 @@ public class ControleurImport {
      * @return
      * @throws InvalidNameException
      */
-    private static void creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
-        ModelePrincipal modele = ModelePrincipal.getInstance();
+    private static boolean creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
+        //True si la catégorie existe ou si la création est fructueuse
+        boolean creationOK = true;
         // Si la catégorie n'existe pas on la créer
         if (!modele.categorieExiste(nomCategorie)) {
             try {
-                modele.creerCategorie(nomCategorie);
+                creationOK = modele.creerCategorie(nomCategorie);
             } catch (InvalidNameException e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
                 throw e;
             } catch (HomonymeException e) {
                 // Si la catégorie existe déjà on ne fais rien
             }
         }
+        return creationOK;
     }
 
     /**
@@ -221,7 +226,6 @@ public class ControleurImport {
     }
 
     /**
-     * 
      * Récupère une ligne du CSV et retourne une HashMap associant chaque élément
      * d'une question
      * 
@@ -262,5 +266,34 @@ public class ControleurImport {
             resultat.put("feedback", "");
         }
         return resultat;
+    }
+
+    /** 
+     * Affiche la fenêtre de retour utilisateur correspondante.
+     * Si la hashMap est vide une simple fenêtre de succès sinon
+     * une fenêtre d'erreur avec la ligne et l'erreur généré 
+     * @param erreurImportLigne HashMap associant la ligne et 
+     *        l'erreur correspondante
+     */
+    private static void afficherConfirmation(
+            HashMap<Integer, String> erreurImportLigne) {
+        
+        if (erreurImportLigne.isEmpty()) {
+        
+            AlertBox.showSuccessBox("Toutes les questions ont "
+                    + "été importées avec succès");
+        } else {
+            
+            StringBuilder messageErreur = new StringBuilder() ;
+            
+            //Pour les utilisateur de l'application, une liste commence à 1
+            erreurImportLigne.forEach((key , value) -> {
+                messageErreur.append("Erreur d'import a la ligne n°" + (key + 1)
+                                     + " : " + value +"\n");
+            });
+            
+            AlertBox.showErrorBox(messageErreur.toString());
+        }
+    
     }
 }

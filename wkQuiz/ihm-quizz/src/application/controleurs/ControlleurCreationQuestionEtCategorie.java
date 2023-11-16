@@ -1,3 +1,8 @@
+/*
+ * ControlleurCreationQuestionEtCategorie.java
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs;
 
 import java.util.ArrayList;
@@ -54,12 +59,12 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	@FXML private TextField saisieNomCategorie;
 
-	@FXML Tab tabCategorie;
-	@FXML TabPane tabPane;
+	@FXML private Tab tabCategorie;
+
+	@FXML private TabPane tabPane;
 
 	/**
-	 * Méthodes liée au bouton annuler,
-	 * qui devra vider les champs 
+	 * Méthodes liée au bouton annuler, vide les champs 
 	 */
 	@FXML
 	private void annulerQuestion() {
@@ -68,8 +73,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	}
 	
 	/**
-	 * Méthodes liée au bouton annuler,
-	 * qui devra vider les champs 
+	 * Méthodes liée au bouton annuler, vide les champs 
 	 */
 	@FXML
 	private void annulerCategorie() {
@@ -85,6 +89,7 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	    miseAJourListeCategorie();
 
+	    //Permet de sélectionner un onglet dans le TabPane
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
 	    	tabPane.getSelectionModel().select(tabCategorie);
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
@@ -92,19 +97,19 @@ public class ControlleurCreationQuestionEtCategorie {
     }
 
 	/**
-     * TODO comment method role
-     * @throws InvalidNameException
+	 * Met à jour la ComboBox de Catégorie avec les catégories du modèle
      */
     private void miseAJourListeCategorie() {
         //Récupération puis ajout des nom de catégorie
         categories = modele.getCategories();
+        
         selectCategorie.getItems().clear();
         selectCategorie.getItems().addAll(categories);
     }
 
     /**
 	 * Méthodes liée au bouton Accueil
-	 * qui devra renvoyer vers la page Accueil.fxml
+	 * envoie vers la page Accueil.fxml
 	 */
 	@FXML
 	private void retourAcceuil() {
@@ -112,22 +117,18 @@ public class ControlleurCreationQuestionEtCategorie {
 	}
 
     /**
-     * Méthodes liée au bouton valider,
-     * qui devra enregistrer les champs  dans la banques de question
+     * Méthodes liée au bouton valider, créer une nouvelle question
+     * à partir des champs
      */
 	@FXML
 	private void validerQuestion() {
-	    //TODO Refactor pour avoir une fonction par action
 		System.out.println("Valider");
 		try {
 			//Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
-	//		System.out.println(  "Catégorie choisie : "
-	//		                   + (indiceCategorieChoisie >= 0
-	//		                      ? categories.get(indiceCategorieChoisie)
-	//		                      : "Invalide"));
 			if (indiceCategorieChoisie <= 0) {
-				throw new NullPointerException("Il n'y a pas de Catégorie choisie");
+				throw new 
+				NullPointerException("Il n'y a pas de Catégorie choisie");
 			}
 			
 			//Récupération du nom de la question
@@ -158,7 +159,7 @@ public class ControlleurCreationQuestionEtCategorie {
         	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
         }
 		
-		// Quiz.charger("EditerQuestions.fxml"); crash l'appli
+		 Quiz.charger("EditerQuestions.fxml");
 		
 	}
 
@@ -273,10 +274,8 @@ public class ControlleurCreationQuestionEtCategorie {
 
 		boolean categorieCreer = false;
 
-        String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
-
-		creerEtGererCategorie( categorieCreer, nom);
+        String nom = saisieNomCategorie.getText().strip();
+		creerEtGererCategorie(categorieCreer, nom);
     }
 	
 	/**
@@ -309,9 +308,11 @@ public class ControlleurCreationQuestionEtCategorie {
 	 */
 	private void viderChampsQuestion() {
 	    difficulte.selectToggle(null);
-	    saisieFeedback.setText("");
+	    
 	    saisieLibeleQuestion.setText("");
+	    saisieFeedback.setText("");
 	    saisieReponseVrai.setText("");
+	    
 	    saisiePremiereReponseFausse.setText("");
 	    saisieSecondeReponseFausse.setText("");
 	    saisieTroisiemeReponseFausse.setText("");
@@ -321,6 +322,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	     * meme si ce n'est pas le plus optimal pour l'utilisateur
 	     * car la combo box ne prends que des catégories et non une String
 	     */
+	    //TODO Mettre à jour la liste sa va vider la liste et donc ne rien sélectionner
 	}
 
 	/**
