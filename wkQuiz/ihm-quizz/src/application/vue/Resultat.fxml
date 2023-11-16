@@ -6,8 +6,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurResultat">
    <children>
@@ -25,21 +25,29 @@
             </Label>
          </children>
       </Group>
-      <Label  layoutX="424.0" layoutY="58.0" text="Résultat" textFill="WHITE">
+      <Label layoutX="424.0" layoutY="58.0" text="Résultat" textFill="WHITE">
          <font>
             <Font name="Open Sans" size="40.0" />
          </font>
       </Label>
-      <Text fill="WHITE" layoutX="53.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message correspondant au nombre de bonnes réponses" textAlignment="CENTER">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Text>
-      <Label fx:id="score" layoutX="274.0" layoutY="288.0" prefHeight="57.0" prefWidth="530.0" text="Score/Nombre de questions" textFill="WHITE">
-         <font>
-            <Font name="Open Sans Italic" size="36.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" layoutX="-4.0" layoutY="169.0" prefHeight="64.0" prefWidth="1000.0">
+         <children>
+            <Label fx:id="messagePrivee" alignment="CENTER" text="Message correspondant au nombre de bonnes réponses" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1.0" layoutY="282.0" prefHeight="64.0" prefWidth="1000.0">
+         <children>
+            <Label fx:id="score" alignment="CENTER" prefHeight="57.0" prefWidth="1007.0" text="Score/Nombre de questions" textFill="WHITE">
+               <font>
+                  <Font name="Open Sans Italic" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
       <Button layoutX="260.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#voirReponses" prefHeight="80.0" prefWidth="480.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Voir les réponses" textFill="WHITE">
          <font>
             <Font name="Open Sans" size="32.0" />
