@@ -52,12 +52,23 @@ public class ControlleurRepondreQuestion {
     
 	@FXML 
 	public void initialize() {
-		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
-		afficherChoixPossible(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    Partie partie = modele.getPartie();
+		afficherQuestion(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
+		afficherChoixPossible(modele.getBanqueQuestion().getQuestions().get(partie.getIndiceQuestion()));
 		// if déja répondu, on affiche son choix;
+		//questionPossible();
 	}
 
-	private String formaterLIbelle(String chaine, int a) {
+	/** 
+     * TODO comment method role
+     */
+    private void questionPossible() {
+        System.out.println(ModelePrincipal.getInstance().getPartie().getQuestionPossible());
+        
+    }
+
+    private String formaterLIbelle(String chaine, int a) {
 		String libelleFormater = "";
 
     	for (int i = 0; i <= chaine.length() - 1; i ++) {
@@ -77,7 +88,8 @@ public class ControlleurRepondreQuestion {
     private void validerReponse() {
         boolean reponseAlertBox = true ; 
         Partie partie = ModelePrincipal.getInstance().getPartie();
-        String reponseChoisie; 
+        String reponseChoisie;
+        int actuelle = partie.getIndiceQuestion();
         if (reponses.getSelectedToggle() == null) {
            reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
                    + "aucunes reponses.\nPar défaut cette réponse sera compté "
@@ -85,12 +97,18 @@ public class ControlleurRepondreQuestion {
         }
         if (reponseAlertBox) {
             if (reponses.getSelectedToggle() == null) {
-               reponseChoisie = ""; 
+                System.out.println("ici");
+               reponseChoisie = "vide"; 
             } else {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            partie.setReponseDonnee(partie.getActuelle(), reponseChoisie);
+            
+            partie.setReponseDonnee(
+                    partie.getQuestionPossible().get(actuelle), reponseChoisie);
+            System.out.println(partie.getReponseDonnees());
+            // TODO verifier ou on en est par rapport au parametrage
+            partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
             Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
         }
     }

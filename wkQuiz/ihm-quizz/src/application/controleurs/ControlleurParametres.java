@@ -58,7 +58,7 @@ public class ControlleurParametres {
     @FXML
     public void commencerPartie() {
         try {
-        	ModelePrincipal.getInstance().setPartie(new Partie());
+        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
@@ -78,7 +78,7 @@ public class ControlleurParametres {
             }
             if (lancer) {
                 ordreAleatoire();
-                Quiz.changerVue("RepondreQuestion.fxml");
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");;
             }
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
@@ -120,6 +120,7 @@ public class ControlleurParametres {
                 partie.getQuestionPossible().add(question);        
             }   
         }
+
         return partie.getQuestionPossible().size();
         
     }

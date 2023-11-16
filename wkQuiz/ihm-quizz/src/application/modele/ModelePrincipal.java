@@ -69,6 +69,7 @@ public class ModelePrincipal {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
+        this.partie = new Partie();
         
         
         
