@@ -273,10 +273,8 @@ public class ControlleurCreationQuestionEtCategorie {
 
 		boolean categorieCreer = false;
 
-        String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
-
-		creerEtGererCategorie( categorieCreer, nom);
+        String nom = saisieNomCategorie.getText().strip();
+		creerEtGererCategorie(categorieCreer, nom);
     }
 	
 	/**

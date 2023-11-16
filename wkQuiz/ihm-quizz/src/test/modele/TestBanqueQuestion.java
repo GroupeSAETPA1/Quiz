@@ -182,7 +182,7 @@ class TestBanqueQuestion {
                 banqueQuestion.getQuestionsLibelle("libelle"));
         assertIterableEquals(ensembleQuestionLibelleNom, 
                 banqueQuestion.getQuestionsLibelle("LIBELLE"));
-        //On attend toutes les questions
+        // On attend toutes les questions
         assertIterableEquals(ensembleQuestionLibelleNom, 
                 banqueQuestion.getQuestionsLibelle(""));
     }
@@ -194,6 +194,5 @@ class TestBanqueQuestion {
     @Test
     void testToString() {
         assertTrue(banqueQuestion.toString() instanceof String);
-        //System.out.println(ensembleQuestion.toString());
     }
 }

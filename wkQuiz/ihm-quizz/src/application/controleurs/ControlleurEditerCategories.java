@@ -3,6 +3,7 @@ package application.controleurs;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,6 +57,7 @@ public class ControlleurEditerCategories {
 	
 	public void initialize() {
 	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
+	    table.setPlaceholder(new Label("Pas de Catégorie trouvé"));
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
@@ -106,20 +108,27 @@ public class ControlleurEditerCategories {
      * Modifie le tableau des categorie
      */
     private void miseAJourTableau() {
+    	ModelePrincipal modele = ModelePrincipal.getInstance();
        
         ObservableList<LigneCategorie> data = table.getItems();
+//        FilteredList<LigneCategorie> dataFiltre = new FilteredList<>(data);
+
         ArrayList<Categorie> categories ; 
         if (filtre) {
-            data.clear();
-            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesLibelle(barreRecherche.getText().strip());
-          
+        	data.clear();
+        	categories = modele.getCategoriesLibelle(barreRecherche.getText().strip());
         } else {
-            categories = ModelePrincipal.getInstance().getBanqueCategorie().getCategories();
+            categories = modele.getBanqueCategorie().getCategories();
         }
    
         for (Categorie categorie : categories) {
-            data.add(new LigneCategorie(categorie.getNom()
-                    , ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(categorie).size()));
+        	if (modele.getBanqueQuestion().getQuestions(categorie).size() == 0) {
+        		data.add(new LigneCategorie(categorie.getNom()));
+			} else {
+				data.add(new LigneCategorie(categorie.getNom()
+						, String.valueOf(modele.getBanqueQuestion().getQuestions(categorie).size())));
+			}
+    
         }
     }
 }

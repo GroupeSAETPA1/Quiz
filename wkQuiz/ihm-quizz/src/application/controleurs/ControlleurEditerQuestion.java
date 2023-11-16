@@ -101,7 +101,7 @@ public class ControlleurEditerQuestion {
 		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
 		
 		try {
-			aModifier.setCatgorie(selectCategorie.getValue());
+			aModifier.setCategorie(selectCategorie.getValue());
 			aModifier.setBonneReponse(saisieReponseVrai.getText());
 			aModifier.setFeedback(saisieFeedback.getText());
 			aModifier.setLibelle(saisieLibeleQuestion.getText());

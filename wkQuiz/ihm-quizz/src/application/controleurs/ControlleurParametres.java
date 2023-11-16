@@ -7,6 +7,10 @@ package application.controleurs;
 
 import application.modele.Partie;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -21,6 +25,8 @@ import javafx.scene.control.ToggleGroup;
  * @author Lucas
  */
 public class ControlleurParametres {
+	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
 
     @FXML
     private ComboBox<String> selecteurCategorie ;
@@ -47,6 +53,11 @@ public class ControlleurParametres {
     public void retourAccueil() {
         Quiz.changerVue("Accueil.fxml");
     }
+    @FXML
+	private void aider() {
+    	model.setPagePrecedente("ParametrePartie.fxml"); 
+		Quiz.changerVue("Aide.fxml");
+	}
     
     /*
      * Fonction lié au bouton de commencement d'une partie
@@ -54,10 +65,10 @@ public class ControlleurParametres {
     @FXML
     public void commencerPartie() {
         try {
-        	ModelePrincipal.getInstance().setPartie(new Partie());
+        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
-            int nombreQuestion = verifierNombreQuestion();
+            int nombreQuestion = genererListeQuestionPossible();
             Partie partie = ModelePrincipal.getInstance().getPartie();
             if (nombreQuestion == 0) {
                 throw new IllegalArgumentException("Impossible de lancer un "
@@ -73,7 +84,8 @@ public class ControlleurParametres {
                         "Voulez vous lancer le quizz avec ce paramétrage");
             }
             if (lancer) {
-                System.out.println("TODO page de jeu");
+                ordreAleatoire();
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");;
             }
         } catch (Exception e) {
             AlertBox.showErrorBox(e.getMessage());
@@ -81,11 +93,22 @@ public class ControlleurParametres {
     }
     
     /** 
+     * Melange de maniere aléatoire la liste des questions possibles
+     */
+    private void ordreAleatoire() {
+        Partie partie = ModelePrincipal.getInstance().getPartie();
+        ArrayList<Question> listeAMelanger = partie.getQuestionPossible();
+        Collections.shuffle(listeAMelanger);
+        partie.setQuestionPossible(listeAMelanger);
+    }
+
+
+    /** 
      * Ajoute a la liste de questions dans laquelle seront tirés celle de la partie
      * toutes les questions correspondant au parametre
      * @return le nombre de question repondant au parametre
      */
-    private int verifierNombreQuestion() {
+    private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
@@ -95,16 +118,16 @@ public class ControlleurParametres {
              * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
              * prendras les questions de tous les difficultes
              */
-            if (
+            if (partie.getCategoriePartie() == null ||
                 (question.getCategorie().equals(
-                 partie.getCategoriePartie().toString())
-                     || partie.getCategoriePartie() == null)
+                 partie.getCategoriePartie().toString()))
                && (question.getDifficulte() == partie.getDifficulte().intValue()
                    || partie.getDifficulte().intValue() == 0)
                ){
                 partie.getQuestionPossible().add(question);        
             }   
         }
+
         return partie.getQuestionPossible().size();
         
     }

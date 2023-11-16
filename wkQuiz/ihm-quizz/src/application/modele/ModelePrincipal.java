@@ -36,6 +36,13 @@ public class ModelePrincipal {
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT 
     = new HashMap<String, Integer>();
     
+    /**
+     * Lie une difficulté à sont equivalent en string
+     * Ex : Facile -> 1
+     */
+    public static final HashMap<Integer, String> INT_DIFFICULTE_TO_LABEL 
+    = new HashMap<Integer, String>();
+    
     public static final char SEPARATEUR_CSV = '\t';
     
 
@@ -48,6 +55,18 @@ public class ModelePrincipal {
     private Categorie catgorieAModifier;
     
     private boolean displayCategoriePane;
+    
+    private String pagePrecedente;
+    
+    public String getPagePrecendente(){
+    	return pagePrecedente;
+    }
+    
+    public void setPagePrecedente(String nomPage){
+    	this.pagePrecedente = nomPage;
+    }
+    
+    
 
 
     public boolean isDisplayCategoriePane() {
@@ -62,6 +81,7 @@ public class ModelePrincipal {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
+        this.partie = new Partie();
         
         
         
@@ -69,6 +89,11 @@ public class ModelePrincipal {
         LABEL_DIFFICULTE_TO_INT.put("Moyen", 2);
         LABEL_DIFFICULTE_TO_INT.put("Difficile", 3);
         LABEL_DIFFICULTE_TO_INT.put("Tous" , 0);
+        
+        INT_DIFFICULTE_TO_LABEL.put(1, "Facile");
+        INT_DIFFICULTE_TO_LABEL.put(2, "Moyen");
+        INT_DIFFICULTE_TO_LABEL.put(3, "Difficile");
+        INT_DIFFICULTE_TO_LABEL.put(0 , "Tous");
     }
 
     /**
@@ -253,7 +278,7 @@ public class ModelePrincipal {
             throws InvalidNameException, ReponseException, InvalidFormatException, DifficulteException {
       Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
       questionAModifier.setLibelle(libelle);
-      questionAModifier.setCatgorie(nouvelleCat);
+      questionAModifier.setCategorie(nouvelleCat);
       questionAModifier.setDifficulte(difficulte);
       questionAModifier.setBonneReponse(reponseJuste);
       questionAModifier.setMauvaiseReponse(reponseFausses);
@@ -332,5 +357,8 @@ public class ModelePrincipal {
 		this.partie = partie;
 	}
 	
-	
+	public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
+		return this.getBanqueCategorie().getCategoriesLibelle(libelle);
+
+	}
 }

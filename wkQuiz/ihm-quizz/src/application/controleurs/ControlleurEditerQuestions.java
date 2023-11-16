@@ -19,6 +19,7 @@ import application.controleurs.factories.SupprimerQuestionButtonCellFactory;
 import application.controleurs.lignes.LigneQuestion;
 
 public class ControlleurEditerQuestions {
+
 	
 	@FXML
 	private TableView<LigneQuestion> table;
