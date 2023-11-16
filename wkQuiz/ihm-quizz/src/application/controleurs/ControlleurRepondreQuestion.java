@@ -55,8 +55,13 @@ public class ControlleurRepondreQuestion {
     @FXML
     private RadioButton choix5;
     
+    
     @FXML
     private Button boutonPrecedent;
+    
+    @FXML
+    private Button valider;
+    
 	@FXML 
 	public void initialize() {
 	    /*
@@ -70,10 +75,25 @@ public class ControlleurRepondreQuestion {
 	        afficherChoixPossible(questionEnCour);	
 	        afficherQuestion(questionEnCour);	
 	        afficherNumeroQuestion();	
+	        System.out.println(partie.getQuestionPossible().size() + " size");
+	        System.out.println(partie.getIndiceQuestion() + " indice");
+	        if (partie.getQuestionPossible().size() -1 == partie.getIndiceQuestion()) {
+	        	afficherDernierPage();
+	        }
 	    }
 		couleurBoutonPrecedent();
 		// if déja répondu, on affiche son choix;
 		//questionPossible();
+	}
+
+	/**
+	 * modification de la page si c'est la dernier quesiton
+	 */
+	private void afficherDernierPage() {
+		valider.setText("Termminer le questionnaire");
+		valider.setPrefWidth(333);
+		valider.setTranslateX(-75);
+		
 	}
 
 	private void afficherNumeroQuestion() {
