@@ -30,7 +30,14 @@ public class ControlleurRepondreQuestion {
 	
 	@FXML 
 	public void initialize() {
-		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(2));
+		afficherQuestion(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions().get(10));
+		afficherChoixPossible();
+		// if déja répondu, on affiche son choix;
+	}
+
+	private void afficherChoixPossible() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void afficherQuestion(Question question) {
