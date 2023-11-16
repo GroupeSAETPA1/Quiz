@@ -23,11 +23,7 @@ import javafx.scene.control.ToggleGroup;
  * Controlleur de la page d'édition des questions.
  * Celui-ci instance  des methodes liée au bouton de la page 
  * 
- * @author Néo BECOGNE
  * @author Quentin COSTES
- * @author François DE SAINT PALAIS
- * @author Lucas DESCRIAUD
- * @author Tom DOUAUD
  */
 
 public class ControlleurEditerQuestion {
@@ -139,7 +135,7 @@ public class ControlleurEditerQuestion {
 	}
 	
 	/**
-     * met a jour la liste des categories
+     * Met a jour la liste des categories
      * @throws InvalidNameException
      */
     private void miseAJourListeCategorie() {
@@ -150,7 +146,7 @@ public class ControlleurEditerQuestion {
 	
 	/**
 	 * Méthodes liée au group retour 
-	 * qui devra renvoyer vers la page précedentes 
+	 * qui devra renvoyer vers la page précédentes 
 	 */
 	@FXML 
 	private void retour() {
