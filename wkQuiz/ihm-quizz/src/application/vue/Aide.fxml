@@ -28,7 +28,7 @@
          <font>
             <Font size="40.0" />
          </font></Label>
-      <Text fill="WHITE" layoutX="47.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le bouton vous permet de quitter l’application" wrappingWidth="934.0">
+      <Text fx:id="aide" fill="WHITE" layoutX="47.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le bouton vous permet de quitter l’application" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
