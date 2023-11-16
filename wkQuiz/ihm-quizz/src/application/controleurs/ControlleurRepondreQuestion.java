@@ -109,7 +109,7 @@ public class ControlleurRepondreQuestion {
    		intitule.setText(libelleFormater);
    		ModelePrincipal.getInstance();
 		difficulte.setText("Difficulté : " + ModelePrincipal.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()));
-   		numero.setText("Question n°");// ModelePrincipal.getInstance().getPartie().getNumeroQuestion());
+   		numero.setText("Question n°");
    	
 
    		}
