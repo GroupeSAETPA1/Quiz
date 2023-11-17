@@ -108,6 +108,10 @@ public class ControllerAide {
 			text5.setText("Une fois votre paramétrage terminé il ne vous reste plus qu'à cliquer sur commencer\n");
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(65);
+			
+		}else if(pagePrecedente != null && pagePrecedente.equals("CreationQuestionEtCategorie.fxml")) {
+			
+			
 		}
 	}
 }

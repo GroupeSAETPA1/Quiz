@@ -39,9 +39,9 @@
                         </Label>
                      </children>
                   </Group>
-                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideQuestion" >
+                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideQuestion">
                      <children>
-                        <ImageView fitHeight="96.0" fitWidth="96.0"  pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/IconeAide.png" />
                            </image>
