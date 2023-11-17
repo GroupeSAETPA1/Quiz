@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.junit.jupiter.params.provider.EnumSource.Mode;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -41,6 +43,12 @@ public class ControlleurParametres {
         // Ajoute les categorie de banque categorie dans la combo box
         selecteurCategorie.getItems().
         addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());
+        System.out.println(ModelePrincipal.getInstance().getPartie().getDifficulte());
+        System.out.println(ModelePrincipal.getInstance().getPartie().getNombreQuestion());
+        System.out.println(ModelePrincipal.getInstance().getPartie().getCategoriePartie());
+        System.out.println(ModelePrincipal.getInstance().getPartie().getReponseDonnees());
+
+        
     }
     
     
