@@ -25,6 +25,8 @@ public class Partie {
      */ 
     private int nombreQuestionPartie ;
     
+    private String pseudo;
+    
     
     /**
      * Categorie dans laquelle les questions seront tiree
@@ -63,6 +65,7 @@ public class Partie {
     public Partie () {
         reponsesDonnees = new HashMap<>();
     	questionsPossibles = new ArrayList<Question>();
+    	pseudo = "Pseudo";
     }
     
     /**
@@ -190,11 +193,25 @@ public class Partie {
         }
 		return nbBonneReponse;
 	}
+    public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
 	
-	public int pourcentageBonneRep() {
-		int nbReponse = getNombreQuestion();
-		int nbReponseBonne = getNbBonneReponse();
-		int pourcentage;
+
+	public double pourcentageBonneRep() {
+		double nbReponse = 0;
+		if (getQuestionPossible().size() == getIndiceQuestion()) {
+			nbReponse = getNombreQuestion();
+	    } else {
+	    	nbReponse = getQuestionPossible().size();
+	    }	
+		
+		double nbReponseBonne = getNbBonneReponse();
+		double pourcentage;
 		
 		//Pour éviter l'ArithmeticException, si nbReponse est nul 
 		//on le remplace par 1 

@@ -59,16 +59,16 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	@FXML private TextField saisieNomCategorie;
 
-	@FXML private Tab tabCategorie;
-
-	@FXML private TabPane tabPane;
+	@FXML Tab tabCategorie;
+	@FXML TabPane tabPane;
+	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
 
 	/**
 	 * Méthodes liée au bouton annuler, vide les champs 
 	 */
 	@FXML
 	private void annulerQuestion() {
-		System.out.println("AnnulerQuestion");
 		viderChampsQuestion();
 	}
 	
@@ -77,9 +77,24 @@ public class ControlleurCreationQuestionEtCategorie {
 	 */
 	@FXML
 	private void annulerCategorie() {
-		System.out.println("AnnulerCategorie");
 		viderChampsCategorie();
 	}
+	
+	@FXML
+	private void aideCategorie() {
+		model.setDisplayCategoriePane(true);
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+	
+	@FXML
+	private void aideQuestion() {
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+
 
 
 	@FXML
@@ -122,7 +137,6 @@ public class ControlleurCreationQuestionEtCategorie {
      */
 	@FXML
 	private void validerQuestion() {
-		System.out.println("Valider");
 		try {
 			//Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
@@ -133,23 +147,18 @@ public class ControlleurCreationQuestionEtCategorie {
 			
 			//Récupération du nom de la question
 			String libeleQuestion = getLibeleQuestion();
-			System.out.println("Nom de la question : " + libeleQuestion);
 			
 			//Récupération de la difficulté
 			int valeurDifficulte = getDifficulte();
-			System.out.println("Difficulté : " + valeurDifficulte);
 			
 			//Récupération du feedback
 			String feedback = getFeedback();
-			System.out.println("Feedback : " + feedback);
 			
 			//Récupération de la réponse vrai
 			String reponseVrai = getReponseVrai();
-			System.out.println("Réponse vrai : " + reponseVrai);
 			
 			//Récupération des réponses fausses
 			ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
-			System.out.println("Mauvaise réponse(s) : " + mauvaiseReponses);
 			
 			
 			creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
