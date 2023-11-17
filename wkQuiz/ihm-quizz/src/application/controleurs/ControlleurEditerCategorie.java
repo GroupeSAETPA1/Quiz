@@ -57,17 +57,13 @@ public class ControlleurEditerCategorie {
 		System.out.println(modele.getCategories());
 		
 		if( modele.categorieExiste(input.getText()) 
-			||  !modele.getCategorieAModifier().getNom().equalsIgnoreCase(input.getText())) {
+			||  modele.getCategorieAModifier().getNom().equalsIgnoreCase(input.getText())) {
 			
 			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
 			modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
 			AlertBox.showSuccessBox("categorie modifiée avec succées");
-//			try {
-//				Quiz.charger("EditerCategories.fxml");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
+
 			Quiz.chargerEtChangerVue("EditerCategories.fxml");
 		}
 	}
