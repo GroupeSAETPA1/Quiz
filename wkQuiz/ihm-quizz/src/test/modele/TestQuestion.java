@@ -63,9 +63,9 @@ class TestQuestion {
 		mauvaiseReponseJusteChaineVide.add("");
 		mauvaiseReponseJusteChaineVide.add("");
 
-		mauvaiseReponse1.add("le délimiteur /*");
+		mauvaiseReponse1.add("le delimiteur /*");
 		mauvaiseReponse1.add("le delimiteur //");
-		mauvaiseReponse1.add("le délimiteur (*");
+		mauvaiseReponse1.add("le delimiteur (*");
 
 		mauvaiseReponse2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
 		mauvaiseReponse2.add("un texte sans signification particulière");
@@ -141,7 +141,7 @@ class TestQuestion {
 
 		// La réponse juste est présente dans les réponses fausses
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
-				"le délimiteur /*", mauvaiseReponse1, ""));
+				"le delimiteur /*", mauvaiseReponse1, ""));
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
 				"LE DELIMITEUR //", mauvaiseReponse1, ""));
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
@@ -362,7 +362,7 @@ class TestQuestion {
 		// On vérifie que mettre une bonne réponse 
 		// qui fait partie des mauvaise réponses renvoie 
 		// une exception "ReponseException"
-		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le délimiteur /*"));
+		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le delimiteur /*"));
 		
 		// On vérifie qu'on puisse bien mettre une bonne réponse valide 
 		// et qu'elle est enregistrée
@@ -389,9 +389,9 @@ class TestQuestion {
 		ArrayList<String> test2 = new ArrayList<String>();
 		
 		// Les mauvaises réponses de la première question du jeu de test
-		test1.add("le délimiteur /*");
-		test1.add("le délimiteur //");
-		test1.add("le délimiteur (*");
+		test1.add("le delimiteur /*");
+		test1.add("le delimiteur //");
+		test1.add("le delimiteur (*");
 		
 		// des nouvelles mauvaises réponses pour remplacer celles de la première question du jeu de test
 		test2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
@@ -501,9 +501,9 @@ class TestQuestion {
 				Categorie de la question : Commentaire
 				Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
 				Mauvaise réponses :
-				- le délimiteur /*
+				- le delimiteur /*
 				- le delimiteur //
-				- le délimiteur (*
+				- le delimiteur (*
 				Bonne réponse : le délimiteur /**""";
 
 		String valide2 = """
