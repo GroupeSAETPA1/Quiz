@@ -168,17 +168,24 @@ class TestBanqueQuestion {
 	 * Méthode de test pour getQuestionsDifficulte
 	 * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
 	 * 
-	 * @throws HomonymeException   TODO FIXME
+	 * @throws HomonymeException  
 	 * @throws DifficulteException
 	 */
 	@Test
 	void testGetQuestionsDifficulte() throws HomonymeException, DifficulteException {
+		// On vérifie que si on recherche une question dans la banque de question 
+		// qui à une difficultée invalide 
+		// (les min et max values, les valeurs inférieures à 1 et supérieures à 3),
+		// on renvoie une exception "DifficulteException"
 		assertThrows(DifficulteException.class, () -> banqueQuestion.getQuestionsDifficulte(Integer.MIN_VALUE));
 		assertThrows(DifficulteException.class, () -> banqueQuestion.getQuestionsDifficulte(-1));
 		assertThrows(DifficulteException.class, () -> banqueQuestion.getQuestionsDifficulte(0));
 		assertThrows(DifficulteException.class, () -> banqueQuestion.getQuestionsDifficulte(4));
 		assertThrows(DifficulteException.class, () -> banqueQuestion.getQuestionsDifficulte(Integer.MAX_VALUE));
-
+		
+		// On rajoute une question de difficultée facile dans la banque de question 
+		// et on vérifie que la question est renvoyée quand on récupere 
+		// les question de difficultée facile (1) 
 		banqueQuestion.ajouter(ensembleQuestionDifficulteFacile.get(0));
 		assertIterableEquals(ensembleQuestionDifficulteFacile, banqueQuestion.getQuestionsDifficulte(1));
 	}
@@ -197,15 +204,17 @@ class TestBanqueQuestion {
 		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("libelle"));
 		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("LIBELLE"));
 		// On attend toutes les questions
-		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle(""));
+		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("lib"));
 	}
 
 	/**
 	 * Méthode de test pour toString de BanqueQuestion
 	 * {@link application.modele.BanqueQuestion#toString()}.
+	 * @throws HomonymeException 
 	 */
 	@Test
-	void testToString() {
+	void testToString() throws HomonymeException {
+		banqueQuestion.ajouter(ensembleQuestion.get(0));
 		assertTrue(banqueQuestion.toString() instanceof String);
 	}
 }

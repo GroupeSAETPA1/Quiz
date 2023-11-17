@@ -64,24 +64,32 @@ class TestBanqueCategorie {
 	 */
 	@Test
 	void testAjouter() {
+		// On ajoute une première catégorie dans la banque de catégorie
 		assertDoesNotThrow(() -> banqueCategorie.ajouter(ensembleCategories.get(0)));
-		// Question déjà présente
+		// Cas quand la catégorie est déjà présente 
+		// (la catégorie à été ajoutée juste avant)
+		// On renvoie l'exception "HomonymeException"
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(ensembleCategories.get(0)));
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(new Categorie("PreMIerE")));
 	}
 
 	/**
-	 * Test de la méthode getCategories et vérifie que la liste initialisé est vide
+	 * Test de la méthode getCategories
 	 * {@link application.modele.BanqueCategorie#getCategories()}
 	 * 
-	 * @throws HomonymeException    si jamais une catégorie est déjà présente
+	 * @throws HomonymeException  
 	 * @throws InvalidNameException
 	 */
 	@Test
 	void testGetCategories() throws HomonymeException, InvalidNameException {
+		// On ajoute à la banque de catégorie qui a déjà 
+		// la catégorie "General" un ensemble de catégories
 		for (Categorie categorie : ensembleCategories) {
 			banqueCategorie.ajouter(categorie);
 		}
+		// On ajoute à notre ensemble de catégorie la catégorie "General" 
+		// et on vérifie que toutes les catégories de l'ensemble de catégorie
+		// est égal aux catégories de la banque de catégorie 
 		ensembleCategories.add(0, new Categorie("General"));
 		assertIterableEquals(ensembleCategories, banqueCategorie.getCategories());
 	}
@@ -91,14 +99,18 @@ class TestBanqueCategorie {
 	 * bien une exception et que les index valide renvoie bien la catégorie
 	 * {@link application.modele.BanqueCategorie#getCategorie(int)}
 	 * 
-	 * @throws HomonymeException si jamais une catégorie est déjà présente
+	 * @throws HomonymeException 
 	 */
 	@Test
 	void testGetCategorie() throws HomonymeException {
+		// Quand on recherche une categorie a un indice invalide
+		// on reçoit bien l'exception "IndexOutOfBoundsException"
 		assertThrows(IndexOutOfBoundsException.class, () -> banqueCategorie.getCategorie(-1));
-
 		banqueCategorie.ajouter(ensembleCategories.get(0));
 		assertThrows(IndexOutOfBoundsException.class, () -> banqueCategorie.getCategorie(ensembleCategories.size()));
+		
+		// Quand on recherche une catégorie à un bon index 
+		// on à la bonne catégorie recherchée
 		assertEquals(ensembleCategories.get(0), banqueCategorie.getCategorie(1));
 	}
 
@@ -106,8 +118,8 @@ class TestBanqueCategorie {
 	 * Test de la méthode getCategoriesLibelle et vérifie qu'on puisse bien accéder
 	 * a une catégorie par son nom (insensible à la casse)
 	 * 
-	 * @throws HomonymeException    si jamais une catégorie est déjà présente
-	 * @throws InvalidNameException si jamais le nom de la catégorie est invalide
+	 * @throws HomonymeException    
+	 * @throws InvalidNameException 
 	 */
 	@Test
 	void testGetCategoriesLibelle() throws HomonymeException, InvalidNameException {
@@ -125,20 +137,23 @@ class TestBanqueCategorie {
 
 	/**
 	 * Test de la méthode getExactCategoriesLibelle et vérifie qu'on puisse bien
-	 * accéder a une catégorie par son nom exact (insensible à la casse)
+	 * accéder a une catégorie par son nom exact (sensible à la casse)
 	 * 
-	 * @throws HomonymeException    si jamais une catégorie est déjà présente
-	 * @throws InvalidNameException si jamais le nom de la catégorie est invalide
+	 * @throws HomonymeException    
+	 * @throws InvalidNameException 
 	 */
 	@Test
 	void testGetExactCategoriesLibelle() throws HomonymeException, InvalidNameException {
-		// TODO, modifier car la méthode a changer
+		// On ajoute a la banque de categorie une categorie "premiere"
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
-
+		
+		// On vérifie que la catégorie "premiere" est bien dans 
+		// la banque des categories et non "preMiERe"
 		assertTrue(ensembleCategorieLibelleNom.contains(banqueCategorie.getCategorieLibelleExact("premiere")));
 		assertFalse(ensembleCategorieLibelleNom.contains(banqueCategorie.getCategorieLibelleExact("preMiERe")));
 
+		// On ajoute une autre catégorie
 		ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
 
