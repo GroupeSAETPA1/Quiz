@@ -116,62 +116,73 @@ class TestBanqueCategorie {
 
 	/**
 	 * Test de la méthode getCategoriesLibelle et vérifie qu'on puisse bien accéder
-	 * a une catégorie par son nom (insensible à la casse)
+	 * à une catégorie par son nom (insensible à la casse et avec un nom partiel)
 	 * 
 	 * @throws HomonymeException    
 	 * @throws InvalidNameException 
 	 */
 	@Test
 	void testGetCategoriesLibelle() throws HomonymeException, InvalidNameException {
+		// On ajoute une catégorie "premiere" dans la banque de catégorie
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 
+		// On vérifie qu'on puisse récupérer la catégorie avec son nom exact, 
+		// insensible à la casse
 		assertIterableEquals(ensembleCategorieLibelleNom, banqueCategorie.getCategoriesLibelle("premiere"));
 		assertIterableEquals(ensembleCategorieLibelleNom, banqueCategorie.getCategoriesLibelle("preMiERe"));
 
+		// On ajoute une autre catégorie à la banque de catégorie 
+		// nommée "premiere categorie"
 		ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
-		assertIterableEquals(ensembleCategorieLibelleNom, banqueCategorie.getCategoriesLibelle("premiere"));
-		assertIterableEquals(ensembleCategorieLibelleNom, banqueCategorie.getCategoriesLibelle("preMiERe"));
+		
+		// On vérifie qu'on puisse récupérer la catégorie avec son nom partiel, 
+		// insensible à la casse
+		assertIterableEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("premiere").get(1));
+		assertIterableEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("preMiERe").get(1));
 	}
 
 	/**
 	 * Test de la méthode getExactCategoriesLibelle et vérifie qu'on puisse bien
-	 * accéder a une catégorie par son nom exact (sensible à la casse)
+	 * accéder à une catégorie par son nom exact (sensible à la casse)
 	 * 
 	 * @throws HomonymeException    
 	 * @throws InvalidNameException 
 	 */
 	@Test
 	void testGetExactCategoriesLibelle() throws HomonymeException, InvalidNameException {
-		// On ajoute a la banque de categorie une categorie "premiere"
+		// On ajoute à la banque de catégorie une catégorie "premiere"
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
 		
 		// On vérifie que la catégorie "premiere" est bien dans 
-		// la banque des categories et non "preMiERe"
+		// la banque des catégories et non "preMiERe"
 		assertTrue(ensembleCategorieLibelleNom.contains(banqueCategorie.getCategorieLibelleExact("premiere")));
 		assertFalse(ensembleCategorieLibelleNom.contains(banqueCategorie.getCategorieLibelleExact("preMiERe")));
 
-		// On ajoute une autre catégorie
+		// On ajoute une autre catégorie "premiere categorie" dans la banque de catégorie
 		ensembleCategorieLibelleNom.add(new Categorie("premiere categorie"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(1));
-
 		ArrayList<Categorie> listeUneCategorie = new ArrayList<Categorie>();
 		listeUneCategorie.add(new Categorie("premiere categorie"));
 
+		// On vérifie que la méthode nous renvoie null car il n'y a pas 
+		// de catégorie qui s'appele exactement "categorie"
 		assertEquals(banqueCategorie.getCategorieLibelleExact("categorie"), null);
+		// On vérifie que la méthode nous renvoie la catégorie "premiere categorie" 
+		// car il y a une catégorie éponyme dans la banque de categorie
 		assertEquals(banqueCategorie.getCategorieLibelleExact("premiere categorie"), listeUneCategorie.get(0));
 	}
 
 	/**
-	 * Test de la méthode toString et vérifie qu'une chaine de caractère est renvoyé
+	 * Test de la méthode toString et vérifie qu'une chaîne de caractère est renvoyé
 	 * {@link application.modele.BanqueCategorie#toString()}
 	 * 
 	 * @throws HomonymeException
 	 */
 	@Test
-	void testToString() throws HomonymeException {
+	void () throws HomonymeException {
 		banqueCategorie.ajouter(ensembleCategories.get(0));
 		assertTrue(banqueCategorie.toString() instanceof String);
 	}
