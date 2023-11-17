@@ -57,7 +57,7 @@ public class ControleurResultat {
 	 */
 	@FXML 
 	private void voirReponses() {
-		System.out.println("Button voirReponses");
+		Quiz.changerVue("Solution.fxml");
 	}
 
 	/**
