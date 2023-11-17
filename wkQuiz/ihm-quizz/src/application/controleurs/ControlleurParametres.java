@@ -56,7 +56,7 @@ public class ControlleurParametres {
 
     @FXML
 	private void aider() {
-    	model.setPagePrecedente("ParametrePartie.fxml"); 
+    	modele.setPagePrecedente("ParametrePartie.fxml"); 
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
     
