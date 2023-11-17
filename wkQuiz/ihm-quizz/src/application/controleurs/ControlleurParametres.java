@@ -55,11 +55,11 @@ public class ControlleurParametres {
     }
 
     @FXML
-    private void aider() {
-        modele.setPagePrecedente("ParametrePartie.fxml");
-        Quiz.changerVue("Aide.fxml");
-    }
-
+	private void aider() {
+    	model.setPagePrecedente("ParametrePartie.fxml"); 
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+    
     /*
      * Fonction lié au bouton de commencement d'une partie
      */

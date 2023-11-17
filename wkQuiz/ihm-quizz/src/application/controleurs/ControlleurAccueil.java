@@ -66,7 +66,10 @@ public class ControlleurAccueil {
 	@FXML
 	private void aider() {
 		model.setPagePrecedente("Accueil.fxml");
-		Quiz.changerVue("Aide.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+
+		// TODO : lancer une alertBox
 	}
 
 }

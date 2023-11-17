@@ -59,9 +59,10 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	@FXML private TextField saisieNomCategorie;
 
-	@FXML private Tab tabCategorie;
-
-	@FXML private TabPane tabPane;
+	@FXML Tab tabCategorie;
+	@FXML TabPane tabPane;
+	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
 
 	/**
 	 * Méthodes liée au bouton annuler, vide les champs 
@@ -80,6 +81,22 @@ public class ControlleurCreationQuestionEtCategorie {
 		System.out.println("AnnulerCategorie");
 		viderChampsCategorie();
 	}
+	
+	@FXML
+	private void aideCategorie() {
+		model.setDisplayCategoriePane(true);
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+	
+	@FXML
+	private void aideQuestion() {
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+
 
 
 	@FXML
