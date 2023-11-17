@@ -191,10 +191,10 @@ public class Partie {
 		return nbBonneReponse;
 	}
 	
-	public int pourcentageBonneRep() {
+	public float pourcentageBonneRep() {
 		int nbReponse = getNombreQuestion();
 		int nbReponseBonne = getNbBonneReponse();
-		int pourcentage;
+		float pourcentage;
 		
 		//Pour éviter l'ArithmeticException, si nbReponse est nul 
 		//on le remplace par 1 

@@ -72,14 +72,32 @@ public class ControlleurRepondreQuestion {
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
 	        afficherQuestion(questionEnCour);	
+	        retirerChoixVides();
 	        afficherNumeroQuestion();	
 	        couleurBoutonPrecedent();
 	        questionDejaRepondu(questionEnCour);
 
-	        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
+	        if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+	        	|| partie.getNombreQuestion() == partie.getIndiceQuestion() + 1) {
 	        	afficherDernierPage();
 	        }
 	    }
+	}
+
+	private void retirerChoixVides() {
+		// on balai les choix possibles, si leur texte est vide on les retire
+   		if (choix1.getText().isBlank()) {
+   			choix1.setVisible(false);
+   		} else if (choix2.getText().isBlank()) {
+   			choix2.setVisible(false);
+   		} else if (choix3.getText().isBlank()) {
+   			choix3.setVisible(false);
+   		} else if (choix4.getText().isBlank()) {
+   			choix4.setVisible(false);
+   		} else if (choix5.getText().isBlank()) {
+   			choix5.setVisible(false);
+   		}
+		
 	}
 
 	/**
@@ -154,9 +172,15 @@ public class ControlleurRepondreQuestion {
             }
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
-            // TODO verifier ou on en est par rapport au parametrage
-            partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
-            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            
+            if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+    	        || partie.getNombreQuestion() == partie.getIndiceQuestion() + 1) {
+            	Quiz.chargerEtChangerVue("Resultat.fxml");
+            } else {
+                partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            }
+            
         }
     }
     

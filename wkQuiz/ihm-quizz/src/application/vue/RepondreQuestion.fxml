@@ -64,7 +64,7 @@
       </Button>
       <VBox alignment="CENTER" layoutX="33.0" layoutY="332.0" prefHeight="472.0" prefWidth="1338.0" spacing="30.0">
          <children>
-            <RadioButton fx:id="choix1" mnemonicParsing="false" text="Choix 1" textFill="WHITE">
+            <RadioButton fx:id="choix1" mnemonicParsing="false" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -72,29 +72,29 @@
                   <ToggleGroup fx:id="reponses" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="choix2" mnemonicParsing="false" text="Choix 2" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix2" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix3" mnemonicParsing="false" text="Choix 3" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix3" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix4" mnemonicParsing="false" text="Choix 4" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix4" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix5" mnemonicParsing="false" text="Choix 5" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix5" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
          </children>
       </VBox>
-      <Button fx:id="valider" layoutX="602.0" layoutY="815.0" mnemonicParsing="false" onMouseClicked="#validerReponse" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #004F08;" text="Valider" textFill="WHITE">
+      <Button fx:id="valider" layoutX="625.0" layoutY="808.0" mnemonicParsing="false" onMouseClicked="#validerReponse" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #004F08;" text="Valider" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
