@@ -36,6 +36,7 @@ public class ControleurResultat {
     	if(model.getPartie() != null) {
     		Partie partie = model.getPartie();
     		int nbReponse;
+    		
     		if (partie.getQuestionPossible().size() == partie.getNombreQuestion()) {
     			nbReponse = partie.getNombreQuestion();
     		} else {
