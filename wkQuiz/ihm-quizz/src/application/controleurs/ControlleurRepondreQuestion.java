@@ -282,4 +282,26 @@ public class ControlleurRepondreQuestion {
             reponses.selectToggle(aSelectionner);
         }
     }
+    
+    /**
+     * Action lié au bouton Passer
+     */
+    @FXML
+    private void passer() {
+       boolean reponseAlertBox =  AlertBox.showConfirmationBox(
+               "Vous n'avez choisis aucunes reponses.\n"
+               + "Par défaut cette réponse sera compté comme fausse");
+       int actuelle = partie.getIndiceQuestion();
+       if (reponseAlertBox) {
+           partie.setReponseDonnee(
+                   partie.getQuestionPossible().get(actuelle), "");
+           partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
+           Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+           
+           if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
+               
+           }
+           
+       }
+    }
 }
