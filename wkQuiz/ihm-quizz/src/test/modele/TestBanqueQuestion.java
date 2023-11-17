@@ -110,12 +110,18 @@ class TestBanqueQuestion {
 	 */
 	@Test
 	void testGetQuestionNbFausseReponse() throws HomonymeException, InvalidFormatException {
+		// On vérifie que demander des nombres de mauvaises réponses invalides
+		// (le min et max value, des nombres inférieur à 1 ou supérieur à 4)
+		// à la banque de question renvoie  l'exception "InvalidFormatException"
 		assertThrows(InvalidFormatException.class, () -> banqueQuestion.getQuestionsNbFausseReponse(Integer.MIN_VALUE));
 		assertThrows(InvalidFormatException.class, () -> banqueQuestion.getQuestionsNbFausseReponse(-1));
 		assertThrows(InvalidFormatException.class, () -> banqueQuestion.getQuestionsNbFausseReponse(0));
 		assertThrows(InvalidFormatException.class, () -> banqueQuestion.getQuestionsNbFausseReponse(5));
 		assertThrows(InvalidFormatException.class, () -> banqueQuestion.getQuestionsNbFausseReponse(Integer.MAX_VALUE));
 
+		// On vérifie qu'on retrouve bien une question si on a 
+		// dans la banque de question qu'une seule question qui 
+		// à une seule mauvaise réponse 
 		banqueQuestion.ajouter(ensembleQuestion.get(0));
 		assertEquals(ensembleQuestion.get(0), banqueQuestion.getQuestionsNbFausseReponse(1).get(0));
 	}
@@ -128,8 +134,14 @@ class TestBanqueQuestion {
 	 */
 	@Test
 	void testGetQuestions() throws HomonymeException {
+		// On vérifie qu'on aie bien une liste vide de questions si on veut 
+		// récupérer la liste des questions d'une banque de question vide
 		ArrayList<Question> listeVide = new ArrayList<Question>();
 		assertIterableEquals(listeVide, banqueQuestion.getQuestions());
+		
+		// On ajoute une liste de questions à la banque de question vide et 
+		// on vérifie que chaque question de la banque de question est égale à
+		// chaque question de la liste des questions ajoutées
 		for (Question question : ensembleQuestion) {
 			banqueQuestion.ajouter(question);
 		}
@@ -145,6 +157,9 @@ class TestBanqueQuestion {
 	 */
 	@Test
 	void testGetQuestionsCategorie() throws HomonymeException, InvalidNameException {
+		// On ajoute une question qui à une catégorie "Nom" et on vérifie
+		// qu'on récupere bien cette question en recherchant une catégorie "Nom"
+		// dans la banque de questions 
 		banqueQuestion.ajouter(ensembleQuestionCategorieNom.get(0));
 		assertEquals(ensembleQuestionCategorieNom.get(0), banqueQuestion.getQuestions(new Categorie("Nom")).get(0));
 	}
