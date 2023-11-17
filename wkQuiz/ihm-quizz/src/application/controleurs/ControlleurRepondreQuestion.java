@@ -67,7 +67,10 @@ public class ControlleurRepondreQuestion {
 	    /*
 	     * Evite IndexOutOfBoundsException au premier chargement
 	     */	
+	    System.out.println("question possible" + partie.getQuestionPossible());
+	    System.out.println("reponse donne " + partie.getReponseDonnees());
 	    if (partie.getQuestionPossible().size() != 0) {
+	        System.out.println(partie.getIndiceQuestion());
 	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
