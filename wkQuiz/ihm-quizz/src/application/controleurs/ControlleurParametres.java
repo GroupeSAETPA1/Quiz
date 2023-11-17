@@ -42,14 +42,12 @@ public class ControlleurParametres {
         selecteurCategorie.getItems().add("Aléatoire");
         // Ajoute les categorie de banque categorie dans la combo box
         selecteurCategorie.getItems().
-        addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());
-        System.out.println(ModelePrincipal.getInstance().getPartie().getDifficulte());
-        System.out.println(ModelePrincipal.getInstance().getPartie().getNombreQuestion());
-        System.out.println(ModelePrincipal.getInstance().getPartie().getCategoriePartie());
-        System.out.println(ModelePrincipal.getInstance().getPartie().getReponseDonnees());
-
-        
+        addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());  
+        ModelePrincipal.getInstance().getPartie().getReponseDonnees().clear();
+        ModelePrincipal.getInstance().getPartie().getQuestionPossible().clear();
+        ModelePrincipal.getInstance().getPartie().setIndiceQuestion(0);
     }
+    
     
     
     /*
@@ -68,8 +66,12 @@ public class ControlleurParametres {
         try {
         	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
+            System.out.println(ModelePrincipal.getInstance().getPartie().getDifficulte());
+            System.out.println(ModelePrincipal.getInstance().getPartie().getNombreQuestion());
+            System.out.println(ModelePrincipal.getInstance().getPartie().getCategoriePartie());
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
+            System.out.println(ModelePrincipal.getInstance().getPartie().getQuestionPossible());
             Partie partie = ModelePrincipal.getInstance().getPartie();
             if (nombreQuestion == 0) {
                 throw new IllegalArgumentException("Impossible de lancer un "
@@ -86,6 +88,8 @@ public class ControlleurParametres {
             }
             if (lancer) {
                 ordreAleatoire();
+                
+
                 Quiz.chargerEtChangerVue("RepondreQuestion.fxml");;
             }
         } catch (Exception e) {
