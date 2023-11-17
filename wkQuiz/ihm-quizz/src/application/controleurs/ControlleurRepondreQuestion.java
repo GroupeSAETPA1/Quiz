@@ -85,16 +85,26 @@ public class ControlleurRepondreQuestion {
 	}
 
 	private void retirerChoixVides() {
-		// on balai les choix possibles, si leur texte est vide on les retire
-   		if (choix1.getText().isBlank()) {
+		System.out.println("choix1 = " + choix1.getText() + choix1.getText().isBlank());
+		System.out.println("choix2 = " + choix2.getText() + choix2.getText().isBlank());
+		System.out.println("choix3 = " + choix3.getText() + choix3.getText().isBlank());
+		System.out.println("choix4 = " + choix4.getText() + choix4.getText().isBlank());
+		System.out.println("choix5 = " + choix5.getText() + choix5.getText().isBlank());
+		
+   		if (choix1.getText().isBlank()) {			
    			choix1.setVisible(false);
-   		} else if (choix2.getText().isBlank()) {
+   		}
+   		if (choix2.getText().isBlank()) { 			
    			choix2.setVisible(false);
-   		} else if (choix3.getText().isBlank()) {
+   		} 
+   		if (choix3.getText().isBlank()) {			
    			choix3.setVisible(false);
-   		} else if (choix4.getText().isBlank()) {
+   		} 
+   		if (choix4.getText().isBlank()) {		
    			choix4.setVisible(false);
-   		} else if (choix5.getText().isBlank()) {
+   		}
+   		if (choix5.getText().isBlank()) {	
+   			System.out.println("retirer 5");
    			choix5.setVisible(false);
    		}
 		
@@ -204,6 +214,13 @@ public class ControlleurRepondreQuestion {
    		reponsePossibles.add(question.getReponseJuste());
    		reponsePossibles.addAll(question.getMauvaisesReponses());
    		int nbQuestion = reponsePossibles.size();
+   		
+
+   		choix1.setVisible(true);
+   		choix2.setVisible(true);
+   		choix3.setVisible(true);
+   		choix4.setVisible(true);
+   		choix5.setVisible(true);
    		
    		Collections.shuffle(reponsePossibles);
    		
