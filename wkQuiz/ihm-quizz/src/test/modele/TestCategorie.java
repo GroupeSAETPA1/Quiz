@@ -15,22 +15,22 @@ import application.modele.Categorie;
 class TestCategorie {
 
 	/**
-	 * Test du constructeur avec argument valides et invalides
+	 * Test du constructeur avec arguments valides et invalides
 	 * @see {@link application.modele.Categorie#Categorie(String)}
 	 */
 	@Test
 	void testCategorie() {
+		// On vérifie qu'il n'y a pas d'erreurs 
+		// avec des constructeurs valides (longueur nom max < 31)
 		assertDoesNotThrow(() -> new Categorie("test"));
-		// 30 caractère
 		assertDoesNotThrow(() -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 		
-		/* Tests avec constructeur invalide */
+		// On vérifie que des Catégories avec des constructeurs invalides 
+		// renvoie bien l'exception "InvalidNameException"
 		assertThrows(InvalidNameException.class, () -> new Categorie(""));
 		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
-		// 31 caractère
-		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-		
-		
+		// Le constructeur dépasse la longueur nom max
+		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));		
 	}
 
 	/**
