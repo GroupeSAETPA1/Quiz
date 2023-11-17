@@ -35,8 +35,14 @@ public class ControleurResultat {
     	
     	if(model.getPartie() != null) {
     		Partie partie = model.getPartie();
+    		int nbReponse;
+    		if (partie.getQuestionPossible().size() == partie.getNombreQuestion()) {
+    			nbReponse = partie.getNombreQuestion();
+    		} else {
+    			nbReponse = partie.getQuestionPossible().size();
+    		}
     		
-    		int nbReponse = partie.getReponseDonnees().size();
+    		
     		int nbReponseBonne = partie.getNbBonneReponse();
     		score.setText(String.format(TEXT_SCORE,nbReponseBonne,nbReponse));
     	
