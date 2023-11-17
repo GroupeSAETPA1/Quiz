@@ -66,28 +66,32 @@ public class ControlleurParametres {
     @FXML
     public void commencerPartie() {
         // ModelePrincipal.getInstance().setPartie(new Partie());
-        modifierParametrePartie();
+        try {
+            modifierParametrePartie();
+            boolean lancer;
+            int nombreQuestion = genererListeQuestionPossible();
+            Partie partie = modele.getPartie();
+            if (nombreQuestion == 0) {
+                throw new IllegalArgumentException(
+                        "Impossible de lancer un " + "quiz ! "
+                        + "Aucunes questions trouver pour vos choix " + "de parametres");
+                } else if (nombreQuestion < partie.getNombreQuestion()) {
+                    lancer = AlertBox.showConfirmationBox("Seulement " 
+                           + nombreQuestion
+                           + " questions trouvé pour votre paramétrage \n " 
+                           + "voulez vous lance le quizz avec celui-ci ?");
+                } else {
+                    lancer = AlertBox.showConfirmationBox("Voulez vous lancer le quizz avec ce paramétrage");
+                }
 
-        boolean lancer;
-        int nombreQuestion = genererListeQuestionPossible();
-        Partie partie = modele.getPartie();
-
-        if (nombreQuestion == 0) {
-            throw new IllegalArgumentException(
-                    "Impossible de lancer un " + "quiz ! Aucunes questions trouver pour vos choix " + "de parametres");
-        } else if (nombreQuestion < partie.getNombreQuestion()) {
-            lancer = AlertBox.showConfirmationBox("Seulement " + nombreQuestion
-                    + " questions trouvé pour votre paramétrage \n " + "voulez vous lance le quizz avec celui-ci ?");
-        } else {
-            lancer = AlertBox.showConfirmationBox("Voulez vous lancer le quizz avec ce paramétrage");
-        }
-
-        if (lancer) {
-            ordreAleatoire();
-            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
-            ;
-        }
-
+            if (lancer) {
+                ordreAleatoire();
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            }
+                
+            } catch (Exception e) {
+                AlertBox.showErrorBox(e.getMessage());
+            }
     }
 
     /**
