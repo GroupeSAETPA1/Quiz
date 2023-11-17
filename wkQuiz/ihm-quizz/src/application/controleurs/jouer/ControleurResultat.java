@@ -82,8 +82,6 @@ public class ControleurResultat {
 			
 			double pourcentage = partie.pourcentageBonneRep();
 			
-			System.out.println(pourcentage);
-			
 			if(pourcentage == 0) {
 				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
 				        + "retenter " + pseudo);
