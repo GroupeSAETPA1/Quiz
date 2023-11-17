@@ -25,6 +25,8 @@ public class Partie {
      */ 
     private int nombreQuestionPartie ;
     
+    private String pseudo;
+    
     
     /**
      * Categorie dans laquelle les questions seront tiree
@@ -63,6 +65,7 @@ public class Partie {
     public Partie () {
         reponsesDonnees = new HashMap<>();
     	questionsPossibles = new ArrayList<Question>();
+    	pseudo = "Pseudo";
     }
     
     /**
@@ -190,7 +193,15 @@ public class Partie {
         }
 		return nbBonneReponse;
 	}
+    public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
 	
+
 	public double pourcentageBonneRep() {
 		double nbReponse = 0;
 		if (getQuestionPossible().size() == getIndiceQuestion()) {

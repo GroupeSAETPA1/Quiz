@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  */
 public class ControleurResultat {
 	
-	 ModelePrincipal model = ModelePrincipal.getInstance();
+	 ModelePrincipal modele = ModelePrincipal.getInstance();
 	 
 	 final String TEXT_SCORE="Score=%s/%s";
 		
@@ -32,10 +32,10 @@ public class ControleurResultat {
      */
     @FXML
     public void initialize() {
-    	
-    	if(model.getPartie() != null) {
-    		Partie partie = model.getPartie();
-    		int nbReponse;
+    	if(modele.getPartie() != null) {
+    		Partie partie = modele.getPartie();
+			int nbReponse;
+
     		
     		if (partie.getQuestionPossible().size() == partie.getNombreQuestion()) {
     			nbReponse = partie.getNombreQuestion();
@@ -82,10 +82,9 @@ public class ControleurResultat {
 	}
 	
 	public void messagePersonnaliser() {
-		String pseudo="Quentin"; // STUB
-		
-		if(model.getPartie() != null) {
-			Partie partie = model.getPartie();
+		String pseudo = modele.getPartie().getPseudo();		
+		if(modele.getPartie() != null) {
+			Partie partie = modele.getPartie();
 			
 			double pourcentage = partie.pourcentageBonneRep();
 			
