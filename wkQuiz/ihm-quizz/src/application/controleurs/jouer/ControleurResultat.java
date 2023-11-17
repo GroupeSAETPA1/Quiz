@@ -73,7 +73,7 @@ public class ControleurResultat {
 	
 	@FXML
 	private void nouveauQuiz() {
-		Quiz.changerVue("ParametrePartie.fxml");
+		Quiz.chargerEtChangerVue("ParametrePartie.fxml");
 	}
 	
 	public void messagePersonnaliser() {
