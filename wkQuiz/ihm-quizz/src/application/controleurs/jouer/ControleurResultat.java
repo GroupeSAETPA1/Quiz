@@ -58,7 +58,6 @@ public class ControleurResultat {
 	@FXML 
 	private void voirReponses() {
 		Quiz.changerVue("Solution.fxml");
-		System.out.println("Button voirReponses");
 	}
 
 	/**
@@ -67,7 +66,6 @@ public class ControleurResultat {
 	 */
 	@FXML
 	private void retourAccueil() {
-		System.out.println("Button retourAccueil");
 		Quiz.changerVue("Accueil.fxml");
 	}
 	
@@ -82,7 +80,9 @@ public class ControleurResultat {
 		if(model.getPartie() != null) {
 			Partie partie = model.getPartie();
 			
-			float pourcentage = partie.pourcentageBonneRep();
+			double pourcentage = partie.pourcentageBonneRep();
+			
+			System.out.println(pourcentage);
 			
 			if(pourcentage == 0) {
 				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
