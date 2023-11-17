@@ -82,7 +82,7 @@ public class ControleurResultat {
 		if(model.getPartie() != null) {
 			Partie partie = model.getPartie();
 			
-			int pourcentage = partie.pourcentageBonneRep();
+			float pourcentage = partie.pourcentageBonneRep();
 			
 			if(pourcentage == 0) {
 				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
