@@ -188,6 +188,7 @@ public class Partie {
                 nbBonneReponse ++;
             }
         }
+	    System.out.println(nbBonneReponse);
 		return nbBonneReponse;
 	}
 	

@@ -154,9 +154,14 @@ public class ControlleurRepondreQuestion {
             }
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
-            // TODO verifier ou on en est par rapport au parametrage
-            partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
-            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            
+            if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
+            	Quiz.chargerEtChangerVue("Resultat.fxml");
+            } else {
+                partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            }
+            
         }
     }
     
