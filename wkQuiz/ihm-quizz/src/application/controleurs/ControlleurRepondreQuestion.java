@@ -332,20 +332,33 @@ public class ControlleurRepondreQuestion {
      */
     @FXML
     private void passer() {
-       boolean reponseAlertBox =  AlertBox.showConfirmationBox(
+        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+                || partie.getNombreQuestion() == partie.getIndiceQuestion() + 1){
+            confirmationPasserDerniereQuestion();     
+       } else {
+           boolean reponseAlertBox =  AlertBox.showConfirmationBox(
                "Vous n'avez choisis aucunes reponses.\n"
                + "Par défaut cette réponse sera compté comme fausse");
-       int actuelle = partie.getIndiceQuestion();
-       if (reponseAlertBox) {
-           partie.setReponseDonnee(
-                   partie.getQuestionPossible().get(actuelle), "");
-           partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
-           Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
-           
-           if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
-               
+           int actuelle = partie.getIndiceQuestion();
+           if (reponseAlertBox) {
+               partie.setReponseDonnee(
+               partie.getQuestionPossible().get(actuelle), "");
+               partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
+               Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
            }
-           
        }
+    }
+
+    /** 
+     * TODO comment method role
+     */
+    private void confirmationPasserDerniereQuestion() {
+        boolean finir = AlertBox.showConfirmationBox(
+                "Vous allez passer la dernière question et finir le quizz . "
+                + "Vous ne pourrez pas revenir en arrière etes vous sur ? ");
+        if (finir) {
+            Quiz.chargerEtChangerVue("Resultat.fxml");
+        }
+        
     }
 }

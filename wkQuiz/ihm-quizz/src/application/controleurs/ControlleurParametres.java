@@ -66,12 +66,8 @@ public class ControlleurParametres {
         try {
         	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
-            System.out.println(ModelePrincipal.getInstance().getPartie().getDifficulte());
-            System.out.println(ModelePrincipal.getInstance().getPartie().getNombreQuestion());
-            System.out.println(ModelePrincipal.getInstance().getPartie().getCategoriePartie());
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
-            System.out.println(ModelePrincipal.getInstance().getPartie().getQuestionPossible());
             Partie partie = ModelePrincipal.getInstance().getPartie();
             if (nombreQuestion == 0) {
                 throw new IllegalArgumentException("Impossible de lancer un "
