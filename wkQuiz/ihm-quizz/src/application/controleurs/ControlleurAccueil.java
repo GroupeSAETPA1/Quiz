@@ -46,7 +46,6 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void online() {
-		System.out.println("Button en ligne");
 		//TODO
 	}
 	

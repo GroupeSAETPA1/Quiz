@@ -191,10 +191,16 @@ public class Partie {
 		return nbBonneReponse;
 	}
 	
-	public int pourcentageBonneRep() {
-		int nbReponse = getNombreQuestion();
-		int nbReponseBonne = getNbBonneReponse();
-		int pourcentage;
+	public double pourcentageBonneRep() {
+		double nbReponse = 0;
+		if (getQuestionPossible().size() == getIndiceQuestion()) {
+			nbReponse = getNombreQuestion();
+	    } else {
+	    	nbReponse = getQuestionPossible().size();
+	    }	
+		
+		double nbReponseBonne = getNbBonneReponse();
+		double pourcentage;
 		
 		//Pour éviter l'ArithmeticException, si nbReponse est nul 
 		//on le remplace par 1 

@@ -43,7 +43,6 @@ public class ControleurImport {
 
     @FXML
     private void parcourirExplorer() {
-        System.out.println("Parcourir Explorer");
 
         FileChooser fichier = new FileChooser();
 
@@ -79,7 +78,6 @@ public class ControleurImport {
     @FXML
     private void valider() throws IOException {
 
-        System.out.println("Valider");
         String cheminFichierCSV = saisieCheminFichier.getText();
 
         File fichier = new File(cheminFichierCSV);
@@ -216,7 +214,6 @@ public class ControleurImport {
             if (ligne != null) {
                 HashMap<String, String> dicoLigne = getDicotionnaire(ligne);
                 resultat.add(dicoLigne);
-                System.out.println(dicoLigne);
                 nombreQuestionAjoute ++;
             }
         } while (ligne != null);

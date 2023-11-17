@@ -68,18 +68,39 @@ public class ControlleurRepondreQuestion {
 	     * Evite IndexOutOfBoundsException au premier chargement
 	     */	
 	    if (partie.getQuestionPossible().size() != 0) {
-	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
+	        Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
 	        afficherQuestion(questionEnCour);	
+	        retirerChoixVides();
 	        afficherNumeroQuestion();	
 	        couleurBoutonPrecedent();
 	        questionDejaRepondu(questionEnCour);
 
-	        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()) {
+	        if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+	        	|| partie.getNombreQuestion() == partie.getIndiceQuestion() + 1) {
 	        	afficherDernierPage();
 	        }
 	    }
+	}
+
+	private void retirerChoixVides() {
+		if (choix1.getText().isBlank()) {			
+   			choix1.setVisible(false);
+   		}
+   		if (choix2.getText().isBlank()) { 			
+   			choix2.setVisible(false);
+   		} 
+   		if (choix3.getText().isBlank()) {			
+   			choix3.setVisible(false);
+   		} 
+   		if (choix4.getText().isBlank()) {		
+   			choix4.setVisible(false);
+   		}
+   		if (choix5.getText().isBlank()) {	
+   			choix5.setVisible(false);
+   		}
+		
 	}
 
 	/**
@@ -154,9 +175,15 @@ public class ControlleurRepondreQuestion {
             }
             partie.setReponseDonnee(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
-            // TODO verifier ou on en est par rapport au parametrage
-            partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
-            Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            
+            if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+    	        || partie.getNombreQuestion() == partie.getIndiceQuestion() + 1) {
+            	Quiz.chargerEtChangerVue("Resultat.fxml");
+            } else {
+                partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
+                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+            }
+            
         }
     }
     
@@ -180,6 +207,13 @@ public class ControlleurRepondreQuestion {
    		reponsePossibles.add(question.getReponseJuste());
    		reponsePossibles.addAll(question.getMauvaisesReponses());
    		int nbQuestion = reponsePossibles.size();
+   		
+
+   		choix1.setVisible(true);
+   		choix2.setVisible(true);
+   		choix3.setVisible(true);
+   		choix4.setVisible(true);
+   		choix5.setVisible(true);
    		
    		Collections.shuffle(reponsePossibles);
    		
@@ -281,5 +315,40 @@ public class ControlleurRepondreQuestion {
             }
             reponses.selectToggle(aSelectionner);
         }
+    }
+    
+    /**
+     * Action lié au bouton Passer
+     */
+    @FXML
+    private void passer() {
+        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
+                || partie.getNombreQuestion() == partie.getIndiceQuestion() + 1){
+            confirmationPasserDerniereQuestion();     
+       } else {
+           boolean reponseAlertBox =  AlertBox.showConfirmationBox(
+               "Vous n'avez choisis aucunes reponses.\n"
+               + "Par défaut cette réponse sera compté comme fausse");
+           int actuelle = partie.getIndiceQuestion();
+           if (reponseAlertBox) {
+               partie.setReponseDonnee(
+               partie.getQuestionPossible().get(actuelle), "");
+               partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
+               Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
+           }
+       }
+    }
+
+    /** 
+     * TODO comment method role
+     */
+    private void confirmationPasserDerniereQuestion() {
+        boolean finir = AlertBox.showConfirmationBox(
+                "Vous allez passer la dernière question et finir le quizz . "
+                + "Vous ne pourrez pas revenir en arrière etes vous sur ? ");
+        if (finir) {
+            Quiz.chargerEtChangerVue("Resultat.fxml");
+        }
+        
     }
 }

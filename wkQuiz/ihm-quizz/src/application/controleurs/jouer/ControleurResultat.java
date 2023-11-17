@@ -35,9 +35,16 @@ public class ControleurResultat {
     	
     	if(model.getPartie() != null) {
     		Partie partie = model.getPartie();
+    		int nbReponse;
     		
-    		int nbReponse = partie.getNombreQuestion();
-    		int nbReponseBonne = 0; // STUB
+    		if (partie.getQuestionPossible().size() == partie.getNombreQuestion()) {
+    			nbReponse = partie.getNombreQuestion();
+    		} else {
+    			nbReponse = partie.getQuestionPossible().size();
+    		}
+    		
+    		
+    		int nbReponseBonne = partie.getNbBonneReponse();
     		score.setText(String.format(TEXT_SCORE,nbReponseBonne,nbReponse));
     	
     	}else {
@@ -58,7 +65,6 @@ public class ControleurResultat {
 	@FXML 
 	private void voirReponses() {
 		Quiz.changerVue("Solution.fxml");
-		System.out.println("Button voirReponses");
 	}
 
 	/**
@@ -67,39 +73,38 @@ public class ControleurResultat {
 	 */
 	@FXML
 	private void retourAccueil() {
-		System.out.println("Button retourAccueil");
 		Quiz.changerVue("Accueil.fxml");
 	}
 	
 	@FXML
 	private void nouveauQuiz() {
-		Quiz.changerVue("ParametrePartie.fxml");
+		Quiz.chargerEtChangerVue("ParametrePartie.fxml");
 	}
 	
 	public void messagePersonnaliser() {
-		String pseudo="Neo"; // STUB
+		String pseudo="Quentin"; // STUB
 		
 		if(model.getPartie() != null) {
 			Partie partie = model.getPartie();
 			
-			int pourcentage = partie.pourcentageBonneRep();
+			double pourcentage = partie.pourcentageBonneRep();
 			
-			if(pourcentage < 0) {
+			if(pourcentage == 0) {
 				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
 				        + "retenter " + pseudo);
 				
 			}else if(pourcentage > 0 && pourcentage < 25) {
 				messagePrivee.setText("Il va falloir revoir un peu " + pseudo);
 				
-			}else if(pourcentage > 25 && pourcentage < 50) {
+			}else if(pourcentage >= 25 && pourcentage < 50) {
 				messagePrivee.setText("Les bases sont la mais faut revoir "
 				        + "encore un peu " + pseudo);
 				
-			}else if(pourcentage > 50 && pourcentage < 75) {
+			}else if(pourcentage >= 50 && pourcentage < 75) {
 				messagePrivee.setText("Il y a du niveau mais c'est "
 				        + "pas encore parfait " + pseudo);
 				
-			}else if(pourcentage > 75 && pourcentage < 100) {
+			}else if(pourcentage >= 75 && pourcentage < 100) {
 				messagePrivee.setText("Vous maîtriser vos acquis " + pseudo);
 				
 			}else {
