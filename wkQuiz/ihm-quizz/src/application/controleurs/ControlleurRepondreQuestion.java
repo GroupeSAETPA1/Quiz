@@ -67,11 +67,8 @@ public class ControlleurRepondreQuestion {
 	    /*
 	     * Evite IndexOutOfBoundsException au premier chargement
 	     */	
-	    System.out.println("question possible" + partie.getQuestionPossible());
-	    System.out.println("reponse donne " + partie.getReponseDonnees());
 	    if (partie.getQuestionPossible().size() != 0) {
-	        System.out.println(partie.getIndiceQuestion());
-	    	Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
+	        Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
 	        afficherQuestion(questionEnCour);	
@@ -88,13 +85,7 @@ public class ControlleurRepondreQuestion {
 	}
 
 	private void retirerChoixVides() {
-		System.out.println("choix1 = " + choix1.getText() + choix1.getText().isBlank());
-		System.out.println("choix2 = " + choix2.getText() + choix2.getText().isBlank());
-		System.out.println("choix3 = " + choix3.getText() + choix3.getText().isBlank());
-		System.out.println("choix4 = " + choix4.getText() + choix4.getText().isBlank());
-		System.out.println("choix5 = " + choix5.getText() + choix5.getText().isBlank());
-		
-   		if (choix1.getText().isBlank()) {			
+		if (choix1.getText().isBlank()) {			
    			choix1.setVisible(false);
    		}
    		if (choix2.getText().isBlank()) { 			
@@ -107,7 +98,6 @@ public class ControlleurRepondreQuestion {
    			choix4.setVisible(false);
    		}
    		if (choix5.getText().isBlank()) {	
-   			System.out.println("retirer 5");
    			choix5.setVisible(false);
    		}
 		

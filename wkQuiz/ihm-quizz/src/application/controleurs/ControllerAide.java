@@ -20,7 +20,6 @@ public class ControllerAide {
 	@FXML
     public void retourPagePrecedente() {
 		String pagePrecedente = model.getPagePrecendente();
-		System.out.println("controlleur "+pagePrecedente);
         Quiz.changerVue(pagePrecedente);
     }
 }
