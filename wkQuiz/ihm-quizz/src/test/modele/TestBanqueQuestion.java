@@ -66,7 +66,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour le constructeur
-	 * {@link application.modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
+	 * @see {@link application.modele.BanqueQuestion#BanqueQuestion(java.util.List)}.
 	 */
 	@Test
 	void testBanqueQuestion() {
@@ -75,7 +75,7 @@ class TestBanqueQuestion {
 	
 	/**
 	 * Méthode de test pour ajouter
-	 * {@link application.modele.BanqueQuestion#ajouter(application.modele.Question)}.
+	 * @see {@link application.modele.BanqueQuestion#ajouter(application.modele.Question)}.
 	 */
 	@Test
 	void testAjouter() {
@@ -87,15 +87,21 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestion
-	 * {@link application.modele.BanqueQuestion#getQuestion(int)}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestion(int)}.
 	 * 
 	 * @throws IndexOutOfBoundsException
 	 * @throws HomonymeException
 	 */
 	@Test
 	void testGetQuestion() throws IndexOutOfBoundsException, HomonymeException {
+		// On vérifie que rechercher une question a un index invalide 
+		// (index négatif ou supérieur ou égal à size)
+		// renvoie bien l'exception "IndexOutOfBoundsException"
 		assertThrows(IndexOutOfBoundsException.class, () -> banqueQuestion.getQuestion(-1));
 
+		// Ajouter une question à l'index 0 fait que la size de la 
+		// banque de question est de 1, mais il faut chercher l'index 0 
+		// car les collections commencent à 0
 		banqueQuestion.ajouter(ensembleQuestion.get(0));
 		assertThrows(IndexOutOfBoundsException.class, () -> banqueQuestion.getQuestion(ensembleQuestion.size()));
 		assertEquals(ensembleQuestion.get(0), banqueQuestion.getQuestion(0));
@@ -103,7 +109,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestionsNbFausseReponse
-	 * {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestionsNbFausseReponse(int)}.
 	 * 
 	 * @throws HomonymeException
 	 * @throws InvalidFormatException
@@ -128,7 +134,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestions
-	 * {@link application.modele.BanqueQuestion#getQuestions()}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestions()}.
 	 * 
 	 * @throws HomonymeException
 	 */
@@ -150,7 +156,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestionsCategorie
-	 * {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestions(application.modele.Categorie)}.
 	 * 
 	 * @throws HomonymeException
 	 * @throws InvalidNameException
@@ -166,7 +172,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestionsDifficulte
-	 * {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestionsDifficulte(int)}.
 	 * 
 	 * @throws HomonymeException  
 	 * @throws DifficulteException
@@ -192,7 +198,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour getQuestionsLibelle
-	 * {@link application.modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
+	 * @see {@link application.modele.BanqueQuestion#getQuestionsLibelle(java.util.List)}.
 	 * 
 	 * @throws HomonymeException
 	 */
@@ -209,7 +215,7 @@ class TestBanqueQuestion {
 
 	/**
 	 * Méthode de test pour toString de BanqueQuestion
-	 * {@link application.modele.BanqueQuestion#toString()}.
+	 * @see {@link application.modele.BanqueQuestion#toString()}.
 	 * @throws HomonymeException 
 	 */
 	@Test

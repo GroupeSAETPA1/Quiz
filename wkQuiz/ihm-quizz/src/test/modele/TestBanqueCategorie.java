@@ -30,7 +30,7 @@ class TestBanqueCategorie {
 	/**
 	 * Avant chaque test, initialise la banque de catégorie et les catégories a
 	 * ajouter dans la banque pour les tests suivant
-	 * {@link application.modele.BanqueCategorie}
+	 * @see {@link application.modele.BanqueCategorie}
 	 * 
 	 * @throws InvalidNameException
 	 */
@@ -50,7 +50,7 @@ class TestBanqueCategorie {
 
 	/**
 	 * Test du constructeur de la classe
-	 * {@link application.modele.BanqueCategorie#BanqueCategorie()}
+	 * @see {@link application.modele.BanqueCategorie#BanqueCategorie()}
 	 */
 	@Test
 	void testBanqueCategorie() {
@@ -60,7 +60,7 @@ class TestBanqueCategorie {
 	/**
 	 * Test de la méthode ajouter et vérifie que les catégories ne sont pas ajoutées
 	 * si elles ont le même nom (insensible à la casse)
-	 * {@link application.modele.BanqueCategorie#ajouter(Categorie)}
+	 * @see {@link application.modele.BanqueCategorie#ajouter(Categorie)}
 	 */
 	@Test
 	void testAjouter() {
@@ -75,7 +75,7 @@ class TestBanqueCategorie {
 
 	/**
 	 * Test de la méthode getCategories
-	 * {@link application.modele.BanqueCategorie#getCategories()}
+	 * @see {@link application.modele.BanqueCategorie#getCategories()}
 	 * 
 	 * @throws HomonymeException  
 	 * @throws InvalidNameException
@@ -97,7 +97,7 @@ class TestBanqueCategorie {
 	/**
 	 * Test de la méthode getCategorie en vérifiant que les index invalides lèvent
 	 * bien une exception et que les index valide renvoie bien la catégorie
-	 * {@link application.modele.BanqueCategorie#getCategorie(int)}
+	 * @see {@link application.modele.BanqueCategorie#getCategorie(int)}
 	 * 
 	 * @throws HomonymeException 
 	 */
@@ -117,6 +117,7 @@ class TestBanqueCategorie {
 	/**
 	 * Test de la méthode getCategoriesLibelle et vérifie qu'on puisse bien accéder
 	 * à une catégorie par son nom (insensible à la casse et avec un nom partiel)
+	 * @see {@link application.modele.BanqueCategorie#getCategoriesLibelle(String)}
 	 * 
 	 * @throws HomonymeException    
 	 * @throws InvalidNameException 
@@ -139,19 +140,20 @@ class TestBanqueCategorie {
 		
 		// On vérifie qu'on puisse récupérer la catégorie avec son nom partiel, 
 		// insensible à la casse
-		assertIterableEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("premiere").get(1));
-		assertIterableEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("preMiERe").get(1));
+		assertEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("premiere").get(1));
+		assertEquals(ensembleCategorieLibelleNom.get(1), banqueCategorie.getCategoriesLibelle("preMiERe").get(1));
 	}
 
 	/**
 	 * Test de la méthode getExactCategoriesLibelle et vérifie qu'on puisse bien
 	 * accéder à une catégorie par son nom exact (sensible à la casse)
+	 * @see {@link application.modele.BanqueCategorie#getCategorieLibelleExact(String)}
 	 * 
 	 * @throws HomonymeException    
 	 * @throws InvalidNameException 
 	 */
 	@Test
-	void testGetExactCategoriesLibelle() throws HomonymeException, InvalidNameException {
+	void testGetCategorieLibelleExact() throws HomonymeException, InvalidNameException {
 		// On ajoute à la banque de catégorie une catégorie "premiere"
 		ensembleCategorieLibelleNom.add(new Categorie("premiere"));
 		banqueCategorie.ajouter(ensembleCategorieLibelleNom.get(0));
@@ -174,15 +176,77 @@ class TestBanqueCategorie {
 		// car il y a une catégorie éponyme dans la banque de categorie
 		assertEquals(banqueCategorie.getCategorieLibelleExact("premiere categorie"), listeUneCategorie.get(0));
 	}
+	
+	/**
+	 * Test de la méthode testGetCategoriesNom qui vérifie qu'une 
+	 * ArrayList de String contenant les noms des catégories 
+	 * de la banque de catégorie
+	 * @see {@link application.modele.BanqueCategorie#getCategoriesNom()}
+	 * 
+	 * @throws HomonymeException
+	 * @throws InvalidNameException
+	 */
+	@Test
+	void testGetCategoriesNom() throws HomonymeException, InvalidNameException {
+		// On crée une liste de String représentant ce que doit renvoyer 
+		// la méthode getCategoriesNom sur une banque de catégorie vide 
+		// (avec que la catégorie "General")
+		ArrayList<String> nomCategoriesVide  = new ArrayList<String>();
+		nomCategoriesVide.add("General");
+		
+		// On crée une deuxième liste de String représentant ce que doit renvoyer 
+		// la méthode getCategoriesNom sur une banque de catégorie 
+		// avec 2 catégories en plus 
+		ArrayList<String> nomCategories  = new ArrayList<String>();
+		nomCategories.add("General");
+		nomCategories.add("premiere");
+		nomCategories.add("seconde");
+		
+		// On vérifie que la méthode renvoie bien l'ArrayList de String attendue
+		// (cela doit être égal à nomCategoriesVide)
+		assertIterableEquals(nomCategoriesVide, banqueCategorie.getCategoriesNom());
+		
+		// On ajoute deux catégories à la banque de catégorie et on vérifie
+		// que la méthode renvoie bien l'ArrayList attendue (nomCategories)
+		banqueCategorie.ajouter(new Categorie("premiere"));
+		banqueCategorie.ajouter(new Categorie("seconde"));
+		assertIterableEquals(nomCategories, banqueCategorie.getCategoriesNom());
+	}
+	
+	/**
+	 * Test de la méthode getIndice et vérifie que l'indice de la catégorie 
+	 * dans la banque de catégorie soit bien l'index attendu
+	 * @see {@link application.modele.BanqueCategorie#getIndice(String)}
+	 * 
+	 * @throws HomonymeException
+	 * @throws InvalidNameException
+	 */
+	@Test
+	void testGetIndice() throws HomonymeException, InvalidNameException {
+		// On ajoute des catégories à la banque de catégories 
+		banqueCategorie.ajouter(new Categorie("premiere"));
+		banqueCategorie.ajouter(new Categorie("seconde"));
+		banqueCategorie.ajouter(new Categorie("troisieme"));
+		banqueCategorie.ajouter(new Categorie("quatrieme"));
+		
+		// On vérifie que la catégorie "troiseme" est bien 
+		// à la troisième position dans la banque de catégories 
+		// (la catégorie par défaut "General" est a la position 0)
+		assertEquals(3, banqueCategorie.getIndice("troisieme"));
+		
+		// On vérifie que si on recherche une catégorie qui n'existe pas dans 
+		// la banque de catégorie, on revoie l'exception "IllegalArgumentException"
+		assertThrows(IllegalArgumentException.class, () ->  banqueCategorie.getIndice("catégorie inexistante"));
+	}
 
 	/**
 	 * Test de la méthode toString et vérifie qu'une chaîne de caractère est renvoyé
-	 * {@link application.modele.BanqueCategorie#toString()}
+	 * @see {@link application.modele.BanqueCategorie#toString()}
 	 * 
 	 * @throws HomonymeException
 	 */
 	@Test
-	void () throws HomonymeException {
+	void testToString() throws HomonymeException {
 		banqueCategorie.ajouter(ensembleCategories.get(0));
 		assertTrue(banqueCategorie.toString() instanceof String);
 	}
