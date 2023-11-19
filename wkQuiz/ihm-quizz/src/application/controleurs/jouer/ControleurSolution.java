@@ -14,6 +14,10 @@ import application.modele.Partie;
 import application.modele.Question;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -33,11 +37,9 @@ import javafx.scene.text.Text;
  */
 public class ControleurSolution {
 
-    private static final Image BONNE_REPONSE
-    = new Image("application\\vue\\images\\IconeValider.png");
+    private static final Image BONNE_REPONSE = new Image("application\\vue\\images\\IconeValider.png");
 
-    private static final Image MAUVAISE_REPONSE
-    = new Image("application\\vue\\images\\IconeAnnuler.png");
+    private static final Image MAUVAISE_REPONSE = new Image("application\\vue\\images\\IconeAnnuler.png");
 
     private static final String TEXT_SCORE = "Score = %s/%s";
 
@@ -45,13 +47,14 @@ public class ControleurSolution {
     private Partie partie = modele.getPartie();
 
     /** Le texte du score réalisé par le joueur */
-    @FXML private Text score;
+    @FXML
+    private Text score;
 
     /**
-     * Le tableau de la solution du quiz,
-     * avec une indication si le joueur a eu bon
+     * Le tableau de la solution du quiz, avec une indication si le joueur a eu bon
      */
-    @FXML private GridPane tableauSolution;
+    @FXML
+    private TableView<LigneQuestionSolution> tableauSolution;
 
     /**
      * Méthode exécutée au chargement de la page Solution pour récupérer le score et
@@ -59,13 +62,56 @@ public class ControleurSolution {
      */
     @FXML
     public void initialize() {
+
+        TableColumn<LigneQuestionSolution, String> libelle 
+        = new TableColumn<LigneQuestionSolution, String>("Libelle");
+        libelle.setCellValueFactory(
+              new PropertyValueFactory<LigneQuestionSolution, String>("libelle")
+              );
+        libelle.setMinWidth(500);
+
+        TableColumn<LigneQuestionSolution, String> categorie 
+        = new TableColumn<LigneQuestionSolution, String>("Categorie");
+        categorie.setCellValueFactory(
+            new PropertyValueFactory<LigneQuestionSolution, String>("categorie")
+            );
+
+        TableColumn<LigneQuestionSolution, String> reponseJuste 
+        = new TableColumn<LigneQuestionSolution, String>("Reponse Juste");
+        reponseJuste.setCellValueFactory(
+                new PropertyValueFactory<LigneQuestionSolution, String>
+                ("reponseJuste")
+                );
+
+        TableColumn<LigneQuestionSolution, String> feedback 
+        = new TableColumn<LigneQuestionSolution, String>("feedback");
+        feedback.setCellValueFactory(
+             new PropertyValueFactory<LigneQuestionSolution, String>("feedback")
+             );
+        feedback.setMinWidth(500);
+
+        TableColumn<LigneQuestionSolution, ImageView> indication = 
+        new TableColumn<LigneQuestionSolution, ImageView>("indicationReponse");
+        indication.setCellValueFactory(
+                new PropertyValueFactory<LigneQuestionSolution, ImageView>
+                ("indicationReponse")
+                );
+
+        tableauSolution.getColumns().clear();
+        tableauSolution.getColumns()
+        .addAll(libelle, categorie, reponseJuste, feedback, indication);
+
         if (modele.getPartie() != null) {
-    
+
+            HashMap<Question, String> resultatQuestionnaire 
+            = partie.getReponseDonnees();
+            int nombreTotalQuestion = resultatQuestionnaire.size();
+
             int nombreBonneReponse = partie.getNbBonneReponse();
-            int nombreTotalQuestion = partie.getNombreQuestion();
-    
-            score.setText(String.format(TEXT_SCORE, nombreBonneReponse, nombreTotalQuestion));
-    
+
+            score.setText(String.format(TEXT_SCORE, 
+                    nombreBonneReponse, nombreTotalQuestion));
+
             miseAJourTableau();
         }
     }
@@ -75,18 +121,19 @@ public class ControleurSolution {
      */
     private void miseAJourTableau() {
 
-        HashMap<Question, String> resultatQuestionnaire
-        =  partie.getReponseDonnees();
+        HashMap<Question, String> resultatQuestionnaire 
+        = partie.getReponseDonnees();
 
         System.out.println(resultatQuestionnaire);
-        
+
         Set<Question> questionsQuestionnaire = resultatQuestionnaire.keySet();
         for (Question question : questionsQuestionnaire) {
 
             String reponseSelectionner = resultatQuestionnaire.get(question);
             String reponseAttendu = question.getReponseJuste();
 
-            boolean reponseEstJuste = reponseAttendu.equals(reponseSelectionner);
+            boolean reponseEstJuste 
+            = reponseAttendu.equals(reponseSelectionner);
 
             ajouterReponse(question, reponseEstJuste);
         }
@@ -94,39 +141,90 @@ public class ControleurSolution {
 
     /**
      * Ajoute une ligne à la GridPane.
-     * @param question La question a ajouter
-     * @param bonneReponse true l'utilisateur a sélectionner la bonne réponse,
-     * false sinon
+     * 
+     * @param question     La question a ajouter
+     * @param bonneReponse true l'utilisateur a sélectionner la bonne réponse, false
+     *                     sinon
      */
     private void ajouterReponse(Question question, boolean bonneReponse) {
-        // On récupère la dernière ligne du GridPane
-        int ligneAAjoute = tableauSolution.getRowCount();
-    
-        Text libelle = new Text(question.getLibelle());
-        Text reponseJuste = new Text(question.getReponseJuste());
-        Text feedback = new Text(question.getFeedback());
-        ImageView feedbackReponse 
-        = new ImageView(bonneReponse ? BONNE_REPONSE : MAUVAISE_REPONSE);
-    
-        //On centre les éléments dans le GridPane
-        GridPane.setHalignment(libelle, HPos.CENTER);
-        GridPane.setHalignment(reponseJuste, HPos.CENTER);
-        GridPane.setHalignment(feedback, HPos.CENTER);
-        GridPane.setHalignment(feedbackReponse, HPos.CENTER);
-    
-        //Ajout de la ligne avec les différente colonne
-        tableauSolution.add(libelle,        0, ligneAAjoute);
-        tableauSolution.add(reponseJuste,   1, ligneAAjoute);
-        tableauSolution.add(feedback,       2, ligneAAjoute);
-        tableauSolution.add(feedbackReponse,3, ligneAAjoute);
+        LigneQuestionSolution ligne 
+        = new LigneQuestionSolution(question, bonneReponse);
+
+        tableauSolution.getItems().add(ligne);
+
     }
 
     /**
-     * Méthode liée au bouton retourner à l'acceuil qui devra 
-     * envoyer vers la page Accueil.fxml
+     * Méthode liée au bouton retourner à l'acceuil qui devra envoyer vers la page
+     * Accueil.fxml
      */
     @FXML
     private void retour() {
         Quiz.changerVue("Resultat.fxml");
+    }
+
+    /**
+     * TODO comment class responsibility (SRP)
+     * 
+     * @author francois
+     */
+    public static class LigneQuestionSolution {
+
+        private String categorie;
+        private String feedback;
+        private String libelle;
+        private String reponseJuste;
+
+        private ImageView indicationReponse;
+
+        /**
+         * TODO comment initial state properties
+         * 
+         * @param question
+         * @param bonneReponse
+         */
+        public LigneQuestionSolution(Question question, boolean bonneReponse) {
+            this.categorie = question.getCategorie();
+            this.feedback = question.getFeedback();
+            this.libelle = question.getLibelle();
+            this.reponseJuste = question.getReponseJuste();
+            indicationReponse = getImage(bonneReponse);
+        }
+
+        private static ImageView getImage(boolean reponseEstJuste) {
+            ImageView reponse;
+            if (reponseEstJuste) {
+                reponse = new ImageView(BONNE_REPONSE);
+            } else {
+                reponse = new ImageView(MAUVAISE_REPONSE);
+            }
+            return reponse;
+        }
+
+        /** @return valeur de categorie */
+        public String getCategorie() {
+            return categorie;
+        }
+
+        /** @return valeur de feedback */
+        public String getFeedback() {
+            return feedback;
+        }
+
+        /** @return valeur de libelle */
+        public String getLibelle() {
+            return libelle;
+        }
+
+        /** @return valeur de reponseJuste */
+        public String getReponseJuste() {
+            return reponseJuste;
+        }
+
+        /** @return valeur de indicationReponse */
+        public ImageView getIndicationReponse() {
+            return indicationReponse;
+        }
+
     }
 }
