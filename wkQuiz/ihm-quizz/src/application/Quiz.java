@@ -7,7 +7,6 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
@@ -20,9 +19,6 @@ import application.modele.Question;
 import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 

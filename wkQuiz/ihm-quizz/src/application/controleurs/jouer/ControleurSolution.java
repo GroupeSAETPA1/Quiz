@@ -78,6 +78,8 @@ public class ControleurSolution {
         HashMap<Question, String> resultatQuestionnaire
         =  partie.getReponseDonnees();
 
+        System.out.println(resultatQuestionnaire);
+        
         Set<Question> questionsQuestionnaire = resultatQuestionnaire.keySet();
         for (Question question : questionsQuestionnaire) {
 
