@@ -66,7 +66,7 @@ public class ControleurImport {
 
     @FXML
     private void aider() {
-    	model.setPagePrecedente("ImporterQuestion.fxml"); 
+    	modele.setPagePrecedente("ImporterQuestion.fxml"); 
         Quiz.chargerEtChangerVue("Aide.fxml");
     }
 
