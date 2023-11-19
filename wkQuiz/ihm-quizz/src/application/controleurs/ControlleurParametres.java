@@ -37,15 +37,17 @@ public class ControlleurParametres {
     @FXML
     private ToggleGroup difficulte ;
     
+    ModelePrincipal modele = ModelePrincipal.getInstance();
+    
     @FXML
     public void initialize() {
         selecteurCategorie.getItems().add("Aléatoire");
         // Ajoute les categorie de banque categorie dans la combo box
         selecteurCategorie.getItems().
         addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());  
-        ModelePrincipal.getInstance().getPartie().getReponseDonnees().clear();
-        ModelePrincipal.getInstance().getPartie().getQuestionPossible().clear();
-        ModelePrincipal.getInstance().getPartie().setIndiceQuestion(0);
+        modele.getPartie().getReponseDonnees().clear();
+        modele.getPartie().getQuestionPossible().clear();
+        modele.getPartie().setIndiceQuestion(0);
     }
     
     
