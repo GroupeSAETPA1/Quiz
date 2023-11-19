@@ -68,7 +68,6 @@ public class ControleurSolution {
         libelle.setCellValueFactory(
               new PropertyValueFactory<LigneQuestionSolution, String>("libelle")
               );
-        libelle.setMinWidth(500);
 
         TableColumn<LigneQuestionSolution, String> categorie 
         = new TableColumn<LigneQuestionSolution, String>("Categorie");
@@ -88,7 +87,6 @@ public class ControleurSolution {
         feedback.setCellValueFactory(
              new PropertyValueFactory<LigneQuestionSolution, String>("feedback")
              );
-        feedback.setMinWidth(500);
 
         TableColumn<LigneQuestionSolution, ImageView> indication = 
         new TableColumn<LigneQuestionSolution, ImageView>("indicationReponse");
@@ -164,9 +162,8 @@ public class ControleurSolution {
     }
 
     /**
-     * TODO comment class responsibility (SRP)
-     * 
-     * @author francois
+     * Représente une ligne de la tableView
+     * @author François de Saint Palais
      */
     public static class LigneQuestionSolution {
 
@@ -174,31 +171,31 @@ public class ControleurSolution {
         private String feedback;
         private String libelle;
         private String reponseJuste;
-
         private ImageView indicationReponse;
 
         /**
-         * TODO comment initial state properties
-         * 
-         * @param question
-         * @param bonneReponse
+         * Construction de la ligne
+         * @param question La question de la ligne
+         * @param reponseEstJuste true si l'utilisateur a bien répondu false sinon
          */
-        public LigneQuestionSolution(Question question, boolean bonneReponse) {
+        public LigneQuestionSolution(Question question, boolean reponseEstJuste) {
             this.categorie = question.getCategorie();
             this.feedback = question.getFeedback();
             this.libelle = question.getLibelle();
             this.reponseJuste = question.getReponseJuste();
-            indicationReponse = getImage(bonneReponse);
+            indicationReponse = getImage(reponseEstJuste);
         }
 
+        /**
+         * Renvoie l'image correspondant à la réponse de l'utilisateur
+         * Une coche verte s'il a bien répondu.
+         * Une croix rouge sinon.
+         * @param reponseEstJuste true si l'utilisateur a bien répondu false sinon
+         * @return L'image correspondant à la réponse de l'utilisateur
+         */
         private static ImageView getImage(boolean reponseEstJuste) {
-            ImageView reponse;
-            if (reponseEstJuste) {
-                reponse = new ImageView(BONNE_REPONSE);
-            } else {
-                reponse = new ImageView(MAUVAISE_REPONSE);
-            }
-            return reponse;
+            return new ImageView(reponseEstJuste ? 
+                    BONNE_REPONSE : MAUVAISE_REPONSE);
         }
 
         /** @return valeur de categorie */
