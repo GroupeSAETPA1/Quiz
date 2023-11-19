@@ -64,7 +64,7 @@ public class ControleurResultat {
 	 */
 	@FXML 
 	private void voirReponses() {
-		Quiz.changerVue("Solution.fxml");
+		Quiz.chargerEtChangerVue("Solution.fxml");
 	}
 
 	/**
