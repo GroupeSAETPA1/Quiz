@@ -14,11 +14,8 @@ import java.util.HashMap;
 
 import application.Quiz;
 import application.exception.CreerQuestionException;
-import application.exception.DifficulteException;
 import application.exception.HomonymeException;
-import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
-import application.exception.ReponseException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -66,7 +63,7 @@ public class ControleurImport {
 
     @FXML
     private void aider() {
-    	model.setPagePrecedente("ImporterQuestion.fxml"); 
+    	modele.setPagePrecedente("ImporterQuestion.fxml"); 
         Quiz.chargerEtChangerVue("Aide.fxml");
     }
 

@@ -26,8 +26,13 @@ public class BanqueCategorie {
      * Constructeur de BanqueCategorie
      * @throws InvalidNameException 
      */
-    public BanqueCategorie() throws InvalidNameException {
-        categorieGeneral = new Categorie("General");
+    public BanqueCategorie() {
+        try {
+            categorieGeneral = new Categorie("General");
+        } catch (InvalidNameException e) {
+            throw new InternalError("La création de la categorie Général à "
+                    + "généré une erreur");
+        }
         categories = new ArrayList<Categorie>();
         categories.add(categorieGeneral);
     }

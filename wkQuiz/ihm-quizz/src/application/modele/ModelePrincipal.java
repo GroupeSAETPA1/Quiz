@@ -59,7 +59,7 @@ public class ModelePrincipal {
      * Constructeur
      * @throws InvalidNameException 
      */
-    private ModelePrincipal() throws InvalidNameException {
+    private ModelePrincipal() {
         // TODO lire les fichiers serialisé
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
@@ -81,7 +81,7 @@ public class ModelePrincipal {
      * @return Renvoie l'instance unique de ModelePrincipal
      * @throws InvalidNameException 
      */
-    public static ModelePrincipal getInstance() throws InvalidNameException {
+    public static ModelePrincipal getInstance() {
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
