@@ -33,11 +33,20 @@ public class ModelePrincipal {
 
     /**
      * Lie une difficulté à sont equivalent numérique
-     * Ex : Facile -> 1
      */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
+    
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Character, Integer> ALPAHABET = new HashMap<>();
+    
 
+    /* L'alphabet personnalisé */
+    private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
+    		+ "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;,:<>1234567890$%";
+    
     private static ModelePrincipal modele;
 
     /** Les CSV importé devront séparé leur élément avec une tabulation */
@@ -75,6 +84,13 @@ public class ModelePrincipal {
         INT_DIFFICULTE_TO_LABEL.put(2, "Moyen");
         INT_DIFFICULTE_TO_LABEL.put(3, "Difficile");
         INT_DIFFICULTE_TO_LABEL.put(0 , "Tous");
+        
+        
+        // Remplissage de la HashMap avec les caractères de l'alphabet
+        for (int i = 0; i < CUSTOM_ALPHABET.length(); i++) {
+            char c = CUSTOM_ALPHABET.charAt(i);
+            ALPAHABET.put(c, i);
+        }
     }
 
     /**
