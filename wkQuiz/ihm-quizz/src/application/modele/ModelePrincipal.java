@@ -54,6 +54,8 @@ public class ModelePrincipal {
     private Partie partie;
 
     private Question questionAModifier;
+    
+    private ArrayList<Question> questionAEnvoyer;
 
     /**
      * Constructeur
@@ -231,6 +233,16 @@ public class ModelePrincipal {
     public Question getQuestionAModifier() {
         return questionAModifier;
     }
+    
+    /**
+     * Renvoie la catégorie qui à exactement le même libellé que passé en paramètre
+     * si il n'y en a pas cela renvoie null
+     * @param libelle (String) le libellé recherché sensible à la casse
+     * @return catégorie avec le libellé voulu si elle existe, null sinon
+     */
+    public Categorie getCategoriesLibelleExact(String libelle) {
+        return banqueCategorie.getCategorieLibelleExact(libelle);
+    }
 
     /**
      * Utilisé pour ce positionner sur le bon onglet 
@@ -375,5 +387,23 @@ public class ModelePrincipal {
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
+    }
+    
+    /**
+     * Ajouter toute les questions de la catégorie 
+     * à la liste des question a envoyer
+     * @param nomCategorieAAjouter Le nom de la catégorie
+     * @return true si l'ajout est un succès, false sinon
+     */
+    public boolean ajouterALaSelection(String nomCategorieAAjouter) {
+
+        for (Question question : banqueQuestion.getQuestions()) {
+            if (    question.getCategorie() == nomCategorieAAjouter 
+                && !questionAEnvoyer.contains(question)) {
+                
+                questionAEnvoyer.add(question);
+            }
+        }
+        return false; //STUB
     }
 }

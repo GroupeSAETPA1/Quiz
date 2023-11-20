@@ -8,10 +8,8 @@ package application.controleurs.reseau;
 import java.util.ArrayList;
 
 import application.controleurs.factories.CheckBoxCategorieCellFactory;
-import application.controleurs.factories.CheckBoxQuestionCellFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
-import application.modele.Question;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -25,23 +23,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * Controleur de la page SelectionQuestion.fxml
  * @author François de Saint Palais
  */
-public class ControleurSelectionQuestion {
+public class ControleurSelectionCategorie {
     
-    @FXML TableView<LigneSelectionQuestion> tableView;
+    @FXML TableView<LigneSelectionCategorie> tableView;
     
-    @FXML TableColumn<LigneSelectionQuestion, String> libelleQuestion;
-    @FXML TableColumn<LigneSelectionQuestion, String> categorieQuestion;
-    @FXML TableColumn<LigneSelectionQuestion, CheckBox> selection;
+    @FXML TableColumn<LigneSelectionCategorie, String> nomCategorie;
+    @FXML TableColumn<LigneSelectionCategorie, String> nombreQuestion;
+    @FXML TableColumn<LigneSelectionCategorie, CheckBox> selection;
 
     @FXML
     public void initialize() {
         
-        libelleQuestion.setCellValueFactory(
-                new PropertyValueFactory<LigneSelectionQuestion, String>
-                ("libelleQuestion"));
+        nomCategorie.setCellValueFactory(
+                new PropertyValueFactory<LigneSelectionCategorie, String>
+                ("nomCategorie"));
         
-        libelleQuestion.setCellFactory(tc -> {
-            TableCell<LigneSelectionQuestion, String> cell = new TableCell<>();
+        nomCategorie.setCellFactory(tc -> {
+            TableCell<LigneSelectionCategorie, String> cell = new TableCell<>();
             cell.setAlignment(Pos.CENTER);
             cell.textProperty().bind(cell.itemProperty());
             cell.setWrapText(true);
@@ -49,20 +47,19 @@ public class ControleurSelectionQuestion {
         });
         
         
-        categorieQuestion.setCellValueFactory(
-                new PropertyValueFactory<LigneSelectionQuestion, String>
-                ("categorieQuestion"));
+        nombreQuestion.setCellValueFactory(
+                new PropertyValueFactory<LigneSelectionCategorie, String>
+                ("nombreQuestion"));
         
-        categorieQuestion.setCellFactory(tc->{
-            TableCell<LigneSelectionQuestion, String> cell = new TableCell<>();
+        nombreQuestion.setCellFactory(tc->{
+            TableCell<LigneSelectionCategorie, String> cell = new TableCell<>();
             cell.setAlignment(Pos.CENTER);
             cell.textProperty().bind(cell.itemProperty());
-            cell.setWrapText(true);
             return cell;
         });
         
         
-        selection.setCellFactory(new CheckBoxQuestionCellFactory());
+        selection.setCellFactory(new CheckBoxCategorieCellFactory());
         
         miseAJourTableau();
     }
@@ -73,14 +70,13 @@ public class ControleurSelectionQuestion {
     private void miseAJourTableau() {
         ModelePrincipal modele = ModelePrincipal.getInstance();
 
-        ObservableList<LigneSelectionQuestion> data = tableView.getItems();
+        ObservableList<LigneSelectionCategorie> data = tableView.getItems();
 
         ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
-        ArrayList<Question> questions = modele.getBanqueQuestion().getQuestions();
 
-        for (Question question : questions) {
-            data.add(new LigneSelectionQuestion(question.getLibelle(), 
-                                                question.getCategorie()));
+        for (Categorie categorie : categories) {
+            data.add(new LigneSelectionCategorie(categorie.getNom(), 
+                    modele.getNombreQuestionCategorie(categorie)));
 
         }
     }
@@ -89,33 +85,33 @@ public class ControleurSelectionQuestion {
      * Représente une ligne de la tableView
      * @author François de Saint Palais
      */
-    public static class LigneSelectionQuestion {
+    public static class LigneSelectionCategorie {
         
-        String libelleQuestion;
-        String categorieQuestion;
+        String nomCategorie;
+        int nombreQuestion;
         CheckBox selection;
         
         /** 
          * TODO comment initial state properties
-         * @param libelleQuestion
-         * @param categorieQuestion
+         * @param nomCategorie
+         * @param nombreQuestion
          * @param selection
          */
-        public LigneSelectionQuestion(String libelleQuestion, String categorieQuestion) {
+        public LigneSelectionCategorie(String nomCategorie, int nombreQuestion) {
             super();
-            this.libelleQuestion = libelleQuestion;
-            this.categorieQuestion = categorieQuestion;
+            this.nomCategorie = nomCategorie;
+            this.nombreQuestion = nombreQuestion;
             this.selection = new CheckBox();
         }
 
-        /** @return valeur de libelleQuestion */
-        public String getLibelleQuestion() {
-            return libelleQuestion;
+        /** @return valeur de nomCategorie */
+        public String getNomCategorie() {
+            return nomCategorie;
         }
 
-        /** @return valeur de categorieQuestion */
-        public String getCategorieQuestion() {
-            return categorieQuestion;
+        /** @return valeur de nombreQuestion */
+        public String getNombreQuestion() {
+            return nombreQuestion + "";
         }
 
         /** @return valeur de selection */
@@ -139,7 +135,7 @@ public class ControleurSelectionQuestion {
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
-            return libelleQuestion + " -> " + categorieQuestion;
+            return nomCategorie + " -> " + nombreQuestion;
         }
         
         

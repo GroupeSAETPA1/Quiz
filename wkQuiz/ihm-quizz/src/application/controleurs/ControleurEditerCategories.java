@@ -56,8 +56,9 @@ public class ControleurEditerCategories {
 	
 	//TODO Il ne manque pas le @FXML ?
 	public void initialize() {
-	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    table.setPlaceholder(new Label("Pas de Catégorie trouvé"));
+
+	    TableColumn<LigneCategorie, String> nomColumn = new TableColumn<>("Nom de la categorie");
 	    nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomProperty"));
 	    nomColumn.setCellFactory(tc -> {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
