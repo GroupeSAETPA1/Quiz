@@ -92,7 +92,8 @@ public class BanqueCategorie {
 
     /**
      * Récupère les Categories qui contiennent le libellé passé en paramètre
-     * (on vérifie que le libellé contient la string passée en paramètres)
+     * (on vérifie que le libellé contient la string passée en paramètres)<br>
+     * Ignore la casse.
      * @param libelle (String) le libellé recherché
      * @return une ArrayList des différentes catégories qui contiennent ce libellé
      */

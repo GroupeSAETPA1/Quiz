@@ -427,6 +427,116 @@ class TestModelePrincipal {
 			assertEquals(banqueTestQuestions.getQuestion(i), modele.getBanqueQuestion().getQuestion(i));	
 		}		
 	}
+	
+	@Test
+	void testGetCategorieAModifier() throws InvalidNameException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    Categorie a = new Categorie("categorie");
+	    
+	    modele.setCategorieAModifier(a);
+	    assertEquals(a, modele.getCategorieAModifier());
+	}
+	
+	@Test
+	void testGetCategoriesLibelle() throws InvalidNameException, HomonymeException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    BanqueCategorie banque = modele.getBanqueCategorie();
+	    
+	    banque.getCategories().clear();
+	    
+	    Categorie a1 = new Categorie("a");
+	    Categorie a2 = new Categorie("aa");
+	    Categorie a3 = new Categorie("b");
+	    
+	    modele.creerCategorie(a1.getNom());
+	    modele.creerCategorie(a2.getNom());
+	    modele.creerCategorie(a3.getNom());
+	    
+	    ArrayList<Categorie> attendu = new ArrayList<Categorie>();
+	    
+	    attendu.add(a1);
+	    attendu.add(a2);
+	    
+	    assertIterableEquals(attendu, modele.getCategoriesLibelle("a"));
+	}
+	    
+	
+    @Test
+    void testGetIndice() throws InvalidNameException, HomonymeException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        BanqueCategorie banque = modele.getBanqueCategorie();
+
+        banque.getCategories().clear();
+
+        Categorie a1 = new Categorie("a");
+        Categorie a2 = new Categorie("aa");
+        Categorie a3 = new Categorie("b");
+
+        modele.creerCategorie(a1.getNom());
+        modele.creerCategorie(a2.getNom());
+        modele.creerCategorie(a3.getNom());
+
+        assertEquals(1, modele.getIndice("aa"));
+    }
+
+    @Test
+    void testGetNombreQuestionCategorie() throws InvalidNameException, HomonymeException, CreerQuestionException {
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        BanqueCategorie banque = modele.getBanqueCategorie();
+        BanqueQuestion banqueQ = modele.getBanqueQuestion();
+
+        banque.getCategories().clear();
+        banqueQ.getQuestions().clear();
+
+        Categorie a1 = new Categorie("a");
+        Categorie a2 = new Categorie("aa");
+        Categorie a3 = new Categorie("b");
+
+        modele.creerCategorie(a1.getNom());
+        modele.creerCategorie(a2.getNom());
+        modele.creerCategorie(a3.getNom());
+
+
+        assertEquals(0, modele.getNombreQuestionCategorie(a1));
+        assertEquals(0, modele.getNombreQuestionCategorie(a2));
+        assertEquals(0, modele.getNombreQuestionCategorie(a3));
+        
+        modele.creerQuestion("fq", 0, 1, "vze", mauvaiseReponse1, "");
+
+        assertEquals(1, modele.getNombreQuestionCategorie(a1));
+    }
+
+	@Test
+	void testGetQuestionAModifier() throws InvalidNameException, CreerQuestionException, HomonymeException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    BanqueCategorie banque = modele.getBanqueCategorie();
+        BanqueQuestion banqueQ = modele.getBanqueQuestion();
+
+        banque.getCategories().clear();
+        banqueQ.getQuestions().clear();
+	    
+	    Categorie c = new Categorie("ez");
+	    Question q = new Question("fq", c, 1, "vze", mauvaiseReponse1, "");
+	    
+	    modele.creerCategorie(c.getNom());
+	    modele.creerQuestion(q.getLibelle(), 0, q.getDifficulte(), q.getReponseJuste(), q.getMauvaisesReponses(), q.getFeedback());
+
+	    modele.setQuestionAModifier(q);
+	    
+	    assertEquals(q, modele.getQuestionAModifier());
+	}
+	
+	@Test
+	void testGetPartie() throws InvalidNameException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	}
+	
+	@Test
+	void testGetPagePrecendente() throws InvalidNameException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	}
 
 	/**
 	 * Renvoie l'indice de la categorie dans une liste
@@ -436,7 +546,6 @@ class TestModelePrincipal {
 	 * @return
 	 */
 	private int indexOf(Categorie categorie, ArrayList<Categorie> categories) {
-		// TODO Auto-generated method stub
 		int i = 0;
 		for (Categorie categorieListe : categories) {
 			if (categorieListe.equals(categorie))
