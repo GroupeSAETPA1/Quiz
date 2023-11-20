@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurParametres">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurParametres">
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retourAccueil">
          <children>
@@ -48,12 +48,12 @@
             </ImageView>
          </children>
       </Group>
-      <Label layoutX="68.0" layoutY="202.0" prefHeight="57.0" prefWidth="450.0" text="Choix de la catégorie " textFill="WHITE">
+      <Label layoutX="68.0" layoutY="227.0" prefHeight="57.0" prefWidth="450.0" text="Choix de la catégorie " textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <ComboBox fx:id="selecteurCategorie" layoutX="393.0" layoutY="206.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 332px;" />
+      <ComboBox fx:id="selecteurCategorie" layoutX="393.0" layoutY="232.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 332px;" />
       <HBox layoutX="68.0" layoutY="314.0" prefHeight="47.0" prefWidth="764.0">
          <children>
             <Label prefHeight="47.0" prefWidth="326.0" text="Nombre de questions " textFill="WHITE">

@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControllerAide">
    <children>
-      <Group layoutX="-51.0" layoutY="-33.0">
+      <Group layoutX="-51.0" layoutY="-33.0" onMouseClicked="#retourPagePrecedente">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="69.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,50 +28,46 @@
          <font>
             <Font size="40.0" />
          </font></Label>
-      <Text fill="WHITE" layoutX="47.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le bouton vous permet de quitter l’application" wrappingWidth="934.0">
+      <Text fx:id="text1" fill="WHITE" layoutX="47.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="47.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dans la partie “Jouer” vous pouvez choisir le paramétrage de la partie en choisissant la catégorie, le nombre de questions auquel vous voulez répondre et la difficulté des questions  (facile, moyenne et difficile). Et si vous ne choisissez pas, des questions de toute difficulté vous seront proposées. " wrappingWidth="934.0">
+      <Text fx:id="text2" fill="WHITE" layoutX="47.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="47.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Après cela vous n’avez plus qu'à cliquer sur “Commencer la partie” puis répondre aux multiples questions. Une correction vous sera proposée à la fin du questionnaire." wrappingWidth="934.0">
+      <Text fx:id="text3" fill="WHITE" layoutX="47.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="47.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dans la partie “Éditeur”, vous pouvez importer des questions sous format CSV. " wrappingWidth="934.0">
+      <Text fx:id="text4" fill="WHITE" layoutX="47.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="47.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous choisissez “Créer” vous pourrez créer des catégories, en choisissant un nom ou créer une question en choisissant une catégorie, un nom, une difficulté, un feedback optionnel, et la réponse juste et les réponses fausses. " wrappingWidth="934.0">
+      <Text fx:id="text5" fill="WHITE" layoutX="47.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Label layoutX="47.0" layoutY="459.0" text="* La premiere ligne n'est pas a mettre " textFill="WHITE">
+      <Text fill="WHITE" layoutX="47.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="47.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="934.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Label layoutX="47.0" layoutY="459.0" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="109.0" fitWidth="940.0" layoutX="30.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../MesDocs/Images/Screenshots/Capture%20d'écran%202023-11-10%20153705.png" />
-         </image>
-      </ImageView>
-      <Text fill="WHITE" layoutX="47.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si  vous choisissez d'éditer une Question, vous pourrez modifier, ou supprimer une question, si jamais la question que vous cherchiez n’existe pas vous pouvez cliquer sur créer question et vous serez redirigé vers la création de question. Et ce de même pour vous, si vous choisissez Editer Catégorie. " wrappingWidth="934.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="47.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dans la partie Mode en-Ligne, vous pourrez voir votre IP, vous pourrez choisir entre être serveur et envoyer dès question à un utilisateur. Ou bien être client et recevoir des questions, si vous êtes serveur vous pourrez tester la connexion avec le client et entrer son ip afin de lui partager les questions. Ensuite vous pourrez choisir les question et catégorie a partager. " wrappingWidth="934.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
+      <ImageView fx:id="exempleTableur" fitHeight="109.0" fitWidth="940.0" layoutX="30.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>
