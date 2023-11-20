@@ -5,39 +5,63 @@
 
 package application.vue;
 
-import application.Quiz;
+import java.io.IOException;
+import java.util.HashMap;
 
-// import Quiz; // marche pas :-(  FIXME
+import application.Quiz;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 /**
- * Classe principale de l'application permettant d'afficher des fenêtres au contenu
- * différent (ce sont les vues qui changent).
- * 
- * @author Néo BECOGNE
- * @author Quentin COSTES
- * @author François DE SAINT PALAIS
- * @author Lucas DESCRIAUD
- * @author Tom DOUAUD
+ * Gère le chargement et le changement de Vue
+ * @author François de Saint Palais
  */
-public class GestionVues extends Quiz {
+public class GestionVues {
 	
+    /** Associe le nom du fichier fxml à sa Scene charger avec FXMLLoader */
+    private static HashMap<String, Scene> scenes;
 	
-// Exemples de modification de Scenes	
-//	/**
-//	 * Permet de modifier la scène de la fenêtre principale
-//	 * pour qu'elle devienne celle du menu principal
-//	 */
-//	public static void activerMenuPrincipal() {
-//		fenetrePrincipale.setScene(scenes[0]);
-//		fenetrePrincipale.setTitle("Othello - Menu principal");
-//	}
-//	
-//	/**
-//	 * Permet de modifier la scène de la fenêtre principale
-//	 * pour qu'elle devienne celle des paramètres
-//	 */
-//	public static void activerParametres() {
-//		fenetrePrincipale.setScene(scenes[1]);
-//		fenetrePrincipale.setTitle("Othello - Paramètres");
-//	}
+    /**
+     * Charge la vue indiquer
+     * @param vue Le nom de la vue à charger. (garder l'extension .fxml)
+     */
+    public static void charger(String vue) {
+        Quiz quiz = Quiz.getInstance();
+        try {
+            Parent racine 
+            = FXMLLoader.load(quiz.getClass().getResource("vue/" + vue));
+            
+            scenes.put(vue, new Scene(racine));
+            
+        } catch (IOException e) {
+            System.err.println("Chargement impossible de : " + vue);
+            e.printStackTrace(); //TODO Enlever
+        }
+    }
+
+    /** @return valeur de scenes */
+    public static Scene getScene(String vue) {
+        return scenes.get(vue);
+    }
+
+    /** 
+     * TODO comment method role
+     */
+    public static void initialiserScene() {
+        scenes = new HashMap<String, Scene>();
+    }
+    
+    /**
+     * Gestion du changement de fenêtre
+     * @param fenetre (String) le nom de la fenêtre a charger en .fxml
+     */
+    public static void changerVue(String fenetre) {
+        System.out.println(fenetre);
+        Quiz.fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
+        Quiz.fenetrePrincipale.setScene(GestionVues.getScene(fenetre));
+        
+        Quiz.fenetrePrincipale.show();
+    }
+
 }

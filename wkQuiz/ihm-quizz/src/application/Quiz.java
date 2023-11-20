@@ -6,62 +6,38 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import application.exception.DifficulteException;
+import application.exception.HomonymeException;
+import application.exception.InvalidFormatException;
+import application.exception.InvalidNameException;
+import application.exception.ReponseException;
+import application.modele.Categorie;
+import application.modele.ModelePrincipal;
+import application.modele.Question;
+import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 /**
  * Classe principale de l'application permettant d'instancier
  * les contrôleurs, les vues et modèles.
- * 
+ *
+ * TODO A enlever à la fin
+ * Mettre dans les "VM argument" :
+ *  --module-path /path/to/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml
+ *
  * @author Néo BECOGNE
  * @author Quentin COSTES
- * @author François DE SAINT PALAIS
+ * @author François de Saint Palais
  * @author Lucas DESCRIAUD
- * @author Tom DOUAUD 
+ * @author Tom DOUAUD
  */
 public class Quiz extends Application {
-
-	/** Diverses scènes de l'application contenant les vues. */
-	private static Scene sceneAcceuil;
-	private static Scene sceneAide;
-	private static Scene sceneParametrePartie;
-	private static Scene sceneQuestion;
-	private static Scene sceneResultat;
-	private static Scene sceneSolution;	
-	private static Scene sceneEdition;
-	private static Scene sceneImporterQuestion;	
-	private static Scene sceneCreerQuestion;
-	private static Scene sceneCreerCategorie;
-	private static Scene sceneEditerCategorie;
-	private static Scene sceneEditerQuestion;
-	private static Scene sceneModeEnLigne;
-	private static Scene scenePartagerQuestions;
-	private static Scene sceneChoixPartageQuestions;
-	private static Scene sceneRecevoirQuestions;
-
-
-	public static Scene[] scenes = {
-			sceneAcceuil, sceneAide, sceneParametrePartie, sceneQuestion, sceneResultat,
-			sceneSolution, sceneEdition, sceneImporterQuestion, sceneCreerQuestion,
-			sceneCreerCategorie, sceneEditerCategorie, sceneEditerQuestion,
-			sceneModeEnLigne, scenePartagerQuestions, sceneChoixPartageQuestions,
-			sceneRecevoirQuestions
-	};
-		
-	private static String[] ressources = {
-			"Acceuil.fxml", "Aide.fxml", "ParametrePartie.fxml",
-			"Question.fxml", "Resultat.fxml", "Solution.fxml",
-			"Editeur.fxml", "ImporterQuestion.fxml", "CreationQuestion.fxml",
-			"CreationCategorie.fxml", "EditerCategorie.fxml", "EditerQuestion.fxml",
-			"ModeEnLigne.fxml", "PartagerQuestions.fxml", "ChoixPartagerQuestions.fxml",
-			"RecevoirQuestions.fxml"
-	};
 
 	/**
 	 * Fenêtre principale de l'application
@@ -71,53 +47,133 @@ public class Quiz extends Application {
 	 */
 	public static Stage fenetrePrincipale;
 	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		try {
-			
-			for (int indiceScene = 0; indiceScene < scenes.length; indiceScene++) {
-				/*
-				 * Chargement de la vue et création
-				 * de la scène associée à cette vue
-				 */
-				FXMLLoader chargeurFXMLCourant = new FXMLLoader();
-				chargeurFXMLCourant.setLocation(
-						GestionVues.class.getResource(ressources[indiceScene]));
-				Parent conteneur = chargeurFXMLCourant.load();
-				
-				/* Création de la scène correspondante à la vue chargée */
-				scenes[indiceScene] = new Scene(conteneur, 1000, 600); // TODO: Vérifier que ca va pas ne poser de pb avec les scenes qui ont une taille spécialle
-			}
-			
-			// on définit le titre, la hauteur et la largeur de la fenêtre principale
-						primaryStage.setTitle("Quizéo - Menu principal");
-						primaryStage.setHeight(600);
-						primaryStage.setWidth(1000);
-						
-						primaryStage.getIcons().add(new Image("application/vues/images/iconePrincipale.png")); // TODO faudra changer l'architecture de fichier de fond en comble pour que ca puisse marcher
+	private static Quiz instance;
 
-						/*
-						 * on associe la scène principale à la fenêtre principale
-						 * Cette dernière est stockée en tant qu'attribut afin d'être accessible
-						 * dans les méthodes activer... Celles qui permettent de rendre active
-						 * l'une des 3 scènes
-						 */
-						primaryStage.setScene(scenes[0]);
-						fenetrePrincipale = primaryStage;
-						fenetrePrincipale.setResizable(false);
-						primaryStage.show();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+	/** Le nom de tout les fichier fxml de l'application */
+	private ArrayList<String> ressources;
+
+    /**
+     * Fonction main qui lance la fenêtre JavaFX
+     * @param args non utilisé
+     */
+    public static void main(String args[]) {
+    	launch(args);
+    }
+
+    /**
+     * Lance l'application
+     * @throws InvalidNameException 
+     * @throws HomonymeException 
+     * @throws ReponseException 
+     * @throws InvalidFormatException 
+     * @throws DifficulteException 
+     */
+	@Override
+	public void start(Stage primaryStage) throws IOException, HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException {
+        instance = this;
+		ressources = new ArrayList<String>();
+		GestionVues.initialiserScene();
+		
+//		{	// TODO c'est temporaire, c'est pour tester
+//    		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+//    	    
+//    	    ArrayList<String> rep = new ArrayList<>();
+//    	    rep.add("coubeh");
+//    	    rep.add("je vais me prendre a cause des tableView");
+//    	    
+//    	   
+//    	    
+//    	    String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
+//    	    String char350 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.";
+//    	    ArrayList<String> rep250 = new ArrayList<>();
+//    	    rep250.add(char250 + "1");
+//    	    rep250.add(char250 + "2");
+//    	    rep250.add(char250 + "3");
+//    	    rep250.add(char250 + "4");
+//    	    
+//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 1, "feur", rep, ""));
+//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 2, "quette", rep, ""));
+//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
+//		}
+	    
+	    ressources.add("Accueil.fxml");
+		ressources.add("Editeur.fxml");
+		ressources.add("CreationQuestionEtCategorie.fxml");
+		ressources.add("EditerCategorie.fxml");
+		ressources.add("EditerCategories.fxml");
+	    ressources.add("EditerQuestion.fxml");
+	    ressources.add("EditerQuestions.fxml");
+	    ressources.add("Resultat.fxml");
+	    ressources.add("Solution.fxml");
+	    ressources.add("ImporterQuestion.fxml");
+	    ressources.add("ParametrePartie.fxml");
+	    ressources.add("RepondreQuestion.fxml");
+	    ressources.add("Aide.fxml");
+
+		
+		for (String element : ressources) {
+			GestionVues.charger(element);
 		}
+
+		 try {
+		    Image logo 
+		    = new Image("application/vue/images/IconePrincipale.png");
+		    
+            primaryStage.getIcons().add(logo);
+         } catch (Exception e) {
+            System.err.println("Erreur : L'îcone est introuvables");
+         }
+
+		 
+		primaryStage.setTitle("Quizéo - Accueil");
+		fenetrePrincipale = primaryStage;
+		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
+		fenetrePrincipale.setResizable(false);
+		
+		primaryStage.show();
+	}
+	
+	public static Quiz getInstance() {
+    	return instance;
+    }
+	
+	public static void charger(String vue) {
+	    GestionVues.charger(vue);
+	}
+
+    /**
+	 * Gestion du changement de fenêtre
+     * @param fenetre (String) le nom de la fenêtre a charger en .fxml
+     */
+	public static void changerVue(String fenetre) {
+		GestionVues.changerVue(fenetre);
 	}
 	
 	/**
-	 * Programme principal
-	 * @param args non utilisé
-	 */
-	public static void main(String Args[]) {	
-		launch(args);
-		// new ControleurPrincipal();	FIXME
+     * Fonction appelée par les controlleurs permettant de quitter l'application
+     */
+	public static void quitter( ) {
+	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	        Platform.exit();            
+        }
 	}
+	
+	/**
+	 * Recharge une vue et l'affiche
+	 * @param vue Le nom de la vue
+	 */
+	public static void chargerEtChangerVue(String vue) {
+	    GestionVues.charger(vue);
+	    GestionVues.changerVue(vue);
+	}
+
 }
