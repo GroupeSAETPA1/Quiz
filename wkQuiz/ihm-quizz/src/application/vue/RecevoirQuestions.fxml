@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="52.0" layoutY="40.0">
+         <children>
+            <Label layoutX="-1.0" layoutY="74.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAcceuil.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Button layoutX="320.0" layoutY="437.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Connexion" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" styleClass="cavajamaismarcher">
+               <image>
+                  <Image url="@images/IconeLogin.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fill="WHITE" layoutX="308.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recevoir des questions" textAlignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <TextField layoutX="301.0" layoutY="342.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez le port de l’envoyeur (Ex : 8080)" style="-fx-background-radius: 32px;">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="301.0" layoutY="229.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez IP de l’envoyeur (Ex : 192.168.1.1)" style="-fx-background-radius: 32px;">
+         <font>
+            <Font name="Open Sans" size="20.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="308.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse IP de l’envoyeur" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="301.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port de l’envoyeur" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
