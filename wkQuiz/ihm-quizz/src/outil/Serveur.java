@@ -22,7 +22,7 @@ public class Serveur {
 
 	private static final String CLIENT_RECU_SUCCES = "Questions bien reçues";
 
-	// Le ServerSocket statique
+	// Le ServerSocket 
 	private ServerSocket serveur;
     
 	// Le port d'écoute du serveur par défaut = 507705
