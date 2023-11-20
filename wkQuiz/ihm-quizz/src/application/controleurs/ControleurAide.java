@@ -149,11 +149,11 @@ public class ControleurAide {
 			
 			text4.setText("Ensuite vous retrouvez les multiples choix de question, qu’une seul est bonne et n’oubliez pas de la choisir sinon ce sera faux. \n");
 			text4.setStyle("-fx-font-size: 20px");
-			text4.setTranslateY(105);
+			text4.setTranslateY(80);
 			
 			text5.setText("Pour finir en bas il y a trois boutons, un qui vous permet de revenir à la question précédente, un autre qui vous permet de valider. Et un dernier qui vous permet de passer la question en cas de doute.\n");
 			text5.setStyle("-fx-font-size: 20px");
-			text5.setTranslateY(110);
+			text5.setTranslateY(100);
 		}
 	}
 }
