@@ -40,12 +40,16 @@ public class ModelePrincipal {
     /**
      * Lie un charactere a son code pour le chiffement
      */
-    public static final HashMap<Character, Integer> ALPAHABET = new HashMap<>();
+    public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
+    
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
     
 
     /* L'alphabet personnalisé */
-    private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
-    		+ "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;,:<>1234567890$%";
+    private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;,:<>1234567890$%";
     
     private static ModelePrincipal modele;
 
@@ -89,7 +93,12 @@ public class ModelePrincipal {
         // Remplissage de la HashMap avec les caractères de l'alphabet
         for (int i = 0; i < CUSTOM_ALPHABET.length(); i++) {
             char c = CUSTOM_ALPHABET.charAt(i);
-            ALPAHABET.put(c, i);
+            ALPAHABET_TO_INT.put(c, i);
+        }
+        // Remplissage de la HashMap avec les caractères de l'alphabet
+        for (int i = 0; i < CUSTOM_ALPHABET.length(); i++) {
+            char c = CUSTOM_ALPHABET.charAt(i);
+            INT_TO_ALPHABET.put(i, c);
         }
     }
 
