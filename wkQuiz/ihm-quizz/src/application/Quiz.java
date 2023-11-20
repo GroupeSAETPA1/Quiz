@@ -75,16 +75,16 @@ public class Quiz extends Application {
 		GestionVues.initialiserScene();
 		
 //		{	// TODO c'est temporaire, c'est pour tester
-//    		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
+    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 //    	    
 //    	    ArrayList<String> rep = new ArrayList<>();
 //    	    rep.add("coubeh");
@@ -118,6 +118,7 @@ public class Quiz extends Application {
 	    ressources.add("ParametrePartie.fxml");
 	    ressources.add("RepondreQuestion.fxml");
 	    ressources.add("Aide.fxml");
+//	    ressources.add("SelectionQuestion.fxml");
 
 		
 		for (String element : ressources) {

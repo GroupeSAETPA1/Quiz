@@ -167,7 +167,9 @@
     -fx-font-size: 30px; 
 }
 
-
+.anchor-pane {
+    -fx-background-color: #282C34;
+}
 
 
 /*                               */
