@@ -71,7 +71,7 @@ public class ControleurAide {
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(95);
 			
-		}else if(pagePrecedente != null && pagePrecedente.equals("ImporterQuestion.fxml")) {
+		} else if(pagePrecedente != null && pagePrecedente.equals("ImporterQuestion.fxml")) {
 			
 			text1.setText("Sur cette page vous pouvez importer un dossier CSV\n");
 			text1.setStyle("-fx-font-size: 20px");
@@ -89,7 +89,7 @@ public class ControleurAide {
 			exempleTableur.setTranslateY(50);
 			
 			
-		}else if(pagePrecedente != null && pagePrecedente.equals("ParametrePartie.fxml")) {
+		} else if(pagePrecedente != null && pagePrecedente.equals("ParametrePartie.fxml")) {
 			
 			text1.setText("Sur cette page vous pouvez paramétrer votre partie\n");
 			text1.setStyle("-fx-font-size: 20px");
@@ -111,7 +111,7 @@ public class ControleurAide {
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(115);
 			
-		}else if(pagePrecedente != null && pagePrecedente.equals("CreationQuestionEtCategorie.fxml")) {
+		} else if(pagePrecedente != null && pagePrecedente.equals("CreationQuestionEtCategorie.fxml")) {
 			
 			text1.setText("Sur cette page vous pouvez créer vos question ou Catégorie\n");
 			text1.setStyle("-fx-font-size: 20px");
@@ -133,6 +133,27 @@ public class ControleurAide {
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(110);
 			
+		} else if(pagePrecedente != null && pagePrecedente.equals("RepondreQuestion.fxml")) {
+			
+			text1.setText("Sur cette page vous pourrez jouer au jeu\n");
+			text1.setStyle("-fx-font-size: 20px");
+			text1.setTranslateY(80);
+			
+			text2.setText("Vous retrouverez en haut à gauche le rappel de votre catégorie et en haut à droite votre difficulté.\n");
+			text2.setStyle("-fx-font-size: 20px");
+			text2.setTranslateY(80);
+			
+			text3.setText("En dessous de cela il y a le libellé de la question  qui vous est posée.\n");
+			text3.setStyle("-fx-font-size: 20px");
+			text3.setTranslateY(80);
+			
+			text4.setText("Ensuite vous retrouvez les multiples choix de question, qu’une seul est bonne et n’oubliez pas de la choisir sinon ce sera faux. \n");
+			text4.setStyle("-fx-font-size: 20px");
+			text4.setTranslateY(105);
+			
+			text5.setText("Pour finir en bas il y a trois boutons, un qui vous permet de revenir à la question précédente, un autre qui vous permet de valider. Et un dernier qui vous permet de passer la question en cas de doute.\n");
+			text5.setStyle("-fx-font-size: 20px");
+			text5.setTranslateY(110);
 		}
 	}
 }
