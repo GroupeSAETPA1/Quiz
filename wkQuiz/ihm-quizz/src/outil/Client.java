@@ -1,5 +1,5 @@
 /*
- * Serveur.java                                    24 oct. 2023
+ * Client.java                                    20 nov. 2023
  * IUT de Rodez, info1 2023-2024, aucun copyright ni copyleft
  */
 
@@ -13,10 +13,10 @@ import java.net.Socket;
 
 /** 
  * TODO comment class responsibility (SRP)
- * @author Francois
  * @author Tom Douaud
+ * @author Francois
  */
-public class Serveur {
+public class Client {
     
 	private static final String CLIENT_PRET = "Le client est pret";
 
@@ -34,7 +34,7 @@ public class Serveur {
 	// Le message pour terminer la conversation
     private final String MESSAGE_FIN_COMMUNICATION = "FIN_COMMUNICATION";
     
-    public Serveur(int port) throws IOException, ClassNotFoundException  {
+    public Client(int port) throws IOException, ClassNotFoundException  {
     	this.port = port;
         serveur = new ServerSocket(port);
         lancerServeur();
