@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
@@ -35,6 +35,20 @@
                         <Label layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                            <font>
                               <Font name="Open Sans" size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideQuestion">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeAide.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="18.0" layoutY="81.0" text="Aide" textFill="WHITE">
+                           <font>
+                              <Font size="32.0" />
                            </font>
                         </Label>
                      </children>
@@ -65,7 +79,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annuler" prefHeight="50.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerQuestion" prefHeight="50.0" prefWidth="270.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
                      </font>
@@ -168,7 +182,7 @@
             </Pane>
          </content>
       </Tab>
-      <Tab closable="false" text="Création Catégorie">
+      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
@@ -186,6 +200,20 @@
                         </Label>
                      </children>
                   </Group>
+                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideCategorie">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeAide.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="16.0" layoutY="84.0" text="Aide" textFill="WHITE">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
                   <Label layoutX="428.0" layoutY="18.0" prefHeight="58.0" prefWidth="439.0" text="Création d'une catégorie" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
@@ -196,7 +224,7 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>

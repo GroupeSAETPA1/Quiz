@@ -20,7 +20,7 @@
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <ImageView fitHeight="96.0" fitWidth="96.0" onMouseClicked="#retour">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
@@ -37,7 +37,7 @@
             <Font name="Open Sans Regular" size="40.0" />
          </font>
       </Text>
-      <TableView fx:id="table" layoutX="80.0" layoutY="280.0" prefHeight="471.0" prefWidth="1290.0"/>
+      <TableView fx:id="table" layoutX="80.0" layoutY="280.0" prefHeight="471.0" prefWidth="1290.0" style="-fx-background-color: #282C34;" />
       <Text fill="WHITE" layoutX="84.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la Catégorie :">
          <font>
             <Font name="Open Sans Regular" size="24.0" />

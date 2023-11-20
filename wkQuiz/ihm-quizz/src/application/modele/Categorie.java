@@ -21,6 +21,7 @@ public class Categorie implements Serializable {
     /** Le nom de la catégorie */
     private String nom;
 
+    private static final  int LONGUEUR_NOM_MAX = 30 ;
     /**
      * Constructeur de la classe
      * @param nom de la catégorie (String)
@@ -30,7 +31,7 @@ public class Categorie implements Serializable {
     	if (nomValide(nom)) {
     		this.nom = nom;
     	} else {
-    		throw new InvalidNameException("Le nom saisie est vide");
+    		throw new InvalidNameException("Le nom saisie est invalide");
     	}
     }
     
@@ -40,7 +41,7 @@ public class Categorie implements Serializable {
      * @return true si le nom est valide, false sinon
      */
     public static boolean nomValide(String nom) {
-        return !nom.isBlank();
+        return !nom.isBlank() && nom.length() <= LONGUEUR_NOM_MAX ;
     }
 
     /**
