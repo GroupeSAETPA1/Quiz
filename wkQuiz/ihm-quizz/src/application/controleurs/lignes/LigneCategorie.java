@@ -16,19 +16,30 @@ import javafx.scene.control.Button;
 public class LigneCategorie {
 	
     private final SimpleStringProperty nomProperty;
-    private final SimpleIntegerProperty nbProperty;
+    private final SimpleStringProperty nbProperty;
     private final Button editerButton;
     private final Button supprimerButton;
 
-    public LigneCategorie(String nom, int nb) {
+    public LigneCategorie(String nom, String nb) {
         this.nomProperty = new SimpleStringProperty(nom);
-        this.nbProperty = new SimpleIntegerProperty(nb);
+        this.nbProperty = new SimpleStringProperty(nb);
         this.editerButton = new Button("Éditer");
         this.supprimerButton = new Button("Supprimer");
 
         editerButton.setOnAction(event -> editerCategorie());
         supprimerButton.setOnAction(event -> supprimerCategorie());
     }
+    
+    public LigneCategorie(String nom) {
+        this.nomProperty = new SimpleStringProperty(nom);
+        this.nbProperty = new SimpleStringProperty("0");
+        this.editerButton = new Button("Éditer");
+        this.supprimerButton = new Button("Supprimer");
+
+        editerButton.setOnAction(event -> editerCategorie());
+        supprimerButton.setOnAction(event -> supprimerCategorie());
+    }
+    
 
     public String getNomProperty() {
         return nomProperty.get();
@@ -38,11 +49,11 @@ public class LigneCategorie {
         return nomProperty;
     }
 
-    public int getNbProperty() {
+    public String getNbProperty() {
         return nbProperty.get();
     }
 
-    public SimpleIntegerProperty nbPropertyProperty() {
+    public SimpleStringProperty nbPropertyProperty() {
         return nbProperty;
     }
 
@@ -58,7 +69,7 @@ public class LigneCategorie {
     	// méthode appelée lors de l'appuie surle bouton d'edition de la categorie
     	if (this.getNomProperty() != "Général") {
     		// si la quesiotn n'est pas général
-    		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()));
+    		ModelePrincipal.getInstance().setCategorieAModifier(ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(getNomProperty()));
     		Quiz.chargerEtChangerVue("EditerCategorie.fxml");	
     	} else {
     		AlertBox.showErrorBox("la catégorie générale ne peut pas etre modifiée");
@@ -70,7 +81,7 @@ public class LigneCategorie {
     	if (this.getNomProperty() != "Général") {
     		boolean result = AlertBox.showConfirmationBox("supprimer la categorie : " + nomProperty.get());
 	    	if (result) {
-	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(getNomProperty()))) {
+	    		if (ModelePrincipal.getInstance().supprimerCategorie(ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(getNomProperty()))) {
 	    			AlertBox.showSuccessBox("suppresion effectuée");
 	        		Quiz.chargerEtChangerVue("EditerCategories.fxml");
 	    		} else { 

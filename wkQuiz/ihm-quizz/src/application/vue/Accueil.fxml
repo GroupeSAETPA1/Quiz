@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurAccueil">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAccueil">
    <children>
       <Label contentDisplay="CENTER" layoutX="412.0" layoutY="58.0" prefHeight="57.0" prefWidth="243.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -63,7 +62,7 @@
                   <Image url="@images/IconeQuitter.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Quitter" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutY="80.0" prefHeight="57.0" prefWidth="109.0" text="Quitter" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -77,11 +76,36 @@
                   <Image url="@images/IconeAide.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="75.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="84.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
+         </children>
+      </Group>
+      <Group layoutX="750.0" layoutY="20.0" onMouseClicked="#profil">
+         <children>
+            <VBox alignment="CENTER" layoutX="-86.0" prefHeight="147.0" prefWidth="207.0">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/IconeProfil.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D height="96.0" width="96.0" />
+                     </viewport>
+                  </ImageView>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="272.0">
+                     <children>
+                        <Text fx:id="labelPseudo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil" textAlignment="CENTER" wrappingWidth="186.3125">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </Group>
    </children>

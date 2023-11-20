@@ -18,7 +18,8 @@ import application.controleurs.factories.SupprimerQuestionButtonCellFactory;
 
 import application.controleurs.lignes.LigneQuestion;
 
-public class ControlleurEditerQuestions {
+public class ControleurEditerQuestions {
+
 	
 	@FXML
 	private TableView<LigneQuestion> table;
@@ -41,6 +42,7 @@ public class ControlleurEditerQuestions {
 		Quiz.chargerEtChangerVue("CreationQuestionEtCategorie.fxml");
 	}
 	
+	@FXML
 	public void initialize() {
 		TableColumn<LigneQuestion, String> categorieColumn = new TableColumn<>("categorie");
 		categorieColumn.setCellValueFactory(new PropertyValueFactory<>("categorie"));
@@ -62,6 +64,7 @@ public class ControlleurEditerQuestions {
 	        return cell;
 	    });
 
+		/* On remet si la prof veut a tout prix tout les colonnes
         TableColumn<LigneQuestion, String> reponseJusteColumn = new TableColumn<>("réponse juste");
         reponseJusteColumn.setCellValueFactory(new PropertyValueFactory<>("reponseJuste"));
         reponseJusteColumn.setCellFactory(tc -> {
@@ -91,24 +94,21 @@ public class ControlleurEditerQuestions {
             cell.setStyle("-fx-font-size: 30px");
             return cell;
         });
-
-        TableColumn<LigneQuestion, String> modifColumn = new TableColumn<>("Modifier la question");
+		*/
+        TableColumn<LigneQuestion, String> modifColumn = new TableColumn<>("Modifier");
         modifColumn.setCellFactory(new EditerQuestionButtonCellFactory());
 
-        TableColumn<LigneQuestion, String> supColumn = new TableColumn<>("Supprimer la question");
+        TableColumn<LigneQuestion, String> supColumn = new TableColumn<>("Supprimer");
         supColumn.setCellFactory(new SupprimerQuestionButtonCellFactory());
 
         /** style de la table */
-        double tableWidth = 1272;
-        categorieColumn.setPrefWidth(tableWidth * 0.15);
-        libelleColumn.setPrefWidth(tableWidth * 0.15);
-        reponseJusteColumn.setPrefWidth(tableWidth * 0.15);
-        reponsesFaussesColumn.setPrefWidth(tableWidth * 0.15);
-        feedbackColumn.setPrefWidth(tableWidth * 0.15);
-        modifColumn.setPrefWidth(tableWidth * 0.1);
-        supColumn.setPrefWidth(tableWidth * 0.1);
+        double tableWidth = 1280;
+        categorieColumn.setPrefWidth(tableWidth * 0.40);
+        libelleColumn.setPrefWidth(tableWidth * 0.35);
+        modifColumn.setMinWidth(tableWidth * 0.09);
+        supColumn.setMinWidth(tableWidth * 0.12);
 
-        table.getColumns().addAll(categorieColumn, libelleColumn, reponseJusteColumn, reponsesFaussesColumn, feedbackColumn, modifColumn, supColumn);
+        table.getColumns().addAll(categorieColumn, libelleColumn, modifColumn, supColumn);
         
         miseAJourTableau();
 	}
@@ -126,10 +126,9 @@ public class ControlleurEditerQuestions {
         ArrayList<Question> questions = ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(); 
         
         for (Question question : questions) {
-        	System.out.println(question);
-        	LigneQuestion ligne = new LigneQuestion(ModelePrincipal.getInstance().getBanqueCategorie().getExactCategoriesLibelle(question.getCategorie())
+        	LigneQuestion ligne = new LigneQuestion(ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact(question.getCategorie())
         			                              , question.getLibelle(), question.getReponseJuste(), question.getMauvaisesReponses(), question.getFeedback());
-        	data.add(ligne); // erreur ici
+        	data.add(ligne);
         }
         
     }

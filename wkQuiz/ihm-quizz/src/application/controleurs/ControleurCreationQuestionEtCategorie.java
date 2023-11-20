@@ -1,8 +1,14 @@
+/*
+ * ControleurCreationQuestionEtCategorie.java
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs;
 
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -20,8 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * Controlleur de la page Creation de Quetion et de Categorie.
- * Celui-ci instance  des methodes liée au bouton de la page
+ * Controlleur de la page Creation de Question et de Catégorie.
+ * Celui-ci instance  des méthodes liée au bouton de la page
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -31,116 +37,139 @@ import javafx.scene.control.ToggleGroup;
  */
 
 
-public class ControlleurCreationQuestionEtCategorie {
+public class ControleurCreationQuestionEtCategorie {
 
 
     private ArrayList<Categorie> categories;
 
     private ModelePrincipal modele;
     
+    @FXML private ComboBox<Categorie> selectCategorie;
+    
     @FXML private ToggleGroup difficulte;
 
 	@FXML private TextArea saisieFeedback;
 	
 	@FXML private TextField saisieLibeleQuestion;
-	@FXML private TextField saisieNomCategorie;
 	@FXML private TextField saisieReponseVrai;
-
 	@FXML private TextField saisiePremiereReponseFausse;
 	@FXML private TextField saisieSecondeReponseFausse;
 	@FXML private TextField saisieTroisiemeReponseFausse;
 	@FXML private TextField saisieQuatriemeReponseFausse;
 
-	@FXML private ComboBox<Categorie> selectCategorie;
+	@FXML private TextField saisieNomCategorie;
 
 	@FXML Tab tabCategorie;
-	@FXML TabPane tapPane;
+	@FXML TabPane tabPane;
+	
+	private ModelePrincipal model = ModelePrincipal.getInstance();
 
 	/**
-	 * Méthodes liée au bouton annuler,
-	 * qui devra vider les champs et renvoyer vers la page Accueil.fxml
+	 * Méthodes liée au bouton annuler, vide les champs 
 	 */
 	@FXML
-	private void annuler() {
-		System.out.println("Annuler");
-		Quiz.changerVue("Acceuil.fxml");
+	private void annulerQuestion() {
+		viderChampsQuestion();
 	}
+	
+	/**
+	 * Méthodes liée au bouton annuler, vide les champs 
+	 */
+	@FXML
+	private void annulerCategorie() {
+		viderChampsCategorie();
+	}
+	
+	@FXML
+	private void aideCategorie() {
+		model.setDisplayCategoriePane(true);
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+	
+	@FXML
+	private void aideQuestion() {
+		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
+
 
 
 	@FXML
 	public void initialize() {
-	    System.out.println("Instanciation de Création");
         // On récupère l'instance du Modèle
 	    modele = ModelePrincipal.getInstance();
 
 	    miseAJourListeCategorie();
 
+	    //Permet de sélectionner un onglet dans le TabPane
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
-	    	System.out.println("ici");
-	    	tapPane.getSelectionModel().select(tabCategorie);
+	    	tabPane.getSelectionModel().select(tabCategorie);
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
 	    }
     }
 
 	/**
-     * TODO comment method role
-     * @throws InvalidNameException
+	 * Met à jour la ComboBox de Catégorie avec les catégories du modèle
      */
     private void miseAJourListeCategorie() {
         //Récupération puis ajout des nom de catégorie
         categories = modele.getCategories();
+        
+        selectCategorie.getItems().clear();
         selectCategorie.getItems().addAll(categories);
     }
 
     /**
 	 * Méthodes liée au bouton Accueil
-	 * qui devra renvoyer vers la page Accueil.fxml
+	 * envoie vers la page Accueil.fxml
 	 */
 	@FXML
 	private void retourAcceuil() {
-		System.out.println("Bouton retour à l'acceuil");
 		Quiz.changerVue("Editeur.fxml");
 	}
 
     /**
-     * Méthodes liée au bouton valider,
-     * qui devra enregistrer les champs  dans la banques de question
+     * Méthodes liée au bouton valider, créer une nouvelle question
+     * à partir des champs
      */
 	@FXML
 	private void validerQuestion() {
-	    //TODO Refactor pour avoir une fonction par action
-		System.out.println("Valider");
-
-		//Récupération de l'indice de la catégorie choisie
-		int indiceCategorieChoisie = getIndiceCategorieChoisie();
-		System.out.println(  "Catégorie choisie : "
-		                   + (indiceCategorieChoisie >= 0
-		                      ? categories.get(indiceCategorieChoisie)
-		                      : "Invalide"));
-
-		//Récupération du nom de la question
-		String libeleQuestion = getLibeleQuestion();
-		System.out.println("Nom de la question : " + libeleQuestion);
-
-		//Récupération de la difficulté
-		int valeurDifficulte = getDifficulte();
-		System.out.println("Difficulté : " + valeurDifficulte);
-
-		//Récupération du feedback
-		String feedback = getFeedback();
-		System.out.println("Feedback : " + feedback);
-
-		//Récupération de la réponse vrai
-		String reponseVrai = getReponseVrai();
-		System.out.println("Réponse vrai : " + reponseVrai);
-
-		//Récupération des réponses fausses
-		ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
-		System.out.println("Mauvaise réponse(s) : " + mauvaiseReponses);
-
-
-		creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
-                reponseVrai, mauvaiseReponses);
+		try {
+			//Récupération de l'indice de la catégorie choisie
+			int indiceCategorieChoisie = getIndiceCategorieChoisie();
+			if (indiceCategorieChoisie <= 0) {
+				throw new 
+				NullPointerException("Il n'y a pas de Catégorie choisie");
+			}
+			
+			//Récupération du nom de la question
+			String libeleQuestion = getLibeleQuestion();
+			
+			//Récupération de la difficulté
+			int valeurDifficulte = getDifficulte();
+			
+			//Récupération du feedback
+			String feedback = getFeedback();
+			
+			//Récupération de la réponse vrai
+			String reponseVrai = getReponseVrai();
+			
+			//Récupération des réponses fausses
+			ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
+			
+			
+			creerEtGererQuestion(indiceCategorieChoisie, libeleQuestion, valeurDifficulte, feedback,
+					reponseVrai, mauvaiseReponses);
+			
+		} catch (NullPointerException e) {
+        	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
+        }
+		
+		 Quiz.charger("EditerQuestions.fxml");
+		
 	}
 
 
@@ -182,9 +211,13 @@ public class ControlleurCreationQuestionEtCategorie {
     /** 
      * @return La difficulté
      */
-    private Integer getDifficulte() {
-        return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
-		        ((RadioButton) difficulte.getSelectedToggle()).getText());
+    private int getDifficulte() {
+        int reponse = Integer.MAX_VALUE;
+        if (difficulte.getSelectedToggle() != null) {
+            reponse = ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
+                    ((RadioButton) difficulte.getSelectedToggle()).getText());
+        }
+        return reponse;
     }
 
     /** 
@@ -221,7 +254,7 @@ public class ControlleurCreationQuestionEtCategorie {
                     mauvaiseReponses, feedback);
 
         } catch (InvalidFormatException e) {
-            AlertBox.showErrorBox("Veuillez saisir au minimum une réponse fausse.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
                     + "question ET une réponse juste.");
@@ -231,9 +264,13 @@ public class ControlleurCreationQuestionEtCategorie {
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
+        } catch (DifficulteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         if (questionCreer) {
-            AlertBox.showSuccessBox("Question créer !");
+            AlertBox.showSuccessBox("Question crée !");
+            viderChampsQuestion();
         }
     }
 
@@ -244,14 +281,10 @@ public class ControlleurCreationQuestionEtCategorie {
 	@FXML
     private void validerCategorie() {
 
-		System.out.println("Valider");
-
 		boolean categorieCreer = false;
 
-        String nom = saisieNomCategorie.getText();
-		System.out.println("Nom de la catégorie : " + nom);
-
-		creerEtGererCategorie( categorieCreer, nom);
+        String nom = saisieNomCategorie.getText().strip();
+		creerEtGererCategorie(categorieCreer, nom);
     }
 	
 	/**
@@ -272,23 +305,39 @@ public class ControlleurCreationQuestionEtCategorie {
         }
         
         if (categorieCreer) {
-            AlertBox.showSuccessBox("Categorie créer !");
+            AlertBox.showSuccessBox("Categorie crée !");
             miseAJourListeCategorie();
             Quiz.charger("EditerCategories.fxml");
+            viderChampsCategorie();
         }
     }
 	
 	/**
-	 * VIde les champs de la créationQuestion
+	 * Vide les champs de la créationQuestion
 	 */
 	private void viderChampsQuestion() {
-	    //TODO
+	    difficulte.selectToggle(null);
+	    
+	    saisieLibeleQuestion.setText("");
+	    saisieFeedback.setText("");
+	    saisieReponseVrai.setText("");
+	    
+	    saisiePremiereReponseFausse.setText("");
+	    saisieSecondeReponseFausse.setText("");
+	    saisieTroisiemeReponseFausse.setText("");
+	    saisieQuatriemeReponseFausse.setText("");
+	    /* 
+	     * Nous sommes obligés de garder la value de la combobox 
+	     * meme si ce n'est pas le plus optimal pour l'utilisateur
+	     * car la combo box ne prends que des catégories et non une String
+	     */
+	    //TODO Mettre à jour la liste sa va vider la liste et donc ne rien sélectionner
 	}
 
 	/**
-	 * VIde les champs de la créationCategorie
+	 * Vide les champs de la créationCategorie
 	 */
 	private void viderChampsCategorie() {
-	    //TODO
+	    saisieNomCategorie.setText("");
 	}
 }
