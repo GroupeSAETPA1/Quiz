@@ -63,7 +63,7 @@ public class ControleurEditerCategories {
 	        TableCell<LigneCategorie, String> cell = new TableCell<>();
             cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
-	        cell.setStyle("-fx-font-size: 30px");
+	        cell.setStyle("-fx-font-size: 20px");
 	        return cell;
 	    });
 
@@ -73,7 +73,7 @@ public class ControleurEditerCategories {
 	        TableCell<LigneCategorie, Integer> cell = new TableCell<>();
             cell.setAlignment(Pos.CENTER);
 		    cell.textProperty().bind(cell.itemProperty().asString());
-		    cell.setStyle("-fx-font-size: 30px");
+		    cell.setStyle("-fx-font-size: 20px");
 	        return cell;
 	    });
 
