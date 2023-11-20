@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  * 
  * @author Tom DOUAUD
  * @author Néo BECOGNE
- */
+ */ 
 public class ControleurResultat {
 	
 	 ModelePrincipal modele = ModelePrincipal.getInstance();
