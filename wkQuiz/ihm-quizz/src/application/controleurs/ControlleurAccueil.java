@@ -1,6 +1,5 @@
 package application.controleurs;
 
-import java.awt.Label;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;

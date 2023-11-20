@@ -56,12 +56,12 @@ public class ControlleurEditerCategorie {
 		
 		
 		if( modele.categorieExiste(input.getText()) 
-			||  modele.getCategorieAModifier().getNom().equalsIgnoreCase(input.getText())) {
+			||  modele.getCategorieAModifier().getNom().equals(input.getText())) {
 			
 			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
 			modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
-			AlertBox.showSuccessBox("categorie modifiée avec succées");
+			AlertBox.showSuccessBox("Catégorie modifiée avec succées");
 
 			Quiz.chargerEtChangerVue("EditerCategories.fxml");
 		}

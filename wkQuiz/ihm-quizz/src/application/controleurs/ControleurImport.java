@@ -14,11 +14,8 @@ import java.util.HashMap;
 
 import application.Quiz;
 import application.exception.CreerQuestionException;
-import application.exception.DifficulteException;
 import application.exception.HomonymeException;
-import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
-import application.exception.ReponseException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -232,7 +229,7 @@ public class ControleurImport {
     private static HashMap<String, String> getDicotionnaire(String ligne) {
         HashMap<String, String> resultat = new HashMap<String, String>();
         String[] ligneListe = ligne.split(ModelePrincipal.SEPARATEUR_CSV + "");
-        resultat.put("categorie", ligneListe[0]);
+        resultat.put("categorie", ligneListe[0].trim());
         resultat.put("difficulte", ligneListe[1]);
         resultat.put("libelle", ligneListe[2]);
         resultat.put("reponseJuste", ligneListe[3]);

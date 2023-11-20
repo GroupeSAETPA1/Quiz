@@ -57,6 +57,7 @@ public class ModelePrincipal {
 
     /**
      * Constructeur
+     * @throws InvalidNameException 
      */
     private ModelePrincipal() {
         // TODO lire les fichiers serialisé
@@ -78,6 +79,7 @@ public class ModelePrincipal {
 
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
+     * @throws InvalidNameException 
      */
     public static ModelePrincipal getInstance() {
         if (ModelePrincipal.modele == null) {
@@ -155,7 +157,7 @@ public class ModelePrincipal {
         } catch (IndexOutOfBoundsException e) {
             categorieQuestion = banqueCategorie.categorieGeneral;
         }
-
+        
         // Si exception apparais on propage au controlleur appellant
         Question aAjouter = new Question(libelle, categorieQuestion, difficulte,
                 reponseJuste, reponseFausses, feedback);

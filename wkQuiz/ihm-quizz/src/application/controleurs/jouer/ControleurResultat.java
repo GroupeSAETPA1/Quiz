@@ -1,8 +1,11 @@
 package application.controleurs.jouer;
 
+import java.util.HashMap;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
+import application.modele.Question;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -34,14 +37,10 @@ public class ControleurResultat {
     public void initialize() {
     	if(modele.getPartie() != null) {
     		Partie partie = modele.getPartie();
-			int nbReponse;
 
-    		
-    		if (partie.getQuestionPossible().size() == partie.getNombreQuestion()) {
-    			nbReponse = partie.getNombreQuestion();
-    		} else {
-    			nbReponse = partie.getQuestionPossible().size();
-    		}
+			HashMap<Question, String> resultatQuestionnaire 
+            = partie.getReponseDonnees();
+            int nbReponse = resultatQuestionnaire.size();
     		
     		
     		int nbReponseBonne = partie.getNbBonneReponse();
@@ -64,7 +63,7 @@ public class ControleurResultat {
 	 */
 	@FXML 
 	private void voirReponses() {
-		Quiz.changerVue("Solution.fxml");
+		Quiz.chargerEtChangerVue("Solution.fxml");
 	}
 
 	/**

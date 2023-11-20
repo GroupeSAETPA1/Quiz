@@ -63,9 +63,9 @@ class TestQuestion {
 		mauvaiseReponseJusteChaineVide.add("");
 		mauvaiseReponseJusteChaineVide.add("");
 
-		mauvaiseReponse1.add("le délimiteur /*");
+		mauvaiseReponse1.add("le delimiteur /*");
 		mauvaiseReponse1.add("le delimiteur //");
-		mauvaiseReponse1.add("le délimiteur (*");
+		mauvaiseReponse1.add("le delimiteur (*");
 
 		mauvaiseReponse2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
 		mauvaiseReponse2.add("un texte sans signification particulière");
@@ -141,7 +141,7 @@ class TestQuestion {
 
 		// La réponse juste est présente dans les réponses fausses
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
-				"le délimiteur /*", mauvaiseReponse1, ""));
+				"le delimiteur /*", mauvaiseReponse1, ""));
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
 				"LE DELIMITEUR //", mauvaiseReponse1, ""));
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
@@ -362,7 +362,7 @@ class TestQuestion {
 		// On vérifie que mettre une bonne réponse 
 		// qui fait partie des mauvaise réponses renvoie 
 		// une exception "ReponseException"
-		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le délimiteur /*"));
+		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le delimiteur /*"));
 		
 		// On vérifie qu'on puisse bien mettre une bonne réponse valide 
 		// et qu'elle est enregistrée
@@ -375,6 +375,37 @@ class TestQuestion {
 	 * 
 	 * @see {@link application.modele.Question#setMauvaiseReponse(ArrayList)}
 	 */
+	
+	/**
+	 * Teste la méthode getMauvaisesReponses de la classe Question
+	 * 
+	 * @see {@link application.modele.Question#getMauvaisesReponses()}
+	 * @throws ReponseException       si les réponses sont invalides
+	 * @throws InvalidFormatException si le format est invalide
+	 */
+	@Test
+	void testGetMauvaisesReponses() throws InvalidFormatException, ReponseException {
+		ArrayList<String> test1 = new ArrayList<String>();
+		ArrayList<String> test2 = new ArrayList<String>();
+		
+		// Les mauvaises réponses de la première question du jeu de test
+		test1.add("le delimiteur /*");
+		test1.add("le delimiteur //");
+		test1.add("le delimiteur (*");
+		
+		// des nouvelles mauvaises réponses pour remplacer celles de la première question du jeu de test
+		test2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
+		test2.add("un texte sans signification particulière");
+		
+		// On vérifie que les mauvaises réponses de la question 1 
+		// sont bien celles passées dans le constructeur initial
+		assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
+		// On vérifie qu'après avoir modifier les mauvaises réponses, 
+		// les mauvaises réponses sont bien modifiées
+		questionValide.get(0).setMauvaiseReponse(test2);
+		assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
+	}
+	
 	@Test
 	void testSetMauvaiseReponse() {
 		// Génération d'un jeu de mauvaises réponses 
@@ -444,7 +475,7 @@ class TestQuestion {
 		// 2 questions dont 1 feedback l'autre non
 		assertEquals(question2Egale, questionValide.get(1));
 
-		// 2 questions exactemet pareil mais avec une difficultée différente
+		// 2 questions exactement pareil mais avec une difficultée différente
 		assertEquals(question3Egale, questionValide.get(1));
 
 		// 2 fois exactement la meme question
@@ -455,29 +486,6 @@ class TestQuestion {
 
 		// 1 question et un objet d'une autre classe
 		assertNotEquals(questionValide.get(0), new String("test"));
-
-	}
-
-	/**
-	 * Teste la méthode getMauvaisesReponses de la classe Question
-	 * 
-	 * @see {@link application.modele.Question#getMauvaisesReponses()}
-	 * @throws ReponseException       si les réponses sont invalides
-	 * @throws InvalidFormatException si le format est invalide
-	 */
-	@Test
-	void testGetMauvaisesReponses() throws InvalidFormatException, ReponseException {
-		ArrayList<String> test1 = new ArrayList<String>();
-		ArrayList<String> test2 = new ArrayList<String>();
-		test1.add("le délimiteur /*");
-		test1.add("le delimiteur //");
-		test1.add("le délimiteur (*");
-
-		test2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
-		test2.add("un texte sans signification particulière");
-		assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
-		questionValide.get(0).setMauvaiseReponse(test2);
-		assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
 	}
 
 	/**
@@ -487,14 +495,15 @@ class TestQuestion {
 	 */
 	@Test
 	void testToString() {
+		// les résultats attendus de toString pour les deux premières questions
 		String valide = """
 				Difficulté de la question : 1
 				Categorie de la question : Commentaire
 				Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
 				Mauvaise réponses :
-				- le délimiteur /*
+				- le delimiteur /*
 				- le delimiteur //
-				- le délimiteur (*
+				- le delimiteur (*
 				Bonne réponse : le délimiteur /**""";
 
 		String valide2 = """
@@ -506,15 +515,15 @@ class TestQuestion {
 				- un texte sans signification particulière
 				Bonne réponse : une balise reconnue par Javadoc
 				Feedback : Les balises Javadoc commencent par le  caractère @""";
-
-		System.out.println(questionValide.get(1).toString());
+		
+		// On vérifie que la méthode toString ne renvoie pas d'exception 
+		// et renvoie bien le résultat attendu 
 		assertDoesNotThrow(() -> questionValide.get(0).toString());
 		assertEquals(valide, questionValide.get(0).toString());
 
-		// deuxième test avec une question qui a un feedback non vide
+		// Pareil que le premier test mais avec une question 
+		// qui a un feedback non vide
 		assertDoesNotThrow(() -> questionValide.get(1).toString());
 		assertEquals(valide2, questionValide.get(1).toString());
-
 	}
-
 }

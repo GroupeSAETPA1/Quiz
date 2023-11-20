@@ -7,7 +7,6 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
@@ -17,12 +16,10 @@ import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
+import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -165,7 +162,9 @@ public class Quiz extends Application {
      * Fonction appelée par les controlleurs permettant de quitter l'application
      */
 	public static void quitter( ) {
-	    Platform.exit();
+	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	        Platform.exit();            
+        }
 	}
 	
 	/**

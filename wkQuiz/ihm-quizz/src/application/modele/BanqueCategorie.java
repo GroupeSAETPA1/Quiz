@@ -24,15 +24,15 @@ public class BanqueCategorie {
     
     /**
      * Constructeur de BanqueCategorie
+     * @throws InvalidNameException 
      */
     public BanqueCategorie() {
-    	try {
+        try {
             categorieGeneral = new Categorie("General");
         } catch (InvalidNameException e) {
             throw new InternalError("La création de la categorie Général à "
                     + "généré une erreur");
         }
-    	
         categories = new ArrayList<Categorie>();
         categories.add(categorieGeneral);
     }
@@ -66,9 +66,9 @@ public class BanqueCategorie {
     }
 
     /**
-     * Renvoie la catégorie qui a le même libellé que passé en paramètre
+     * Renvoie la catégorie qui à exactement le même libellé que passé en paramètre
      * si il n'y en a pas cela renvoie null
-     * @param libelle (String) le libellé recherché
+     * @param libelle (String) le libellé recherché sensible à la casse
      * @return catégorie avec le libellé voulu si elle existe, null sinon
      */
     public Categorie getCategorieLibelleExact(String libelle) {
@@ -107,6 +107,7 @@ public class BanqueCategorie {
         
         return resultat;
     }
+    
     /** @return le nom de tous les catégorie de la banque */
     public ArrayList<String> getCategoriesNom() {
         ArrayList<String> resultat = new ArrayList<String>();
@@ -117,8 +118,6 @@ public class BanqueCategorie {
         
         return resultat;
     }
-    
-    
     
     
     /**
@@ -135,6 +134,10 @@ public class BanqueCategorie {
                 reponse = i;
                 categoriePasTrouve = false;
             }
+        }
+        
+        if (categoriePasTrouve) {
+        	throw new IllegalArgumentException("La catégorie recherchée n'est pas dans la banque de catégorie !");
         }
         
         return reponse;
