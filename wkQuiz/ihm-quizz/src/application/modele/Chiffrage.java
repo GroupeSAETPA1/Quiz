@@ -39,7 +39,19 @@ public class Chiffrage {
 	}
 	
 	public String chiffrement(String message, String cle) {
-		return null; // STUB
+		StringBuilder aCrypter = new StringBuilder();
+		for (int i = 0 ; i < message.length() ; i++) {
+		    // valeur du caractere message.charAt(i)
+		    int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+		    
+		    // valeur du caractère de la cle
+		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
+		    
+		    char crypter = INT_TO_ALPHABET.get(
+		            (messageI + cleI) % nombreLettreAlphabet);
+		    aCrypter.append(crypter);	    
+		}
+		return aCrypter.toString();
 	}
 	
 	public String dechiffrement(String message, String cle) {
