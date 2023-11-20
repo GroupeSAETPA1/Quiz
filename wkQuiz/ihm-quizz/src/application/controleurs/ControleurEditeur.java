@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
  * @author Tom DOUAUD
  */
 
-public class ControlleurEditeur {
+public class ControleurEditeur {
 	 
 	/**
 	 * Méthode liée au bouton importer des question 

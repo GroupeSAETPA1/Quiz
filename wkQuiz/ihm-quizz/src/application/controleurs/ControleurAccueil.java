@@ -22,7 +22,7 @@ import javafx.scene.text.TextAlignment;
  */
 
 
-public class ControlleurAccueil {
+public class ControleurAccueil {
 	
 	private ModelePrincipal model = ModelePrincipal.getInstance();
 	

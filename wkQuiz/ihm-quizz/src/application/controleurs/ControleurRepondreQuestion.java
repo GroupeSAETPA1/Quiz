@@ -20,7 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
-public class ControlleurRepondreQuestion {
+public class ControleurRepondreQuestion {
     
     private Partie partie = ModelePrincipal.getInstance().getPartie();
 	

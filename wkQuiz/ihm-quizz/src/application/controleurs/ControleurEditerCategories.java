@@ -25,7 +25,7 @@ import application.controleurs.lignes.LigneCategorie;
  * @author Quentin COSTES
  */
 
-public class ControlleurEditerCategories {
+public class ControleurEditerCategories {
 	
 	@FXML
 	private TableView<LigneCategorie> table;

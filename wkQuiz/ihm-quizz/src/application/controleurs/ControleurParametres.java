@@ -1,5 +1,5 @@
 /*
- * ControlleurParametres.java                                    10 nov. 2023
+ * ControleurParametres.java                                    10 nov. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
  * Controller de la page fxml parametre partie
  * @author Lucas
  */
-public class ControlleurParametres {
+public class ControleurParametres {
 
     @FXML
     private ComboBox<String> selecteurCategorie ;

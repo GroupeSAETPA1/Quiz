@@ -1,5 +1,5 @@
 /*
- * ControllerAide.java                                     
+ * ControleurAide.java                                     
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
  * Le controlleur de la page Aide
  * @author Néo BECOGNE
  */
-public class ControllerAide {
+public class ControleurAide {
 	
 	 private ModelePrincipal model = ModelePrincipal.getInstance();
 	 

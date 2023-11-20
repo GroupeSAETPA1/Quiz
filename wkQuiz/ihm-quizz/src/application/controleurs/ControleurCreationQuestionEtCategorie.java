@@ -1,5 +1,5 @@
 /*
- * ControlleurCreationQuestionEtCategorie.java
+ * ControleurCreationQuestionEtCategorie.java
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
@@ -37,7 +37,7 @@ import javafx.scene.control.ToggleGroup;
  */
 
 
-public class ControlleurCreationQuestionEtCategorie {
+public class ControleurCreationQuestionEtCategorie {
 
 
     private ArrayList<Categorie> categories;

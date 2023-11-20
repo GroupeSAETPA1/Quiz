@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
  * @author Quentin COSTES
  */
 
-public class ControlleurEditerCategorie {
+public class ControleurEditerCategorie {
 	
 	@FXML
 	private TextField input;

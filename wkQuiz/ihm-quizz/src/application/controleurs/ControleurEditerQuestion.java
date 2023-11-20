@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
  * @author Quentin COSTES
  */
 
-public class ControlleurEditerQuestion {
+public class ControleurEditerQuestion {
 	
     private ArrayList<Categorie> categories;
 	private ModelePrincipal modele;
