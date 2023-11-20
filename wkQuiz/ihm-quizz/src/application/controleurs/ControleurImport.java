@@ -229,7 +229,7 @@ public class ControleurImport {
     private static HashMap<String, String> getDicotionnaire(String ligne) {
         HashMap<String, String> resultat = new HashMap<String, String>();
         String[] ligneListe = ligne.split(ModelePrincipal.SEPARATEUR_CSV + "");
-        resultat.put("categorie", ligneListe[0]);
+        resultat.put("categorie", ligneListe[0].trim());
         resultat.put("difficulte", ligneListe[1]);
         resultat.put("libelle", ligneListe[2]);
         resultat.put("reponseJuste", ligneListe[3]);

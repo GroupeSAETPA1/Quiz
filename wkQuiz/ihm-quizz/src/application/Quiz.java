@@ -16,6 +16,7 @@ import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
+import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -161,7 +162,9 @@ public class Quiz extends Application {
      * Fonction appelée par les controlleurs permettant de quitter l'application
      */
 	public static void quitter( ) {
-	    Platform.exit();
+	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	        Platform.exit();            
+        }
 	}
 	
 	/**
