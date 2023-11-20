@@ -47,14 +47,12 @@ public class ControleurSolution {
     private Partie partie = modele.getPartie();
 
     /** Le texte du score réalisé par le joueur */
-    @FXML
-    private Text score;
+    @FXML private Text score;
 
     /**
      * Le tableau de la solution du quiz, avec une indication si le joueur a eu bon
      */
-    @FXML
-    private TableView<LigneQuestionSolution> tableauSolution;
+    @FXML private TableView<LigneQuestionSolution> tableauSolution;
 
     /**
      * Méthode exécutée au chargement de la page Solution pour récupérer le score et
