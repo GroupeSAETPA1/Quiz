@@ -5,11 +5,22 @@
 
 package test.modele;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
@@ -21,6 +32,7 @@ import application.modele.BanqueCategorie;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
 
 /**
@@ -530,13 +542,94 @@ class TestModelePrincipal {
 	void testGetPartie() throws InvalidNameException {
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    
+	    modele.setPartie(null);
+	    assertNull(modele.getPartie());
+	    
+	    Partie p = new Partie();
+	    modele.setPartie(p);
+	    assertEquals(p, modele.getPartie());
 	}
 	
 	@Test
 	void testGetPagePrecendente() throws InvalidNameException {
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    
+	    modele.setPagePrecedente(null);
+	    assertNull(modele.getPagePrecendente());
+
+	    String p = "page.fxml";
+	    modele.setPagePrecedente(p);
+	    assertEquals(p,modele.getPagePrecendente());
 	}
+	
+	@Test
+	void testIsDisplay() {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    modele.setDisplayCategoriePane(false);
+	    assertFalse(modele.isDisplayCategoriePane());
+
+	    modele.setDisplayCategoriePane(true);
+	    assertTrue(modele.isDisplayCategoriePane());
+	}
+	
+	@Test
+	@Order(8)
+	void testModifierNomCategorie() throws InvalidNameException, HomonymeException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    BanqueCategorie banque = modele.getBanqueCategorie();
+
+	    System.out.println(banque.getCategoriesNom());
+	    assertThrows(HomonymeException.class,
+                ()-> modele.modifierCategorie("General"));
+	    
+        banque.getCategories().clear();
+	    
+	    Categorie c = new Categorie("A changer");
+	    modele.setCategorieAModifier(c);
+	    
+	    String nouveauNon = "Nouveau nom";
+	    modele.modifierCategorie(nouveauNon);
+	    
+	    c = modele.getCategorieAModifier();
+	    assertEquals(nouveauNon, c.getNom());
+	    
+	    assertThrows(InvalidNameException.class, 
+	            ()->modele.modifierCategorie(""));
+	    assertThrows(InvalidNameException.class, 
+	            ()->modele.modifierCategorie("abcdefghijklmnopqrstuvwxyzabcde"));
+	    
+	    Categorie autreC = new Categorie("Nom");
+	    modele.creerCategorie(autreC.getNom());
+	    
+	    assertThrows(HomonymeException.class,
+	            ()-> modele.modifierCategorie(autreC.getNom()));
+	    assertThrows(HomonymeException.class,
+	            ()-> modele.modifierCategorie(autreC.getNom().toLowerCase()));	    
+	    assertThrows(HomonymeException.class,
+	            ()-> modele.modifierCategorie(autreC.getNom().toUpperCase()));	    
+	    
+	}
+	
+	@Test
+	void testModifierQuestion() throws InvalidNameException, CreerQuestionException, HomonymeException {
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+        BanqueCategorie banque = modele.getBanqueCategorie();
+        BanqueQuestion banqueQ = modele.getBanqueQuestion();
+
+        banque.getCategories().clear();
+        banqueQ.getQuestions().clear();
+        
+        Categorie c = new Categorie("Categorie");
+        Question q = new Question("fq", c, 1, "vze", mauvaiseReponse1, "");
+        
+        modele.creerCategorie(c.getNom());
+        modele.creerQuestion(q.getLibelle(), 0, q.getDifficulte(), q.getReponseJuste(), q.getMauvaisesReponses(), q.getFeedback());
+
+        
+	}
+	
+	
 
 	/**
 	 * Renvoie l'indice de la categorie dans une liste

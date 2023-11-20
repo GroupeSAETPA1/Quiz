@@ -245,10 +245,16 @@ public class ModelePrincipal {
      * @param nouveauNom Le nouveau nom de la catégorie
      * @return true si la modification est effective
      * @throws InvalidNameException Si le nom choisi est invalide
+     * @throws HomonymeException 
      */
-    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
+    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException, HomonymeException {
+        
+        for (String nomCategorieExistant : banqueCategorie.getCategoriesNom()) {
+            if (nomCategorieExistant.equalsIgnoreCase(nouveauNom)) {
+                throw new HomonymeException("Il existe déjà une catégorie avec ce nom");                
+            }
+        }
         catgorieAModifier.setNom(nouveauNom);
-        //TODO vérifier si le nouveauNom n'est pas celui d'une catégorie déjà présente
         return true;
     }
 
