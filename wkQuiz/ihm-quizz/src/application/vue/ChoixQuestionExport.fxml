@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1180.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="30.0" layoutY="20.0">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeRetour.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="4.0" layoutY="75.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="350.0" layoutY="60.0" text="Choissisez Les Questions " textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Button layoutX="871.0" layoutY="200.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="219.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Valider" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeValider.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
+      <TableView layoutX="90.0" layoutY="286.0" prefHeight="350.0" prefWidth="1000.0">
+         <columns>
+            <TableColumn fx:id="libelleQuestion" prefWidth="333.0" text="Libellé de la question" />
+            <TableColumn fx:id="categorieQuestion" prefWidth="333.0" text="Catégorie de la question " />
+            <TableColumn fx:id="selection" prefWidth="333.0" text="Sélectionner" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>
