@@ -46,10 +46,8 @@ class testChiffrage {
         String chiffrerMain = "Yip";
         //27 46 45
         //23 55 63
-        // X i p
-        //System.out.println(Chiffrage.ALPAHABET_TO_INT);
-        assertEquals(chiffrerMain,  Chiffrage.chiffrement(messageAchiffrer , cle));
-        System.out.println(Chiffrage.dechiffrement("Yip" , cle));
+        // Y i p
+        assertEquals(chiffrerMain, Chiffrage.chiffrement(messageAchiffrer , cle));
     }
 
     /**
@@ -57,7 +55,11 @@ class testChiffrage {
      */
     @Test
     void testDechiffrement() {
-        fail("Not yet implemented");
+        String cle = "x#_";
+        String messageAdechiffrer = "Yip";
+        String dechiffrerMain = "BUT";
+        
+        assertEquals(dechiffrerMain, Chiffrage.dechiffrement(messageAdechiffrer , cle));
     }
 
     /**
