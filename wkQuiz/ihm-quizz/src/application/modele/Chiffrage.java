@@ -87,8 +87,13 @@ public class Chiffrage {
 	        return aCrypter.toString();
 	}
 	
-	public void genererCSV(String fichier) {
-	    
+	public void genererCSV(ArrayList<Question> aEnvoyer , String cle ) {
+	    for(Question questions : aEnvoyer) {
+	        StringBuilder ligne =  new StringBuilder();
+	        ligne.append(chiffrement(questions.getLibelle(), cle)+ SEPARATEUR);
+	        ligne.append(chiffrement(questions.getCategorie(), cle) +SEPARATEUR);
+	        ligne.append(chiffrement(""+questions.getDifficulte() ,cle)+SEPARATEUR);
+	    }
 	}
 	
 	public ArrayList<String[]> lireCSV(String cheminFichier) {
