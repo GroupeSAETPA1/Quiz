@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import application.vue.AlertBox;
 
 /** 
  * TODO comment class responsibility (SRP)
@@ -20,7 +23,7 @@ import java.net.UnknownHostException;
 public class Client {
     
 	/** TODO comment field role (attribute, associative role) */
-    public static final String CLIENT_PRET_MESSAGE = "Le client est pret";
+    public static final String CLIENT_PRET_MESSAGE = "OUI JE SUIS PRET";
 
     // Le socket 
 	private Socket socket;
@@ -57,13 +60,26 @@ public class Client {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-        //On indique on serveur que le client est prêt
-        oos.writeObject(CLIENT_PRET_MESSAGE);
+        //On attend la demande du serveur pour savoir si on est prêt
+        String questionRecevoir = (String) ois.readObject();
+        System.out.println(questionRecevoir);
+        
+        if (AlertBox.showConfirmationBox("Recevoir les questions ?")) {
+            //On indique on serveur que le client est prêt
+            oos.writeObject(CLIENT_PRET_MESSAGE);
+            
+            int nbQuestion = ois.readInt();
+            ArrayList<Object> elementsRecu = new ArrayList<Object>(nbQuestion);
+            
+            for (int i = 0; i < nbQuestion; i++) {
+                Object eltRecu = ois.readObject();
+                elementsRecu.add(eltRecu);
+                System.out.println("Element reçu : " + eltRecu);
+            }
+        }
 
-        String messageRecu = (String) ois.readObject();
-        System.out.println(messageRecu);
+
         // TODO vérifier que les questions sont valides et importer
-
         // fermetures des ressources
         ois.close();
         oos.close();
