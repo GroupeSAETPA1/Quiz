@@ -18,7 +18,7 @@ import java.net.Socket;
  */
 public class Serveur {
     
-	private static final String CLIENT_PRET = "Le client est pret";
+	private static final String CLIENT_PRET = Client.CLIENT_PRET_MESSAGE;
 
 	private static final String CLIENT_RECU_SUCCES = "Questions bien reçues";
 
@@ -26,7 +26,7 @@ public class Serveur {
 	private ServerSocket serveur;
     
 	// Le port d'écoute du serveur par défaut = 507705
-	private int port = 507705;
+	private static int port = 50705;
 	
 	// Le nombre maximum de tentatives d'envoi au client
 	private static final int TENTATIVES_MAX = 100;
@@ -37,15 +37,14 @@ public class Serveur {
     public Serveur(int port) throws IOException, ClassNotFoundException  {
     	this.port = port;
         serveur = new ServerSocket(port);
-        lancerServeur();
     }
     
-    private void lancerServeur() throws IOException, ClassNotFoundException {
+    public void lancerServeur() throws IOException, ClassNotFoundException {
     	// Le booléen qui indique que le serveur est activé
     	boolean serveurActif = true;
     	while (serveurActif) {
-    		// Création d'un socket et attente d'une connexion d'un client
-    		Socket socket = serveur.accept();
+    	 // Création d'un socket et attente d'une connexion d'un client
+            Socket socket = serveur.accept();
     		
     		// Lecture du socket en objet ObjectInputStream et conversion
     		// en String
@@ -83,4 +82,11 @@ public class Serveur {
     		ois.close();
     	}
     }
+
+    /** @return valeur de port */
+    public static int getPort() {
+        return port;
+    }
+	
+	
 }

@@ -19,7 +19,10 @@ import java.net.UnknownHostException;
  */
 public class Client {
     
-	// Le socket 
+	/** TODO comment field role (attribute, associative role) */
+    public static final String CLIENT_PRET_MESSAGE = "Le client est pret";
+
+    // Le socket 
 	private Socket socket;
     
 	// Le port d'écoute du client par défaut = 507705
@@ -31,36 +34,38 @@ public class Client {
 	// Le nombre maximum de tentatives d'envoi au client
 	private static final int TENTATIVES_MAX = 100;
     
-    public Client(String ip, int port) throws IOException, ClassNotFoundException {
+    public Client(String ip, int port) {
+        if (ip.isEmpty()) {
+            throw new IllegalArgumentException("L'adresse IP n'est pas valide");
+        }
+        if (port <= 0) {
+            throw new IllegalArgumentException("Le port n'est pas valide");            
+        }
     	this.port = port;
     	this.ip = ip;
-    	recevoirDonnees();
     }
     
-	private void recevoirDonnees() throws UnknownHostException, IOException, ClassNotFoundException {
-	// TODO Auto-generated method stub
-		boolean connexionTermine = false;
-		
-		while (connexionTermine) {
-			// Lance la connexion socket connection au serveur
-			// TODO vérifier que le serveur existe et fonctionne
-			socket = new Socket(ip, port);
-			System.out.println("le client est connecté au serveur !");
-		
-			// Création d'un objet ObjectOutputStream  et ObjectInputStream
-    		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-    		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-    		
-    		oos.writeObject("Le client est pret");
-    		
-    		String messageRecu = (String) ois.readObject();
-    		System.out.println(messageRecu);
-    		// TODO vérifier que les questions sont valides et importer
-    		
-    		// fermetures des ressources
-            ois.close();
-            oos.close();
-            connexionTermine = true;
-		}
+    public void seConnecter() throws UnknownHostException, IOException {
+        socket = new Socket(ip, port);
+        // Lance la connexion socket connection au serveur
+        // TODO vérifier que le serveur existe et fonctionne
+        
+        System.out.println("le client est connecté au serveur !");
+    }
+    
+	public void recevoirDonnees() throws UnknownHostException, IOException, ClassNotFoundException {
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+
+        //On indique on serveur que le client est prêt
+        oos.writeObject(CLIENT_PRET_MESSAGE);
+
+        String messageRecu = (String) ois.readObject();
+        System.out.println(messageRecu);
+        // TODO vérifier que les questions sont valides et importer
+
+        // fermetures des ressources
+        ois.close();
+        oos.close();
     }
 }
