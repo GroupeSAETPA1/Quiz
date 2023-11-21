@@ -363,6 +363,16 @@ class TestModelePrincipal {
 		}
 	}
 	
+	/**
+	 * Méthode de test pour la méthode getBanqueQuestion
+	 * {@link application.modele.ModelePrincipal#getBanqueQuestion()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 * @throws InvalidFormatException
+	 * @throws ReponseException
+	 * @throws DifficulteException
+	 */
 	@Test
 	@Order(7)
 	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException, DifficulteException {
@@ -440,22 +450,41 @@ class TestModelePrincipal {
 		}		
 	}
 	
+    /**
+	 * Méthode de test pour la méthode getCategorieAModifier
+	 * {@link application.modele.ModelePrincipal#getCategorieAModifier()}.
+	 * 
+     * @throws InvalidNameException
+     */
 	@Test
 	void testGetCategorieAModifier() throws InvalidNameException {
+		// On récupère l'instance du modèle principal et on crée une catégorie
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    Categorie a = new Categorie("categorie");
 	    
+	    // On mets cette catégorie à modifier et 
+	    // on vérifie qu'on ait bien la catégorie "categorie" qui est à modifier
 	    modele.setCategorieAModifier(a);
 	    assertEquals(a, modele.getCategorieAModifier());
 	}
 	
+	/**
+	 * Méthode de test pour la méthode getCategoriesLibelle
+	 * {@link application.modele.ModelePrincipal#getCategoriesLibelle()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
 	@Test
 	void testGetCategoriesLibelle() throws InvalidNameException, HomonymeException {
+		// On récupère l'instance du modèle principal 
+		// et de la banque de catégories du modele principal et on vide cette banque
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    BanqueCategorie banque = modele.getBanqueCategorie();
 	    
 	    banque.getCategories().clear();
 	    
+	    // On rajoute 3 Catégories dans la banque de catégorie du modèle principal
 	    Categorie a1 = new Categorie("a");
 	    Categorie a2 = new Categorie("aa");
 	    Categorie a3 = new Categorie("b");
@@ -469,17 +498,28 @@ class TestModelePrincipal {
 	    attendu.add(a1);
 	    attendu.add(a2);
 	    
+	    // On vérifie que la méthode renvoie deux catégories quand on recherche "a"
+	    // car deux catégories contiennent "a" dans leur libellé
 	    assertIterableEquals(attendu, modele.getCategoriesLibelle("a"));
 	}
 	    
-	
+	/**
+	 * Méthode de test pour la méthode getIndice
+	 * {@link application.modele.ModelePrincipal#getIndice()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
     @Test
     void testGetIndice() throws InvalidNameException, HomonymeException {
+		// On récupère l'instance du modèle principal 
+		// et de la banque de catégories du modele principal et on vide cette banque
         ModelePrincipal modele = ModelePrincipal.getInstance();
         BanqueCategorie banque = modele.getBanqueCategorie();
 
         banque.getCategories().clear();
 
+	    // On rajoute 3 Catégories dans la banque de catégorie du modèle principal
         Categorie a1 = new Categorie("a");
         Categorie a2 = new Categorie("aa");
         Categorie a3 = new Categorie("b");
@@ -488,6 +528,8 @@ class TestModelePrincipal {
         modele.creerCategorie(a2.getNom());
         modele.creerCategorie(a3.getNom());
 
+        // On vérifie que la catégorie "aa" qui est en deuxieme position 
+        // renvoie bien 1 car la position 0 est pour "a"
         assertEquals(1, modele.getIndice("aa"));
     }
 
