@@ -46,10 +46,17 @@ public class ControleurEnvoieQuestion {
     }
 
     @FXML
-    void annuler() throws ClassNotFoundException, IOException {
+    void annuler() {
+        
+    }
+
+    @FXML
+    void lancerServeur() throws ClassNotFoundException, IOException {
         //TODO Faire annuler
-        System.out.println("Annuler");
+        System.out.println("Lancement serveur ...");
         serveur.lancerServeur();
     }
+    
+    
 
 }

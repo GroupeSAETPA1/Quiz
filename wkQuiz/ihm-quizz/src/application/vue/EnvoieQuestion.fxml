@@ -46,7 +46,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="349.0" layoutY="469.0" mnemonicParsing="false" onAction="#annuler" prefHeight="86.0" prefWidth="300.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+      <Button layoutX="138.0" layoutY="470.0" mnemonicParsing="false" onAction="#annuler" prefHeight="86.0" prefWidth="300.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -58,10 +58,15 @@
             <Font size="32.0" />
          </font>
       </Button>
-      <TextField fx:id="txtIP" editable="false" layoutX="444.0" layoutY="289.0" prefHeight="69.0" prefWidth="187.0">
+      <TextField fx:id="txtIP" editable="false" layoutX="444.0" layoutY="289.0" prefHeight="69.0" prefWidth="268.0">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
+      <Button layoutX="529.0" layoutY="470.0" mnemonicParsing="false" onAction="#lancerServeur" prefHeight="86.0" prefWidth="300.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Lancer Serveur" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

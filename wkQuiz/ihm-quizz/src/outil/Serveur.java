@@ -40,47 +40,45 @@ public class Serveur {
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException {
-    	// Le booléen qui indique que le serveur est activé
-    	boolean serveurActif = true;
-    	while (serveurActif) {
-    	 // Création d'un socket et attente d'une connexion d'un client
-            Socket socket = serveur.accept();
-    		
-    		// Lecture du socket en objet ObjectInputStream et conversion
-    		// en String
-    		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-    		String messageRecu = (String) ois.readObject();
-            System.out.println("Message du client reçu : " + messageRecu);
-            
-            ois.close();
-            // Si le client dit qu'il est pret, envoyer les questions
-            if (messageRecu == CLIENT_PRET) {
-            	envoiQuestion(socket);
-    		}
-            socket.close();
-            serveurActif = false;
-    	}
+        // Le booléen qui indique que le serveur est activé
+        // Création d'un socket et attente d'une connexion d'un client
+        System.out.println("Attente client");
+        Socket socket = serveur.accept();
+        System.out.println("Client accepté");
+
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        System.out.println("Stream Créer");
+        // Envoi des questions
+
+        String reponseClient = (String) ois.readObject();
+        System.out.println(reponseClient);
+
+        oos.writeObject(reponseClient);
+        System.out.println("Réponse envoyer");
+
+        socket.close();
         System.out.println("Fermeture du Socket server!");
     }
     
 
 	private void envoiQuestion(Socket socket) throws IOException, ClassNotFoundException {
     	boolean envoiReussi = false;
-    	// TODO message d'erreur compréhesible si erreur de transimission  
-    	for (int i = 0; i <= TENTATIVES_MAX || envoiReussi; i++) {
-    		// Création d'un objet ObjectOutputStream  et ObjectInputStream
-    		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-    		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-    		// Envoi des questions
-    		oos.writeObject("Les questions choisies dans ModelePrincipal.questionAEnvoyer");
-    		
-    		String reponseClient = (String) ois.readObject();
-			envoiReussi = reponseClient == CLIENT_RECU_SUCCES;
-			
-    		// Fermeture des ressources 		
-    		oos.close();
-    		ois.close();
-    	}
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        System.out.println("Stream Créer");
+        // Envoi des questions
+
+        String reponseClient = (String) ois.readObject();
+        System.out.println(reponseClient);
+        envoiReussi = reponseClient == CLIENT_RECU_SUCCES;
+
+        oos.writeObject(reponseClient);
+        System.out.println("Réponse envoyer");
+
+        // Fermeture des ressources
+        oos.close();
+        ois.close();
     }
 
     /** @return valeur de port */
