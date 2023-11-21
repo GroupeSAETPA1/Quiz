@@ -52,8 +52,6 @@ public class Client {
         socket = new Socket(ip, port);
         // Lance la connexion socket connection au serveur
         // TODO vérifier que le serveur existe et fonctionne
-        
-        System.out.println("le client est connecté au serveur !");
     }
     
 	public void recevoirDonnees() throws UnknownHostException, IOException, ClassNotFoundException {
@@ -68,7 +66,7 @@ public class Client {
             //On indique on serveur que le client est prêt
             oos.writeObject(CLIENT_PRET_MESSAGE);
             
-            int nbQuestion = ois.readInt();
+            int nbQuestion = (int) ois.readObject();
             ArrayList<Object> elementsRecu = new ArrayList<Object>(nbQuestion);
             
             for (int i = 0; i < nbQuestion; i++) {

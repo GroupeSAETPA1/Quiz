@@ -45,6 +45,7 @@ public class ControleurRecevoirQuestions {
         if (clientCreer) {
             try {
                 client.seConnecter();
+                System.out.println("");
                 client.recevoirDonnees();
             } catch (IOException e) {
                 // TODO Auto-generated catch block

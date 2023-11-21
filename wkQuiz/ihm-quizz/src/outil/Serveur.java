@@ -10,6 +10,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import application.exception.ClientPasConnecterException;
+import application.modele.ModelePrincipal;
 
 /** 
  * TODO comment class responsibility (SRP)
@@ -19,6 +23,8 @@ import java.net.Socket;
 public class Serveur {
     
 	private static final String CLIENT_PRET = Client.CLIENT_PRET_MESSAGE;
+
+	private static final String QUESTION_CLIENT_PRET = "ES-TU PRET ?";
 
 	private static final String CLIENT_RECU_SUCCES = "Questions bien reçues";
 
@@ -34,47 +40,62 @@ public class Serveur {
 	// Le message pour terminer la conversation
     private final String MESSAGE_FIN_COMMUNICATION = "FIN_COMMUNICATION";
     
+    private Socket socket;
+    
     public Serveur(int port) throws IOException, ClassNotFoundException  {
     	this.port = port;
         serveur = new ServerSocket(port);
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException {
-        // Le booléen qui indique que le serveur est activé
-        // Création d'un socket et attente d'une connexion d'un client
-        System.out.println("Attente client");
-        Socket socket = serveur.accept();
+        // Attente d'une connexion d'un client
+        System.out.println("Attente client...");
+        socket = serveur.accept();
         System.out.println("Client accepté");
-
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        System.out.println("Stream Créer");
-        // Envoi des questions
-
-        String reponseClient = (String) ois.readObject();
-        System.out.println(reponseClient);
-
-        oos.writeObject(reponseClient);
-        System.out.println("Réponse envoyer");
-
-        socket.close();
-        System.out.println("Fermeture du Socket server!");
     }
     
 
-	private void envoiQuestion(Socket socket) throws IOException, ClassNotFoundException {
-    	boolean envoiReussi = false;
+	public void envoiQuestion() throws IOException, ClassNotFoundException, 
+	ClientPasConnecterException {
+	    
+	    if (socket == null) {
+            throw new ClientPasConnecterException("Le serveur n'est connecté à "
+                    + "personne");
+        }
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+    	boolean clientEstPret = false;
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         System.out.println("Stream Créer");
-        // Envoi des questions
+        ArrayList<Object> elementAEnvoyer = new ArrayList<Object>();
+        
+        System.out.println("Envoie question");
+        // Demande si le client est prêt
+        oos.writeObject(QUESTION_CLIENT_PRET);
 
+        //On vérifie si le client est prêt
         String reponseClient = (String) ois.readObject();
-        System.out.println(reponseClient);
-        envoiReussi = reponseClient == CLIENT_RECU_SUCCES;
+        System.out.println("Réponse client :  " + reponseClient);
+        clientEstPret = reponseClient.equals(CLIENT_PRET);
+        
+        System.out.println(clientEstPret);
 
-        oos.writeObject(reponseClient);
-        System.out.println("Réponse envoyer");
+        if (clientEstPret) {
+            //TODO Recupérer les question a envoyer
+            elementAEnvoyer.add(modele.getCategories().getFirst());
+            
+            //On envoie de le nombre d'élements à envoyer
+            
+            oos.writeObject(elementAEnvoyer.size());
+            
+            for (Object object : elementAEnvoyer) {
+                oos.writeObject(object);
+                System.out.println("Message envoyer : " + object);                
+            }
+        }
+        
+//        //Fin de la communication
+//        oos.writeObject(MESSAGE_FIN_COMMUNICATION);
 
         // Fermeture des ressources
         oos.close();
@@ -86,5 +107,14 @@ public class Serveur {
         return port;
     }
 	
-	
+    /**
+     * Renvoie l'adresse IP du client si il est connecté
+     * @return
+     */
+	public String getIPClient() {
+	    if (socket != null) {
+	        return socket.getInetAddress().getHostName();            
+        }
+	    return null;
+	}
 }

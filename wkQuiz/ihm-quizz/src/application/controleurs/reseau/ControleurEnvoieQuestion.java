@@ -8,8 +8,13 @@ package application.controleurs.reseau;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import application.exception.ClientPasConnecterException;
+import application.vue.AlertBox;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Dialog;
 import javafx.scene.text.Text;
 import outil.Serveur;
 
@@ -20,6 +25,8 @@ import outil.Serveur;
 public class ControleurEnvoieQuestion {
 
     @FXML Text txtPort;
+    @FXML Text information;
+    
     @FXML TextField txtIP;
     
     private Serveur serveur;
@@ -46,16 +53,29 @@ public class ControleurEnvoieQuestion {
     }
 
     @FXML
-    void annuler() {
-        
+    void envoyer() {
+        System.out.println(serveur.getIPClient());
+        try {
+            serveur.envoiQuestion();
+        } catch (ClientPasConnecterException e) {
+            AlertBox.showErrorBox("Pas de client connecté");
+        } catch (ClassNotFoundException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void lancerServeur() throws ClassNotFoundException, IOException {
-        //TODO Faire annuler
         System.out.println("Lancement serveur ...");
+        information.setText("En attente d'un client ...");
+        AlertBox.showSuccessBox("Prêt à recevoir un client ?");
         serveur.lancerServeur();
+        
+        information.setText("Adresse IP du client : " + serveur.getIPClient());
     }
+    
+    
     
     
 

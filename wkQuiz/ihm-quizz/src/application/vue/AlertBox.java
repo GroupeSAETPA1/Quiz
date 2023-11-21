@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
  * @author Quentin COSTES
  */
 public abstract class AlertBox {
+    
 
 	/**
 	 * alert box de confirmation 
@@ -72,6 +73,8 @@ public abstract class AlertBox {
         
         alert.showAndWait();
     }
+    
+    
     
     
 }
