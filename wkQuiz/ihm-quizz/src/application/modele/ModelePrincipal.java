@@ -5,9 +5,13 @@
 
 package application.modele;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +36,8 @@ public class ModelePrincipal implements Serializable {
 	 * ID de serialisation par défaut
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final String FICHIER_SERIALISATION = "donnees";
 
     /**
      * Lie une difficulté à sont equivalent en string
@@ -68,8 +74,30 @@ public class ModelePrincipal implements Serializable {
      * Constructeur
      * @throws InvalidNameException 
      */
-    private ModelePrincipal() {
-        // TODO lire les fichiers serialisé
+    private ModelePrincipal() throws IOException {
+    	
+    	try {
+            // Création d'un BufferedReader pour lire le fichier serialisé
+    		BufferedReader fichier = new BufferedReader(new FileReader(FICHIER_SERIALISATION));
+    		
+    		// une ligne du fichier
+    		String ligne = "";
+    		
+    		 /*
+    		  * Tant que le fichier contient des lignes on les analyses pour 
+    		  * importer les questions et les categories
+    		  */
+    		 do {
+    		     ligne += fichier.readLine(); // lecture d’une ligne
+    		 } while (fichier.readLine() != null);
+    		 
+    		 System.out.println(ligne);
+    		 // fermeture du fichier
+    		 fichier.close();
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+
         this.banqueQuestion = new BanqueQuestion();
         this.banqueCategorie = new BanqueCategorie();
         this.partie = new Partie();
@@ -88,9 +116,10 @@ public class ModelePrincipal implements Serializable {
 
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
+     * @throws IOException 
      * @throws InvalidNameException 
      */
-    public static ModelePrincipal getInstance() {
+    public static ModelePrincipal getInstance() throws IOException {
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
@@ -387,21 +416,17 @@ public class ModelePrincipal implements Serializable {
     }
     
     public void serialiserModele() throws IOException {
-        ObjectOutputStream oos = null;
     	try {
-            final FileOutputStream fichier = new FileOutputStream("donnees.csv");
-    	    oos = new ObjectOutputStream(fichier);
+    	    // déclaration et création de l'objet fichier
+    		PrintWriter fichier = new PrintWriter(new FileWriter(FICHIER_SERIALISATION));
+    		
+    		fichier.print(banqueQuestion);
+    		fichier.println("Fin des questions");
+    		fichier.print(banqueCategorie);
+    		
+    		fichier.close();
     	} catch(IOException e) {
     		 e.printStackTrace();
-    	} finally {
-            try {
-	            if (oos != null) {
-	                oos.flush();
-	                oos.close();
-	            }
-    	    } catch (final IOException e) {
-    		        e.printStackTrace();
-    		}
     	}
     }
 }

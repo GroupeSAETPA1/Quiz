@@ -1,0 +1,168 @@
+Nombre de question : 11
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : General
+Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc 
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : non vide
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : Autre Nom
+Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc 
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : non vide
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : General
+Intiltulé de la question : libelle different
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : non vide
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : General
+Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc 
+Mauvaise réponses :
+- une façon de présenter le code choisie par le programmeur nommé Dupont
+- un texte sans signification particulière
+Bonne réponse : non vide
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : General
+Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc 
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : different
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : General
+Intiltulé de la question : Question inexistante
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : non vide
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : test
+Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : le délimiteur /**
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 2
+Categorie de la question : Commentaire
+Intiltulé de la question : A quoi correspond l'expression : @author Dupont ?
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : une balise reconnue par Javadoc
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : test
+Intiltulé de la question : Si un commentaire est écrit sur plusieurs lignes, quel délimiteur de commentaire est-il préférable d'utiliser ?
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : /* commentaire */
+Fin Question
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 3
+Categorie de la question : Commentaire
+Intiltulé de la question : Que doit décrire le texte écrit dans le commentaire Javadoc situé juste avant la ligne "public class …" ?
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : Le rôle du programme, en explicitant de manière précise ce rôle
+Fin Question 
+
+--------------------------------------------
+
+Question :
+Difficulté de la question : 1
+Categorie de la question : UneNouvelleUnique
+Intiltulé de la question : Que doit décrire le texte écrit dans le commentaire Javadoc situé juste avant la ligne "public class ..." ?
+Mauvaise réponses :
+- le délimiteur /*
+- le delimiteur //
+- le délimiteur (*
+Bonne réponse : Le rôle du programme, en explicitant de manière précise ce rôle
+Fin Question
+
+--------------------------------------------
+
+General
+
+--------------------------------------------
+
+Autre Nom
+
+--------------------------------------------
+
+Commentaire
+
+--------------------------------------------
+
+test
+
+--------------------------------------------
+
+UneNouvelleUnique
+
+--------------------------------------------
+
+Une catégorie rajoutée
+
+--------------------------------------------
+

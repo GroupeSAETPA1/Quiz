@@ -7,6 +7,7 @@ package test.modele;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.*;
@@ -426,6 +427,15 @@ class TestModelePrincipal {
 		for (int i = 0; i < modele.getBanqueCategorie().getCategories().size(); i++) {
 			assertEquals(banqueTestQuestions.getQuestion(i), modele.getBanqueQuestion().getQuestion(i));	
 		}		
+	}
+	
+	@Test
+	void testSerialisation() throws IOException, InvalidFormatException, ReponseException, DifficulteException, HomonymeException, InvalidNameException {
+		// On récupère l'instance du modèle principal
+		ModelePrincipal modele = ModelePrincipal.getInstance();
+		
+		// On vérifie que la serialisation du modele ne renvoie pas d'erreur
+		assertDoesNotThrow(() -> modele.serialiserModele());
 	}
 
 	/**
