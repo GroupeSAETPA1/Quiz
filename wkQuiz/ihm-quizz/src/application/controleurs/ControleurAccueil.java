@@ -79,7 +79,7 @@ public class ControleurAccueil {
 	 */
 	@FXML 
 	private void online() {
-		//TODO
+		Quiz.changerVue("ModeEnLigne.fxml");
 	}
 	
 	/**

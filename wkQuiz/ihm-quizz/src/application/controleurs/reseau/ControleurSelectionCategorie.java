@@ -31,6 +31,11 @@ public class ControleurSelectionCategorie {
     @FXML TableColumn<LigneSelectionCategorie, String> nomCategorie;
     @FXML TableColumn<LigneSelectionCategorie, String> nombreQuestion;
     @FXML TableColumn<LigneSelectionCategorie, CheckBox> selection;
+    
+    @FXML
+    public void retour() {
+        Quiz.changerVue("ChoixEnvoie.fxml");
+    }
 
     @FXML
     public void initialize() {
@@ -138,16 +143,5 @@ public class ControleurSelectionCategorie {
         public String toString() {
             return nomCategorie + " -> " + nombreQuestion;
         }
-        
-        /**
-      	  * Fonction liée au group Retour et son image
-      	  * Et qui permet de retourner a la page précédente 
-      	  */
-      	@FXML
-          public void retour() {
-              Quiz.changerVue("ChoixEnvoie.fxml");
-          }
-        
-        
     }
 }
