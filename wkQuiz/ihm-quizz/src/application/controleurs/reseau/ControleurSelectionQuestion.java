@@ -7,6 +7,7 @@ package application.controleurs.reseau;
 
 import java.util.ArrayList;
 
+import application.Quiz;
 import application.controleurs.factories.CheckBoxCategorieCellFactory;
 import application.controleurs.factories.CheckBoxQuestionCellFactory;
 import application.modele.Categorie;
@@ -142,6 +143,14 @@ public class ControleurSelectionQuestion {
             return libelleQuestion + " -> " + categorieQuestion;
         }
         
+        /**
+   	  * Fonction liée au group Retour et son image
+   	  * Et qui permet de retourner a la page précédente 
+   	  */
+   	@FXML
+       public void retour() {
+           Quiz.changerVue("ChoixEnvoie.fxml");
+       }
         
     }
 }

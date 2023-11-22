@@ -7,6 +7,7 @@ package application.controleurs.reseau;
 
 import java.util.ArrayList;
 
+import application.Quiz;
 import application.controleurs.factories.CheckBoxCategorieCellFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
@@ -137,6 +138,15 @@ public class ControleurSelectionCategorie {
         public String toString() {
             return nomCategorie + " -> " + nombreQuestion;
         }
+        
+        /**
+      	  * Fonction liée au group Retour et son image
+      	  * Et qui permet de retourner a la page précédente 
+      	  */
+      	@FXML
+          public void retour() {
+              Quiz.changerVue("ChoixEnvoie.fxml");
+          }
         
         
     }
