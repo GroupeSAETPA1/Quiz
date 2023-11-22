@@ -72,7 +72,6 @@ public class ControlleurParametres {
     @FXML
     public void commencerPartie() {
         try {
-        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
@@ -119,6 +118,8 @@ public class ControlleurParametres {
      */
     private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
+        // On réinitialise la liste des questions possibles
+        partie.getQuestionPossible().clear();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
             /*
