@@ -26,19 +26,14 @@ public class Serveur {
 
 	private static final String QUESTION_CLIENT_PRET = "ES-TU PRET ?";
 
-	private static final String CLIENT_RECU_SUCCES = "Questions bien reçues";
-
 	// Le ServerSocket 
 	private ServerSocket serveur;
     
 	// Le port d'écoute du serveur par défaut = 507705
 	private static int port = 50705;
 	
-	// Le nombre maximum de tentatives d'envoi au client
-	private static final int TENTATIVES_MAX = 100;
-    
 	// Le message pour terminer la conversation
-    private final String MESSAGE_FIN_COMMUNICATION = "FIN_COMMUNICATION";
+    protected static final String MESSAGE_FIN_COMMUNICATION = "FIN_COMMUNICATION";
     
     private Socket socket;
     
@@ -69,7 +64,7 @@ public class Serveur {
         System.out.println("Stream Créer");
         ArrayList<Object> elementAEnvoyer = new ArrayList<Object>();
         
-        System.out.println("Envoie question");
+        System.out.println("Envoie question : " + QUESTION_CLIENT_PRET);
         // Demande si le client est prêt
         oos.writeObject(QUESTION_CLIENT_PRET);
 
@@ -83,9 +78,9 @@ public class Serveur {
         if (clientEstPret) {
             //TODO Recupérer les question a envoyer
             elementAEnvoyer.add(modele.getCategories().getFirst());
+            elementAEnvoyer.add("Coucou");
             
             //On envoie de le nombre d'élements à envoyer
-            
             oos.writeObject(elementAEnvoyer.size());
             
             for (Object object : elementAEnvoyer) {
@@ -94,12 +89,16 @@ public class Serveur {
             }
         }
         
-//        //Fin de la communication
-//        oos.writeObject(MESSAGE_FIN_COMMUNICATION);
-
+        //Fin de la communication
+        oos.writeObject(MESSAGE_FIN_COMMUNICATION);
+        String messageFin = (String) ois.readObject();
+        System.out.println(messageFin);
+        
         // Fermeture des ressources
         oos.close();
         ois.close();
+        
+        socket.close();
     }
 
     /** @return valeur de port */

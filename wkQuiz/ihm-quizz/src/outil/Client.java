@@ -74,12 +74,19 @@ public class Client {
                 elementsRecu.add(eltRecu);
                 System.out.println("Element reçu : " + eltRecu);
             }
+        } else {
+            oos.writeObject("Non");
         }
 
-
+        String messageFin = (String) ois.readObject();
+        oos.writeObject(Serveur.MESSAGE_FIN_COMMUNICATION);
+        System.out.println(messageFin);
+        
         // fermetures des ressources
         ois.close();
         oos.close();
+        
+        socket.close();
 
         // TODO vérifier que les questions sont valides et importer
     }
