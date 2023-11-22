@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group layoutX="40.0" layoutY="20.0">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeRetour.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="3.0" layoutY="75.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="307.0" layoutY="50.0" text="Recapitulatif de vos envoies" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TableView layoutX="10.0" layoutY="239.0" prefHeight="340.0" prefWidth="980.0">
+         <columns>
+            <TableColumn prefWidth="220.0" text="Libéllé Question " />
+            <TableColumn prefWidth="220.0" text="Catégorie" />
+            <TableColumn prefWidth="100.0" text="Difficulté" />
+            <TableColumn minWidth="196.0" prefWidth="220.0" text="Réponse vrai " />
+            <TableColumn prefWidth="220.0" text="Réponse fausse " />
+         </columns>
+      </TableView>
+   </children>
+</Pane>
