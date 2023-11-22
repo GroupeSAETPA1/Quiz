@@ -122,7 +122,6 @@ public class Quiz extends Application {
 	    ressources.add("EnvoieQuestion.fxml");
 	    ressources.add("ChoixEnvoie.fxml");
 	    ressources.add("ModeEnLigne.fxml");
-//	    ressources.add("SelectionQuestion.fxml");
 
 		
 		for (String element : ressources) {
@@ -141,9 +140,7 @@ public class Quiz extends Application {
 		 
 		primaryStage.setTitle("Quizéo - Accueil");
 		fenetrePrincipale = primaryStage;
-//		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
-//		primaryStage.setScene(GestionVues.getScene("RecevoirQuestions.fxml"));
-		primaryStage.setScene(GestionVues.getScene("EnvoieQuestion.fxml"));
+		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		
 		primaryStage.show();

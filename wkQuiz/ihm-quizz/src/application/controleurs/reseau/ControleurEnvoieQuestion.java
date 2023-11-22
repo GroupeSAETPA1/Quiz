@@ -6,9 +6,12 @@
 package application.controleurs.reseau;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 
 import application.Quiz;
+import application.exception.ClientDejaConnecter;
 import application.exception.ClientPasConnecterException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
@@ -31,7 +34,7 @@ public class ControleurEnvoieQuestion {
     
     @FXML TextField txtIP;
     
-    private Serveur serveur;
+    private static Serveur serveur;
     
     private ModelePrincipal model = ModelePrincipal.getInstance();
 
@@ -45,7 +48,18 @@ public class ControleurEnvoieQuestion {
         txtIP.setText(ip.getHostAddress());
         txtPort.setText(Serveur.getPort() + "");
         
-        serveur = new Serveur(Serveur.getPort());
+        System.out.println(serveur);
+        if (serveur == null) {
+            do {
+                try {
+                    serveur = new Serveur(Serveur.getPort());                
+                } catch (BindException e) {
+                    Serveur.setPort(Serveur.getPort() + 1);
+                }
+                txtPort.setText(Serveur.getPort() + "");
+            } while (serveur == null);
+        }
+        System.out.println(serveur);
         
         
     }
@@ -71,23 +85,42 @@ public class ControleurEnvoieQuestion {
     void envoyer() {
         System.out.println(serveur.getIPClient());
         try {
-            serveur.envoiQuestion();
+            boolean envoieReussi = serveur.envoiQuestion();
+             if (!envoieReussi) {
+                 AlertBox.showWarningBox("Le client a refuser les questions");
+             }
         } catch (ClientPasConnecterException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+        
     }
 
     @FXML
     void lancerServeur() throws ClassNotFoundException, IOException {
-        System.out.println("Lancement serveur ...");
-        information.setText("En attente d'un client ...");
-        AlertBox.showSuccessBox("Prêt à recevoir un client ?");
-        serveur.lancerServeur();
         
-        information.setText("Adresse IP du client : " + serveur.getIPClient());
+        
+        if (!serveur.clientEstConnecte()) {
+            information.setText("En attente d'un client ...");
+            AlertBox.showSuccessBox("Prêt à recevoir un client ?");
+            try {
+                serveur.lancerServeur();
+                information.setText("Adresse IP du client : " + serveur.getIPClient());
+            } catch (ClientDejaConnecter e) {
+                AlertBox.showWarningBox("Un client est déjà connecté.");
+            } catch (SocketTimeoutException e) {
+                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de ce "
+                        + "connecter");
+            }
+        } else {
+            AlertBox.showWarningBox("Un client est déjà connecté.");
+        }
+        
+        
+        
     }
     
     
