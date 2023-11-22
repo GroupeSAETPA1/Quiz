@@ -121,6 +121,7 @@ public class Quiz extends Application {
 	    ressources.add("RecevoirQuestions.fxml");
 	    ressources.add("EnvoieQuestion.fxml");
 	    ressources.add("ChoixEnvoie.fxml");
+	    ressources.add("ModeEnLigne.fxml");
 //	    ressources.add("SelectionQuestion.fxml");
 
 		
