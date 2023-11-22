@@ -8,6 +8,7 @@ package application.controleurs.reseau;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import application.exception.ClientDejaConnecter;
 import application.exception.ClientPasConnecterException;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -56,21 +57,38 @@ public class ControleurEnvoieQuestion {
     void envoyer() {
         System.out.println(serveur.getIPClient());
         try {
-            serveur.envoiQuestion();
+            boolean envoieReussi = serveur.envoiQuestion();
+             if (!envoieReussi) {
+                 AlertBox.showWarningBox("Le client a refuser les questions");
+             }
         } catch (ClientPasConnecterException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+        
     }
 
     @FXML
     void lancerServeur() throws ClassNotFoundException, IOException {
         System.out.println("Lancement serveur ...");
-        information.setText("En attente d'un client ...");
-        AlertBox.showSuccessBox("Prêt à recevoir un client ?");
-        serveur.lancerServeur();
+        
+        if (!serveur.clientEstConnecte()) {
+            information.setText("En attente d'un client ...");
+            AlertBox.showSuccessBox("Prêt à recevoir un client ?");
+
+            try {
+                serveur.lancerServeur();
+            } catch (ClientDejaConnecter e) {
+                AlertBox.showWarningBox("Un client est déjà connecté.");
+            
+            }
+        } else {
+            AlertBox.showWarningBox("Un client est déjà connecté.");
+        }
+        
         
         information.setText("Adresse IP du client : " + serveur.getIPClient());
     }

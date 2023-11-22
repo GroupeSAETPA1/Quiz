@@ -8,6 +8,7 @@ package outil;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -34,8 +35,13 @@ public class Client {
 	// L'adresse ip du serveur
 	private String ip;
 	
-	// Le nombre maximum de tentatives d'envoi au client
-	private static final int TENTATIVES_MAX = 100;
+	/**
+	 * Le temps que le client attend le serveur pour se connecter 
+	 * avant d'abandonner
+	 * Durée en millisecond (5000ms = 5s)
+	 */
+	private static final int TIMEOUT_CONNEXION = 5000;
+	
     
     public Client(String ip, int port) {
         if (ip.isEmpty()) {
@@ -49,11 +55,18 @@ public class Client {
     }
     
     public void seConnecter() throws UnknownHostException, IOException {
-        socket = new Socket(ip, port);
         // Lance la connexion socket connection au serveur
-        // TODO vérifier que le serveur existe et fonctionne
+        socket = new Socket();
+        InetSocketAddress adresseServeur = new InetSocketAddress(ip, port);
+        socket.connect(adresseServeur, TIMEOUT_CONNEXION);
     }
     
+    /**
+     * TODO comment method role
+     * @throws UnknownHostException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
 	public void recevoirDonnees() throws UnknownHostException, IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
@@ -82,11 +95,11 @@ public class Client {
         oos.writeObject(Serveur.MESSAGE_FIN_COMMUNICATION);
         System.out.println(messageFin);
         
-        // fermetures des ressources
+     // Fermeture des chemins de communication
         ois.close();
         oos.close();
         
-        socket.close();
+        socket.close();//Fin de communication
 
         // TODO vérifier que les questions sont valides et importer
     }

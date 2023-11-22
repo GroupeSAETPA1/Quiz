@@ -12,6 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import application.exception.ClientDejaConnecter;
 import application.exception.ClientPasConnecterException;
 import application.modele.ModelePrincipal;
 
@@ -42,23 +43,36 @@ public class Serveur {
         serveur = new ServerSocket(port);
     }
     
-    public void lancerServeur() throws IOException, ClassNotFoundException {
+    public void lancerServeur() throws IOException, ClassNotFoundException, 
+    ClientDejaConnecter {
+        
         // Attente d'une connexion d'un client
+        if (socket != null && !socket.isClosed()) {
+            throw new ClientDejaConnecter("Un client est déjà connecté");
+        }
         System.out.println("Attente client...");
         socket = serveur.accept();
         System.out.println("Client accepté");
     }
     
 
-	public void envoiQuestion() throws IOException, ClassNotFoundException, 
+    /**
+     * TODO comment method role
+     * @return true si le client a reçu les questions
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws ClientPasConnecterException
+     */
+	public boolean envoiQuestion() throws IOException, ClassNotFoundException, 
 	ClientPasConnecterException {
 	    
-	    if (socket == null) {
+	    if (socket == null || socket.isClosed()) {
             throw new ClientPasConnecterException("Le serveur n'est connecté à "
                     + "personne");
         }
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
     	boolean clientEstPret = false;
+    	boolean clientARecu = false;
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         System.out.println("Stream Créer");
@@ -87,6 +101,7 @@ public class Serveur {
                 oos.writeObject(object);
                 System.out.println("Message envoyer : " + object);                
             }
+            clientARecu = true;
         }
         
         //Fin de la communication
@@ -94,11 +109,13 @@ public class Serveur {
         String messageFin = (String) ois.readObject();
         System.out.println(messageFin);
         
-        // Fermeture des ressources
+        // Fermeture des chemins de communication
         oos.close();
         ois.close();
         
-        socket.close();
+        socket.close();//Fin de communication
+        
+        return clientARecu;
     }
 
     /** @return valeur de port */
@@ -115,5 +132,10 @@ public class Serveur {
 	        return socket.getInetAddress().getHostName();            
         }
 	    return null;
+	}
+	
+	/** @return Renvoie true si le serveur est connecté à un client */
+	public boolean clientEstConnecte() {
+	    return socket != null && !socket.isClosed();
 	}
 }
