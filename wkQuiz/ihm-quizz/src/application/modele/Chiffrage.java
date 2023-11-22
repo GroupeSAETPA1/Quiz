@@ -1,11 +1,23 @@
 package application.modele;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.CsvWriter;
+
+import application.outil.lectureFichier;
+import application.vue.AlertBox;
 
 public class Chiffrage {
 	
-	private static char SEPARATEUR = 'é';
+	private static char SEPARATEUR = '\u00e9';
 	
 	private static final int LONGUEUR_CLE_MINIMUM = 40 ;
 	
@@ -18,6 +30,10 @@ public class Chiffrage {
 	public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
 	
 	public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
+	
+	private static final String CHEMIN_FICHIER = "./../../crypter.csv";
+	
+	private static final File fichier = new File(CHEMIN_FICHIER);
 	        
     static {
 
@@ -27,7 +43,6 @@ public class Chiffrage {
             INT_TO_ALPHABET.put(i, c);
         }
         nombreLettreAlphabet = ALPAHABET_TO_INT.size();
-        System.out.println(nombreLettreAlphabet);
     }
 	
 	/**
@@ -66,12 +81,12 @@ public class Chiffrage {
 	}
 	
 	public static String dechiffrement(String message, String cle) {
-	    System.out.println(INT_TO_ALPHABET);
+	    System.out.println("message : " + message);
 	      StringBuilder aCrypter = new StringBuilder();
 	        for (int i = 0 ; i < message.length() ; i++) {
 	            // valeur du caractere message.charAt(i)
 	            int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
-	            System.out.println("message i : " + messageI);
+	           
 	            
 	            // valeur du caractère de la cle
 	            int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
@@ -87,20 +102,56 @@ public class Chiffrage {
 	        return aCrypter.toString();
 	}
 	
-	public void genererCSV(ArrayList<Question> aEnvoyer , String cle ) {
-	    for(Question questions : aEnvoyer) {
-	        StringBuilder ligne =  new StringBuilder();
-	        ligne.append(chiffrement(questions.getLibelle(), cle)+ SEPARATEUR);
-	        ligne.append(chiffrement(questions.getCategorie(), cle) +SEPARATEUR);
-	        ligne.append(chiffrement(""+questions.getDifficulte() ,cle)+SEPARATEUR);
-	    }
+	public static void genererCSV(ArrayList<Question> aEnvoyer , String cle) throws IOException {
+	    
+	        File file = new File(CHEMIN_FICHIER);
+	        FileWriter outputFile = new FileWriter(file);
+	        for (int i = 0 ; i < aEnvoyer.size() ;  i++ ) {
+	            outputFile.write(crypterQuestion(aEnvoyer.get(i), cle));
+	            if (i != aEnvoyer.size()) {
+	                outputFile.write('\n');
+	            }
+	        }
+	        outputFile.close();
+	    
 	}
 	
-	public ArrayList<String[]> lireCSV(String cheminFichier) {
-		return null; // STUB	
+	/** 
+     * TODO comment method role
+	 * @param question 
+     * @return
+     */
+    private static String crypterQuestion(Question question , String cle) {
+        StringBuilder ligne = new StringBuilder();
+        ligne.append(chiffrement(question.getCategorie(), cle) +SEPARATEUR);
+        ligne.append(chiffrement(""+question.getDifficulte() ,cle)+SEPARATEUR);
+        ligne.append(chiffrement(question.getLibelle(), cle)+ SEPARATEUR);
+        ligne.append(chiffrement(question.getReponseJuste(), cle)+SEPARATEUR);
+        for (int i = 0 ; i < 4 ; i++) {
+           if (i < question.getMauvaisesReponses().size() ) {
+               ligne.append(chiffrement(question.getMauvaisesReponses().get(i) , cle) + SEPARATEUR );
+           } else {
+               ligne.append(SEPARATEUR);
+           }
+        }
+        return ligne.toString();
+    }
+
+    public static ArrayList<String[]> decrypterFichier(String cleD) throws IOException {
+        ArrayList<HashMap<String, String>> questionCrypter = lectureFichier.getLigneCSV(fichier);
+        
+        for (HashMap<String, String> question : questionCrypter) {
+            Set<String> listeCle = question.keySet();
+            for (String cle : listeCle) {
+                System.err.println(dechiffrement(question.get(cle),cleD));
+            }
+        }
+        return null;
 	}
+    
+    
 	
-	public void analiserResultat(ArrayList<String[]> contenu) {
+	public void decrypterLigne(ArrayList<String[]> contenu) {
 		
 	}
 }

@@ -52,9 +52,6 @@ public class ModelePrincipal {
     
     
     private static ModelePrincipal modele;
-
-    /** Les CSV importé devront séparé leur élément avec une tabulation */
-    public static final char SEPARATEUR_CSV = '\t';
     
     private BanqueCategorie banqueCategorie;
     private BanqueQuestion banqueQuestion;
