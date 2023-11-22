@@ -18,7 +18,7 @@ import outil.Serveur;
 
 /** 
  * Représente le client qui reçoit les question
- * @author francois
+ * @author François de Saint Palais
  */
 public class ControleurRecevoirQuestions {
 
