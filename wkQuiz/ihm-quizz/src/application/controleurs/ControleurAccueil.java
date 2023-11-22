@@ -100,8 +100,6 @@ public class ControleurAccueil {
 		model.setPagePrecedente("Accueil.fxml");
 		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
-
-		// TODO : lancer une alertBox
 	}
 
 }

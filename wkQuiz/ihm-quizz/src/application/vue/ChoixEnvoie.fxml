@@ -32,7 +32,7 @@
       </Label>
       <Group layoutX="30.0" layoutY="245.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="285.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Envoyer les Questions " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="285.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Envoyer  toutes les Questions " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="28.0" />
                </font>
@@ -42,6 +42,20 @@
                   <Image url="@images/IconeUpload.png" />
                </image>
             </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="870.0" layoutY="20.0">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAide.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="19.0" layoutY="83.0" text="Aide" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
          </children>
       </Group>
       <Separator layoutX="629.0" layoutY="245.0" orientation="VERTICAL" prefHeight="210.0" prefWidth="85.0" />

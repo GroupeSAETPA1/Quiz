@@ -8,7 +8,9 @@ package application.controleurs.reseau;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import application.Quiz;
 import application.exception.ClientPasConnecterException;
+import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -30,6 +32,8 @@ public class ControleurEnvoieQuestion {
     @FXML TextField txtIP;
     
     private Serveur serveur;
+    
+    private ModelePrincipal model = ModelePrincipal.getInstance();
 
     @FXML
     void initialize() throws ClassNotFoundException, IOException {
@@ -48,9 +52,20 @@ public class ControleurEnvoieQuestion {
     
     @FXML
     void retour() {
-        //TODO Faire retour
+    	Quiz.changerVue("ChoixEnvoie.fxml");
         System.out.println("Retour");
     }
+    
+    /**
+	 * Méthode liée au groupe aider,
+	 * envoie vers la page Aide.fxml
+	 */
+	@FXML
+	private void aider() {
+		model.setPagePrecedente("EnvoieQuestion.fxml");
+		System.out.println("Aider");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
 
     @FXML
     void envoyer() {

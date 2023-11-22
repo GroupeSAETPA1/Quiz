@@ -208,6 +208,78 @@ public class ControleurAide {
 					+ "de passer la question en cas de doute.\n");
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(100);
-		}
+			
+		} else if(pagePrecedente != null 
+				&& pagePrecedente.equals("ChoixEnvoie.fxml")) {
+			
+			text1.setText("Sur cette page vous disposez de trois bouton\n");
+			text1.setStyle("-fx-font-size: 20px");
+			text1.setTranslateY(80);
+			
+			text2.setText("Le premier “Envoyé toutes les Questions” vous "
+					+ "permettra d’envoyer toutes les questions dont vous "
+					+ "disposez.");
+			text2.setStyle("-fx-font-size: 20px");
+			text2.setTranslateY(80);
+			
+			text3.setText("Le second “Sélectionné les question à l'unité” vous"
+					+ " permettra d’aller sélectionner des questions que vous"
+					+ " souhaitez envoyer.");
+			text3.setStyle("-fx-font-size: 20px");
+			text3.setTranslateY(80);
+			
+			text4.setText("Le dernier “Choisir les questions par catégorie”"
+					+ " vous permettra d’aller sélectionner des catégories"
+					+ " que vous souhaitez envoyer. ");
+			text4.setStyle("-fx-font-size: 20px");
+			text4.setTranslateY(80);
+			
+		} else if(pagePrecedente != null 
+				&& pagePrecedente.equals("RecevoirQuestions.fxml")) {
+			
+			text1.setText("Sur cette page vous allez pouvoir entrer les "
+					+ "information pour recevoir des questionsn\n");
+			text1.setStyle("-fx-font-size: 20px");
+			text1.setTranslateY(80);
+			
+			text2.setText("Vous devrez entrer l’adresse IP de la personne qui"
+					+ " souhaite partager ses questions ");
+			text2.setStyle("-fx-font-size: 20px");
+			text2.setTranslateY(80);
+			
+			text3.setText("Et Vous devrez entrer le port qui sera utilisé,"
+					+ " lui aussi trouvable sur l’ordinateur de la personne"
+					+ " qui souhaite partager ses questions. ");
+			text3.setStyle("-fx-font-size: 20px");
+			text3.setTranslateY(80);
+			
+		} else if(pagePrecedente != null 
+				&& pagePrecedente.equals("EnvoieQuestion.fxml")) {
+			
+			text1.setText("Sur cette page vous allez pouvoir partager vos"
+					+ " information afin d’envoyer des question\n");
+			text1.setStyle("-fx-font-size: 20px");
+			text1.setTranslateY(80);
+			
+			text2.setText("Vous avez en  premier votre port  d’afficher\n");
+			text2.setStyle("-fx-font-size: 20px");
+			text2.setTranslateY(80);
+			
+			text3.setText("Ensuite votre adresse IP\n");
+			text3.setStyle("-fx-font-size: 20px");
+			text3.setTranslateY(80);
+			
+			text4.setText("Il y a ensuite un bouton pour démarrer l'échange"
+					+ "  et faire le partage\n");
+			text4.setStyle("-fx-font-size: 20px");
+			text4.setTranslateY(80);
+			
+			text5.setText("Pour finir en bas il y a trois boutons, un qui vous "
+					+ "permet de revenir à la question précédente, un autre qui"
+					+ " vous permet de valider. Et un dernier qui vous permet "
+					+ "de passer la question en cas de doute.\n");
+			text5.setStyle("-fx-font-size: 20px");
+			text5.setTranslateY(100);
+		} 
 	}
 }
