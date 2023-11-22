@@ -77,9 +77,10 @@ public class Client {
         }
 
 
-        // TODO vérifier que les questions sont valides et importer
         // fermetures des ressources
         ois.close();
         oos.close();
+
+        // TODO vérifier que les questions sont valides et importer
     }
 }
