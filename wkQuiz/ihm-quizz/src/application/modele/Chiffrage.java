@@ -18,6 +18,10 @@ public class Chiffrage {
 	public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
 	
 	public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
+	
+	private static final int P = 8269;
+	
+	private static final int G = 4537;
 	        
     static {
 
@@ -97,5 +101,20 @@ public class Chiffrage {
 	
 	public void analiserResultat(ArrayList<String[]> contenu) {
 		
+	}
+	
+	public static int exposantModulo(int a, int exp, int modulo) {
+		int result = 1;
+        a = a % modulo;
+        
+        while (exp > 0) {
+            if (exp % 2 == 1) {
+                result = (result * a) % modulo;
+            }
+            exp = exp / 2;
+            a = (a * a) % modulo;
+        }
+        
+        return result;
 	}
 }

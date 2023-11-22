@@ -62,6 +62,8 @@ class testChiffrage {
         assertEquals(dechiffrerMain, Chiffrage.dechiffrement(messageAdechiffrer , cle));
     }
 
+    
+    
     /**
      * Test method for {@link application.modele.Chiffrage#genererCSV(java.lang.String)}.
      */
@@ -84,6 +86,43 @@ class testChiffrage {
     @Test
     void testAnaliserResultat() {
         fail("Not yet implemented");
+    }
+    
+    
+    /**
+     * Test method for {@link application.modele.Chiffrage#exposantModulo(java.lang.Integer, java.lang.Integer, java.lang.Integer)}.
+     */
+    @Test
+    void testexposantModulo() {
+    	// Test case 1
+        assertEquals(1, Chiffrage.exposantModulo(6, 0, 11));
+
+        // Test case 2
+        assertEquals(6, Chiffrage.exposantModulo(6, 1, 11));
+
+        // Test case 3
+        assertEquals(3, Chiffrage.exposantModulo(6, 2, 11));
+
+        // Test case 4
+        assertEquals(9, Chiffrage.exposantModulo(6, 3, 11));
+
+        // Test case 5
+        assertEquals(1, Chiffrage.exposantModulo(2, 0, 7));
+
+        // Test case 6
+        assertEquals(2, Chiffrage.exposantModulo(2, 1, 7));
+
+        // Test case 7
+        assertEquals(4, Chiffrage.exposantModulo(2, 2, 7));
+
+        // Test case 8
+        assertEquals(1, Chiffrage.exposantModulo(3, 0, 5));
+
+        // Test case 9
+        assertEquals(3, Chiffrage.exposantModulo(3, 1, 5));
+
+        // Test case 10
+        assertEquals(4, Chiffrage.exposantModulo(3, 2, 5));
     }
 
 }
