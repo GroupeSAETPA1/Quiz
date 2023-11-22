@@ -5,6 +5,10 @@
 
 package application.modele;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,7 +26,12 @@ import application.exception.ReponseException;
  * @author Lucas Descriaud
  * @author François de Saint Palais
  */
-public class ModelePrincipal {
+public class ModelePrincipal implements Serializable {
+	
+    /**
+	 * ID de serialisation par défaut
+	 */
+	private static final long serialVersionUID = 1L;
 
     /**
      * Lie une difficulté à sont equivalent en string
@@ -375,5 +384,24 @@ public class ModelePrincipal {
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
+    }
+    
+    public void serialiserModele() throws IOException {
+        ObjectOutputStream oos = null;
+    	try {
+            final FileOutputStream fichier = new FileOutputStream("donnees.csv");
+    	    oos = new ObjectOutputStream(fichier);
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    	} finally {
+            try {
+	            if (oos != null) {
+	                oos.flush();
+	                oos.close();
+	            }
+    	    } catch (final IOException e) {
+    		        e.printStackTrace();
+    		}
+    	}
     }
 }

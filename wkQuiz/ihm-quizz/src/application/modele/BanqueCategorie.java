@@ -15,8 +15,8 @@ import application.exception.InvalidNameException;
  * @author Tom Douaud
  */
 public class BanqueCategorie {
-	
-    /** La catégorie Général */
+
+	/** La catégorie Général */
     protected Categorie categorieGeneral;
     
     /** La liste des catégories */
