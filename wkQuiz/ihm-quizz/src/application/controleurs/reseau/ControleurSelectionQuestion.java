@@ -7,6 +7,7 @@ package application.controleurs.reseau;
 
 import java.util.ArrayList;
 
+import application.Quiz;
 import application.controleurs.factories.CheckBoxCategorieCellFactory;
 import application.controleurs.factories.CheckBoxQuestionCellFactory;
 import application.modele.Categorie;
@@ -32,6 +33,16 @@ public class ControleurSelectionQuestion {
     @FXML TableColumn<LigneSelectionQuestion, String> libelleQuestion;
     @FXML TableColumn<LigneSelectionQuestion, String> categorieQuestion;
     @FXML TableColumn<LigneSelectionQuestion, CheckBox> selection;
+    
+    /**
+  	  * Fonction liée au group Retour et son image
+  	  * Et qui permet de retourner a la page précédente 
+  	  */
+  	@FXML
+      public void retour() {
+          Quiz.changerVue("ChoixEnvoie.fxml");
+      }
+       
 
     @FXML
     public void initialize() {
@@ -142,6 +153,6 @@ public class ControleurSelectionQuestion {
             return libelleQuestion + " -> " + categorieQuestion;
         }
         
-        
+       
     }
 }

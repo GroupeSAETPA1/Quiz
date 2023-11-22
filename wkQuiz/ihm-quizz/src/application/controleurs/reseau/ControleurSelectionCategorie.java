@@ -7,6 +7,7 @@ package application.controleurs.reseau;
 
 import java.util.ArrayList;
 
+import application.Quiz;
 import application.controleurs.factories.CheckBoxCategorieCellFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
@@ -30,6 +31,11 @@ public class ControleurSelectionCategorie {
     @FXML TableColumn<LigneSelectionCategorie, String> nomCategorie;
     @FXML TableColumn<LigneSelectionCategorie, String> nombreQuestion;
     @FXML TableColumn<LigneSelectionCategorie, CheckBox> selection;
+    
+    @FXML
+    public void retour() {
+        Quiz.changerVue("ChoixEnvoie.fxml");
+    }
 
     @FXML
     public void initialize() {
@@ -137,7 +143,5 @@ public class ControleurSelectionCategorie {
         public String toString() {
             return nomCategorie + " -> " + nombreQuestion;
         }
-        
-        
     }
 }

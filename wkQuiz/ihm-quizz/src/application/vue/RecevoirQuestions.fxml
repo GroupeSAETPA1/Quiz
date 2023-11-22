@@ -10,20 +10,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.reseau.ControleurRecevoirQuestions">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.reseau.ControleurRecevoirQuestions">
    <children>
-      <Group layoutX="52.0" layoutY="40.0">
+      <Group layoutX="50.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <Label layoutX="-1.0" layoutY="74.0" text="Retour" textFill="WHITE">
+            <Label layoutX="-1.0" layoutY="82.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/IconeAcceuil.png" />
+                  <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="870.0" layoutY="20.0" onMouseClicked="#aider">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAide.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="17.0" layoutY="86.0" text="Aide" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
          </children>
       </Group>
       <Button layoutX="320.0" layoutY="437.0" mnemonicParsing="false" onAction="#connexion" prefHeight="80.0" prefWidth="360.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60px;" styleClass="cavajamaismarcher" stylesheets="@css/mainStyle.css" text="Connexion" textAlignment="CENTER" textFill="WHITE">
