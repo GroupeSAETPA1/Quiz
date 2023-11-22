@@ -5,14 +5,7 @@
 
 package application.modele;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,14 +23,8 @@ import application.exception.ReponseException;
  * @author Lucas Descriaud
  * @author François de Saint Palais
  */
-public class ModelePrincipal implements Serializable {
-	
-    /**
-	 * ID de serialisation par défaut
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private static final String FICHIER_SERIALISATION = "donnees";
+public class ModelePrincipal {
+		
 
     /**
      * Lie une difficulté à sont equivalent en string
@@ -72,34 +59,17 @@ public class ModelePrincipal implements Serializable {
 
     /**
      * Constructeur
+     * @throws IOException 
+     * @throws InternalError 
+     * @throws ClassNotFoundException 
      * @throws InvalidNameException 
      */
-    private ModelePrincipal() throws IOException {
+    private ModelePrincipal() throws ClassNotFoundException, InternalError, IOException {
     	
-    	try {
-            // Création d'un BufferedReader pour lire le fichier serialisé
-    		BufferedReader fichier = new BufferedReader(new FileReader(FICHIER_SERIALISATION));
-    		
-    		// une ligne du fichier
-    		String ligne = "";
-    		
-    		 /*
-    		  * Tant que le fichier contient des lignes on les analyses pour 
-    		  * importer les questions et les categories
-    		  */
-    		 do {
-    		     ligne += fichier.readLine(); // lecture d’une ligne
-    		 } while (fichier.readLine() != null);
-    		 
-    		 System.out.println(ligne);
-    		 // fermeture du fichier
-    		 fichier.close();
-    	} catch(IOException e) {
-    		e.printStackTrace();
-    	}
+    	// TODO changer le this.banqueQuestion et categorie pour qu'il soit égal a soit une new Banque Question soit l'objet deserialisé
 
         this.banqueQuestion = new BanqueQuestion();
-        this.banqueCategorie = new BanqueCategorie();
+        this.banqueCategorie = banqueCategorie.deSerialiserBanqueCategorie(); // new BanqueCategorie(); TODO
         this.partie = new Partie();
 
 
@@ -117,9 +87,11 @@ public class ModelePrincipal implements Serializable {
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
      * @throws IOException 
+     * @throws InternalError 
+     * @throws ClassNotFoundException 
      * @throws InvalidNameException 
      */
-    public static ModelePrincipal getInstance() throws IOException {
+    public static ModelePrincipal getInstance() throws IOException, ClassNotFoundException, InternalError {
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
@@ -413,20 +385,5 @@ public class ModelePrincipal implements Serializable {
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
-    }
-    
-    public void serialiserModele() throws IOException {
-    	try {
-    	    // déclaration et création de l'objet fichier
-    		PrintWriter fichier = new PrintWriter(new FileWriter(FICHIER_SERIALISATION));
-    		
-    		fichier.print(banqueQuestion);
-    		fichier.println("Fin des questions");
-    		fichier.print(banqueCategorie);
-    		
-    		fichier.close();
-    	} catch(IOException e) {
-    		 e.printStackTrace();
-    	}
     }
 }

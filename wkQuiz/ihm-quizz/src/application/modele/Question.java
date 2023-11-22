@@ -393,8 +393,7 @@ public class Question implements Serializable {
      */
     @Override
     public String toString() {
-    	String aRetouner =  "Question :\n"
-             + "Difficulté de la question : " + this.getDifficulte()
+    	String aRetouner =  "Difficulté de la question : " + this.getDifficulte()
     		 + "\nCategorie de la question : " + this.getCategorie()
     		 + "\nIntiltulé de la question : " + this.getLibelle()
     		 + "\nMauvaise réponses :\n";
@@ -407,7 +406,6 @@ public class Question implements Serializable {
     	if (getFeedback() != "") {
     		aRetouner += "\nFeedback : " + getFeedback();    	
     	}
-    	aRetouner += "\nFin Question";
     	return aRetouner; 	
     }
 }

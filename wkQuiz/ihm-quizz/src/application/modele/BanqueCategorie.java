@@ -5,6 +5,12 @@
 
 package application.modele;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
@@ -14,7 +20,15 @@ import application.exception.InvalidNameException;
  * @author Quentin Costes
  * @author Tom Douaud
  */
-public class BanqueCategorie {
+public class BanqueCategorie implements Serializable {
+	
+	/**
+	 * ID de serialisation
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** le nom du fichier pour la serialisation */
+	private static final String FICHIER_SERIALISATION = "donnees";
 
 	/** La catégorie Général */
     protected Categorie categorieGeneral;
@@ -27,14 +41,14 @@ public class BanqueCategorie {
      * @throws InvalidNameException 
      */
     public BanqueCategorie() {
-        try {
-            categorieGeneral = new Categorie("General");
-        } catch (InvalidNameException e) {
-            throw new InternalError("La création de la categorie Général à "
-                    + "généré une erreur");
-        }
-        categories = new ArrayList<Categorie>();
-        categories.add(categorieGeneral);
+    	try {
+    		categorieGeneral = new Categorie("General");
+    	} catch (InvalidNameException e) {
+    		throw new InternalError("La création de la categorie Général à "
+    				+ "généré une erreur");
+    	}
+    	categories = new ArrayList<Categorie>();
+    	categories.add(categorieGeneral);
     }
     
     /**
@@ -156,5 +170,44 @@ public class BanqueCategorie {
         }
         
         return resultat.toString();
+    }
+    
+    
+    public void serialiserBanqueCategorie() throws IOException {
+    	try {
+            FileOutputStream fichier = new FileOutputStream(FICHIER_SERIALISATION);
+            ObjectOutputStream out = new ObjectOutputStream(fichier);
+             
+            // Méthode pour serialiser la banque de categorie
+            out.writeObject(this);
+             
+            out.close();
+            fichier.close();
+             
+            System.out.println("La banque de Categorie à bien été serialisée !");
+            
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    	}
+    }
+    
+    public BanqueCategorie deSerialiserBanqueCategorie() throws IOException, ClassNotFoundException {
+    	try {
+            FileInputStream fichier = new FileInputStream(FICHIER_SERIALISATION);
+            ObjectInputStream in = new ObjectInputStream(fichier);
+             
+            // Méthode pour dé-serialiser la banque de categorie
+            BanqueCategorie banqueDeserialisee = (BanqueCategorie)in.readObject();
+             
+            in.close();
+            fichier.close();
+            
+            System.out.println("La banque de Categorie à bien été dé-serialisée !");
+            
+            return banqueDeserialisee;
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    		 return null;
+    	}
     }
 }
