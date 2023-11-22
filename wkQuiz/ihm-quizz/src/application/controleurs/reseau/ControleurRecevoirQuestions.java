@@ -6,6 +6,7 @@
 package application.controleurs.reseau;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
@@ -66,14 +67,19 @@ public class ControleurRecevoirQuestions {
             e.printStackTrace();
             AlertBox.showErrorBox(e.getMessage());
         }
+        
+        
         if (clientCreer) {
             try {
                 client.seConnecter();
-                System.out.println("");
+                System.out.println("On est connecter");
                 client.recevoirDonnees();
+            } catch (SocketTimeoutException e) {
+                AlertBox.showErrorBox("TimeOut : Pas de serveur trouvé");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                
             }
         }
     }

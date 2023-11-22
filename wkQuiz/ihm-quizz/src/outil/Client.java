@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class Client {
     
     public Client(String ip, int port) {
         if (ip.isEmpty()) {
-            throw new IllegalArgumentException("L'adresse IP n'est pas valide");
+            throw new IllegalArgumentException("L'adresse IP est vide");
         }
         if (port <= 0) {
             throw new IllegalArgumentException("Le port n'est pas valide");            
@@ -54,7 +55,7 @@ public class Client {
     	this.ip = ip;
     }
     
-    public void seConnecter() throws UnknownHostException, IOException {
+    public void seConnecter() throws UnknownHostException, IOException, SocketTimeoutException {
         // Lance la connexion socket connection au serveur
         socket = new Socket();
         InetSocketAddress adresseServeur = new InetSocketAddress(ip, port);
@@ -100,7 +101,7 @@ public class Client {
         oos.close();
         
         socket.close();//Fin de communication
-
+        System.out.println("Fin. La socket est fermé");
         // TODO vérifier que les questions sont valides et importer
     }
 }

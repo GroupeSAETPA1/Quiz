@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 import application.exception.ClientDejaConnecter;
@@ -38,20 +39,29 @@ public class Serveur {
     
     private Socket socket;
     
+    /**
+     * Le temps que le serveur attend pour accepter un client.
+     */
+    private static final int TIMEOUT_SERVEUR_ACCEPT = 20_000;
+    
     public Serveur(int port) throws IOException, ClassNotFoundException  {
     	this.port = port;
         serveur = new ServerSocket(port);
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException, 
-    ClientDejaConnecter {
+    ClientDejaConnecter, SocketTimeoutException {
         
         // Attente d'une connexion d'un client
         if (socket != null && !socket.isClosed()) {
             throw new ClientDejaConnecter("Un client est déjà connecté");
         }
         System.out.println("Attente client...");
+        //Ajout d'un TimeOut
+        serveur.setSoTimeout(TIMEOUT_SERVEUR_ACCEPT);
         socket = serveur.accept();
+        //On enlève le TimeOut
+        serveur.setSoTimeout(0);
         System.out.println("Client accepté");
     }
     
@@ -114,6 +124,7 @@ public class Serveur {
         ois.close();
         
         socket.close();//Fin de communication
+        System.out.println("Fin. La socket est fermé");
         
         return clientARecu;
     }
@@ -137,5 +148,13 @@ public class Serveur {
 	/** @return Renvoie true si le serveur est connecté à un client */
 	public boolean clientEstConnecte() {
 	    return socket != null && !socket.isClosed();
+	}
+	
+	/**
+	 * TODO comment method role
+	 * @param nouveauPort
+	 */
+	public static void setPort(int nouveauPort) {
+	    port = nouveauPort;
 	}
 }
