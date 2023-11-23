@@ -42,7 +42,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button layoutX="735.0" layoutY="195.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="355.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Valider vos choix" textFill="WHITE">
+      <Button layoutX="735.0" layoutY="195.0" mnemonicParsing="false" onAction="#valider" prefHeight="72.0" prefWidth="355.0" style="-fx-background-radius: 60; -fx-background-color: #2F76FF;" text="Valider vos choix" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>

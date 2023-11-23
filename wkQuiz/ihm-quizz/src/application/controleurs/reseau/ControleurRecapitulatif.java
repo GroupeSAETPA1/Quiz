@@ -1,13 +1,17 @@
 package application.controleurs.reseau;
 
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import application.Quiz;
+import application.controleurs.reseau.ControleurSelectionCategorie.LigneSelectionCategorie;
+import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 
 
 
@@ -54,9 +58,19 @@ public class ControleurRecapitulatif {
 	 
 	 private void miseAjourRecap() {
 		 
-		 private ModelePrincipal modele = ModelePrincipal.getInstance();
+		 ModelePrincipal modele = ModelePrincipal.getInstance();
 		 
-		 
+		 ObservableList<LigneRecapitulatif> data = tableRecap.getItems();
+
+	        ArrayList<Question> questions = modele.getQuestionAEnvoyer();
+
+	        for (Question question : questions) {
+	            data.add(new LigneRecapitulatif(question.getLibelle(), 
+	            		question.getCategorie(), ModelePrincipal
+	            		.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()),
+	            		question.getReponseJuste(),
+	            		question.getMauvaisesReponses()));
+	        }
 	 }
 	
 	
@@ -76,9 +90,9 @@ public class ControleurRecapitulatif {
 	        String categorie;
 	        String difficulte;
 	        String repVrai;
-	        String repFausse;
+	        ArrayList<String> repFausse;
 	        
-	        public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai,String repFausse ) {
+	        public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai,  ArrayList<String> repFausse ) {
 	            super();
 	            this.libelleQuestion = libelleQuestion;
 	            this.categorie = categorie;
@@ -103,7 +117,7 @@ public class ControleurRecapitulatif {
 	            return repVrai;
 	        }
 	        
-	        public String getRepFausse() {
+	        public   ArrayList<String> getRepFausse() {
 	            return repFausse;
 	        }
 	        
