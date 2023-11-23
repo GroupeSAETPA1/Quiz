@@ -27,7 +27,7 @@
             </Label>
          </children>
       </Group>
-      <Label layoutX="350.0" layoutY="40.0" text="Choissisez des catégorie" textFill="WHITE">
+      <Label layoutX="350.0" layoutY="40.0" text="Choisissez des catégories" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>

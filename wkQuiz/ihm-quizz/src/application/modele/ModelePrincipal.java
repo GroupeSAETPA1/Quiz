@@ -55,7 +55,8 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     
-    private ArrayList<Question> questionAEnvoyer;
+    private ArrayList<Question> questionAEnvoyer = new ArrayList<Question>();
+    private ArrayList<Categorie> categorieAEnvoyer = new ArrayList<Categorie>();
 
     /**
      * Constructeur
@@ -395,8 +396,10 @@ public class ModelePrincipal {
      * @param nomCategorieAAjouter Le nom de la catégorie
      * @return true si l'ajout est un succès, false sinon
      */
-    public boolean ajouterALaSelection(String nomCategorieAAjouter) {
-
+    public boolean ajouterALaSelectionDEnvoie(String nomCategorieAAjouter) {
+        
+        categorieAEnvoyer.add(getCategoriesLibelleExact(nomCategorieAAjouter));
+        
         for (Question question : banqueQuestion.getQuestions()) {
             if (    question.getCategorie() == nomCategorieAAjouter 
                 && !questionAEnvoyer.contains(question)) {
@@ -406,4 +409,30 @@ public class ModelePrincipal {
         }
         return false; //STUB
     }
+    
+    /**
+     * Retire de la liste questionAEnvoyer,
+     * les questions de la catégorie nomCategorieASupprimer
+     * @param nomCategorieASupprimer Le nom de la catégorie 
+     * @return
+     */
+    public boolean supprimerALaSelectionDEnvoie(String nomCategorieASupprimer) {
+        ArrayList<Question> questionARetirer = new ArrayList<Question>();
+        
+        categorieAEnvoyer.remove(getCategoriesLibelleExact(nomCategorieASupprimer));
+        
+        for (Question question : questionAEnvoyer) {
+            if (question.getCategorie().equalsIgnoreCase(nomCategorieASupprimer)) {
+                questionARetirer.add(question);
+            }
+        }
+        
+        return questionAEnvoyer.removeAll(questionARetirer);
+    }
+
+    /** @return valeur de questionAEnvoyer */
+    public ArrayList<Question> getQuestionAEnvoyer() {
+        return questionAEnvoyer;
+    }
+    
 }
