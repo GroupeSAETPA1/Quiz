@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import application.modele.Categorie;
 import application.modele.Question;
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -40,14 +41,12 @@ class TestQuestion {
 	/**
 	 * Génère des jeux de test pour les tests unitaires
 	 * 
-	 * @throws ReponseException       si les réponses sont invalides
-	 * @throws InvalidFormatException si le format est invalide
 	 * @throws InvalidNameException   si le nom est invalide
-	 * @throws DifficulteException
+	 * @throws CreerQuestionException 
 	 */
 	@BeforeEach
 	void genererJeuxDeTest()
-			throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+			throws InvalidNameException, CreerQuestionException {
 		categoriesValides = new Categorie[] { new Categorie("Commentaire"), new Categorie("test") };
 		questionValide = new ArrayList<Question>();
 		mauvaiseReponse1 = new ArrayList<String>();
@@ -448,13 +447,11 @@ class TestQuestion {
 	 * Teste la méthode equals de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#equals()}
-	 * @throws InvalidFormatException si le format est invalide
-	 * @throws ReponseException       si les réponses sont invalides
 	 * @throws InvalidNameException   si le nom est invalide
-	 * @throws DifficulteException
+	 * @throws CreerQuestionException 
 	 */
 	@Test
-	void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+	void testEquals() throws InvalidNameException, CreerQuestionException {
 		// Création de plusieurs question :
 	    // - question1Egale qui est exactement parreile que questionValide[0]
 		// - question2Egale qui est une copie de questionValide[1] mais sans feedback
