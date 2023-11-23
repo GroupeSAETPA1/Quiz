@@ -49,10 +49,10 @@ public class ControleurRecapitulatif {
 	                new PropertyValueFactory<LigneRecapitulatif, String>
 	                ("repFausse"));
 		
-		 recapChoix();
+		 miseAjourRecap();
 	 }
 	 
-	 private void recapChoix() {
+	 private void miseAjourRecap() {
 		 
 		 private ModelePrincipal modele = ModelePrincipal.getInstance();
 		 
