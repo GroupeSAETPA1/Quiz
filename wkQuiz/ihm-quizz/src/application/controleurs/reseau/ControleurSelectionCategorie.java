@@ -8,7 +8,6 @@ package application.controleurs.reseau;
 import java.util.ArrayList;
 
 import application.Quiz;
-import application.controleurs.factories.CheckBoxCategorieCellFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import javafx.collections.ObservableList;
@@ -19,9 +18,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /** 
- * Controleur de la page SelectionQuestion.fxml
+ * Contrôleur de la page SelectionQuestion.fxml
  * @author François de Saint Palais
  */
 public class ControleurSelectionCategorie {
@@ -91,11 +91,11 @@ public class ControleurSelectionCategorie {
      * Représente une ligne de la tableView
      * @author François de Saint Palais
      */
-    public static class LigneSelectionCategorie {
+    public class LigneSelectionCategorie {
         
-        String nomCategorie;
-        int nombreQuestion;
-        CheckBox selection;
+        private String nomCategorie;
+        private int nombreQuestion;
+        private CheckBox selection;
         
         /** 
          * TODO comment initial state properties
@@ -144,4 +144,44 @@ public class ControleurSelectionCategorie {
             return nomCategorie + " -> " + nombreQuestion;
         }
     }
+
+
+/** 
+ * Créer et gère les actions sur les CheckBox
+ * @author François de Saint Palais
+ */
+public class CheckBoxCategorieCellFactory 
+implements  Callback<TableColumn<LigneSelectionCategorie, CheckBox>, 
+                     TableCell<LigneSelectionCategorie, CheckBox>> {
+
+    /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
+    @Override
+    public TableCell<LigneSelectionCategorie, CheckBox> 
+    call(TableColumn<LigneSelectionCategorie, CheckBox> arg0) {
+        return new TableCell<LigneSelectionCategorie, CheckBox>() {
+            @Override
+            protected void updateItem(CheckBox item, boolean empty) {
+                super.updateItem(item, empty);
+                super.setAlignment(Pos.CENTER);
+                //On créer une CheckBox
+                CheckBox checkbox = new CheckBox();
+
+                //On ajoute l'évenement lié au côchage/décochage
+                checkbox.setOnAction(event -> {
+                    //La ligne de la checkbox
+                    LigneSelectionCategorie ligne = getTableView().getItems().get(getIndex());
+                    if (checkbox.isSelected()) {
+                        ligne.ajouterALaSelection();
+                    } else {
+                        ligne.retirerALaSelection();
+                    }
+                });
+
+                setGraphic(checkbox);
+            }
+        };
+    }
+
+}
+
 }
