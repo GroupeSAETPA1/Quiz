@@ -167,6 +167,10 @@
     -fx-font-size: 30px; 
 }
 
+.table-view .cell {
+	-fx-font-size: 20px;
+}
+
 .anchor-pane {
     -fx-background-color: #282C34;
 }

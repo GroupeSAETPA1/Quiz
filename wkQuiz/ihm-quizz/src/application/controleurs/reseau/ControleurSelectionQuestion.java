@@ -6,6 +6,7 @@
 package application.controleurs.reseau;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
@@ -87,8 +88,7 @@ public class ControleurSelectionQuestion {
         ArrayList<Question> questions = modele.getBanqueQuestion().getQuestions();
 
         for (Question question : questions) {
-            data.add(new LigneSelectionQuestion(question.getLibelle(), 
-                                                question.getCategorie()));
+            data.add(new LigneSelectionQuestion(question));
         }
     }
 
@@ -100,9 +100,7 @@ public class ControleurSelectionQuestion {
         
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
-        private String libelleQuestion;
-        private String categorieQuestion;
-        private CheckBox selection;
+        private Question question;
         
         /** 
          * TODO comment initial state properties
@@ -110,51 +108,57 @@ public class ControleurSelectionQuestion {
          * @param categorieQuestion
          * @param selection
          */
-        public LigneSelectionQuestion(String libelleQuestion, String categorieQuestion) {
+        public LigneSelectionQuestion(Question question) {
             super();
-            this.libelleQuestion = libelleQuestion;
-            this.categorieQuestion = categorieQuestion;
-            this.selection = new CheckBox();
+            this.question = question;
         }
 
         /** @return valeur de libelleQuestion */
         public String getLibelleQuestion() {
-            return libelleQuestion;
+            return question.getLibelle();
         }
 
         /** @return valeur de categorieQuestion */
         public String getCategorieQuestion() {
-            return categorieQuestion;
-        }
-
-        /** @return valeur de selection */
-        public CheckBox getSelection() {
-            return selection;
+            return question.getCategorie();
         }
         
         public void ajouterALaSelection() {
-            // TODO Auto-generated method stub
             System.out.println(this + " selectionner");
+            modele.ajouterALaSelectionDEnvoie(question);
         }
 
         /** 
          * TODO comment method role
          */
         public void retirerALaSelection() {
-            // TODO Auto-generated method stub
-            System.out.println(this + " deselectionner");            
+            System.out.println(this + " deselectionner");
+            modele.supprimerALaSelectionDEnvoie(question);
         }
 
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
-            return libelleQuestion + " -> " + categorieQuestion;
+            return question.toString();
         }
         
-        
+        /** @return true si la checkbox doit être sélectionner */
         public boolean estSelectionner() {
-            return false; //STUB
+            return modele.estSelectionner(question); //STUB
         }
+
+        /* non javadoc - @see java.lang.Object#equals(java.lang.Object) */
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null)
+                return false;
+            if (question.getClass() != obj.getClass())
+                return false;
+            Question other = (Question) obj;
+            return question.equals(other);
+        }
+        
+        
     }
 
     /**
@@ -175,6 +179,13 @@ public class ControleurSelectionQuestion {
                     super.setAlignment(Pos.CENTER);
                     // On créer une CheckBox
                     CheckBox checkbox = new CheckBox();
+                    
+                    /* Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception */
+                    try {
+                        checkbox.setSelected(getTableView().getItems()
+                                .get( getIndex() ).estSelectionner());
+                    } catch (IndexOutOfBoundsException e) { }
 
                     // On ajoute l'évenement lié au côchage/décochage
                     checkbox.setOnAction(event -> {
@@ -187,7 +198,11 @@ public class ControleurSelectionQuestion {
                         }
                     });
 
-                    setGraphic(checkbox);
+                    if (getIndex() >= getTableView().getItems().size()) {
+                        setGraphic(null);                        
+                    } else {
+                        setGraphic(checkbox);
+                    }
                 }
             };
         }

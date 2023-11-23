@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1180.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1180.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.reseau.ControleurSelectionCategorie">
    <children>
-      <Group layoutX="30.0" layoutY="20.0" >
+      <Group layoutX="30.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -54,7 +54,7 @@
             <Font size="32.0" />
          </font>
       </Button>
-      <TableView fx:id="tableView" layoutX="90.0" layoutY="290.0" prefHeight="350.0" prefWidth="1000.0">
+      <TableView fx:id="tableView" layoutX="90.0" layoutY="290.0" prefHeight="350.0" prefWidth="1000.0" stylesheets="@css/mainStyle.css">
          <columns>
             <TableColumn fx:id="nomCategorie" prefWidth="333.0" text="Nom de la Question " />
             <TableColumn fx:id="nombreQuestion" minWidth="0.0" prefWidth="333.0" text="Nombre de Question " />
