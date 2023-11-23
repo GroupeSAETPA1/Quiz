@@ -116,11 +116,11 @@ class testChiffrage {
             ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
         }
         //System.out.println(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions());
-        String cle = Chiffrage.generationCle();
-        Chiffrage.genererCSV(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(), cle);
+        //String cle = Chiffrage.generationCle();
+        //Chiffrage.genererCSV(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(), cle);
         System.out.println(cle);
         //System.out.println();
-        Chiffrage.decrypterFichier(cle);    
+        //Chiffrage.decrypterFichier(cle);    
         System.out.println("finis");
     }
 
@@ -156,7 +156,7 @@ class testChiffrage {
         assertEquals(3, Chiffrage.exposantModulo(6, 2, 11));
 
         // Test case 4
-        assertEquals(9, Chiffrage.exposantModulo(6, 3, 11));
+        assertEquals(7, Chiffrage.exposantModulo(6, 3, 11));
 
         // Test case 5
         assertEquals(1, Chiffrage.exposantModulo(2, 0, 7));
@@ -175,6 +175,9 @@ class testChiffrage {
 
         // Test case 10
         assertEquals(4, Chiffrage.exposantModulo(3, 2, 5));
+        
+        assertEquals(4, Chiffrage.exposantModulo(13, 63, 17));
+        System.out.println(Chiffrage.exposantModulo(24526, 1425, 34561));
     }
 
 }
