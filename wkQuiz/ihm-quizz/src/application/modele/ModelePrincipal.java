@@ -55,7 +55,7 @@ public class ModelePrincipal {
 
     private Question questionAModifier;
     
-    private ArrayList<Question> questionAEnvoyer;
+    private ArrayList<Question> questionAEnvoyer = new ArrayList<Question>();
 
     /**
      * Constructeur
@@ -396,7 +396,7 @@ public class ModelePrincipal {
      * @return true si l'ajout est un succès, false sinon
      */
     public boolean ajouterALaSelectionDEnvoie(String nomCategorieAAjouter) {
-
+        
         for (Question question : banqueQuestion.getQuestions()) {
             if (    question.getCategorie() == nomCategorieAAjouter 
                 && !questionAEnvoyer.contains(question)) {
@@ -424,4 +424,10 @@ public class ModelePrincipal {
         
         return questionAEnvoyer.removeAll(questionARetirer);
     }
+
+    /** @return valeur de questionAEnvoyer */
+    public ArrayList<Question> getQuestionAEnvoyer() {
+        return questionAEnvoyer;
+    }
+    
 }
