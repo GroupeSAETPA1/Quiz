@@ -1,6 +1,8 @@
 package application.controleurs;
 
 
+import java.io.IOException;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
@@ -85,9 +87,12 @@ public class ControlleurAccueil {
 	/**
 	 * Méthode liée au groupe quitter,
 	 * ferme l'application
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@FXML
-	private void quitter() {
+	private void quitter() throws ClassNotFoundException, InternalError, IOException {
 		Quiz.quitter();
 	}
 	

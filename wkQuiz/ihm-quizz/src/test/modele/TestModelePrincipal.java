@@ -446,7 +446,6 @@ class TestModelePrincipal {
 			assertEquals(banqueTestQuestions.getQuestion(i), modele.getBanqueQuestion().getQuestion(i));	
 		}		
 	}
-	
 
 	/**
 	 * Renvoie l'indice de la categorie dans une liste

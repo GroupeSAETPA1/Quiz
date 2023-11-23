@@ -160,9 +160,13 @@ public class Quiz extends Application {
 	
 	/**
      * Fonction appelée par les controlleurs permettant de quitter l'application
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
      */
-	public static void quitter( ) {
+	public static void quitter( ) throws ClassNotFoundException, InternalError, IOException {
 	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	    	ModelePrincipal.getInstance().serialiser();
 	        Platform.exit();            
         }
 	}

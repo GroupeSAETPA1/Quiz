@@ -27,9 +27,6 @@ public class BanqueCategorie implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** le nom du fichier pour la serialisation */
-	private static final String FICHIER_SERIALISATION = "donnees";
-
 	/** La catégorie Général */
     protected Categorie categorieGeneral;
     
@@ -170,44 +167,5 @@ public class BanqueCategorie implements Serializable {
         }
         
         return resultat.toString();
-    }
-    
-    
-    public void serialiserBanqueCategorie() throws IOException {
-    	try {
-            FileOutputStream fichier = new FileOutputStream(FICHIER_SERIALISATION);
-            ObjectOutputStream out = new ObjectOutputStream(fichier);
-             
-            // Méthode pour serialiser la banque de categorie
-            out.writeObject(this);
-             
-            out.close();
-            fichier.close();
-             
-            System.out.println("La banque de Categorie à bien été serialisée !");
-            
-    	} catch(IOException e) {
-    		 e.printStackTrace();
-    	}
-    }
-    
-    public BanqueCategorie deSerialiserBanqueCategorie() throws IOException, ClassNotFoundException {
-    	try {
-            FileInputStream fichier = new FileInputStream(FICHIER_SERIALISATION);
-            ObjectInputStream in = new ObjectInputStream(fichier);
-             
-            // Méthode pour dé-serialiser la banque de categorie
-            BanqueCategorie banqueDeserialisee = (BanqueCategorie)in.readObject();
-             
-            in.close();
-            fichier.close();
-            
-            System.out.println("La banque de Categorie à bien été dé-serialisée !");
-            
-            return banqueDeserialisee;
-    	} catch(IOException e) {
-    		 e.printStackTrace();
-    		 return null;
-    	}
     }
 }

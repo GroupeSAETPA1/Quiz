@@ -7,6 +7,7 @@ package application.controleurs;
 
 import application.modele.Partie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -148,8 +149,13 @@ public class ControlleurParametres {
      */
     private void modifierParametrePartie() {
         if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance().getPartie()
-            .setCategoriePartie(selecteurCategorie.getValue());
+            try {
+				ModelePrincipal.getInstance().getPartie()
+				.setCategoriePartie(selecteurCategorie.getValue());
+			} catch (ClassNotFoundException | InternalError | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         } else {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }

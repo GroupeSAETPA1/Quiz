@@ -3,6 +3,7 @@
  */
 package application.modele;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -102,8 +103,11 @@ public class Partie {
     /**
      * Change la categorie de la partie actuelle
      * @param choisis la categorie dans laquelle on veut prendre des questions
+     * @throws IOException 
+     * @throws InternalError 
+     * @throws ClassNotFoundException 
      */
-    public void setCategoriePartie(String choisis) {
+    public void setCategoriePartie(String choisis) throws ClassNotFoundException, InternalError, IOException {
         this.categorieQuestion = ModelePrincipal.getInstance().getBanqueCategorie()
                                					.getCategorieLibelleExact(choisis);
     }

@@ -5,7 +5,12 @@
 
 package application.modele;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,11 +44,17 @@ public class ModelePrincipal {
      */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
-
+    
+	/** le nom des fichiers pour la serialisation */
+	private static final String FICHIER_SERIALISATION_CATEGORIE = "donneesCategorie";
+	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
+	
+	
     private static ModelePrincipal modele;
 
     /** Les CSV importé devront séparé leur élément avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
+
     
     private BanqueCategorie banqueCategorie;
     private BanqueQuestion banqueQuestion;
@@ -59,17 +70,26 @@ public class ModelePrincipal {
 
     /**
      * Constructeur
-     * @throws IOException 
-     * @throws InternalError 
-     * @throws ClassNotFoundException 
-     * @throws InvalidNameException 
-     */
-    private ModelePrincipal() throws ClassNotFoundException, InternalError, IOException {
-    	
-    	// TODO changer le this.banqueQuestion et categorie pour qu'il soit égal a soit une new Banque Question soit l'objet deserialisé
 
-        this.banqueQuestion = new BanqueQuestion();
-        this.banqueCategorie = banqueCategorie.deSerialiserBanqueCategorie(); // new BanqueCategorie(); TODO
+     */
+    private ModelePrincipal() {
+    	
+//        try {
+//			this.banqueQuestion = deSerialiserQuestion() != null 
+//						        ? deSerialiserQuestion() : new BanqueQuestion();
+//		} catch (ClassNotFoundException | IOException e) {
+//			e.printStackTrace();
+//			this.banqueQuestion = new BanqueQuestion();
+//		}
+//        try {
+//			this.banqueCategorie = deSerialiserCategorie() != null 
+//			        			 ? deSerialiserCategorie() : new BanqueCategorie();
+//		} catch (ClassNotFoundException | IOException e) {
+//			e.printStackTrace();
+//			this.banqueQuestion = new BanqueQuestion();
+//		}
+    	this.banqueCategorie = deSerialiserCategorie();
+    	this.banqueQuestion = deSerialiserQuestion();
         this.partie = new Partie();
 
 
@@ -86,12 +106,8 @@ public class ModelePrincipal {
 
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
-     * @throws IOException 
-     * @throws InternalError 
-     * @throws ClassNotFoundException 
-     * @throws InvalidNameException 
      */
-    public static ModelePrincipal getInstance() throws IOException, ClassNotFoundException, InternalError {
+    public static ModelePrincipal getInstance(){
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
@@ -385,5 +401,89 @@ public class ModelePrincipal {
     public boolean supprimerQuestion(Question questionASuprimer) {
         banqueQuestion.getQuestions().remove(questionASuprimer);
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
+    }
+    
+    public void serialiser() throws IOException {
+    	try {
+            FileOutputStream fichierCategorie = new FileOutputStream(FICHIER_SERIALISATION_CATEGORIE);
+            ObjectOutputStream outCategorie = new ObjectOutputStream(fichierCategorie);
+            
+            FileOutputStream fichierQuestion = new FileOutputStream(FICHIER_SERIALISATION_QUESTION);
+            ObjectOutputStream outQuestion = new ObjectOutputStream(fichierQuestion);
+             
+            // Méthode pour serialiser la banque de categorie
+            outCategorie.writeObject(this.getBanqueCategorie());
+            
+            // Méthode pour serialiser la banque de question
+            outQuestion.writeObject(this.getBanqueQuestion());
+             
+            outCategorie.close();
+            fichierCategorie.close();
+            
+            System.out.println("La banque de Categorie à bien été serialisée !");
+            
+            outQuestion.close();
+            fichierQuestion.close();
+             
+            System.out.println("La banque de Question à bien été serialisée !"); 
+            
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    	}
+    }
+    
+    public BanqueCategorie deSerialiserCategorie() {
+		try {
+			File fichierCategorie = new File(FICHIER_SERIALISATION_CATEGORIE);
+			
+			if (fichierCategorie.isFile() && fichierCategorie.canRead()) {
+				FileInputStream inputFichierCategorie = new FileInputStream(fichierCategorie);
+				
+				ObjectInputStream inCategorie = new ObjectInputStream(inputFichierCategorie);	
+				
+				// Méthode pour dé-serialiser la banque de categorie
+				BanqueCategorie banqueDeserialiseeCategorie = (BanqueCategorie)inCategorie.readObject();
+				inCategorie.close();
+				inputFichierCategorie.close();
+				
+				System.out.println("La banque de Categorie à bien été dé-serialisée !");
+				
+				return banqueDeserialiseeCategorie;
+			} else {
+				return new BanqueCategorie();
+			}	
+			
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new BanqueCategorie();
+		}
+    }
+    
+    public BanqueQuestion deSerialiserQuestion() {
+    	try {
+			File fichierQuestion = new File(FICHIER_SERIALISATION_QUESTION);
+			
+			if (fichierQuestion.isFile() && fichierQuestion.canRead()) {	
+				FileInputStream inputFichierQuestion = new FileInputStream(FICHIER_SERIALISATION_QUESTION);
+				ObjectInputStream inQuestion = new ObjectInputStream(inputFichierQuestion);
+				
+				// Méthode pour dé-serialiser la banque de question
+				BanqueQuestion banqueDeserialiseeQuestion = (BanqueQuestion)inQuestion.readObject();
+				
+				inQuestion.close();
+				inputFichierQuestion.close();
+				
+				System.out.println("La banque de Question à bien été dé-serialisée !");
+				
+				return banqueDeserialiseeQuestion;
+			} else {
+	   		    return new BanqueQuestion();
+			}
+			
+    	} catch(ClassNotFoundException | IOException e) {
+   		    e.printStackTrace();
+   		    return new BanqueQuestion();
+        }
     }
 }
