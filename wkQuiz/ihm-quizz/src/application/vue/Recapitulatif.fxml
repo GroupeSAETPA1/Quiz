@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Group layoutX="40.0" layoutY="20.0">
@@ -32,19 +31,26 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <TableView layoutX="10.0" layoutY="175.0" prefHeight="392.0" prefWidth="980.0">
+      <TableView fx:id="tableRecap" layoutX="10.0" layoutY="175.0" prefHeight="392.0" prefWidth="980.0">
          <columns>
-            <TableColumn prefWidth="220.0" text="Libéllé Question " />
-            <TableColumn prefWidth="220.0" text="Catégorie" />
-            <TableColumn prefWidth="100.0" text="Difficulté" />
-            <TableColumn minWidth="196.0" prefWidth="220.0" text="Réponse vrai " />
-            <TableColumn prefWidth="220.0" text="Réponse fausse " />
+            <TableColumn fx:id="libelleQuestion" prefWidth="220.0" text="Libéllé Question " />
+            <TableColumn fx:id="categorie" prefWidth="220.0" text="Catégorie" />
+            <TableColumn fx:id="difficulte" prefWidth="100.0" text="Difficulté" />
+            <TableColumn fx:id="repVrai" minWidth="196.0" prefWidth="220.0" text="Réponse vrai " />
+            <TableColumn fx:id="repFausse" prefWidth="220.0" text="Réponse fausse " />
          </columns>
       </TableView>
       <Button layoutX="365.0" layoutY="604.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="276.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeValider.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </Pane>
