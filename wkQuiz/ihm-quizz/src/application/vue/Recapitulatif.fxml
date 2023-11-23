@@ -31,7 +31,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <TableView fx:id="tableRecap" layoutX="10.0" layoutY="175.0" prefHeight="392.0" prefWidth="980.0">
+      <TableView fx:id="tableRecap" layoutX="10.0" layoutY="175.0" prefHeight="392.0" prefWidth="980.0" stylesheets="@css/mainStyle.css">
          <columns>
             <TableColumn fx:id="libelleQuestion" prefWidth="220.0" text="Libéllé Question " />
             <TableColumn fx:id="categorie" prefWidth="220.0" text="Catégorie" />
