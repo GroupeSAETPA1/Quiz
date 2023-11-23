@@ -7,6 +7,7 @@ package test.modele;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.*;
@@ -109,10 +110,13 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#getInstance()}.
 	 * 
 	 * @throws InvalidNameException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(1)
-	void testGetInstance() throws InvalidNameException {
+	void testGetInstance() throws InvalidNameException, ClassNotFoundException, InternalError, IOException {
 		// On vérifie que deux objets de type ModelePrincipal qui sont 
 		// égaux à l'instance du modelePrincipal sont les mêmes
 		ModelePrincipal modele1 = ModelePrincipal.getInstance();
@@ -128,11 +132,14 @@ class TestModelePrincipal {
 	 * @throws InvalidFormatException
 	 * @throws HomonymeException
 	 * @throws DifficulteException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(2)
 	void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException,
-			DifficulteException {
+			DifficulteException, ClassNotFoundException, InternalError, IOException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
 		// Question de "reference", avec des attributs valides
@@ -210,10 +217,13 @@ class TestModelePrincipal {
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(3)
-	void testSupprimerCategorie() throws InvalidNameException, HomonymeException {
+	void testSupprimerCategorie() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
@@ -250,10 +260,13 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(4)
-	void testCategorieContientQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException {
+	void testCategorieContientQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
@@ -302,10 +315,13 @@ class TestModelePrincipal {
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(5)
-	void testCategorieExiste() throws InvalidNameException, HomonymeException {
+	void testCategorieExiste() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		
@@ -329,10 +345,13 @@ class TestModelePrincipal {
 	 *  
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	@Order(6)
-	void testGetBanqueCategorie() throws InvalidNameException, HomonymeException {
+	void testGetBanqueCategorie() throws ClassNotFoundException, InternalError, IOException, HomonymeException, InvalidNameException  {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		
@@ -353,7 +372,7 @@ class TestModelePrincipal {
 	
 	@Test
 	@Order(7)
-	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException, DifficulteException {
+	void testGetBanqueQuestion() throws ClassNotFoundException, InternalError, IOException, InvalidFormatException, ReponseException, DifficulteException, HomonymeException, InvalidNameException  {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		

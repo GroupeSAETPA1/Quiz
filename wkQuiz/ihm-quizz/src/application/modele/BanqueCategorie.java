@@ -5,6 +5,12 @@
 
 package application.modele;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
@@ -14,9 +20,14 @@ import application.exception.InvalidNameException;
  * @author Quentin Costes
  * @author Tom Douaud
  */
-public class BanqueCategorie {
+public class BanqueCategorie implements Serializable {
 	
-    /** La catégorie Général */
+	/**
+	 * ID de serialisation
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** La catégorie Général */
     protected Categorie categorieGeneral;
     
     /** La liste des catégories */
@@ -27,14 +38,14 @@ public class BanqueCategorie {
      * @throws InvalidNameException 
      */
     public BanqueCategorie() {
-        try {
-            categorieGeneral = new Categorie("General");
-        } catch (InvalidNameException e) {
-            throw new InternalError("La création de la categorie Général à "
-                    + "généré une erreur");
-        }
-        categories = new ArrayList<Categorie>();
-        categories.add(categorieGeneral);
+    	try {
+    		categorieGeneral = new Categorie("General");
+    	} catch (InvalidNameException e) {
+    		throw new InternalError("La création de la categorie Général à "
+    				+ "généré une erreur");
+    	}
+    	categories = new ArrayList<Categorie>();
+    	categories.add(categorieGeneral);
     }
     
     /**

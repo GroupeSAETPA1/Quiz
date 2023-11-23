@@ -7,6 +7,7 @@ package application.controleurs;
 
 import application.modele.Partie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -73,7 +74,6 @@ public class ControleurParametres {
     @FXML
     public void commencerPartie() {
         try {
-        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
@@ -120,6 +120,8 @@ public class ControleurParametres {
      */
     private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
+        // On réinitialise la liste des questions possibles
+        partie.getQuestionPossible().clear();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
             /*
@@ -148,8 +150,13 @@ public class ControleurParametres {
      */
     private void modifierParametrePartie() {
         if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance().getPartie()
-            .setCategoriePartie(selecteurCategorie.getValue());
+            try {
+				ModelePrincipal.getInstance().getPartie()
+				.setCategoriePartie(selecteurCategorie.getValue());
+			} catch (ClassNotFoundException | InternalError | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         } else {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }

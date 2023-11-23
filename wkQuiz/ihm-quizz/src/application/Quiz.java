@@ -5,6 +5,7 @@
 
 package application;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,15 +14,14 @@ import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
-import application.modele.Question;
 import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Classe principale de l'application permettant d'instancier
@@ -143,6 +143,15 @@ public class Quiz extends Application {
 		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
 		
+		primaryStage.setOnCloseRequest((e) -> {
+			try {
+				quitter();
+			} catch (ClassNotFoundException | InternalError | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		primaryStage.show();
 	}
 	
@@ -164,9 +173,13 @@ public class Quiz extends Application {
 	
 	/**
      * Fonction appelée par les controlleurs permettant de quitter l'application
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
      */
-	public static void quitter( ) {
+	public static void quitter() throws ClassNotFoundException, InternalError, IOException {
 	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	    	ModelePrincipal.getInstance().serialiser();
 	        Platform.exit();            
         }
 	}
@@ -179,5 +192,6 @@ public class Quiz extends Application {
 	    GestionVues.charger(vue);
 	    GestionVues.changerVue(vue);
 	}
+	
 
 }
