@@ -62,6 +62,8 @@ public class ControleurRepondreQuestion {
     @FXML
     private Button valider;
     
+    ModelePrincipal modele = ModelePrincipal.getInstance();
+    
 	@FXML 
 	public void initialize() {
 	    /*
@@ -195,6 +197,13 @@ public class ControleurRepondreQuestion {
             
         }
     }
+    
+    @FXML
+	public void aider() {
+    	modele.setPagePrecedente("RepondreQuestion.fxml");
+    	System.out.println(";jtdj,d");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
 
     /**
      * 

@@ -41,7 +41,7 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Group layoutX="890.0" layoutY="20.0">
+      <Group layoutX="890.0" layoutY="20.0" onMouseClicked="#aider">
          <children>
             <Label layoutX="17.0" layoutY="75.0" prefHeight="57.0" prefWidth="77.0" text="Aide " textFill="WHITE">
                <font>

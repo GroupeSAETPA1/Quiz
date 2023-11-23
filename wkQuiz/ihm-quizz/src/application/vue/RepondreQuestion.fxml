@@ -28,7 +28,7 @@
             </Label>
          </children>
       </Group>
-      <Group layoutX="1275.0" layoutY="27.0">
+      <Group layoutX="1275.0" layoutY="27.0" onMouseClicked="#aider">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>

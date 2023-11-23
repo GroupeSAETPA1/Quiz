@@ -50,7 +50,7 @@ public class ControleurEditerQuestions {
 	        TableCell<LigneQuestion, String> cell = new TableCell<>();
 	        cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
-	        cell.setStyle("-fx-font-size: 30px");
+	        cell.setStyle("-fx-font-size: 20px");
 	        return cell;
 	    });
 		
@@ -60,7 +60,7 @@ public class ControleurEditerQuestions {
 	        TableCell<LigneQuestion, String> cell = new TableCell<>();
 	        cell.setAlignment(Pos.CENTER);
 	        cell.textProperty().bind(cell.itemProperty());
-	        cell.setStyle("-fx-font-size: 30px");
+	        cell.setStyle("-fx-font-size: 20px");
 	        return cell;
 	    });
 
