@@ -89,9 +89,9 @@ public class Quiz extends Application {
     	    ArrayList<String> rep = new ArrayList<>();
     	    rep.add("coubeh");
     	    rep.add("je vais me prendre a cause des tableView");
-//    	    
-//    	   
-//    	    
+    	    
+    	   
+    	    
     	    String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
     	    String char350 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.";
     	    ArrayList<String> rep250 = new ArrayList<>();

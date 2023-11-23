@@ -78,25 +78,22 @@ public class ControleurSelectionCategorie {
         ObservableList<LigneSelectionCategorie> data = tableView.getItems();
 
         ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
-
+        
         for (Categorie categorie : categories) {
-            data.add(new LigneSelectionCategorie(categorie.getNom(), modele.getNombreQuestionCategorie(categorie)));
-
+            data.add(new LigneSelectionCategorie(categorie));
         }
     }
 
     /**
-     * Représente une ligne de la tableView
+     * Représente une ligne dans la tableView
      * 
      * @author François de Saint Palais
      */
     public class LigneSelectionCategorie {
 
         ModelePrincipal modele = ModelePrincipal.getInstance();
-
-        private String nomCategorie;
-        private int nombreQuestion;
-        private CheckBox selection;
+        
+        private Categorie categorie;
 
         /**
          * TODO comment initial state properties
@@ -105,41 +102,32 @@ public class ControleurSelectionCategorie {
          * @param nombreQuestion
          * @param selection
          */
-        public LigneSelectionCategorie(String nomCategorie, int nombreQuestion) {
+        public LigneSelectionCategorie(Categorie categorie) {
             super();
-            this.nomCategorie = nomCategorie;
-            this.nombreQuestion = nombreQuestion;
-            this.selection = new CheckBox();
+            this.categorie = categorie;
         }
 
         /** @return valeur de nomCategorie */
         public String getNomCategorie() {
-            return nomCategorie;
+            return categorie.getNom();
         }
 
         /** @return valeur de nombreQuestion */
         public String getNombreQuestion() {
-            return nombreQuestion + "";
-        }
-
-        /** @return valeur de selection */
-        public CheckBox getSelection() {
-            return selection;
+            return modele.getNombreQuestionCategorie(categorie) + "";
         }
 
         public void ajouterALaSelection() {
-            // TODO Auto-generated method stub
             System.out.println(this + " selectionner");
-            modele.ajouterALaSelectionDEnvoie(nomCategorie);
+            modele.ajouterALaSelectionDEnvoie(categorie);
         }
 
         /**
          * TODO comment method role
          */
         public void retirerALaSelection() {
-            // TODO Auto-generated method stub
             System.out.println(this + " deselectionner");
-            modele.supprimerALaSelectionDEnvoie(nomCategorie);
+            modele.supprimerALaSelectionDEnvoie(categorie);
         }
 
         /* non javadoc - @see java.lang.Object#toString() */
@@ -147,11 +135,15 @@ public class ControleurSelectionCategorie {
         public String toString() {
             return nomCategorie + " -> " + nombreQuestion;
         }
+
+        /** @return true si la checkbox doit être sélectionner */
+        public boolean estSelectionner() {
+            return modele.estSelectionner(categorie);
+        }
     }
 
     /**
-     * Créer et gère les actions sur les CheckBox
-     * 
+     * Construit et gère les actions sur les CheckBox
      * @author François de Saint Palais
      */
     public class CheckBoxCategorieCellFactory implements
@@ -167,6 +159,13 @@ public class ControleurSelectionCategorie {
                     super.setAlignment(Pos.CENTER);
                     // On créer une CheckBox
                     CheckBox checkbox = new CheckBox();
+                    
+                    /* Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception */
+                    try {
+                        checkbox.setSelected(getTableView().getItems()
+                                .get( getIndex() ).estSelectionner());
+                    } catch (IndexOutOfBoundsException e) { }
 
                     // On ajoute l'évenement lié au cochage/décochage
                     checkbox.setOnAction(event -> {
@@ -179,13 +178,15 @@ public class ControleurSelectionCategorie {
                         }
                     });
 
-                    setGraphic(checkbox);
+                    if (getIndex() >= getTableView().getItems().size()) {
+                        setGraphic(null);                        
+                    } else {
+                        setGraphic(checkbox);
+                    }
                 }
             };
         }
 
     }
-
-}
 
 }

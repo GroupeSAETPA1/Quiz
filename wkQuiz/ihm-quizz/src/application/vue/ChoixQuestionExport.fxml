@@ -43,7 +43,7 @@
             <Font size="32.0" />
          </font>
       </Button>
-      <TableView layoutX="90.0" layoutY="286.0" prefHeight="350.0" prefWidth="1000.0" fx:id="tableView">
+      <TableView layoutX="90.0" layoutY="286.0" prefHeight="350.0" prefWidth="1000.0" fx:id="tableView" stylesheets="@css/mainStyle.css">
          <columns>
             <TableColumn fx:id="libelleQuestion" prefWidth="333.0" text="Libellé de la question" />
             <TableColumn fx:id="categorieQuestion" prefWidth="333.0" text="Catégorie de la question " />

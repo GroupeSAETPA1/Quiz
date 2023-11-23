@@ -7,7 +7,9 @@ package application.modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import application.controleurs.reseau.ControleurSelectionQuestion.LigneSelectionQuestion;
 import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
@@ -393,46 +395,80 @@ public class ModelePrincipal {
     /**
      * Ajouter toute les questions de la catégorie 
      * à la liste des question a envoyer
-     * @param nomCategorieAAjouter Le nom de la catégorie
+     * @param categorie Le nom de la catégorie
      * @return true si l'ajout est un succès, false sinon
      */
-    public boolean ajouterALaSelectionDEnvoie(String nomCategorieAAjouter) {
+    public boolean ajouterALaSelectionDEnvoie(Categorie categorie) {
         
-        categorieAEnvoyer.add(getCategoriesLibelleExact(nomCategorieAAjouter));
+        categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie() == nomCategorieAAjouter 
+            if (    question.getCategorie() == categorie.getNom() 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
             }
         }
-        return false; //STUB
+        return true;
+    }
+
+    /**
+     * Ajouter toute les questions de la catégorie 
+     * à la liste des question a envoyer
+     * @param categorie Le nom de la catégorie
+     * @return true si l'ajout est un succès, false sinon
+     */
+    public boolean ajouterALaSelectionDEnvoie(Question question) {
+        return questionAEnvoyer.add(question);
     }
     
     /**
      * Retire de la liste questionAEnvoyer,
      * les questions de la catégorie nomCategorieASupprimer
-     * @param nomCategorieASupprimer Le nom de la catégorie 
+     * @param categorie Le nom de la catégorie 
      * @return
      */
-    public boolean supprimerALaSelectionDEnvoie(String nomCategorieASupprimer) {
+    public boolean supprimerALaSelectionDEnvoie(Categorie categorie) {
         ArrayList<Question> questionARetirer = new ArrayList<Question>();
         
-        categorieAEnvoyer.remove(getCategoriesLibelleExact(nomCategorieASupprimer));
+        categorieAEnvoyer.remove(categorie);
         
         for (Question question : questionAEnvoyer) {
-            if (question.getCategorie().equalsIgnoreCase(nomCategorieASupprimer)) {
+            if (question.getCategorie().equalsIgnoreCase(categorie.getNom())) {
                 questionARetirer.add(question);
             }
         }
         
         return questionAEnvoyer.removeAll(questionARetirer);
     }
+    
+    /**
+     * Retire de la liste questionAEnvoyer,
+     * les questions de la catégorie nomCategorieASupprimer
+     * @param categorie Le nom de la catégorie 
+     * @return
+     */
+    public boolean supprimerALaSelectionDEnvoie(Question question) {
+        return questionAEnvoyer.remove(question);
+    }
 
     /** @return valeur de questionAEnvoyer */
     public ArrayList<Question> getQuestionAEnvoyer() {
         return questionAEnvoyer;
     }
+
+    /** @return true si catégorie est sélectionner, false sinon*/
+    public boolean estSelectionner(Categorie categorie) {
+        return categorieAEnvoyer.contains(categorie);
+    }
+
+    /** @return true si catégorie est sélectionner, false sinon*/
+    public boolean estSelectionner(Question question) {
+        return questionAEnvoyer.contains(question);
+    }
+    
+    
+    
+    
     
 }
