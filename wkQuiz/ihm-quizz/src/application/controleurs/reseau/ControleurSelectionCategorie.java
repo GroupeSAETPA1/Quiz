@@ -78,10 +78,10 @@ public class ControleurSelectionCategorie {
         ObservableList<LigneSelectionCategorie> data = tableView.getItems();
 
         ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
-
+        
         for (Categorie categorie : categories) {
-            data.add(new LigneSelectionCategorie(categorie.getNom(), modele.getNombreQuestionCategorie(categorie)));
-
+            data.add(new LigneSelectionCategorie(categorie.getNom(), 
+                    modele.getNombreQuestionCategorie(categorie)));
         }
     }
 
@@ -110,6 +110,8 @@ public class ControleurSelectionCategorie {
             this.nomCategorie = nomCategorie;
             this.nombreQuestion = nombreQuestion;
             this.selection = new CheckBox();
+            
+            selection.setSelected(modele.estSelectionner(nomCategorie));
         }
 
         /** @return valeur de nomCategorie */
@@ -147,6 +149,11 @@ public class ControleurSelectionCategorie {
         public String toString() {
             return nomCategorie + " -> " + nombreQuestion;
         }
+
+        /** @return true si la checkbox doit être sélectionner */
+        public boolean isSelected() {
+            return modele.estSelectionner(nomCategorie);
+        }
     }
 
     /**
@@ -167,6 +174,13 @@ public class ControleurSelectionCategorie {
                     super.setAlignment(Pos.CENTER);
                     // On créer une CheckBox
                     CheckBox checkbox = new CheckBox();
+                    
+                    /* Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception */
+                    try {
+                        checkbox.setSelected(getTableView().getItems()
+                                .get( getIndex() ).isSelected());
+                    } catch (IndexOutOfBoundsException e) { }
 
                     // On ajoute l'évenement lié au cochage/décochage
                     checkbox.setOnAction(event -> {

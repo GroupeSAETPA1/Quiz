@@ -8,9 +8,6 @@ package application.controleurs.reseau;
 import java.util.ArrayList;
 
 import application.Quiz;
-import application.controleurs.factories.CheckBoxCategorieCellFactory;
-import application.controleurs.factories.CheckBoxQuestionCellFactory;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import javafx.collections.ObservableList;
@@ -21,6 +18,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /** 
  * Contrôleur de la page SelectionQuestion.fxml
@@ -86,13 +84,11 @@ public class ControleurSelectionQuestion {
 
         ObservableList<LigneSelectionQuestion> data = tableView.getItems();
 
-        ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
         ArrayList<Question> questions = modele.getBanqueQuestion().getQuestions();
 
         for (Question question : questions) {
             data.add(new LigneSelectionQuestion(question.getLibelle(), 
                                                 question.getCategorie()));
-
         }
     }
 
@@ -155,6 +151,46 @@ public class ControleurSelectionQuestion {
             return libelleQuestion + " -> " + categorieQuestion;
         }
         
-       
+        
+        public boolean estSelectionner() {
+            return false; //STUB
+        }
+    }
+
+    /**
+     * Créer et gère les actions sur les CheckBox
+     * 
+     * @author François de Saint Palais
+     */
+    public class CheckBoxQuestionCellFactory implements
+            Callback<TableColumn<LigneSelectionQuestion, CheckBox>, TableCell<LigneSelectionQuestion, CheckBox>> {
+
+        /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
+        @Override
+        public TableCell<LigneSelectionQuestion, CheckBox> call(TableColumn<LigneSelectionQuestion, CheckBox> arg0) {
+            return new TableCell<LigneSelectionQuestion, CheckBox>() {
+                @Override
+                protected void updateItem(CheckBox item, boolean empty) {
+                    super.updateItem(item, empty);
+                    super.setAlignment(Pos.CENTER);
+                    // On créer une CheckBox
+                    CheckBox checkbox = new CheckBox();
+
+                    // On ajoute l'évenement lié au côchage/décochage
+                    checkbox.setOnAction(event -> {
+                        // La ligne de la checkbox
+                        LigneSelectionQuestion ligne = getTableView().getItems().get(getIndex());
+                        if (checkbox.isSelected()) {
+                            ligne.ajouterALaSelection();
+                        } else {
+                            ligne.retirerALaSelection();
+                        }
+                    });
+
+                    setGraphic(checkbox);
+                }
+            };
+        }
+
     }
 }
