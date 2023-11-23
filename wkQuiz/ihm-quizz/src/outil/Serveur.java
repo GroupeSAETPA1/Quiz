@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import application.exception.ClientDejaConnecter;
 import application.exception.ClientPasConnecterException;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 
 /** 
  * TODO comment class responsibility (SRP)
@@ -86,7 +87,7 @@ public class Serveur {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         System.out.println("Stream Créer");
-        ArrayList<Object> elementAEnvoyer = new ArrayList<Object>();
+        ArrayList<Question> elementAEnvoyer = new ArrayList<Question>();
         
         System.out.println("Envoie question : " + QUESTION_CLIENT_PRET);
         // Demande si le client est prêt
@@ -101,8 +102,7 @@ public class Serveur {
 
         if (clientEstPret) {
             //TODO Recupérer les question a envoyer
-            elementAEnvoyer.add(modele.getCategories().getFirst());
-            elementAEnvoyer.add("Coucou");
+            elementAEnvoyer.addAll(modele.getQuestionAEnvoyer());
             
             //On envoie de le nombre d'élements à envoyer
             oos.writeObject(elementAEnvoyer.size());

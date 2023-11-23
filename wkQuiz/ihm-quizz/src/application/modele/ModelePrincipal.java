@@ -56,6 +56,7 @@ public class ModelePrincipal {
     private Question questionAModifier;
     
     private ArrayList<Question> questionAEnvoyer = new ArrayList<Question>();
+    private ArrayList<Categorie> categorieAEnvoyer = new ArrayList<Categorie>();
 
     /**
      * Constructeur
@@ -397,6 +398,8 @@ public class ModelePrincipal {
      */
     public boolean ajouterALaSelectionDEnvoie(String nomCategorieAAjouter) {
         
+        categorieAEnvoyer.add(getCategoriesLibelleExact(nomCategorieAAjouter));
+        
         for (Question question : banqueQuestion.getQuestions()) {
             if (    question.getCategorie() == nomCategorieAAjouter 
                 && !questionAEnvoyer.contains(question)) {
@@ -415,6 +418,8 @@ public class ModelePrincipal {
      */
     public boolean supprimerALaSelectionDEnvoie(String nomCategorieASupprimer) {
         ArrayList<Question> questionARetirer = new ArrayList<Question>();
+        
+        categorieAEnvoyer.remove(getCategoriesLibelleExact(nomCategorieASupprimer));
         
         for (Question question : questionAEnvoyer) {
             if (question.getCategorie().equalsIgnoreCase(nomCategorieASupprimer)) {
