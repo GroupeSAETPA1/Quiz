@@ -561,6 +561,13 @@ public class ModelePrincipal {
     public boolean supprimerALaSelectionDEnvoie(Question question) {
         return questionAEnvoyer.remove(question);
     }
+    
+    /**
+     * Sélectionne toute les question de la banque pour les envoyer
+     */
+    public void toutEnvoyer() {
+        questionAEnvoyer = banqueQuestion.getQuestions();
+    }
 
     /** @return valeur de questionAEnvoyer */
     public ArrayList<Question> getQuestionAEnvoyer() {

@@ -6,7 +6,7 @@ import application.modele.ModelePrincipal;
 
 public class ControleurChoixEnvoie {
 	
-	private ModelePrincipal model = ModelePrincipal.getInstance();
+	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	@FXML
     void retour() {
@@ -20,13 +20,14 @@ public class ControleurChoixEnvoie {
 	 */
 	@FXML
 	private void aider() {
-		model.setPagePrecedente("ChoixEnvoie.fxml");
+		modele.setPagePrecedente("ChoixEnvoie.fxml");
 		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
 	private void envoieTous() {
+	    modele.toutEnvoyer();
 		Quiz.chargerEtChangerVue("EnvoieQuestion.fxml");
 	}
 	
