@@ -91,7 +91,7 @@ public class ControleurSelectionCategorie {
      * Représente une ligne de la tableView
      * @author François de Saint Palais
      */
-    public static class LigneSelectionCategorie {
+    public  class LigneSelectionCategorie {
         
         String nomCategorie;
         int nombreQuestion;
