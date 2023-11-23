@@ -3,6 +3,8 @@ package application.controleurs.reseau;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,7 +27,7 @@ public class ControleurRecapitulatif {
 	@FXML TableColumn<LigneRecapitulatif, String> categorie;
 	@FXML TableColumn<LigneRecapitulatif, String> difficulte;
 	@FXML TableColumn<LigneRecapitulatif, String> repVrai;
-	@FXML TableColumn<LigneRecapitulatif, String> repFausse;
+
 	
 	 
 	 
@@ -48,10 +50,8 @@ public class ControleurRecapitulatif {
 		 repVrai.setCellValueFactory(
 	                new PropertyValueFactory<LigneRecapitulatif, String>
 	                ("repVrai"));
-		 
-		 repFausse.setCellValueFactory(
-	                new PropertyValueFactory<LigneRecapitulatif, String>
-	                ("repFausse"));
+
+	        });
 		
 		 miseAjourRecap();
 	 }
@@ -68,8 +68,7 @@ public class ControleurRecapitulatif {
 	            data.add(new LigneRecapitulatif(question.getLibelle(), 
 	            		question.getCategorie(), ModelePrincipal
 	            		.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()),
-	            		question.getReponseJuste(),
-	            		question.getMauvaisesReponses()));
+	            		question.getReponseJuste()));
 	        }
 	 }
 	
@@ -90,15 +89,15 @@ public class ControleurRecapitulatif {
 	        String categorie;
 	        String difficulte;
 	        String repVrai;
-	        ArrayList<String> repFausse;
+
 	        
-	        public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai,  ArrayList<String> repFausse ) {
+	        public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai ) {
 	            super();
 	            this.libelleQuestion = libelleQuestion;
 	            this.categorie = categorie;
 	            this.difficulte = difficulte;
 	            this.repVrai = repVrai;
-	            this.repFausse = repFausse;
+
 	        }
 	        
 	        public String getLibelleQuestion() {
@@ -117,9 +116,8 @@ public class ControleurRecapitulatif {
 	            return repVrai;
 	        }
 	        
-	        public   ArrayList<String> getRepFausse() {
-	            return repFausse;
-	        }
-	        
+
 	  }
+	        
 }
+
