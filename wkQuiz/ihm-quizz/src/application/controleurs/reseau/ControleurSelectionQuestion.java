@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 /** 
- * Controleur de la page SelectionQuestion.fxml
+ * Contrôleur de la page SelectionQuestion.fxml
  * @author François de Saint Palais
  */
 public class ControleurSelectionQuestion {
@@ -101,9 +101,11 @@ public class ControleurSelectionQuestion {
      */
     public static class LigneSelectionQuestion {
         
-        String libelleQuestion;
-        String categorieQuestion;
-        CheckBox selection;
+        ModelePrincipal modele = ModelePrincipal.getInstance();
+        
+        private String libelleQuestion;
+        private String categorieQuestion;
+        private CheckBox selection;
         
         /** 
          * TODO comment initial state properties
