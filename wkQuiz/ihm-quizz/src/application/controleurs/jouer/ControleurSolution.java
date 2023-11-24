@@ -39,9 +39,9 @@ import javafx.util.Callback;
  */
 public class ControleurSolution {
 
-    private static final Image BONNE_REPONSE = new Image("application\\vue\\images\\IconeValider.png");
+    private static final Image BONNE_REPONSE = new Image("application/vue/images/IconeValider.png");
 
-    private static final Image MAUVAISE_REPONSE = new Image("application\\vue\\images\\IconeAnnuler.png");
+    private static final Image MAUVAISE_REPONSE = new Image("application/vue/images/IconeAnnuler.png");
 
     private static final String TEXT_SCORE = "Score = %s/%s";
 
