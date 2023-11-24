@@ -33,7 +33,7 @@ public class ControleurAide {
 	 
 	 @FXML private ImageView exempleTableur;
 	 
-	 private Image image = new Image("application\\vue\\images\\tableur.png");
+	 private Image image = new Image("application/vue/images/tableur.png");
 	 
 	 //private ModelePrincipal categorie = model.setDisplayCategoriePane(true);
 	 
