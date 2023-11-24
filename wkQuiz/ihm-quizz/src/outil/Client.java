@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import application.vue.AlertBox;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * 
  * @author Tom Douaud
- * @author Francois
+ * @author Francois de Saint Palais
  */
 public class Client {
     
@@ -69,7 +69,6 @@ public class Client {
      */
 	public ArrayList<Object> recevoirDonnees() 
 	        throws UnknownHostException, IOException, ClassNotFoundException {
-        
 	    ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         
