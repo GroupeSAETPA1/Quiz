@@ -37,3 +37,7 @@ Modelio/Digramme de classe/.runtime/
 
 #sonarLint
 .sonarlint/
+
+# Fichier de serialisation
+donneesCategorie
+donneesQuestion
