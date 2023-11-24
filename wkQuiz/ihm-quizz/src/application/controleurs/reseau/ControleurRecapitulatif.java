@@ -43,15 +43,39 @@ public class ControleurRecapitulatif {
 	                new PropertyValueFactory<LigneRecapitulatif, String>
 	                ("categorie"));
 		 
+		 categorie.setCellFactory(tc -> {
+	            TableCell<LigneRecapitulatif, String> cell = new TableCell<>();
+	            cell.setAlignment(Pos.CENTER);
+	            cell.textProperty().bind(cell.itemProperty());
+	            cell.setWrapText(true);
+	            return cell;
+	        });
+		 
 		 difficulte.setCellValueFactory(
 	                new PropertyValueFactory<LigneRecapitulatif, String>
 	                ("difficulte"));
 		 
+		 difficulte.setCellFactory(tc -> {
+	            TableCell<LigneRecapitulatif, String> cell = new TableCell<>();
+	            cell.setAlignment(Pos.CENTER);
+	            cell.textProperty().bind(cell.itemProperty());
+	            cell.setWrapText(true);
+	            return cell;
+	        });
+		 
 		 repVrai.setCellValueFactory(
 	                new PropertyValueFactory<LigneRecapitulatif, String>
 	                ("repVrai"));
-
+		 
+		 repVrai.setCellFactory(tc -> {
+	            TableCell<LigneRecapitulatif, String> cell = new TableCell<>();
+	            cell.setAlignment(Pos.CENTER);
+	            cell.textProperty().bind(cell.itemProperty());
+	            cell.setWrapText(true);
+	            return cell;
 	        });
+
+
 		
 		 miseAjourRecap();
 	 }
