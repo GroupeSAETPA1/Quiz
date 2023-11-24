@@ -514,7 +514,7 @@ public class ModelePrincipal {
         categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie() == categorie.getNom() 
+            if (    question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
@@ -582,6 +582,7 @@ public class ModelePrincipal {
 
     /** @return true si catégorie est sélectionner, false sinon*/
     public boolean estSelectionner(Question question) {
+        System.out.println(questionAEnvoyer);
         return questionAEnvoyer.contains(question);
     }
 

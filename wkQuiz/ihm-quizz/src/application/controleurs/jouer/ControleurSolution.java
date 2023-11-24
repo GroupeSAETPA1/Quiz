@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import application.Quiz;
+import application.controleurs.factories.TextCellFactory;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
@@ -99,10 +100,10 @@ public class ControleurSolution {
                 new PropertyValueFactory<LigneQuestionSolution, ImageView>
                 ("indicationReponse"));
         
-        colonneLibelle.setCellFactory(new TextCellFactory());
-        colonneCategorie.setCellFactory(new TextCellFactory());
-        colonneReponseJuste.setCellFactory(new TextCellFactory());
-        colonneFeedBack.setCellFactory(new TextCellFactory());
+        colonneLibelle.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneCategorie.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneReponseJuste.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneFeedBack.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
 
         colonneIndication.setCellFactory(new ImageViewCellFactory());
         
@@ -258,36 +259,36 @@ public class ControleurSolution {
             return cell;
         }
     }
-
-    public class TextCellFactory implements Callback<TableColumn<LigneQuestionSolution, String>, TableCell<LigneQuestionSolution, String>> {
-
-        /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
-        @Override
-        public TableCell<LigneQuestionSolution, String> call(TableColumn<LigneQuestionSolution, String> arg0) {
-
-            TableCell<LigneQuestionSolution, String> cell 
-            = new TableCell<LigneQuestionSolution, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        setText(item.toString());
-                    }
-                    Tooltip information = new Tooltip(getText());
-                    Tooltip.install(this, information);
-                }
-            };
-            
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().setValue(cell.getItem());
-            cell.setWrapText(true);
-            
-            return cell;
-        }
-        
-    }
+//
+//    public class TextCellFactory implements Callback<TableColumn<LigneQuestionSolution, String>, TableCell<LigneQuestionSolution, String>> {
+//
+//        /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
+//        @Override
+//        public TableCell<LigneQuestionSolution, String> call(TableColumn<LigneQuestionSolution, String> arg0) {
+//
+//            TableCell<LigneQuestionSolution, String> cell 
+//            = new TableCell<LigneQuestionSolution, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty || item == null) {
+//                        setText(null);
+//                        setGraphic(null);
+//                    } else {
+//                        setText(item.toString());
+//                    }
+//                    Tooltip information = new Tooltip(getText());
+//                    Tooltip.install(this, information);
+//                }
+//            };
+//            
+//            cell.setAlignment(Pos.CENTER);
+//            cell.textProperty().setValue(cell.getItem());
+//            cell.setWrapText(true);
+//            
+//            return cell;
+//        }
+//        
+//    }
 
 }

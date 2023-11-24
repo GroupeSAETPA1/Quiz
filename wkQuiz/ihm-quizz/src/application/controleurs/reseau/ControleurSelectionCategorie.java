@@ -8,6 +8,7 @@ package application.controleurs.reseau;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.controleurs.factories.TextCellFactory;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import javafx.collections.ObservableList;
@@ -46,23 +47,10 @@ public class ControleurSelectionCategorie {
     public void initialize() {
 
         nomCategorie.setCellValueFactory(new PropertyValueFactory<LigneSelectionCategorie, String>("nomCategorie"));
-
-        nomCategorie.setCellFactory(tc -> {
-            TableCell<LigneSelectionCategorie, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setWrapText(true);
-            return cell;
-        });
-
         nombreQuestion.setCellValueFactory(new PropertyValueFactory<LigneSelectionCategorie, String>("nombreQuestion"));
 
-        nombreQuestion.setCellFactory(tc -> {
-            TableCell<LigneSelectionCategorie, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            return cell;
-        });
+        nomCategorie.setCellFactory(new TextCellFactory<LigneSelectionCategorie>());
+        nombreQuestion.setCellFactory(new TextCellFactory<LigneSelectionCategorie>());
 
         selection.setCellFactory(new CheckBoxCategorieCellFactory());
 
@@ -77,7 +65,8 @@ public class ControleurSelectionCategorie {
 
         ObservableList<LigneSelectionCategorie> data = tableView.getItems();
 
-        ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
+        ArrayList<Categorie> categories 
+        = modele.getBanqueCategorie().getCategories();
         
         for (Categorie categorie : categories) {
             data.add(new LigneSelectionCategorie(categorie));
@@ -133,7 +122,7 @@ public class ControleurSelectionCategorie {
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
-            return nomCategorie + " -> " + nombreQuestion;
+            return getNomCategorie() + " -> " + getNombreQuestion();
         }
 
         /** @return true si la checkbox doit être sélectionner */

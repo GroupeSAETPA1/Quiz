@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import application.Quiz;
+import application.controleurs.factories.TextCellFactory;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import javafx.collections.ObservableList;
@@ -49,28 +50,14 @@ public class ControleurSelectionQuestion {
         libelleQuestion.setCellValueFactory(
                 new PropertyValueFactory<LigneSelectionQuestion, String>
                 ("libelleQuestion"));
-        
-        libelleQuestion.setCellFactory(tc -> {
-            TableCell<LigneSelectionQuestion, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setWrapText(true);
-            return cell;
-        });
-        
-        
         categorieQuestion.setCellValueFactory(
                 new PropertyValueFactory<LigneSelectionQuestion, String>
                 ("categorieQuestion"));
         
-        categorieQuestion.setCellFactory(tc->{
-            TableCell<LigneSelectionQuestion, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setWrapText(true);
-            return cell;
-        });
-        
+        libelleQuestion.setCellFactory(
+                new TextCellFactory<LigneSelectionQuestion>());
+        categorieQuestion.setCellFactory(
+                new TextCellFactory<LigneSelectionQuestion>());
         
         selection.setCellFactory(new CheckBoxQuestionCellFactory());
         
@@ -190,7 +177,8 @@ public class ControleurSelectionQuestion {
                     // On ajoute l'évenement lié au côchage/décochage
                     checkbox.setOnAction(event -> {
                         // La ligne de la checkbox
-                        LigneSelectionQuestion ligne = getTableView().getItems().get(getIndex());
+                        LigneSelectionQuestion ligne 
+                        = getTableView().getItems().get(getIndex());
                         if (checkbox.isSelected()) {
                             ligne.ajouterALaSelection();
                         } else {
