@@ -6,9 +6,9 @@
 package application.controleurs.reseau;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import application.Quiz;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import javafx.collections.ObservableList;
@@ -90,13 +90,10 @@ public class ControleurSelectionQuestion {
 
         ObservableList<LigneSelectionQuestion> data = tableView.getItems();
 
-        ArrayList<Categorie> categories = modele.getBanqueCategorie().getCategories();
         ArrayList<Question> questions = modele.getBanqueQuestion().getQuestions();
 
         for (Question question : questions) {
-            data.add(new LigneSelectionQuestion(question.getLibelle(), 
-                                                question.getCategorie()));
-
+            data.add(new LigneSelectionQuestion(question));
         }
     }
 
@@ -108,9 +105,7 @@ public class ControleurSelectionQuestion {
         
         ModelePrincipal modele = ModelePrincipal.getInstance();
         
-        private String libelleQuestion;
-        private String categorieQuestion;
-        private CheckBox selection;
+        private Question question;
         
         /** 
          * TODO comment initial state properties
@@ -118,73 +113,88 @@ public class ControleurSelectionQuestion {
          * @param categorieQuestion
          * @param selection
          */
-        public LigneSelectionQuestion(String libelleQuestion, String categorieQuestion) {
+        public LigneSelectionQuestion(Question question) {
             super();
-            this.libelleQuestion = libelleQuestion;
-            this.categorieQuestion = categorieQuestion;
-            this.selection = new CheckBox();
+            this.question = question;
         }
 
         /** @return valeur de libelleQuestion */
         public String getLibelleQuestion() {
-            return libelleQuestion;
+            return question.getLibelle();
         }
 
         /** @return valeur de categorieQuestion */
         public String getCategorieQuestion() {
-            return categorieQuestion;
-        }
-
-        /** @return valeur de selection */
-        public CheckBox getSelection() {
-            return selection;
+            return question.getCategorie();
         }
         
         public void ajouterALaSelection() {
-            // TODO Auto-generated method stub
             System.out.println(this + " selectionner");
+            modele.ajouterALaSelectionDEnvoie(question);
         }
 
         /** 
          * TODO comment method role
          */
         public void retirerALaSelection() {
-            // TODO Auto-generated method stub
-            System.out.println(this + " deselectionner");            
+            System.out.println(this + " deselectionner");
+            modele.supprimerALaSelectionDEnvoie(question);
         }
 
         /* non javadoc - @see java.lang.Object#toString() */
         @Override
         public String toString() {
-            return libelleQuestion + " -> " + categorieQuestion;
+            return question.toString();
         }
         
-       
+        /** @return true si la checkbox doit être sélectionner */
+        public boolean estSelectionner() {
+            return modele.estSelectionner(question); //STUB
+        }
+
+        /* non javadoc - @see java.lang.Object#equals(java.lang.Object) */
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null)
+                return false;
+            if (question.getClass() != obj.getClass())
+                return false;
+            Question other = (Question) obj;
+            return question.equals(other);
+        }
+        
+        
     }
-    
-    /** 
+
+    /**
      * Créer et gère les actions sur les CheckBox
+     * 
      * @author François de Saint Palais
      */
-    public class CheckBoxQuestionCellFactory 
-    implements  Callback<TableColumn<LigneSelectionQuestion, CheckBox>, 
-                         TableCell<LigneSelectionQuestion, CheckBox>> {
+    public class CheckBoxQuestionCellFactory implements
+            Callback<TableColumn<LigneSelectionQuestion, CheckBox>, TableCell<LigneSelectionQuestion, CheckBox>> {
 
         /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
         @Override
-        public TableCell<LigneSelectionQuestion, CheckBox> 
-        call(TableColumn<LigneSelectionQuestion, CheckBox> arg0) {
+        public TableCell<LigneSelectionQuestion, CheckBox> call(TableColumn<LigneSelectionQuestion, CheckBox> arg0) {
             return new TableCell<LigneSelectionQuestion, CheckBox>() {
                 @Override
                 protected void updateItem(CheckBox item, boolean empty) {
                     super.updateItem(item, empty);
                     super.setAlignment(Pos.CENTER);
-                    //On créer une CheckBox
+                    // On créer une CheckBox
                     CheckBox checkbox = new CheckBox();
+                    
+                    /* Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception */
+                    try {
+                        checkbox.setSelected(getTableView().getItems()
+                                .get( getIndex() ).estSelectionner());
+                    } catch (IndexOutOfBoundsException e) { }
 
-                    //On ajoute l'évenement lié au côchage/décochage
+                    // On ajoute l'évenement lié au côchage/décochage
                     checkbox.setOnAction(event -> {
-                        //La ligne de la checkbox
+                        // La ligne de la checkbox
                         LigneSelectionQuestion ligne = getTableView().getItems().get(getIndex());
                         if (checkbox.isSelected()) {
                             ligne.ajouterALaSelection();
@@ -193,7 +203,11 @@ public class ControleurSelectionQuestion {
                         }
                     });
 
-                    setGraphic(checkbox);
+                    if (getIndex() >= getTableView().getItems().size()) {
+                        setGraphic(null);                        
+                    } else {
+                        setGraphic(checkbox);
+                    }
                 }
             };
         }

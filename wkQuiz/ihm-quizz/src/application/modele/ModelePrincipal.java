@@ -5,9 +5,17 @@
 
 package application.modele;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import application.controleurs.reseau.ControleurSelectionQuestion.LigneSelectionQuestion;
 import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
@@ -23,6 +31,7 @@ import application.exception.ReponseException;
  * @author François de Saint Palais
  */
 public class ModelePrincipal {
+		
 
     /**
      * Lie une difficulté à sont equivalent en string
@@ -37,11 +46,17 @@ public class ModelePrincipal {
      */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
-
+    
+	/** le nom des fichiers pour la serialisation */
+	private static final String FICHIER_SERIALISATION_CATEGORIE = "donneesCategorie";
+	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
+	
+	
     private static ModelePrincipal modele;
 
     /** Les CSV importé devront séparé leur élément avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
+
     
     private BanqueCategorie banqueCategorie;
     private BanqueQuestion banqueQuestion;
@@ -60,12 +75,26 @@ public class ModelePrincipal {
 
     /**
      * Constructeur
-     * @throws InvalidNameException 
+
      */
     private ModelePrincipal() {
-        // TODO lire les fichiers serialisé
-        this.banqueQuestion = new BanqueQuestion();
-        this.banqueCategorie = new BanqueCategorie();
+    	
+//        try {
+//			this.banqueQuestion = deSerialiserQuestion() != null 
+//						        ? deSerialiserQuestion() : new BanqueQuestion();
+//		} catch (ClassNotFoundException | IOException e) {
+//			e.printStackTrace();
+//			this.banqueQuestion = new BanqueQuestion();
+//		}
+//        try {
+//			this.banqueCategorie = deSerialiserCategorie() != null 
+//			        			 ? deSerialiserCategorie() : new BanqueCategorie();
+//		} catch (ClassNotFoundException | IOException e) {
+//			e.printStackTrace();
+//			this.banqueQuestion = new BanqueQuestion();
+//		}
+    	this.banqueCategorie = deSerialiserCategorie();
+    	this.banqueQuestion = deSerialiserQuestion();
         this.partie = new Partie();
 
 
@@ -82,9 +111,8 @@ public class ModelePrincipal {
 
     /**
      * @return Renvoie l'instance unique de ModelePrincipal
-     * @throws InvalidNameException 
      */
-    public static ModelePrincipal getInstance() {
+    public static ModelePrincipal getInstance(){
         if (ModelePrincipal.modele == null) {
             ModelePrincipal.modele = new ModelePrincipal();
         }
@@ -390,49 +418,170 @@ public class ModelePrincipal {
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
     }
     
+    public void serialiser() throws IOException {
+    	try {
+            FileOutputStream fichierCategorie = new FileOutputStream(FICHIER_SERIALISATION_CATEGORIE);
+            ObjectOutputStream outCategorie = new ObjectOutputStream(fichierCategorie);
+            
+            FileOutputStream fichierQuestion = new FileOutputStream(FICHIER_SERIALISATION_QUESTION);
+            ObjectOutputStream outQuestion = new ObjectOutputStream(fichierQuestion);
+             
+            // Méthode pour serialiser la banque de categorie
+            outCategorie.writeObject(this.getBanqueCategorie());
+            
+            // Méthode pour serialiser la banque de question
+            outQuestion.writeObject(this.getBanqueQuestion());
+             
+            outCategorie.close();
+            fichierCategorie.close();
+            
+            System.out.println("La banque de Categorie à bien été serialisée !");
+            
+            outQuestion.close();
+            fichierQuestion.close();
+             
+            System.out.println("La banque de Question à bien été serialisée !"); 
+            
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    	}
+    }
+    
+    public BanqueCategorie deSerialiserCategorie() {
+		try {
+			File fichierCategorie = new File(FICHIER_SERIALISATION_CATEGORIE);
+			
+			if (fichierCategorie.isFile() && fichierCategorie.canRead()) {
+				FileInputStream inputFichierCategorie = new FileInputStream(fichierCategorie);
+				
+				ObjectInputStream inCategorie = new ObjectInputStream(inputFichierCategorie);	
+				
+				// Méthode pour dé-serialiser la banque de categorie
+				BanqueCategorie banqueDeserialiseeCategorie = (BanqueCategorie)inCategorie.readObject();
+				inCategorie.close();
+				inputFichierCategorie.close();
+				
+				System.out.println("La banque de Categorie à bien été dé-serialisée !");
+				
+				return banqueDeserialiseeCategorie;
+			} else {
+				return new BanqueCategorie();
+			}	
+			
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new BanqueCategorie();
+		}
+    }
+    
+    public BanqueQuestion deSerialiserQuestion() {
+    	try {
+			File fichierQuestion = new File(FICHIER_SERIALISATION_QUESTION);
+			
+			if (fichierQuestion.isFile() && fichierQuestion.canRead()) {	
+				FileInputStream inputFichierQuestion = new FileInputStream(FICHIER_SERIALISATION_QUESTION);
+				ObjectInputStream inQuestion = new ObjectInputStream(inputFichierQuestion);
+				
+				// Méthode pour dé-serialiser la banque de question
+				BanqueQuestion banqueDeserialiseeQuestion = (BanqueQuestion)inQuestion.readObject();
+				
+				inQuestion.close();
+				inputFichierQuestion.close();
+				
+				System.out.println("La banque de Question à bien été dé-serialisée !");
+				
+				return banqueDeserialiseeQuestion;
+			} else {
+	   		    return new BanqueQuestion();
+			}
+			
+    	} catch(ClassNotFoundException | IOException e) {
+   		    e.printStackTrace();
+   		    return new BanqueQuestion();
+        }
+    }
+    
     /**
      * Ajouter toute les questions de la catégorie 
      * à la liste des question a envoyer
-     * @param nomCategorieAAjouter Le nom de la catégorie
+     * @param categorie Le nom de la catégorie
      * @return true si l'ajout est un succès, false sinon
      */
-    public boolean ajouterALaSelectionDEnvoie(String nomCategorieAAjouter) {
+    public boolean ajouterALaSelectionDEnvoie(Categorie categorie) {
         
-        categorieAEnvoyer.add(getCategoriesLibelleExact(nomCategorieAAjouter));
+        categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie() == nomCategorieAAjouter 
+            if (    question.getCategorie() == categorie.getNom() 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
             }
         }
-        return false; //STUB
+        return true;
+    }
+
+    /**
+     * Ajouter toute les questions de la catégorie 
+     * à la liste des question a envoyer
+     * @param categorie Le nom de la catégorie
+     * @return true si l'ajout est un succès, false sinon
+     */
+    public boolean ajouterALaSelectionDEnvoie(Question question) {
+        return questionAEnvoyer.add(question);
     }
     
     /**
      * Retire de la liste questionAEnvoyer,
      * les questions de la catégorie nomCategorieASupprimer
-     * @param nomCategorieASupprimer Le nom de la catégorie 
+     * @param categorie Le nom de la catégorie 
      * @return
      */
-    public boolean supprimerALaSelectionDEnvoie(String nomCategorieASupprimer) {
+    public boolean supprimerALaSelectionDEnvoie(Categorie categorie) {
         ArrayList<Question> questionARetirer = new ArrayList<Question>();
         
-        categorieAEnvoyer.remove(getCategoriesLibelleExact(nomCategorieASupprimer));
+        categorieAEnvoyer.remove(categorie);
         
         for (Question question : questionAEnvoyer) {
-            if (question.getCategorie().equalsIgnoreCase(nomCategorieASupprimer)) {
+            if (question.getCategorie().equalsIgnoreCase(categorie.getNom())) {
                 questionARetirer.add(question);
             }
         }
         
         return questionAEnvoyer.removeAll(questionARetirer);
     }
+    
+    /**
+     * Retire de la liste questionAEnvoyer,
+     * les questions de la catégorie nomCategorieASupprimer
+     * @param categorie Le nom de la catégorie 
+     * @return
+     */
+    public boolean supprimerALaSelectionDEnvoie(Question question) {
+        return questionAEnvoyer.remove(question);
+    }
+    
+    /**
+     * Sélectionne toute les question de la banque pour les envoyer
+     */
+    public void toutEnvoyer() {
+        questionAEnvoyer = banqueQuestion.getQuestions();
+    }
 
     /** @return valeur de questionAEnvoyer */
     public ArrayList<Question> getQuestionAEnvoyer() {
         return questionAEnvoyer;
+    }
+
+    /** @return true si catégorie est sélectionner, false sinon*/
+    public boolean estSelectionner(Categorie categorie) {
+        return categorieAEnvoyer.contains(categorie);
+    }
+
+    /** @return true si catégorie est sélectionner, false sinon*/
+    public boolean estSelectionner(Question question) {
+        return questionAEnvoyer.contains(question);
     }
     
 }

@@ -89,8 +89,9 @@ public class ControleurImport {
         } else {
             
             ArrayList<HashMap<String, String>> lignes = getLigneCSV(fichier);
-            creerEtGererQuestionCategorie(lignes);
-        
+            if (!lignes.isEmpty()) {
+            	creerEtGererQuestionCategorie(lignes);            	
+            }
         }
     }
 
@@ -209,7 +210,14 @@ public class ControleurImport {
             ligne = fichierReader.readLine();
 
             if (ligne != null) {
-                HashMap<String, String> dicoLigne = getDicotionnaire(ligne);
+            	HashMap<String, String> dicoLigne;
+            	try {
+            		 dicoLigne = getDicotionnaire(ligne);
+            	} catch (IndexOutOfBoundsException e) {
+            		AlertBox.showErrorBox("Le fichier csv à un format invalide, " 
+                		+ "veuillez vérifier que le séparateur est bien \"é\"");
+            		break;
+            	}
                 resultat.add(dicoLigne);
                 nombreQuestionAjoute ++;
             }
@@ -229,10 +237,12 @@ public class ControleurImport {
     private static HashMap<String, String> getDicotionnaire(String ligne) {
         HashMap<String, String> resultat = new HashMap<String, String>();
         String[] ligneListe = ligne.split(ModelePrincipal.SEPARATEUR_CSV + "");
-        resultat.put("categorie", ligneListe[0].trim());
-        resultat.put("difficulte", ligneListe[1]);
-        resultat.put("libelle", ligneListe[2]);
-        resultat.put("reponseJuste", ligneListe[3]);
+        
+        	resultat.put("categorie", ligneListe[0].trim());
+        	resultat.put("difficulte", ligneListe[1]);
+        	resultat.put("libelle", ligneListe[2]);
+        	resultat.put("reponseJuste", ligneListe[3]);	
+
 
         try {
             resultat.put("1reponseFausse", ligneListe[4]);

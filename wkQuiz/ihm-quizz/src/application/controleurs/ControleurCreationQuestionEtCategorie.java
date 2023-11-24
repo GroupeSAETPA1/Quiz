@@ -140,7 +140,7 @@ public class ControleurCreationQuestionEtCategorie {
 		try {
 			//Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
-			if (indiceCategorieChoisie <= 0) {
+			if (indiceCategorieChoisie < 0) {
 				throw new 
 				NullPointerException("Il n'y a pas de Catégorie choisie");
 			}
