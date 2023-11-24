@@ -34,7 +34,7 @@ class testChiffrage {
      */
     @Test
     void testGenerationCle() {
-        for (int i = 0 ;  i < 1000 ; i ++) {
+        for (int i = 0 ;  i < 10000 ; i ++) {
             String cle  = Chiffrage.generationCle();
             for (int j = 0 ; j < cle.length()  ; j++) {
                 assertTrue(
@@ -116,28 +116,12 @@ class testChiffrage {
             ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
         }
         //System.out.println(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions());
-        //String cle = Chiffrage.generationCle();
-        //Chiffrage.genererCSV(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions(), cle);
+        String cle = Chiffrage.generationCle();
+        ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions() , cle);
         System.out.println(cle);
         //System.out.println();
-        //Chiffrage.decrypterFichier(cle);    
+        Chiffrage.decrypterFichier(questionCrypter.get(0) , cle);    
         System.out.println("finis");
-    }
-
-    /**
-     * Test method for {@link application.modele.Chiffrage#lireCSV(java.lang.String)}.
-     */
-    @Test
-    void testLireCSV() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Chiffrage#analiserResultat(java.util.ArrayList)}.
-     */
-    @Test
-    void testAnaliserResultat() {
-        fail("Not yet implemented");
     }
     
     
@@ -146,38 +130,30 @@ class testChiffrage {
      */
     @Test
     void testexposantModulo() {
-    	// Test case 1
         assertEquals(1, Chiffrage.exposantModulo(6, 0, 11));
-
-        // Test case 2
         assertEquals(6, Chiffrage.exposantModulo(6, 1, 11));
-
-        // Test case 3
         assertEquals(3, Chiffrage.exposantModulo(6, 2, 11));
-
-        // Test case 4
         assertEquals(7, Chiffrage.exposantModulo(6, 3, 11));
-
-        // Test case 5
         assertEquals(1, Chiffrage.exposantModulo(2, 0, 7));
-
-        // Test case 6
         assertEquals(2, Chiffrage.exposantModulo(2, 1, 7));
-
-        // Test case 7
         assertEquals(4, Chiffrage.exposantModulo(2, 2, 7));
-
-        // Test case 8
         assertEquals(1, Chiffrage.exposantModulo(3, 0, 5));
-
-        // Test case 9
         assertEquals(3, Chiffrage.exposantModulo(3, 1, 5));
-
-        // Test case 10
-        assertEquals(4, Chiffrage.exposantModulo(3, 2, 5));
-        
+        assertEquals(4, Chiffrage.exposantModulo(3, 2, 5));      
         assertEquals(4, Chiffrage.exposantModulo(13, 63, 17));
-        System.out.println(Chiffrage.exposantModulo(24526, 1425, 34561));
     }
-
+    
+    @Test
+    void genererPuissanceTest() {
+        for (int i = 0 ; i < 10000 ; i++) {
+            int nombre = Chiffrage.genererPuissance();
+            assertTrue( nombre >= 5000 && nombre <= 9999);
+        } 
+    }
+    
+    @Test
+    void testCleDepuisDiffe() {
+       //TEST pour gab = 2899 (pris aleatoirement)
+       assertEquals("wCDD3900 fgg fgg", Chiffrage.cleDepuisDiffie());
+    }
 }
