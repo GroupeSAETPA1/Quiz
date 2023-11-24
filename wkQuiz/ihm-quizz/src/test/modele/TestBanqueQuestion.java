@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
-import application.exception.ReponseException;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.Question;
@@ -39,14 +39,12 @@ class TestBanqueQuestion {
 	/**
 	 * Génère une question valide pour les tests
 	 * 
-	 * @throws ReponseException
 	 * @throws InvalidNameException
-	 * @throws InvalidFormatException
-	 * @throws DifficulteException
+	 * @throws CreerQuestionException 
 	 */
 	@BeforeEach
 	void genererQuestionValide()
-			throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+			throws InvalidNameException, CreerQuestionException {
 		ArrayList<String> reponsesFausses = new ArrayList<String>();
 		reponsesFausses.add("Faux");
 		Question question1 = new Question("Libelle", new Categorie("Nom"), 1, "Vrai", reponsesFausses, "");

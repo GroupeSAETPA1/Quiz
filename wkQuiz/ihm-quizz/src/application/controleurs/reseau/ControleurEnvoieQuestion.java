@@ -89,6 +89,7 @@ public class ControleurEnvoieQuestion {
              if (!envoieReussi) {
                  AlertBox.showWarningBox("Le client a refuser les questions");
              }
+             information.setText("Pas de client connecté");
         } catch (ClientPasConnecterException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
@@ -101,7 +102,6 @@ public class ControleurEnvoieQuestion {
 
     @FXML
     void lancerServeur() throws ClassNotFoundException, IOException {
-        
         
         if (!serveur.clientEstConnecte()) {
             information.setText("En attente d'un client ...");
@@ -118,8 +118,6 @@ public class ControleurEnvoieQuestion {
         } else {
             AlertBox.showWarningBox("Un client est déjà connecté.");
         }
-        
-        
         
     }
     
