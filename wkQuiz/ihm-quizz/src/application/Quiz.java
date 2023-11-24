@@ -54,10 +54,10 @@ public class Quiz extends Application {
      * Fonction main qui lance la fenêtre JavaFX
      * @param args non utilisé
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
     	launch(args);
     }
-
+    
     /**
      * Lance l'application
      * @throws InvalidNameException 
@@ -123,8 +123,8 @@ public class Quiz extends Application {
 		        	e.consume();
 		        }
 			} catch (InternalError | IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				System.err.println("Erreur dans la sauvegarde des données");
 			}
 		});
 		

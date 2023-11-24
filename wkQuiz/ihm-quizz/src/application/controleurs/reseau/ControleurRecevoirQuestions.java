@@ -62,8 +62,6 @@ public class ControleurRecevoirQuestions {
             clientCreer = true;
             System.out.println("Client créer");
         } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
             AlertBox.showErrorBox(e.getMessage());
         }
         
@@ -84,8 +82,6 @@ public class ControleurRecevoirQuestions {
                         try {
                             modele.ajouterQuestion((Question) object);
                         } catch (Exception e) {
-                            // TODO: handle exception
-                            e.printStackTrace();
                             AlertBox.showWarningBox("Toute les question n'ont pas pu être ajouté");
                         }
                     }
@@ -94,8 +90,7 @@ public class ControleurRecevoirQuestions {
             } catch (SocketTimeoutException e) {
                 AlertBox.showErrorBox("TimeOut : Pas de serveur trouvé");
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                AlertBox.showErrorBox(e.getMessage());
             }
         }
     }
