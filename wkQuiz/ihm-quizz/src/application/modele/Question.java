@@ -163,6 +163,9 @@ public class Question implements Serializable {
                     + "contient une ou plusieurs propositions égale "
                     + "a la réponse juste (casse ignorée");
         }
+        if (contientAccent(reponseJuste, reponsesFausse, libelle)) {
+        	throw new InvalidNameException("Aucun champ ne doit contenir des accents.");
+        }
         
         ArrayList<String>reponseFausseTropLongue = 
                 reponseFausseLongueurInvalide(reponsesFausse);
@@ -187,7 +190,19 @@ public class Question implements Serializable {
         
     }
 
-    /** 
+    private boolean contientAccent(String reponseJuste, ArrayList<String> reponsesFausses, String libelle) {
+    	boolean ok = true;
+    	for (int i = 0 ; i < reponsesFausses.size(); i++) {
+    		ok = ok && ModelePrincipal.alphabetOk(reponsesFausses.get(i));
+    	}
+    	
+    	ok = ok && ModelePrincipal.alphabetOk(reponseJuste);
+    	ok = ok && ModelePrincipal.alphabetOk(libelle);
+    	
+    	return ok;
+	}
+
+	/** 
      * * Construire un message d'erreur a partir d'une arrayList de reponse trop
      * longue
      * @param reponseFausse liste des reponses fausses a ajouter dans le 
@@ -408,4 +423,7 @@ public class Question implements Serializable {
     	}
     	return aRetouner; 	
     }
+    
+    
+    
 }

@@ -388,4 +388,18 @@ public class ModelePrincipal {
         banqueQuestion.getQuestions().remove(questionASuprimer);
         return !banqueQuestion.getQuestions().contains(questionASuprimer);
     }
+    
+    /**
+     * test si la string passée en parametre est contenue dans l'alphabet defini
+     * @param aTester
+     * @return false si un caractere n'est pas dans l'alphabet true sinon
+     */
+    public static boolean alphabetOk(String aTester) {
+    	for (int i = 0; i < aTester.length(); i++) {
+			if (!Chiffrage.ALPAHABET_TO_INT.keySet().contains(aTester.charAt(i))) {
+				return false;	
+			}
+		}
+    	return true;
+    }
 }

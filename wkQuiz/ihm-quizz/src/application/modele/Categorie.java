@@ -40,9 +40,10 @@ public class Categorie implements Serializable {
      * @param nom à vérifier (String)
      * @return true si le nom est valide, false sinon
      */
-    public static boolean nomValide(String nom) {
-        return !nom.isBlank() && nom.length() <= LONGUEUR_NOM_MAX ;
+    public static boolean nomValide(String nom) {		
+        return !nom.isBlank() && nom.length() <= LONGUEUR_NOM_MAX  && ModelePrincipal.alphabetOk(nom);
     }
+      
 
     /**
      * Setter du nom de la catégorie
