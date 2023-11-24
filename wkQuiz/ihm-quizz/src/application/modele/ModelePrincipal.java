@@ -77,20 +77,6 @@ public class ModelePrincipal {
      */
     private ModelePrincipal() {
     	
-//        try {
-//			this.banqueQuestion = deSerialiserQuestion() != null 
-//						        ? deSerialiserQuestion() : new BanqueQuestion();
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//			this.banqueQuestion = new BanqueQuestion();
-//		}
-//        try {
-//			this.banqueCategorie = deSerialiserCategorie() != null 
-//			        			 ? deSerialiserCategorie() : new BanqueCategorie();
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//			this.banqueQuestion = new BanqueQuestion();
-//		}
     	this.banqueCategorie = deSerialiserCategorie();
     	this.banqueQuestion = deSerialiserQuestion();
         this.partie = new Partie();
@@ -468,7 +454,6 @@ public class ModelePrincipal {
 			}	
 			
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new BanqueCategorie();
 		}

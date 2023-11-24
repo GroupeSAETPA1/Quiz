@@ -5,6 +5,7 @@
 
 package test.modele;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,6 +30,7 @@ import application.modele.BanqueCategorie;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
 
 /**
@@ -252,7 +254,7 @@ class TestModelePrincipal {
 
 	/**
 	 * Méthode de test pour la méthode supprimerCategorie
-	 * {@link application.modele.ModelePrincipal#supprimerCategorie(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#supprimerCategorie(Categorie)}.
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
@@ -294,7 +296,7 @@ class TestModelePrincipal {
 
 	/**
 	 * Méthode de test pour la méthode categorieContientQuestion
-	 * {@link application.modele.ModelePrincipal#categorieContientQuestion(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#categorieContientQuestion(Categorie)}.
 	 * 
 	 * @throws CreerQuestionException
 	 * @throws InvalidNameException
@@ -351,7 +353,7 @@ class TestModelePrincipal {
 	
 	/**
 	 * Méthode de test pour la méthode categorieExiste
-	 * {@link application.modele.ModelePrincipal#categorieExiste(String)}.
+	 * @see {@link application.modele.ModelePrincipal#categorieExiste(String)}.
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
@@ -381,7 +383,7 @@ class TestModelePrincipal {
 	
 	/**
 	 * Méthode de test pour la méthode getBanqueCategorie
-	 * {@link application.modele.ModelePrincipal#getBanqueCategorie()}.
+	 * @see {@link application.modele.ModelePrincipal#getBanqueCategorie()}.
 	 *  
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
@@ -400,7 +402,6 @@ class TestModelePrincipal {
 		// que celle de la banque de catégorie par défaut 
 		// plus les catégories rajoutés lors des autres test
 		BanqueCategorie banqueTest = new BanqueCategorie();
-		System.out.println(modele.getBanqueCategorie());
 		banqueTest.ajouter(new Categorie("Autre Nom"));
 		banqueTest.ajouter(categoriesValides[0]);
 		banqueTest.ajouter(categoriesValides[1]);
@@ -411,6 +412,16 @@ class TestModelePrincipal {
 		}
 	}
 	
+	/**
+	 * Méthode de test pour la méthode getBanqueQuestion
+	 * @see {@link application.modele.ModelePrincipal#getBanqueQuestion()}.
+	 * @throws ClassNotFoundException
+	 * @throws InternalError
+	 * @throws IOException
+	 * @throws HomonymeException
+	 * @throws InvalidNameException
+	 * @throws CreerQuestionException
+	 */
 	@Test
 	@Order(9)
 	void testGetBanqueQuestion() throws ClassNotFoundException, InternalError, IOException, HomonymeException, InvalidNameException, CreerQuestionException  {
@@ -490,7 +501,7 @@ class TestModelePrincipal {
 	
 	/**
 	 * Méthode de test pour la méthode getCategorieAModifier
-	 * {@link application.modele.ModelePrincipal#getCategorieAModifier()}.
+	 * @see {@link application.modele.ModelePrincipal#getCategorieAModifier()}.
 	 * 
 	 * @throws InvalidNameException
 	 */
@@ -509,7 +520,7 @@ class TestModelePrincipal {
 	
 	/**
 	 * Méthode de test pour la méthode getCategoriesLibelle
-	 * {@link application.modele.ModelePrincipal#getCategoriesLibelle()}.
+	 * @see {@link application.modele.ModelePrincipal#getCategoriesLibelle()}.
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
@@ -542,18 +553,140 @@ class TestModelePrincipal {
 	    // car deux catégories contiennent "a" dans leur libellé
 	    assertIterableEquals(attendu, modele.getCategoriesLibelle("a"));
 	}
+	
+	/**
+	 * Méthode de test pour la méthode getIndice
+	 * @see {@link application.modele.ModelePrincipal#getIndice()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(12)
+	void testGetIndice() throws InvalidNameException, HomonymeException {
+	    // On récupère l'instance du modèle principal 
+	    // et de la banque de catégories du modele principal et on vide cette banque
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    BanqueCategorie banque = modele.getBanqueCategorie();
 
+	    banque.getCategories().clear();
 
+	    // On rajoute 3 Catégories dans la banque de catégorie du modèle principal
+	    Categorie a1 = new Categorie("a");
+	    Categorie a2 = new Categorie("aa");
+	    Categorie a3 = new Categorie("b");
+
+	    modele.creerCategorie(a1.getNom());
+	    modele.creerCategorie(a2.getNom());
+	    modele.creerCategorie(a3.getNom());
+
+	    // On vérifie que la catégorie "aa" qui est en deuxième position 
+	    // renvoie bien 1 car la position 0 est pour "a"
+	    assertEquals(1, modele.getIndice("aa"));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode getNombreQuestionCategorie
+	 * @see {@link application.modele.ModelePrincipal#getNombreQuestionCategorie(Categorie)}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 * @throws CreerQuestionException
+	 */
+	@Test
+	@Order(13)
+	void testGetNombreQuestionCategorie() throws InvalidNameException, HomonymeException, CreerQuestionException {
+	    // On récupère l'instance du modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On crée une catégorie avec 3 questions
+	    Categorie categorie3question = new Categorie("Categorie avec 3 questions");
+	    modele.creerCategorie(categorie3question.getNom());
+	    modele.creerQuestion("question 1", 3, 1, "juste", mauvaiseReponse1, "");
+	    modele.creerQuestion("question 2", 3, 1, "juste", mauvaiseReponse1, "");
+	    modele.creerQuestion("question 3", 3, 1, "juste", mauvaiseReponse1, "");
+	    
+	    // On vérifie que la catégorie possède bien 3 questions
+	    assertEquals(3, modele.getNombreQuestionCategorie(categorie3question));
+	}
+
+	/**
+     * Méthode de test pour la méthode getPagePrecendente et setPagePrecedente
+	 * @see {@link application.modele.ModelePrincipal#getPagePrecendente()}.
+	 * @see {@link application.modele.ModelePrincipal#setPagePrecendente()}.
+	 */
+	@Test
+	@Order(14)
+	void testPagePrecedente() {
+		// On récupere le modèle principal et on vérifie que par défault, 
+		// il n'y a pas de page précédente (null) 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+		assertNull(modele.getPagePrecendente());
+		
+		// On définit la page précedente et on vérifie que 
+		// les modifications sont bien effectives
+		modele.setPagePrecedente("TestPagePrecedente");
+		assertEquals("TestPagePrecedente", modele.getPagePrecendente());
+	}
+	
+	/**
+	 * Méthode de test pour la méthode setPartie et getPartie
+	 * @see {@link application.modele.ModelePrincipal#getPartie()}.
+	 * @see {@link application.modele.ModelePrincipal#setPartie()}.
+	 */
+	@Test
+	@Order(15)
+	void testPartie() {
+		// On récupère le modèle principal et on vérifie 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On set la partie du modèle et on vérifie 
+	    // que la partie est bien celle mise en paramètre
+		Partie partieTest = new Partie();
+		modele.setPartie(partieTest);
+		assertEquals(partieTest, modele.getPartie());
+	}
+	
+	/**
+	 * Méthode de test pour la méthode setQuestionAModifier et getQuestionAModifier
+	 * @see {@link application.modele.ModelePrincipal#setQuestionAModifier()}.
+	 * @see {@link application.modele.ModelePrincipal#getQuestionAModifier()}.
+	 * 
+	 * @throws CreerQuestionException
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(16)
+	void testQuestionsAModifier() throws CreerQuestionException, InvalidNameException, HomonymeException {
+		// On récupère le modèle principal et on vérifie qu'au départ 
+		// il n'y a pas de question à modifier 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    assertNull(modele.getQuestionAModifier());
+	    
+	    // On crée une question, on l'ajoute au modèle et on la définit 
+	    // comme question à modifier
+	    Question questionAModifier = new Question("Question a modifier", 
+				  	  				               modele.getCategories().get(0), 
+				  	  				               1,
+				  	  				               "non vide", 
+				  	  				               mauvaiseReponse1, 
+					  							   "");
+	    modele.ajouterQuestion(questionAModifier);
+	    modele.setQuestionAModifier(questionAModifier);
+	    
+	    // On vérifie que la question à modifier est bien la question créé auparavant
+		assertEquals(questionAModifier, modele.getQuestionAModifier());
+	}
 	
 	/**
 	 * Renvoie l'indice de la categorie dans une liste
 	 * 
-	 * @param categorie
-	 * @param categories
-	 * @return
+	 * @param categorie la catégorie qu'on recherche dans la liste de catégorie
+	 * @param categories la liste de catégorie
+	 * @return i, la position dans la liste de la catégorie (-1 si introuvable)
 	 */
 	private int indexOf(Categorie categorie, ArrayList<Categorie> categories) {
-		// TODO Auto-generated method stub
 		int i = 0;
 		for (Categorie categorieListe : categories) {
 			if (categorieListe.equals(categorie))
@@ -562,5 +695,4 @@ class TestModelePrincipal {
 		}
 		return -1;
 	}
-
 }
