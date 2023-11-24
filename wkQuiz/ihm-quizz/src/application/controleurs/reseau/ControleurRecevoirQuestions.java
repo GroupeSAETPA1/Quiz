@@ -79,13 +79,15 @@ public class ControleurRecevoirQuestions {
                 //TODO décrypter
                 
                 //TODO Ajouter à la banque
-                for (Object object : elementRecu) {
-                    try {
-                        modele.ajouterQuestion((Question) object);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                        e.printStackTrace();
-                        AlertBox.showWarningBox("Toute les question n'ont pas pu être ajouté");
+                if (elementRecu != null) {
+                    for (Object object : elementRecu) {
+                        try {
+                            modele.ajouterQuestion((Question) object);
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                            e.printStackTrace();
+                            AlertBox.showWarningBox("Toute les question n'ont pas pu être ajouté");
+                        }
                     }
                 }
                 
