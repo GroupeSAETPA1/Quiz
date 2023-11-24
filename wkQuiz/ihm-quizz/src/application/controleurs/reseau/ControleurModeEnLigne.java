@@ -1,7 +1,7 @@
 package application.controleurs.reseau;
 
-import javafx.fxml.FXML;
 import application.Quiz;
+import javafx.fxml.FXML;
 
 
 public class ControleurModeEnLigne {

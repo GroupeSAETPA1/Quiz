@@ -5,7 +5,6 @@
 
 package application.controleurs.factories;
 
-import application.controleurs.jouer.ControleurSolution.LigneQuestionSolution;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;

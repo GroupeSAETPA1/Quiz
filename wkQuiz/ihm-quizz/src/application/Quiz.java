@@ -5,7 +5,6 @@
 
 package application;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,16 +13,13 @@ import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
-import application.modele.Question;
 import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * Classe principale de l'application permettant d'instancier

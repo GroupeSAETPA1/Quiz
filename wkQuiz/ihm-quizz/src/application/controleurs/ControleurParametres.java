@@ -5,17 +5,13 @@
 
 package application.controleurs;
 
-import application.modele.Partie;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-
-import org.junit.jupiter.params.provider.EnumSource.Mode;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;

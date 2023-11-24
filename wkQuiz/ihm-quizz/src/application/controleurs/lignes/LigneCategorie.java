@@ -1,12 +1,9 @@
 package application.controleurs.lignes;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.control.Alert;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 
 /**

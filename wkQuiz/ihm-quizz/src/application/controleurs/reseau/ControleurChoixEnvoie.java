@@ -1,8 +1,8 @@
 package application.controleurs.reseau;
 
-import javafx.fxml.FXML;
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import javafx.fxml.FXML;
 
 public class ControleurChoixEnvoie {
 	

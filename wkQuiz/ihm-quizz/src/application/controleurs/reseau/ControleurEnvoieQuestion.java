@@ -16,10 +16,7 @@ import application.exception.ClientPasConnecterException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Dialog;
 import javafx.scene.text.Text;
 import outil.Serveur;
 

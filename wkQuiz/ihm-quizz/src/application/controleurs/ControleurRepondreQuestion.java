@@ -1,23 +1,17 @@
 package application.controleurs;
 
 import java.util.ArrayList;
-import java.util.Collections;import javax.naming.PartialResultException;
-
-import org.junit.jupiter.params.provider.EnumSource.Mode;
+import java.util.Collections;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class ControleurRepondreQuestion {

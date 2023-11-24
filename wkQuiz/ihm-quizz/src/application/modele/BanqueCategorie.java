@@ -5,13 +5,9 @@
 
 package application.modele;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 

@@ -1,5 +1,13 @@
 package application.controleurs;
 
+import java.util.ArrayList;
+
+import application.Quiz;
+import application.controleurs.factories.EditerCategorieButtonCellFactory;
+import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
+import application.controleurs.lignes.LigneCategorie;
+import application.modele.Categorie;
+import application.modele.ModelePrincipal;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,15 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import application.modele.Categorie;
-import application.modele.ModelePrincipal;
-
-import java.util.ArrayList;
-
-import application.Quiz;
-import application.controleurs.factories.EditerCategorieButtonCellFactory;
-import application.controleurs.factories.SupprimerCategorieButtonCellFactory;
-import application.controleurs.lignes.LigneCategorie;
 /**
  * Controlleur de la page d'édition des catégories.
  * Celui-ci instance  des méthodes liée au bouton de la page 
