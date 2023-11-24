@@ -31,7 +31,9 @@ public class BanqueCategorie implements Serializable {
     
     /**
      * Constructeur de BanqueCategorie
-     * @throws InvalidNameException 
+     * @throws InvalidNameException L'exception ne serait jamais envoyée 
+     * vu qu'on appele le constructeur de Categorie avec la catégorie general 
+     * qui est valide mais on est obligés de l'entourer d'un try catch
      */
     public BanqueCategorie() {
     	try {

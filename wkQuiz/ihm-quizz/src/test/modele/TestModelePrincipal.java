@@ -8,6 +8,7 @@ package test.modele;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -112,6 +113,39 @@ class TestModelePrincipal {
 	}
 
 	/**
+	 * Méthode de test pour les méthodes serialiser, deSerialiserCategorie, deSerialiserQuestion
+	 * @see {@link application.modele.ModelePrincipal#serialiser()}.
+	 * @see {@link application.modele.ModelePrincipal#deSerialiserCategorie()}.
+	 * @see {@link application.modele.ModelePrincipal#deSerialiserQuestion()}.
+	 */
+	@Test
+	@Order(1)
+	void testSerialisation() {
+		// On vérifie que la serialisation et la dé-serialisation du modèle 
+		// est bien effectuée et valide
+		ModelePrincipal modele = ModelePrincipal.getInstance();
+		assertIterableEquals(modele.getBanqueCategorie().getCategories(), modele.deSerialiserCategorie().getCategories());
+		assertIterableEquals(modele.getBanqueQuestion().getQuestions(), modele.deSerialiserQuestion().getQuestions());
+	}
+	
+	/**
+	 * Méthode pour que les autres tests 
+	 * ne soient pas influencés par la sérialisation
+	 * @throws InvalidNameException 
+	 */
+	@Test
+	@Order(2)
+	void reinitialiserModele() throws InvalidNameException {
+		// On récupère le modele principal et on supprime toutes ses questions et categories
+		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueCategorie().getCategories().clear();
+		modele.getBanqueQuestion().getQuestions().clear();
+		
+		// On remets juste la catégorie general
+		modele.getBanqueCategorie().getCategories().add(new Categorie("General"));
+	}
+	
+	/**
 	 * Méthode de test pour la méthode getInstance
 	 * @see {@link application.modele.ModelePrincipal#getInstance()}.
 	 * 
@@ -121,7 +155,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(1)
+	@Order(3)
 	void testGetInstance() throws InvalidNameException, ClassNotFoundException, InternalError, IOException {
 		// On vérifie que deux objets de type ModelePrincipal qui sont 
 		// égaux à l'instance du modelePrincipal sont les mêmes
@@ -141,11 +175,11 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException 
 	 */
 	@Test
-	@Order(2)
+	@Order(4)
 	void testCreerQuestion() throws InvalidNameException, HomonymeException,
 			ClassNotFoundException, InternalError, IOException, CreerQuestionException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
-
+		
 		// Question de "reference", avec des attributs valides
 		assertDoesNotThrow(() -> modele.creerQuestion("Quel est le délimiteur de " 
 													+ "début d'un commentaire Javadoc ", 
@@ -154,9 +188,9 @@ class TestModelePrincipal {
 													   "non vide", 
 													   mauvaiseReponse1, 
 													   ""));
-
+		
 		modele.creerCategorie("Autre Nom");
-
+		
 		// Test ajout de question avec seulement la catégorie de différente
 		assertDoesNotThrow(() -> modele.creerQuestion("Quel est le délimiteur de " 
 													+ "début d'un commentaire Javadoc ", 
@@ -165,6 +199,7 @@ class TestModelePrincipal {
 													  "non vide",
 													  mauvaiseReponse1, 
 													  ""));
+
 
 		// Test ajout de question avec seulement le libellé de différent
 		assertDoesNotThrow(() -> modele.creerQuestion("libelle different", 
@@ -226,7 +261,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(3)
+	@Order(5)
 	void testSupprimerCategorie() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -269,7 +304,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(4)
+	@Order(6)
 	void testCategorieContientQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -280,13 +315,14 @@ class TestModelePrincipal {
 
 		// On mets des une question sur deux de la liste de questionValide
 		// dans la catégorie "Commentaire" et "test"
+		
 		int c = 1;
 		for (Question q : questionValide) {
 			modele.creerQuestion(q.getLibelle(), c % 2 + 2, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1,
 					"");
 			c++;
 		}
-
+		
 		// On vérifie qu'il existe bien des questions présentes dans les deux catégories
 		assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
 		assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
@@ -324,7 +360,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(5)
+	@Order(7)
 	void testCategorieExiste() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -354,7 +390,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(6)
+	@Order(8)
 	void testGetBanqueCategorie() throws ClassNotFoundException, InternalError, IOException, HomonymeException, InvalidNameException  {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -364,6 +400,7 @@ class TestModelePrincipal {
 		// que celle de la banque de catégorie par défaut 
 		// plus les catégories rajoutés lors des autres test
 		BanqueCategorie banqueTest = new BanqueCategorie();
+		System.out.println(modele.getBanqueCategorie());
 		banqueTest.ajouter(new Categorie("Autre Nom"));
 		banqueTest.ajouter(categoriesValides[0]);
 		banqueTest.ajouter(categoriesValides[1]);
@@ -375,7 +412,7 @@ class TestModelePrincipal {
 	}
 	
 	@Test
-	@Order(7)
+	@Order(9)
 	void testGetBanqueQuestion() throws ClassNotFoundException, InternalError, IOException, HomonymeException, InvalidNameException, CreerQuestionException  {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -450,7 +487,64 @@ class TestModelePrincipal {
 			assertEquals(banqueTestQuestions.getQuestion(i), modele.getBanqueQuestion().getQuestion(i));	
 		}		
 	}
+	
+	/**
+	 * Méthode de test pour la méthode getCategorieAModifier
+	 * {@link application.modele.ModelePrincipal#getCategorieAModifier()}.
+	 * 
+	 * @throws InvalidNameException
+	 */
+	@Test
+	@Order(10)
+	void testGetCategorieAModifier() throws InvalidNameException {
+	    // On récupère l'instance du modèle principal et on crée une catégorie
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    Categorie a = new Categorie("categorie");
+		    
+	    // On mets cette catégorie à modifier et 
+	    // on vérifie qu'on ait bien la catégorie "categorie" qui est à modifier
+	    modele.setCategorieAModifier(a);
+	    assertEquals(a, modele.getCategorieAModifier());
+	}
+	
+	/**
+	 * Méthode de test pour la méthode getCategoriesLibelle
+	 * {@link application.modele.ModelePrincipal#getCategoriesLibelle()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(11)
+	void testGetCategoriesLibelle() throws InvalidNameException, HomonymeException {
+	    // On récupère l'instance du modèle principal 
+	    // et de la banque de catégories du modele principal et on vide cette banque
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    BanqueCategorie banque = modele.getBanqueCategorie();
+		    
+	    banque.getCategories().clear();
+		    
+	    // On rajoute 3 Catégories dans la banque de catégorie du modèle principal
+	    Categorie a1 = new Categorie("a"); 
+	    Categorie a2 = new Categorie("aa");
+	    Categorie a3 = new Categorie("b");
+		    
+	    modele.creerCategorie(a1.getNom());
+	    modele.creerCategorie(a2.getNom());
+	    modele.creerCategorie(a3.getNom());
+		    
+	    ArrayList<Categorie> attendu = new ArrayList<Categorie>();
+	    
+	    attendu.add(a1);
+	    attendu.add(a2);
+		    
+	    // On vérifie que la méthode renvoie deux catégories quand on recherche "a"
+	    // car deux catégories contiennent "a" dans leur libellé
+	    assertIterableEquals(attendu, modele.getCategoriesLibelle("a"));
+	}
 
+
+	
 	/**
 	 * Renvoie l'indice de la categorie dans une liste
 	 * 
