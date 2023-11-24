@@ -68,9 +68,13 @@ public class Client {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-	public void recevoirDonnees() throws UnknownHostException, IOException, ClassNotFoundException {
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+	public ArrayList<Object> recevoirDonnees() 
+	        throws UnknownHostException, IOException, ClassNotFoundException {
+        
+	    ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        
+        ArrayList<Object> elementsRecu = null;
 
         //On attend la demande du serveur pour savoir si on est prêt
         String questionRecevoir = (String) ois.readObject();
@@ -81,7 +85,7 @@ public class Client {
             oos.writeObject(CLIENT_PRET_MESSAGE);
             
             int nbQuestion = (int) ois.readObject();
-            ArrayList<Object> elementsRecu = new ArrayList<Object>(nbQuestion);
+            elementsRecu = new ArrayList<Object>(nbQuestion);
             
             for (int i = 0; i < nbQuestion; i++) {
                 Object eltRecu = ois.readObject();
@@ -96,12 +100,13 @@ public class Client {
         oos.writeObject(Serveur.MESSAGE_FIN_COMMUNICATION);
         System.out.println(messageFin);
         
-     // Fermeture des chemins de communication
+        // Fermeture des chemins de communication
         ois.close();
         oos.close();
         
         socket.close();//Fin de communication
         System.out.println("Fin. La socket est fermé");
-        // TODO vérifier que les questions sont valides et importer
+        
+        return elementsRecu;
     }
 }

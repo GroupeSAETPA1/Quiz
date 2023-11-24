@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.*;
 
 import application.exception.CreerQuestionException;
-import application.exception.DifficulteException;
 import application.exception.HomonymeException;
-import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
-import application.exception.ReponseException;
 import application.modele.BanqueCategorie;
 import application.modele.BanqueQuestion;
 import application.modele.Categorie;
@@ -128,18 +125,16 @@ class TestModelePrincipal {
 	 * Méthode de test pour la méthode creerQuestion
 	 * @see {@link application.modele.ModelePrincipal#creerQuestion(java.lang.String, application.modele.Categorie, int, java.lang.String, java.util.ArrayList, java.lang.String)}.
 	 * 
-	 * @throws ReponseException
-	 * @throws InvalidFormatException
 	 * @throws HomonymeException
-	 * @throws DifficulteException
 	 * @throws IOException 
 	 * @throws InternalError 
 	 * @throws ClassNotFoundException 
+	 * @throws CreerQuestionException 
 	 */
 	@Test
 	@Order(2)
-	void testCreerQuestion() throws InvalidNameException, InvalidFormatException, ReponseException, HomonymeException,
-			DifficulteException, ClassNotFoundException, InternalError, IOException {
+	void testCreerQuestion() throws InvalidNameException, HomonymeException,
+			ClassNotFoundException, InternalError, IOException, CreerQuestionException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
 		// Question de "reference", avec des attributs valides
@@ -372,7 +367,7 @@ class TestModelePrincipal {
 	
 	@Test
 	@Order(7)
-	void testGetBanqueQuestion() throws ClassNotFoundException, InternalError, IOException, InvalidFormatException, ReponseException, DifficulteException, HomonymeException, InvalidNameException  {
+	void testGetBanqueQuestion() throws ClassNotFoundException, InternalError, IOException, HomonymeException, InvalidNameException, CreerQuestionException  {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		

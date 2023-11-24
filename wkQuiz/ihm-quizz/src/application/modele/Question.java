@@ -7,6 +7,7 @@ package application.modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -132,8 +133,7 @@ public class Question implements Serializable {
      */
     public Question(String libelle,Categorie categorie,int difficulte,
                     String reponseJuste, ArrayList<String> reponsesFausse,
-                    String feedback) throws InvalidFormatException, 
-                    InvalidNameException, ReponseException, DifficulteException {
+                    String feedback) throws CreerQuestionException, InvalidNameException {
         
         if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
             throw new InvalidNameException("Le libelle contient " + libelle.length() 

@@ -174,12 +174,13 @@ public class ModelePrincipal {
      * @param feedback      : feedback de la question
      * @param reponseJuste  : bonne réponse de la question
      * @return true si la question a été créer , false sinon
+     * @throws InvalidNameException 
      * @throws HomonymeException
      * @throws DifficulteException
      */
     public boolean creerQuestion(String libelle, int idCategorie, int difficulte, String reponseJuste,
             ArrayList<String> reponseFausses, String feedback)
-            throws InvalidFormatException, InvalidNameException, ReponseException, HomonymeException, DifficulteException {
+            throws CreerQuestionException, InvalidNameException, HomonymeException {
 
         // La catégorie de la question existera toujours donc aucune vérification d'existence n'est nécessaire
         Categorie categorieQuestion;
@@ -513,7 +514,7 @@ public class ModelePrincipal {
         categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie() == categorie.getNom() 
+            if (    question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
@@ -581,7 +582,26 @@ public class ModelePrincipal {
 
     /** @return true si catégorie est sélectionner, false sinon*/
     public boolean estSelectionner(Question question) {
+        System.out.println(questionAEnvoyer);
         return questionAEnvoyer.contains(question);
+    }
+
+    /** 
+     * Ajoute une question à la banque
+     * @param question la question à ajouté
+     * @throws HomonymeException 
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
+     */
+    public void ajouterQuestion(Question question) throws InvalidNameException, HomonymeException, CreerQuestionException {
+        if (!categorieExiste(question.getCategorie())) {
+            creerCategorie(question.getCategorie());
+        }
+        int indiceCategorie = getIndice(question.getCategorie());
+        
+        creerQuestion(question.getLibelle(), indiceCategorie, 
+                      question.getDifficulte(),question.getReponseJuste(), 
+                      question.getMauvaisesReponses(), question.getFeedback());
     }
     
 }

@@ -7,9 +7,12 @@ package application.controleurs.reseau;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -25,7 +28,7 @@ public class ControleurRecevoirQuestions {
     @FXML private TextField portServeur;
     @FXML private TextField ipServeur;
     
-    private ModelePrincipal model = ModelePrincipal.getInstance();
+    private ModelePrincipal modele = ModelePrincipal.getInstance();
     
     private Client client;
     
@@ -40,19 +43,16 @@ public class ControleurRecevoirQuestions {
 	 */
 	@FXML
 	private void aider() {
-		model.setPagePrecedente("RecevoirQuestions.fxml");
+		modele.setPagePrecedente("RecevoirQuestions.fxml");
 		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
     void retour() {
-    	Quiz.changerVue("ChoixEnvoie.fxml");
+    	Quiz.changerVue("ModeEnLigne.fxml");
         System.out.println("Retour");
     }
-    
-    
-    
     
     @FXML
     void connexion() throws ClassNotFoundException {
@@ -71,15 +71,30 @@ public class ControleurRecevoirQuestions {
         
         if (clientCreer) {
             try {
+                ArrayList<Object> elementRecu;
+                
                 client.seConnecter();
                 System.out.println("On est connecter");
-                client.recevoirDonnees();
+                elementRecu = client.recevoirDonnees();
+                
+                //TODO décrypter
+                
+                //TODO Ajouter à la banque
+                for (Object object : elementRecu) {
+                    try {
+                        modele.ajouterQuestion((Question) object);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                        e.printStackTrace();
+                        AlertBox.showWarningBox("Toute les question n'ont pas pu être ajouté");
+                    }
+                }
+                
             } catch (SocketTimeoutException e) {
                 AlertBox.showErrorBox("TimeOut : Pas de serveur trouvé");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-                
             }
         }
     }
