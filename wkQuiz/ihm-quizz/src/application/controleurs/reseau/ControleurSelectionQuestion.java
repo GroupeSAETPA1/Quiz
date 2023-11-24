@@ -39,8 +39,13 @@ public class ControleurSelectionQuestion {
   	  */
   	@FXML
       public void retour() {
-          Quiz.changerVue("ChoixEnvoie.fxml");
+          Quiz.chargerEtChangerVue("ChoixEnvoie.fxml");
       }
+  	
+  	@FXML
+    public void valider() {
+    	Quiz.chargerEtChangerVue("Recapitulatif.fxml");
+    }
        
 
     @FXML

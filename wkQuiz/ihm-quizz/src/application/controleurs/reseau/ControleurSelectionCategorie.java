@@ -40,7 +40,12 @@ public class ControleurSelectionCategorie {
 
     @FXML
     public void retour() {
-        Quiz.changerVue("ChoixEnvoie.fxml");
+        Quiz.chargerEtChangerVue("ChoixEnvoie.fxml");
+    }
+    
+    @FXML
+    public void valider() {
+    	Quiz.chargerEtChangerVue("Recapitulatif.fxml");
     }
 
     @FXML
@@ -78,6 +83,7 @@ public class ControleurSelectionCategorie {
      * 
      * @author François de Saint Palais
      */
+
     public class LigneSelectionCategorie {
 
         ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -177,5 +183,5 @@ public class ControleurSelectionCategorie {
         }
 
     }
-
 }
+

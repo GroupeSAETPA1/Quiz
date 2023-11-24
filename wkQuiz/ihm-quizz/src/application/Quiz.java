@@ -89,6 +89,8 @@ public class Quiz extends Application {
 	    ressources.add("EnvoieQuestion.fxml");
 	    ressources.add("ChoixEnvoie.fxml");
 	    ressources.add("ModeEnLigne.fxml");
+	    ressources.add("Recapitulatif.fxml");
+	    
 
 		
 		for (String element : ressources) {
@@ -112,8 +114,15 @@ public class Quiz extends Application {
 		
 		primaryStage.setOnCloseRequest((e) -> {
 			try {
-				quitter();
-			} catch (ClassNotFoundException | InternalError | IOException e1) {
+			    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+			    	ModelePrincipal.getInstance().serialiser();
+			        Platform.exit();            
+		        } else {
+		        	// Si l'utilisateur a appuyé par erreur, 
+		        	// il peut annuler le fait de quitter l'application
+		        	e.consume();
+		        }
+			} catch (InternalError | IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -142,9 +151,8 @@ public class Quiz extends Application {
      * Fonction appelée par les controlleurs permettant de quitter l'application
 	 * @throws IOException 
 	 * @throws InternalError 
-	 * @throws ClassNotFoundException 
      */
-	public static void quitter() throws ClassNotFoundException, InternalError, IOException {
+	public static void quitter() throws InternalError, IOException {
 	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
 	    	ModelePrincipal.getInstance().serialiser();
 	        Platform.exit();            
