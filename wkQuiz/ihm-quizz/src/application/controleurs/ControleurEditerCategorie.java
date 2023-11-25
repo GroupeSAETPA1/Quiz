@@ -54,6 +54,8 @@ public class ControleurEditerCategorie {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		Categorie aModifier = modele.getCategorieAModifier();
 		
+		//TODO utiliser la fonction modifierCategorie de ModelePrincipal
+		
 		
 		if( modele.categorieExiste(input.getText()) 
 			||  modele.getCategorieAModifier().getNom().equals(input.getText())) {

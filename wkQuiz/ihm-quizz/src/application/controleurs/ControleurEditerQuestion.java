@@ -96,6 +96,8 @@ public class ControleurEditerQuestion {
 	private void valider() {
 		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
 		
+		//TODO utiliser la méthode modifierQuestion de ModelePrincipal
+		
 		try {
 			aModifier.setCategorie(selectCategorie.getValue());
 			aModifier.setBonneReponse(saisieReponseVrai.getText());
