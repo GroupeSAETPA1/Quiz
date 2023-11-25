@@ -680,6 +680,86 @@ class TestModelePrincipal {
 	}
 	
 	/**
+	 * Méthode de test pour la méthode getCategoriesLibelleExact 
+	 * @see {@link application.modele.ModelePrincipal#getCategoriesLibelleExact()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(17)
+	void testGetCategoriesLibelleExact() throws InvalidNameException, HomonymeException {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    Categorie categorieLibelleExact = new Categorie("LibelleExact");
+	    
+	    // On crée une catégorie "LibelleExact" qu'on mets dans le modèle principal et 
+	    // on vérifie qu'on récupère bien la catégorie recherchée avec "LibelleExact"
+	    modele.creerCategorie("LibelleExact");
+	    
+	    assertEquals(categorieLibelleExact.getNom(), modele.getCategoriesLibelleExact("LibelleExact").getNom());
+	}
+	
+	/**
+	 * Méthode de test pour la méthode setDisplayCategoriePane et isDisplayCategoriePane
+	 * @see {@link application.modele.ModelePrincipal#setDisplayCategoriePane()}.
+	 * @see {@link application.modele.ModelePrincipal#isDisplayCategoriePane()}.
+	 */
+	@Test
+	@Order(18)
+	void testDisplayCategoriePane() {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On vérifie que par défaut le booléen est faux
+	    assertFalse(modele.isDisplayCategoriePane());
+	    
+	    // On vérifie qu'en le passant à true, la modification est bien prise en compte
+	    modele.setDisplayCategoriePane(true);
+	    assertTrue(modele.isDisplayCategoriePane());
+	}
+	
+	/**
+	 * Méthode de test pour la méthode modifierCategorie
+	 * @see {@link application.modele.ModelePrincipal#modifierCategorie()}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(19)
+	void testModifierCategorie() throws InvalidNameException, HomonymeException {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On modifie la première catégorie "a" par "NouveauNom" et 
+	    // on vérifie que la catégorie est bien modifiée
+	    modele.setCategorieAModifier(modele.getBanqueCategorie().getCategorie(0));
+	    modele.modifierCategorie("NouveauNom");
+	    assertEquals("NouveauNom", modele.getCategories().get(0).getNom());
+	    
+	    // On vérifie la cas ou on essaye de modifier une catégorie par un 
+	    // nom de catégorie qui existe déjà dans la banque de catégorie
+	    assertThrows(HomonymeException.class,
+					 () -> modele.modifierCategorie("aa"));
+	}
+	
+//	@Test
+//	@Order(20)
+//	void testModifierQuestion() throws CreerQuestionException, InvalidNameException {
+//		// On récupère le modèle principal 
+//	    ModelePrincipal modele = ModelePrincipal.getInstance();
+//	    
+//	    System.out.println(modele.getBanqueQuestion());
+//	    modele.setQuestionAModifier(modele.getBanqueQuestion().getQuestion(0));
+//	    
+//	    modele.modifierQuestion("NouvelleQuestion", "General", 2, "NouvelleBonneRéponse", mauvaiseReponse1, "");
+//	    System.out.println(modele.getBanqueQuestion());
+//
+//	}
+	
+	/**
 	 * Renvoie l'indice de la categorie dans une liste
 	 * 
 	 * @param categorie la catégorie qu'on recherche dans la liste de catégorie

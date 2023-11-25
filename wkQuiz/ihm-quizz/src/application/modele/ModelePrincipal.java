@@ -250,7 +250,7 @@ public class ModelePrincipal {
     
     /**
      * Renvoie la catégorie qui à exactement le même libellé que passé en paramètre
-     * si il n'y en a pas cela renvoie null
+     * s'il n'y en a pas cela renvoie null
      * @param libelle (String) le libellé recherché sensible à la casse
      * @return catégorie avec le libellé voulu si elle existe, null sinon
      */
@@ -259,7 +259,7 @@ public class ModelePrincipal {
     }
 
     /**
-     * Utilisé pour ce positionner sur le bon onglet 
+     * Utilisé pour se positionner sur le bon onglet 
      * quand on passe d'Editer à Créer
      * @return displayCategoriePane */
     public boolean isDisplayCategoriePane() {
@@ -271,11 +271,15 @@ public class ModelePrincipal {
      * @param nouveauNom Le nouveau nom de la catégorie
      * @return true si la modification est effective
      * @throws InvalidNameException Si le nom choisi est invalide
+     * @throws HomonymeException 
      */
-    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
-        catgorieAModifier.setNom(nouveauNom);
-        //TODO vérifier si le nouveauNom n'est pas celui d'une catégorie déjà présente
-        return true;
+    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException, HomonymeException {
+        if (getCategoriesLibelleExact(nouveauNom) == null) {
+        	catgorieAModifier.setNom(nouveauNom);
+        	return true;
+        } else {
+        	throw new HomonymeException("La categorie est déja présente dans la banque de categorie.");
+        }
     }
 
     /**
@@ -293,24 +297,24 @@ public class ModelePrincipal {
      * @throws InvalidFormatException
      * @throws DifficulteException
      */
-    public boolean modifierQuestion(String libelle, String categorie,
-            int difficulte, String reponseJuste,
-            ArrayList<String> reponseFausses, String feedback)
-            throws CreerQuestionException, InvalidNameException {
-        
-      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
-      
-      questionAModifier.setLibelle(libelle);
-      questionAModifier.setCategorie(nouvelleCat);
-      questionAModifier.setDifficulte(difficulte);
-      questionAModifier.setBonneReponse(reponseJuste);
-      questionAModifier.setMauvaiseReponse(reponseFausses);
-      questionAModifier.setFeedback(feedback);
-      
-      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte ,
-              reponseJuste , reponseFausses , feedback);
-      return banqueQuestion.getQuestions().contains(temoinAjout);
-    }
+//    public boolean modifierQuestion(String libelle, String categorie,
+//            int difficulte, String reponseJuste,
+//            ArrayList<String> reponseFausses, String feedback)
+//            throws CreerQuestionException, InvalidNameException {
+//        
+//      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
+//      
+//      questionAModifier.setLibelle(libelle);
+//      questionAModifier.setCategorie(nouvelleCat);
+//      questionAModifier.setDifficulte(difficulte);
+//      questionAModifier.setBonneReponse(reponseJuste);
+//      questionAModifier.setMauvaiseReponse(reponseFausses);
+//      questionAModifier.setFeedback(feedback);
+//      
+//      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte ,
+//              reponseJuste , reponseFausses , feedback);
+//      return banqueQuestion.getQuestions().contains(temoinAjout);
+//    }
 
     /**
      * Pour garder l'instance de la catégorie que l'on veux modifier, on garde
