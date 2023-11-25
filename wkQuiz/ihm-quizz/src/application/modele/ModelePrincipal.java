@@ -497,7 +497,7 @@ public class ModelePrincipal {
     /**
      * Ajouter toute les questions de la catégorie 
      * à la liste des question a envoyer
-     * @param categorie Le nom de la catégorie
+     * @param categorie Le nom de la catégorie à envoyer
      * @return true si l'ajout est un succès, false sinon
      */
     public boolean ajouterALaSelectionDEnvoie(Categorie categorie) {
@@ -505,7 +505,7 @@ public class ModelePrincipal {
         categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
+            if (question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
@@ -515,9 +515,9 @@ public class ModelePrincipal {
     }
 
     /**
-     * Ajouter toute les questions de la catégorie 
+     * Ajouter la question en parametre 
      * à la liste des question a envoyer
-     * @param categorie Le nom de la catégorie
+     * @param question Le nom de la question à envoyer
      * @return true si l'ajout est un succès, false sinon
      */
     public boolean ajouterALaSelectionDEnvoie(Question question) {

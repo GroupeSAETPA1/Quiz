@@ -129,6 +129,8 @@ class TestModelePrincipal {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		assertIterableEquals(modele.getBanqueCategorie().getCategories(), modele.deSerialiserCategorie().getCategories());
 		assertIterableEquals(modele.getBanqueQuestion().getQuestions(), modele.deSerialiserQuestion().getQuestions());
+		// On vérifie que sérialiser ne renvoie pas d'erreur
+		assertDoesNotThrow(() -> modele.serialiser());
 	}
 	
 	/**
@@ -859,6 +861,59 @@ class TestModelePrincipal {
 		assertTrue(modele.supprimerQuestion(modele.getBanqueQuestion()
 											.getQuestionsLibelle("QuestionTestSupprimerQuestion")
 											.get(0)));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode ajouterALaSelectionDEnvoie et estSelectionner
+	 * @see {@link application.modele.ModelePrincipal#ajouterALaSelectionDEnvoie(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#ajouterALaSelectionDEnvoie(Question)}.
+	 * @see {@link application.modele.ModelePrincipal#estSelectionner(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#estSelectionner(Question)}.
+	 * 
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 * @throws CreerQuestionException
+	 */
+	@Test
+	@Order(23)
+	void testAjouterALaSelectionDEnvoie() throws InvalidNameException, HomonymeException, CreerQuestionException {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On crée une catégorie "Categorie à envoyer" et 
+	    // on y ajoute une question pour vérifier
+	    // que quand on ajoute une catégorie a envoyer, 
+	    // cela ajoute aussi les questions de cette catégorie
+	    modele.creerCategorie("Categorie à envoyer");
+	    modele.creerQuestion("QuestionTestAEnvoyer", 
+	    					  modele.getIndice("Categorie à envoyer"), 
+	    					  1, 
+	    					 "vrai", 
+	    					  mauvaiseReponse1, 
+				 			 "");
+	    modele.ajouterALaSelectionDEnvoie(modele.getCategoriesLibelleExact
+	    								  ("Categorie à envoyer"));
+	    assertTrue(modele.estSelectionner(modele.getCategoriesLibelleExact
+	    								  ("Categorie à envoyer")));
+	    assertTrue(modele.estSelectionner((modele.getBanqueQuestion()
+	    								   .getQuestionsLibelle
+	    								   ("QuestionTestAEnvoyer").get(0))));
+	    
+	    // On vérifie que quand on crée une question et 
+	    // qu'on l'ajoute à la sélection pour envoyer la question est 
+	    // bien dans la liste
+	    modele.creerQuestion("QuestionTestAEnvoyer2", 
+	    					  0, 
+	    					  1, 
+	    					 "vrai", 
+	    					  mauvaiseReponse1, 
+	 			 			 "");
+	    modele.ajouterALaSelectionDEnvoie(modele.getBanqueQuestion()
+	    								  .getQuestionsLibelle
+	    								  ("QuestionTestAEnvoyer2").get(0));
+	    assertTrue(modele.estSelectionner((modele.getBanqueQuestion()
+	    								   .getQuestionsLibelle
+	    								   ("QuestionTestAEnvoyer2").get(0))));
 	}
 	
 	/**
