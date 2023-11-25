@@ -73,7 +73,7 @@ class TestModelePrincipal {
 
 		categoriesValides[0] = new Categorie("Commentaire");
 		categoriesValides[1] = new Categorie("test");
-
+		
 		mauvaiseReponseJusteChaineVide.add("");
 		mauvaiseReponseJusteChaineVide.add("");
 		mauvaiseReponseJusteChaineVide.add("");
@@ -684,8 +684,13 @@ class TestModelePrincipal {
 	    
 	    // On crée une question, on l'ajoute au modèle et on la définit 
 	    // comme question à modifier
+	    
+	    // Pour passer toutes les conditions de ajouter question,
+	    // on ajoute une question avec une nouvelle catégorie
+		Categorie categorieNonPresente = new Categorie("Catégorie non présente");
+
 	    Question questionAModifier = new Question("Question a modifier", 
-				  	  				               modele.getCategories().get(0), 
+	    										   categorieNonPresente, 
 				  	  				               1,
 				  	  				               "non vide", 
 				  	  				               mauvaiseReponse1, 
@@ -867,8 +872,8 @@ class TestModelePrincipal {
 	 * Méthode de test pour la méthode ajouterALaSelectionDEnvoie et estSelectionner
 	 * @see {@link application.modele.ModelePrincipal#ajouterALaSelectionDEnvoie(Categorie)}.
 	 * @see {@link application.modele.ModelePrincipal#ajouterALaSelectionDEnvoie(Question)}.
-	 * @see {@link application.modele.ModelePrincipal#estSelectionner(Categorie)}.
-	 * @see {@link application.modele.ModelePrincipal#estSelectionner(Question)}.
+	 * @see {@link application.modele.ModelePrincipal#estAEnvoyer(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#estAEnvoyer(Question)}.
 	 * 
 	 * @throws InvalidNameException
 	 * @throws HomonymeException
@@ -893,9 +898,9 @@ class TestModelePrincipal {
 				 			 "");
 	    modele.ajouterALaSelectionDEnvoie(modele.getCategoriesLibelleExact
 	    								  ("Categorie à envoyer"));
-	    assertTrue(modele.estSelectionner(modele.getCategoriesLibelleExact
+	    assertTrue(modele.estAEnvoyer(modele.getCategoriesLibelleExact
 	    								  ("Categorie à envoyer")));
-	    assertTrue(modele.estSelectionner((modele.getBanqueQuestion()
+	    assertTrue(modele.estAEnvoyer((modele.getBanqueQuestion()
 	    								   .getQuestionsLibelle
 	    								   ("QuestionTestAEnvoyer").get(0))));
 	    
@@ -911,9 +916,58 @@ class TestModelePrincipal {
 	    modele.ajouterALaSelectionDEnvoie(modele.getBanqueQuestion()
 	    								  .getQuestionsLibelle
 	    								  ("QuestionTestAEnvoyer2").get(0));
-	    assertTrue(modele.estSelectionner((modele.getBanqueQuestion()
+	    assertTrue(modele.estAEnvoyer((modele.getBanqueQuestion()
 	    								   .getQuestionsLibelle
 	    								   ("QuestionTestAEnvoyer2").get(0))));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode supprimerALaSelectionDEnvoie
+	 * @see {@link application.modele.ModelePrincipal#supprimerALaSelectionDEnvoie(Categorie)}.
+	 * @see {@link application.modele.ModelePrincipal#supprimerALaSelectionDEnvoie(Question)}.
+	 */
+	@Test
+	@Order(24)
+	void testSupprimerALaSelectionDEnvoie() {
+		/*
+		 * Ce test fait le contraire du test précédent, 
+		 * on supprime les questions et les catégories de la liste 
+		 * et on vérifie qu'elles y sont plus 
+		 */
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    modele.supprimerALaSelectionDEnvoie(modele.getCategoriesLibelleExact
+				  							("Categorie à envoyer"));
+	    assertFalse(modele.estAEnvoyer(modele.getCategoriesLibelleExact
+				                      ("Categorie à envoyer")));
+	    assertFalse(modele.estAEnvoyer((modele.getBanqueQuestion()
+				                        .getQuestionsLibelle
+				                        ("QuestionTestAEnvoyer").get(0))));
+
+	    modele.supprimerALaSelectionDEnvoie(modele.getBanqueQuestion()
+				  							.getQuestionsLibelle
+				  							("QuestionTestAEnvoyer2").get(0));
+	    assertFalse(modele.estAEnvoyer((modele.getBanqueQuestion()
+				   						.getQuestionsLibelle
+				   						("QuestionTestAEnvoyer2").get(0))));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode toutEnvoyer et getQuestionAEnvoyer
+	 * @see {@link application.modele.ModelePrincipal#toutEnvoyer()}.
+	 * @see {@link application.modele.ModelePrincipal#getQuestionAEnvoyer()}.
+	 */
+	@Test
+	@Order(25)
+	void testToutEnvoyer() {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On ajoute toute les questions de la banque de question et 
+	    // on vérifie que la liste des questions à envoyer à toutes les questions
+	    modele.toutEnvoyer();
+	    assertIterableEquals(modele.getBanqueQuestion().getQuestions(), modele.getQuestionAEnvoyer());
 	}
 	
 	/**
