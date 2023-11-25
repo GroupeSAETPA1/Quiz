@@ -8,21 +8,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import application.exception.DifficulteException;
+
 /**
- * 
+ * TODO
  */
 public class Partie {
 	
 	/** 
      * Difficulte des questions de la partie en cours
-     * La partie en cour pourra prendre des questions de niveau egal 
-     * a difficultePartie 
-     **/
+     * La partie en cours pourra prendre des questions de niveau égal 
+     * à difficultePartie 
+     */
     private Integer difficultePartie; 
     
     
-    /** Nombre de question auquel l'utilisateur 
-     * repondra dans la partie actuelle 
+    /** 
+     * Nombre de question auquel l'utilisateur 
+     * répondra dans la partie actuelle 
      */ 
     private int nombreQuestionPartie ;
     
@@ -58,9 +61,8 @@ public class Partie {
     private int indiceQuestion ;
     
 
-
     /**
-     * constructeur 
+     * Constructeur 
      * initialise tout a null sauf la hashmap
      */
     public Partie () {
@@ -72,9 +74,16 @@ public class Partie {
     /**
      * Change la difficulte actuelle pour difficulte 
      * @param difficulte nouvelle difficulte
+     * @throws DifficulteException 
      */
-    public void setDifficultePartie(int difficulte) {
-        this.difficultePartie = difficulte ;
+    public void setDifficultePartie(int difficulte) throws DifficulteException {
+    	if (difficulte > -1 && difficulte < 4) {
+    		this.difficultePartie = difficulte ;
+    	} else {
+    		throw new DifficulteException("La difficultée est invalide, " 
+    									+ "elle doit etre comprise " 
+    									+ " entre 0 et 3 compris");
+    	}
     }
     
     /**
@@ -144,9 +153,6 @@ public class Partie {
     public void setReponseDonnee(Question question , String reponseAssocie) {
         reponsesDonnees.put(question, reponseAssocie);
     }
-    
-	
-
 
     /**
 	 * @return la question actuelle

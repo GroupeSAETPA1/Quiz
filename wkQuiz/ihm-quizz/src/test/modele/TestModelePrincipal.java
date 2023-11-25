@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import application.exception.CreerQuestionException;
+import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 import application.modele.BanqueCategorie;
@@ -261,10 +262,11 @@ class TestModelePrincipal {
 	 * @throws IOException 
 	 * @throws InternalError 
 	 * @throws ClassNotFoundException 
+	 * @throws CreerQuestionException 
 	 */
 	@Test
 	@Order(5)
-	void testSupprimerCategorie() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
+	void testSupprimerCategorie() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException, CreerQuestionException {
 		// On récupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
@@ -277,10 +279,23 @@ class TestModelePrincipal {
 		// Vu que la catégorie "Truc" n'existe plus, 
 		// on ne peut plus la supprimer
 		assertFalse(modele.supprimerCategorie(uneCategorie));
-
-		// Le fait de rajouter une catégorie "Général" ne fait rien 
+		
+		// On vérifie que supprimer une catégorie avec des question 
+		// supprime les questions de cette catégorie
+		modele.creerCategorie("categorieASupprimer");
+		modele.creerQuestion("Question à supprimer", 
+							  modele.getIndice("categorieASupprimer"), 
+							  1, 
+							  "reponse vrai", 
+							  mauvaiseReponse1, 
+							  "");
+		
+		assertTrue(modele.supprimerCategorie(modele.getCategoriesLibelleExact("categorieASupprimer")));
+		assertEquals(new ArrayList<Question>(), modele.getBanqueQuestion().getQuestionsLibelle("Question à supprimer"));
+		
+		// Le fait de rajouter une catégorie "General" ne fait rien 
 		// car "General" existe déjà
-		Categorie categorieGeneral = new Categorie("Général");
+		Categorie categorieGeneral = new Categorie("General");
 		// On ne peut pas supprimer la catégorie "General"
 		assertFalse(modele.supprimerCategorie(categorieGeneral));
 
@@ -292,6 +307,7 @@ class TestModelePrincipal {
 		// le modèle principal
 		Categorie nonPresenteDansModele = new Categorie("non présente dans modèle");
 		assertFalse(modele.supprimerCategorie(nonPresenteDansModele));
+		
 	}
 
 	/**
@@ -745,19 +761,105 @@ class TestModelePrincipal {
 					 () -> modele.modifierCategorie("aa"));
 	}
 	
-//	@Test
-//	@Order(20)
-//	void testModifierQuestion() throws CreerQuestionException, InvalidNameException {
-//		// On récupère le modèle principal 
-//	    ModelePrincipal modele = ModelePrincipal.getInstance();
-//	    
-//	    System.out.println(modele.getBanqueQuestion());
-//	    modele.setQuestionAModifier(modele.getBanqueQuestion().getQuestion(0));
-//	    
-//	    modele.modifierQuestion("NouvelleQuestion", "General", 2, "NouvelleBonneRéponse", mauvaiseReponse1, "");
-//	    System.out.println(modele.getBanqueQuestion());
-//
-//	}
+	/**
+	 * Méthode de test pour la méthode modifierQuestion
+	 * @see {@link application.modele.ModelePrincipal#modifierQuestion()}.
+	 */
+	@Test
+	@Order(20)
+	void testModifierQuestion() {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On choisit la première question à modifier
+	    modele.setQuestionAModifier(modele.getBanqueQuestion().getQuestion(0));
+	    
+	    // On vérifie qu'on puisse bien modifier une question 
+	    // avec des arguments valides et si la catégorie n'existe 
+	    // pas dans la banque de catégorie on peut la créer
+	    assertTrue(modele.modifierQuestion("NouvelleQuestion", 
+	    								   "General", 
+	    								    2, 
+	    								   "NouvelleBonneRéponse", 
+	    								    mauvaiseReponse1, 
+	    								    ""));
+	    assertTrue(modele.modifierQuestion("NouvelleQuestion2", 
+	    		                           "Catégorie existait pas encore", 
+	    		                            2, 
+	    		                           "NouvelleBonneRéponse", 
+	    		                            mauvaiseReponse1, 
+	    		                           ""));
+	    
+	    // On vérifie que si les arguments ne sont pas valides la question n'est pas modifiée
+	    assertFalse(modele.modifierQuestion("NouvelleQuestionInvalide", 
+	    		                            "General", 
+	    		                             0, 
+	    		                            "NouvelleBonneRéponse", 
+	    		                             mauvaiseReponse1, 
+	    		                             ""));
+	    assertFalse(modele.modifierQuestion("NouvelleQuestionInvalide", 
+                                            "", 
+                                             1, 
+                                            "NouvelleBonneRéponse", 
+                                             mauvaiseReponse1, 
+                                            ""));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode modifierQuestion
+	 * @see {@link application.modele.ModelePrincipal#modifierQuestion()}.
+	 * 
+	 * @throws DifficulteException
+	 */
+	@Test
+	@Order(21)
+	void testSetDifficultePartie() throws DifficulteException {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+	    
+	    // On vérifie que modifier la difficultée avec une 
+	    // difficultée valide modifie bien la difficultée de la partie
+	    modele.setDifficultePartie(0);
+	    assertEquals(0, modele.getPartie().getDifficulte());
+	    
+	    modele.setDifficultePartie(2);
+	    assertEquals(2, modele.getPartie().getDifficulte());
+	    
+	    // On vérifie que modifier une difficultée par une difficultée invalide 
+	    // (inférieure à 0 ou supérieur à 3)
+	    // renvoie bien l'excpetion "DifficulteException"
+	    assertThrows(DifficulteException.class,
+				     () -> modele.setDifficultePartie(4));
+	    assertThrows(DifficulteException.class,
+			         () -> modele.setDifficultePartie(-1));
+	}
+	
+	/**
+	 * Méthode de test pour la méthode supprimerQuestion
+	 * @see {@link application.modele.ModelePrincipal#supprimerQuestion()}.
+	 * 
+	 * @throws CreerQuestionException
+	 * @throws InvalidNameException
+	 * @throws HomonymeException
+	 */
+	@Test
+	@Order(22)
+	void testSupprimerQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException {
+		// On récupère le modèle principal 
+	    ModelePrincipal modele = ModelePrincipal.getInstance();
+		
+	    // On crée une question a supprimer et on vérifie 
+	    // que la méthode supprimerQuestion renvoie bien vrai
+	    modele.creerQuestion("QuestionTestSupprimerQuestion", 
+	    					  0, 
+	    					  1, 
+	    					 "vrai", 
+	    					  mauvaiseReponse1, 
+	    					 "");
+		assertTrue(modele.supprimerQuestion(modele.getBanqueQuestion()
+											.getQuestionsLibelle("QuestionTestSupprimerQuestion")
+											.get(0)));
+	}
 	
 	/**
 	 * Renvoie l'indice de la categorie dans une liste

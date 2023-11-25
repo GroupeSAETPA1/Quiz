@@ -291,30 +291,34 @@ public class ModelePrincipal {
      * @param reponseJuste   La nouvelle réponse juste de la question
      * @param reponseFausses Les nouvelles réponse fausse de la question
      * @param feedback       Le nouveau feedback de la question
-     * @return true si la modification a pu être faite
-     * @throws ReponseException
-     * @throws InvalidNameException
-     * @throws InvalidFormatException
-     * @throws DifficulteException
+     * @return true si la question à bien été modifiée
      */
-//    public boolean modifierQuestion(String libelle, String categorie,
-//            int difficulte, String reponseJuste,
-//            ArrayList<String> reponseFausses, String feedback)
-//            throws CreerQuestionException, InvalidNameException {
-//        
-//      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
-//      
-//      questionAModifier.setLibelle(libelle);
-//      questionAModifier.setCategorie(nouvelleCat);
-//      questionAModifier.setDifficulte(difficulte);
-//      questionAModifier.setBonneReponse(reponseJuste);
-//      questionAModifier.setMauvaiseReponse(reponseFausses);
-//      questionAModifier.setFeedback(feedback);
-//      
-//      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte ,
-//              reponseJuste , reponseFausses , feedback);
-//      return banqueQuestion.getQuestions().contains(temoinAjout);
-//    }
+    public boolean modifierQuestion(String libelle, String categorie,
+            int difficulte, String reponseJuste,
+            ArrayList<String> reponseFausses, String feedback) {
+        
+        if (getBanqueCategorie().getCategorieLibelleExact(categorie) == null) {
+        	try {
+				creerCategorie(categorie);
+			} catch (InvalidNameException | HomonymeException e) {
+				return false;
+			}
+        }
+        // TODO ne pas modifier la question si un des arguments ne sont pas valides, 
+        // parce que sinon on peut juste avoir un probleme de difficultée par exemple 
+        // et ca va modifier quand meme le nom et le la catégorie
+        try {
+		     questionAModifier.setLibelle(libelle);
+		     questionAModifier.setCategorie(getBanqueCategorie().getCategorieLibelleExact(categorie));
+		     questionAModifier.setDifficulte(difficulte);
+		     questionAModifier.setBonneReponse(reponseJuste);
+		     questionAModifier.setMauvaiseReponse(reponseFausses);
+		     questionAModifier.setFeedback(feedback);
+		     return true;
+	    } catch (InvalidNameException | InvalidFormatException | ReponseException e) {
+			return false;
+	    }
+    }
 
     /**
      * Pour garder l'instance de la catégorie que l'on veux modifier, on garde
@@ -329,8 +333,9 @@ public class ModelePrincipal {
     /**
      * Change la difficulte actuelle pour difficulte
      * @param difficulte nouvelle difficulte
+     * @throws DifficulteException 
      */
-    public void setDifficultePartie(int difficulte) {
+    public void setDifficultePartie(int difficulte) throws DifficulteException {
         partie.setDifficultePartie(difficulte);
     }
 
@@ -364,7 +369,6 @@ public class ModelePrincipal {
      * @return true si la suppression est un sucés false sinon
      */
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
-        //TODO a tester
         boolean estSupprimer = false;
         
         if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
