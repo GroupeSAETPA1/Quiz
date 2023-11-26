@@ -39,5 +39,5 @@ Modelio/Digramme de classe/.runtime/
 .sonarlint/
 
 # Fichier de serialisation
-donneesCategorie
-donneesQuestion
+wkQuiz/ihm-quizz/donneesCategorie
+wkQuiz/ihm-quizz/donneesQuestion
