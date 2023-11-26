@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,6 +48,9 @@ public class ControleurEditerQuestions {
 	
 	@FXML
 	public void initialize() {
+	    
+	    table.setPlaceholder(new Label("Pas de Question"));
+	    
 		TableColumn<LigneQuestion, String> categorieColumn = new TableColumn<>("categorie");
 		categorieColumn.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 		categorieColumn.setCellFactory(new TextCellFactory<LigneQuestion>());
