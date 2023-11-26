@@ -255,8 +255,8 @@ public class Partie {
 		double nbReponseBonne = getNbBonneReponse();
 		double pourcentage;
 		
-		//Pour éviter l'ArithmeticException, si nbReponse est nul 
-		//on le remplace par 1 
+		// Pour éviter l'ArithmeticException, si nbReponse est nul 
+		// on le remplace par 1 
 		nbReponse = nbReponse == 0 ? 1 : nbReponse;
 		
 		pourcentage = (nbReponseBonne / nbReponse) * 100;

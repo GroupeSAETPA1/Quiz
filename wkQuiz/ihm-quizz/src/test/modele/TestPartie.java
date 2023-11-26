@@ -178,9 +178,8 @@ class TestPartie {
 
 
     /**
- 	 * Méthode de test pour la méthode setReponseDonnees et getReponseDonnees
-     * @see {@link application.modele.Partie#setReponseDonnees(Question, String)}.
-     * @see {@link application.modele.Partie#getReponseDonnees()}.     
+ 	 * Méthode de test pour la méthode getNbBonneReponse
+     * @see {@link application.modele.Partie#getNbBonneReponse()}.   
      *
      * @throws InvalidNameException 
      * @throws CreerQuestionException 
@@ -221,11 +220,34 @@ class TestPartie {
     }
 
     /**
-     * Test method for {@link application.modele.Partie#getNbBonneReponse()}.
+     * Méthode de test pour la méthode setIndiceQuestion et getIndiceQuestion
+     * @see {@link application.modele.Partie#setIndiceQuestion(int)}.
+     * 
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
      */
     @Test
-    void testGetNbBonneReponse() {
-        fail("Not yet implemented");
+    void testGetNbBonneReponse() throws CreerQuestionException, InvalidNameException {
+    	Partie partie = new Partie();
+    	
+    	// On crée 3 questions
+    	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
+    	ArrayList<Question> questions = new ArrayList<Question>();
+    	mauvaisesReponse.add("Mauvaise Réponse");
+    	questions.add(new Question("Question1", new Categorie("Categorie1"), 
+    							    1, "Réponse 1", mauvaisesReponse, ""));
+    	questions.add(new Question("Question2", new Categorie("Categorie1"), 
+    								1, "Réponse 2", mauvaisesReponse, ""));
+    	questions.add(new Question("Question3", new Categorie("Categorie1"), 
+    								1, "Réponse 3", mauvaisesReponse, ""));
+    	
+    	// On réponds juste à la première et à la dernière question
+    	partie.setReponseDonnees(questions.get(0), "Réponse 1");
+    	partie.setReponseDonnees(questions.get(1), "Réponse fausse");
+    	partie.setReponseDonnees(questions.get(2), "Réponse 3");
+    	
+    	// On vérifie que notre score est de 2
+    	assertEquals(2, partie.getNbBonneReponse());
     }
 
     /**
