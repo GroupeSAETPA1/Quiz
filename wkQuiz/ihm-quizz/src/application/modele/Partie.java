@@ -151,49 +151,62 @@ public class Partie {
     }
 
     /**
-     * Ajoute a la HashMap une question et sa reponse associe
-     * Si une reponse existe deja elle est ecrasée
-     * @param question cle dans la hashMap
-     * @param reponseAssocie value dans la hashMap
+     * Ajoute à la HashMap une question et sa réponse associée.
+     * Si une réponse existe déja elle est écrasée
+     * @param question la clé dans la hashMap
+     * @param reponseAssocie la valeur dans la hashMap
      */
-    public void setReponseDonnee(Question question , String reponseAssocie) {
+    public void setReponseDonnees(Question question , String reponseAssocie) {
         reponsesDonnees.put(question, reponseAssocie);
     }
 
     /**
+     * Getter de la réponse donnée par l'utilisateur
+     * @return la HashMap associant les question et les réponses données par
+     * l'utilisateur
+     */
+    public HashMap<Question, String> getReponseDonnees() {
+    	return this.reponsesDonnees;
+    }   
+    
+    /**
+     * Getter de la question actuelle
 	 * @return la question actuelle
 	 */
-	public Question getActuelle() {
+	public Question getQuestionActuelle() {
 	    return this.actuelle;
 	}
 	
 	/**
 	 * Change la question actuelle
-	 * @param nouvelle question actuelle
+	 * @param la nouvelle question actuelle
 	 */
-	public void setActuelle(Question aChanger) {
+	public void setQuestionActuelle(Question aChanger) {
 	    this.actuelle = aChanger;
 	}
 	
 	
 
-    /** @return valeur de indiceQuestion */
+    /**
+     * Getter de l'indice de la question actuelle
+     * @return valeur (int) de indiceQuestion 
+     */
     public int getIndiceQuestion() {
         return indiceQuestion;
     }
 
-    /** @param indiceQuestion nouvelle valeur de indiceQuestion */
+    /** 
+     * Change l'indice de la question par le nouvel indice
+     * @param indiceQuestion (int) nouvelle valeur de indiceQuestion 
+     */
     public void setIndiceQuestion(int indiceQuestion) {
         this.indiceQuestion = indiceQuestion;
     }
-    /**
-     * @return la HashMap associant les question et les reponses donnees par
-     * l'utilisateur
-     */
-   public HashMap<Question, String> getReponseDonnees() {
-       return this.reponsesDonnees;
-   }   
 	
+    /**
+     * Getter du nombre de bonne réponses
+     * @return (int) le nombre de bonnes réponses
+     */
 	public int getNbBonneReponse() {
 	    Set<Question> cle = reponsesDonnees.keySet();
 	    int nbBonneReponse = 0;
@@ -209,15 +222,28 @@ public class Partie {
         }
 		return nbBonneReponse;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
     public String getPseudo() {
 		return pseudo;
 	}
 
+    /**
+     * 
+     * @param pseudo
+     */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 	
 
+	/**
+	 * 
+	 * @return
+	 */
 	public double pourcentageBonneRep() {
 		double nbReponse = 0;
 		if (getQuestionPossible().size() == getIndiceQuestion()) {

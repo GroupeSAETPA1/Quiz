@@ -10,16 +10,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
+import application.modele.Question;
 
 /** 
  * TODO comment class responsibility (SRP)
@@ -114,67 +118,106 @@ class TestPartie {
     }
 
     /**
-     * Test method for {@link application.modele.Partie#getQuestionPossible()}.
+ 	 * Méthode de test pour la méthode setQuestionPossible et getQuestionPossible
+     * @see {@link application.modele.Partie#setQuestionPossible(java.util.ArrayList)}.
+     * @see {@link application.modele.Partie#getQuestionPossible()}.
+     * 
+     * @throws HomonymeException 
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
      */
     @Test
-    void testGetQuestionPossible() {
-        fail("Not yet implemented");
+    void testQuestionPossible() throws CreerQuestionException, InvalidNameException, HomonymeException {
+    	Partie partie = new Partie();
+    	
+    	// On crée 3 questions
+    	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
+    	ArrayList<Question> questions = new ArrayList<Question>();
+    	mauvaisesReponse.add("Mauvaise Réponse");
+    	questions.add(new Question("Question1", new Categorie("Categorie1"), 
+    							    1, "Réponse 1", mauvaisesReponse, ""));
+    	questions.add(new Question("Question2", new Categorie("Categorie1"), 
+    								1, "Réponse 2", mauvaisesReponse, ""));
+    	questions.add(new Question("Question3", new Categorie("Categorie1"), 
+    								1, "Réponse 3", mauvaisesReponse, ""));
+    	
+    	// On mets ces 3 questions dans la liste des questions possibles 
+    	// et on vérifie que la liste des questions possibles 
+    	// à bien ces 3 questions
+    	partie.setQuestionPossible(questions);
+    	assertEquals(questions, partie.getQuestionPossible());
     }
 
     /**
-     * Test method for {@link application.modele.Partie#setQuestionPossible(java.util.ArrayList)}.
+ 	 * Méthode de test pour la méthode setReponseDonnees et getReponseDonnees
+     * @see {@link application.modele.Partie#setReponseDonnees(Question, String)}.
+     * @see {@link application.modele.Partie#getReponseDonnees()}.
+     * 
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
      */
     @Test
-    void testSetQuestionPossible() {
-        fail("Not yet implemented");
+    void testReponseDonnee() throws CreerQuestionException, InvalidNameException {
+    	Partie partie = new Partie();
+    	
+    	// On ajoute une question
+    	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
+    	mauvaisesReponse.add("Mauvaise Réponse");
+    	Question question = new Question("Question1", new Categorie("Categorie1"), 
+    							          1, "Réponse 1", mauvaisesReponse, "");
+    	
+    	// On définit la réponse de l'utilisateur a la question "question" 
+    	// la réponse "Réponse Utilisateur"
+    	partie.setReponseDonnees(question, "Réponse Utilisateur");
+    	
+    	// On vérifie que la méthode renvoie bien la question et la réponse attendue
+    	HashMap<Question, String> hashmapAttendue = new HashMap<Question, String>();
+    	hashmapAttendue.put(question, "Réponse Utilisateur");
+    	assertEquals(hashmapAttendue, partie.getReponseDonnees());
+    }
+
+
+    /**
+ 	 * Méthode de test pour la méthode setReponseDonnees et getReponseDonnees
+     * @see {@link application.modele.Partie#setReponseDonnees(Question, String)}.
+     * @see {@link application.modele.Partie#getReponseDonnees()}.     
+     *
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
+     */
+    @Test
+    void testQuestionActuelle() throws CreerQuestionException, InvalidNameException {
+    	Partie partie = new Partie();
+    	
+    	// On ajoute une question
+    	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
+    	mauvaisesReponse.add("Mauvaise Réponse");
+    	Question question = new Question("Question1", new Categorie("Categorie1"), 
+    							          1, "Réponse 1", mauvaisesReponse, "");
+    	
+        // On vérifie que quand on set la question actuelle 
+        // avec la question créé auparavant	
+        // la question actuelle devient la question créé auparavant
+    	partie.setQuestionActuelle(question);
+    	assertEquals(question, partie.getQuestionActuelle());
     }
 
     /**
-     * Test method for {@link application.modele.Partie#setReponseDonnee(application.modele.Question, java.lang.String)}.
+ 	 * Méthode de test pour la méthode setIndiceQuestion et getIndiceQuestion
+     * @see {@link application.modele.Partie#setIndiceQuestion(int)}.
+     * @see {@link application.modele.Partie#getIndiceQuestion()}.  
      */
     @Test
-    void testSetReponseDonnee() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#getActuelle()}.
-     */
-    @Test
-    void testGetActuelle() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#setActuelle(application.modele.Question)}.
-     */
-    @Test
-    void testSetActuelle() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#getIndiceQuestion()}.
-     */
-    @Test
-    void testGetIndiceQuestion() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#setIndiceQuestion(int)}.
-     */
-    @Test
-    void testSetIndiceQuestion() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#getReponseDonnees()}.
-     */
-    @Test
-    void testGetReponseDonnees() {
-        fail("Not yet implemented");
+    void testIndiceQuestion() {
+    	Partie partie = new Partie();
+    	
+    	// On vérifie que l'indice de la question est bien changé a chaque fois
+    	partie.setIndiceQuestion(1);
+    	assertEquals(1, partie.getIndiceQuestion());
+    	partie.setIndiceQuestion(2);
+    	assertEquals(2, partie.getIndiceQuestion());
+    	partie.setIndiceQuestion(5);
+    	assertEquals(5, partie.getIndiceQuestion());
     }
 
     /**
@@ -190,6 +233,14 @@ class TestPartie {
      */
     @Test
     void testPourcentageBonneRep() {
+        fail("Not yet implemented");
+    }
+
+    /**
+     * Test method for {@link application.modele.Partie#pourcentageBonneRep()}.
+     */
+    @Test
+    void testPseudo() {
         fail("Not yet implemented");
     }
 
