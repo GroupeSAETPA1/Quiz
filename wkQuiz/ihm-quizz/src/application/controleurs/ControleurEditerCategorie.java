@@ -62,7 +62,7 @@ public class ControleurEditerCategorie {
 			
 			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
-			modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
+			modele.getCategoriesLibelleExact(aModifier.getNom()).setNom(input.getText());
 			AlertBox.showSuccessBox("Catégorie modifiée avec succées");
 
 			Quiz.chargerEtChangerVue("EditerCategories.fxml");
