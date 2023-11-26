@@ -16,7 +16,7 @@ import application.exception.DifficulteException;
 public class Partie {
 	
 	/** 
-     * Difficulte des questions de la partie en cours
+     * Difficultée des questions de la partie en cours.
      * La partie en cours pourra prendre des questions de niveau égal 
      * à difficultePartie 
      */
@@ -24,46 +24,49 @@ public class Partie {
     
     
     /** 
-     * Nombre de question auquel l'utilisateur 
+     * Nombre de questions auquel l'utilisateur 
      * répondra dans la partie actuelle 
      */ 
     private int nombreQuestionPartie ;
     
+    /**
+     * Pseudonyme du joueur du quiz
+     */
     private String pseudo;
     
     
     /**
-     * Categorie dans laquelle les questions seront tiree
-     * Initialisé a null reste a null si l'option Aléatoire est choisis dans la
-     * page de paramètre
+     * Categorie dans laquelle les questions seront tirées.
+     * Initialisé a null et reste a null si l'option Aléatoire est choisi dans la
+     * page de paramètres
      */
-    private Categorie categorieQuestion ;
+    private Categorie categorieQuestion;
     
     /**
-     * Liste de question correspondant au parametre 
-     * selectionne par l'utilisateur
+     * Liste de questions correspondant au paramètres
+     * selectionnés par l'utilisateur
      */
     private ArrayList<Question> questionsPossibles ;
     
     /**
-     * question jouée et réponses associées
+     * Question jouée et ses réponses associées
      */
     private HashMap<Question, String> reponsesDonnees;
     
     /**
-     * Question actuelle a laquelle l'utilisateur doit repondre
+     * Question actuelle à laquelle l'utilisateur doit répondre
      */
-    private Question actuelle ;
+    private Question actuelle;
     
     /**
      * Indice de la question actuelle
      */
-    private int indiceQuestion ;
+    private int indiceQuestion;
     
 
     /**
-     * Constructeur 
-     * initialise tout a null sauf la hashmap
+     * Constructeur qui
+     * initialise tout a null sauf le pseudo
      */
     public Partie () {
         reponsesDonnees = new HashMap<>();
@@ -72,9 +75,9 @@ public class Partie {
     }
     
     /**
-     * Change la difficulte actuelle pour difficulte 
-     * @param difficulte nouvelle difficulte
-     * @throws DifficulteException 
+     * Change la difficultée actuelle pour difficultée 
+     * @param difficulte la nouvelle difficultée du quiz
+     * @throws DifficulteException si la difficultée est invalide
      */
     public void setDifficultePartie(int difficulte) throws DifficulteException {
     	if (difficulte > -1 && difficulte < 4) {
@@ -87,15 +90,17 @@ public class Partie {
     }
     
     /**
-     * @return la difficulte de la partie en cour
+     * Getter de la difficultée de la partie
+     * @return (Int) la difficultée de la partie
      */
-    public Integer getDifficulte() {
+    public Integer getDifficultePartie() {
         return this.difficultePartie;
         
     }
     
     /**
-     * @return le nombre de question dans la partie en cour 
+     * Getter du nombre de questions de la partie
+     * @return (int) le nombre de question dans la partie
      */
     public int getNombreQuestion() {
         return this.nombreQuestionPartie;
@@ -106,12 +111,12 @@ public class Partie {
      * @param nombreQuestion nouveau nombre de question
      */
     public void setNombreQuestion(int nombreQuestion) {
-        this.nombreQuestionPartie = nombreQuestion ;
+        this.nombreQuestionPartie = nombreQuestion;
     }
     
     /**
-     * Change la categorie de la partie actuelle
-     * @param choisis la categorie dans laquelle on veut prendre des questions
+     * Change la catégorie de la partie actuelle
+     * @param la categorie choisie pour le quiz
      * @throws IOException 
      * @throws InternalError 
      * @throws ClassNotFoundException 
@@ -121,15 +126,16 @@ public class Partie {
                                					.getCategorieLibelleExact(choisis);
     }
     /**
-     * @return la categorie dans lequelle seront 
-     * tirés les questions de la partie  
+     * Getter de la catégorie de la partie
+     * @return (Categorie) la catégorie de la partie
      */
     public Categorie getCategoriePartie() {
         return this.categorieQuestion;          
     }
     
     /**
-     * @return la liste de question possible correspondant au parametre
+     * Getter des Questions possibles par rapport au paramètre de la partie
+     * @return la liste de questions possible correspondant au paramètre
      */
     public ArrayList<Question> getQuestionPossible() {
         return this.questionsPossibles;
@@ -141,7 +147,7 @@ public class Partie {
      * @param nouvelle liste de questions
      */
     public void setQuestionPossible(ArrayList<Question> aChanger) {
-        this.questionsPossibles = aChanger ;   
+        this.questionsPossibles = aChanger;   
     }
 
     /**

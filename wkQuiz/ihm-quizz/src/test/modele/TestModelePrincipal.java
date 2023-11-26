@@ -827,10 +827,10 @@ class TestModelePrincipal {
 	    // On vérifie que modifier la difficultée avec une 
 	    // difficultée valide modifie bien la difficultée de la partie
 	    modele.setDifficultePartie(0);
-	    assertEquals(0, modele.getPartie().getDifficulte());
+	    assertEquals(0, modele.getPartie().getDifficultePartie());
 	    
 	    modele.setDifficultePartie(2);
-	    assertEquals(2, modele.getPartie().getDifficulte());
+	    assertEquals(2, modele.getPartie().getDifficultePartie());
 	    
 	    // On vérifie que modifier une difficultée par une difficultée invalide 
 	    // (inférieure à 0 ou supérieur à 3)

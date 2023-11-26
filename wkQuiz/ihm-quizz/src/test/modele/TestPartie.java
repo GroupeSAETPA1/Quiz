@@ -1,74 +1,116 @@
 /*
  * TestPartie.java                                    16 nov. 2023
- * IUT de Rodez, info1 2023-2024, aucun copyright ni copyleft
+ * IUT de Rodez, info2 2023-2024, aucun copyright ni copyleft
  */
 
 package test.modele;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.IOException;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import application.exception.DifficulteException;
+import application.exception.HomonymeException;
+import application.exception.InvalidNameException;
+import application.modele.Categorie;
+import application.modele.ModelePrincipal;
+import application.modele.Partie;
 
 /** 
  * TODO comment class responsibility (SRP)
- * @author francois
+ * @author Tom Douaud
+ * @author Francois DSP
  */
 class TestPartie {
 
     /**
-     * Test method for {@link application.modele.Partie#Partie()}.
+	 * Méthode de test pour le constructeur Partie
+     * @see {@link application.modele.Partie#Partie()}.
      */
     @Test
     void testPartie() {
-        fail("Not yet implemented");
+    	// On crée une partie et on vérifie que le pseudo
+    	// soit bien celui du constructeur
+        Partie partie = new Partie();
+        assertEquals("Pseudo", partie.getPseudo());
     }
 
     /**
-     * Test method for {@link application.modele.Partie#setDifficultePartie(int)}.
+	 * Méthode de test pour la méthode setDifficultePartie et getDifficultePartie
+     * @see {@link application.modele.Partie#setDifficultePartie(int)}.
+     * @see {@link application.modele.Partie#getDifficultePartie()}.
+     * 
+     * @throws DifficulteException 
      */
     @Test
-    void testSetDifficultePartie() {
-        fail("Not yet implemented");
+    void testDifficultePartie() throws DifficulteException {
+    	Partie partie = new Partie();
+    	
+    	// On vérifie que changer la difficultée de la partie par une 
+    	// nouvelle difficultée valide change bien la difficultée de la partie
+    	partie.setDifficultePartie(1);
+    	assertEquals(1, partie.getDifficultePartie());
+    	partie.setDifficultePartie(0);
+    	assertEquals(0, partie.getDifficultePartie());
+    	
+    	// On vérifie que changer la difficultée par une difficultée invalide 
+    	// (inférieur à 0 ou supérieure à 3) renvoie bien 
+    	// l'exception "DifficulteException"
+    	assertThrows(DifficulteException.class, () -> partie.setDifficultePartie(-1));
+    	assertThrows(DifficulteException.class, () -> partie.setDifficultePartie(4));
     }
 
-    /**
-     * Test method for {@link application.modele.Partie#getDifficulte()}.
-     */
-    @Test
-    void testGetDifficulte() {
-        fail("Not yet implemented");
-    }
 
     /**
-     * Test method for {@link application.modele.Partie#getNombreQuestion()}.
+	 * Méthode de test pour la méthode setDifficultePartie et getDifficultePartie
+     * @see {@link application.modele.Partie#setDifficultePartie(int)}.
+     * @see {@link application.modele.Partie#getDifficultePartie()}.
      */
     @Test
-    void testGetNombreQuestion() {
-        fail("Not yet implemented");
+    void testNombreQuestion() {
+    	Partie partie = new Partie();
+    	
+    	// On vérifie que changer le nombre de questions de la partie par une
+    	// nouveau nombre de questions change bien 
+    	// le nombre de questions de la partie
+    	partie.setNombreQuestion(1);
+    	assertEquals(1, partie.getNombreQuestion());
+    	partie.setNombreQuestion(0);
+    	assertEquals(0, partie.getNombreQuestion());
+    	partie.setNombreQuestion(10);
+    	assertEquals(10, partie.getNombreQuestion());
     }
 
-    /**
-     * Test method for {@link application.modele.Partie#setNombreQuestion(int)}.
-     */
-    @Test
-    void testSetNombreQuestion() {
-        fail("Not yet implemented");
-    }
 
     /**
-     * Test method for {@link application.modele.Partie#setCategoriePartie(java.lang.String)}.
+	 * Méthode de test pour la méthode setCategoriePartie et getCategoriePartie
+     * @see {@link application.modele.Partie#setCategoriePartie(String)}.
+     * @see {@link application.modele.Partie#getCategoriePartie()}.
+     *      
+     * @throws HomonymeException 
+     * @throws InvalidNameException 
+     * @throws IOException 
+     * @throws InternalError 
+     * @throws ClassNotFoundException 
      */
     @Test
-    void testSetCategoriePartie() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link application.modele.Partie#getCategoriePartie()}.
-     */
-    @Test
-    void testGetCategoriePartie() {
-        fail("Not yet implemented");
+    void testCategoriePartie() throws InvalidNameException, HomonymeException, ClassNotFoundException, InternalError, IOException {
+    	// On récupère le modèle principal et on crée 
+    	// une nouvelle catégorie dans ce modèle
+    	ModelePrincipal modele = ModelePrincipal.getInstance();
+    	modele.creerCategorie("Nouvelle catégorie partie");
+    	
+    	// On définit la catégorie de la partie par la catégorie créée 
+    	// juste avant et on vérifie que la catégorie séléctionée pour 
+    	// la partie est bien celle qu'on à créé dans le modèle
+    	modele.getPartie().setCategoriePartie("Nouvelle catégorie partie");
+    	assertEquals(modele.getCategoriesLibelleExact("Nouvelle catégorie partie"),
+    				 modele.getPartie().getCategoriePartie());
     }
 
     /**
