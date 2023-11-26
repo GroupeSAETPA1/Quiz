@@ -224,16 +224,16 @@ public class Partie {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Getter du pseudo du joueur
+	 * @return (String) le pseudo du joueur
 	 */
     public String getPseudo() {
 		return pseudo;
 	}
 
     /**
-     * 
-     * @param pseudo
+     * Setter du pseudo du joueur
+     * @param pseudo (String) le pseudo du joueur
      */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
@@ -241,8 +241,8 @@ public class Partie {
 	
 
 	/**
-	 * 
-	 * @return
+	 * Récupere le pourcentage de bonnes réponses du joueur
+	 * @return (douvle) le pourcentage de 0.0 à 100 du joueur
 	 */
 	public double pourcentageBonneRep() {
 		double nbReponse = 0;

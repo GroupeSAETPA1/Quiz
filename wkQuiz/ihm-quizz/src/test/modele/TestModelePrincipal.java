@@ -127,7 +127,9 @@ class TestModelePrincipal {
 		// On vérifie que la serialisation et la dé-serialisation du modèle 
 		// est bien effectuée et valide
 		ModelePrincipal modele = ModelePrincipal.getInstance();
+		System.out.println(modele.getBanqueCategorie().getCategories());
 		assertIterableEquals(modele.getBanqueCategorie().getCategories(), modele.deSerialiserCategorie().getCategories());
+
 		assertIterableEquals(modele.getBanqueQuestion().getQuestions(), modele.deSerialiserQuestion().getQuestions());
 		// On vérifie que sérialiser ne renvoie pas d'erreur
 		assertDoesNotThrow(() -> modele.serialiser());

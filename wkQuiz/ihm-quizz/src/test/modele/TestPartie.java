@@ -7,13 +7,10 @@ package test.modele;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import application.exception.CreerQuestionException;
@@ -115,6 +112,9 @@ class TestPartie {
     	modele.getPartie().setCategoriePartie("Nouvelle catégorie partie");
     	assertEquals(modele.getCategoriesLibelleExact("Nouvelle catégorie partie"),
     				 modele.getPartie().getCategoriePartie());
+    	
+    	// On supprime cette catégorie une fois le test fini pour ne pas interférer les autres test
+    	modele.getCategories().remove(modele.getCategoriesLibelleExact("Nouvelle catégorie partie"));
     }
 
     /**
@@ -250,20 +250,60 @@ class TestPartie {
     	assertEquals(2, partie.getNbBonneReponse());
     }
 
-    /**
-     * Test method for {@link application.modele.Partie#pourcentageBonneRep()}.
-     */
-    @Test
-    void testPourcentageBonneRep() {
-        fail("Not yet implemented");
-    }
 
     /**
-     * Test method for {@link application.modele.Partie#pourcentageBonneRep()}.
+     * Méthode de test pour la méthode getPseudo et setPseudo
+     * @see {@link application.modele.Partie#getPseudo()}.
+     * @see {@link application.modele.Partie#setPseudo(String)}.
      */
     @Test
     void testPseudo() {
-        fail("Not yet implemented");
+    	Partie partie = new Partie();
+    	
+    	// On vérifie qu'à chaque fois qu'on change le pseudo, 
+    	// le pseudo est bien modifié
+    	partie.setPseudo("Nouveau Pseudo");
+    	assertEquals("Nouveau Pseudo", partie.getPseudo());
+    	partie.setPseudo("Deuxième Nouveau Pseudo");
+    	assertEquals("Deuxième Nouveau Pseudo", partie.getPseudo());
     }
 
+    /**
+     * Méthode de test pour la méthode pourcentageBonneRep
+     * @see {@link application.modele.Partie#pourcentageBonneRep()}.
+     * 
+     * @throws InvalidNameException 
+     * @throws CreerQuestionException 
+     */
+    @Test
+    void testPourcentageBonneRep() throws CreerQuestionException, InvalidNameException {
+    	Partie partie = new Partie();
+    	
+    	// On vérifie qu'au départ on à 0 en pourcentage de bonnes réponses
+    	assertEquals(0, partie.pourcentageBonneRep());
+    	
+    	// On crée 3 questions
+    	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
+    	ArrayList<Question> questions = new ArrayList<Question>();
+    	mauvaisesReponse.add("Mauvaise Réponse");
+    	questions.add(new Question("Question1", new Categorie("Categorie1"), 
+    							    1, "Réponse 1", mauvaisesReponse, ""));
+    	questions.add(new Question("Question2", new Categorie("Categorie1"), 
+    								1, "Réponse 2", mauvaisesReponse, ""));
+    	questions.add(new Question("Question3", new Categorie("Categorie1"), 
+    								1, "Réponse 3", mauvaisesReponse, ""));
+    	partie.setQuestionPossible(questions);
+    	partie.setNombreQuestion(3);
+    	
+    	// On réponds bon à 2 questions sur 3, donc 66% de bonnes réponses
+    	partie.setReponseDonnees(questions.get(0), "Réponse 1");
+    	partie.setReponseDonnees(questions.get(1), "Mauvaise Réponse");
+    	partie.setReponseDonnees(questions.get(2), "Réponse 3");
+    	assertEquals(66.66666666666666, partie.pourcentageBonneRep());
+    	
+    	// On réponds bon à 3 questions sur 3, donc 100% de bonnes réponses
+    	partie.setIndiceQuestion(3);
+    	partie.setReponseDonnees(questions.get(1), "Réponse 2");
+    	assertEquals(100, partie.pourcentageBonneRep());
+    }
 }
