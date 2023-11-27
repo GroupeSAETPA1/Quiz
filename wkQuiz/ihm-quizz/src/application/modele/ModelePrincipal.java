@@ -65,8 +65,6 @@ public class ModelePrincipal {
 	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
 	
 	
-    private static ModelePrincipal modele;
-
     /** Les CSV importés devront séparer leur éléments avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
 

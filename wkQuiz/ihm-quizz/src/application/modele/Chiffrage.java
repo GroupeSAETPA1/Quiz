@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.CsvWriter;
 
-import application.outil.lectureFichier;
 import application.vue.AlertBox;
 
 /**

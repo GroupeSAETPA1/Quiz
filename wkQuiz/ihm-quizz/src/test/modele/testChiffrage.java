@@ -13,11 +13,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import application.exception.DifficulteException;
+import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
-import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
-import application.exception.ReponseException;
 import application.modele.Categorie;
 import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
@@ -78,13 +76,11 @@ class testChiffrage {
      * Test method for {@link application.modele.Chiffrage#genererCSV(java.lang.String)}.
      * @throws InvalidNameException 
      * @throws HomonymeException 
-     * @throws DifficulteException 
-     * @throws ReponseException 
-     * @throws InvalidFormatException 
      * @throws IOException 
+     * @throws CreerQuestionException 
      */
     @Test
-    void testGenererCSV() throws HomonymeException, InvalidNameException, InvalidFormatException, ReponseException, DifficulteException, IOException {
+    void testGenererCSV() throws HomonymeException, InvalidNameException, IOException, CreerQuestionException {
         {   // TODO c'est temporaire, c'est pour tester
             ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
             ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));

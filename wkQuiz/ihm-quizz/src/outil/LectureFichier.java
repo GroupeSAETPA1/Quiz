@@ -3,7 +3,7 @@
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
-package application.outil;
+package outil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +18,7 @@ import application.modele.ModelePrincipal;
  * Méthode outils de lecture de fichier CSV
  * @author Lucas
  */
-public class lectureFichier {
+public class LectureFichier {
     
     /** Les CSV importé devront séparé leur élément avec une tabulation */
     public static final char SEPARATEUR_CSV = 'é';
@@ -38,7 +38,7 @@ public class lectureFichier {
             ligne = fichierReader.readLine();
     
             if (ligne != null) {
-                HashMap<String, String> dicoLigne = lectureFichier.getDicotionnaire(ligne);
+                HashMap<String, String> dicoLigne = LectureFichier.getDicotionnaire(ligne);
                 resultat.add(dicoLigne);
                 nombreQuestionAjoute ++;
             }

@@ -15,11 +15,11 @@ import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 import application.modele.ModelePrincipal;
-import application.outil.lectureFichier;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import outil.LectureFichier;
 
 
 /**
@@ -87,7 +87,7 @@ public class ControleurImport {
         			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
         } else {
             
-            ArrayList<HashMap<String, String>> lignes = getLigneCSV(fichier);
+            ArrayList<HashMap<String, String>> lignes = LectureFichier.getLigneCSV(fichier);
             if (!lignes.isEmpty()) {
             	creerEtGererQuestionCategorie(lignes);            	
             }
