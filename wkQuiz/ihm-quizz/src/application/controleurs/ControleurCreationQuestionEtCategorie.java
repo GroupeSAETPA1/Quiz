@@ -168,12 +168,7 @@ public class ControleurCreationQuestionEtCategorie {
 		} catch (NullPointerException e) {
         	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
         }
-		
-		 Quiz.charger("EditerQuestions.fxml");
-		
 	}
-
-
 
     /** 
      * @return La liste des mauvaise réponse choisie
@@ -265,10 +260,8 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
         } catch (DifficulteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            AlertBox.showWarningBox("Il manque la difficultée de la question");
         } catch (CreerQuestionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         if (questionCreer) {
