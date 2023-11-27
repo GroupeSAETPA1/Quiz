@@ -641,4 +641,20 @@ public class ModelePrincipal {
                       question.getMauvaisesReponses(), question.getFeedback());
     }
     
+    /**
+     * @param categorie
+     * @return true si la catégorie est la catégorie General false sinon
+     */
+    public boolean estGeneral(Categorie categorie) {
+        return categorie.equals(banqueCategorie.categorieGeneral);
+    }
+    
+    /**
+     * @param nomCategorie
+     * @return true si la catégorie est la catégorie General false sinon
+     */
+    public boolean estGeneral(String nomCategorie) {
+        return nomCategorie.equals(banqueCategorie.categorieGeneral.getNom());
+    }
+    
 }
