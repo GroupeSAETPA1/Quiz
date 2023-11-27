@@ -32,7 +32,7 @@ public class ControleurRepondreQuestion {
 	
     
     @FXML
-    private ToggleGroup reponses ;
+    private ToggleGroup reponses;
 	
     @FXML
     private RadioButton choix1;
@@ -340,6 +340,11 @@ public class ControleurRepondreQuestion {
                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
            }
        }
+    }
+    
+    @FXML
+    private void quitterQuiz() {
+    	
     }
 
     /** 
