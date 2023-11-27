@@ -344,7 +344,12 @@ public class ControleurRepondreQuestion {
     
     @FXML
     private void quitterQuiz() {
-    	
+    	boolean quitterQuiz = AlertBox.showConfirmationBox("Voulez-vous " 
+    						  + "renvenir au menu principal ?\n Toute "
+    						  + "votre progression sur le quiz sera perdue.");
+    	if (quitterQuiz) {
+    		Quiz.chargerEtChangerVue("Accueil.fxml");
+    	}
     }
 
     /** 
