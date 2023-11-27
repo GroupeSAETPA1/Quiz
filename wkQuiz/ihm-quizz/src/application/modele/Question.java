@@ -280,7 +280,7 @@ public class Question implements Serializable {
      */
     public void setBonneReponse(String nouvelleBonneReponse) 
     throws InvalidNameException, ReponseException {
-        if (nouvelleBonneReponse.equals("")) {
+        if (reponseJuste.isBlank()) {
             throw new InvalidNameException("Bonne réponse vide");
         }
         if (reponseFausseContientReponseJuste(mauvaisesReponses, 
@@ -288,6 +288,12 @@ public class Question implements Serializable {
             throw new ReponseException("Impossible de mettre une bonne "
                     + "reponse si la valeur est deja contenu "
                     + "dans mauvaiseReponse ");
+        }
+        if (   reponseJuste.length() > LONGUEUR_MAX_REPONSE 
+            || nouvelleBonneReponse.length() <= 0) {
+            throw new InvalidNameException("La réponse juste contient" + 
+            libelle.length()  + "Il faut qu'elle contienne entre 1 et " 
+            + LONGUEUR_MAX_REPONSE);
         }
         //else
         this.reponseJuste = nouvelleBonneReponse;
@@ -319,8 +325,16 @@ public class Question implements Serializable {
     /**
      * Change le feedback de la question
      * @param feedback (String) le nouveau feedback
+     * @throws InvalidNameException 
      */
-    public void setFeedback(String feedback) {
+    public void setFeedback(String feedback) throws InvalidNameException {
+        if (libelle.isBlank()) {
+            throw new InvalidNameException("Le libelle est vide");
+        }
+        if (LONGUEUR_LIBELLE_MAX < feedback.length()) {
+            throw new InvalidNameException("Le libelle contient " + feedback.length() 
+            + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
+        }
 		this.feedback = feedback;
 	}
     

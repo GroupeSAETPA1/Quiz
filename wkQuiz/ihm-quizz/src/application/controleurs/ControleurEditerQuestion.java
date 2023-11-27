@@ -29,7 +29,7 @@ import javafx.scene.control.ToggleGroup;
 public class ControleurEditerQuestion {
 	
     private ArrayList<Categorie> categories;
-	private ModelePrincipal modele;
+	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	private Question questionAModifier;
     
     @FXML private ToggleGroup difficulte;
@@ -44,15 +44,9 @@ public class ControleurEditerQuestion {
 
 	@FXML private ComboBox<Categorie> selectCategorie;
 	
-	/**
-	 * Méthodes liée au bouton valider,
-	 * qui devra enregister les champs  dans la banques de question 
-	 */
-	
 	@FXML
 	public void initialize() {
         // On récupère l'instance du Modèle
-	    modele = ModelePrincipal.getInstance();
 	    questionAModifier = modele.getQuestionAModifier();
 	    miseAJourListeCategorie();
 	    
@@ -92,9 +86,13 @@ public class ControleurEditerQuestion {
 	    }
     }
 	
+	/**
+     * Méthodes liée au bouton valider,
+     * qui devra enregistrer les champs  dans la banques de question 
+     */
 	@FXML
 	private void valider() {
-		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
+		Question aModifier = modele.getQuestionAModifier();
 		
 		//TODO utiliser la méthode modifierQuestion de ModelePrincipal
 		
