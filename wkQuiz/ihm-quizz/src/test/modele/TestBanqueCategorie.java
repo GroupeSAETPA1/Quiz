@@ -76,6 +76,8 @@ class TestBanqueCategorie {
 		// On renvoie l'exception "HomonymeException"
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(ensembleCategories.get(0)));
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(new Categorie("PreMIerE")));
+		
+		
 	}
 
 	/**

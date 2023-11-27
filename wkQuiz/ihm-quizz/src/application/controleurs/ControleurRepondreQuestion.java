@@ -169,7 +169,7 @@ public class ControleurRepondreQuestion {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            partie.setReponseDonnee(
+            partie.setReponseDonnees(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
             
             if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
@@ -334,7 +334,7 @@ public class ControleurRepondreQuestion {
                + "Par défaut cette réponse sera compté comme fausse");
            int actuelle = partie.getIndiceQuestion();
            if (reponseAlertBox) {
-               partie.setReponseDonnee(
+               partie.setReponseDonnees(
                partie.getQuestionPossible().get(actuelle), "");
                partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");

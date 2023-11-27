@@ -23,7 +23,7 @@ import application.exception.ReponseException;
 
 /**
  * Contrôleur principale de l'application .
- * Permet l'interaction entre les classes du modèle et les controlleurs.
+ * Permet l'interaction entre les classes du modèle et les controleurs.
  * C'est une classe Singleton
  * @author Lucas Descriaud
  * @author François de Saint Palais
@@ -32,27 +32,27 @@ public class ModelePrincipal {
 		
 
     /**
-     * Lie une difficulté à sont equivalent en string
+     * Lie une difficulté à son équivalent en string
      * Ex : 1 -> Facile
      */
     public static final HashMap<Integer, String> INT_DIFFICULTE_TO_LABEL
     = new HashMap<>();
 
     /**
-     * Lie une difficulté à sont equivalent numérique
+     * Lie une difficulté à son équivalent numérique
      * Ex : Facile -> 1
      */
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
     
-	/** le nom des fichiers pour la serialisation */
+	/** Le nom des fichiers pour la sérialisation */
 	private static final String FICHIER_SERIALISATION_CATEGORIE = "donneesCategorie";
 	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
 	
 	
     private static ModelePrincipal modele;
 
-    /** Les CSV importé devront séparé leur élément avec une tabulation */
+    /** Les CSV importés devront séparer leur éléments avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
 
     
@@ -72,25 +72,10 @@ public class ModelePrincipal {
     private ArrayList<Categorie> categorieAEnvoyer = new ArrayList<Categorie>();
 
     /**
-     * Constructeur
-
+     * Constructeur du modele principal
      */
     private ModelePrincipal() {
     	
-//        try {
-//			this.banqueQuestion = deSerialiserQuestion() != null 
-//						        ? deSerialiserQuestion() : new BanqueQuestion();
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//			this.banqueQuestion = new BanqueQuestion();
-//		}
-//        try {
-//			this.banqueCategorie = deSerialiserCategorie() != null 
-//			        			 ? deSerialiserCategorie() : new BanqueCategorie();
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//			this.banqueQuestion = new BanqueQuestion();
-//		}
     	this.banqueCategorie = deSerialiserCategorie();
     	this.banqueQuestion = deSerialiserQuestion();
         this.partie = new Partie();
@@ -108,6 +93,7 @@ public class ModelePrincipal {
     }
 
     /**
+     * Getter de l'intance du modele principal
      * @return Renvoie l'instance unique de ModelePrincipal
      */
     public static ModelePrincipal getInstance(){
@@ -118,9 +104,9 @@ public class ModelePrincipal {
     }
 
     /**
-     * Vérifie si une Catégorie contient des Questions
-     * @param categorie La Categorie pour laquelle on cherche
-     * @return revoie true si la categorie contient des question, false sinon
+     * Vérifie si une catégorie contient des Questions
+     * @param categorie La categorie ou les questions sont recherchées
+     * @return Revoie true si la categorie contient des questions, false sinon
      */
     public boolean categorieContientQuestion(Categorie categorie) {
         ArrayList<Question> questionExistante = banqueQuestion.getQuestions();
@@ -135,6 +121,7 @@ public class ModelePrincipal {
     }
 
 	/**
+	 * Vérifie si la catégorie existe
      * @param nom Le nom de la catégorie recherché
      * @return true si la catégorie existe, false sinon
      */
@@ -143,26 +130,26 @@ public class ModelePrincipal {
     }
 
 	/**
-     * Créer une Categorie et l'ajoute au banque de catégorie. Si la création a été
+     * Crée une categorie et l'ajoute a la banque de catégorie. Si la création a été
      * un sucés on revoie true
      *
-     * @param nom Le nom que vous voulait donnée à la Categorie.
+     * @param nom Le nom donnée à la categorie.
      * @return true si la création est un sucés false sinon
      * @throws InvalidNameException Si le nom choisie est invalide
      * @throws HomonymeException    Si la catégorie existe déjà
      */
     public boolean creerCategorie(String nom) throws InvalidNameException, HomonymeException {
-        // On propage a l'appelant les éventuelle exception lié à la création
+        // On propage à l'appelant les éventuelles exceptions liés à la création
         Categorie aAjouter = new Categorie(nom);
 
-        // On propage a l'appelant les éventuelle exception lié à la création
+        // On propage à l'appelant les éventuelles exceptions liés à la création
         banqueCategorie.ajouter(aAjouter);
         
         return true;
     }
 
     /**
-     * Ajoute une question a la modele.banqueQuestion en appelant le constructeur de
+     * Ajoute une question à la banque de question en appelant le constructeur de
      * question.
      *
      * @param libelle       : libelle de la question
@@ -171,7 +158,7 @@ public class ModelePrincipal {
      * @param reponseFausse : liste de mauvaise réponse
      * @param feedback      : feedback de la question
      * @param reponseJuste  : bonne réponse de la question
-     * @return true si la question a été créer , false sinon
+     * @return true si la question a été crée, false sinon
      * @throws InvalidNameException 
      * @throws HomonymeException
      * @throws DifficulteException
@@ -188,43 +175,56 @@ public class ModelePrincipal {
             categorieQuestion = banqueCategorie.categorieGeneral;
         }
         
-        // Si exception apparais on propage au controlleur appellant
+        // Si une exception apparais on la propage au controlleur appellant
         Question aAjouter = new Question(libelle, categorieQuestion, difficulte,
                 reponseJuste, reponseFausses, feedback);
 
-        // Si exception apparais on propage l'exception à l'appelant
+        // Si une exception apparais on la propage au controlleur appellant
         banqueQuestion.ajouter(aAjouter);
         return true;
 
     }
 
-    /** @return La BanqueCategorie */
+    /** 
+     * Getter de la banque de categorie du modele principal
+     * @return La BanqueCategorie 
+     */
     public BanqueCategorie getBanqueCategorie() {
         // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
         // Question. Pour éviter les effet de bords
         return banqueCategorie;
     }
 
-    /** @return La BanqueQuestion */
+    /** 
+     * Getter de la banque de question du modele principal
+     * @return La BanqueQuestion 
+     */
     public BanqueQuestion getBanqueQuestion() {
         // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
         // Question. Pour éviter les effet de bords
         return banqueQuestion;
     }
 
-    /** @return valeur de categorieAModifier */
+    /**
+     * Getter de la catégorie à modifier
+     *  @return valeur de categorieAModifier
+     */
     public Categorie getCategorieAModifier() {
         return catgorieAModifier;
     }
 
-    /** @return Une liste des categories */
+    /**
+     * Getter de la liste des catégories du modele principal
+     * @return Une liste des catégories 
+     */
     public ArrayList<Categorie> getCategories() {
         return banqueCategorie.getCategories();
     }
 
     /**
-     * @param libelle Le nom de catégorie recherché
-     * @return Les catégories qui ont libelle dans leur nom
+     * Récupere les catégories qui ont un libellé recherché
+     * @param libellé Le nom de catégorie recherché
+     * @return Les catégories qui ont libellé dans leur nom
      */
     public ArrayList<Categorie> getCategoriesLibelle(String libelle) {
 		return this.getBanqueCategorie().getCategoriesLibelle(libelle);
@@ -232,7 +232,7 @@ public class ModelePrincipal {
 
     /**
      * Retourne l'indice de la catégorie dans la liste des catégories
-     * @param string catégorie recherché
+     * @param string la catégorie recherchée
      * @return L'indice de la catégorie
      */
     public int getIndice(String string) {
@@ -240,90 +240,108 @@ public class ModelePrincipal {
     }
 
     /**
+     * Retourne le nombre de question d'une catégorie
      * @param categorie La catégorie dont on veut connaître le nombre de question
-     * @return le nombre de question présente dans une catégorie
+     * @return le nombre de questions présentes dans une catégorie
      */
     public int getNombreQuestionCategorie(Categorie categorie) {
         return getBanqueQuestion().getQuestions(categorie).size();
     }
 
-    /** @return la page précédente */
-    public String getPagePrecendente(){
+    /** 
+     * Getter du nom de la page précédente
+     * @return la page précédente 
+     */
+    public String getPagePrecendente() {
     	return pagePrecedente;
     }
 
-    /** @return la partie */
+    /** 
+     * Getter de la partie du modèle principal
+     * @return la partie 
+     */
     public Partie getPartie() {
 		return partie;
 	}
 
-    /** @return valeur de questionAModifier */
+    /**
+     * Getter de la question à modifier
+     * @return la question à modifier 
+     */
     public Question getQuestionAModifier() {
         return questionAModifier;
     }
     
     /**
-     * Renvoie la catégorie qui à exactement le même libellé que passé en paramètre
-     * si il n'y en a pas cela renvoie null
+     * Renvoie la catégorie qui à exactement le même libellé que celui passé en paramètre
      * @param libelle (String) le libellé recherché sensible à la casse
-     * @return catégorie avec le libellé voulu si elle existe, null sinon
+     * @return la catégorie avec le libellé voulu si elle existe, null sinon
      */
     public Categorie getCategoriesLibelleExact(String libelle) {
         return banqueCategorie.getCategorieLibelleExact(libelle);
     }
 
     /**
-     * Utilisé pour ce positionner sur le bon onglet 
+     * Utilisé pour se positionner sur le bon onglet 
      * quand on passe d'Editer à Créer
-     * @return displayCategoriePane */
+     * @return displayCategoriePane 
+     */
     public boolean isDisplayCategoriePane() {
 		return displayCategoriePane;
 	}
 
     /**
-     * Modifie la catégorie catgorieAModifier stocké dans le modèle 
+     * Modifie la catégorie catgorieAModifier stockée dans le modèle 
      * @param nouveauNom Le nouveau nom de la catégorie
      * @return true si la modification est effective
-     * @throws InvalidNameException Si le nom choisi est invalide
+     * @throws InvalidNameException si le nom choisi est invalide
+     * @throws HomonymeException 
      */
-    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException {
-        catgorieAModifier.setNom(nouveauNom);
-        //TODO vérifier si le nouveauNom n'est pas celui d'une catégorie déjà présente
-        return true;
+    public boolean modifierCategorie(String nouveauNom) throws InvalidNameException, HomonymeException {
+        if (getCategoriesLibelleExact(nouveauNom) == null) {
+        	catgorieAModifier.setNom(nouveauNom);
+        	return true;
+        } else {
+        	throw new HomonymeException("La categorie est déja présente dans la banque de categorie.");
+        }
     }
 
     /**
      * Modifie la questionAModifier stocké dans le modèle
      *
      * @param libelle        Le nouveau nom de la question
-     * @param categorie      La nouvelle Categorie de la question
+     * @param categorie      La nouvelle categorie de la question
      * @param difficulte     La nouvelle difficulté de la question
      * @param reponseJuste   La nouvelle réponse juste de la question
-     * @param reponseFausses Les nouvelles réponse fausse de la question
+     * @param reponseFausses Les nouvelles réponses fausses de la question
      * @param feedback       Le nouveau feedback de la question
-     * @return true si la modification a pu être faite
-     * @throws ReponseException
-     * @throws InvalidNameException
-     * @throws InvalidFormatException
-     * @throws DifficulteException
+     * @return true si la question à bien été modifiée
      */
     public boolean modifierQuestion(String libelle, String categorie,
             int difficulte, String reponseJuste,
-            ArrayList<String> reponseFausses, String feedback)
-            throws CreerQuestionException, InvalidNameException {
+            ArrayList<String> reponseFausses, String feedback) {
         
-      Categorie nouvelleCat = banqueCategorie.getCategorieLibelleExact(categorie);
-      
-      questionAModifier.setLibelle(libelle);
-      questionAModifier.setCategorie(nouvelleCat);
-      questionAModifier.setDifficulte(difficulte);
-      questionAModifier.setBonneReponse(reponseJuste);
-      questionAModifier.setMauvaiseReponse(reponseFausses);
-      questionAModifier.setFeedback(feedback);
-      
-      Question temoinAjout = new Question (libelle , nouvelleCat , difficulte ,
-              reponseJuste , reponseFausses , feedback);
-      return banqueQuestion.getQuestions().contains(temoinAjout);
+        if (getBanqueCategorie().getCategorieLibelleExact(categorie) == null) {
+        	try {
+				creerCategorie(categorie);
+			} catch (InvalidNameException | HomonymeException e) {
+				return false;
+			}
+        }
+        // TODO ne pas modifier la question si un des arguments ne sont pas valides, 
+        // parce que sinon on peut juste avoir un probleme de difficultée par exemple 
+        // et ca va modifier quand meme le nom et le la catégorie
+        try {
+		     questionAModifier.setLibelle(libelle);
+		     questionAModifier.setCategorie(getBanqueCategorie().getCategorieLibelleExact(categorie));
+		     questionAModifier.setDifficulte(difficulte);
+		     questionAModifier.setBonneReponse(reponseJuste);
+		     questionAModifier.setMauvaiseReponse(reponseFausses);
+		     questionAModifier.setFeedback(feedback);
+		     return true;
+	    } catch (InvalidNameException | InvalidFormatException | ReponseException e) {
+			return false;
+	    }
     }
 
     /**
@@ -337,10 +355,11 @@ public class ModelePrincipal {
     }
 
     /**
-     * Change la difficulte actuelle pour difficulte
-     * @param difficulte nouvelle difficulte
+     * Change la difficulte actuelle pour une nouvelle difficulte rentrée en parametre
+     * @param difficulte nouvelle difficulte (de 0 à 3 compris)
+     * @throws DifficulteException 
      */
-    public void setDifficultePartie(int difficulte) {
+    public void setDifficultePartie(int difficulte) throws DifficulteException {
         partie.setDifficultePartie(difficulte);
     }
 
@@ -367,14 +386,13 @@ public class ModelePrincipal {
     }
 
 	/**
-     * Supprimer de la banqueBategorie la Categorie passé en paramètre. Si la
-     * Categorie a supprimer est la Categorie "Général", la suppression est annulé
+     * Supprimer de la banque de categorie la categorie passé en paramètre. Si la
+     * categorie a supprimer est la categorie "Général", la suppression est annulé
      *
      * @param categorieASupprimer
-     * @return true si la suppression est un sucés false sinon
+     * @return true si la suppression est un succès false sinon
      */
     public boolean supprimerCategorie(Categorie categorieASupprimer) {
-        //TODO a tester
         boolean estSupprimer = false;
         
         if (categorieASupprimer.equals(banqueCategorie.categorieGeneral)) {
@@ -382,10 +400,10 @@ public class ModelePrincipal {
         
         } else if (banqueCategorie.getCategories().contains(categorieASupprimer)) {
         	/*
-        	 *  On parcours la Banque des Questions et on ajoute toutes les questions
-        	 *  qui ont la meme catégorie que celle qu'on veut supprimer
-        	 *  dans une ArrayList pour apres pouvoir les supprimer
-        	 *  de la Banque de questions
+        	 *  On parcours la banque des questions et on ajoute toutes les questions
+        	 *  qui ont la même catégorie que celle qu'on veut supprimer
+        	 *  dans une ArrayList pour après pouvoir les supprimer
+        	 *  de la banque de questions
         	 */
         	ArrayList<Question> questionsASupprimer = new ArrayList<>();
 
@@ -406,7 +424,7 @@ public class ModelePrincipal {
     }
 
 	/**
-     * Supprime de la banque de question la question passé en paramètre. Si la
+     * Supprime de la banque de question la question passée en paramètre. Si la
      * suppression est un succès alors on revoie true false sinon
      *
      * @param questionASuprimer La question a supprimer
@@ -446,6 +464,12 @@ public class ModelePrincipal {
     	}
     }
     
+    /**
+     * Méthode de de-serialisation des catégories qui lit le fichier "donneesCategorie"
+     * et qui ajoute les catégories dans la banque de catégorie
+     * @return une banque de catégorie avec les catégories du fichier si il est valide,
+     * sinon une banque vide
+     */
     public BanqueCategorie deSerialiserCategorie() {
 		try {
 			File fichierCategorie = new File(FICHIER_SERIALISATION_CATEGORIE);
@@ -455,7 +479,6 @@ public class ModelePrincipal {
 				
 				ObjectInputStream inCategorie = new ObjectInputStream(inputFichierCategorie);	
 				
-				// Méthode pour dé-serialiser la banque de categorie
 				BanqueCategorie banqueDeserialiseeCategorie = (BanqueCategorie)inCategorie.readObject();
 				inCategorie.close();
 				inputFichierCategorie.close();
@@ -468,12 +491,17 @@ public class ModelePrincipal {
 			}	
 			
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new BanqueCategorie();
 		}
     }
     
+    /**
+     * Méthode de de-serialisation des questions qui lit le fichier "donneesQuestions"
+     * et qui ajoute les questions dans la banque de question
+     * @return une banque de question avec les question du fichier si il est valide,
+     * sinon une banque vide
+     */
     public BanqueQuestion deSerialiserQuestion() {
     	try {
 			File fichierQuestion = new File(FICHIER_SERIALISATION_QUESTION);
@@ -502,9 +530,9 @@ public class ModelePrincipal {
     }
     
     /**
-     * Ajouter toute les questions de la catégorie 
-     * à la liste des question a envoyer
-     * @param categorie Le nom de la catégorie
+     * Ajouter la catégories et toutes ses questions 
+     * à la liste des questions à envoyer
+     * @param categorie le nom de la catégorie à envoyer
      * @return true si l'ajout est un succès, false sinon
      */
     public boolean ajouterALaSelectionDEnvoie(Categorie categorie) {
@@ -512,7 +540,7 @@ public class ModelePrincipal {
         categorieAEnvoyer.add(categorie);
         
         for (Question question : banqueQuestion.getQuestions()) {
-            if (    question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
+            if (question.getCategorie().equalsIgnoreCase(categorie.getNom()) 
                 && !questionAEnvoyer.contains(question)) {
                 
                 questionAEnvoyer.add(question);
@@ -522,9 +550,9 @@ public class ModelePrincipal {
     }
 
     /**
-     * Ajouter toute les questions de la catégorie 
+     * Ajouter la question en parametre 
      * à la liste des question a envoyer
-     * @param categorie Le nom de la catégorie
+     * @param question le nom de la question à envoyer
      * @return true si l'ajout est un succès, false sinon
      */
     public boolean ajouterALaSelectionDEnvoie(Question question) {
@@ -533,9 +561,12 @@ public class ModelePrincipal {
     
     /**
      * Retire de la liste questionAEnvoyer,
-     * les questions de la catégorie nomCategorieASupprimer
-     * @param categorie Le nom de la catégorie 
-     * @return
+     * les questions de la catégorie en parametre et 
+     * la catégorie de la liste des categories à envoyer
+     * @param categorie Le nom de la catégorie qui possede les questions 
+     * qu'on veut supprimer de la liste des questions à envoyer 
+     * et de la liste des catégories à envoyer
+     * @return true si les questions ont été supprimées de la liste
      */
     public boolean supprimerALaSelectionDEnvoie(Categorie categorie) {
         ArrayList<Question> questionARetirer = new ArrayList<Question>();
@@ -553,40 +584,48 @@ public class ModelePrincipal {
     
     /**
      * Retire de la liste questionAEnvoyer,
-     * les questions de la catégorie nomCategorieASupprimer
-     * @param categorie Le nom de la catégorie 
-     * @return
+     * la question en parametre
+     * @param question la question qu'on veut supprimer de la liste 
+     * @return true si la question est supprimée de la liste
      */
     public boolean supprimerALaSelectionDEnvoie(Question question) {
         return questionAEnvoyer.remove(question);
     }
     
     /**
-     * Sélectionne toute les question de la banque pour les envoyer
+     * Sélectionne toute les questions de la banque de question pour pouvoir les envoyer
      */
     public void toutEnvoyer() {
         questionAEnvoyer = banqueQuestion.getQuestions();
     }
 
-    /** @return valeur de questionAEnvoyer */
+    /** 
+     * Récupère la liste des questions a envoyer
+     * @return questionAEnvoyer(ArrayList) la liste des questions à envoyer
+     */
     public ArrayList<Question> getQuestionAEnvoyer() {
         return questionAEnvoyer;
     }
 
-    /** @return true si catégorie est sélectionner, false sinon*/
-    public boolean estSelectionner(Categorie categorie) {
+    /** 
+     * Vérifie si la catégorie fait partie de la liste des categories à envoyer
+     * @return true si la catégorie est dans la liste, false sinon
+     */
+    public boolean estAEnvoyer(Categorie categorie) {
         return categorieAEnvoyer.contains(categorie);
     }
 
-    /** @return true si catégorie est sélectionner, false sinon*/
-    public boolean estSelectionner(Question question) {
-        System.out.println(questionAEnvoyer);
+    /** 
+     * Vérifie si la question fait partie de la liste des questions à envoyer
+     * @return true si la question est dans la liste, false sinon
+     */
+    public boolean estAEnvoyer(Question question) {
         return questionAEnvoyer.contains(question);
     }
 
     /** 
-     * Ajoute une question à la banque
-     * @param question la question à ajouté
+     * Ajoute une question à la banque de question
+     * @param question la question à ajouter
      * @throws HomonymeException 
      * @throws InvalidNameException 
      * @throws CreerQuestionException 

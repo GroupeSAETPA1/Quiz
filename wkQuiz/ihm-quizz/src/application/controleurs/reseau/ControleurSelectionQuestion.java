@@ -135,7 +135,7 @@ public class ControleurSelectionQuestion {
         
         /** @return true si la checkbox doit être sélectionner */
         public boolean estSelectionner() {
-            return modele.estSelectionner(question); //STUB
+            return modele.estAEnvoyer(question); //STUB
         }
 
         /* non javadoc - @see java.lang.Object#equals(java.lang.Object) */

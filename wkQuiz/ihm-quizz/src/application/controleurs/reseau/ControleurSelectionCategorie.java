@@ -133,7 +133,7 @@ public class ControleurSelectionCategorie {
 
         /** @return true si la checkbox doit être sélectionner */
         public boolean estSelectionner() {
-            return modele.estSelectionner(categorie);
+            return modele.estAEnvoyer(categorie);
         }
     }
 

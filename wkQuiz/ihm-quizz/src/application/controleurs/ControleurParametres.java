@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
@@ -129,8 +130,8 @@ public class ControleurParametres {
             if (partie.getCategoriePartie() == null ||
                 (question.getCategorie().equals(
                  partie.getCategoriePartie().toString()))
-               && (question.getDifficulte() == partie.getDifficulte().intValue()
-                   || partie.getDifficulte().intValue() == 0)
+               && (question.getDifficulte() == partie.getDifficultePartie().intValue()
+                   || partie.getDifficultePartie().intValue() == 0)
                ){
                 partie.getQuestionPossible().add(question);        
             }   
@@ -143,8 +144,9 @@ public class ControleurParametres {
 
     /** 
      * Met a jour les paramètre de la partie
+     * @throws DifficulteException 
      */
-    private void modifierParametrePartie() {
+    private void modifierParametrePartie() throws DifficulteException {
         if (selecteurCategorie.getValue() != null ) {
             try {
 				ModelePrincipal.getInstance().getPartie()
