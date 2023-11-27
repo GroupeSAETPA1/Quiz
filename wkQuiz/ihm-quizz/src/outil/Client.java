@@ -14,6 +14,7 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import application.modele.Chiffrage;
 import application.vue.AlertBox;
 
 /** 
@@ -82,6 +83,23 @@ public class Client {
             //On indique on serveur que le client est prêt
             oos.writeObject(CLIENT_PRET_MESSAGE);
             
+            int b =  Chiffrage.genererPuissance();
+            int gab;
+            
+            //On récupère g^a envoyé par le serveur
+            int ga = (int) ois.readObject();
+            gab = Chiffrage.exposantModulo(ga, b, Chiffrage.P);
+            Chiffrage.setGab(gab);
+            
+            int gb = Chiffrage.exposantModulo(Chiffrage.G, b, Chiffrage.P);
+            //On envoie g^b au serveur
+            oos.writeObject(gb);
+            
+            
+            String cleVigenereCrypte = (String) ois.readObject();
+            
+            
+            //Récupération du nombre de question
             int nbQuestion = (int) ois.readObject();
             elementsRecu = new ArrayList<Object>(nbQuestion);
             

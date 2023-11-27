@@ -41,8 +41,8 @@ public class Chiffrage {
 	
 	
 	// Paramètres pour l'algorithme de Diffie-Hellman
-	private static final int P = 8269;
-	private static final int G = 4537;
+	public static final int P = 8269;
+	public static final int G = 4537;
 	private static final int PUISSANCE_MINI = 5000 ;
 	private static final int PUISSANCE_MAXI = 9999 ;
 	
@@ -254,7 +254,7 @@ public class Chiffrage {
      *
      * @param nouveau La nouvelle valeur de la clé partagée.
      */
-    public void setGab(int nouveau) {
+    public static void setGab(int nouveau) {
         gab = nouveau;
     }
 
@@ -264,7 +264,7 @@ public class Chiffrage {
      *
      * @return La valeur de la clé partagée.
      */
-    public int getGab() {
+    public static int getGab() {
         return gab;
     }
 }
