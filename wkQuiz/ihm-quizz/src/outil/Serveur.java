@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import application.exception.ClientDejaConnecter;
 import application.exception.ClientPasConnecterException;
+import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 
@@ -101,15 +102,46 @@ public class Serveur {
         System.out.println(clientEstPret);
 
         if (clientEstPret) {
-            //TODO Recupérer les question a envoyer
+            
+            
+            int a =  Chiffrage.genererPuissance();
+            int ga = Chiffrage.exposantModulo(Chiffrage.G, a, Chiffrage.P);
+            
+            //On envoie g^a au client
+            oos.writeObject(ga);
+            
+            //Récuperè g^b
+            int gb = (int) ois.readObject();
+            
+            //On cacule, la donnée partagé
+            int gab = Chiffrage.exposantModulo(gb, a, Chiffrage.P);
+            Chiffrage.setGab(gab);
+            
+            
+            //Définition clé pour crypter le donnée
+            String cleVigenere = Chiffrage.generationCle();
+            
+            //Cryptage de clé pour l'envoie
+            String cleVigenereCrypte 
+            = Chiffrage.chiffrement(cleVigenere, Chiffrage.cleDepuisDiffie());
+            
+            
+            //Envoyer la clé Vigenère
+            oos.writeObject(cleVigenereCrypte);
+            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
+            System.out.println("Cle vigenère : " + cleVigenere);
+            
+            //Récupérer les question a envoyer
             elementAEnvoyer.addAll(modele.getQuestionAEnvoyer());
             
-            //On envoie de le nombre d'élements à envoyer
-            oos.writeObject(elementAEnvoyer.size());
+            ArrayList<String> questionCrypte 
+            = Chiffrage.genererTableauCrypter(elementAEnvoyer, cleVigenere);
             
-            for (Object object : elementAEnvoyer) {
+            //On envoie de le nombre d'élements à envoyer
+            oos.writeObject(questionCrypte.size());
+            
+            for (Object object : questionCrypte) {
                 oos.writeObject(object);
-                System.out.println("Message envoyer : " + object);                
             }
             clientARecu = true;
         }
