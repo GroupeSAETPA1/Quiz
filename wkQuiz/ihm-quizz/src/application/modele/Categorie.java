@@ -54,7 +54,7 @@ public class Categorie implements Serializable {
     	if (nomValide(nom)) {
     		this.nom = nom;
     	} else {
-    		throw new InvalidNameException("Le nom saisie est vide");
+    		throw new InvalidNameException("Le nom saisie est incorrect");
     	}
     }
 

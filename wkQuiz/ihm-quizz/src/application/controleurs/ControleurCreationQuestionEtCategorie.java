@@ -256,8 +256,7 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (InvalidFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
-                    + "question ET une réponse juste.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (ReponseException e) {
             AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
                     + "pas être en double ET la bonne réponse ne peut pas être "

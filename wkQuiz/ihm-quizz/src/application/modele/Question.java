@@ -135,7 +135,7 @@ public class Question implements Serializable {
                     String feedback) throws InvalidFormatException, 
                     InvalidNameException, ReponseException, DifficulteException {
         
-        if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
+        if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX ) {
             throw new InvalidNameException("Le libelle contient " + libelle.length() 
             + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
@@ -163,7 +163,7 @@ public class Question implements Serializable {
                     + "contient une ou plusieurs propositions égale "
                     + "a la réponse juste (casse ignorée");
         }
-        if (contientAccent(reponseJuste, reponsesFausse, libelle)) {
+        if (contientAccent(reponseJuste, reponsesFausse, libelle, feedback)) {
         	throw new InvalidNameException("Aucun champ ne doit contenir des accents.");
         }
         
@@ -190,16 +190,20 @@ public class Question implements Serializable {
         
     }
 
-    private boolean contientAccent(String reponseJuste, ArrayList<String> reponsesFausses, String libelle) {
-    	boolean ok = true;
+    private boolean contientAccent(String reponseJuste, ArrayList<String> reponsesFausses, String libelle, String feedback) {
+    	boolean ok = true; // ok si pas d'accent
     	for (int i = 0 ; i < reponsesFausses.size(); i++) {
     		ok = ok && ModelePrincipal.alphabetOk(reponsesFausses.get(i));
+    		if (!ok) {
+    			System.out.println("ereur a la reponse : " + reponsesFausses.get(i));
+    		}
     	}
     	
     	ok = ok && ModelePrincipal.alphabetOk(reponseJuste);
     	ok = ok && ModelePrincipal.alphabetOk(libelle);
+    	ok = ok && ModelePrincipal.alphabetOk(feedback);
     	
-    	return ok;
+    	return !ok;
 	}
 
 	/** 
