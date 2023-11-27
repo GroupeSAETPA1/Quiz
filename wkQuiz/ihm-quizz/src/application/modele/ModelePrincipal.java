@@ -500,12 +500,16 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeCategorie;
 			} else {
+				AlertBox.showErrorBox("Le fichier de sauvegarde " 
+						+ "des catégories à été corrompu ou supprimé, "
+			            + "les catégories sont réinitialisées");
 				return new BanqueCategorie();
 			}	
 			
 		} catch (ClassNotFoundException | IOException e) {
-			AlertBox.showErrorBox("Le fichier des catégories à été corrompu ou supprimé, "
-					            + "la banque de catégorie est réinitialisée");
+			AlertBox.showErrorBox("Le fichier de sauvegarde " 
+								+ "des catégories à été corrompu ou supprimé, "
+					            + "les catégories sont réinitialisées");
 			return new BanqueCategorie();
 		}
     }
@@ -534,12 +538,16 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeQuestion;
 			} else {
+				AlertBox.showErrorBox("Le fichier de sauvegarde des " 
+								    + "questions à été corrompu ou supprimé, "
+			            		    + "les questions sont réinitialisées");
 	   		    return new BanqueQuestion();
 			}
 			
     	} catch(ClassNotFoundException | IOException e) {
-    		AlertBox.showErrorBox("Le fichier des questions à été corrompu ou supprimé, "
-    				            + "la banque de questions est réinitialisée");
+			AlertBox.showErrorBox("Le fichier de sauvegarde des " 
+				    + "questions à été corrompu ou supprimé, "
+        		    + "les questions sont réinitialisées");
    		    return new BanqueQuestion();
         }
     }
