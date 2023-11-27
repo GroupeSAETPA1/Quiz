@@ -62,10 +62,15 @@ public class ControleurEditerCategorie {
 			
 			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
-			modele.getCategoriesLibelleExact(aModifier.getNom()).setNom(input.getText());
-			AlertBox.showSuccessBox("Catégorie modifiée avec succées");
+			try {
+				modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
+				AlertBox.showSuccessBox("Catégorie modifiée avec succées");
 
-			Quiz.chargerEtChangerVue("EditerCategories.fxml");
+				Quiz.chargerEtChangerVue("EditerCategories.fxml");
+			} catch (InvalidNameException e) {
+				AlertBox.showErrorBox(e.getMessage());
+			}
+			
 		}
 	}
 	
