@@ -128,18 +128,20 @@ public class Serveur {
             
             //Envoyer la clé Vigenère
             oos.writeObject(cleVigenereCrypte);
+            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
+            System.out.println("Cle vigenère : " + cleVigenere);
             
-            
-            
-            //TODO Recupérer les question a envoyer
+            //Récupérer les question a envoyer
             elementAEnvoyer.addAll(modele.getQuestionAEnvoyer());
             
-            //On envoie de le nombre d'élements à envoyer
-            oos.writeObject(elementAEnvoyer.size());
+            ArrayList<String> questionCrypte 
+            = Chiffrage.genererTableauCrypter(elementAEnvoyer, cleVigenere);
             
-            for (Object object : elementAEnvoyer) {
+            //On envoie de le nombre d'élements à envoyer
+            oos.writeObject(questionCrypte.size());
+            
+            for (Object object : questionCrypte) {
                 oos.writeObject(object);
-                System.out.println("Message envoyer : " + object);                
             }
             clientARecu = true;
         }

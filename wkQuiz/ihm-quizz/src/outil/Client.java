@@ -98,6 +98,14 @@ public class Client {
             
             String cleVigenereCrypte = (String) ois.readObject();
             
+            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
+            
+            //Décrypter clé vigenère reçue
+            String cleVigenere = Chiffrage.dechiffrement(cleVigenereCrypte, 
+                    Chiffrage.cleDepuisDiffie());
+            
+            System.out.println(cleVigenere);
+            
             
             //Récupération du nombre de question
             int nbQuestion = (int) ois.readObject();
