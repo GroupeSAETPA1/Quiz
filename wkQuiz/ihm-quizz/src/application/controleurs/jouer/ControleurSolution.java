@@ -9,19 +9,21 @@ import java.util.HashMap;
 import java.util.Set;
 
 import application.Quiz;
+import application.controleurs.factories.TextCellFactory;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 /**
  * Controlleur de la page Solution. La page affiche les réponse du dernier Quiz
@@ -37,9 +39,9 @@ import javafx.scene.text.Text;
  */
 public class ControleurSolution {
 
-    private static final Image BONNE_REPONSE = new Image("application\\vue\\images\\IconeValider.png");
+    private static final Image BONNE_REPONSE = new Image("application/vue/images/IconeValider.png");
 
-    private static final Image MAUVAISE_REPONSE = new Image("application\\vue\\images\\IconeAnnuler.png");
+    private static final Image MAUVAISE_REPONSE = new Image("application/vue/images/IconeAnnuler.png");
 
     private static final String TEXT_SCORE = "Score = %s/%s";
 
@@ -53,6 +55,12 @@ public class ControleurSolution {
      * Le tableau de la solution du quiz, avec une indication si le joueur a eu bon
      */
     @FXML private TableView<LigneQuestionSolution> tableauSolution;
+    
+    @FXML private TableColumn<LigneQuestionSolution, String> colonneLibelle;
+    @FXML private TableColumn<LigneQuestionSolution, String> colonneCategorie;
+    @FXML private TableColumn<LigneQuestionSolution, String> colonneReponseJuste;
+    @FXML private TableColumn<LigneQuestionSolution, String> colonneFeedBack;
+    @FXML private TableColumn<LigneQuestionSolution, ImageView> colonneIndication;
 
     /**
      * Méthode exécutée au chargement de la page Solution pour récupérer le score et
@@ -60,43 +68,41 @@ public class ControleurSolution {
      */
     @FXML
     public void initialize() {
+        
+        tableauSolution.setRowFactory(tr->{
+            TableRow<LigneQuestionSolution> row = new TableRow<ControleurSolution.LigneQuestionSolution>();
+            row.setMinHeight(100);
+            return row;
+        });
 
-        TableColumn<LigneQuestionSolution, String> libelle 
-        = new TableColumn<LigneQuestionSolution, String>("Libelle");
-        libelle.setCellValueFactory(
+        colonneLibelle.setCellValueFactory(
               new PropertyValueFactory<LigneQuestionSolution, String>("libelle")
               );
 
-        TableColumn<LigneQuestionSolution, String> categorie 
-        = new TableColumn<LigneQuestionSolution, String>("Categorie");
-        categorie.setCellValueFactory(
+        colonneCategorie.setCellValueFactory(
             new PropertyValueFactory<LigneQuestionSolution, String>("categorie")
             );
 
-        TableColumn<LigneQuestionSolution, String> reponseJuste 
-        = new TableColumn<LigneQuestionSolution, String>("Reponse Juste");
-        reponseJuste.setCellValueFactory(
+        colonneReponseJuste.setCellValueFactory(
                 new PropertyValueFactory<LigneQuestionSolution, String>
                 ("reponseJuste")
                 );
 
-        TableColumn<LigneQuestionSolution, String> feedback 
-        = new TableColumn<LigneQuestionSolution, String>("feedback");
-        feedback.setCellValueFactory(
+        colonneFeedBack.setCellValueFactory(
              new PropertyValueFactory<LigneQuestionSolution, String>("feedback")
              );
 
-        TableColumn<LigneQuestionSolution, ImageView> indication = 
-        new TableColumn<LigneQuestionSolution, ImageView>("indicationReponse");
-        indication.setCellValueFactory(
+        colonneIndication.setCellValueFactory(
                 new PropertyValueFactory<LigneQuestionSolution, ImageView>
-                ("indicationReponse")
-                );
+                ("indicationReponse"));
+        
+        colonneLibelle.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneCategorie.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneReponseJuste.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
+        colonneFeedBack.setCellFactory(new TextCellFactory<LigneQuestionSolution>());
 
-        tableauSolution.getColumns().clear();
-        tableauSolution.getColumns()
-        .addAll(libelle, categorie, reponseJuste, feedback, indication);
-
+        colonneIndication.setCellFactory(new ImageViewCellFactory());
+        
         if (modele.getPartie() != null) {
 
             HashMap<Question, String> resultatQuestionnaire 
@@ -222,4 +228,63 @@ public class ControleurSolution {
         }
 
     }
+    
+    /**
+     * Créer une cellule qui contient une image centrer
+     * @author François de Saint Palais
+     */
+    public class ImageViewCellFactory implements 
+    Callback<TableColumn<LigneQuestionSolution, ImageView>, 
+             TableCell<LigneQuestionSolution, ImageView>> {
+
+        @Override
+        public TableCell<LigneQuestionSolution, ImageView> call(
+                TableColumn<LigneQuestionSolution, ImageView> param) {
+            
+            //Cellule à return
+            TableCell<LigneQuestionSolution, ImageView> cell 
+            = new TableCell<LigneQuestionSolution, ImageView>() {
+                @Override
+                protected void updateItem(ImageView item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    setGraphic((empty || item == null) ? null : item);
+                }
+            };
+            cell.setAlignment(Pos.CENTER);
+            return cell;
+        }
+    }
+//
+//    public class TextCellFactory implements Callback<TableColumn<LigneQuestionSolution, String>, TableCell<LigneQuestionSolution, String>> {
+//
+//        /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
+//        @Override
+//        public TableCell<LigneQuestionSolution, String> call(TableColumn<LigneQuestionSolution, String> arg0) {
+//
+//            TableCell<LigneQuestionSolution, String> cell 
+//            = new TableCell<LigneQuestionSolution, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty || item == null) {
+//                        setText(null);
+//                        setGraphic(null);
+//                    } else {
+//                        setText(item.toString());
+//                    }
+//                    Tooltip information = new Tooltip(getText());
+//                    Tooltip.install(this, information);
+//                }
+//            };
+//            
+//            cell.setAlignment(Pos.CENTER);
+//            cell.textProperty().setValue(cell.getItem());
+//            cell.setWrapText(true);
+//            
+//            return cell;
+//        }
+//        
+//    }
+
 }

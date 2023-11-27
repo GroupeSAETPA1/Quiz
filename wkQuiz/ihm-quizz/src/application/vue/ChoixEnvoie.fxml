@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.reseau.ControleurChoixEnvoie">
+   <children>
+      <Group layoutX="30.0" layoutY="20.0" onMouseClicked="#retour">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeRetour.png" />
+               </image>
+            </ImageView>
+            <Label layoutY="75.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="200.0" layoutY="60.0" text="Choissisez les questions a envoyer" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Group layoutX="30.0" layoutY="245.0" onMouseClicked="#envoieTous">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="210.0"  onAction="#envoieTous" prefWidth="285.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Envoyer  toutes les Questions " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="111.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeUpload.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="870.0" layoutY="20.0" onMouseClicked="#aider">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeAide.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="19.0" layoutY="83.0" text="Aide" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Separator layoutX="629.0" layoutY="245.0" orientation="VERTICAL" prefHeight="210.0" prefWidth="85.0" />
+      <Group layoutX="700.0" layoutY="245.0" onMouseClicked="#envoieCategorie">
+         <children>
+            <Button mnemonicParsing="false" onAction="#envoieCategorie" prefHeight="210.0" prefWidth="285.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Choisir les question par catégorie " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="113.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeUpload.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Separator layoutX="298.0" layoutY="243.0" orientation="VERTICAL" prefHeight="210.0" prefWidth="75.0" />
+      <Group layoutX="375.0" layoutY="245.0" onMouseClicked="#envoieQuestion">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#envoieQuestion" prefHeight="210.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Sélectionné les question a l'unité" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="103.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeUpload.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</Pane>

@@ -5,19 +5,23 @@
 
 package test.modele;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.modele.Categorie;
-import application.modele.Question;
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
+import application.modele.Categorie;
+import application.modele.Question;
 
 /**
  * Lancement des tests pour la classe Question
@@ -27,7 +31,18 @@ import application.exception.ReponseException;
 
 class TestQuestion {
 
-	private ArrayList<Question> questionValide;
+	/** TODO comment field role (attribute, associative role) */
+    private static final String TROP_LONG_TEXT = "Lorem ipsum dolor sit amet, "
+            + "consectetuer adipiscing elit. Aenean commodo ligula eget dolor. "
+            + "Aenean massa. Cum sociis natoque penatibus et magnis dis parturi"
+            + "ent montes, nascetur ridiculus mus. Donec quam felis, ultricies "
+            + "nec, pellentesque eu, pretium Lorem ipsum dolor sit amet, consec"
+            + "tetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean"
+            + " massa. Cum sociis natoque penatibus et magnis dis parturient mo"
+            + "ntes, nascetur ridiculus mus. Donec quam felis, ultricies nec, p"
+            + "ellentesque eu, pretium";
+    
+    private ArrayList<Question> questionValide;
 	private ArrayList<String> mauvaiseReponse1;
 	private ArrayList<String> mauvaiseReponse2;
 	private ArrayList<String> mauvaiseReponse3;
@@ -40,14 +55,12 @@ class TestQuestion {
 	/**
 	 * Génère des jeux de test pour les tests unitaires
 	 * 
-	 * @throws ReponseException       si les réponses sont invalides
-	 * @throws InvalidFormatException si le format est invalide
 	 * @throws InvalidNameException   si le nom est invalide
-	 * @throws DifficulteException
+	 * @throws CreerQuestionException 
 	 */
 	@BeforeEach
 	void genererJeuxDeTest()
-			throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+			throws InvalidNameException, CreerQuestionException {
 		categoriesValides = new Categorie[] { new Categorie("Commentaire"), new Categorie("test") };
 		questionValide = new ArrayList<Question>();
 		mauvaiseReponse1 = new ArrayList<String>();
@@ -320,17 +333,21 @@ class TestQuestion {
 
 	/**
 	 * Teste la méthode setFeedback de la classe Question
+	 * @throws InvalidNameException 
 	 * 
 	 * @see {@link application.modele.Question#setFeedback(String)}
 	 */
 	@Test
-	void testSetFeedback() {
+	void testSetFeedback() throws InvalidNameException {
 		// On vérifie que la méthode ne lève pas d'exception 
 		// si on ne mets pas de feedback ou si on le modifie
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback(""));
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback("test"));
 		// On vérifie que le changement a bien été effectué
 		assertEquals("test", questionValide.get(0).getFeedback());
+		
+		assertThrows(InvalidNameException.class,
+		        () -> questionValide.get(0).setFeedback(TROP_LONG_TEXT));
 	}
 
 	/**
@@ -448,13 +465,11 @@ class TestQuestion {
 	 * Teste la méthode equals de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#equals()}
-	 * @throws InvalidFormatException si le format est invalide
-	 * @throws ReponseException       si les réponses sont invalides
 	 * @throws InvalidNameException   si le nom est invalide
-	 * @throws DifficulteException
+	 * @throws CreerQuestionException 
 	 */
 	@Test
-	void testEquals() throws InvalidFormatException, InvalidNameException, ReponseException, DifficulteException {
+	void testEquals() throws InvalidNameException, CreerQuestionException {
 		// Création de plusieurs question :
 	    // - question1Egale qui est exactement parreile que questionValide[0]
 		// - question2Egale qui est une copie de questionValide[1] mais sans feedback

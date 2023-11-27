@@ -8,6 +8,7 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -140,7 +141,7 @@ public class ControleurCreationQuestionEtCategorie {
 		try {
 			//Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
-			if (indiceCategorieChoisie <= 0) {
+			if (indiceCategorieChoisie < 0) {
 				throw new 
 				NullPointerException("Il n'y a pas de Catégorie choisie");
 			}
@@ -265,6 +266,9 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
         } catch (DifficulteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (CreerQuestionException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

@@ -1,6 +1,11 @@
 package test.modele;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -71,6 +76,8 @@ class TestBanqueCategorie {
 		// On renvoie l'exception "HomonymeException"
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(ensembleCategories.get(0)));
 		assertThrows(HomonymeException.class, () -> banqueCategorie.ajouter(new Categorie("PreMIerE")));
+		
+		
 	}
 
 	/**

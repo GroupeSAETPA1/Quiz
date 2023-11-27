@@ -1,6 +1,8 @@
 package application.controleurs;
 
 
+import java.io.IOException;
+
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
@@ -79,15 +81,18 @@ public class ControleurAccueil {
 	 */
 	@FXML 
 	private void online() {
-		//TODO
+		Quiz.changerVue("ModeEnLigne.fxml");
 	}
 	
 	/**
 	 * Méthode liée au groupe quitter,
 	 * ferme l'application
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@FXML
-	private void quitter() {
+	private void quitter() throws ClassNotFoundException, InternalError, IOException {
 		Quiz.quitter();
 	}
 	
@@ -100,8 +105,6 @@ public class ControleurAccueil {
 		model.setPagePrecedente("Accueil.fxml");
 		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
-
-		// TODO : lancer une alertBox
 	}
 
 }

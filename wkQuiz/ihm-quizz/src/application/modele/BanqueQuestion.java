@@ -18,7 +18,7 @@ import application.exception.InvalidFormatException;
  * @author François de Saint Palais
  * @author Tom Douaud
  */
-public class BanqueQuestion implements Serializable{
+public class BanqueQuestion implements Serializable {
 	
     /** TODO comment field role (attribute, associative role) */
     private static final long serialVersionUID = 1685481789337969601L;

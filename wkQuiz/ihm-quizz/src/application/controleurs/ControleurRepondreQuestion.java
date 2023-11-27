@@ -1,23 +1,17 @@
 package application.controleurs;
 
 import java.util.ArrayList;
-import java.util.Collections;import javax.naming.PartialResultException;
-
-import org.junit.jupiter.params.provider.EnumSource.Mode;
+import java.util.Collections;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class ControleurRepondreQuestion {
@@ -61,6 +55,8 @@ public class ControleurRepondreQuestion {
     
     @FXML
     private Button valider;
+    
+    ModelePrincipal modele = ModelePrincipal.getInstance();
     
 	@FXML 
 	public void initialize() {
@@ -173,7 +169,7 @@ public class ControleurRepondreQuestion {
                 reponseChoisie = ((RadioButton) 
                         reponses.getSelectedToggle()).getText();
             }
-            partie.setReponseDonnee(
+            partie.setReponseDonnees(
                     partie.getQuestionPossible().get(actuelle), reponseChoisie);
             
             if (   partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
@@ -195,6 +191,13 @@ public class ControleurRepondreQuestion {
             
         }
     }
+    
+    @FXML
+	public void aider() {
+    	modele.setPagePrecedente("RepondreQuestion.fxml");
+    	System.out.println(";jtdj,d");
+		Quiz.chargerEtChangerVue("Aide.fxml");
+	}
 
     /**
      * 
@@ -331,7 +334,7 @@ public class ControleurRepondreQuestion {
                + "Par défaut cette réponse sera compté comme fausse");
            int actuelle = partie.getIndiceQuestion();
            if (reponseAlertBox) {
-               partie.setReponseDonnee(
+               partie.setReponseDonnees(
                partie.getQuestionPossible().get(actuelle), "");
                partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
                Quiz.chargerEtChangerVue("RepondreQuestion.fxml");

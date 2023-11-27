@@ -5,16 +5,14 @@
 
 package application.controleurs;
 
-import application.modele.Partie;
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
-import org.junit.jupiter.params.provider.EnumSource.Mode;
-
 import application.Quiz;
+import application.exception.DifficulteException;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -62,7 +60,8 @@ public class ControleurParametres {
 
     @FXML
 	private void aider() {
-    	modele.setPagePrecedente("ParametrePartie.fxml"); 
+    	modele.setPagePrecedente("ParametrePartie.fxml");
+    	System.out.println(";jtdj,d");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
     
@@ -72,7 +71,6 @@ public class ControleurParametres {
     @FXML
     public void commencerPartie() {
         try {
-        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
@@ -119,6 +117,8 @@ public class ControleurParametres {
      */
     private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
+        // On réinitialise la liste des questions possibles
+        partie.getQuestionPossible().clear();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
             /*
@@ -130,8 +130,8 @@ public class ControleurParametres {
             if (partie.getCategoriePartie() == null ||
                 (question.getCategorie().equals(
                  partie.getCategoriePartie().toString()))
-               && (question.getDifficulte() == partie.getDifficulte().intValue()
-                   || partie.getDifficulte().intValue() == 0)
+               && (question.getDifficulte() == partie.getDifficultePartie().intValue()
+                   || partie.getDifficultePartie().intValue() == 0)
                ){
                 partie.getQuestionPossible().add(question);        
             }   
@@ -144,11 +144,17 @@ public class ControleurParametres {
 
     /** 
      * Met a jour les paramètre de la partie
+     * @throws DifficulteException 
      */
-    private void modifierParametrePartie() {
+    private void modifierParametrePartie() throws DifficulteException {
         if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance().getPartie()
-            .setCategoriePartie(selecteurCategorie.getValue());
+            try {
+				ModelePrincipal.getInstance().getPartie()
+				.setCategoriePartie(selecteurCategorie.getValue());
+			} catch (ClassNotFoundException | InternalError | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         } else {
             throw new NullPointerException("Categorie non selectionné  ! ");
         }

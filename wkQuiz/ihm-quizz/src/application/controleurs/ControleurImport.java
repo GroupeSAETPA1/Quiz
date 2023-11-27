@@ -87,9 +87,10 @@ public class ControleurImport {
         			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
         } else {
             
-            ArrayList<HashMap<String, String>> lignes = lectureFichier.getLigneCSV(fichier);
-            creerEtGererQuestionCategorie(lignes);
-        
+            ArrayList<HashMap<String, String>> lignes = getLigneCSV(fichier);
+            if (!lignes.isEmpty()) {
+            	creerEtGererQuestionCategorie(lignes);            	
+            }
         }
     }
 
