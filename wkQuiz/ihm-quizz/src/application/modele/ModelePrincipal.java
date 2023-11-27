@@ -20,6 +20,7 @@ import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
+import application.vue.AlertBox;
 
 /**
  * Contrôleur principale de l'application .
@@ -491,7 +492,8 @@ public class ModelePrincipal {
 			}	
 			
 		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+			AlertBox.showErrorBox("Le fichier des catégories à été corrompu ou supprimé, "
+					            + "la banque de catégorie est réinitialisée");
 			return new BanqueCategorie();
 		}
     }
@@ -520,6 +522,8 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeQuestion;
 			} else {
+				AlertBox.showErrorBox("Le fichier des questions à été corrompu ou supprimé, "
+			                        + "la banque de questions est réinitialisée");
 	   		    return new BanqueQuestion();
 			}
 			
