@@ -46,13 +46,26 @@ public class ModelePrincipal {
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
     
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
+    
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
+    
+
+    /* L'alphabet personnalisé */
+    
+    
+    private static ModelePrincipal modele;
 	/** Le nom des fichiers pour la sérialisation */
 	private static final String FICHIER_SERIALISATION_CATEGORIE = "donneesCategorie";
 	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
 	
 	
-    private static ModelePrincipal modele;
-
     /** Les CSV importés devront séparer leur éléments avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
 
@@ -104,6 +117,8 @@ public class ModelePrincipal {
         INT_DIFFICULTE_TO_LABEL.put(2, "Moyen");
         INT_DIFFICULTE_TO_LABEL.put(3, "Difficile");
         INT_DIFFICULTE_TO_LABEL.put(0 , "Tous");
+        
+
     }
 
     /**
