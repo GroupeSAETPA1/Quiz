@@ -524,7 +524,6 @@ public class ModelePrincipal {
 			}
 			
     	} catch(ClassNotFoundException | IOException e) {
-   		    e.printStackTrace();
    		    return new BanqueQuestion();
         }
     }
