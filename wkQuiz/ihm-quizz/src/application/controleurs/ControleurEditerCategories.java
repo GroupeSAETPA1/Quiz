@@ -185,7 +185,11 @@ public class ControleurEditerCategories {
 
         public void supprimerCategorie() {
             if (!this.getNomCategorie().equals("General")) {
-                boolean result = AlertBox.showConfirmationBox("Supprimer la categorie : " + getNomCategorie());
+                boolean result = AlertBox.showConfirmationBox("Voulez vous supprimer la catégorie : " 
+                											 + getNomCategorie() 
+                											 + " ?\nCette catégorie contient " 
+                											 + getNombreQuestion() 
+                											 + " question.");
                 if (result) {
 
                     if (modele.supprimerCategorie(modele.getCategoriesLibelleExact(getNomCategorie()))) {

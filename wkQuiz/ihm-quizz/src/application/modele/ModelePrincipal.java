@@ -408,12 +408,11 @@ public class ModelePrincipal {
         	 */
         	ArrayList<Question> questionsASupprimer = new ArrayList<>();
 
-        	for (Question question : banqueQuestion.getQuestions()) {
-				if (question.getCategorie() == categorieASupprimer.toString()) {
+        	for (Question question : banqueQuestion.getQuestions()) { 
+				if (question.getCategorie().equals(categorieASupprimer.toString())) {
 					questionsASupprimer.add(question);
 				}
 			}
-
         	banqueQuestion.getQuestions().removeAll(questionsASupprimer);
             estSupprimer = banqueCategorie.getCategories().remove(categorieASupprimer);
         
