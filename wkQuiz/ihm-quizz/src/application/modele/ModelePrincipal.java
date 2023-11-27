@@ -79,6 +79,19 @@ public class ModelePrincipal {
     	
     	this.banqueCategorie = deSerialiserCategorie();
     	this.banqueQuestion = deSerialiserQuestion();
+    	
+    	// Si jamais il ya eu des problèmes de sérialisation des catégories,
+    	// on parcours les questions et on ajoute les catégories manquantes
+    	for (Question question : this.banqueQuestion.getQuestions()) {
+			if (this.getCategoriesLibelleExact(question.getCategorie()) == null) {
+				try {
+					this.creerCategorie(question.getCategorie());
+				} catch (InvalidNameException | HomonymeException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+    	
         this.partie = new Partie();
 
 
@@ -521,12 +534,12 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeQuestion;
 			} else {
-				AlertBox.showErrorBox("Le fichier des questions à été corrompu ou supprimé, "
-			                        + "la banque de questions est réinitialisée");
 	   		    return new BanqueQuestion();
 			}
 			
     	} catch(ClassNotFoundException | IOException e) {
+    		AlertBox.showErrorBox("Le fichier des questions à été corrompu ou supprimé, "
+    				            + "la banque de questions est réinitialisée");
    		    return new BanqueQuestion();
         }
     }
