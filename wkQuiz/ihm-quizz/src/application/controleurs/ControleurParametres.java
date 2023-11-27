@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import application.Quiz;
 import application.exception.DifficulteException;
+import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Partie;
 import application.modele.Question;
@@ -119,6 +120,7 @@ public class ControleurParametres {
         Partie partie = ModelePrincipal.getInstance().getPartie();
         // On réinitialise la liste des questions possibles
         partie.getQuestionPossible().clear();
+        Categorie categoriePartie = partie.getCategoriePartie();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
             /*
@@ -127,13 +129,13 @@ public class ControleurParametres {
              * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
              * prendras les questions de tous les difficultes
              */
-            if (partie.getCategoriePartie() == null ||
-                (question.getCategorie().equals(
-                 partie.getCategoriePartie().toString()))
-               && (question.getDifficulte() == partie.getDifficultePartie().intValue()
-                   || partie.getDifficultePartie().intValue() == 0)
+            if ((categoriePartie == null || question.getCategorie().equals
+               (categoriePartie.getNom()))
+               && (question.getDifficulte() == partie.getDifficultePartie()
+               .intValue()
+               || partie.getDifficultePartie().intValue() == 0)
                ){
-                partie.getQuestionPossible().add(question);        
+                partie.getQuestionPossible().add(question); 
             }   
         }
 
