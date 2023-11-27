@@ -43,6 +43,9 @@ public class Client {
 	 */
 	private static final int TIMEOUT_CONNEXION = 5000;
 	
+	
+	private static String cleVigenere;
+	
     
     public Client(String ip, int port) {
         if (ip.isEmpty()) {
@@ -103,8 +106,9 @@ public class Client {
             //Décrypter clé vigenère reçue
             String cleVigenere = Chiffrage.dechiffrement(cleVigenereCrypte, 
                     Chiffrage.cleDepuisDiffie());
-            
             System.out.println(cleVigenere);
+            
+            Client.cleVigenere = cleVigenere;
             
             
             //Récupération du nombre de question
@@ -133,4 +137,10 @@ public class Client {
         
         return elementsRecu;
     }
+
+    /** @return valeur de cleVigenere */
+    public static String getCleVigenere() {
+        return cleVigenere;
+    }
+	
 }
