@@ -1,3 +1,7 @@
+/*
+ * ControleurEditerQuestion.java                                     
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
 package application.controleurs;
 
 import java.util.ArrayList;

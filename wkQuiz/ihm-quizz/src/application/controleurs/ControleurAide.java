@@ -14,12 +14,12 @@ import javafx.scene.text.Text;
 
 
 /**
- * Le controlleur de la page Aide
+ * Le controleur de la page Aide
  * @author Néo BECOGNE
  */
 public class ControleurAide {
 	
-	 private ModelePrincipal model = ModelePrincipal.getInstance();
+	 private ModelePrincipal modele = ModelePrincipal.getInstance();
 	 
 	 @FXML private Text text1;
 	 
@@ -34,70 +34,68 @@ public class ControleurAide {
 	 @FXML private ImageView exempleTableur;
 	 
 	 private Image image = new Image("application/vue/images/tableur.png");
-	 
-	 //private ModelePrincipal categorie = model.setDisplayCategoriePane(true);
-	 
+	 	 
 	 /**
 	  * Fonction liée au group Retour et son image
-	  * Et qui permet de retourner a la page précédente 
+	  * qui permet de retourner à la page précédente 
 	  */
 	@FXML
     public void retourPagePrecedente() {
-		String pagePrecedente = model.getPagePrecendente();
+		String pagePrecedente = modele.getPagePrecendente();
         Quiz.changerVue(pagePrecedente);
     }
 	
 	/**
 	 * Méthode qui se lance au chargement de la page
-	 * et qui change le text en fonction de la page précédente  
+	 * et qui change le texte en fonction de la page précédente  
 	 */
 	@FXML
 	public void initialize() {
-		//Récuperation de la page précédente 
-		String pagePrecedente = model.getPagePrecendente();
+		// Récuperation de la page précédente 
+		String pagePrecedente = modele.getPagePrecendente();
 		
-		//comparaison de la page precedente, afin de svoir le message a afficher
-		if(pagePrecedente != null && pagePrecedente.equals("Accueil.fxml")) {
+		// Comparaison de la page précedente, afin de savoir le message à afficher
+		if (pagePrecedente != null && pagePrecedente.equals("Accueil.fxml")) {
 			
-			//Change le text de text1 
+			// Change le texte de text1 
 			text1.setText("L'icône quitter vous permet de quitter "
 					+ "l’application\n");
 			
-			//Change le style et la police d'ecriture de text1
+			// Change le style et la police d'ecriture de text1
 			text1.setStyle("-fx-font-size: 20px");
 			
-			/*Deplace text1 sur l'axe Y afin de le descendre et de centrer le 
-			*text en fonction du nombre de text present
-			*/
+			/*
+			 * Déplace text1 sur l'axe Y afin de le descendre et de centrer le 
+			 * texte en fonction du nombre de texte présent
+			 */
 			text1.setTranslateY(80);
 			
-			text2.setText("Le bouton jouer vous permettra d'accéder à tout ce "
-					+ "qui concerne la jeux,donc le paramétrage de la partie et "
+			text2.setText("Le bouton \"Jouer\" vous permettra d'accéder à tout ce "
+					+ "qui concerne le jeu, c'est à dire le paramétrage de la partie et "
 					+ "le jeu.\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(70);
 			
-			text3.setText("Le bouton Editeur de question, vous permettra "
-					+ "d’accéder au import  de csv, l'édition et création de "
-					+ "catégorie.\n");
+			text3.setText("Le bouton \"Éditeur de questions\", vous permettra "
+					+ "d’accéder à l'import de csv, l'édition et la création de "
+					+ "question et de catégorie.\n");
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
-			text4.setText("Le bouton Mode En Ligne vous permettra d’accéder  "
-					+ "au partage en réseaux de question, et l’import en "
-					+ "réseaux de question\n");
+			text4.setText("Le bouton \"Mode en-ligne\" vous permettra d’accéder "
+					+ "au partage et à la réception en réseau de questions\n");
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(95);
 			
 		} else if(pagePrecedente != null 
 				&& pagePrecedente.equals("ImporterQuestion.fxml")) {
 			
-			text1.setText("Sur cette page vous pouvez importer un dossier "
+			text1.setText("Sur cette page vous pouvez importer un fichier "
 					+ "CSV\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
-			text2.setText("Il faut qu’il respecte un format spécifié"
+			text2.setText("Il faut que ce fichier respecte un format spécifié"
 					+ "(voir Image)\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(70);
@@ -107,16 +105,21 @@ public class ControleurAide {
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(70);
 			
-			//Initialise l'image avec celle choisit 
+			text4.setText("Le délimateur du fichier .CSV est le caractère \"é\"\n");
+			text4.setStyle("-fx-font-size: 20px");
+			text4.setTranslateY(70);
+			
+			// Initialise l'image avec celle choisit 
 			exempleTableur.setImage(image);
 			
-			/*Deplace l'image sur l'axe Y afin de la centrer avec le reste du 
-			*text
-			*/
+			/*
+			 * Déplace l'image sur l'axe Y afin de la centrer avec le reste du 
+			 * texte
+			 */
 			exempleTableur.setTranslateY(50);
 			
 			
-		} else if(pagePrecedente != null 
+		} else if (pagePrecedente != null 
 				&& pagePrecedente.equals("ParametrePartie.fxml")) {
 			
 			text1.setText("Sur cette page vous pouvez paramétrer votre partie"
@@ -125,7 +128,7 @@ public class ControleurAide {
 			text1.setTranslateY(80);
 			
 			text2.setText("Vous avez une catégorie à choisir, parmi de "
-					+ "multiples catégories, proposées de base, ou que vous "
+					+ "multiples catégories proposées de base, ou que vous "
 					+ "avez créées.\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(70);
@@ -138,7 +141,7 @@ public class ControleurAide {
 			text3.setTranslateY(80);
 			
 			text4.setText("Pour finir vous pouvez choisir votre difficultée, "
-					+ "si celle ci ne contient pas assez de questions, une pop "
+					+ "si celle-ci ne contient pas assez de questions, une pop-"
 					+ "up viendras vous prévenir que ce n’est pas possible de "
 					+ "faire ces choix\n");
 			text4.setStyle("-fx-font-size: 20px");
@@ -149,16 +152,16 @@ public class ControleurAide {
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(115);
 			
-		} else if(pagePrecedente != null 
+		} else if (pagePrecedente != null 
 				&& pagePrecedente.equals("CreationQuestionEtCategorie.fxml")) {
 			
-			text1.setText("Sur cette page vous pouvez créer vos question ou "
-					+ "Catégorie\n");
+			text1.setText("Sur cette page vous pouvez créer vos questions ou "
+					+ "catégorie\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
 			text2.setText("Si vous souhaitez créer une catégorie, il faut que "
-					+ "son libellé soit différent des catégorie déjà existantes"
+					+ "son libellé soit différent des catégories déjà existantes"
 					+ ".\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(80);
@@ -174,7 +177,7 @@ public class ControleurAide {
 			text4.setTranslateY(105);
 			
 			text5.setText("Vous pouvez entrer le nom d’une question déjà "
-					+ "existante, mais ces réponses bonne et fausse doivent "
+					+ "existante, mais ses réponses doivent "
 					+ "être différente\n");
 			text5.setStyle("-fx-font-size: 20px");
 			text5.setTranslateY(110);
@@ -197,8 +200,8 @@ public class ControleurAide {
 			text3.setTranslateY(80);
 			
 			text4.setText("Ensuite vous retrouvez les multiples choix de "
-					+ "question, qu’une seul est bonne et n’oubliez pas de la "
-					+ "choisir sinon ce sera faux. \n");
+					+ "réponses, une seule est bonne et si vous passez la question, " 
+					+ "la réponse est considérée comme fausse\n");
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(80);
 			
@@ -212,44 +215,44 @@ public class ControleurAide {
 		} else if(pagePrecedente != null 
 				&& pagePrecedente.equals("ChoixEnvoie.fxml")) {
 			
-			text1.setText("Sur cette page vous disposez de trois bouton\n");
+			text1.setText("Sur cette page vous disposez de trois boutons\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
-			text2.setText("Le premier “Envoyé toutes les Questions” vous "
+			text2.setText("Le premier, “Envoyer toutes les questions” vous "
 					+ "permettra d’envoyer toutes les questions dont vous "
 					+ "disposez.");
 			text2.setStyle("-fx-font-size: 20px");
-			text2.setTranslateY(80);
+			text2.setTranslateY(90);
 			
-			text3.setText("Le second “Sélectionné les question à l'unité” vous"
+			text3.setText("Le second, “Séléctionner les questions à l'unité” vous"
 					+ " permettra d’aller sélectionner des questions que vous"
 					+ " souhaitez envoyer.");
 			text3.setStyle("-fx-font-size: 20px");
-			text3.setTranslateY(80);
+			text3.setTranslateY(120);
 			
-			text4.setText("Le dernier “Choisir les questions par catégorie”"
+			text4.setText("Le dernier, “Choisir les questions par catégorie”"
 					+ " vous permettra d’aller sélectionner des catégories"
 					+ " que vous souhaitez envoyer. ");
 			text4.setStyle("-fx-font-size: 20px");
-			text4.setTranslateY(80);
+			text4.setTranslateY(150);
 			
 		} else if(pagePrecedente != null 
 				&& pagePrecedente.equals("RecevoirQuestions.fxml")) {
 			
 			text1.setText("Sur cette page vous allez pouvoir entrer les "
-					+ "information pour recevoir des questionsn\n");
+					+ "informations pour recevoir des questionsn\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
 			text2.setText("Vous devrez entrer l’adresse IP de la personne qui"
-					+ " souhaite partager ses questions ");
+					+ " souhaite partager ses questions.");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(80);
 			
-			text3.setText("Et Vous devrez entrer le port qui sera utilisé,"
+			text3.setText("Vous devrez entrer aussi le port qui sera utilisé,"
 					+ " lui aussi trouvable sur l’ordinateur de la personne"
-					+ " qui souhaite partager ses questions. ");
+					+ " qui souhaite partager ses questions.");
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
@@ -257,11 +260,11 @@ public class ControleurAide {
 				&& pagePrecedente.equals("EnvoieQuestion.fxml")) {
 			
 			text1.setText("Sur cette page vous allez pouvoir partager vos"
-					+ " information afin d’envoyer des question\n");
+					+ " informations afin d’envoyer des questions\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
-			text2.setText("Vous avez en  premier votre port  d’afficher\n");
+			text2.setText("Vous avez en premier votre port d’affiché\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(80);
 			
@@ -269,17 +272,13 @@ public class ControleurAide {
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
-			text4.setText("Il y a ensuite un bouton pour démarrer l'échange"
-					+ "  et faire le partage\n");
+			text4.setText("Pour lancer un serveur, il faut d'abord " 
+					+ "lancer le serveur avec le bouton droit, puis une fois"
+					+ " qu'un client est connecté, cliquez sur le bouton " 
+					+ "envoyer à gauche pour envoyer les questions\n");
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(80);
 			
-			text5.setText("Pour finir en bas il y a trois boutons, un qui vous "
-					+ "permet de revenir à la question précédente, un autre qui"
-					+ " vous permet de valider. Et un dernier qui vous permet "
-					+ "de passer la question en cas de doute.\n");
-			text5.setStyle("-fx-font-size: 20px");
-			text5.setTranslateY(100);
 		} 
 	}
 }

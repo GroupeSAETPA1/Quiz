@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -14,23 +8,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAide">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAide">
    <children>
-      <Group layoutX="-32.0" layoutY="-20.0" onMouseClicked="#retourPagePrecedente">
+      <Group layoutX="-36.0" layoutY="-25.0" onMouseClicked="#retourPagePrecedente">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="69.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label layoutX="65.0" layoutY="135.0" text="Retour" textFill="WHITE">
+            <Label layoutX="70.0" layoutY="125.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Label layoutX="500.0" layoutY="35.0" text="Aide" textFill="WHITE">
+      <Label layoutX="460.0" layoutY="80.0" text="Aide" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font></Label>
