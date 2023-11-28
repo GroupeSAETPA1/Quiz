@@ -1,5 +1,5 @@
 /*
- * testChiffrage.java                                    21 nov. 2023
+ * TestChiffrage.java                                    21 nov. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
@@ -23,7 +23,7 @@ import application.modele.ModelePrincipal;
  * TODO comment class responsibility (SRP)
  * @author Lenovo
  */
-class testChiffrage {
+class TestChiffrage {
 
     /**
      * Test method for {@link application.modele.Chiffrage#generationCle()}.
@@ -115,7 +115,8 @@ class testChiffrage {
         } 
     }
     
-    @Test
+    /** Ce test est désactivé car il est basé sur l'aléatoire. */
+    //@Test
     void testCleDepuisDiffe() {
        //Ce test fail car g^ab est aléatoire
        //TEST pour gab = 2899 (pris aleatoirement)

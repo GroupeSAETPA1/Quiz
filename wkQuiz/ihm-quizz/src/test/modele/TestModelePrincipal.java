@@ -278,22 +278,33 @@ class TestModelePrincipal {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
-		// On cree deux categories "Commentaire" et "test"
-		modele.creerCategorie(categoriesValides[0].getNom());
-		modele.creerCategorie(categoriesValides[1].getNom());
+		// On crée deux categories "Commentaire" et "test"
+		modele.creerCategorie("Commentaire");
+		modele.creerCategorie("test");
 
 		// On mets des une question sur deux de la liste de questionValide
 		// dans la categorie "Commentaire" et "test"
-		int c = 1;
-		for (Question q : questionValide) {
-			modele.creerQuestion(q.getLibelle(), c % 2 + 2, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1,
-					"");
-			c++;
-		}
+		modele.creerQuestion(questionValide.get(0).getLibelle(),
+		                     modele.getIndice("Commentaire"), 
+		                     questionValide.get(0).getDifficulte(),
+		                     questionValide.get(0).getReponseJuste(), 
+		                     mauvaiseReponse1,"");
+		modele.creerQuestion(questionValide.get(1).getLibelle(),
+		                     modele.getIndice("test"), 
+                		     questionValide.get(1).getDifficulte(),
+		                     questionValide.get(1).getReponseJuste(), 
+		                     mauvaiseReponse1,"");
 
 		// On verifie qu'il existe bien des questions presentes dans les deux categories
-		assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
-		assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
+		assertTrue(modele.categorieContientQuestion(
+		        modele.getCategoriesLibelleExact("Commentaire")));
+		assertTrue(modele.categorieContientQuestion(
+		        modele.getCategoriesLibelleExact("test")));
+		
+		modele.getBanqueCategorie().getCategories().remove(
+		        modele.getCategoriesLibelleExact("Commentaire"));
+		modele.getBanqueCategorie().getCategories().remove(
+		        modele.getCategoriesLibelleExact("test"));
 
 		// On cree une nouvelle categorie sans question
 		Categorie uneAutre = new Categorie("UneNouvelleUnique");
@@ -362,6 +373,8 @@ class TestModelePrincipal {
 	void testGetBanqueCategorie() throws InvalidNameException, HomonymeException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueCategorie().getCategories().clear();
+		
 		
 		// On verifie que quand on recupère la banque de categorie 
 		// du modèle principal, on obtient les mêmes categories 
@@ -373,8 +386,17 @@ class TestModelePrincipal {
 		banqueTest.ajouter(categoriesValides[1]);
 		banqueTest.ajouter(new Categorie("UneNouvelleUnique"));
 		banqueTest.ajouter(new Categorie("Une categorie rajoutee"));
+		
+		modele.creerCategorie("General");
+		modele.creerCategorie("Autre Nom");
+		modele.creerCategorie(categoriesValides[0].getNom());
+		modele.creerCategorie(categoriesValides[1].getNom());
+		modele.creerCategorie("UneNouvelleUnique");
+		modele.creerCategorie("Une categorie rajoutee");
+		
 		for (int i = 0; i < modele.getBanqueCategorie().getCategories().size(); i++) {
-			assertEquals(banqueTest.getCategorie(i), modele.getBanqueCategorie().getCategorie(i));	
+		    assertEquals(banqueTest.getCategorie(i), 
+		                 modele.getBanqueCategorie().getCategorie(i));	
 		}
 	}
 	
@@ -393,6 +415,9 @@ class TestModelePrincipal {
 	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, CreerQuestionException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueQuestion().getQuestions().clear();
+		
+		ArrayList<Question> question = new ArrayList<Question>();
 		
 		/*
 		 * Pour pouvoir tester la methode, on doit recreer
@@ -400,7 +425,7 @@ class TestModelePrincipal {
 		 * tous les tests precendents
 		 */ 
 		BanqueQuestion banqueTestQuestions = new BanqueQuestion();
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											  	  modele.getCategories().get(0), 
 											  	  1,
@@ -408,7 +433,7 @@ class TestModelePrincipal {
 											  	  mauvaiseReponse1, 
 												  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											  	  modele.getCategories().get(1), 
 											  	  1,
@@ -416,14 +441,14 @@ class TestModelePrincipal {
 											  	  mauvaiseReponse1, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("libelle different", 
+		question.add(new Question("libelle different", 
 												  modele.getCategories().get(0), 
 												  1, 
 									      		 "non vide", 
 									      		  mauvaiseReponse1, 
 				   								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											   	  modele.getCategories().get(0),  
 											   	  1,
@@ -431,7 +456,7 @@ class TestModelePrincipal {
 											   	  mauvaiseReponse2, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											   	  modele.getCategories().get(0), 
 											   	  1,
@@ -439,18 +464,16 @@ class TestModelePrincipal {
 											   	  mauvaiseReponse1, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Question inexistante", 
+		question.add(new Question("Question inexistante", 
 											      modele.getCategories().get(0), 
 											      1, 
 											     "non vide", 
 											      mauvaiseReponse1, 
 												  ""));
 		
-		int c = 1;
-		for (Question q : questionValide) {
-			banqueTestQuestions.ajouter(new Question(q.getLibelle(), modele.getCategories().get(c % 2 + 2), q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1,
-					""));
-			c++;
+		for (Question q : question) {
+			banqueTestQuestions.ajouter(q);
+			modele.getBanqueQuestion().ajouter(q);
 		}
 		
 		/*
