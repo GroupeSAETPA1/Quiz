@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -26,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
@@ -60,7 +53,7 @@
                         </Label>
                      </children>
                   </Group>
-                  <Label layoutX="430.0" layoutY="50.0" prefHeight="60.0" prefWidth="437.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
+                  <Label layoutX="430.0" layoutY="50.0" prefHeight="60.0" prefWidth="462.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
                      </font>
@@ -152,9 +145,9 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <HBox layoutX="112.0" layoutY="413.0" prefHeight="36.0" prefWidth="426.0" spacing="30.0">
+                  <HBox layoutX="112.0" layoutY="413.0" prefHeight="38.0" prefWidth="465.0" spacing="30.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Facile" textFill="WHITE">
+                        <RadioButton mnemonicParsing="false" prefHeight="38.0" prefWidth="123.0" text="Facile" textFill="WHITE">
                            <toggleGroup>
                               <ToggleGroup fx:id="difficulte" />
                            </toggleGroup>
@@ -162,7 +155,7 @@
                               <Font size="25.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Moyen" textFill="#fffdfd" toggleGroup="$difficulte">
+                        <RadioButton mnemonicParsing="false" prefHeight="38.0" prefWidth="145.0" text="Moyen" textFill="#fffdfd" toggleGroup="$difficulte">
                            <font>
                               <Font size="25.0" />
                            </font>
