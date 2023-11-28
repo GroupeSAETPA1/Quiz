@@ -136,8 +136,8 @@ public class Question implements Serializable {
                     String feedback) throws CreerQuestionException, InvalidNameException {
         
         if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX ) {
-            throw new InvalidNameException("Le libelle contient " + libelle.length() 
-            + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
+            throw new InvalidNameException("Le libéllé contient " + libelle.length() 
+            + " caractères. Il faut qu'il soit entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
             throw new DifficulteException("Le niveau de difficulté doit être "
