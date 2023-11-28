@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.reseau.ControleurModeEnLigne">
    <children>
-      <Text fill="WHITE" layoutX="370.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode En-ligne" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="370.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode En-ligne" textAlignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
@@ -40,9 +40,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Group layoutX="42.0" layoutY="30.0" onMouseClicked="#retour">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <Label layoutX="-1.0" layoutY="74.0" text="Retour" textFill="WHITE">
+            <Label layoutY="80.0" text="Accueil" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
