@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -19,41 +26,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
    <tabs>
       <Tab closable="false" text="Création Question">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
                <children>
-                  <Group layoutX="18.0" layoutY="18.0" onMouseClicked="#retourAcceuil">
+                  <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retourAcceuil">
                      <children>
                         <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/IconeRetour.png" />
                            </image>
                         </ImageView>
-                        <Label layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+                        <Label layoutY="80.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                            <font>
                               <Font name="Open Sans" size="32.0" />
                            </font>
                         </Label>
                      </children>
                   </Group>
-                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideQuestion">
+                  <Group layoutX="1170.0" layoutY="20.0" onMouseClicked="#aideQuestion">
                      <children>
                         <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/IconeAide.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="18.0" layoutY="81.0" text="Aide" textFill="WHITE">
+                        <Label layoutX="15.0" layoutY="80.0" text="Aide" textFill="WHITE">
                            <font>
                               <Font size="32.0" />
                            </font>
                         </Label>
                      </children>
                   </Group>
-                  <Label layoutX="428.0" layoutY="18.0" prefHeight="60.0" prefWidth="437.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
+                  <Label layoutX="430.0" layoutY="50.0" prefHeight="60.0" prefWidth="437.0" text="Création d'une question " textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
                      </font>
@@ -214,7 +221,7 @@
                         </Label>
                      </children>
                   </Group>
-                  <Label layoutX="428.0" layoutY="18.0" prefHeight="58.0" prefWidth="439.0" text="Création d'une catégorie" textFill="WHITE">
+                  <Label layoutX="430.0" layoutY="50.0" prefHeight="58.0" prefWidth="439.0" text="Création d'une catégorie" textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="40.0" />
                      </font>
