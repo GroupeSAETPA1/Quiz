@@ -21,12 +21,12 @@ public class Chiffrage {
 	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% ";
 
 	// Mapping des caractères de l'alphabet vers des entiers
-    public static final HashMap<Character, Integer> ALPAHABET_TO_INT = 
-            new HashMap<>();
+    public static final HashMap<Character, Integer> ALPAHABET_TO_INT 
+    = new HashMap<>();
 	
     // Mapping des entiers vers des caractères de l'alphabet
-	public static final HashMap<Integer, Character> INT_TO_ALPHABET = 
-	        new HashMap<>();
+	public static final HashMap<Integer, Character> INT_TO_ALPHABET 
+	= new HashMap<>();
 	
 	
 	// Paramètres pour l'algorithme de Diffie-Hellman
@@ -83,7 +83,14 @@ public class Chiffrage {
 		StringBuilder aCrypter = new StringBuilder();
 		for (int i = 0 ; i < message.length() ; i++) {
 		    // valeur du caractere message.charAt(i)
-		    int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+		    int messageI;
+		    try {                
+		        messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+            } catch (Exception e) {
+                System.err.print(message);
+                System.err.println(message.charAt(i));
+                throw e;
+            }
 		    
 		    // valeur du caractère de la cle
 		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));

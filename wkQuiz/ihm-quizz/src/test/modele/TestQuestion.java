@@ -53,7 +53,7 @@ class TestQuestion {
 	private ArrayList<String> mauvaiseReponseJusteChaineVide;
 
 	/**
-	 * Génère des jeux de test pour les tests unitaires
+	 * Genere des jeux de test pour les tests unitaires
 	 * 
 	 * @throws InvalidNameException   si le nom est invalide
 	 * @throws CreerQuestionException 
@@ -80,35 +80,35 @@ class TestQuestion {
 		mauvaiseReponse1.add("le delimiteur //");
 		mauvaiseReponse1.add("le delimiteur (*");
 
-		mauvaiseReponse2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
-		mauvaiseReponse2.add("un texte sans signification particulière");
+		mauvaiseReponse2.add("une facon de presenter le code choisie par le programmeur nomme Dupont");
+		mauvaiseReponse2.add("un texte sans signification particuliere");
 
 		mauvaiseReponse3.add(" // commentaire");
 
-		mauvaiseReponse4.add("Un résumé très bref, pas plus d'une ligne, " + "du rôle du programme");
-		mauvaiseReponse4.add("Il n'y a pas de commentaire Javadoc " + "juste avant la ligne \"public class …\"");
+		mauvaiseReponse4.add("Un resume tres bref, pas plus d'une ligne, du role du programme");
+		mauvaiseReponse4.add("Il n'y a pas de commentaire Javadoc juste avant la ligne \"public class ...\"");
 		mauvaiseReponse4.add("Le nom du fichier contenant le programme");
-		mauvaiseReponse4.add("Un texte libre laissé " + "à l'appréciation du programmeur");
+		mauvaiseReponse4.add("Un texte libre laisse " + "a l'appreciation du programmeur");
 
 		mauvaiseReponseDoublon.add("doublon");
 		mauvaiseReponseDoublon.add("DOUBLON");
 		mauvaiseReponseDoublon.add("dOublon");
 		mauvaiseReponseDoublon.add("DoUbLOn");
 
-		questionValide.add(new Question("Quel est le délimiteur de début " + "d'un commentaire Javadoc ?",
-				categoriesValides[0], 1, "le délimiteur /**", mauvaiseReponse1, ""));
+		questionValide.add(new Question("Quel est le delimiteur de debut " + "d'un commentaire Javadoc ?",
+				categoriesValides[0], 1, "le delimiteur /**", mauvaiseReponse1, ""));
 		questionValide.add(new Question("A quoi correspond l'expression : " + "@author Dupont ?", categoriesValides[0],
 				2, "une balise reconnue par Javadoc", mauvaiseReponse2,
-				"Les balises Javadoc commencent par le  caractère @"));
+				"Les balises Javadoc commencent par le  caractere @"));
 		questionValide.add(new Question(
-				"Si un commentaire est écrit " + "sur plusieurs lignes, quel délimiteur de "
-						+ "commentaire est-il préférable d'utiliser ?",
+				"Si un commentaire est ecrit " + "sur plusieurs lignes, quel delimiteur de "
+						+ "commentaire est-il preferable d'utiliser ?",
 				categoriesValides[0], 1, "/* commentaire */", mauvaiseReponse3, ""));
 
 		questionValide.add(new Question(
-				"Que doit décrire le texte écrit dans " + "le commentaire Javadoc situé juste avant "
-						+ "la ligne \"public class …\" ?",
-				categoriesValides[0], 3, "Le rôle du programme, en explicitant " + "de manière précise ce rôle ",
+				"Que doit decrire le texte ecrit dans " + "le commentaire Javadoc situe juste avant "
+						+ "la ligne \"public class ...\" ?",
+				categoriesValides[0], 3, "Le role du programme, en explicitant " + "de maniere precise ce role ",
 				mauvaiseReponse4, ""));
 	}
 
@@ -116,43 +116,43 @@ class TestQuestion {
 	 * Teste le constructeur de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#Question(String, Categorie, int, String, ArrayList, String)}
-	 * @throws ReponseException       si les réponses sont invalides
+	 * @throws ReponseException       si les reponses sont invalides
 	 * @throws InvalidFormatException si le format est invalide
 	 * @throws InvalidNameException   si le nom est invalide
 	 */
 	@Test
 	void testConstructeur() {
-		// Le libellé est vide
+		// Le libelle est vide
 		assertThrows(InvalidNameException.class,
-				() -> new Question("", categoriesValides[0], 3, "le délimiteur /**", mauvaiseReponse1, ""));
+				() -> new Question("", categoriesValides[0], 3, "le delimiteur /**", mauvaiseReponse1, ""));
 
-		// La difficulté est negative
+		// La difficulte est negative
 		assertThrows(DifficulteException.class, () -> new Question("libelle non vide", categoriesValides[0], -1,
-				"le délimiteur /**", mauvaiseReponse1, ""));
+				"le delimiteur /**", mauvaiseReponse1, ""));
 		assertThrows(DifficulteException.class, () -> new Question("libelle non vide", categoriesValides[0], -999999,
-				"le délimiteur /**", mauvaiseReponse1, ""));
+				"le delimiteur /**", mauvaiseReponse1, ""));
 
-		// La difficulté est strictement supérieur à 3
+		// La difficulte est strictement superieur a 3
 		assertThrows(DifficulteException.class, () -> new Question("libelle non vide", categoriesValides[0], 4,
-				"le délimiteur /**", mauvaiseReponse1, ""));
+				"le delimiteur /**", mauvaiseReponse1, ""));
 		assertThrows(DifficulteException.class, () -> new Question("libelle non vide", categoriesValides[0], 9999999,
-				"le délimiteur /**", mauvaiseReponse1, ""));
+				"le delimiteur /**", mauvaiseReponse1, ""));
 
-		// La réponse juste est vide
+		// La reponse juste est vide
 		assertThrows(InvalidNameException.class,
 				() -> new Question("libelle non vide", categoriesValides[0], 1, "", mauvaiseReponse3, ""));
 
-		// La liste des mauvaise réponses est vide
+		// La liste des mauvaise reponses est vide
 		assertThrows(InvalidFormatException.class, () -> new Question("Libelle non  vide", categoriesValides[0], 1,
 				"reponse juste non vide", mauvaiseReponseVide, ""));
-		assertDoesNotThrow(() -> new Question("libelle non vide", categoriesValides[0], 3, "le délimiteur /**",
+		assertDoesNotThrow(() -> new Question("libelle non vide", categoriesValides[0], 3, "le delimiteur /**",
 				mauvaiseReponse1, ""));
 
-		// La liste des mauvaise réponses contient un doublon
+		// La liste des mauvaise reponses contient un doublon
 		assertDoesNotThrow(() -> new Question("libelle non vide", categoriesValides[0], 3, "reponse juste non vide",
 				mauvaiseReponseDoublon, ""));
 
-		// La réponse juste est présente dans les réponses fausses
+		// La reponse juste est presente dans les reponses fausses
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
 				"le delimiteur /*", mauvaiseReponse1, ""));
 		assertThrows(ReponseException.class, () -> new Question("libelle non vide", categoriesValides[0], 3,
@@ -175,7 +175,7 @@ class TestQuestion {
 						+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAA                         " + "        AAAAAAAAAAAAAA",
 				categoriesValides[0], 2, "non vide", mauvaiseReponse1, ""));
 
-		// Réponse juste de longueur (251) > longueur max réponse (250)
+		// Reponse juste de longueur (251) > longueur max reponse (250)
 		assertThrows(InvalidNameException.class,
 				() -> new Question("non vide", categoriesValides[0], 1,
 						"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -185,14 +185,14 @@ class TestQuestion {
 								+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA                                " + " AAAAAAAAAAAAAA",
 						mauvaiseReponse2, ""));
 
-		// Une réponse fausse de longeur (251) > longueur max réponse (250)
+		// Une reponse fausse de longeur (251) > longueur max reponse (250)
 		mauvaiseReponse1.add("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 				+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 				+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "        aaaaaaaaaaaaaaaaa");
 		assertThrows(ReponseException.class,
 				() -> new Question("non vide", categoriesValides[0], 1, "non vide", mauvaiseReponse1, ""));
-		// Plusieurs réponses fausse (251) > longueur max réponse (250)
+		// Plusieurs reponses fausse (251) > longueur max reponse (250)
 		mauvaiseReponse1.add("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 				+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 				+ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -214,7 +214,7 @@ class TestQuestion {
 	}
 
 	/**
-	 * Teste la méthode getLibelle de la classe Question
+	 * Teste la methode getLibelle de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getLibelle()}
 	 * @throws InvalidNameException si le nom est invalide
@@ -222,42 +222,42 @@ class TestQuestion {
 	@Test
 	void testGetLibelle() throws InvalidNameException {
 
-		// Récuperer un libellé existant
-		assertEquals("Quel est le délimiteur de début d'un commentaire Javadoc ?", questionValide.get(0).getLibelle());
+		// Recuperer un libelle existant
+		assertEquals("Quel est le delimiteur de debut d'un commentaire Javadoc ?", questionValide.get(0).getLibelle());
 		assertEquals("A quoi correspond l'expression : @author Dupont ?", questionValide.get(1).getLibelle());
 		assertEquals(
-				"Si un commentaire est écrit sur plusieurs lignes, "
-						+ "quel délimiteur de commentaire est-il préférable d'utiliser ?",
+				"Si un commentaire est ecrit sur plusieurs lignes, "
+						+ "quel delimiteur de commentaire est-il preferable d'utiliser ?",
 				questionValide.get(2).getLibelle());
 		assertEquals(
-				"Que doit décrire le texte écrit dans le commentaire "
-						+ "Javadoc situé juste avant la ligne \"public class …\" ?",
+				"Que doit decrire le texte ecrit dans le commentaire "
+						+ "Javadoc situe juste avant la ligne \"public class ...\" ?",
 				questionValide.get(3).getLibelle());
 
-		// Récupere un libellé après modification
+		// Recupere un libelle apres modification
 		questionValide.get(0).setLibelle("nouveau libelle");
 		assertEquals("nouveau libelle", questionValide.get(0).getLibelle());
 	}
 
 	/**
-	 * Teste la méthode setLibelle de la classe Question
+	 * Teste la methode setLibelle de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#setLibelle(String)}
 	 * @throws InvalidNameException si le nom est invalide
 	 */
 	@Test
 	void testSetLibelle() {
-		// On vérifie qu'une exception est bien levée si on donne un libellé invalide
+		// On verifie qu'une exception est bien levee si on donne un libelle invalide
 		assertThrows(InvalidNameException.class, () -> questionValide.get(0).setLibelle(""));
 		
-		// On vérifie qu'il n'y a pas d'exception de levée quand on donne un libellé valide
+		// On verifie qu'il n'y a pas d'exception de levee quand on donne un libelle valide
 		assertDoesNotThrow(() -> questionValide.get(0).setLibelle("test1"));
-		// On vérifie après que le libellé est bien modifié
+		// On verifie apres que le libelle est bien modifie
 		assertEquals("test1", questionValide.get(0).getLibelle());
 	}
 
 	/**
-	 * Teste la méthode getCategorie de la classe Question
+	 * Teste la methode getCategorie de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getCategorie()}
 	 */
@@ -266,28 +266,28 @@ class TestQuestion {
 		assertEquals("Commentaire", questionValide.get(0).getCategorie());
 		assertNotEquals("test", questionValide.get(0).getCategorie());
 		
-		// Modification de la catégorie de la question
+		// Modification de la categorie de la question
 		questionValide.get(0).setCategorie(categoriesValides[1]);
-		// On vérifie que la catégorie de la question est bien changée
+		// On verifie que la categorie de la question est bien changee
 		assertEquals("test", questionValide.get(0).getCategorie());
 		assertNotEquals("Commentaire", questionValide.get(0).getCategorie());
 	}
 
 	/**
-	 * Teste la méthode setCategorie de la classe Question
+	 * Teste la methode setCategorie de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#setCategorie(Categorie)}
 	 */
 	@Test
 	void testSetCategorie() {
-		// On vérifie que la méthode ne lève pas d'exception
+		// On verifie que la methode ne leve pas d'exception
 		assertDoesNotThrow(() -> questionValide.get(0).setCategorie(categoriesValides[1]));
-		// On vérifie que le changement a bien été effectué
+		// On verifie que le changement a bien ete effectue
 		assertEquals("test", questionValide.get(0).getCategorie());
 	}
 
 	/**
-	 * Teste la méthode getDifficulte de la classe Question
+	 * Teste la methode getDifficulte de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getDifficulte()}
 	 */
@@ -301,49 +301,49 @@ class TestQuestion {
 	}
 
 	/**
-	 * Teste la méthode setDifficulte de la classe Question
+	 * Teste la methode setDifficulte de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#setDifficulte(int)}
 	 */
 	@Test
 	void testSetDifficulte() {
-		// On vérifie qu'il y a bien une exception quand on envoie des difficultées invalides
+		// On verifie qu'il y a bien une exception quand on envoie des difficultees invalides
 		assertThrows(InvalidFormatException.class, () -> questionValide.get(0).setDifficulte(6));
 		assertThrows(InvalidFormatException.class, () -> questionValide.get(0).setDifficulte(-5));
 		
-		// On vérifie qu'il n'y a pas d'exception quand on set une difficultée valide 
+		// On verifie qu'il n'y a pas d'exception quand on set une difficultee valide 
 		assertDoesNotThrow(() -> questionValide.get(0).setDifficulte(3));
 		assertEquals(3, questionValide.get(0).getDifficulte());
 	}
 
 	/**
-	 * Teste la méthode getFeedback de la classe Question
+	 * Teste la methode getFeedback de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getFeedback()}
 	 */
 	@Test
 	void testGetFeedback() {
-		// On vérifie qu'on ait bien une chaine vide sur une question sans feedback
+		// On verifie qu'on ait bien une chaine vide sur une question sans feedback
 		assertEquals("", questionValide.get(0).getFeedback());
 		assertNotEquals("test", questionValide.get(0).getFeedback());
 		
-		// On vérifie qu'on ait bien le Feedback d'une question avec feedback
-		assertEquals("Les balises Javadoc commencent par le  caractère @", questionValide.get(1).getFeedback());
+		// On verifie qu'on ait bien le Feedback d'une question avec feedback
+		assertEquals("Les balises Javadoc commencent par le  caractere @", questionValide.get(1).getFeedback());
 	}
 
 	/**
-	 * Teste la méthode setFeedback de la classe Question
+	 * Teste la methode setFeedback de la classe Question
 	 * @throws InvalidNameException 
 	 * 
 	 * @see {@link application.modele.Question#setFeedback(String)}
 	 */
 	@Test
 	void testSetFeedback() throws InvalidNameException {
-		// On vérifie que la méthode ne lève pas d'exception 
+		// On verifie que la methode ne leve pas d'exception 
 		// si on ne mets pas de feedback ou si on le modifie
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback(""));
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback("test"));
-		// On vérifie que le changement a bien été effectué
+		// On verifie que le changement a bien ete effectue
 		assertEquals("test", questionValide.get(0).getFeedback());
 		
 		assertThrows(InvalidNameException.class,
@@ -351,53 +351,53 @@ class TestQuestion {
 	}
 
 	/**
-	 * Teste la méthode getBonneReponse de la classe Question
+	 * Teste la methode getBonneReponse de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getBonneReponse()}
-	 * @throws ReponseException     si les réponses sont invalides
+	 * @throws ReponseException     si les reponses sont invalides
 	 * @throws InvalidNameException si le nom est invalide
 	 */
 	@Test
 	void testGetBonneReponse() throws InvalidNameException, ReponseException {
-		// Réponse juste déjà existante
+		// Reponse juste deja existante
 		assertEquals("/* commentaire */", questionValide.get(2).getReponseJuste());
-		// Réponse juste après un changement
+		// Reponse juste apres un changement
 		questionValide.get(2).setBonneReponse("test45");
 		assertEquals("test45", questionValide.get(2).getReponseJuste());
 	}
 	
 	/**
-	 * Teste la méthode testSetBonneReponse de la classe Question
+	 * Teste la methode testSetBonneReponse de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#setBonneReponse()}
 	 */
 	@Test
 	void testSetBonneReponse() {
-		// On vérifie que mettre une bonne réponse vide 
+		// On verifie que mettre une bonne reponse vide 
 		// renvoie une exception "InvalidNameException"
 		assertThrows(InvalidNameException.class, () -> questionValide.get(0).setBonneReponse(""));
-		// On vérifie que mettre une bonne réponse 
-		// qui fait partie des mauvaise réponses renvoie 
+		// On verifie que mettre une bonne reponse 
+		// qui fait partie des mauvaise reponses renvoie 
 		// une exception "ReponseException"
 		assertThrows(ReponseException.class, () -> questionValide.get(0).setBonneReponse("le delimiteur /*"));
 		
-		// On vérifie qu'on puisse bien mettre une bonne réponse valide 
-		// et qu'elle est enregistrée
+		// On verifie qu'on puisse bien mettre une bonne reponse valide 
+		// et qu'elle est enregistree
 		assertDoesNotThrow(() -> questionValide.get(0).setBonneReponse("test1"));
 		assertEquals("test1", questionValide.get(0).getReponseJuste());
 	}
 
 	/**
-	 * Teste la méthode setMauvaiseReponse de la classe Question
+	 * Teste la methode setMauvaiseReponse de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#setMauvaiseReponse(ArrayList)}
 	 */
 	
 	/**
-	 * Teste la méthode getMauvaisesReponses de la classe Question
+	 * Teste la methode getMauvaisesReponses de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getMauvaisesReponses()}
-	 * @throws ReponseException       si les réponses sont invalides
+	 * @throws ReponseException       si les reponses sont invalides
 	 * @throws InvalidFormatException si le format est invalide
 	 */
 	@Test
@@ -405,64 +405,64 @@ class TestQuestion {
 		ArrayList<String> test1 = new ArrayList<String>();
 		ArrayList<String> test2 = new ArrayList<String>();
 		
-		// Les mauvaises réponses de la première question du jeu de test
+		// Les mauvaises reponses de la premiere question du jeu de test
 		test1.add("le delimiteur /*");
 		test1.add("le delimiteur //");
 		test1.add("le delimiteur (*");
 		
-		// des nouvelles mauvaises réponses pour remplacer celles de la première question du jeu de test
-		test2.add("une façon de présenter le code choisie par " + "le programmeur nommé Dupont");
-		test2.add("un texte sans signification particulière");
+		// des nouvelles mauvaises reponses pour remplacer celles de la premiere question du jeu de test
+		test2.add("une facon de presenter le code choisie par " + "le programmeur nomme Dupont");
+		test2.add("un texte sans signification particuliere");
 		
-		// On vérifie que les mauvaises réponses de la question 1 
-		// sont bien celles passées dans le constructeur initial
+		// On verifie que les mauvaises reponses de la question 1 
+		// sont bien celles passees dans le constructeur initial
 		assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
-		// On vérifie qu'après avoir modifier les mauvaises réponses, 
-		// les mauvaises réponses sont bien modifiées
+		// On verifie qu'apres avoir modifier les mauvaises reponses, 
+		// les mauvaises reponses sont bien modifiees
 		questionValide.get(0).setMauvaiseReponse(test2);
 		assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
 	}
 	
 	@Test
 	void testSetMauvaiseReponse() {
-		// Génération d'un jeu de mauvaises réponses 
-		// qui contienent la réponse juste
+		// Generation d'un jeu de mauvaises reponses 
+		// qui contienent la reponse juste
 		ArrayList<String> mauvaiseReponseContientJuste = new ArrayList<String>();
 		mauvaiseReponseContientJuste.add("reponseOk");
 		mauvaiseReponseContientJuste.add("reponseOK2");
-		mauvaiseReponseContientJuste.add("le délimiteur /**");
+		mauvaiseReponseContientJuste.add("le delimiteur /**");
 		
-		// Génération d'une ArrayList de mauvaise réponse
-		// avec une mauvaise réponse valide
+		// Generation d'une ArrayList de mauvaise reponse
+		// avec une mauvaise reponse valide
 		ArrayList<String> test1 = new ArrayList<String>();
 		test1.add("test1");
 		
-		// On vérifie que modifier les mauvaises réponses 
-		// pour mettre une liste de mauvaises réponses vide (ou une liste vide)
+		// On verifie que modifier les mauvaises reponses 
+		// pour mettre une liste de mauvaises reponses vide (ou une liste vide)
 		// renvoie l'exception "InvalidFormatException" ou "ReponseException"
 		assertThrows(InvalidFormatException.class, () -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseVide));
 		assertThrows(ReponseException.class,
 				() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseJusteChaineVide));
 		
-		// On vérifie que modifier les mauvaises réponses 
+		// On verifie que modifier les mauvaises reponses 
 		// afin mettre plusieurs fois 
-		// la meme mauvaise réponse ne renvoye pas d'exception
+		// la meme mauvaise reponse ne renvoye pas d'exception
 		assertDoesNotThrow(() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseDoublon));
-		// On vérifie que modifier les mauvaises réponses
-		// pour mettre une liste de mauvaises réponse qui contient 
-		// la bonne réponse renvoie l'exception "ReponseException"
+		// On verifie que modifier les mauvaises reponses
+		// pour mettre une liste de mauvaises reponse qui contient 
+		// la bonne reponse renvoie l'exception "ReponseException"
 		assertThrows(ReponseException.class,
 				() -> questionValide.get(0).setMauvaiseReponse(mauvaiseReponseContientJuste));
 		
-		// On vérifie que modifier les mauvaises réponses pour 
-		// mettre une mauvaise réponse valide ne renvoie pas d'exception 
-		// et que la modification est bien enregistrée
+		// On verifie que modifier les mauvaises reponses pour 
+		// mettre une mauvaise reponse valide ne renvoie pas d'exception 
+		// et que la modification est bien enregistree
 		assertDoesNotThrow(() -> questionValide.get(0).setMauvaiseReponse(test1));
 		assertEquals(test1, questionValide.get(0).getMauvaisesReponses());
 	}
 
 	/**
-	 * Teste la méthode equals de la classe Question
+	 * Teste la methode equals de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#equals()}
 	 * @throws InvalidNameException   si le nom est invalide
@@ -470,18 +470,18 @@ class TestQuestion {
 	 */
 	@Test
 	void testEquals() throws InvalidNameException, CreerQuestionException {
-		// Création de plusieurs question :
+		// Creation de plusieurs question :
 	    // - question1Egale qui est exactement parreile que questionValide[0]
 		// - question2Egale qui est une copie de questionValide[1] mais sans feedback
-		// - question3Egale qui est une copie de questionValide[2] mais avec une autre difficultée
-		Question question1Egale = new Question("Quel est le délimiteur de début " + "d'un commentaire Javadoc ?",
-				categoriesValides[0], 1, "le délimiteur /**", mauvaiseReponse1, "");
+		// - question3Egale qui est une copie de questionValide[2] mais avec une autre difficultee
+		Question question1Egale = new Question("Quel est le delimiteur de debut " + "d'un commentaire Javadoc ?",
+				categoriesValides[0], 1, "le delimiteur /**", mauvaiseReponse1, "");
 		Question question2Egale = new Question("A quoi correspond l'expression : " + "@author Dupont ?",
 				categoriesValides[0], 2, "une balise reconnue par Javadoc", mauvaiseReponse2, "");
 		Question question3Egale = new Question("A quoi correspond l'expression : " + "@author Dupont ?",
 				categoriesValides[0], 3, "une balise reconnue par Javadoc", mauvaiseReponse2, "");
 		
-		// 2 questions complèment différentes
+		// 2 questions complement differentes
 		assertNotEquals(questionValide.get(0), questionValide.get(1));
 
 		// 2 questions identique
@@ -490,7 +490,7 @@ class TestQuestion {
 		// 2 questions dont 1 feedback l'autre non
 		assertEquals(question2Egale, questionValide.get(1));
 
-		// 2 questions exactement pareil mais avec une difficultée différente
+		// 2 questions exactement pareil mais avec une difficultee differente
 		assertEquals(question3Egale, questionValide.get(1));
 
 		// 2 fois exactement la meme question
@@ -504,35 +504,35 @@ class TestQuestion {
 	}
 
 	/**
-	 * Teste la méthode toString de la classe Question
+	 * Teste la methode toString de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#toString()}
 	 */
 	@Test
 	void testToString() {
-		// les résultats attendus de toString pour les deux premières questions
+		// les resultats attendus de toString pour les deux premieres questions
 		String valide = """
 				Difficulté de la question : 1
 				Categorie de la question : Commentaire
-				Intiltulé de la question : Quel est le délimiteur de début d'un commentaire Javadoc ?
+				Intiltulé de la question : Quel est le delimiteur de debut d'un commentaire Javadoc ?
 				Mauvaise réponses :
 				- le delimiteur /*
 				- le delimiteur //
 				- le delimiteur (*
-				Bonne réponse : le délimiteur /**""";
+				Bonne réponse : le delimiteur /**""";
 
 		String valide2 = """
 				Difficulté de la question : 2
 				Categorie de la question : Commentaire
 				Intiltulé de la question : A quoi correspond l'expression : @author Dupont ?
 				Mauvaise réponses :
-				- une façon de présenter le code choisie par le programmeur nommé Dupont
-				- un texte sans signification particulière
+				- une facon de presenter le code choisie par le programmeur nomme Dupont
+				- un texte sans signification particuliere
 				Bonne réponse : une balise reconnue par Javadoc
-				Feedback : Les balises Javadoc commencent par le  caractère @""";
+				Feedback : Les balises Javadoc commencent par le  caractere @""";
 		
-		// On vérifie que la méthode toString ne renvoie pas d'exception 
-		// et renvoie bien le résultat attendu 
+		// On verifie que la methode toString ne renvoie pas d'exception 
+		// et renvoie bien le resultat attendu 
 		assertDoesNotThrow(() -> questionValide.get(0).toString());
 		assertEquals(valide, questionValide.get(0).toString());
 

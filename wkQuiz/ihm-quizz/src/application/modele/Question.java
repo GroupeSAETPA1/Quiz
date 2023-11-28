@@ -195,7 +195,7 @@ public class Question implements Serializable {
     	for (int i = 0 ; i < reponsesFausses.size(); i++) {
     		ok = ok && ModelePrincipal.alphabetOk(reponsesFausses.get(i));
     		if (!ok) {
-    			System.out.println("ereur a la reponse : " + reponsesFausses.get(i));
+    			System.out.println("erreur a la reponse : " + reponsesFausses.get(i));
     		}
     	}
     	
