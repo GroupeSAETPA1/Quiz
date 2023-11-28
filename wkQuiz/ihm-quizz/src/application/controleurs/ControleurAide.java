@@ -212,23 +212,23 @@ public class ControleurAide {
 		} else if(pagePrecedente != null 
 				&& pagePrecedente.equals("ChoixEnvoie.fxml")) {
 			
-			text1.setText("Sur cette page vous disposez de trois bouton\n");
+			text1.setText("Sur cette page vous disposez de trois boutons\n");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
-			text2.setText("Le premier “Envoyé toutes les Questions” vous "
+			text2.setText("Le premier “Envoyer toutes les questions” vous "
 					+ "permettra d’envoyer toutes les questions dont vous "
 					+ "disposez.");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(80);
 			
-			text3.setText("Le second “Sélectionné les question à l'unité” vous"
+			text3.setText("\nLe second “Séléctionner les questions à l'unitée” vous"
 					+ " permettra d’aller sélectionner des questions que vous"
 					+ " souhaitez envoyer.");
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
-			text4.setText("Le dernier “Choisir les questions par catégorie”"
+			text4.setText("\n\nLe dernier “Choisir les questions par catégorie”"
 					+ " vous permettra d’aller sélectionner des catégories"
 					+ " que vous souhaitez envoyer. ");
 			text4.setStyle("-fx-font-size: 20px");
