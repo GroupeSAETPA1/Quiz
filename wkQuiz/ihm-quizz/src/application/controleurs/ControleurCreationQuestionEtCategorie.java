@@ -297,7 +297,7 @@ public class ControleurCreationQuestionEtCategorie {
             AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide "
                     + ": entre 1 et 30 caractères maximum et ne dois pas contenir d'accents");
         } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La categorie saisie existe déjà");
+            AlertBox.showWarningBox("La catégorie saisie existe déjà");
         }
         
         if (categorieCreer) {
