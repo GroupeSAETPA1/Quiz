@@ -15,7 +15,6 @@ import java.util.HashMap;
 import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 

@@ -1,18 +1,7 @@
 package application.modele;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
-
-import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.CsvWriter;
-
-import application.vue.AlertBox;
 
 /**
  * La classe Chiffrage fournit des méthodes pour le chiffrement

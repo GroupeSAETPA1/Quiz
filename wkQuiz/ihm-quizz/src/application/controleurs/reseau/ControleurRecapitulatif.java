@@ -1,6 +1,11 @@
 package application.controleurs.reseau;
 
 
+import java.util.ArrayList;
+
+import application.Quiz;
+import application.modele.ModelePrincipal;
+import application.modele.Question;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -8,12 +13,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.util.ArrayList;
-import application.Quiz;
-import application.controleurs.reseau.ControleurSelectionCategorie.LigneSelectionCategorie;
-import application.modele.Categorie;
-import application.modele.ModelePrincipal;
-import application.modele.Question;
 
 
 
