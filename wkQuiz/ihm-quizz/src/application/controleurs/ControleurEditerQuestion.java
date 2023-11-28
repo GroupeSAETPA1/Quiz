@@ -148,7 +148,7 @@ public class ControleurEditerQuestion {
 	        
 	        aModifier.setDifficulte(reponse);
 			
-			AlertBox.showSuccessBox("question modifiée avec succé");
+			AlertBox.showSuccessBox("question modifiée avec succès");
 			Quiz.chargerEtChangerVue("EditerQuestions.fxml");
 			
 		} catch (ReponseException | InvalidNameException | InvalidFormatException e) {
