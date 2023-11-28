@@ -51,11 +51,11 @@ public class ControleurEditerQuestions {
 	    
 	    table.setPlaceholder(new Label("Pas de Question"));
 	    
-		TableColumn<LigneQuestion, String> categorieColumn = new TableColumn<>("categorie");
+		TableColumn<LigneQuestion, String> categorieColumn = new TableColumn<>("Categorie");
 		categorieColumn.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 		categorieColumn.setCellFactory(new TextCellFactory<LigneQuestion>());
 		
-		TableColumn<LigneQuestion, String> libelleColumn = new TableColumn<>("libellé");
+		TableColumn<LigneQuestion, String> libelleColumn = new TableColumn<>("Libellé");
 		libelleColumn.setCellValueFactory(new PropertyValueFactory<>("nomQuestion"));
 		libelleColumn.setCellFactory(new TextCellFactory<LigneQuestion>());
 
