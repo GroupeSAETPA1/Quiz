@@ -17,7 +17,7 @@ public class Chiffrage {
 	private static final int LONGUEUR_CLE_MAXIMUM = 60 ;
 	
 	// Alphabet personnalisé pouvant etre chiffré 
-	private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
+	public static final String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
 	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% ";
 
 	// Mapping des caractères de l'alphabet vers des entiers

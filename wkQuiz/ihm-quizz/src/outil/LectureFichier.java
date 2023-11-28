@@ -10,11 +10,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import static java.util.Map.entry;
 
 import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
+import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 
@@ -26,8 +32,8 @@ import application.modele.Question;
 public class LectureFichier {
 
     /** Les CSV importé devront séparé leur élément avec une tabulation */
-    public static final char SEPARATEUR_CSV = 'é';
-
+    public static final char SEPARATEUR_CSV = '\t';
+    
     private static ModelePrincipal modele = ModelePrincipal.getInstance();
 
     /**
@@ -106,6 +112,8 @@ public class LectureFichier {
     public static Question creerQuestionFromLigneCSV(HashMap<String, String> ligneHashMap)
             throws CreerQuestionException, InvalidNameException {
         
+        ligneHashMap = Accent.convertirAccent(ligneHashMap);
+        
         boolean erreurCreationCategorie;
 
         erreurCreationCategorie = !creerCategorieSiAbsent(ligneHashMap.get("categorie"));
@@ -138,6 +146,8 @@ public class LectureFichier {
             return null;
         }
     }
+
+    
 
     /**
      * Vérifie si une catégorie est présente dans le modèle et si elle n'est pas
