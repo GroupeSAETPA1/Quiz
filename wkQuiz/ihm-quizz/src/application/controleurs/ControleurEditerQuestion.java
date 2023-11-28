@@ -29,7 +29,7 @@ import javafx.scene.control.ToggleGroup;
 public class ControleurEditerQuestion {
 	
     private ArrayList<Categorie> categories;
-	private ModelePrincipal modele;
+	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	private Question questionAModifier;
     
     @FXML private ToggleGroup difficulte;
@@ -44,15 +44,9 @@ public class ControleurEditerQuestion {
 
 	@FXML private ComboBox<Categorie> selectCategorie;
 	
-	/**
-	 * Méthodes liée au bouton valider,
-	 * qui devra enregister les champs  dans la banques de question 
-	 */
-	
 	@FXML
 	public void initialize() {
         // On récupère l'instance du Modèle
-	    modele = ModelePrincipal.getInstance();
 	    questionAModifier = modele.getQuestionAModifier();
 	    miseAJourListeCategorie();
 	    
@@ -92,28 +86,57 @@ public class ControleurEditerQuestion {
 	    }
     }
 	
+	/**
+     * Méthodes liée au bouton valider,
+     * qui devra enregistrer les champs  dans la banques de question 
+     */
 	@FXML
 	private void valider() {
-		Question aModifier = modele.getBanqueQuestion().getQuestionsLibelle(questionAModifier.getLibelle()).get(0);
+		Question aModifier = modele.getQuestionAModifier();
+		
+		//TODO utiliser la méthode modifierQuestion de ModelePrincipal
 		
 		try {
+	    	
 			aModifier.setCategorie(selectCategorie.getValue());
-			aModifier.setBonneReponse(saisieReponseVrai.getText());
-			aModifier.setFeedback(saisieFeedback.getText());
-			aModifier.setLibelle(saisieLibeleQuestion.getText());
+			if (ModelePrincipal.alphabetOk(saisieReponseVrai.getText())) {
+				aModifier.setBonneReponse(saisieReponseVrai.getText());
+			}
+			if (ModelePrincipal.alphabetOk(saisieFeedback.getText())) {
+				aModifier.setFeedback(saisieFeedback.getText());
+			}
+			if (ModelePrincipal.alphabetOk(saisieLibeleQuestion.getText())) {
+				aModifier.setLibelle(saisieLibeleQuestion.getText());
+			}
 			
 			ArrayList<String> reponseFausses = new ArrayList<>();
 			if (!saisiePremiereReponseFausse.getText().isBlank()) {
-				reponseFausses.add(saisiePremiereReponseFausse.getText());
+				if (ModelePrincipal.alphabetOk(saisiePremiereReponseFausse.getText())) {
+					reponseFausses.add(saisiePremiereReponseFausse.getText());
+				} else {
+					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la premiere réponse fausse");
+				}
 			}
 			if (!saisieSecondeReponseFausse.getText().isBlank()) {
-				reponseFausses.add(saisieSecondeReponseFausse.getText());
+				if (ModelePrincipal.alphabetOk(saisieSecondeReponseFausse.getText())) {
+					reponseFausses.add(saisieSecondeReponseFausse.getText());
+				} else {
+					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la seconde réponse fausse");
+				}
 			}
 			if (!saisieTroisiemeReponseFausse.getText().isBlank()) {
-				reponseFausses.add(saisieTroisiemeReponseFausse.getText());
+				if (ModelePrincipal.alphabetOk(saisieTroisiemeReponseFausse.getText())) {
+					reponseFausses.add(saisieTroisiemeReponseFausse.getText());
+				} else {
+					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la troiseme réponse fausse");
+				}
 			}
 			if (!saisieQuatriemeReponseFausse.getText().isBlank()) {
-				reponseFausses.add(saisieQuatriemeReponseFausse.getText());
+				if (ModelePrincipal.alphabetOk(saisieQuatriemeReponseFausse.getText())) {
+					reponseFausses.add(saisieQuatriemeReponseFausse.getText());
+				} else {
+					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la quatrieme réponse fausse");
+				}
 			}
 			aModifier.setMauvaiseReponse(reponseFausses);
 			
@@ -125,7 +148,7 @@ public class ControleurEditerQuestion {
 	        
 	        aModifier.setDifficulte(reponse);
 			
-			AlertBox.showSuccessBox("catégorie modifiée avec succé");
+			AlertBox.showSuccessBox("question modifiée avec succé");
 			Quiz.chargerEtChangerVue("EditerQuestions.fxml");
 			
 		} catch (ReponseException | InvalidNameException | InvalidFormatException e) {

@@ -8,14 +8,18 @@ package application.controleurs.reseau;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.Quiz;
+import application.exception.HomonymeException;
+import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import outil.Client;
+import outil.LectureFichier;
 import outil.Serveur;
 
 /** 
@@ -62,8 +66,6 @@ public class ControleurRecevoirQuestions {
             clientCreer = true;
             System.out.println("Client créer");
         } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
             AlertBox.showErrorBox(e.getMessage());
         }
         
@@ -71,29 +73,51 @@ public class ControleurRecevoirQuestions {
         if (clientCreer) {
             try {
                 ArrayList<Object> elementRecu;
+                ArrayList<String> questionClair;
                 
                 client.seConnecter();
                 System.out.println("On est connecter");
                 elementRecu = client.recevoirDonnees();
+                questionClair = new ArrayList<String>(elementRecu.size());
                 
-                //TODO décrypter
-                
-                //TODO Ajouter à la banque
-                for (Object object : elementRecu) {
-                    try {
-                        modele.ajouterQuestion((Question) object);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                        e.printStackTrace();
-                        AlertBox.showWarningBox("Toute les question n'ont pas pu être ajouté");
+                if (elementRecu != null) {
+                    //TODO décrypter
+                    for (Object questionCrypte : elementRecu) {
+                        questionClair.add(
+                                Chiffrage.decrypterFichier((String) questionCrypte, 
+                                        Client.getCleVigenere()));
+                    }
+                    
+                    //TODO Ajouter à la banque
+                    int nbErreur = 0;
+                    int nbDejaPresent = 0;
+                    for (String ligne : questionClair) {
+                        try {
+                            HashMap<String, String> dictionnaire 
+                            = LectureFichier.getDictionnaire(ligne);
+                            
+                            Question question = LectureFichier
+                                    .creerQuestionFromLigneCSV(dictionnaire);
+                            
+                            modele.ajouterQuestion(question);
+                        } catch (HomonymeException e) {
+                            nbDejaPresent ++;
+                        } catch (Exception e) {
+                            nbErreur ++;
+                        }
+                    }
+                    if (nbErreur != 0) {                        
+                        AlertBox.showWarningBox(String.format(
+                                "Sur les %d question envoyés, %d n'ont pas pu "
+                                + "être ajouté et %d existe déjà", 
+                                questionClair.size(), nbErreur, nbDejaPresent));
                     }
                 }
                 
             } catch (SocketTimeoutException e) {
                 AlertBox.showErrorBox("TimeOut : Pas de serveur trouvé");
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                AlertBox.showErrorBox(e.getMessage());
             }
         }
     }

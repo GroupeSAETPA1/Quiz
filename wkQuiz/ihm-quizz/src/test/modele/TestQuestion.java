@@ -31,7 +31,18 @@ import application.modele.Question;
 
 class TestQuestion {
 
-	private ArrayList<Question> questionValide;
+	/** TODO comment field role (attribute, associative role) */
+    private static final String TROP_LONG_TEXT = "Lorem ipsum dolor sit amet, "
+            + "consectetuer adipiscing elit. Aenean commodo ligula eget dolor. "
+            + "Aenean massa. Cum sociis natoque penatibus et magnis dis parturi"
+            + "ent montes, nascetur ridiculus mus. Donec quam felis, ultricies "
+            + "nec, pellentesque eu, pretium Lorem ipsum dolor sit amet, consec"
+            + "tetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean"
+            + " massa. Cum sociis natoque penatibus et magnis dis parturient mo"
+            + "ntes, nascetur ridiculus mus. Donec quam felis, ultricies nec, p"
+            + "ellentesque eu, pretium";
+    
+    private ArrayList<Question> questionValide;
 	private ArrayList<String> mauvaiseReponse1;
 	private ArrayList<String> mauvaiseReponse2;
 	private ArrayList<String> mauvaiseReponse3;
@@ -322,17 +333,21 @@ class TestQuestion {
 
 	/**
 	 * Teste la méthode setFeedback de la classe Question
+	 * @throws InvalidNameException 
 	 * 
 	 * @see {@link application.modele.Question#setFeedback(String)}
 	 */
 	@Test
-	void testSetFeedback() {
+	void testSetFeedback() throws InvalidNameException {
 		// On vérifie que la méthode ne lève pas d'exception 
 		// si on ne mets pas de feedback ou si on le modifie
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback(""));
 		assertDoesNotThrow(() -> questionValide.get(0).setFeedback("test"));
 		// On vérifie que le changement a bien été effectué
 		assertEquals("test", questionValide.get(0).getFeedback());
+		
+		assertThrows(InvalidNameException.class,
+		        () -> questionValide.get(0).setFeedback(TROP_LONG_TEXT));
 	}
 
 	/**

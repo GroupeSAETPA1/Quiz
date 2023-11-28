@@ -168,12 +168,7 @@ public class ControleurCreationQuestionEtCategorie {
 		} catch (NullPointerException e) {
         	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
         }
-		
-		 Quiz.charger("EditerQuestions.fxml");
-		
 	}
-
-
 
     /** 
      * @return La liste des mauvaise réponse choisie
@@ -257,8 +252,7 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (InvalidFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
-                    + "question ET une réponse juste.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (ReponseException e) {
             AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
                     + "pas être en double ET la bonne réponse ne peut pas être "
@@ -266,10 +260,8 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
         } catch (DifficulteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            AlertBox.showWarningBox("Il manque la difficultée de la question");
         } catch (CreerQuestionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         if (questionCreer) {
@@ -303,7 +295,7 @@ public class ControleurCreationQuestionEtCategorie {
 
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide "
-                    + ": entre 1 et 30 caractère maximum ");
+                    + ": entre 1 et 30 caractère maximum et ne dois pas contenir d'accents");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La categorie saisie existe déjà");
         }

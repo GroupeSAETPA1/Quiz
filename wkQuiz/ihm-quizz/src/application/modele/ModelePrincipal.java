@@ -20,6 +20,7 @@ import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
+import application.vue.AlertBox;
 
 /**
  * Contrôleur principale de l'application .
@@ -45,13 +46,26 @@ public class ModelePrincipal {
     public static final HashMap<String, Integer> LABEL_DIFFICULTE_TO_INT
     = new HashMap<>();
     
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
+    
+    /**
+     * Lie un charactere a son code pour le chiffement
+     */
+    public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
+    
+
+    /* L'alphabet personnalisé */
+    
+    
+    private static ModelePrincipal modele;
 	/** Le nom des fichiers pour la sérialisation */
 	private static final String FICHIER_SERIALISATION_CATEGORIE = "donneesCategorie";
 	private static final String FICHIER_SERIALISATION_QUESTION = "donneesQuestion";
 	
 	
-    private static ModelePrincipal modele;
-
     /** Les CSV importés devront séparer leur éléments avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
 
@@ -78,6 +92,19 @@ public class ModelePrincipal {
     	
     	this.banqueCategorie = deSerialiserCategorie();
     	this.banqueQuestion = deSerialiserQuestion();
+    	
+    	// Si jamais il ya eu des problèmes de sérialisation des catégories,
+    	// on parcours les questions et on ajoute les catégories manquantes
+    	for (Question question : this.banqueQuestion.getQuestions()) {
+			if (this.getCategoriesLibelleExact(question.getCategorie()) == null) {
+				try {
+					this.creerCategorie(question.getCategorie());
+				} catch (InvalidNameException | HomonymeException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+    	
         this.partie = new Partie();
 
 
@@ -90,6 +117,8 @@ public class ModelePrincipal {
         INT_DIFFICULTE_TO_LABEL.put(2, "Moyen");
         INT_DIFFICULTE_TO_LABEL.put(3, "Difficile");
         INT_DIFFICULTE_TO_LABEL.put(0 , "Tous");
+        
+
     }
 
     /**
@@ -407,12 +436,11 @@ public class ModelePrincipal {
         	 */
         	ArrayList<Question> questionsASupprimer = new ArrayList<>();
 
-        	for (Question question : banqueQuestion.getQuestions()) {
-				if (question.getCategorie() == categorieASupprimer.toString()) {
+        	for (Question question : banqueQuestion.getQuestions()) { 
+				if (question.getCategorie().equals(categorieASupprimer.toString())) {
 					questionsASupprimer.add(question);
 				}
 			}
-
         	banqueQuestion.getQuestions().removeAll(questionsASupprimer);
             estSupprimer = banqueCategorie.getCategories().remove(categorieASupprimer);
         
@@ -487,11 +515,16 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeCategorie;
 			} else {
+				AlertBox.showErrorBox("Le fichier de sauvegarde " 
+						+ "des catégories à été corrompu ou supprimé, "
+			            + "les catégories sont réinitialisées");
 				return new BanqueCategorie();
 			}	
 			
 		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+			AlertBox.showErrorBox("Le fichier de sauvegarde " 
+								+ "des catégories à été corrompu ou supprimé, "
+					            + "les catégories sont réinitialisées");
 			return new BanqueCategorie();
 		}
     }
@@ -520,11 +553,16 @@ public class ModelePrincipal {
 				
 				return banqueDeserialiseeQuestion;
 			} else {
+				AlertBox.showErrorBox("Le fichier de sauvegarde des " 
+								    + "questions à été corrompu ou supprimé, "
+			            		    + "les questions sont réinitialisées");
 	   		    return new BanqueQuestion();
 			}
 			
     	} catch(ClassNotFoundException | IOException e) {
-   		    e.printStackTrace();
+			AlertBox.showErrorBox("Le fichier de sauvegarde des " 
+				    + "questions à été corrompu ou supprimé, "
+        		    + "les questions sont réinitialisées");
    		    return new BanqueQuestion();
         }
     }
@@ -641,4 +679,34 @@ public class ModelePrincipal {
                       question.getMauvaisesReponses(), question.getFeedback());
     }
     
+    /**
+     * @param categorie
+     * @return true si la catégorie est la catégorie General false sinon
+     */
+    public boolean estGeneral(Categorie categorie) {
+        return categorie.equals(banqueCategorie.categorieGeneral);
+    }
+    
+    /**
+     * @param nomCategorie
+     * @return true si la catégorie est la catégorie General false sinon
+     */
+    public boolean estGeneral(String nomCategorie) {
+        return nomCategorie.equals(banqueCategorie.categorieGeneral.getNom());
+    }
+    
+    
+    /**
+     * test si la string passée en parametre est contenue dans l'alphabet defini
+     * @param aTester
+     * @return false si un caractere n'est pas dans l'alphabet true sinon
+     */
+    public static boolean alphabetOk(String aTester) {
+    	for (int i = 0; i < aTester.length(); i++) {
+			if (!Chiffrage.ALPAHABET_TO_INT.keySet().contains(aTester.charAt(i))) {
+				return false;	
+			}
+		}
+    	return true;
+    }
 }

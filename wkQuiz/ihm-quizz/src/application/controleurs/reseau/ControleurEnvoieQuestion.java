@@ -8,7 +8,10 @@ package application.controleurs.reseau;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 import application.Quiz;
 import application.exception.ClientDejaConnecter;
@@ -21,7 +24,7 @@ import javafx.scene.text.Text;
 import outil.Serveur;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * Gére la création du serveur pour envoyer les question a un client
  * @author François de Saint Palais
  */
 public class ControleurEnvoieQuestion {
@@ -37,12 +40,23 @@ public class ControleurEnvoieQuestion {
 
     @FXML
     void initialize() throws ClassNotFoundException, IOException {
-        InetAddress ip = InetAddress.getLocalHost();
         
-        System.out.print("Mon adresse IP est: ");
-        System.out.println(ip.getHostAddress());
+        String nomOS = System.getProperty("os.name");
         
-        txtIP.setText(ip.getHostAddress());
+        String adresseIP;
+        
+        //TODO regex
+        if (nomOS.contains("Windows")) {
+            adresseIP = getIPFromWindows();
+        } else if (nomOS.contains("Linux") || nomOS.contains("Mac OS X")) {
+            adresseIP = getIPFromLinux();
+        } else {
+            adresseIP = "OS non reconnu";
+        }
+        
+        System.out.print("Mon adresse IP est: " + adresseIP);
+        
+        txtIP.setText(adresseIP);
         txtPort.setText(Serveur.getPort() + "");
         
         System.out.println(serveur);
@@ -90,8 +104,7 @@ public class ControleurEnvoieQuestion {
         } catch (ClientPasConnecterException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            AlertBox.showErrorBox(e.getMessage());
         }
         
         
@@ -118,8 +131,48 @@ public class ControleurEnvoieQuestion {
         
     }
     
+    /**
+     * Revoie l'adresse IPV4 sur un système type Linux
+     * @return L'adresse IPV4 de la machine.
+     */
+    public String getIPFromLinux() {
+        String resultat = "";
+        try {
+            Enumeration<NetworkInterface> interfaces 
+            = NetworkInterface.getNetworkInterfaces();
+
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface iface = interfaces.nextElement();
+
+                // Filtrer les interfaces loopback et les interfaces désactivées
+                if (!iface.isLoopback() && iface.isUp()) {
+                    
+                    Enumeration<InetAddress> addresses = iface.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress addr = addresses.nextElement();
+                        // Filtrer les adresses IPv6
+                        if (!addr.getHostAddress().contains(":")) {
+                            System.out.println("Interface: " + iface.getDisplayName());
+                            System.out.println("Adresse IPv4: " + addr.getHostAddress());
+                            resultat = addr.getHostAddress();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultat;
+    }
     
-    
+    /**
+     * 
+     * @return
+     * @throws UnknownHostException 
+     */
+    public static String getIPFromWindows() throws UnknownHostException {
+        return InetAddress.getLocalHost().getHostAddress();
+    }
     
 
 }

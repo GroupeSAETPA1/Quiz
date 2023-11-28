@@ -35,6 +35,8 @@ class TestCategorie {
 		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
 		// Le constructeur dépasse la longueur nom max
 		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));		
+		// caractere invalide
+		assertThrows(InvalidNameException.class, () -> new Categorie("é"));	
 	}
 
 	/**

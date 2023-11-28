@@ -54,16 +54,23 @@ public class ControleurEditerCategorie {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 		Categorie aModifier = modele.getCategorieAModifier();
 		
+		//TODO utiliser la fonction modifierCategorie de ModelePrincipal
+		
 		
 		if( modele.categorieExiste(input.getText()) 
 			||  modele.getCategorieAModifier().getNom().equals(input.getText())) {
 			
 			AlertBox.showErrorBox("La Catégorie est déjà existante ");
 		}else {
-			modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
-			AlertBox.showSuccessBox("Catégorie modifiée avec succées");
+			try {
+				modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
+				AlertBox.showSuccessBox("Catégorie modifiée avec succées");
 
-			Quiz.chargerEtChangerVue("EditerCategories.fxml");
+				Quiz.chargerEtChangerVue("EditerCategories.fxml");
+			} catch (InvalidNameException e) {
+				AlertBox.showErrorBox(e.getMessage());
+			}
+			
 		}
 	}
 	

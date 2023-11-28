@@ -14,12 +14,13 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import application.modele.Chiffrage;
 import application.vue.AlertBox;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * 
  * @author Tom Douaud
- * @author Francois
+ * @author Francois de Saint Palais
  */
 public class Client {
     
@@ -41,6 +42,9 @@ public class Client {
 	 * Durée en millisecond (5000ms = 5s)
 	 */
 	private static final int TIMEOUT_CONNEXION = 5000;
+	
+	
+	private static String cleVigenere;
 	
     
     public Client(String ip, int port) {
@@ -69,7 +73,6 @@ public class Client {
      */
 	public ArrayList<Object> recevoirDonnees() 
 	        throws UnknownHostException, IOException, ClassNotFoundException {
-        
 	    ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         
@@ -83,6 +86,32 @@ public class Client {
             //On indique on serveur que le client est prêt
             oos.writeObject(CLIENT_PRET_MESSAGE);
             
+            int b =  Chiffrage.genererPuissance();
+            int gab;
+            
+            //On récupère g^a envoyé par le serveur
+            int ga = (int) ois.readObject();
+            gab = Chiffrage.exposantModulo(ga, b, Chiffrage.P);
+            Chiffrage.setGab(gab);
+            
+            int gb = Chiffrage.exposantModulo(Chiffrage.G, b, Chiffrage.P);
+            //On envoie g^b au serveur
+            oos.writeObject(gb);
+            
+            
+            String cleVigenereCrypte = (String) ois.readObject();
+            
+            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
+            
+            //Décrypter clé vigenère reçue
+            String cleVigenere = Chiffrage.dechiffrement(cleVigenereCrypte, 
+                    Chiffrage.cleDepuisDiffie());
+            System.out.println(cleVigenere);
+            
+            Client.cleVigenere = cleVigenere;
+            
+            
+            //Récupération du nombre de question
             int nbQuestion = (int) ois.readObject();
             elementsRecu = new ArrayList<Object>(nbQuestion);
             
@@ -108,4 +137,10 @@ public class Client {
         
         return elementsRecu;
     }
+
+    /** @return valeur de cleVigenere */
+    public static String getCleVigenere() {
+        return cleVigenere;
+    }
+	
 }
