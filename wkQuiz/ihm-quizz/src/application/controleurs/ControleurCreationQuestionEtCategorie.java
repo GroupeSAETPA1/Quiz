@@ -254,7 +254,7 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox(e.getMessage());
         } catch (ReponseException e) {
-            AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
+            AlertBox.showErrorBox("Attention, les mauvaises réponses ne doivent "
                     + "pas être en double ET la bonne réponse ne peut pas être "
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
