@@ -301,7 +301,7 @@ public class ControleurCreationQuestionEtCategorie {
         }
         
         if (categorieCreer) {
-            AlertBox.showSuccessBox("Categorie crée !");
+            AlertBox.showSuccessBox("Catégorie crée !");
             miseAJourListeCategorie();
             Quiz.charger("EditerCategories.fxml");
             viderChampsCategorie();
