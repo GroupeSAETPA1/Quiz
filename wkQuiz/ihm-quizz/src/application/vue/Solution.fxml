@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,16 +16,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="1256.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurSolution">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="1256.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurSolution">
    <children>
-      <Group layoutX="43.0" layoutY="25.0" onMouseClicked="#retour">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutY="80.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -36,7 +42,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TableView fx:id="tableauSolution" layoutX="27.0" layoutY="235.0" prefHeight="387.0" prefWidth="1203.0">
+      <TableView fx:id="tableauSolution" layoutX="27.0" layoutY="235.0" prefHeight="387.0" prefWidth="1203.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css">
          <columns>
             <TableColumn fx:id="colonneLibelle" maxWidth="500.0" minWidth="100.0" prefWidth="245.0" text="Libelle" />
             <TableColumn fx:id="colonneCategorie" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Categorie" />
