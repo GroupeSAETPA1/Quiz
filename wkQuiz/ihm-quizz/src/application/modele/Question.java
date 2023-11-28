@@ -153,13 +153,13 @@ public class Question implements Serializable {
                     + "ne doit pas etre vide");
         }
         if (!reponsesFausseSansDoublon(reponsesFausse)) {
-            throw new ReponseException("La liste des mauvaises reponses "
+            throw new ReponseException("La liste des mauvaises réponses "
                     + "ne peut pas contenir de valeurs "
                     + "en double");
         }
         
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
-            throw new ReponseException("La liste des reponses fausses "
+            throw new ReponseException("La liste des réponses fausses "
                     + "contient une ou plusieurs propositions égale "
                     + "a la réponse juste (casse ignorée");
         }
