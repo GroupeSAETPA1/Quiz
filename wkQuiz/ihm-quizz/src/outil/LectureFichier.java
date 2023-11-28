@@ -23,6 +23,7 @@ import application.exception.InvalidNameException;
 import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
+import application.vue.AlertBox;
 
 /**
  * Méthode outils de lecture de fichier CSV
@@ -57,6 +58,7 @@ public class LectureFichier {
             }
         } while (ligne != null);
         fichierReader.close();
+        AlertBox.showSuccessBox(nombreQuestionAjoute + "lignes analysées.");
         return resultat;
     }
 

@@ -19,7 +19,7 @@
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#accueil">
          <children>
-            <Label layoutX="-1.0" layoutY="74.0" text="Retour" textFill="WHITE">
+            <Label layoutY="90.0" text="Accueil" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -79,15 +79,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text fill="WHITE" layoutX="329.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditeur de questions" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="323.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditeur de questions" textAlignment="CENTER">
          <font>
             <Font name="Open Sans Regular" size="40.0" />
          </font>
       </Text>
-      <ImageView fitHeight="380.0" fitWidth="70.0" layoutX="488.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/Connector%20line.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

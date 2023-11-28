@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -17,23 +24,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="1300.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurEditerQuestion">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="1300.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurEditerQuestion">
    <children>
-      <Group layoutX="18.0" layoutY="18.0" onMouseClicked="#retour">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+            <Label layoutY="80.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                <font>
                   <Font name="Open Sans" size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Label layoutX="511.0" layoutY="24.0" prefHeight="60.0" prefWidth="332.0" text="Editez la question " textAlignment="RIGHT" textFill="WHITE">
+      <Label layoutX="497.0" layoutY="42.0" prefHeight="60.0" prefWidth="330.0" text="Editez la question " textAlignment="RIGHT" textFill="WHITE">
          <font>
             <Font name="Open Sans" size="40.0" />
          </font>

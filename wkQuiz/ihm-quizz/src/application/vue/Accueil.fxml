@@ -6,15 +6,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAccueil">
    <children>
-      <Label contentDisplay="CENTER" layoutX="412.0" layoutY="58.0" prefHeight="57.0" prefWidth="243.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
+      <Label contentDisplay="CENTER" layoutX="411.0" layoutY="60.0" prefHeight="58.0" prefWidth="190.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
@@ -55,7 +53,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Group layoutX="33.0" layoutY="15.0" onMouseClicked="#quitter">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#quitter">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -76,7 +74,7 @@
                   <Image url="@images/IconeAide.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="84.0" prefHeight="57.0" prefWidth="64.0" text="Aide" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutX="15.0" layoutY="80.0" prefHeight="57.0" prefWidth="73.0" text="Aide" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -85,27 +83,19 @@
       </Group>
       <Group layoutX="750.0" layoutY="20.0" onMouseClicked="#profil">
          <children>
-            <VBox alignment="CENTER" layoutX="-86.0" prefHeight="147.0" prefWidth="207.0">
-               <children>
-                  <ImageView fitHeight="82.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/IconeProfil.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D height="96.0" width="96.0" />
-                     </viewport>
-                  </ImageView>
-                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="272.0">
-                     <children>
-                        <Text fx:id="labelPseudo" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil" textAlignment="CENTER" wrappingWidth="186.3125">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="5.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/IconeProfil.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D height="96.0" width="96.0" />
+               </viewport>
+            </ImageView>
+            <Text fx:id="labelPseudo" fill="WHITE" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil" textAlignment="CENTER" wrappingWidth="93.3125">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
          </children>
       </Group>
    </children>
