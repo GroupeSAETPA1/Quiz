@@ -47,7 +47,7 @@ public class Serveur {
     private static final int TIMEOUT_SERVEUR_ACCEPT = 20_000;
     
     public Serveur(int port) throws IOException, ClassNotFoundException  {
-    	this.port = port;
+    	Serveur.port = port;
         serveur = new ServerSocket(port);
     }
     

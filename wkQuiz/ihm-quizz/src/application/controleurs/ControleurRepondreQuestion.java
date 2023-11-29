@@ -110,8 +110,7 @@ public class ControleurRepondreQuestion {
 	}
 
 	/**
-	 * 
-	 * TODO comment method role
+	 * Affiche le numéro de la question dans la partie
 	 */
 	private void afficherNumeroQuestion() {
 		Integer nb = partie.getIndiceQuestion() + 1;
@@ -200,8 +199,7 @@ public class ControleurRepondreQuestion {
 	}
 
     /**
-     * 
-     * TODO comment method role
+     * Affiche les réponse possible pour la question
      * @param question
      */
    	private void afficherChoixPossible(Question question) {
@@ -209,37 +207,35 @@ public class ControleurRepondreQuestion {
    		
    		reponsePossibles.add(question.getReponseJuste());
    		reponsePossibles.addAll(question.getMauvaisesReponses());
-   		int nbQuestion = reponsePossibles.size();
-   		
+        int nbQuestion = reponsePossibles.size();
 
-   		choix1.setVisible(true);
-   		choix2.setVisible(true);
-   		choix3.setVisible(true);
-   		choix4.setVisible(true);
-   		choix5.setVisible(true);
-   		
-   		Collections.shuffle(reponsePossibles);
-   		
-   		String reponsesAAfficher = "";
-   		
-   		for ( int i = 0 ; i < nbQuestion ; i ++ ) {
-   			if (reponsePossibles.get(i).length() > 125) {
-   				reponsesAAfficher = formaterLibelle(reponsePossibles.get(i), 125);
-   			} else {
-   				reponsesAAfficher = reponsePossibles.get(i);
-   			}
-   			if (i == 0) {
-   				choix1.setText(reponsesAAfficher);
-   			} else if (i == 1) {
-   				choix2.setText(reponsesAAfficher);
-   			} else if (i == 2) {
-   				choix3.setText(reponsesAAfficher);
-   			} else if (i == 3) {
-   				choix4.setText(reponsesAAfficher);
-   			} else if (i == 4) {
-   				choix5.setText(reponsesAAfficher);
-   			} 
-   		}
+        Collections.shuffle(reponsePossibles);
+
+        String reponsesAAfficher = "";
+
+        for (int i = 0; i < nbQuestion; i++) {
+            if (reponsePossibles.get(i).length() > 125) {
+                reponsesAAfficher = formaterLibelle(reponsePossibles.get(i), 125);
+            } else {
+                reponsesAAfficher = reponsePossibles.get(i);
+            }
+            if (i == 0) {
+                choix1.setVisible(true);
+                choix1.setText(reponsesAAfficher);
+            } else if (i == 1) {
+                choix2.setVisible(true);
+                choix2.setText(reponsesAAfficher);
+            } else if (i == 2) {
+                choix3.setVisible(true);
+                choix3.setText(reponsesAAfficher);
+            } else if (i == 3) {
+                choix4.setVisible(true);
+                choix4.setText(reponsesAAfficher);
+            } else if (i == 4) {
+                choix5.setVisible(true);
+                choix5.setText(reponsesAAfficher);
+            }
+        }
    		
    	}
 

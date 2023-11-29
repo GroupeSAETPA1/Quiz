@@ -26,8 +26,6 @@ public class ControleurEditerQuestions {
 	@FXML
 	private TableView<LigneQuestion> table;
 	
-	private boolean filtre = false;
-	
 	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	/**
@@ -103,14 +101,13 @@ public class ControleurEditerQuestions {
         modifColumn.setMinWidth(tableWidth * 0.09);
         supColumn.setMinWidth(tableWidth * 0.12);
 
-        table.getColumns().addAll(categorieColumn, libelleColumn, modifColumn, supColumn);
+        table.getColumns().add(categorieColumn);
+        table.getColumns().add(libelleColumn);
+        table.getColumns().add(modifColumn);
+        table.getColumns().add(supColumn);
+//        table.getColumns().addAll(categorieColumn, libelleColumn, modifColumn, supColumn);
         
         miseAJourTableau();
-	}
-	
-	public void filtrer() {
-	    filtre = true ; 
-	    // miseAJourTableau ();
 	}
 	
 	/** 

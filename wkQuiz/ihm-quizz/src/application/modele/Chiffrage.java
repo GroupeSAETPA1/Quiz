@@ -18,7 +18,7 @@ public class Chiffrage {
 	
 	// Alphabet personnalisé pouvant etre chiffré 
 	public static final String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
-	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% =";
+	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% +=";
 
 	// Mapping des caractères de l'alphabet vers des entiers
     public static final HashMap<Character, Integer> ALPAHABET_TO_INT 
@@ -46,6 +46,7 @@ public class Chiffrage {
             ALPAHABET_TO_INT.put(c, i);
             INT_TO_ALPHABET.put(i, c);
         }
+        System.out.println(ALPAHABET_TO_INT);
     }
     // Nombre de lettres dans l'alphabet personnalisé
     private final static int NOMBRE_LETTRE_ALPHABET = CUSTOM_ALPHABET.length();
@@ -87,7 +88,7 @@ public class Chiffrage {
 		    try {                
 		        messageI = ALPAHABET_TO_INT.get(message.charAt(i));
             } catch (Exception e) {
-                System.err.print(message);
+                System.err.print(message + " -> ");
                 System.err.println(message.charAt(i));
                 throw e;
             }
@@ -114,8 +115,10 @@ public class Chiffrage {
 	    for (int i = 0 ; i < message.length() ; i++) {
 	        // valeur du caractere message.charAt(i)
 	        int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+	        
             // valeur du caractère de la cle
             int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
+            
 	        int positionReelle  = (messageI - cleI) % NOMBRE_LETTRE_ALPHABET;
 	        // on repasse le modulo en positif
 	        positionReelle = positionReelle < 0 ? 

@@ -100,10 +100,12 @@ public class ControleurEditerCategories {
         supColumn.setPrefWidth(tableWidth * 0.15);
         supColumn.setResizable(false);
 
-        table.getColumns().addAll(nomColumn, nbColumn, modifColumn, supColumn);
+        table.getColumns().add(nomColumn);
+        table.getColumns().add(nbColumn);
+        table.getColumns().add(modifColumn);
+        table.getColumns().add(supColumn);
 
         miseAJourTableau();
-
     }
 
     public void filtrer() {

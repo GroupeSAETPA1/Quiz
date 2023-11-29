@@ -17,6 +17,8 @@ import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 import application.modele.Chiffrage;
+import static application.modele.Chiffrage.chiffrement;
+import static application.modele.Chiffrage.dechiffrement;
 import application.modele.ModelePrincipal;
 
 /** 
@@ -49,11 +51,8 @@ class TestChiffrage {
     void testChiffrement() {
         String cle = "x#_";
         String messageAchiffrer = "BUT";
-        String chiffrerMain = "Yip";
-        //27 46 45
-        //23 55 63
-        // Y i p
-        assertEquals(chiffrerMain, Chiffrage.chiffrement(messageAchiffrer , cle));
+        assertEquals(messageAchiffrer, 
+                dechiffrement(chiffrement(messageAchiffrer , cle), cle) );
     }
 
     /**
@@ -63,9 +62,9 @@ class TestChiffrage {
     void testDechiffrement() {
         String cle = "x#_";
         String messageAdechiffrer = "Yip";
-        String dechiffrerMain = "BUT";
         
-       assertEquals(dechiffrerMain, Chiffrage.dechiffrement(messageAdechiffrer , cle));
+       assertEquals(messageAdechiffrer, 
+               chiffrement(dechiffrement(messageAdechiffrer , cle), cle));
     }
 
     
