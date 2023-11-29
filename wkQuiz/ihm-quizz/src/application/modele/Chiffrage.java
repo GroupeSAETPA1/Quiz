@@ -29,7 +29,7 @@ public class Chiffrage {
 	
 	// Alphabet personnalisé pouvant etre chiffré 
 	private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
-	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% ";
+	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% +=";
 
 	// Mapping des caractères de l'alphabet vers des entiers
     public static final HashMap<Character, Integer> ALPAHABET_TO_INT = 
