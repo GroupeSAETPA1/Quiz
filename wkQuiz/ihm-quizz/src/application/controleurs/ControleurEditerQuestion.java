@@ -99,9 +99,6 @@ public class ControleurEditerQuestion {
 		try {
 	    	
 			aModifier.setCategorie(selectCategorie.getValue());
-			if (ModelePrincipal.alphabetOk(saisieReponseVrai.getText())) {
-				aModifier.setBonneReponse(saisieReponseVrai.getText());
-			}
 			if (ModelePrincipal.alphabetOk(saisieFeedback.getText())) {
 				aModifier.setFeedback(saisieFeedback.getText());
 			}
@@ -138,7 +135,20 @@ public class ControleurEditerQuestion {
 					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la quatrieme réponse fausse");
 				}
 			}
-			aModifier.setMauvaiseReponse(reponseFausses);
+			String reponseSTUB = "ceci est un STUB pour la réponse";
+			if (ModelePrincipal.alphabetOk(saisieReponseVrai.getText())) {
+				try {
+					aModifier.setBonneReponse(saisieReponseVrai.getText());
+					aModifier.setMauvaiseReponse(reponseFausses);
+				} catch (ReponseException e) {
+						aModifier.setBonneReponse(reponseSTUB);
+						aModifier.setMauvaiseReponse(reponseFausses);
+						aModifier.setBonneReponse(saisieReponseVrai.getText());
+				}
+
+				
+				
+			}
 			
 			int reponse = 0;
 	        if (difficulte.getSelectedToggle() != null) {
