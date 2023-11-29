@@ -113,6 +113,41 @@ class TestModelePrincipal {
                 mauvaiseReponse4, ""));
     }
 
+		/**
+	 * Méthode de test pour les méthodes serialiser, deSerialiserCategorie, deSerialiserQuestion
+	 * @see {@link application.modele.ModelePrincipal#serialiser()}.
+	 * @see {@link application.modele.ModelePrincipal#deSerialiserCategorie()}.
+	 * @see {@link application.modele.ModelePrincipal#deSerialiserQuestion()}.
+	 */
+	@Test
+	@Order(1)
+	void testSerialisation() {
+		// On vérifie que la serialisation et la dé-serialisation du modèle 
+		// est bien effectuée et valide
+		ModelePrincipal modele = ModelePrincipal.getInstance();
+		assertIterableEquals(modele.getBanqueCategorie().getCategories(), modele.deSerialiserCategorie().getCategories());
+		assertIterableEquals(modele.getBanqueQuestion().getQuestions(), modele.deSerialiserQuestion().getQuestions());
+		// On vérifie que sérialiser ne renvoie pas d'erreur
+		assertDoesNotThrow(() -> modele.serialiser());
+
+		reinitialiserModele();
+	}
+	
+	/**
+	 * Méthode pour que les autres tests 
+	 * ne soient pas influencés par la sérialisation
+	 * @throws InvalidNameException 
+	 */
+	void reinitialiserModele() throws InvalidNameException {
+		// On récupère le modele principal et on supprime toutes ses questions et categories
+		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueCategorie().getCategories().clear();
+		modele.getBanqueQuestion().getQuestions().clear();
+		
+		// On remets juste la catégorie general
+		modele.getBanqueCategorie().getCategories().add(new Categorie("General"));
+	}
+
 	/**
 	 * Methode de test pour la methode getInstance
 	 * @see {@link application.modele.ModelePrincipal#getInstance()}.
@@ -123,7 +158,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(1)
+	@Order(2)
 	void testGetInstance() throws InvalidNameException {
 		// On verifie que deux objets de type ModelePrincipal qui sont 
 		// egaux a l'instance du modelePrincipal sont les mêmes
@@ -243,6 +278,20 @@ class TestModelePrincipal {
 		// Vu que la categorie "Truc" n'existe plus, 
 		// on ne peut plus la supprimer
 		assertFalse(modele.supprimerCategorie(uneCategorie));
+
+		// On vérifie que supprimer une catégorie avec des question 
+		// supprime les questions de cette catégorie
+		modele.creerCategorie("categorieASupprimer");
+		modele.creerQuestion("Question a supprimer", 
+							  modele.getIndice("categorieASupprimer"), 
+							  1, 
+							  "reponse vrai", 
+							  mauvaiseReponse1, 
+							  "");
+		
+		assertTrue(modele.supprimerCategorie(modele.getCategoriesLibelleExact("categorieASupprimer")));
+		assertEquals(new ArrayList<Question>(), modele.getBanqueQuestion().getQuestionsLibelle("Question a supprimer"));
+		
 
 		// Le fait de rajouter une categorie "General" ne fait rien 
 		// car "General" existe deja
