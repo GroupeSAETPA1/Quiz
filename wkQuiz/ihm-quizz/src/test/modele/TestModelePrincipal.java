@@ -113,7 +113,7 @@ class TestModelePrincipal {
                 mauvaiseReponse4, ""));
     }
 
-		/**
+	/**
 	 * Méthode de test pour les méthodes serialiser, deSerialiserCategorie, deSerialiserQuestion
 	 * @see {@link application.modele.ModelePrincipal#serialiser()}.
 	 * @see {@link application.modele.ModelePrincipal#deSerialiserCategorie()}.
@@ -130,7 +130,11 @@ class TestModelePrincipal {
 		// On vérifie que sérialiser ne renvoie pas d'erreur
 		assertDoesNotThrow(() -> modele.serialiser());
 
-		reinitialiserModele();
+		try {
+			reinitialiserModele();
+		} catch (InvalidNameException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -178,7 +182,7 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException 
 	 */
 	@Test
-	@Order(4)
+	@Order(3)
 	void testCreerQuestion() throws InvalidNameException, HomonymeException,
 			ClassNotFoundException, InternalError, IOException, CreerQuestionException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -264,8 +268,8 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException 
 	 */
 	@Test
-	@Order(3)
-	void testSupprimerCategorie() throws InvalidNameException, HomonymeException {
+	@Order(4)
+	void testSupprimerCategorie() throws InvalidNameException, HomonymeException, CreerQuestionException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
@@ -322,7 +326,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(4)
+	@Order(5)
 	void testCategorieContientQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -388,7 +392,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(5)
+	@Order(6)
 	void testCategorieExiste() throws InvalidNameException, HomonymeException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -418,7 +422,7 @@ class TestModelePrincipal {
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	@Order(6)
+	@Order(7)
 	void testGetBanqueCategorie() throws InvalidNameException, HomonymeException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -460,7 +464,7 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException
 	 */
 	@Test
-	@Order(7)
+	@Order(8)
 	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, CreerQuestionException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -544,7 +548,7 @@ class TestModelePrincipal {
 	 * @throws InvalidNameException
 	 */
 	@Test
-	@Order(10)
+	@Order(9)
 	void testGetCategorieAModifier() throws InvalidNameException {
 	    // On récupère l'instance du modèle principal et on crée une catégorie
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -564,7 +568,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(11)
+	@Order(10)
 	void testGetCategoriesLibelle() throws InvalidNameException, HomonymeException {
 	    // On récupère l'instance du modèle principal 
 	    // et de la banque de catégories du modele principal et on vide cette banque
@@ -600,7 +604,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(12)
+	@Order(11)
 	void testGetIndice() throws InvalidNameException, HomonymeException {
 	    // On récupère l'instance du modèle principal 
 	    // et de la banque de catégories du modele principal et on vide cette banque
@@ -632,7 +636,7 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException
 	 */
 	@Test
-	@Order(13)
+	@Order(12)
 	void testGetNombreQuestionCategorie() throws InvalidNameException, HomonymeException, CreerQuestionException {
 	    // On récupère l'instance du modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -654,7 +658,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#setPagePrecendente()}.
 	 */
 	@Test
-	@Order(14)
+	@Order(13)
 	void testPagePrecedente() {
 		// On récupere le modèle principal et on vérifie que par défault, 
 		// il n'y a pas de page précédente (null) 
@@ -673,7 +677,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#setPartie()}.
 	 */
 	@Test
-	@Order(15)
+	@Order(14)
 	void testPartie() {
 		// On récupère le modèle principal et on vérifie 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -695,7 +699,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(16)
+	@Order(15)
 	void testQuestionsAModifier() throws CreerQuestionException, InvalidNameException, HomonymeException {
 		// On récupère le modèle principal et on vérifie qu'au départ 
 		// il n'y a pas de question à modifier 
@@ -730,7 +734,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(17)
+	@Order(16)
 	void testGetCategoriesLibelleExact() throws InvalidNameException, HomonymeException {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -750,7 +754,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#isDisplayCategoriePane()}.
 	 */
 	@Test
-	@Order(18)
+	@Order(17)
 	void testDisplayCategoriePane() {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -771,7 +775,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(19)
+	@Order(18)
 	void testModifierCategorie() throws InvalidNameException, HomonymeException {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -793,7 +797,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#modifierQuestion()}.
 	 */
 	@Test
-	@Order(20)
+	@Order(19)
 	void testModifierQuestion() {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -839,7 +843,7 @@ class TestModelePrincipal {
 	 * @throws DifficulteException
 	 */
 	@Test
-	@Order(21)
+	@Order(20)
 	void testSetDifficultePartie() throws DifficulteException {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -870,7 +874,7 @@ class TestModelePrincipal {
 	 * @throws HomonymeException
 	 */
 	@Test
-	@Order(22)
+	@Order(21)
 	void testSupprimerQuestion() throws CreerQuestionException, InvalidNameException, HomonymeException {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -900,7 +904,7 @@ class TestModelePrincipal {
 	 * @throws CreerQuestionException
 	 */
 	@Test
-	@Order(23)
+	@Order(22)
 	void testAjouterALaSelectionDEnvoie() throws InvalidNameException, HomonymeException, CreerQuestionException {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -947,7 +951,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#supprimerALaSelectionDEnvoie(Question)}.
 	 */
 	@Test
-	@Order(24)
+	@Order(23)
 	void testSupprimerALaSelectionDEnvoie() {
 		/*
 		 * Ce test fait le contraire du test précédent, 
@@ -979,7 +983,7 @@ class TestModelePrincipal {
 	 * @see {@link application.modele.ModelePrincipal#getQuestionAEnvoyer()}.
 	 */
 	@Test
-	@Order(25)
+	@Order(24)
 	void testToutEnvoyer() {
 		// On récupère le modèle principal 
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -1008,7 +1012,7 @@ class TestModelePrincipal {
 	}
 	
 	@Test
-	@Order(8)
+	@Order(25)
 	public void testAlphabetOk() {
 		assertTrue(ModelePrincipal.alphabetOk("pas de caracteres non contenue dans l'alphabet"));
 		assertFalse(ModelePrincipal.alphabetOk("caracteres non contenue dans l'alphabet : éàç"));

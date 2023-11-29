@@ -16,10 +16,12 @@ import org.junit.jupiter.api.Test;
 import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
+import application.modele.Categorie;
 import application.modele.Chiffrage;
 import static application.modele.Chiffrage.chiffrement;
 import static application.modele.Chiffrage.dechiffrement;
 import application.modele.ModelePrincipal;
+import application.modele.Question;
 
 /** 
  * Méthode de test pour le chiffrement
@@ -80,10 +82,27 @@ class TestChiffrage {
     void testGenererCSV() throws HomonymeException, InvalidNameException, IOException, CreerQuestionException {
         ModelePrincipal modele = ModelePrincipal.getInstance();
         String cle = Chiffrage.generationCle();
+        
+        ArrayList<String> mauvaiseReponse = new ArrayList<String>();
+        mauvaiseReponse.add("Mauvaise Reponse 1");
+        mauvaiseReponse.add("Mauvaise Reponse 2");
+        mauvaiseReponse.add("Mauvaise Reponse 3");
+        mauvaiseReponse.add("Mauvaise Reponse 4");
+        
+        modele.creerCategorie("testChiffrement");
+        
+        Question question = new Question("QuestionACrypter", modele.getCategoriesLibelleExact("testChiffrement"), 1, "ReponseJuste", mauvaiseReponse, "");        
+        modele.getBanqueQuestion().ajouter(question);
+        
         ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(modele.getBanqueQuestion().getQuestions() , cle);
         System.out.println(cle);
         Chiffrage.decrypterFichier(questionCrypter.get(0) , cle);
         System.out.println("finis");
+        
+        // On supprime la question et la catégorie pour nettoyer 
+        // l'environement de test pour les autres tests
+        modele.supprimerQuestion(question);
+        modele.supprimerCategorie(modele.getCategoriesLibelleExact("testChiffrement"));
     }
     
     
