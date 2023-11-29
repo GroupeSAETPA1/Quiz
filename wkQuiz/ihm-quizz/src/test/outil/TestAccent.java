@@ -24,6 +24,7 @@ class TestAccent {
     @Test
     void testConvertiAccent() {
         assertEquals('e', convertirAccent('é'));
+        assertEquals('o', convertirAccent('ô'));
         assertEquals(' ', convertirAccent(' '));
         assertEquals('?', convertirAccent('?'));
         assertEquals('?', convertirAccent(CARACTERE_INCONNU));
@@ -34,6 +35,7 @@ class TestAccent {
         
         assertEquals("ete", convertirAccent("été"));
         assertEquals("eEe", convertirAccent("éÊé"));
+        assertEquals("role", convertirAccent("rôle"));
 
         assertEquals("eE?", convertirAccent("éÊ" + CARACTERE_INCONNU));
         
