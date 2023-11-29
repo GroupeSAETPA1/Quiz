@@ -23,7 +23,7 @@ import outil.LectureFichier;
 import outil.Serveur;
 
 /** 
- * Représente le client qui reçoit les question
+ * Représente le client qui reçoit les questions
  * @author François de Saint Palais
  */
 public class ControleurRecevoirQuestions {
@@ -64,7 +64,7 @@ public class ControleurRecevoirQuestions {
         try {
             client = new Client(ipServeur.getText(), Integer.parseInt(portServeur.getText()));
             clientCreer = true;
-            System.out.println("Client créer");
+            System.out.println("Client crée");
         } catch (NumberFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         }
@@ -108,8 +108,8 @@ public class ControleurRecevoirQuestions {
                     }
                     if (nbErreur != 0) {                        
                         AlertBox.showWarningBox(String.format(
-                                "Sur les %d question envoyés, %d n'ont pas pu "
-                                + "être ajouté et %d existe déjà", 
+                                "Sur les %d question envoyées, %d n'ont pas pu "
+                                + "être ajoutées et %d existe déjà", 
                                 questionClair.size(), nbErreur, nbDejaPresent));
                     }
                 }

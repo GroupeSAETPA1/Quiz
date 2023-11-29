@@ -35,7 +35,7 @@ public class ControleurSelectionQuestion {
     
     /**
   	  * Fonction liée au group Retour et son image
-  	  * Et qui permet de retourner a la page précédente 
+  	  * Et qui permet de retourner à la page précédente 
   	  */
   	@FXML
       public void retour() {
@@ -94,10 +94,8 @@ public class ControleurSelectionQuestion {
         private Question question;
         
         /** 
-         * TODO comment initial state properties
-         * @param libelleQuestion
-         * @param categorieQuestion
-         * @param selection
+         * Récupere la question pour la tableView
+         * @param question la question à récuperer
          */
         public LigneSelectionQuestion(Question question) {
             super();
@@ -120,7 +118,7 @@ public class ControleurSelectionQuestion {
         }
 
         /** 
-         * TODO comment method role
+         * Retire de la sélection d'envoi la question décochée
          */
         public void retirerALaSelection() {
             System.out.println(this + " deselectionner");
@@ -148,12 +146,11 @@ public class ControleurSelectionQuestion {
             Question other = (Question) obj;
             return question.equals(other);
         }
-        
-        
+   
     }
 
     /**
-     * Créer et gère les actions sur les CheckBox
+     * Crée et gère les actions sur les CheckBox
      * 
      * @author François de Saint Palais
      */
@@ -168,11 +165,13 @@ public class ControleurSelectionQuestion {
                 protected void updateItem(CheckBox item, boolean empty) {
                     super.updateItem(item, empty);
                     super.setAlignment(Pos.CENTER);
-                    // On créer une CheckBox
+                    // On crée une CheckBox
                     CheckBox checkbox = new CheckBox();
                     
-                    /* Lors de la création des lignes, 
-                     * la TableView commence à l'index -1 => Exception */
+                    /* 
+                     * Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception 
+                     */
                     try {
                         checkbox.setSelected(getTableView().getItems()
                                 .get( getIndex() ).estSelectionner());
@@ -198,6 +197,5 @@ public class ControleurSelectionQuestion {
                 }
             };
         }
-
     }
 }

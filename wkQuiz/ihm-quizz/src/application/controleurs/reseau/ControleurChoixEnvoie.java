@@ -1,3 +1,8 @@
+/*
+ * ControleurChoixEnvoie.java                               
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs.reseau;
 
 import application.Quiz;

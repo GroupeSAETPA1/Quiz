@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import outil.Serveur;
 
 /** 
- * Gére la création du serveur pour envoyer les question a un client
+ * Gére la création du serveur pour envoyer les question à un client
  * @author François de Saint Palais
  */
 public class ControleurEnvoieQuestion {
@@ -71,8 +71,6 @@ public class ControleurEnvoieQuestion {
             } while (serveur == null);
         }
         System.out.println(serveur);
-        
-        
     }
     
     @FXML
@@ -98,7 +96,7 @@ public class ControleurEnvoieQuestion {
         try {
             boolean envoieReussi = serveur.envoiQuestion();
              if (!envoieReussi) {
-                 AlertBox.showWarningBox("Le client a refuser les questions");
+                 AlertBox.showWarningBox("Le client à refusé les questions");
              }
              information.setText("Pas de client connecté");
         } catch (ClientPasConnecterException e) {
@@ -115,14 +113,14 @@ public class ControleurEnvoieQuestion {
         
         if (!serveur.clientEstConnecte()) {
             information.setText("En attente d'un client ...");
-            AlertBox.showSuccessBox("Prêt à recevoir un client ?");
+            AlertBox.showSuccessBox("Êtes-vous prêt à recevoir un client ?");
             try {
                 serveur.lancerServeur();
                 information.setText("Adresse IP du client : " + serveur.getIPClient());
             } catch (ClientDejaConnecter e) {
                 AlertBox.showWarningBox("Un client est déjà connecté.");
             } catch (SocketTimeoutException e) {
-                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de ce "
+                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de se "
                         + "connecter");
             }
         } else {
@@ -166,8 +164,8 @@ public class ControleurEnvoieQuestion {
     }
     
     /**
-     * 
-     * @return
+     * Getter de l'IP si l'OS est Windows
+     * @return L'adresse IP de l'utilisateur
      * @throws UnknownHostException 
      */
     public static String getIPFromWindows() throws UnknownHostException {

@@ -1,3 +1,8 @@
+/*
+ * ControleurRecapitulatif.java                               
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs.reseau;
 
 
@@ -14,10 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
-
-
-
 public class ControleurRecapitulatif {
 
 	
@@ -26,13 +27,9 @@ public class ControleurRecapitulatif {
 	@FXML TableColumn<LigneRecapitulatif, String> categorie;
 	@FXML TableColumn<LigneRecapitulatif, String> difficulte;
 	@FXML TableColumn<LigneRecapitulatif, String> repVrai;
-
-	
 	 
-	 
-	 
-	 @FXML
-	    public void initialize() {
+	@FXML
+	public void initialize() {
 		 
 		 libelleQuestion.setCellValueFactory(
 	                new PropertyValueFactory<LigneRecapitulatif, String>
@@ -73,26 +70,24 @@ public class ControleurRecapitulatif {
 	            cell.setWrapText(true);
 	            return cell;
 	        });
-
-
-		
+	
 		 miseAjourRecap();
-	 }
-	 
-	 private void miseAjourRecap() {
+	}
+	
+    private void miseAjourRecap() {
 		 
-		 ModelePrincipal modele = ModelePrincipal.getInstance();
+		ModelePrincipal modele = ModelePrincipal.getInstance();
 		 
-		 ObservableList<LigneRecapitulatif> data = tableRecap.getItems();
+		ObservableList<LigneRecapitulatif> data = tableRecap.getItems();
 
-	        ArrayList<Question> questions = modele.getQuestionAEnvoyer();
+	    ArrayList<Question> questions = modele.getQuestionAEnvoyer();
 
-	        for (Question question : questions) {
-	            data.add(new LigneRecapitulatif(question.getLibelle(), 
-	            		question.getCategorie(), ModelePrincipal
-	            		.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()),
-	            		question.getReponseJuste()));
-	        }
+        for (Question question : questions) {
+            data.add(new LigneRecapitulatif(question.getLibelle(), 
+            		question.getCategorie(), ModelePrincipal
+            		.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()),
+            		question.getReponseJuste()));
+        }
 	 }
 	
 	
@@ -106,41 +101,37 @@ public class ControleurRecapitulatif {
 		Quiz.changerVue("EnvoieQuestion.fxml");
 	}
 	
-	  public  class LigneRecapitulatif {
+	public  class LigneRecapitulatif {
 	        
-	        String libelleQuestion;
-	        String categorie;
-	        String difficulte;
-	        String repVrai;
+	    String libelleQuestion;
+	    String categorie;
+	    String difficulte;
+	    String repVrai;
 
 	        
-	        public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai ) {
-	            super();
-	            this.libelleQuestion = libelleQuestion;
-	            this.categorie = categorie;
-	            this.difficulte = difficulte;
-	            this.repVrai = repVrai;
+	    public LigneRecapitulatif(String libelleQuestion, String categorie,  String difficulte, String repVrai ) {
+	        super();
+	        this.libelleQuestion = libelleQuestion;
+	        this.categorie = categorie;
+	        this.difficulte = difficulte;
+	        this.repVrai = repVrai;
 
-	        }
+	    }
 	        
-	        public String getLibelleQuestion() {
-	            return libelleQuestion;
-	        }
+	    public String getLibelleQuestion() {
+	        return libelleQuestion;
+	    }
 	        
-	        public String getCategorie() {
-	            return categorie;
-	        }
-	        
-	        public String getDifficulte() {
-	            return difficulte;
-	        }
-	        
-	        public String getRepVrai() {
-	            return repVrai;
-	        }
-	        
-
-	  }
-	        
+        public String getCategorie() {
+            return categorie;
+        }
+        
+        public String getDifficulte() {
+            return difficulte;
+        }
+        
+        public String getRepVrai() {
+            return repVrai;
+        }
+    }     
 }
-

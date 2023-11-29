@@ -12,8 +12,8 @@ import javafx.scene.control.Tooltip;
 import javafx.util.Callback;
 
 /** 
- * Créer une cellule pour afficher du text.
- * Quand la souris hover le text, le text est affiche dans un Tooltip
+ * Crée une cellule pour afficher du texte.
+ * Quand la souris hoover le text, le textr est affiché dans un Tooltip
  * @author François de Saint Palais
  */
 public class TextCellFactory<P> implements Callback<TableColumn<P, String>, TableCell<P, String>> {
