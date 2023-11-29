@@ -72,7 +72,7 @@ public class ControleurAide {
 			text1.setTranslateY(80);
 			
 			text2.setText("Le bouton jouer vous permettra d'accéder à tout ce "
-					+ "qui concerne la jeux,donc le paramétrage de la partie et "
+					+ "qui concerne la jeux, donc le paramétrage de la partie et "
 					+ "le jeu.\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(70);
