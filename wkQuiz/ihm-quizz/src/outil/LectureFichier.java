@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static java.util.Map.entry;
 
@@ -70,11 +71,21 @@ public class LectureFichier {
      * @return
      */
     public static HashMap<String, String> getDictionnaire(String ligne) {
+        
         HashMap<String, String> resultat = new HashMap<String, String>();
+        Pattern guillemeDebutFin = Pattern.compile("^\".*\"$");
         String[] ligneListe = ligne.split(SEPARATEUR_CSV + "");
         
         for (int i = 0; i < ligneListe.length; i++) {
             ligneListe[i] = Accent.convertirAccent(ligneListe[i]);
+            
+            //Il est possible qu'un CSV encadre ces valeur par des ". 
+            //Il faut les supprimer avant d'utiliser les valeurs
+            if (guillemeDebutFin.matcher(ligneListe[i]).matches()) {
+                //On supprime le premier et dernier  qui sont des ".
+                ligneListe[i] 
+                = ligneListe[i].substring(1, ligneListe[i].length() - 1);
+            }
         }
         
         resultat.put("categorie", ligneListe[0].trim());
