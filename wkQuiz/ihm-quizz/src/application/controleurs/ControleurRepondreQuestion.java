@@ -72,7 +72,7 @@ public class ControleurRepondreQuestion {
 	        Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
 	        afficherQuestion(questionEnCour);
 	        afficherChoixPossible(questionEnCour);	
-	        afficherQuestion(questionEnCour);	
+//	        afficherQuestion(questionEnCour);	
 	        retirerChoixVides();
 	        afficherNumeroQuestion();	
 	        couleurBoutonPrecedent();
@@ -296,24 +296,31 @@ public class ControleurRepondreQuestion {
     }
     
     /**
-     * Action lieé au bouton Passer
+     * Action lié au bouton Passer
      */
     @FXML
     private void passer() {
-        if (partie.getQuestionPossible().size()-1 == partie.getIndiceQuestion()
-                || partie.getNombreQuestion() == partie.getIndiceQuestion() + 1){
-            confirmationPasserDerniereQuestion();     
+        int actuelle = partie.getIndiceQuestion();
+        
+        boolean reponseAlertBox =  AlertBox.showConfirmationBox(
+                "Vous avez choisi aucune réponse.\n"
+                + "Par défaut la réponse sera comptée comme fausse");
+
+        if (reponseAlertBox) {
+
+            partie.setReponseDonnees(partie.getQuestionPossible()
+                    .get(actuelle), "");
+
+            partie.setIndiceQuestion(actuelle + 1);
+        }
+
+        //Si la question actuel est la dernière question du questionnaire
+        if (partie.getQuestionPossible().size()-1 == actuelle
+                || partie.getNombreQuestion() == actuelle + 1){
+            
+            confirmationPasserDerniereQuestion();
        } else {
-           boolean reponseAlertBox =  AlertBox.showConfirmationBox(
-               "Vous avez choisi aucune réponse.\n"
-               + "Par défaut la réponse sera comptée comme fausse");
-           int actuelle = partie.getIndiceQuestion();
-           if (reponseAlertBox) {
-               partie.setReponseDonnees(
-               partie.getQuestionPossible().get(actuelle), "");
-               partie.setIndiceQuestion(partie.getIndiceQuestion() + 1 );
-               Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
-           }
+           Quiz.chargerEtChangerVue("RepondreQuestion.fxml");           
        }
     }
     
