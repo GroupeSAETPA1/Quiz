@@ -32,7 +32,7 @@ public class ControleurEnvoieQuestion {
     @FXML Text txtPort;
     @FXML Text information;
     
-    @FXML TextField txtIP;
+    @FXML Text txtIP;
     
     private static Serveur serveur;
     
@@ -67,6 +67,8 @@ public class ControleurEnvoieQuestion {
                 txtPort.setText(Serveur.getPort() + "");
             } while (serveur == null);
         }
+        
+        information.setText("");
     }
     
     @FXML
@@ -85,6 +87,29 @@ public class ControleurEnvoieQuestion {
 	}
 
     @FXML
+    void connexionEtEnvoie() throws ClassNotFoundException, IOException {
+        
+        if (!serveur.clientEstConnecte()) {
+            information.setText("En attente d'un client ...");
+            AlertBox.showSuccessBox("Êtes-vous prêt à recevoir un client ?");
+            try {
+                serveur.lancerServeur();
+                AlertBox.showSuccessBox("Client connecté");
+                information.setText("Adresse IP du client : " + serveur.getIPClient());
+                envoyer();
+            } catch (ClientDejaConnecte e) {
+                AlertBox.showWarningBox("Un client est déjà connecté.");
+            } catch (SocketTimeoutException e) {
+                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de se "
+                        + "connecter");
+            }
+        } else {
+            AlertBox.showWarningBox("Un client est déjà connecté.");
+        }
+        
+        
+    }
+
     void envoyer() {
         try {
             boolean envoieReussi = serveur.envoiQuestion();
@@ -101,27 +126,6 @@ public class ControleurEnvoieQuestion {
         
     }
 
-    @FXML
-    void lancerServeur() throws ClassNotFoundException, IOException {
-        
-        if (!serveur.clientEstConnecte()) {
-            information.setText("En attente d'un client ...");
-            AlertBox.showSuccessBox("Êtes-vous prêt à recevoir un client ?");
-            try {
-                serveur.lancerServeur();
-                information.setText("Adresse IP du client : " + serveur.getIPClient());
-            } catch (ClientDejaConnecte e) {
-                AlertBox.showWarningBox("Un client est déjà connecté.");
-            } catch (SocketTimeoutException e) {
-                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de se "
-                        + "connecter");
-            }
-        } else {
-            AlertBox.showWarningBox("Un client est déjà connecté.");
-        }
-        
-    }
-    
     /**
      * Revoie l'adresse IPV4 sur un système type Linux
      * @return L'adresse IPV4 de la machine.

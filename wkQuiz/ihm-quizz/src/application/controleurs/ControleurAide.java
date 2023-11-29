@@ -252,30 +252,33 @@ public class ControleurAide {
 			
 			text3.setText("Vous devrez entrer aussi le port qui sera utilisé,"
 					+ " lui aussi trouvable sur l’ordinateur de la personne"
-					+ " qui souhaite partager ses questions.");
+					+ " qui souhaite partager ses questions.\n"
+					+ "Quand celui qui veux partager ses question est prêt "
+					+ "cliquer sur \"Connexion\", puis accepter les questions");
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
 		} else if(pagePrecedente != null 
 				&& pagePrecedente.equals("EnvoieQuestion.fxml")) {
 			
-			text1.setText("Sur cette page vous allez pouvoir partager vos"
-					+ " informations afin d’envoyer des questions\n");
+			text1.setText(  "Sur cette page vous allez pouvoir partager "
+			              + "vos questions");
 			text1.setStyle("-fx-font-size: 20px");
 			text1.setTranslateY(80);
 			
-			text2.setText("Vous avez en premier votre port d’affiché\n");
+			text2.setText("En premier vous avez le port utilisé.\n");
 			text2.setStyle("-fx-font-size: 20px");
 			text2.setTranslateY(80);
 			
-			text3.setText("Ensuite votre adresse IP\n");
+			text3.setText("Ensuite vous avez votre adresse IP.\n");
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(80);
 			
-			text4.setText("Pour lancer un serveur, il faut d'abord " 
-					+ "lancer le serveur avec le bouton droit, puis une fois"
-					+ " qu'un client est connecté, cliquez sur le bouton " 
-					+ "envoyer à gauche pour envoyer les questions\n");
+			text4.setText("Pour envoyer les questions a n'importe qui, cliquer "
+			              + "sur l'unique bouton : \"Se connecter et envoyer\""
+			              + "\nUne popup devrait vous demander si vous êtes "
+			              + "prêt. Si le client est prêt cliquer valider.\n"
+			              + "Après cela les questions seront envoyé au client");
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(80);
 			
