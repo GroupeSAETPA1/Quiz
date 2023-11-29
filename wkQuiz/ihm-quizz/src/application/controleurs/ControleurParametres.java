@@ -62,7 +62,6 @@ public class ControleurParametres {
     @FXML
 	private void aider() {
     	modele.setPagePrecedente("ParametrePartie.fxml");
-    	System.out.println(";jtdj,d");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
     

@@ -113,7 +113,6 @@ public class ControleurSelectionQuestion {
         }
         
         public void ajouterALaSelection() {
-            System.out.println(this + " selectionner");
             modele.ajouterALaSelectionDEnvoie(question);
         }
 
@@ -121,7 +120,6 @@ public class ControleurSelectionQuestion {
          * Retire de la sélection d'envoi la question décochée
          */
         public void retirerALaSelection() {
-            System.out.println(this + " deselectionner");
             modele.supprimerALaSelectionDEnvoie(question);
         }
 

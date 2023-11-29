@@ -45,7 +45,6 @@ public class ControleurEnvoieQuestion {
         
         String adresseIP;
         
-        //TODO regex
         if (nomOS.contains("Windows")) {
             adresseIP = getIPFromWindows();
         } else if (nomOS.contains("Linux") || nomOS.contains("Mac OS X")) {
@@ -54,12 +53,10 @@ public class ControleurEnvoieQuestion {
             adresseIP = "OS non reconnu";
         }
         
-        System.out.print("Mon adresse IP est: " + adresseIP);
         
         txtIP.setText(adresseIP);
         txtPort.setText(Serveur.getPort() + "");
         
-        System.out.println(serveur);
         if (serveur == null) {
             do {
                 try {
@@ -70,13 +67,11 @@ public class ControleurEnvoieQuestion {
                 txtPort.setText(Serveur.getPort() + "");
             } while (serveur == null);
         }
-        System.out.println(serveur);
     }
     
     @FXML
     void retour() {
     	Quiz.changerVue("ChoixEnvoie.fxml");
-        System.out.println("Retour");
     }
     
     /**
@@ -86,13 +81,11 @@ public class ControleurEnvoieQuestion {
 	@FXML
 	private void aider() {
 		model.setPagePrecedente("EnvoieQuestion.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 
     @FXML
     void envoyer() {
-        System.out.println(serveur.getIPClient());
         try {
             boolean envoieReussi = serveur.envoiQuestion();
              if (!envoieReussi) {
@@ -150,8 +143,6 @@ public class ControleurEnvoieQuestion {
                         InetAddress addr = addresses.nextElement();
                         // Filtrer les adresses IPv6
                         if (!addr.getHostAddress().contains(":")) {
-                            System.out.println("Interface: " + iface.getDisplayName());
-                            System.out.println("Adresse IPv4: " + addr.getHostAddress());
                             resultat = addr.getHostAddress();
                         }
                     }

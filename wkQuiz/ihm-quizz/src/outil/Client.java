@@ -18,13 +18,13 @@ import application.modele.Chiffrage;
 import application.vue.AlertBox;
 
 /** 
- * 
+ * Méthode pour le client
  * @author Tom Douaud
  * @author Francois de Saint Palais
  */
 public class Client {
     
-	/** TODO comment field role (attribute, associative role) */
+	/** Message de confirmation du client */
     public static final String CLIENT_PRET_MESSAGE = "OUI JE SUIS PRET";
 
     // Le socket 
@@ -66,7 +66,7 @@ public class Client {
     }
     
     /**
-     * TODO comment method role
+     * Méthode pour recevoir les données du serveur
      * @throws UnknownHostException
      * @throws IOException
      * @throws ClassNotFoundException
@@ -78,47 +78,43 @@ public class Client {
         
         ArrayList<Object> elementsRecu = null;
 
-        //On attend la demande du serveur pour savoir si on est prêt
+        // On attend la demande du serveur pour savoir si on est prêt
         String questionRecevoir = (String) ois.readObject();
         System.out.println(questionRecevoir);
         
         if (AlertBox.showConfirmationBox("Recevoir les questions ?")) {
-            //On indique on serveur que le client est prêt
+            // On indique on serveur que le client est prêt
             oos.writeObject(CLIENT_PRET_MESSAGE);
             
             int b =  Chiffrage.genererPuissance();
             int gab;
             
-            //On récupère g^a envoyé par le serveur
+            // On récupère g^a envoyé par le serveur
             int ga = (int) ois.readObject();
             gab = Chiffrage.exposantModulo(ga, b, Chiffrage.P);
             Chiffrage.setGab(gab);
             
             int gb = Chiffrage.exposantModulo(Chiffrage.G, b, Chiffrage.P);
-            //On envoie g^b au serveur
+            // On envoie g^b au serveur
             oos.writeObject(gb);
             
             
             String cleVigenereCrypte = (String) ois.readObject();
-            
-            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
-            
-            //Décrypter clé vigenère reçue
+                        
+            // Décrypter clé vigenère reçue
             String cleVigenere = Chiffrage.dechiffrement(cleVigenereCrypte, 
                     Chiffrage.cleDepuisDiffie());
-            System.out.println(cleVigenere);
             
             Client.cleVigenere = cleVigenere;
             
             
-            //Récupération du nombre de question
+            // Récupération du nombre de question
             int nbQuestion = (int) ois.readObject();
             elementsRecu = new ArrayList<Object>(nbQuestion);
             
             for (int i = 0; i < nbQuestion; i++) {
                 Object eltRecu = ois.readObject();
                 elementsRecu.add(eltRecu);
-                System.out.println("Element reçu : " + eltRecu);
             }
         } else {
             oos.writeObject("Non");
@@ -126,14 +122,12 @@ public class Client {
 
         String messageFin = (String) ois.readObject();
         oos.writeObject(Serveur.MESSAGE_FIN_COMMUNICATION);
-        System.out.println(messageFin);
         
         // Fermeture des chemins de communication
         ois.close();
         oos.close();
         
         socket.close();//Fin de communication
-        System.out.println("Fin. La socket est fermé");
         
         return elementsRecu;
     }

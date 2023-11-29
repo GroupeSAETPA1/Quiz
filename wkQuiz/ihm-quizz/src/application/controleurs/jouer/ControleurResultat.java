@@ -103,7 +103,7 @@ public class ControleurResultat {
 				        + "encore un peu " + pseudo);
 				
 			} else if(pourcentage >= 50 && pourcentage < 75) {
-				messagePrivee.setText("Il y à du niveau mais c'est "
+				messagePrivee.setText("Il y a du niveau mais c'est "
 				        + "pas encore parfait " + pseudo);
 				
 			} else if(pourcentage >= 75 && pourcentage < 100) {

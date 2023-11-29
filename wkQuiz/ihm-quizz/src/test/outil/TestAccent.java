@@ -18,7 +18,7 @@ import java.util.HashMap;
  */
 class TestAccent {
 
-    /** TODO comment field role (attribute, associative role) */
+    /** Un caractère inconnu */
     private static final char CARACTERE_INCONNU = '\u0182';
 
     @Test
@@ -56,5 +56,4 @@ class TestAccent {
         assertEquals(attendu, convertirAccent(donnee));
                 
     }
-
 }

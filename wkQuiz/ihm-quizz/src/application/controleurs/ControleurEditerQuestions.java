@@ -29,9 +29,7 @@ public class ControleurEditerQuestions {
 	
 	@FXML
 	private TableView<LigneQuestion> table;
-	
-	private boolean filtre = false;
-	
+		
 	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	/**

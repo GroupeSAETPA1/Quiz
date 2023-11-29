@@ -14,7 +14,6 @@ public class ControleurModeEnLigne {
 	@FXML
     void retour() {
     	Quiz.changerVue("Accueil.fxml");
-        System.out.println("Retour");
     }
 	
 	@FXML

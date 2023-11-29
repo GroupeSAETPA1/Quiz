@@ -111,7 +111,6 @@ public class ControleurSelectionCategorie {
         }
 
         public void ajouterALaSelection() {
-            System.out.println(this + " selectionnée");
             modele.ajouterALaSelectionDEnvoie(categorie);
         }
 
@@ -119,7 +118,6 @@ public class ControleurSelectionCategorie {
          * Retire à la sélection la catégorie
          */
         public void retirerALaSelection() {
-            System.out.println(this + " deselectionnée");
             modele.supprimerALaSelectionDEnvoie(categorie);
         }
 

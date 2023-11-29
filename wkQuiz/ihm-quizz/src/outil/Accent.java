@@ -85,7 +85,5 @@ public class Accent {
                     ACCENT_TO_NORMAL.get(caratereARemplacer) : '?';
         }
         return reponse;
-        
     }
-
 }

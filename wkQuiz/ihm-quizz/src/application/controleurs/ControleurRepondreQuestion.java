@@ -196,7 +196,6 @@ public class ControleurRepondreQuestion {
     @FXML
 	public void aider() {
     	modele.setPagePrecedente("RepondreQuestion.fxml");
-    	System.out.println(";jtdj,d");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 

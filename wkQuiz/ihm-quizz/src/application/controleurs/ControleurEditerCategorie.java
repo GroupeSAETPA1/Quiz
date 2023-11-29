@@ -58,7 +58,6 @@ public class ControleurEditerCategorie {
 	@FXML
 	private void valider() throws InvalidNameException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
-		Categorie aModifier = modele.getCategorieAModifier();
 				
 		if (modele.categorieExiste(input.getText()) 
 			|| modele.getCategorieAModifier().getNom().equals(input.getText())) {

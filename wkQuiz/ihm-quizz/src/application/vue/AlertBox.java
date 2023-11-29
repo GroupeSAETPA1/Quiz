@@ -1,3 +1,8 @@
+/*
+ * AlertBox.java                                    26 oct. 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
+ */
+
 package application.vue;
 
 import java.util.Optional;
@@ -15,7 +20,7 @@ public abstract class AlertBox {
     
 
 	/**
-	 * alert box de confirmation 
+	 * Alert box de confirmation 
 	 * @param message
 	 * @return
 	 */
@@ -35,7 +40,7 @@ public abstract class AlertBox {
     }
     
     /**
-     * alert box pour afficher le succés d'une opération
+     * Alert box pour afficher le succès d'une opération
      * @param message
      */
     public static void showSuccessBox(String message) {
@@ -48,7 +53,7 @@ public abstract class AlertBox {
     }
 
     /**
-     * alert box pour afficher une erreur
+     * Alert box pour afficher une erreur
      * @param message
      */
     public static void showErrorBox(String message) {
@@ -62,7 +67,7 @@ public abstract class AlertBox {
     }
 
     /**
-     * alert box pour afficher une erreur
+     * Alert box pour afficher un message d'avertissement
      * @param message
      */
     public static void showWarningBox(String message) {
@@ -73,8 +78,4 @@ public abstract class AlertBox {
         
         alert.showAndWait();
     }
-    
-    
-    
-    
 }

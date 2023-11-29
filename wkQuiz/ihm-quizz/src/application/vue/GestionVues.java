@@ -36,10 +36,8 @@ public class GestionVues {
             
         } catch (IOException e) {
             System.err.println("Chargement impossible de : " + vue);
-            e.printStackTrace(); //TODO Enlever
         } catch (NullPointerException e) {
             System.err.println("Page introuvale : " + vue);
-            e.printStackTrace();
         }
     }
 
@@ -49,7 +47,7 @@ public class GestionVues {
     }
 
     /** 
-     * TODO comment method role
+     * Initialise les scenes
      */
     public static void initialiserScene() {
         scenes = new HashMap<String, Scene>();
@@ -60,7 +58,6 @@ public class GestionVues {
      * @param fenetre (String) le nom de la fenêtre a charger en .fxml
      */
     public static void changerVue(String fenetre) {
-        System.out.println(fenetre);
         Quiz.fenetrePrincipale.setTitle("Quizéo - " + fenetre.split(".fxml")[0]);
         Quiz.fenetrePrincipale.setScene(GestionVues.getScene(fenetre));
         

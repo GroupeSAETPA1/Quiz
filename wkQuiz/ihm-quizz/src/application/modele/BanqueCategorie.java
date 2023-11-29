@@ -68,7 +68,7 @@ public class BanqueCategorie implements Serializable {
     public Categorie getCategorie(int id) {
     	if (id < 0 || categories.size() <= id) {
             throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
-                    + "hors de la liste de taile %s", id, categories.size()));
+                    + "hors de la liste de taille %s", id, categories.size()));
         }
     	
         return categories.get(id);

@@ -20,8 +20,8 @@ import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 
 /** 
- * TODO comment class responsibility (SRP)
- * @author Lenovo
+ * Méthode de test pour le chiffrement
+ * @author Lucas Descriaud
  */
 class TestChiffrage {
 
@@ -83,7 +83,6 @@ class TestChiffrage {
         String cle = Chiffrage.generationCle();
         ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(modele.getBanqueQuestion().getQuestions() , cle);
         System.out.println(cle);
-        //System.out.println();
         Chiffrage.decrypterFichier(questionCrypter.get(0) , cle);
         System.out.println("finis");
     }

@@ -102,7 +102,7 @@ public class ControleurImport {
      */
     private static void creerEtGererQuestionCategorie(
             ArrayList<HashMap<String, String>> lignes) {
-        //TODO utiliser la fonction présente dans LectureFichier
+        // TODO utiliser la fonction présente dans LectureFichier
         int indiceLigne = 0;
         boolean erreurCreationCategorie = false;
 

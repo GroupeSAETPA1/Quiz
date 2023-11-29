@@ -31,7 +31,7 @@ import application.modele.Question;
 
 class TestQuestion {
 
-	/** TODO comment field role (attribute, associative role) */
+	/** Un texte qui est trop long pour un feedback*/
     private static final String TROP_LONG_TEXT = "Lorem ipsum dolor sit amet, "
             + "consectetuer adipiscing elit. Aenean commodo ligula eget dolor. "
             + "Aenean massa. Cum sociis natoque penatibus et magnis dis parturi"

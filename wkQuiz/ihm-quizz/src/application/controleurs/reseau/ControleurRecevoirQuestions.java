@@ -47,24 +47,20 @@ public class ControleurRecevoirQuestions {
 	@FXML
 	private void aider() {
 		modele.setPagePrecedente("RecevoirQuestions.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
     void retour() {
     	Quiz.changerVue("ModeEnLigne.fxml");
-        System.out.println("Retour");
     }
     
     @FXML
     void connexion() throws ClassNotFoundException {
-        System.out.println("Connexion");
         boolean clientCreer = false;
         try {
             client = new Client(ipServeur.getText(), Integer.parseInt(portServeur.getText()));
             clientCreer = true;
-            System.out.println("Client crée");
         } catch (NumberFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         }
@@ -76,19 +72,16 @@ public class ControleurRecevoirQuestions {
                 ArrayList<String> questionClair;
                 
                 client.seConnecter();
-                System.out.println("On est connecter");
                 elementRecu = client.recevoirDonnees();
                 questionClair = new ArrayList<String>(elementRecu.size());
                 
                 if (elementRecu != null) {
-                    //TODO décrypter
                     for (Object questionCrypte : elementRecu) {
                         questionClair.add(
                                 Chiffrage.decrypterFichier((String) questionCrypte, 
                                         Client.getCleVigenere()));
                     }
                     
-                    //TODO Ajouter à la banque
                     int nbErreur = 0;
                     int nbDejaPresent = 0;
                     for (String ligne : questionClair) {
