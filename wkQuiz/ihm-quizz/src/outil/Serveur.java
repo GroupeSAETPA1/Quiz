@@ -13,8 +13,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import application.exception.ClientDejaConnecter;
-import application.exception.ClientPasConnecterException;
+import application.exception.ClientDejaConnecte;
+import application.exception.ClientPasConnecteException;
 import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
@@ -52,11 +52,11 @@ public class Serveur {
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException, 
-    ClientDejaConnecter, SocketTimeoutException {
+    ClientDejaConnecte, SocketTimeoutException {
         
         // Attente d'une connexion d'un client
         if (socket != null && !socket.isClosed()) {
-            throw new ClientDejaConnecter("Un client est déjà connecté");
+            throw new ClientDejaConnecte("Un client est déjà connecté");
         }
         System.out.println("Attente client...");
         //Ajout d'un TimeOut
@@ -73,13 +73,13 @@ public class Serveur {
      * @return true si le client a reçu les questions
      * @throws IOException
      * @throws ClassNotFoundException
-     * @throws ClientPasConnecterException
+     * @throws ClientPasConnecteException
      */
 	public boolean envoiQuestion() throws IOException, ClassNotFoundException, 
-	ClientPasConnecterException {
+	ClientPasConnecteException {
 	    
 	    if (socket == null || socket.isClosed()) {
-            throw new ClientPasConnecterException("Le serveur n'est connecté à "
+            throw new ClientPasConnecteException("Le serveur n'est connecté à "
                     + "personne");
         }
 	    ModelePrincipal modele = ModelePrincipal.getInstance();

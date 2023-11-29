@@ -14,8 +14,8 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 import application.Quiz;
-import application.exception.ClientDejaConnecter;
-import application.exception.ClientPasConnecterException;
+import application.exception.ClientDejaConnecte;
+import application.exception.ClientPasConnecteException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -99,7 +99,7 @@ public class ControleurEnvoieQuestion {
                  AlertBox.showWarningBox("Le client à refusé les questions");
              }
              information.setText("Pas de client connecté");
-        } catch (ClientPasConnecterException e) {
+        } catch (ClientPasConnecteException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
             AlertBox.showErrorBox(e.getMessage());
@@ -117,7 +117,7 @@ public class ControleurEnvoieQuestion {
             try {
                 serveur.lancerServeur();
                 information.setText("Adresse IP du client : " + serveur.getIPClient());
-            } catch (ClientDejaConnecter e) {
+            } catch (ClientDejaConnecte e) {
                 AlertBox.showWarningBox("Un client est déjà connecté.");
             } catch (SocketTimeoutException e) {
                 AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de se "
