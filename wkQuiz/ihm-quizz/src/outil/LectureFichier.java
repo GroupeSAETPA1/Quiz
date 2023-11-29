@@ -72,6 +72,11 @@ public class LectureFichier {
     public static HashMap<String, String> getDictionnaire(String ligne) {
         HashMap<String, String> resultat = new HashMap<String, String>();
         String[] ligneListe = ligne.split(SEPARATEUR_CSV + "");
+        
+        for (int i = 0; i < ligneListe.length; i++) {
+            ligneListe[i] = Accent.convertirAccent(ligneListe[i]);
+        }
+        
         resultat.put("categorie", ligneListe[0].trim());
         resultat.put("difficulte", ligneListe[1]);
         resultat.put("libelle", ligneListe[2]);
@@ -102,6 +107,7 @@ public class LectureFichier {
         } catch (IndexOutOfBoundsException e) {
             resultat.put("feedback", "");
         }
+        System.out.println(resultat);
         return resultat;
     }
 
@@ -113,8 +119,6 @@ public class LectureFichier {
      */
     public static Question creerQuestionFromLigneCSV(HashMap<String, String> ligneHashMap)
             throws CreerQuestionException, InvalidNameException {
-        
-        ligneHashMap = Accent.convertirAccent(ligneHashMap);
         
         boolean erreurCreationCategorie;
 

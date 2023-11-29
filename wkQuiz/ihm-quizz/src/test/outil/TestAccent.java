@@ -27,6 +27,9 @@ class TestAccent {
         assertEquals(' ', convertirAccent(' '));
         assertEquals('?', convertirAccent('?'));
         assertEquals('?', convertirAccent(CARACTERE_INCONNU));
+        assertEquals('?', convertirAccent('�'));
+        assertEquals('=', convertirAccent('='));
+        
         
         
         assertEquals("ete", convertirAccent("été"));
