@@ -23,8 +23,8 @@ import outil.LectureFichier;
 
 
 /**
- * Controlleur de Import Gère le fichier CSV et créer les nouvelles questions et
- * catégorie présente dans le fichier
+ * Controleur de l'import. Gère le fichier CSV et crée les nouvelles questions et
+ * catégories présentes dans le fichier
  * 
  * @author François de Saint Palais
  */
@@ -42,16 +42,16 @@ public class ControleurImport {
 
         FileChooser fichier = new FileChooser();
 
-        //Ajout d'un filtre sur l'extensions des fichier sélectionnable
+        // Ajout d'un filtre sur l'extension des fichier sélectionnables
         fichier.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("CSV", "*.csv"));
-        //Le titre de la fenêtre pour sélectionner le fichier
+        // e titre de la fenêtre pour sélectionner le fichier
         fichier.setTitle("Selectionner le fichier contenant les nouvelles "
                 + "questions");
-        //On sélectionne le chemin de départ de la fenêtre
+        // On sélectionne le chemin de départ de la fenêtre
         fichier.setInitialDirectory(new File(System.getProperty("user.home")));
 
-        //Ouvre une fenêtre pour sélectionner un fichier
+        // Ouvre une fenêtre pour sélectionner un fichier
         fichierCSVChoisie = fichier.showOpenDialog(null);
 
         if (fichierCSVChoisie != null) {
@@ -79,7 +79,7 @@ public class ControleurImport {
         File fichier = new File(cheminFichierCSV);
 
         if (cheminFichierCSV.isBlank()) {
-        	AlertBox.showWarningBox("Aucun fichier selectionner");
+        	AlertBox.showWarningBox("Aucun fichier selectionné");
         } else if (!fichier.exists()) {
         	AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
         } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") + 1).equals("csv")) {
@@ -96,7 +96,7 @@ public class ControleurImport {
 
     /**
      * Créer une question (et sa catégorie correspondante si nécessaire) 
-     * Et gère les exceptions lié à la création.
+     * et gère les exceptions liés à la création.
      * 
      * @param lignes Une liste de HashMap où chaque ligne est une ligne du CSV
      */
@@ -108,7 +108,7 @@ public class ControleurImport {
 
         HashMap<Integer , String> erreurImportLigne = new HashMap<>();
         
-        //Parcours des lignes du CSV
+        // Parcours des lignes du CSV
         for (HashMap<String, String> ligneHashMap : lignes) {
 
             try {
@@ -117,8 +117,8 @@ public class ControleurImport {
                 = !creerCategorieSiAbsent(ligneHashMap.get("categorie"));
                 
             } catch (InvalidNameException e) {
-                //Si on n'arrive pas à créer une nouvelle catégorie 
-                //car le nom est invalide, on passe à la question suivante
+                // Si on n'arrive pas à créer une nouvelle catégorie 
+                // car le nom est invalide, on passe à la question suivante
                 erreurImportLigne.put(indiceLigne , e.getMessage());
                 erreurCreationCategorie = true;
             }
@@ -164,23 +164,22 @@ public class ControleurImport {
         }
         afficherConfirmation(erreurImportLigne);
         
-        //On met à jour les pages d'Édition
+        // On met à jour les pages d'Édition
         Quiz.charger("EditerQuestions.fxml");
         Quiz.charger("EditerCategories.fxml");
     }
 
     /**
      * Vérifie si une catégorie est présente dans le modèle et si elle n'est pas
-     * présente, elle est créer.
+     * présente, elle est crée.
      * 
      * @param nomCategorie
-     * @return
+     * @return True si la catégorie existe ou si la création est fructueuse
      * @throws InvalidNameException
      */
     private static boolean creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
-        //True si la catégorie existe ou si la création est fructueuse
         boolean creationOK = true;
-        // Si la catégorie n'existe pas on la créer
+        // Si la catégorie n'existe pas on la crée
         if (!modele.categorieExiste(nomCategorie)) {
             try {
                 creationOK = modele.creerCategorie(nomCategorie);
@@ -197,7 +196,7 @@ public class ControleurImport {
     /** 
      * Affiche la fenêtre de retour utilisateur correspondante.
      * Si la hashMap est vide une simple fenêtre de succès sinon
-     * une fenêtre d'erreur avec la ligne et l'erreur généré 
+     * une fenêtre d'erreur avec la ligne et l'erreur générée 
      * @param erreurImportLigne HashMap associant la ligne et 
      *        l'erreur correspondante
      */
@@ -212,9 +211,9 @@ public class ControleurImport {
             
             StringBuilder messageErreur = new StringBuilder() ;
             
-            //Pour les utilisateur de l'application, une liste commence à 1
+            // Pour les utilisateur de l'application, une liste commence à 1
             erreurImportLigne.forEach((key , value) -> {
-                messageErreur.append("Erreur d'import a la ligne n°" + (key + 1)
+                messageErreur.append("Erreur d'import à la ligne n°" + (key + 1)
                                      + " : " + value +"\n");
             });
             
