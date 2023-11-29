@@ -1,14 +1,14 @@
 /*
- * testChiffrage.java                                    21 nov. 2023
+ * TestChiffrage.java                                    21 nov. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
 package test.modele;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.lang.ref.Cleaner.Cleanable;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -16,16 +16,14 @@ import org.junit.jupiter.api.Test;
 import application.exception.CreerQuestionException;
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
-import application.modele.Categorie;
 import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
-import application.modele.Question;
 
 /** 
  * TODO comment class responsibility (SRP)
  * @author Lenovo
  */
-class testChiffrage {
+class TestChiffrage {
 
     /**
      * Test method for {@link application.modele.Chiffrage#generationCle()}.
@@ -81,39 +79,9 @@ class testChiffrage {
      */
     @Test
     void testGenererCSV() throws HomonymeException, InvalidNameException, IOException, CreerQuestionException {
-//        {   // TODO c'est temporaire, c'est pour tester
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
-//            ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-//            
-//            ArrayList<String> rep = new ArrayList<>();
-//            rep.add("coubeh");
-//            rep.add("je vais me prendre a cause des tableView");
-//            
-//           
-//            
-//            String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
-//            String char350 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.";
-//            ArrayList<String> rep250 = new ArrayList<>();
-//            rep250.add(char250 + "1");
-//            rep250.add(char250 + "2");
-//            rep250.add(char250 + "3");
-//            rep250.add(char250 + "4");
-//            
-//            ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 1, "feur", rep, ""));
-//            ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 2, "quette", rep, ""));
-//            ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
-//        }
-        //System.out.println(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions());
+        ModelePrincipal modele = ModelePrincipal.getInstance();
         String cle = Chiffrage.generationCle();
-        ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(ModelePrincipal.getInstance().getBanqueQuestion().getQuestions() , cle);
+        ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(modele.getBanqueQuestion().getQuestions() , cle);
         System.out.println(cle);
         //System.out.println();
         Chiffrage.decrypterFichier(questionCrypter.get(0) , cle);
@@ -147,7 +115,8 @@ class testChiffrage {
         } 
     }
     
-    @Test
+    /** Ce test est désactivé car il est basé sur l'aléatoire. */
+    //@Test
     void testCleDepuisDiffe() {
        //Ce test fail car g^ab est aléatoire
        //TEST pour gab = 2899 (pris aleatoirement)

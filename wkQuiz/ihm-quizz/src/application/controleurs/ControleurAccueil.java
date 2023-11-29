@@ -1,3 +1,8 @@
+/*
+ * ControleurAccueil.java 				                     octobre 2023
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs;
 
 
@@ -13,7 +18,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * Controlleur de la page d'accueil.
+ * Controleur de la page d'accueil.
  * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Néo BECOGNE
@@ -26,7 +31,7 @@ import javafx.scene.text.TextAlignment;
 
 public class ControleurAccueil {
 	
-	private ModelePrincipal model = ModelePrincipal.getInstance();
+	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	@FXML
 	private Text labelPseudo;
@@ -102,7 +107,7 @@ public class ControleurAccueil {
 	 */
 	@FXML
 	private void aider() {
-		model.setPagePrecedente("Accueil.fxml");
+		modele.setPagePrecedente("Accueil.fxml");
 		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}

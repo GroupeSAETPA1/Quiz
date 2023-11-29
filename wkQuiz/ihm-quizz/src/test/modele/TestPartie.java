@@ -7,6 +7,7 @@ package test.modele;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,17 +105,17 @@ class TestPartie {
     	// On récupère le modèle principal et on crée 
     	// une nouvelle catégorie dans ce modèle
     	ModelePrincipal modele = ModelePrincipal.getInstance();
-    	modele.creerCategorie("Nouvelle catégorie partie");
+    	modele.creerCategorie("Nouvelle categorie partie");
     	
     	// On définit la catégorie de la partie par la catégorie créée 
     	// juste avant et on vérifie que la catégorie séléctionée pour 
     	// la partie est bien celle qu'on à créé dans le modèle
-    	modele.getPartie().setCategoriePartie("Nouvelle catégorie partie");
-    	assertEquals(modele.getCategoriesLibelleExact("Nouvelle catégorie partie"),
+    	modele.getPartie().setCategoriePartie("Nouvelle categorie partie");
+    	assertEquals(modele.getCategoriesLibelleExact("Nouvelle categorie partie"),
     				 modele.getPartie().getCategoriePartie());
     	
     	// On supprime cette catégorie une fois le test fini pour ne pas interférer les autres test
-    	modele.getCategories().remove(modele.getCategoriesLibelleExact("Nouvelle catégorie partie"));
+    	modele.getCategories().remove(modele.getCategoriesLibelleExact("Nouvelle categorie partie"));
     }
 
     /**
@@ -133,13 +134,13 @@ class TestPartie {
     	// On crée 3 questions
     	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
     	ArrayList<Question> questions = new ArrayList<Question>();
-    	mauvaisesReponse.add("Mauvaise Réponse");
+    	mauvaisesReponse.add("Mauvaise Reponse");
     	questions.add(new Question("Question1", new Categorie("Categorie1"), 
-    							    1, "Réponse 1", mauvaisesReponse, ""));
+    							    1, "Reponse 1", mauvaisesReponse, ""));
     	questions.add(new Question("Question2", new Categorie("Categorie1"), 
-    								1, "Réponse 2", mauvaisesReponse, ""));
+    								1, "Reponse 2", mauvaisesReponse, ""));
     	questions.add(new Question("Question3", new Categorie("Categorie1"), 
-    								1, "Réponse 3", mauvaisesReponse, ""));
+    								1, "Reponse 3", mauvaisesReponse, ""));
     	
     	// On mets ces 3 questions dans la liste des questions possibles 
     	// et on vérifie que la liste des questions possibles 
@@ -162,17 +163,17 @@ class TestPartie {
     	
     	// On ajoute une question
     	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
-    	mauvaisesReponse.add("Mauvaise Réponse");
+    	mauvaisesReponse.add("Mauvaise Reponse");
     	Question question = new Question("Question1", new Categorie("Categorie1"), 
-    							          1, "Réponse 1", mauvaisesReponse, "");
+    							          1, "Reponse 1", mauvaisesReponse, "");
     	
     	// On définit la réponse de l'utilisateur a la question "question" 
     	// la réponse "Réponse Utilisateur"
-    	partie.setReponseDonnees(question, "Réponse Utilisateur");
+    	partie.setReponseDonnees(question, "Reponse Utilisateur");
     	
     	// On vérifie que la méthode renvoie bien la question et la réponse attendue
     	HashMap<Question, String> hashmapAttendue = new HashMap<Question, String>();
-    	hashmapAttendue.put(question, "Réponse Utilisateur");
+    	hashmapAttendue.put(question, "Reponse Utilisateur");
     	assertEquals(hashmapAttendue, partie.getReponseDonnees());
     }
 
@@ -190,9 +191,9 @@ class TestPartie {
     	
     	// On ajoute une question
     	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
-    	mauvaisesReponse.add("Mauvaise Réponse");
+    	mauvaisesReponse.add("Mauvaise Reponse");
     	Question question = new Question("Question1", new Categorie("Categorie1"), 
-    							          1, "Réponse 1", mauvaisesReponse, "");
+    							          1, "Reponse 1", mauvaisesReponse, "");
     	
         // On vérifie que quand on set la question actuelle 
         // avec la question créé auparavant	
@@ -233,18 +234,18 @@ class TestPartie {
     	// On crée 3 questions
     	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
     	ArrayList<Question> questions = new ArrayList<Question>();
-    	mauvaisesReponse.add("Mauvaise Réponse");
+    	mauvaisesReponse.add("Mauvaise eponse");
     	questions.add(new Question("Question1", new Categorie("Categorie1"), 
-    							    1, "Réponse 1", mauvaisesReponse, ""));
+    							    1, "Reponse 1", mauvaisesReponse, ""));
     	questions.add(new Question("Question2", new Categorie("Categorie1"), 
-    								1, "Réponse 2", mauvaisesReponse, ""));
+    								1, "Reponse 2", mauvaisesReponse, ""));
     	questions.add(new Question("Question3", new Categorie("Categorie1"), 
-    								1, "Réponse 3", mauvaisesReponse, ""));
+    								1, "Reponse 3", mauvaisesReponse, ""));
     	
     	// On réponds juste à la première et à la dernière question
-    	partie.setReponseDonnees(questions.get(0), "Réponse 1");
-    	partie.setReponseDonnees(questions.get(1), "Réponse fausse");
-    	partie.setReponseDonnees(questions.get(2), "Réponse 3");
+    	partie.setReponseDonnees(questions.get(0), "Reponse 1");
+    	partie.setReponseDonnees(questions.get(1), "Reponse fausse");
+    	partie.setReponseDonnees(questions.get(2), "Reponse 3");
     	
     	// On vérifie que notre score est de 2
     	assertEquals(2, partie.getNbBonneReponse());
@@ -264,8 +265,8 @@ class TestPartie {
     	// le pseudo est bien modifié
     	partie.setPseudo("Nouveau Pseudo");
     	assertEquals("Nouveau Pseudo", partie.getPseudo());
-    	partie.setPseudo("Deuxième Nouveau Pseudo");
-    	assertEquals("Deuxième Nouveau Pseudo", partie.getPseudo());
+    	partie.setPseudo("Deuxieme Nouveau Pseudo");
+    	assertEquals("Deuxieme Nouveau Pseudo", partie.getPseudo());
     }
 
     /**
@@ -285,25 +286,25 @@ class TestPartie {
     	// On crée 3 questions
     	ArrayList<String> mauvaisesReponse = new ArrayList<String>();
     	ArrayList<Question> questions = new ArrayList<Question>();
-    	mauvaisesReponse.add("Mauvaise Réponse");
+    	mauvaisesReponse.add("Mauvaise Reponse");
     	questions.add(new Question("Question1", new Categorie("Categorie1"), 
-    							    1, "Réponse 1", mauvaisesReponse, ""));
+    							    1, "Reponse 1", mauvaisesReponse, ""));
     	questions.add(new Question("Question2", new Categorie("Categorie1"), 
-    								1, "Réponse 2", mauvaisesReponse, ""));
+    								1, "Reponse 2", mauvaisesReponse, ""));
     	questions.add(new Question("Question3", new Categorie("Categorie1"), 
-    								1, "Réponse 3", mauvaisesReponse, ""));
+    								1, "Reponse 3", mauvaisesReponse, ""));
     	partie.setQuestionPossible(questions);
     	partie.setNombreQuestion(3);
     	
     	// On réponds bon à 2 questions sur 3, donc 66% de bonnes réponses
-    	partie.setReponseDonnees(questions.get(0), "Réponse 1");
-    	partie.setReponseDonnees(questions.get(1), "Mauvaise Réponse");
-    	partie.setReponseDonnees(questions.get(2), "Réponse 3");
+    	partie.setReponseDonnees(questions.get(0), "Reponse 1");
+    	partie.setReponseDonnees(questions.get(1), "Mauvaise Reponse");
+    	partie.setReponseDonnees(questions.get(2), "Reponse 3");
     	assertEquals(66.66666666666666, partie.pourcentageBonneRep());
     	
     	// On réponds bon à 3 questions sur 3, donc 100% de bonnes réponses
     	partie.setIndiceQuestion(3);
-    	partie.setReponseDonnees(questions.get(1), "Réponse 2");
+    	partie.setReponseDonnees(questions.get(1), "Reponse 2");
     	assertEquals(100, partie.pourcentageBonneRep());
     }
 }

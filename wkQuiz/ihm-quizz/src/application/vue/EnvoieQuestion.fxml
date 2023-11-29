@@ -15,33 +15,33 @@
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
-            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label layoutY="90.0" text="Retour" textFill="WHITE">
+            <Label layoutX="-1.0" layoutY="81.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Group layoutX="860.0" layoutY="20.0" onMouseClicked="#aider">
+      <Group layoutX="870.0" layoutY="20.0" onMouseClicked="#aider">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeAide.png" />
                </image>
             </ImageView>
-            <Label layoutX="15.0" layoutY="90.0" text="Aide" textFill="WHITE">
+            <Label layoutX="15.0" layoutY="80.0" text="Aide" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Label layoutX="300.0" layoutY="60.0" text="Envoie des Questions " textFill="WHITE">
+      <Label layoutX="300.0" layoutY="80.0" text="Envoie des Questions " textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
@@ -51,7 +51,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Text fx:id="txtPort" fill="WHITE" layoutX="469.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtPort" fill="WHITE" layoutX="469.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
             <Font size="32.0" />
          </font>
@@ -61,7 +61,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="147.0" layoutY="470.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="86.0" prefWidth="268.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Envoyer" textFill="WHITE">
+      <Button layoutX="176.0" layoutY="470.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="86.0" prefWidth="268.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Envoyer" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
@@ -71,7 +71,7 @@
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="529.0" layoutY="470.0" mnemonicParsing="false" onAction="#lancerServeur" prefHeight="86.0" prefWidth="300.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Lancer Serveur" textFill="WHITE">
+      <Button layoutX="562.0" layoutY="470.0" mnemonicParsing="false" onAction="#lancerServeur" prefHeight="86.0" prefWidth="300.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Lancer Serveur" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>

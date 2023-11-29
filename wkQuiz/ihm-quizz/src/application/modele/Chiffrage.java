@@ -1,18 +1,7 @@
 package application.modele;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
-
-import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.CsvWriter;
-
-import application.vue.AlertBox;
 
 /**
  * La classe Chiffrage fournit des méthodes pour le chiffrement
@@ -28,16 +17,16 @@ public class Chiffrage {
 	private static final int LONGUEUR_CLE_MAXIMUM = 60 ;
 	
 	// Alphabet personnalisé pouvant etre chiffré 
-	private static String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
+	public static final String CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGH"
 	        + "IJKLMNOPQRSTUVWXYZ&~\"#'({[-|`_\\^@)]}/*.!?,;:<>1234567890$% ";
 
 	// Mapping des caractères de l'alphabet vers des entiers
-    public static final HashMap<Character, Integer> ALPAHABET_TO_INT = 
-            new HashMap<>();
+    public static final HashMap<Character, Integer> ALPAHABET_TO_INT 
+    = new HashMap<>();
 	
     // Mapping des entiers vers des caractères de l'alphabet
-	public static final HashMap<Integer, Character> INT_TO_ALPHABET = 
-	        new HashMap<>();
+	public static final HashMap<Integer, Character> INT_TO_ALPHABET 
+	= new HashMap<>();
 	
 	
 	// Paramètres pour l'algorithme de Diffie-Hellman
@@ -94,7 +83,14 @@ public class Chiffrage {
 		StringBuilder aCrypter = new StringBuilder();
 		for (int i = 0 ; i < message.length() ; i++) {
 		    // valeur du caractere message.charAt(i)
-		    int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+		    int messageI;
+		    try {                
+		        messageI = ALPAHABET_TO_INT.get(message.charAt(i));
+            } catch (Exception e) {
+                System.err.print(message);
+                System.err.println(message.charAt(i));
+                throw e;
+            }
 		    
 		    // valeur du caractère de la cle
 		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));

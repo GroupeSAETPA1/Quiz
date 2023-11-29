@@ -54,66 +54,64 @@ class TestModelePrincipal {
 	private ArrayList<String> mauvaiseReponseJusteChaineVide;
 
 	/**
-	 * Genère des jeux de test pour les tests unitaires
-	 * 
-	 * @throws CreerQuestionException
-	 * @throws InvalidNameException
-	 */
-	@BeforeEach
-	void genererJeuxDeTest() throws CreerQuestionException, InvalidNameException {
+     * Genère des jeux de test pour les tests unitaires
+     * 
+     * @throws InvalidNameException   si le nom est invalide
+     * @throws CreerQuestionException 
+     */
+    @BeforeEach
+    void genererJeuxDeTest()
+            throws InvalidNameException, CreerQuestionException {
+        categoriesValides = new Categorie[] { new Categorie("Commentaire"), new Categorie("test") };
+        questionValide = new ArrayList<Question>();
+        mauvaiseReponse1 = new ArrayList<String>();
+        mauvaiseReponse2 = new ArrayList<String>();
+        mauvaiseReponse3 = new ArrayList<String>();
+        mauvaiseReponse4 = new ArrayList<String>();
+        mauvaiseReponseVide = new ArrayList<String>();
+        mauvaiseReponseDoublon = new ArrayList<String>();
+        mauvaiseReponseJusteChaineVide = new ArrayList<String>();
 
-		questionValide = new ArrayList<Question>();
-		mauvaiseReponse1 = new ArrayList<String>();
-		mauvaiseReponse2 = new ArrayList<String>();
-		mauvaiseReponse3 = new ArrayList<String>();
-		mauvaiseReponse4 = new ArrayList<String>();
-		mauvaiseReponseVide = new ArrayList<String>();
-		mauvaiseReponseDoublon = new ArrayList<String>();
-		mauvaiseReponseJusteChaineVide = new ArrayList<String>();
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponseJusteChaineVide.add("");
 
-		categoriesValides[0] = new Categorie("Commentaire");
-		categoriesValides[1] = new Categorie("test");
-		
-		mauvaiseReponseJusteChaineVide.add("");
-		mauvaiseReponseJusteChaineVide.add("");
-		mauvaiseReponseJusteChaineVide.add("");
-		mauvaiseReponseJusteChaineVide.add("");
+        mauvaiseReponse1.add("le delimiteur /*");
+        mauvaiseReponse1.add("le delimiteur //");
+        mauvaiseReponse1.add("le delimiteur (*");
 
-		mauvaiseReponse1.add("le delimiteur /*");
-		mauvaiseReponse1.add("le delimiteur //");
-		mauvaiseReponse1.add("le delimiteur (*");
+        mauvaiseReponse2.add("une facon de presenter le code choisie par le programmeur nomme Dupont");
+        mauvaiseReponse2.add("un texte sans signification particuliere");
 
-		mauvaiseReponse2.add("une façon de presenter le code choisie par " + "le programmeur nomme Dupont");
-		mauvaiseReponse2.add("un texte sans signification particulière");
+        mauvaiseReponse3.add(" // commentaire");
 
-		mauvaiseReponse3.add(" // commentaire");
+        mauvaiseReponse4.add("Un resume tres bref, pas plus d'une ligne, du role du programme");
+        mauvaiseReponse4.add("Il n'y a pas de commentaire Javadoc juste avant la ligne \"public class ...\"");
+        mauvaiseReponse4.add("Le nom du fichier contenant le programme");
+        mauvaiseReponse4.add("Un texte libre laisse " + "a l'appreciation du programmeur");
 
-		mauvaiseReponse4.add("Un resume très bref, pas plus d'une ligne, " + "du rôle du programme");
-		mauvaiseReponse4.add("Il n'y a pas de commentaire Javadoc " + "juste avant la ligne \"public class …\"");
-		mauvaiseReponse4.add("Le nom du fichier contenant le programme");
-		mauvaiseReponse4.add("Un texte libre laisse " + "a l'appreciation du programmeur");
+        mauvaiseReponseDoublon.add("doublon");
+        mauvaiseReponseDoublon.add("DOUBLON");
+        mauvaiseReponseDoublon.add("dOublon");
+        mauvaiseReponseDoublon.add("DoUbLOn");
 
-		mauvaiseReponseDoublon.add("doublon");
-		mauvaiseReponseDoublon.add("DOUBLON");
-		mauvaiseReponseDoublon.add("doublon");
-		mauvaiseReponseDoublon.add("DoUbLOn");
+        questionValide.add(new Question("Quel est le delimiteur de debut " + "d'un commentaire Javadoc ?",
+                categoriesValides[0], 1, "le delimiteur /**", mauvaiseReponse1, ""));
+        questionValide.add(new Question("A quoi correspond l'expression : " + "@author Dupont ?", categoriesValides[0],
+                2, "une balise reconnue par Javadoc", mauvaiseReponse2,
+                "Les balises Javadoc commencent par le  caractere @"));
+        questionValide.add(new Question(
+                "Si un commentaire est ecrit " + "sur plusieurs lignes, quel delimiteur de "
+                        + "commentaire est-il preferable d'utiliser ?",
+                categoriesValides[0], 1, "/* commentaire */", mauvaiseReponse3, ""));
 
-		questionValide.add(new Question("Quel est le delimiteur de debut " + "d'un commentaire Javadoc ?",
-				categoriesValides[0], 1, "le delimiteur /**", mauvaiseReponse1, ""));
-		questionValide.add(new Question("A quoi correspond l'expression : " + "@author Dupont ?", categoriesValides[0],
-				2, "une balise reconnue par Javadoc", mauvaiseReponse2,
-				"Les balises Javadoc commencent par le  caractère @"));
-		questionValide.add(new Question(
-				"Si un commentaire est ecrit " + "sur plusieurs lignes, quel delimiteur de "
-						+ "commentaire est-il preferable d'utiliser ?",
-				categoriesValides[0], 1, "/* commentaire */", mauvaiseReponse3, ""));
-
-		questionValide.add(new Question(
-				"Que doit decrire le texte ecrit dans " + "le commentaire Javadoc situe juste avant "
-						+ "la ligne \"public class …\" ?",
-				categoriesValides[1], 3, "Le rôle du programme, en explicitant " + "de manière precise ce rôle ",
-				mauvaiseReponse4, ""));
-	}
+        questionValide.add(new Question(
+                "Que doit decrire le texte ecrit dans " + "le commentaire Javadoc situe juste avant "
+                        + "la ligne \"public class ...\" ?",
+                categoriesValides[0], 3, "Le role du programme, en explicitant " + "de maniere precise ce role ",
+                mauvaiseReponse4, ""));
+    }
 
 	/**
 	 * Methode de test pour la methode getInstance
@@ -280,22 +278,33 @@ class TestModelePrincipal {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
 
-		// On cree deux categories "Commentaire" et "test"
-		modele.creerCategorie(categoriesValides[0].getNom());
-		modele.creerCategorie(categoriesValides[1].getNom());
+		// On crée deux categories "Commentaire" et "test"
+		modele.creerCategorie("Commentaire");
+		modele.creerCategorie("test");
 
 		// On mets des une question sur deux de la liste de questionValide
 		// dans la categorie "Commentaire" et "test"
-		int c = 1;
-		for (Question q : questionValide) {
-			modele.creerQuestion(q.getLibelle(), c % 2 + 2, q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1,
-					"");
-			c++;
-		}
+		modele.creerQuestion(questionValide.get(0).getLibelle(),
+		                     modele.getIndice("Commentaire"), 
+		                     questionValide.get(0).getDifficulte(),
+		                     questionValide.get(0).getReponseJuste(), 
+		                     mauvaiseReponse1,"");
+		modele.creerQuestion(questionValide.get(1).getLibelle(),
+		                     modele.getIndice("test"), 
+                		     questionValide.get(1).getDifficulte(),
+		                     questionValide.get(1).getReponseJuste(), 
+		                     mauvaiseReponse1,"");
 
 		// On verifie qu'il existe bien des questions presentes dans les deux categories
-		assertTrue(modele.categorieContientQuestion(categoriesValides[0]));
-		assertTrue(modele.categorieContientQuestion(categoriesValides[1]));
+		assertTrue(modele.categorieContientQuestion(
+		        modele.getCategoriesLibelleExact("Commentaire")));
+		assertTrue(modele.categorieContientQuestion(
+		        modele.getCategoriesLibelleExact("test")));
+		
+		modele.getBanqueCategorie().getCategories().remove(
+		        modele.getCategoriesLibelleExact("Commentaire"));
+		modele.getBanqueCategorie().getCategories().remove(
+		        modele.getCategoriesLibelleExact("test"));
 
 		// On cree une nouvelle categorie sans question
 		Categorie uneAutre = new Categorie("UneNouvelleUnique");
@@ -312,8 +321,8 @@ class TestModelePrincipal {
 				+ "situe juste avant la ligne \"public class ...\" ?",
 				indexCategorieuneAutre, 
 				1, 
-				"Le rôle du programme, en explicitant de manière precise" 
-				+ " ce rôle", 
+				"Le role du programme, en explicitant de maniere precise" 
+				+ " ce role", 
 				mauvaiseReponse1, 
 				"");
 		assertTrue(modele.categorieContientQuestion(uneAutre));
@@ -364,6 +373,8 @@ class TestModelePrincipal {
 	void testGetBanqueCategorie() throws InvalidNameException, HomonymeException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueCategorie().getCategories().clear();
+		
 		
 		// On verifie que quand on recupère la banque de categorie 
 		// du modèle principal, on obtient les mêmes categories 
@@ -375,8 +386,17 @@ class TestModelePrincipal {
 		banqueTest.ajouter(categoriesValides[1]);
 		banqueTest.ajouter(new Categorie("UneNouvelleUnique"));
 		banqueTest.ajouter(new Categorie("Une categorie rajoutee"));
+		
+		modele.creerCategorie("General");
+		modele.creerCategorie("Autre Nom");
+		modele.creerCategorie(categoriesValides[0].getNom());
+		modele.creerCategorie(categoriesValides[1].getNom());
+		modele.creerCategorie("UneNouvelleUnique");
+		modele.creerCategorie("Une categorie rajoutee");
+		
 		for (int i = 0; i < modele.getBanqueCategorie().getCategories().size(); i++) {
-			assertEquals(banqueTest.getCategorie(i), modele.getBanqueCategorie().getCategorie(i));	
+		    assertEquals(banqueTest.getCategorie(i), 
+		                 modele.getBanqueCategorie().getCategorie(i));	
 		}
 	}
 	
@@ -392,9 +412,12 @@ class TestModelePrincipal {
 	 */
 	@Test
 	@Order(7)
-	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, InvalidFormatException, ReponseException, DifficulteException {
+	void testGetBanqueQuestion() throws InvalidNameException, HomonymeException, CreerQuestionException {
 		// On recupère l'instance du modèle principal
 		ModelePrincipal modele = ModelePrincipal.getInstance();
+		modele.getBanqueQuestion().getQuestions().clear();
+		
+		ArrayList<Question> question = new ArrayList<Question>();
 		
 		/*
 		 * Pour pouvoir tester la methode, on doit recreer
@@ -402,7 +425,7 @@ class TestModelePrincipal {
 		 * tous les tests precendents
 		 */ 
 		BanqueQuestion banqueTestQuestions = new BanqueQuestion();
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											  	  modele.getCategories().get(0), 
 											  	  1,
@@ -410,7 +433,7 @@ class TestModelePrincipal {
 											  	  mauvaiseReponse1, 
 												  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											  	  modele.getCategories().get(1), 
 											  	  1,
@@ -418,14 +441,14 @@ class TestModelePrincipal {
 											  	  mauvaiseReponse1, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("libelle different", 
+		question.add(new Question("libelle different", 
 												  modele.getCategories().get(0), 
 												  1, 
 									      		 "non vide", 
 									      		  mauvaiseReponse1, 
 				   								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											   	  modele.getCategories().get(0),  
 											   	  1,
@@ -433,7 +456,7 @@ class TestModelePrincipal {
 											   	  mauvaiseReponse2, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Quel est le delimiteur de " 
+		question.add(new Question("Quel est le delimiteur de " 
 											   + "debut d'un commentaire Javadoc ", 
 											   	  modele.getCategories().get(0), 
 											   	  1,
@@ -441,18 +464,16 @@ class TestModelePrincipal {
 											   	  mauvaiseReponse1, 
 				  								  ""));
 		
-		banqueTestQuestions.ajouter(new Question("Question inexistante", 
+		question.add(new Question("Question inexistante", 
 											      modele.getCategories().get(0), 
 											      1, 
 											     "non vide", 
 											      mauvaiseReponse1, 
 												  ""));
 		
-		int c = 1;
-		for (Question q : questionValide) {
-			banqueTestQuestions.ajouter(new Question(q.getLibelle(), modele.getCategories().get(c % 2 + 2), q.getDifficulte(), q.getReponseJuste(), mauvaiseReponse1,
-					""));
-			c++;
+		for (Question q : question) {
+			banqueTestQuestions.ajouter(q);
+			modele.getBanqueQuestion().ajouter(q);
 		}
 		
 		/*
@@ -637,7 +658,7 @@ class TestModelePrincipal {
 	    
 	    // Pour passer toutes les conditions de ajouter question,
 	    // on ajoute une question avec une nouvelle catégorie
-		Categorie categorieNonPresente = new Categorie("Catégorie non présente");
+		Categorie categorieNonPresente = new Categorie("Categorie non presente");
 
 	    Question questionAModifier = new Question("Question a modifier", 
 	    										   categorieNonPresente, 
@@ -737,13 +758,13 @@ class TestModelePrincipal {
 	    assertTrue(modele.modifierQuestion("NouvelleQuestion", 
 	    								   "General", 
 	    								    2, 
-	    								   "NouvelleBonneRéponse", 
+	    								   "NouvelleBonneReponse", 
 	    								    mauvaiseReponse1, 
 	    								    ""));
 	    assertTrue(modele.modifierQuestion("NouvelleQuestion2", 
-	    		                           "Catégorie existait pas encore", 
+	    		                           "Categorie existait pas encore", 
 	    		                            2, 
-	    		                           "NouvelleBonneRéponse", 
+	    		                           "NouvelleBonneReponse", 
 	    		                            mauvaiseReponse1, 
 	    		                           ""));
 	    
@@ -751,13 +772,13 @@ class TestModelePrincipal {
 	    assertFalse(modele.modifierQuestion("NouvelleQuestionInvalide", 
 	    		                            "General", 
 	    		                             0, 
-	    		                            "NouvelleBonneRéponse", 
+	    		                            "NouvelleBonneReponse", 
 	    		                             mauvaiseReponse1, 
 	    		                             ""));
 	    assertFalse(modele.modifierQuestion("NouvelleQuestionInvalide", 
                                             "", 
                                              1, 
-                                            "NouvelleBonneRéponse", 
+                                            "NouvelleBonneReponse", 
                                              mauvaiseReponse1, 
                                             ""));
 	}
@@ -839,17 +860,17 @@ class TestModelePrincipal {
 	    // on y ajoute une question pour vérifier
 	    // que quand on ajoute une catégorie a envoyer, 
 	    // cela ajoute aussi les questions de cette catégorie
-	    modele.creerCategorie("Categorie à envoyer");
+	    modele.creerCategorie("Categorie a envoyer");
 	    modele.creerQuestion("QuestionTestAEnvoyer", 
-	    					  modele.getIndice("Categorie à envoyer"), 
+	    					  modele.getIndice("Categorie a envoyer"), 
 	    					  1, 
 	    					 "vrai", 
 	    					  mauvaiseReponse1, 
 				 			 "");
 	    modele.ajouterALaSelectionDEnvoie(modele.getCategoriesLibelleExact
-	    								  ("Categorie à envoyer"));
+	    								  ("Categorie a envoyer"));
 	    assertTrue(modele.estAEnvoyer(modele.getCategoriesLibelleExact
-	    								  ("Categorie à envoyer")));
+	    								  ("Categorie a envoyer")));
 	    assertTrue(modele.estAEnvoyer((modele.getBanqueQuestion()
 	    								   .getQuestionsLibelle
 	    								   ("QuestionTestAEnvoyer").get(0))));
@@ -888,9 +909,9 @@ class TestModelePrincipal {
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
 	    
 	    modele.supprimerALaSelectionDEnvoie(modele.getCategoriesLibelleExact
-				  							("Categorie à envoyer"));
+				  							("Categorie a envoyer"));
 	    assertFalse(modele.estAEnvoyer(modele.getCategoriesLibelleExact
-				                      ("Categorie à envoyer")));
+				                      ("Categorie a envoyer")));
 	    assertFalse(modele.estAEnvoyer((modele.getBanqueQuestion()
 				                        .getQuestionsLibelle
 				                        ("QuestionTestAEnvoyer").get(0))));

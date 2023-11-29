@@ -1,3 +1,7 @@
+/*
+ * ControleurEditerQuestion.java                                     
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
 package application.controleurs;
 
 import java.util.ArrayList;
@@ -20,8 +24,8 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * Controlleur de la page d'édition des questions.
- * Celui-ci instance  des methodes liée au bouton de la page 
+ * Controleur de la page d'édition des questions.
+ * Celui-ci instance des methodes liée au boutons de la page 
  * 
  * @author Quentin COSTES
  */
@@ -87,8 +91,8 @@ public class ControleurEditerQuestion {
     }
 	
 	/**
-     * Méthodes liée au bouton valider,
-     * qui devra enregistrer les champs  dans la banques de question 
+     * Méthode liée au bouton valider,
+     * qui devra enregistrer les champs dans la banque de questions 
      */
 	@FXML
 	private void valider() {
@@ -114,28 +118,28 @@ public class ControleurEditerQuestion {
 				if (ModelePrincipal.alphabetOk(saisiePremiereReponseFausse.getText())) {
 					reponseFausses.add(saisiePremiereReponseFausse.getText());
 				} else {
-					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la premiere réponse fausse");
+					AlertBox.showErrorBox("Il ne doit pas y avoir d'accents dans la première réponse fausse");
 				}
 			}
 			if (!saisieSecondeReponseFausse.getText().isBlank()) {
 				if (ModelePrincipal.alphabetOk(saisieSecondeReponseFausse.getText())) {
 					reponseFausses.add(saisieSecondeReponseFausse.getText());
 				} else {
-					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la seconde réponse fausse");
+					AlertBox.showErrorBox("Il ne doit pas y avoir d'accents dans la seconde réponse fausse");
 				}
 			}
 			if (!saisieTroisiemeReponseFausse.getText().isBlank()) {
 				if (ModelePrincipal.alphabetOk(saisieTroisiemeReponseFausse.getText())) {
 					reponseFausses.add(saisieTroisiemeReponseFausse.getText());
 				} else {
-					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la troiseme réponse fausse");
+					AlertBox.showErrorBox("Il ne doit pas y avoir d'accents dans la troisème réponse fausse");
 				}
 			}
 			if (!saisieQuatriemeReponseFausse.getText().isBlank()) {
 				if (ModelePrincipal.alphabetOk(saisieQuatriemeReponseFausse.getText())) {
 					reponseFausses.add(saisieQuatriemeReponseFausse.getText());
 				} else {
-					AlertBox.showErrorBox("il ne doit pas y avoir d'accents dans la quatrieme réponse fausse");
+					AlertBox.showErrorBox("Il ne doit pas y avoir d'accents dans la quatrième réponse fausse");
 				}
 			}
 			aModifier.setMauvaiseReponse(reponseFausses);
@@ -148,7 +152,7 @@ public class ControleurEditerQuestion {
 	        
 	        aModifier.setDifficulte(reponse);
 			
-			AlertBox.showSuccessBox("question modifiée avec succé");
+			AlertBox.showSuccessBox("Question modifiée avec succès");
 			Quiz.chargerEtChangerVue("EditerQuestions.fxml");
 			
 		} catch (ReponseException | InvalidNameException | InvalidFormatException e) {
@@ -158,7 +162,7 @@ public class ControleurEditerQuestion {
 	}
 	
 	/**
-     * Met a jour la liste des categories
+     * Met à jour la liste des categories
      * @throws InvalidNameException
      */
     private void miseAJourListeCategorie() {

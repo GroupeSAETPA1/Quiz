@@ -1,3 +1,7 @@
+/*
+ * ControleurEditerCategories.java                                     
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
 package application.controleurs;
 
 import java.util.ArrayList;
@@ -23,7 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 /**
- * Controlleur de la page d'édition des catégories. Celui-ci instance des
+ * Controleur de la page d'édition des catégories. Celui-ci instancie des
  * méthodes liée au bouton de la page
  * 
  * @author Quentin COSTES
@@ -42,7 +46,7 @@ public class ControleurEditerCategories {
     private boolean filtre = false;
 
     /**
-     * Méthodes liée au group retour evoie vers la page précédente
+     * Méthode liée au group retour. Envoie vers la page précédente
      */
     @FXML
     private void retour() {
@@ -50,7 +54,7 @@ public class ControleurEditerCategories {
     }
 
     /**
-     * Méthodes liée au bouton Créer Categorie envoie vers la page
+     * Méthode liée au bouton Créer Categorie. Envoie vers la page
      * CreationQuestionEtCategorie.fxml
      */
     @FXML
@@ -61,7 +65,7 @@ public class ControleurEditerCategories {
 
     @FXML
     public void initialize() {
-        table.setPlaceholder(new Label("Pas de Catégorie trouvé"));
+        table.setPlaceholder(new Label("Pas de catégorie trouvé !"));
         
         table.setRowFactory(tr->{
             TableRow<LigneCategorie> row 
@@ -114,7 +118,6 @@ public class ControleurEditerCategories {
         ModelePrincipal modele = ModelePrincipal.getInstance();
 
         ObservableList<LigneCategorie> data = table.getItems();
-//        FilteredList<LigneCategorie> dataFiltre = new FilteredList<>(data);
 
         ArrayList<Categorie> categories;
         if (filtre) {
@@ -173,13 +176,13 @@ public class ControleurEditerCategories {
         }
 
         public void editerCategorie() {
-            // méthode appelée lors de l'appuie sur le bouton d'edition de la catégorie
+            // Méthode appelée lors de l'appui sur le bouton d'édition de la catégorie
             if (!this.getNomCategorie().equals("General")) {
                 // si la catégorie n'est pas général
                 modele.setCategorieAModifier(modele.getCategoriesLibelleExact(getNomCategorie()));
                 Quiz.chargerEtChangerVue("EditerCategorie.fxml");
             } else {
-                AlertBox.showErrorBox("La catégorie générale ne peut pas etre modifiée");
+                AlertBox.showErrorBox("La catégorie générale ne peut pas être modifiée");
             }
         }
 
@@ -189,7 +192,7 @@ public class ControleurEditerCategories {
                 											 + getNomCategorie() 
                 											 + " ?\nCette catégorie contient " 
                 											 + getNombreQuestion() 
-                											 + " question.");
+                											 + " question(s).");
                 if (result) {
 
                     if (modele.supprimerCategorie(modele.getCategoriesLibelleExact(getNomCategorie()))) {
@@ -209,7 +212,7 @@ public class ControleurEditerCategories {
     }
 
     /**
-     * Permet la création d'un bouton dans la TableView
+     * Permet la création d'un bouton editer dans la TableView
      * 
      * @author Quentin Costes
      * @author François de Saint Palais
@@ -254,7 +257,7 @@ public class ControleurEditerCategories {
 
     /**
      * 
-     * TODO comment class responsibility (SRP)
+     * Permet la création d'un bouton supprimer dans la TableView
      * 
      * @author Quentin Costes
      * @author François de Saint Palais
@@ -279,7 +282,7 @@ public class ControleurEditerCategories {
 
                         if (!modele.estGeneral(ligne.getNomCategorie())) {
                         
-                            // Créez le bouton de suppression pour chaque ligne et associez une action
+                            // Créer le bouton de suppression pour chaque ligne et lui associez une action
                             Button supprimerButton = new Button();
                             Image image = new Image(getClass().getResource("/application/vue/images/IconeSupprimer.png")
                                     .toExternalForm());

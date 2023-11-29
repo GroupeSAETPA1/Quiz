@@ -704,7 +704,8 @@ public class ModelePrincipal {
     public static boolean alphabetOk(String aTester) {
     	for (int i = 0; i < aTester.length(); i++) {
 			if (!Chiffrage.ALPAHABET_TO_INT.keySet().contains(aTester.charAt(i))) {
-				return false;	
+				System.err.println(aTester.charAt(i));
+			    return false;	
 			}
 		}
     	return true;
