@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAccueil">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAccueil">
    <children>
       <Label contentDisplay="CENTER" layoutX="411.0" layoutY="60.0" prefHeight="58.0" prefWidth="190.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -81,7 +81,7 @@
             </Label>
          </children>
       </Group>
-      <Group layoutX="750.0" layoutY="20.0" onMouseClicked="#profil">
+      <Group layoutX="738.0" layoutY="20.0" onMouseClicked="#profil">
          <children>
             <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="5.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -91,7 +91,7 @@
                   <Rectangle2D height="96.0" width="96.0" />
                </viewport>
             </ImageView>
-            <Text fx:id="labelPseudo" fill="WHITE" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil" textAlignment="CENTER" wrappingWidth="93.3125">
+            <Text fx:id="labelPseudo" fill="WHITE" layoutX="-56.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" textAlignment="CENTER" wrappingWidth="204.3125">
                <font>
                   <Font size="32.0" />
                </font>
