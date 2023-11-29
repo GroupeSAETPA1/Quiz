@@ -120,7 +120,6 @@ public class Client {
             oos.writeObject("Non");
         }
 
-        String messageFin = (String) ois.readObject();
         oos.writeObject(Serveur.MESSAGE_FIN_COMMUNICATION);
         
         // Fermeture des chemins de communication

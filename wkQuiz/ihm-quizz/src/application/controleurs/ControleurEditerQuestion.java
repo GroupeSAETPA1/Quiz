@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import application.Quiz;
 import application.exception.CreerQuestionException;
-import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
 import application.modele.Categorie;
@@ -100,7 +99,7 @@ public class ControleurEditerQuestion {
 		Question aModifier = modele.getQuestionAModifier();		
 		
 		try {
-			ArrayList<String> repFausses = new ArrayList();
+			ArrayList<String> repFausses = new ArrayList<String>();
 			repFausses.add("faux");
 			Question questionTemp = new Question("libelle", null, 1, "juste", repFausses, "");
 	    	

@@ -28,6 +28,8 @@ public class AlertBoxTest extends Application {
         confirmationButton.setOnAction(e -> {
             String message = "Voulez-vous continuer ?";
             boolean result = AlertBox.showConfirmationBox(message);
+            AlertBox.showConfirmationBox(message);
+            System.out.println(result);
         });
 
         successButton.setOnAction(e -> {

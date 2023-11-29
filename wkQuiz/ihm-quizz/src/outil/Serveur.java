@@ -139,7 +139,6 @@ public class Serveur {
         
         // Fin de la communication
         oos.writeObject(MESSAGE_FIN_COMMUNICATION);
-        String messageFin = (String) ois.readObject();
         
         // Fermeture des chemins de communication
         oos.close();
