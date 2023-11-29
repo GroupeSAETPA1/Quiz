@@ -14,8 +14,8 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 import application.Quiz;
-import application.exception.ClientDejaConnecter;
-import application.exception.ClientPasConnecterException;
+import application.exception.ClientDejaConnecte;
+import application.exception.ClientPasConnecteException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import outil.Serveur;
 
 /** 
- * Gére la création du serveur pour envoyer les question a un client
+ * Gére la création du serveur pour envoyer les question à un client
  * @author François de Saint Palais
  */
 public class ControleurEnvoieQuestion {
@@ -45,7 +45,6 @@ public class ControleurEnvoieQuestion {
         
         String adresseIP;
         
-        //TODO regex
         if (nomOS.contains("Windows")) {
             adresseIP = getIPFromWindows();
         } else if (nomOS.contains("Linux") || nomOS.contains("Mac OS X")) {
@@ -54,12 +53,10 @@ public class ControleurEnvoieQuestion {
             adresseIP = "OS non reconnu";
         }
         
-        System.out.print("Mon adresse IP est: " + adresseIP);
         
         txtIP.setText(adresseIP);
         txtPort.setText(Serveur.getPort() + "");
         
-        System.out.println(serveur);
         if (serveur == null) {
             do {
                 try {
@@ -70,15 +67,11 @@ public class ControleurEnvoieQuestion {
                 txtPort.setText(Serveur.getPort() + "");
             } while (serveur == null);
         }
-        System.out.println(serveur);
-        
-        
     }
     
     @FXML
     void retour() {
     	Quiz.changerVue("ChoixEnvoie.fxml");
-        System.out.println("Retour");
     }
     
     /**
@@ -88,20 +81,18 @@ public class ControleurEnvoieQuestion {
 	@FXML
 	private void aider() {
 		model.setPagePrecedente("EnvoieQuestion.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 
     @FXML
     void envoyer() {
-        System.out.println(serveur.getIPClient());
         try {
             boolean envoieReussi = serveur.envoiQuestion();
              if (!envoieReussi) {
-                 AlertBox.showWarningBox("Le client a refuser les questions");
+                 AlertBox.showWarningBox("Le client à refusé les questions");
              }
              information.setText("Pas de client connecté");
-        } catch (ClientPasConnecterException e) {
+        } catch (ClientPasConnecteException e) {
             AlertBox.showErrorBox("Pas de client connecté");
         } catch (ClassNotFoundException | IOException e) {
             AlertBox.showErrorBox(e.getMessage());
@@ -115,14 +106,14 @@ public class ControleurEnvoieQuestion {
         
         if (!serveur.clientEstConnecte()) {
             information.setText("En attente d'un client ...");
-            AlertBox.showSuccessBox("Prêt à recevoir un client ?");
+            AlertBox.showSuccessBox("Êtes-vous prêt à recevoir un client ?");
             try {
                 serveur.lancerServeur();
                 information.setText("Adresse IP du client : " + serveur.getIPClient());
-            } catch (ClientDejaConnecter e) {
+            } catch (ClientDejaConnecte e) {
                 AlertBox.showWarningBox("Un client est déjà connecté.");
             } catch (SocketTimeoutException e) {
-                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de ce "
+                AlertBox.showErrorBox("TimeOut : Aucun client n'a tenté de se "
                         + "connecter");
             }
         } else {
@@ -152,8 +143,6 @@ public class ControleurEnvoieQuestion {
                         InetAddress addr = addresses.nextElement();
                         // Filtrer les adresses IPv6
                         if (!addr.getHostAddress().contains(":")) {
-                            System.out.println("Interface: " + iface.getDisplayName());
-                            System.out.println("Adresse IPv4: " + addr.getHostAddress());
                             resultat = addr.getHostAddress();
                         }
                     }
@@ -166,8 +155,8 @@ public class ControleurEnvoieQuestion {
     }
     
     /**
-     * 
-     * @return
+     * Getter de l'IP si l'OS est Windows
+     * @return L'adresse IP de l'utilisateur
      * @throws UnknownHostException 
      */
     public static String getIPFromWindows() throws UnknownHostException {

@@ -1,6 +1,8 @@
-/**
- * 
+/*
+ * Partie.java                                    26 oct. 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
+
 package application.modele;
 
 import java.io.IOException;
@@ -11,7 +13,9 @@ import java.util.Set;
 import application.exception.DifficulteException;
 
 /**
- * TODO
+ * Modèle d'une partie du quiz
+ * @author Quentin Costes
+ * @author Lucas Descriaud
  */
 public class Partie {
 	

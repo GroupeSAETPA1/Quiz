@@ -1,5 +1,5 @@
 /*
- * lectureFichier.java                                    22 nov. 2023
+ * LectureFichier.java                                    22 nov. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
@@ -28,12 +28,13 @@ import application.vue.AlertBox;
  */
 public class LectureFichier {
 
-    /** Les CSV importé devront séparé leur élément avec une tabulation */
+    /** Les CSV importés devront séparer leur éléments avec une tabulation */
     public static final char SEPARATEUR_CSV = '\t';
     
     private static ModelePrincipal modele = ModelePrincipal.getInstance();
 
     /**
+     * Lit le fichier .csv et récupère les lignes
      * @param fichierCSV
      * @return Une liste des ligne du fichier CSV
      * @throws IOException
@@ -62,8 +63,8 @@ public class LectureFichier {
      * Récupère une ligne du CSV et retourne une HashMap associant chaque élément
      * d'une question
      * 
-     * @param ligne
-     * @return
+     * @param ligne une ligne du CSV
+     * @return une HashMap de la question analysée
      */
     public static HashMap<String, String> getDictionnaire(String ligne) {
         
@@ -118,10 +119,10 @@ public class LectureFichier {
     }
 
     /**
-     * 
-     * @return
+     * Crée une question à partir d'une ligne csv
      * @throws InvalidNameException
      * @throws CreerQuestionException
+     * @return une Question à partir d'une ligne analysée
      */
     public static Question creerQuestionFromLigneCSV(HashMap<String, String> ligneHashMap)
             throws CreerQuestionException, InvalidNameException {
@@ -164,8 +165,8 @@ public class LectureFichier {
      * présente, elle est créer.
      * 
      * @param nomCategorie
-     * @return
      * @throws InvalidNameException
+     * @return un booléen à vrai si la création de la catégorie à été réussie
      */
     private static boolean creerCategorieSiAbsent(String nomCategorie) throws InvalidNameException {
         // True si la catégorie existe ou si la création est fructueuse

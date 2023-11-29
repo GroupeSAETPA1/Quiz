@@ -23,8 +23,7 @@ import application.exception.ReponseException;
 import application.vue.AlertBox;
 
 /**
- * Contrôleur principale de l'application .
- * Permet l'interaction entre les classes du modèle et les controleurs.
+ * Modele principal de l'application .
  * C'est une classe Singleton
  * @author Lucas Descriaud
  * @author François de Saint Palais
@@ -47,12 +46,12 @@ public class ModelePrincipal {
     = new HashMap<>();
     
     /**
-     * Lie un charactere a son code pour le chiffement
+     * Lie un charactère a son code pour le chiffement
      */
     public static final HashMap<Character, Integer> ALPAHABET_TO_INT = new HashMap<>();
     
     /**
-     * Lie un charactere a son code pour le chiffement
+     * Lie un charactère a son code pour le chiffement
      */
     public static final HashMap<Integer, Character> INT_TO_ALPHABET = new HashMap<>();
     
@@ -160,7 +159,7 @@ public class ModelePrincipal {
 
 	/**
      * Crée une categorie et l'ajoute a la banque de catégorie. Si la création a été
-     * un sucés on revoie true
+     * un succès on revoie true
      *
      * @param nom Le nom donnée à la categorie.
      * @return true si la création est un sucés false sinon
@@ -219,8 +218,6 @@ public class ModelePrincipal {
      * @return La BanqueCategorie 
      */
     public BanqueCategorie getBanqueCategorie() {
-        // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
-        // Question. Pour éviter les effet de bords
         return banqueCategorie;
     }
 
@@ -229,8 +226,6 @@ public class ModelePrincipal {
      * @return La BanqueQuestion 
      */
     public BanqueQuestion getBanqueQuestion() {
-        // TODO Je pense que l'on peux changer la visibilité de certaine méthode de
-        // Question. Pour éviter les effet de bords
         return banqueQuestion;
     }
 
@@ -357,9 +352,6 @@ public class ModelePrincipal {
 				return false;
 			}
         }
-        // TODO ne pas modifier la question si un des arguments ne sont pas valides, 
-        // parce que sinon on peut juste avoir un probleme de difficultée par exemple 
-        // et ca va modifier quand meme le nom et le la catégorie
         try {
 		     questionAModifier.setLibelle(libelle);
 		     questionAModifier.setCategorie(getBanqueCategorie().getCategorieLibelleExact(categorie));
@@ -479,14 +471,10 @@ public class ModelePrincipal {
              
             outCategorie.close();
             fichierCategorie.close();
-            
-            System.out.println("La banque de Categorie à bien été serialisée !");
-            
+                        
             outQuestion.close();
             fichierQuestion.close();
-             
-            System.out.println("La banque de Question à bien été serialisée !"); 
-            
+                         
     	} catch(IOException e) {
     		 e.printStackTrace();
     	}
@@ -510,9 +498,7 @@ public class ModelePrincipal {
 				BanqueCategorie banqueDeserialiseeCategorie = (BanqueCategorie)inCategorie.readObject();
 				inCategorie.close();
 				inputFichierCategorie.close();
-				
-				System.out.println("La banque de Categorie à bien été dé-serialisée !");
-				
+								
 				return banqueDeserialiseeCategorie;
 			} else {
 				AlertBox.showErrorBox("Le fichier de sauvegarde " 
@@ -548,9 +534,7 @@ public class ModelePrincipal {
 				
 				inQuestion.close();
 				inputFichierQuestion.close();
-				
-				System.out.println("La banque de Question à bien été dé-serialisée !");
-				
+								
 				return banqueDeserialiseeQuestion;
 			} else {
 				AlertBox.showErrorBox("Le fichier de sauvegarde des " 

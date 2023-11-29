@@ -91,11 +91,9 @@ public class ControleurSelectionCategorie {
         private Categorie categorie;
 
         /**
-         * TODO comment initial state properties
+         * Récupere une catégorie
          * 
-         * @param nomCategorie
-         * @param nombreQuestion
-         * @param selection
+         * @param categorie la catégorie à representer
          */
         public LigneSelectionCategorie(Categorie categorie) {
             super();
@@ -113,15 +111,13 @@ public class ControleurSelectionCategorie {
         }
 
         public void ajouterALaSelection() {
-            System.out.println(this + " selectionner");
             modele.ajouterALaSelectionDEnvoie(categorie);
         }
 
         /**
-         * TODO comment method role
+         * Retire à la sélection la catégorie
          */
         public void retirerALaSelection() {
-            System.out.println(this + " deselectionner");
             modele.supprimerALaSelectionDEnvoie(categorie);
         }
 
@@ -131,7 +127,7 @@ public class ControleurSelectionCategorie {
             return getNomCategorie() + " -> " + getNombreQuestion();
         }
 
-        /** @return true si la checkbox doit être sélectionner */
+        /** @return true si la checkbox doit être sélectionnée */
         public boolean estSelectionner() {
             return modele.estAEnvoyer(categorie);
         }
@@ -152,11 +148,13 @@ public class ControleurSelectionCategorie {
                 protected void updateItem(CheckBox item, boolean empty) {
                     super.updateItem(item, empty);
                     super.setAlignment(Pos.CENTER);
-                    // On créer une CheckBox
+                    // On crée une CheckBox
                     CheckBox checkbox = new CheckBox();
                     
-                    /* Lors de la création des lignes, 
-                     * la TableView commence à l'index -1 => Exception */
+                    /* 
+                     * Lors de la création des lignes, 
+                     * la TableView commence à l'index -1 => Exception 
+                     */
                     try {
                         checkbox.setSelected(getTableView().getItems()
                                 .get( getIndex() ).estSelectionner());
@@ -181,7 +179,5 @@ public class ControleurSelectionCategorie {
                 }
             };
         }
-
     }
 }
-

@@ -24,7 +24,7 @@ import application.modele.Partie;
 import application.modele.Question;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * Méthode de test pour la Partie
  * @author Tom Douaud
  * @author Francois DSP
  */

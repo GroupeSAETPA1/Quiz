@@ -6,7 +6,7 @@
 package application.exception;
 
 /** 
- * Est généré lorsque que la difficulté spécifier est incorrect
+ * Est généré lorsque que la difficultée spécifiée est incorrecte
  * @author François de Saint Palais
  */
 public class DifficulteException extends CreerQuestionException {
@@ -26,7 +26,5 @@ public class DifficulteException extends CreerQuestionException {
         super();
     }
 
-    /** TODO comment field role (attribute, associative role) */
     private static final long serialVersionUID = 1L;
-
 }

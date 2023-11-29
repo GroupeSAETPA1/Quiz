@@ -85,14 +85,12 @@ public class ControleurCreationQuestionEtCategorie {
 	private void aideCategorie() {
 		model.setDisplayCategoriePane(true);
 		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
 	private void aideQuestion() {
 		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 

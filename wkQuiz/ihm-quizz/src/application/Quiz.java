@@ -25,10 +25,6 @@ import javafx.stage.Stage;
  * Classe principale de l'application permettant d'instancier
  * les contrôleurs, les vues et modèles.
  *
- * TODO A enlever à la fin
- * Mettre dans les "VM argument" :
- *  --module-path /path/to/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml
- *
  * @author Néo BECOGNE
  * @author Quentin COSTES
  * @author François de Saint Palais
@@ -114,7 +110,7 @@ public class Quiz extends Application {
 		
 		primaryStage.setOnCloseRequest((e) -> {
 			try {
-			    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+			    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application ?")) {
 			    	ModelePrincipal.getInstance().serialiser();
 			        Platform.exit();            
 		        } else {

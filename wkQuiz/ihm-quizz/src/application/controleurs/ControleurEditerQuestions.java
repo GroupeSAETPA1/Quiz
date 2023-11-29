@@ -1,3 +1,7 @@
+/*
+ * ControleurEditerQuestions.java                                    novembre 2023
+ * IUT de Rodez, info1 2023-2024, aucun copyright ni copyleft
+ */
 package application.controleurs;
 
 import java.util.ArrayList;
@@ -25,14 +29,13 @@ public class ControleurEditerQuestions {
 	
 	@FXML
 	private TableView<LigneQuestion> table;
-	
+		
 	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	/**
-	 * Méthodes liée au group retour 
-	 * qui devra renvoyer vers la page precedente
+	 * Méthode liée au group retour 
+	 * qui devra renvoyer vers la page précédente
 	 */
-	
 	@FXML 
 	private void retour() {
 		Quiz.changerVue("Editeur.fxml");
@@ -57,44 +60,13 @@ public class ControleurEditerQuestions {
 		libelleColumn.setCellValueFactory(new PropertyValueFactory<>("nomQuestion"));
 		libelleColumn.setCellFactory(new TextCellFactory<LigneQuestion>());
 
-		/* On remet si la prof veut a tout prix tout les colonnes
-        TableColumn<LigneQuestion, String> reponseJusteColumn = new TableColumn<>("réponse juste");
-        reponseJusteColumn.setCellValueFactory(new PropertyValueFactory<>("reponseJuste"));
-        reponseJusteColumn.setCellFactory(tc -> {
-            TableCell<LigneQuestion, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setStyle("-fx-font-size: 30px");
-            return cell;
-        });
-
-        TableColumn<LigneQuestion, String> reponsesFaussesColumn = new TableColumn<>("réponses fausses");
-        reponsesFaussesColumn.setCellValueFactory(new PropertyValueFactory<>("reponsesFausses"));
-        reponsesFaussesColumn.setCellFactory(tc -> {
-            TableCell<LigneQuestion, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setStyle("-fx-font-size: 30px");
-            return cell;
-        });
-
-        TableColumn<LigneQuestion, String> feedbackColumn = new TableColumn<>("feedback");
-        feedbackColumn.setCellValueFactory(new PropertyValueFactory<>("feedback"));
-        feedbackColumn.setCellFactory(tc -> {
-            TableCell<LigneQuestion, String> cell = new TableCell<>();
-            cell.setAlignment(Pos.CENTER);
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setStyle("-fx-font-size: 30px");
-            return cell;
-        });
-		*/
         TableColumn<LigneQuestion, String> modifColumn = new TableColumn<>("Modifier");
         modifColumn.setCellFactory(new EditerQuestionButtonCellFactory());
 
         TableColumn<LigneQuestion, String> supColumn = new TableColumn<>("Supprimer");
         supColumn.setCellFactory(new SupprimerQuestionButtonCellFactory());
 
-        /** style de la table */
+        /** Style de la table */
         double tableWidth = 1280;
         categorieColumn.setPrefWidth(tableWidth * 0.40);
         libelleColumn.setPrefWidth(tableWidth * 0.35);
@@ -125,18 +97,12 @@ public class ControleurEditerQuestions {
     }
     
     /**
-     * classe permettant l'affichage des lignes dans la tableView de la vue EditerQuestions
+     * Classe permettant l'affichage des lignes dans la tableView de la vue EditerQuestions
      * @author quentin COSTES
      */
     public class LigneQuestion {
         
         private Question question;
-        
-        /*
-        private final SimpleStringProperty reponseJuste;
-        private final SimpleStringProperty reponsesFausses;
-        private final SimpleStringProperty feedback;
-        */
         
         private final Button editerButton;
         private final Button supprimerButton;
@@ -151,7 +117,6 @@ public class ControleurEditerQuestions {
             supprimerButton.setOnAction(event -> supprimerQuestion());
         }
 
-        
         public String getCategorie() {
             return question.getCategorie();
         }
@@ -160,23 +125,6 @@ public class ControleurEditerQuestions {
         public String getNomQuestion() {
             return question.getLibelle();
         }
-
-        /* On remet si la prof veut a tout prix tout les colonnes
-        public String getReponseJuste() {
-            return reponseJuste.get();
-        }
-
-
-        public String getReponsesFausses() {
-            return reponsesFausses.get();
-        }
-
-
-        public String getFeedback() {
-            return feedback.get();
-        }
-
-        */
         
         public Button getEditerButton() {
             return editerButton;
@@ -194,23 +142,23 @@ public class ControleurEditerQuestions {
         }
 
         public void supprimerQuestion() {
-            // méthode appelée lors de l'appuie sur le bouton de suppression de la categorie
+            // Méthode appelée lors de l'appui sur le bouton de suppression de la catégorie
 
-            // on demande confirmation à l'utilisateur
+            // On demande confirmation à l'utilisateur
             boolean result = AlertBox.showConfirmationBox("Êtes-vous sûr de vouloir supprimer la question " + this.getNomQuestion() + " ?");
             if (result) {
-                // si l'utilisateur confirme
+                // Si l'utilisateur confirme
                 // on supprime la question
                 if (modele.supprimerQuestion(question)) {
-                    // si la suppression a réussi
+                    // Si la suppression a réussie
                     AlertBox.showSuccessBox("Suppression effectuée");
                     Quiz.chargerEtChangerVue("EditerQuestions.fxml");
                 } else {
-                    // si la suppression a échoué
+                    // Si la suppression a échoué
                     AlertBox.showErrorBox("Suppression échouée");
                 }
             } else {
-                // si l'utilisateur annule
+                // Si l'utilisateur annule la suppression
                 AlertBox.showErrorBox("Suppression annulée");
             }
             
@@ -281,7 +229,7 @@ public class ControleurEditerQuestions {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        // Créez le bouton de suppression pour chaque ligne et associez une action
+                        // Crée le bouton de suppression pour chaque ligne et associie une action
                         Button supprimerButton = new Button();
                         
                         Image image 

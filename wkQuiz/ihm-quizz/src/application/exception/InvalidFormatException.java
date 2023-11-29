@@ -1,3 +1,8 @@
+/*
+ * InvalidFormatException.java                              novembre 2023
+ * IUT de Rodez, info1 2023-2024, aucun copyright ni copyleft
+ */
+
 package application.exception;
 
 /**
@@ -7,7 +12,7 @@ public class InvalidFormatException extends CreerQuestionException {
 
     /** 
      * Constructeur de la classe InvalidFormatException
-     * @param string
+     * @param string le message d'erreur à renvoyer
      */
     public InvalidFormatException(String messageErreur) {
         super(messageErreur);

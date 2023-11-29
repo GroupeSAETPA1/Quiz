@@ -48,9 +48,7 @@ public class ControleurAccueil {
 	}
 	
 	@FXML
-	private void profil() {
-		System.out.println("PARAMETRE !!!!!!!!!!!!!!!!!!");
-		
+	private void profil() {		
 		TextInputDialog saisiePseudo = new TextInputDialog();
 		
 		saisiePseudo.setContentText("Votre Pseudo");
@@ -108,7 +106,6 @@ public class ControleurAccueil {
 	@FXML
 	private void aider() {
 		modele.setPagePrecedente("Accueil.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 

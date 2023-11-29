@@ -13,14 +13,14 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-import application.exception.ClientDejaConnecter;
-import application.exception.ClientPasConnecterException;
+import application.exception.ClientDejaConnecte;
+import application.exception.ClientPasConnecteException;
 import application.modele.Chiffrage;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 
 /** 
- * TODO comment class responsibility (SRP)
+ * Classe de serveur pour les échanges réseaux
  * @author Francois
  * @author Tom Douaud
  */
@@ -52,34 +52,32 @@ public class Serveur {
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException, 
-    ClientDejaConnecter, SocketTimeoutException {
+    ClientDejaConnecte, SocketTimeoutException {
         
         // Attente d'une connexion d'un client
         if (socket != null && !socket.isClosed()) {
-            throw new ClientDejaConnecter("Un client est déjà connecté");
+            throw new ClientDejaConnecte("Un client est déjà connecté");
         }
-        System.out.println("Attente client...");
         //Ajout d'un TimeOut
         serveur.setSoTimeout(TIMEOUT_SERVEUR_ACCEPT);
         socket = serveur.accept();
         //On enlève le TimeOut
         serveur.setSoTimeout(0);
-        System.out.println("Client accepté");
     }
     
 
     /**
-     * TODO comment method role
+     * Envoie une question au client
      * @return true si le client a reçu les questions
      * @throws IOException
      * @throws ClassNotFoundException
-     * @throws ClientPasConnecterException
+     * @throws ClientPasConnecteException
      */
 	public boolean envoiQuestion() throws IOException, ClassNotFoundException, 
-	ClientPasConnecterException {
+	ClientPasConnecteException {
 	    
 	    if (socket == null || socket.isClosed()) {
-            throw new ClientPasConnecterException("Le serveur n'est connecté à "
+            throw new ClientPasConnecteException("Le serveur n'est connecté à "
                     + "personne");
         }
 	    ModelePrincipal modele = ModelePrincipal.getInstance();
@@ -87,57 +85,50 @@ public class Serveur {
     	boolean clientARecu = false;
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        System.out.println("Stream Créer");
         ArrayList<Question> elementAEnvoyer = new ArrayList<Question>();
         
-        System.out.println("Envoie question : " + QUESTION_CLIENT_PRET);
         // Demande si le client est prêt
         oos.writeObject(QUESTION_CLIENT_PRET);
 
         //On vérifie si le client est prêt
         String reponseClient = (String) ois.readObject();
-        System.out.println("Réponse client :  " + reponseClient);
         clientEstPret = reponseClient.equals(CLIENT_PRET);
         
-        System.out.println(clientEstPret);
-
         if (clientEstPret) {
             
             
             int a =  Chiffrage.genererPuissance();
             int ga = Chiffrage.exposantModulo(Chiffrage.G, a, Chiffrage.P);
             
-            //On envoie g^a au client
+            // On envoie g^a au client
             oos.writeObject(ga);
             
-            //Récuperè g^b
+            // Récupere g^b
             int gb = (int) ois.readObject();
             
-            //On cacule, la donnée partagé
+            // On cacule, la donnée partagé
             int gab = Chiffrage.exposantModulo(gb, a, Chiffrage.P);
             Chiffrage.setGab(gab);
             
             
-            //Définition clé pour crypter le donnée
+            // Définition clé pour crypter le donnée
             String cleVigenere = Chiffrage.generationCle();
             
-            //Cryptage de clé pour l'envoie
+            // Cryptage de clé pour l'envoie
             String cleVigenereCrypte 
             = Chiffrage.chiffrement(cleVigenere, Chiffrage.cleDepuisDiffie());
             
             
-            //Envoyer la clé Vigenère
+            // Envoyer la clé Vigenère
             oos.writeObject(cleVigenereCrypte);
-            System.out.println("Cle vigenère crypté : " + cleVigenereCrypte);
-            System.out.println("Cle vigenère : " + cleVigenere);
             
-            //Récupérer les question a envoyer
+            // Récupérer les question a envoyer
             elementAEnvoyer.addAll(modele.getQuestionAEnvoyer());
             
             ArrayList<String> questionCrypte 
             = Chiffrage.genererTableauCrypter(elementAEnvoyer, cleVigenere);
             
-            //On envoie de le nombre d'élements à envoyer
+            // On envoie de le nombre d'élements à envoyer
             oos.writeObject(questionCrypte.size());
             
             for (Object object : questionCrypte) {
@@ -146,17 +137,15 @@ public class Serveur {
             clientARecu = true;
         }
         
-        //Fin de la communication
+        // Fin de la communication
         oos.writeObject(MESSAGE_FIN_COMMUNICATION);
         String messageFin = (String) ois.readObject();
-        System.out.println(messageFin);
         
         // Fermeture des chemins de communication
         oos.close();
         ois.close();
         
-        socket.close();//Fin de communication
-        System.out.println("Fin. La socket est fermé");
+        socket.close();// Fin de communication
         
         return clientARecu;
     }
@@ -168,7 +157,7 @@ public class Serveur {
 	
     /**
      * Renvoie l'adresse IP du client si il est connecté
-     * @return
+     * @return l'IP du client
      */
 	public String getIPClient() {
 	    if (socket != null) {
@@ -183,8 +172,8 @@ public class Serveur {
 	}
 	
 	/**
-	 * TODO comment method role
-	 * @param nouveauPort
+	 * Setter du port d'écoute
+	 * @param nouveauPort (int) le nouveau port
 	 */
 	public static void setPort(int nouveauPort) {
 	    port = nouveauPort;

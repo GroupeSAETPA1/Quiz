@@ -1,3 +1,7 @@
+/*
+ * ControleurResultat.java                                    novembre 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
+ */
 package application.controleurs.jouer;
 
 import java.util.HashMap;
@@ -11,7 +15,7 @@ import javafx.scene.control.Label;
 
 
 /**
- * Controlleur de la page Résultat
+ * Controleur de la page Résultat
  * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Tom DOUAUD
@@ -21,7 +25,7 @@ public class ControleurResultat {
 	
 	 ModelePrincipal modele = ModelePrincipal.getInstance();
 	 
-	 final String TEXT_SCORE="Score=%s/%s";
+	 final String TEXT_SCORE="Score = %s/%s";
 		
 	/**
 	 * Le texte du score réalisé par le joueur
@@ -88,32 +92,31 @@ public class ControleurResultat {
 			double pourcentage = partie.pourcentageBonneRep();
 			
 			if(pourcentage == 0) {
-				messagePrivee.setText("C'est ratée pour cette fois ci, il faut "
+				messagePrivee.setText("C'est raté pour cette fois-ci, il faut "
 				        + "retenter " + pseudo);
 				
-			}else if(pourcentage > 0 && pourcentage < 25) {
+			} else if(pourcentage > 0 && pourcentage < 25) {
 				messagePrivee.setText("Il va falloir revoir un peu " + pseudo);
 				
-			}else if(pourcentage >= 25 && pourcentage < 50) {
-				messagePrivee.setText("Les bases sont la mais faut revoir "
+			} else if(pourcentage >= 25 && pourcentage < 50) {
+				messagePrivee.setText("Les bases sont là mais il faut revoir "
 				        + "encore un peu " + pseudo);
 				
-			}else if(pourcentage >= 50 && pourcentage < 75) {
+			} else if(pourcentage >= 50 && pourcentage < 75) {
 				messagePrivee.setText("Il y a du niveau mais c'est "
 				        + "pas encore parfait " + pseudo);
 				
-			}else if(pourcentage >= 75 && pourcentage < 100) {
-				messagePrivee.setText("Vous maîtriser vos acquis " + pseudo);
+			} else if(pourcentage >= 75 && pourcentage < 100) {
+				messagePrivee.setText("Vous maîtrisez vos acquis " + pseudo);
 				
-			}else {
-				messagePrivee.setText("Mais vous savez tous, bien joué " 
+			} else {
+				messagePrivee.setText("Mais vous savez tout, bien joué " 
 			                          + pseudo);
 			}
 			
 			
-		}else {
+		} else {
 			messagePrivee.setText("Il n'y a pas de partie en cours " + pseudo);
 		}
 	}
-			
 }

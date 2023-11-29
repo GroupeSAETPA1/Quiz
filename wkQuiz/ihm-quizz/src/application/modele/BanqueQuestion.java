@@ -20,7 +20,7 @@ import application.exception.InvalidFormatException;
  */
 public class BanqueQuestion implements Serializable {
 	
-    /** TODO comment field role (attribute, associative role) */
+    /** Id de sérialisation */
     private static final long serialVersionUID = 1685481789337969601L;
     
     /** Liste des questions */
@@ -56,7 +56,7 @@ public class BanqueQuestion implements Serializable {
     public Question getQuestion(int id) throws IndexOutOfBoundsException {
         if (id < 0 || questions.size() <= id) {
             throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
-                    + "hors de la liste de taile %s", id, questions.size()));
+                    + "hors de la liste de taille %s", id, questions.size()));
         }
         
         return questions.get(id);
@@ -71,7 +71,7 @@ public class BanqueQuestion implements Serializable {
     }
 
     /**
-     * Permet de récupérer les questions qui on la catégorie passé en paramètres.
+     * Permet de récupérer les questions qui ont la catégorie passée en paramètres.
      * @param categorie la catégorie des questions à récupérer
      * @return null
      */
@@ -98,7 +98,7 @@ public class BanqueQuestion implements Serializable {
     throws DifficulteException {
         
         if (difficulte < 1 || 3 < difficulte) {
-            throw new DifficulteException("Une difficulte est comprise " 
+            throw new DifficulteException("Une difficultée est comprise " 
                                            + "entre 1 et 3");
         }
         

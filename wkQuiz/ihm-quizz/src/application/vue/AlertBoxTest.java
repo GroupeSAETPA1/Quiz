@@ -1,3 +1,8 @@
+/*
+ * AlertBoxTest.java                                    26 oct. 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
+ */
+
 package application.vue;
 
 import javafx.application.Application;
@@ -6,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Tests du fonctionnement des Alert box
+ */
 public class AlertBoxTest extends Application {
 
     @Override
@@ -20,7 +28,6 @@ public class AlertBoxTest extends Application {
         confirmationButton.setOnAction(e -> {
             String message = "Voulez-vous continuer ?";
             boolean result = AlertBox.showConfirmationBox(message);
-            System.out.println("Confirmation résultat : " + result);
         });
 
         successButton.setOnAction(e -> {
@@ -49,7 +56,6 @@ public class AlertBoxTest extends Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("mgoeh");
         launch(args);
     }
 }

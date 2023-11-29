@@ -23,7 +23,7 @@ import outil.LectureFichier;
 import outil.Serveur;
 
 /** 
- * Représente le client qui reçoit les question
+ * Représente le client qui reçoit les questions
  * @author François de Saint Palais
  */
 public class ControleurRecevoirQuestions {
@@ -47,24 +47,20 @@ public class ControleurRecevoirQuestions {
 	@FXML
 	private void aider() {
 		modele.setPagePrecedente("RecevoirQuestions.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
     void retour() {
     	Quiz.changerVue("ModeEnLigne.fxml");
-        System.out.println("Retour");
     }
     
     @FXML
     void connexion() throws ClassNotFoundException {
-        System.out.println("Connexion");
         boolean clientCreer = false;
         try {
             client = new Client(ipServeur.getText(), Integer.parseInt(portServeur.getText()));
             clientCreer = true;
-            System.out.println("Client créer");
         } catch (NumberFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         }
@@ -76,19 +72,16 @@ public class ControleurRecevoirQuestions {
                 ArrayList<String> questionClair;
                 
                 client.seConnecter();
-                System.out.println("On est connecter");
                 elementRecu = client.recevoirDonnees();
                 questionClair = new ArrayList<String>(elementRecu.size());
                 
                 if (elementRecu != null) {
-                    //TODO décrypter
                     for (Object questionCrypte : elementRecu) {
                         questionClair.add(
                                 Chiffrage.decrypterFichier((String) questionCrypte, 
                                         Client.getCleVigenere()));
                     }
                     
-                    //TODO Ajouter à la banque
                     int nbErreur = 0;
                     int nbDejaPresent = 0;
                     for (String ligne : questionClair) {
@@ -108,8 +101,8 @@ public class ControleurRecevoirQuestions {
                     }
                     if (nbErreur != 0) {                        
                         AlertBox.showWarningBox(String.format(
-                                "Sur les %d question envoyés, %d n'ont pas pu "
-                                + "être ajouté et %d existe déjà", 
+                                "Sur les %d question envoyées, %d n'ont pas pu "
+                                + "être ajoutées et %d existe déjà", 
                                 questionClair.size(), nbErreur, nbDejaPresent));
                     }
                 }

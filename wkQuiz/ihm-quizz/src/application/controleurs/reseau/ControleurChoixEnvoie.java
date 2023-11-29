@@ -1,3 +1,8 @@
+/*
+ * ControleurChoixEnvoie.java                               
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs.reseau;
 
 import application.Quiz;
@@ -11,7 +16,6 @@ public class ControleurChoixEnvoie {
 	@FXML
     void retour() {
     	Quiz.changerVue("ModeEnLigne.fxml");
-        System.out.println("Retour");
     }
     
     /**
@@ -21,7 +25,6 @@ public class ControleurChoixEnvoie {
 	@FXML
 	private void aider() {
 		modele.setPagePrecedente("ChoixEnvoie.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	

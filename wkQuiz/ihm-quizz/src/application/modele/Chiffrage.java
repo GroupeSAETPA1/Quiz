@@ -1,3 +1,8 @@
+/*
+ * Chiffrage.java 								18/10/2023
+ * IUT de Rodez, pas de copyrights ni copyleft
+ */
+
 package application.modele;
 
 import java.util.ArrayList;
@@ -5,7 +10,7 @@ import java.util.HashMap;
 
 /**
  * La classe Chiffrage fournit des méthodes pour le chiffrement
- *  et le déchiffrement grace a un algorithme de vigenere
+ * et le déchiffrement grace a un algorithme de vigenere
  */
 public class Chiffrage {
 	
@@ -54,6 +59,7 @@ public class Chiffrage {
     
     
 	/**
+	 * Méthode de génération de clé
      * @return une cle de longueur comprise entre 
 	 * LONGUEUR_CLE_MINIMUM et LONGUEUR_CLE_MAXIMUM
 	 * et comprenant uniquement des caractères de INT_TO_ALPHABET 
@@ -83,7 +89,7 @@ public class Chiffrage {
 	public static String chiffrement(String message, String cle) {
 		StringBuilder aCrypter = new StringBuilder();
 		for (int i = 0 ; i < message.length() ; i++) {
-		    // valeur du caractere message.charAt(i)
+		    // Valeurs du caractère message.charAt(i)
 		    int messageI;
 		    try {                
 		        messageI = ALPAHABET_TO_INT.get(message.charAt(i));
@@ -93,7 +99,7 @@ public class Chiffrage {
                 throw e;
             }
 		    
-		    // valeur du caractère de la cle
+		    // Valeur du caractère de la cle
 		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
 		    
 		    char crypter = INT_TO_ALPHABET.get(
@@ -113,14 +119,13 @@ public class Chiffrage {
 	public static String dechiffrement(String message, String cle) {
 	    StringBuilder aCrypter = new StringBuilder();
 	    for (int i = 0 ; i < message.length() ; i++) {
-	        // valeur du caractere message.charAt(i)
+	        // Valeur du caractère message.charAt(i)
 	        int messageI = ALPAHABET_TO_INT.get(message.charAt(i));
-	        
-            // valeur du caractère de la cle
+            // Valeur du caractère de la cle
             int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
             
 	        int positionReelle  = (messageI - cleI) % NOMBRE_LETTRE_ALPHABET;
-	        // on repasse le modulo en positif
+	        // On repasse le modulo en positif
 	        positionReelle = positionReelle < 0 ? 
 	                         positionReelle + NOMBRE_LETTRE_ALPHABET 
 	                         : positionReelle;

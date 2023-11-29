@@ -1,5 +1,6 @@
 /*
- * 
+ * Question.java                                    26 oct. 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
 package application.modele;
@@ -20,7 +21,7 @@ import application.exception.ReponseException;
  */
 public class Question implements Serializable {
 	
-	/** TODO comment field role (attribute, associative role) */
+	/** ID de sérialisation */
     private static final long serialVersionUID = 1L;
 
     private static boolean reponseFausseContientReponseJuste
@@ -149,7 +150,7 @@ public class Question implements Serializable {
             + LONGUEUR_MAX_REPONSE);
         }
         if (reponsesFausse.isEmpty()) {
-            throw new InvalidFormatException("La liste des mauvaises reponses "
+            throw new InvalidFormatException("La liste des mauvaises réponses "
                     + "ne doit pas etre vide");
         }
         if (!reponsesFausseSansDoublon(reponsesFausse)) {
@@ -161,7 +162,7 @@ public class Question implements Serializable {
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
             throw new ReponseException("La liste des réponses fausses "
                     + "contient une ou plusieurs propositions égale "
-                    + "a la réponse juste (casse ignorée");
+                    + "à la réponse juste (casse ignorée");
         }
         if (contientAccent(reponseJuste, reponsesFausse, libelle, feedback)) {
         	throw new InvalidNameException("Aucun champ ne doit contenir des accents.");
@@ -176,7 +177,7 @@ public class Question implements Serializable {
         }
         if (feedback != null && feedback.length() > LONGUEUR_MAX_FEEDBACK) {
             throw new InvalidNameException("Le feedback contient " 
-            + feedback.length() + " caractères . Il peut en contenir au maximum " 
+            + feedback.length() + " caractères. Il peut en contenir au maximum " 
                     + LONGUEUR_MAX_FEEDBACK);
         }
         
@@ -194,9 +195,6 @@ public class Question implements Serializable {
     	boolean ok = true; // ok si pas d'accent
     	for (int i = 0 ; i < reponsesFausses.size(); i++) {
     		ok = ok && ModelePrincipal.alphabetOk(reponsesFausses.get(i));
-    		if (!ok) {
-    			System.out.println("erreur a la reponse : " + reponsesFausses.get(i));
-    		}
     	}
     	
     	ok = ok && ModelePrincipal.alphabetOk(reponseJuste);
@@ -207,7 +205,7 @@ public class Question implements Serializable {
 	}
 
 	/** 
-     * * Construire un message d'erreur a partir d'une arrayList de reponse trop
+     * Construire un message d'erreur a partir d'une arrayList de reponse trop
      * longue
      * @param reponseFausse liste des reponses fausses a ajouter dans le 
      *        stringBuilder
@@ -215,8 +213,8 @@ public class Question implements Serializable {
      */
     private static StringBuilder erreurReponsesFaussesTropLongue(ArrayList<String> reponseFausse) {
         StringBuilder messageErreur = new StringBuilder();
-        messageErreur.append("Une reponse fausse peut contenir au maximum " 
-                + LONGUEUR_MAX_REPONSE + " caractères. Voici les reponses qui posent"
+        messageErreur.append("Une réponse fausse peut contenir au maximum " 
+                + LONGUEUR_MAX_REPONSE + " caractères. Voici les réponses qui posent"
                         + " problèmes : ");
                 for (String reponse : reponseFausse) {
                     messageErreur.append("- " + reponse + " " + reponse.length() 
@@ -348,10 +346,10 @@ public class Question implements Serializable {
      */
     public void setFeedback(String feedback) throws InvalidNameException {
         if (libelle.isBlank()) {
-            throw new InvalidNameException("Le libelle est vide");
+            throw new InvalidNameException("Le libellé est vide");
         }
         if (LONGUEUR_LIBELLE_MAX < feedback.length()) {
-            throw new InvalidNameException("Le libelle contient " + feedback.length() 
+            throw new InvalidNameException("Le libellé contient " + feedback.length() 
             + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
 		this.feedback = feedback;
@@ -389,9 +387,9 @@ public class Question implements Serializable {
             reponseJuste)) {
             
             throw new ReponseException("Impossible de modifier si "
-                                     + "la liste de mauvaise reponse " 
+                                     + "la liste de mauvaise réponse " 
                                      + "contient une possibilité "
-                                     + "égale a la bonne reponse (case ignorée)");
+                                     + "égale à la bonne réponse (case ignorée)");
             
         }
         if (!reponsesFausseSansDoublon(nouvellesMauvaisesReponses)) {

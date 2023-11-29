@@ -26,8 +26,8 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
- * Controlleur de la page Solution. La page affiche les réponse du dernier Quiz
- * avec,
+ * Controlleur de la page Solution. La page affiche les réponses du dernier Quiz
+ * avec :
  * <ul>
  * <li>La bonne réponse</li>
  * <li>Le feedback</li>
@@ -52,7 +52,7 @@ public class ControleurSolution {
     @FXML private Text score;
 
     /**
-     * Le tableau de la solution du quiz, avec une indication si le joueur a eu bon
+     * Le tableau de la solution du quiz, avec une indication si le joueur à eu bon
      */
     @FXML private TableView<LigneQuestionSolution> tableauSolution;
     
@@ -126,8 +126,6 @@ public class ControleurSolution {
         HashMap<Question, String> resultatQuestionnaire 
         = partie.getReponseDonnees();
 
-        System.out.println(resultatQuestionnaire);
-
         Set<Question> questionsQuestionnaire = resultatQuestionnaire.keySet();
         for (Question question : questionsQuestionnaire) {
 
@@ -144,8 +142,8 @@ public class ControleurSolution {
     /**
      * Ajoute une ligne à la GridPane.
      * 
-     * @param question     La question a ajouter
-     * @param bonneReponse true l'utilisateur a sélectionner la bonne réponse, false
+     * @param question     La question à ajouter
+     * @param bonneReponse true si l'utilisateur à sélectionné la bonne réponse, false
      *                     sinon
      */
     private void ajouterReponse(Question question, boolean bonneReponse) {
@@ -180,7 +178,7 @@ public class ControleurSolution {
         /**
          * Construction de la ligne
          * @param question La question de la ligne
-         * @param reponseEstJuste true si l'utilisateur a bien répondu false sinon
+         * @param reponseEstJuste true si l'utilisateur à bien répondu false sinon
          */
         public LigneQuestionSolution(Question question, boolean reponseEstJuste) {
             this.categorie = question.getCategorie();
@@ -202,7 +200,7 @@ public class ControleurSolution {
                     BONNE_REPONSE : MAUVAISE_REPONSE);
         }
 
-        /** @return valeur de categorie */
+        /** @return valeur de catégorie */
         public String getCategorie() {
             return categorie;
         }
@@ -212,17 +210,17 @@ public class ControleurSolution {
             return feedback;
         }
 
-        /** @return valeur de libelle */
+        /** @return valeur de libellé */
         public String getLibelle() {
             return libelle;
         }
 
-        /** @return valeur de reponseJuste */
+        /** @return valeur de réponseJuste */
         public String getReponseJuste() {
             return reponseJuste;
         }
 
-        /** @return valeur de indicationReponse */
+        /** @return valeur de indicationRéponse */
         public ImageView getIndicationReponse() {
             return indicationReponse;
         }
@@ -230,7 +228,7 @@ public class ControleurSolution {
     }
     
     /**
-     * Créer une cellule qui contient une image centrer
+     * Créer une cellule qui contient une image centrée
      * @author François de Saint Palais
      */
     public class ImageViewCellFactory implements 
@@ -241,7 +239,7 @@ public class ControleurSolution {
         public TableCell<LigneQuestionSolution, ImageView> call(
                 TableColumn<LigneQuestionSolution, ImageView> param) {
             
-            //Cellule à return
+            // Cellule à return
             TableCell<LigneQuestionSolution, ImageView> cell 
             = new TableCell<LigneQuestionSolution, ImageView>() {
                 @Override
@@ -255,36 +253,4 @@ public class ControleurSolution {
             return cell;
         }
     }
-//
-//    public class TextCellFactory implements Callback<TableColumn<LigneQuestionSolution, String>, TableCell<LigneQuestionSolution, String>> {
-//
-//        /* non javadoc - @see javafx.util.Callback#call(java.lang.Object) */
-//        @Override
-//        public TableCell<LigneQuestionSolution, String> call(TableColumn<LigneQuestionSolution, String> arg0) {
-//
-//            TableCell<LigneQuestionSolution, String> cell 
-//            = new TableCell<LigneQuestionSolution, String>() {
-//                @Override
-//                protected void updateItem(String item, boolean empty) {
-//                    super.updateItem(item, empty);
-//                    if (empty || item == null) {
-//                        setText(null);
-//                        setGraphic(null);
-//                    } else {
-//                        setText(item.toString());
-//                    }
-//                    Tooltip information = new Tooltip(getText());
-//                    Tooltip.install(this, information);
-//                }
-//            };
-//            
-//            cell.setAlignment(Pos.CENTER);
-//            cell.textProperty().setValue(cell.getItem());
-//            cell.setWrapText(true);
-//            
-//            return cell;
-//        }
-//        
-//    }
-
 }

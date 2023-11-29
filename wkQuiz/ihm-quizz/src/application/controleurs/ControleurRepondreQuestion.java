@@ -1,3 +1,7 @@
+/*
+ * ControleurRepondreQuestion.java                                    novembre 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
+ */
 package application.controleurs;
 
 import java.util.ArrayList;
@@ -17,6 +21,7 @@ import javafx.scene.control.ToggleGroup;
 public class ControleurRepondreQuestion {
     
     private Partie partie = ModelePrincipal.getInstance().getPartie();
+    
 	
 	@FXML
 	private Label categorie;
@@ -61,7 +66,7 @@ public class ControleurRepondreQuestion {
 	@FXML 
 	public void initialize() {
 	    /*
-	     * Evite IndexOutOfBoundsException au premier chargement
+	     * Évite l'IndexOutOfBoundsException au premier chargement
 	     */	
 	    if (partie.getQuestionPossible().size() != 0) {
 	        Question questionEnCour = partie.getQuestionPossible().get(partie.getIndiceQuestion());
@@ -100,17 +105,17 @@ public class ControleurRepondreQuestion {
 	}
 
 	/**
-	 * modification de la page si c'est la dernier quesiton
+	 * Modification de la page si c'est la dernière quesiton
 	 */
 	private void afficherDernierPage() {
-		valider.setText("Termminer le questionnaire");
+		valider.setText("Terminer le questionnaire");
 		valider.setPrefWidth(333);
 		valider.setTranslateX(-75);
 		
 	}
 
 	/**
-	 * Affiche le numéro de la question dans la partie
+	 * Affiche sur la page le numéro de la question courante
 	 */
 	private void afficherNumeroQuestion() {
 		Integer nb = partie.getIndiceQuestion() + 1;
@@ -118,8 +123,8 @@ public class ControleurRepondreQuestion {
 	}
 
 	/** 
-     * Change le style du bouton precedent en fonction de si il doit etre
-     * active ou non
+     * Change le style du bouton précédent en fonction de si il doit être
+     * activé ou non
      */
     private void couleurBoutonPrecedent() {
         String couleur = 
@@ -132,11 +137,11 @@ public class ControleurRepondreQuestion {
 
 
     /**
-     * permet de rajouter des \n a tout les a caracteres
-     * @param chaine 
-     * @param a
+     * Permet de rajouter des \n a tous les "a" caractères
+     * @param chaine (String) la chaine de caractères à formatter
+     * @param a (int) le nombre de caractères max avant le \n
      */
-    private String formaterLIbelle(String chaine, int a) {
+    private String formaterLibelle(String chaine, int a) {
 		String libelleFormater = "";
 
     	for (int i = 0; i <= chaine.length() - 1; i ++) {
@@ -147,9 +152,7 @@ public class ControleurRepondreQuestion {
     	}
     	
     	return libelleFormater;   	
-	}
-
-    
+	}   
     
     @FXML
     private void validerReponse() {
@@ -157,8 +160,8 @@ public class ControleurRepondreQuestion {
         String reponseChoisie;
         int actuelle = partie.getIndiceQuestion();
         if (reponses.getSelectedToggle() == null) {
-           reponseAlertBox =  AlertBox.showConfirmationBox("Vous n'avez choisis "
-                   + "aucunes reponses.\nPar défaut cette réponse sera compté "
+           reponseAlertBox =  AlertBox.showConfirmationBox("Vous avez choisi "
+                   + "aucune réponse.\nPar défaut la réponse sera comptée "
                    + "comme fausse");
         }
         if (reponseAlertBox) {
@@ -178,7 +181,6 @@ public class ControleurRepondreQuestion {
                 partie.setIndiceQuestion(partie.getIndiceQuestion()+1);
                 Quiz.chargerEtChangerVue("RepondreQuestion.fxml");
             }
-            
         }
     }
     
@@ -194,13 +196,12 @@ public class ControleurRepondreQuestion {
     @FXML
 	public void aider() {
     	modele.setPagePrecedente("RepondreQuestion.fxml");
-    	System.out.println(";jtdj,d");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 
     /**
-     * Affiche les réponse possible pour la question
-     * @param question
+     * Affiche les différentes réponses possibles
+     * @param question la question dont on devra afficher les choix possibles
      */
    	private void afficherChoixPossible(Question question) {
    		ArrayList<String> reponsePossibles = new ArrayList<>();
@@ -239,10 +240,9 @@ public class ControleurRepondreQuestion {
    		
    	}
 
-   	/**
-   	 * 
-   	 * TODO comment method role
-   	 * @param question
+   	/** 
+   	 * Affiche la question sur la page
+   	 * @param question la question à afficher
    	 */
    	private void afficherQuestion(Question question) {
    		
@@ -259,40 +259,19 @@ public class ControleurRepondreQuestion {
    		
    		intitule.setText(libelleFormater);
    		ModelePrincipal.getInstance();
-		difficulte.setText("Difficulté : " + ModelePrincipal.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()));
+		difficulte.setText("Difficultée : " + ModelePrincipal.INT_DIFFICULTE_TO_LABEL.get(question.getDifficulte()));
    		numero.setText("Question n°");
-   	
 
-   		}
-   	
-   	/**
-   	 * 
-   	 * TODO comment method role
-   	 * @param chaine
-   	 * @param a TODO un meilleur nom pour a svp
-   	 * @return
-   	 */
-   	private String formaterLibelle(String chaine, int a) {
-   		String libelleFormater = "";
-
-       	for (int i = 0; i <= chaine.length() - 1; i ++) {
-       		libelleFormater += chaine.charAt(i);
-       		if (i % a == 0 && i != 0) {
-       			libelleFormater += "\n";
-       		}
-       	}
-       	
-       	return libelleFormater;   	
    	}
+   	
    	
     /** 
      * Sélectionne la réponse de l'utilisateur si il avait déjà répondu et 
      * qu'il revient sur cette question 
-     * @param questionEnCour question dont ou souhaite verifier l'existence 
+     * @param questionEnCour question dont ou souhaite vérifier l'existence 
      * d'une réponse
      */
     private void questionDejaRepondu(Question questionEnCour) {
-//        Partie parti = ModelePrincipal.getInstance().getPartie();
         
         if (partie.getReponseDonnees().containsKey(questionEnCour)) {
         
@@ -317,7 +296,7 @@ public class ControleurRepondreQuestion {
     }
     
     /**
-     * Action lié au bouton Passer
+     * Action lieé au bouton Passer
      */
     @FXML
     private void passer() {
@@ -326,8 +305,8 @@ public class ControleurRepondreQuestion {
             confirmationPasserDerniereQuestion();     
        } else {
            boolean reponseAlertBox =  AlertBox.showConfirmationBox(
-               "Vous n'avez choisis aucunes reponses.\n"
-               + "Par défaut cette réponse sera compté comme fausse");
+               "Vous avez choisi aucune réponse.\n"
+               + "Par défaut la réponse sera comptée comme fausse");
            int actuelle = partie.getIndiceQuestion();
            if (reponseAlertBox) {
                partie.setReponseDonnees(
@@ -341,7 +320,7 @@ public class ControleurRepondreQuestion {
     @FXML
     private void quitterQuiz() {
     	boolean quitterQuiz = AlertBox.showConfirmationBox("Voulez-vous " 
-    						  + "renvenir au menu principal ?\n Toute "
+    						  + "renvenir au menu principal ?\nToute "
     						  + "votre progression sur le quiz sera perdue.");
     	if (quitterQuiz) {
     		Quiz.chargerEtChangerVue("Accueil.fxml");
@@ -349,12 +328,13 @@ public class ControleurRepondreQuestion {
     }
 
     /** 
-     * TODO comment method role
+     * Affiche un pop-up qui prévient l'utilisateur 
+     * qu'il va passer la dernière question du quiz
      */
     private void confirmationPasserDerniereQuestion() {
         boolean finir = AlertBox.showConfirmationBox(
-                "Vous allez passer la dernière question et finir le quizz . "
-                + "Vous ne pourrez pas revenir en arrière etes vous sur ? ");
+                "Vous allez passer la dernière question et finir le quiz. "
+                + "Voulez vous vraiment passer la question et terminer le quiz ?");
         if (finir) {
             Quiz.chargerEtChangerVue("Resultat.fxml");
         }

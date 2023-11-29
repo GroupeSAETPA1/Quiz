@@ -35,7 +35,7 @@ import application.modele.Partie;
 import application.modele.Question;
 
 /**
- * TODO comment class responsibility (SRP)
+ * Méthode de test du Modele Principal
  * 
  * @author Lucas Descriaud
  * @author Tom Douaud

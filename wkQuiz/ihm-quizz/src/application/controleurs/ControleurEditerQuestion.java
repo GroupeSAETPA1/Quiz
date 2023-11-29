@@ -197,7 +197,7 @@ public class ControleurEditerQuestion {
      * @throws InvalidNameException
      */
     private void miseAJourListeCategorie() {
-        //Récupération puis ajout des nom de catégorie
+        // Récupération puis ajout des noms de catégorie
         categories = modele.getCategories();
         selectCategorie.getItems().addAll(categories);
     }
