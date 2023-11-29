@@ -70,7 +70,7 @@
                   <Font size="38.0" />
                </font>
             </Label>
-            <TextField fx:id="saisieCheminFichier" prefHeight="51.0" prefWidth="799.0" promptText="Chemin absolue du fichier csv" style="-fx-background-radius: 60;">
+            <TextField fx:id="saisieCheminFichier" prefHeight="51.0" prefWidth="799.0" promptText="Chemin absolu du fichier .csv" style="-fx-background-radius: 60;">
                <font>
                   <Font size="24.0" />
                </font>

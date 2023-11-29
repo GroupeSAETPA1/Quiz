@@ -7,6 +7,7 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.CreerQuestionException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
@@ -96,21 +97,19 @@ public class ControleurEditerQuestion {
      */
 	@FXML
 	private void valider() {
-		Question aModifier = modele.getQuestionAModifier();
-		
-		//TODO utiliser la méthode modifierQuestion de ModelePrincipal
+		Question aModifier = modele.getQuestionAModifier();		
 		
 		try {
+			ArrayList<String> repFausses = new ArrayList();
+			repFausses.add("faux");
+			Question questionTemp = new Question("libelle", null, 1, "juste", repFausses, "");
 	    	
-			aModifier.setCategorie(selectCategorie.getValue());
-			if (ModelePrincipal.alphabetOk(saisieReponseVrai.getText())) {
-				aModifier.setBonneReponse(saisieReponseVrai.getText());
-			}
+			questionTemp.setCategorie(selectCategorie.getValue());
 			if (ModelePrincipal.alphabetOk(saisieFeedback.getText())) {
-				aModifier.setFeedback(saisieFeedback.getText());
+				questionTemp.setFeedback(saisieFeedback.getText());
 			}
 			if (ModelePrincipal.alphabetOk(saisieLibeleQuestion.getText())) {
-				aModifier.setLibelle(saisieLibeleQuestion.getText());
+				questionTemp.setLibelle(saisieLibeleQuestion.getText());
 			}
 			
 			ArrayList<String> reponseFausses = new ArrayList<>();
@@ -142,7 +141,20 @@ public class ControleurEditerQuestion {
 					AlertBox.showErrorBox("Il ne doit pas y avoir d'accents dans la quatrième réponse fausse");
 				}
 			}
-			aModifier.setMauvaiseReponse(reponseFausses);
+			String reponseSTUB = "ceci est un STUB pour la réponse";
+			if (ModelePrincipal.alphabetOk(saisieReponseVrai.getText())) {
+				try {
+					questionTemp.setBonneReponse(saisieReponseVrai.getText());
+					questionTemp.setMauvaiseReponse(reponseFausses);
+				} catch (ReponseException e) {
+					questionTemp.setBonneReponse(reponseSTUB);
+					questionTemp.setMauvaiseReponse(reponseFausses);
+					questionTemp.setBonneReponse(saisieReponseVrai.getText());
+				}
+
+				
+				
+			}
 			
 			int reponse = 0;
 	        if (difficulte.getSelectedToggle() != null) {
@@ -150,12 +162,31 @@ public class ControleurEditerQuestion {
 	                    ((RadioButton) difficulte.getSelectedToggle()).getText());
 	        }
 	        
-	        aModifier.setDifficulte(reponse);
-			
-			AlertBox.showSuccessBox("Question modifiée avec succès");
+	        questionTemp.setDifficulte(reponse);
+	        
+	        if (!aModifier.equals(questionTemp) && !modele.getBanqueQuestion().getQuestions().contains(questionTemp)) {
+	        	System.out.println(questionTemp);
+	        	System.out.println("pas egal a ");
+	        	System.out.println(aModifier);
+	        	aModifier.setDifficulte(questionTemp.getDifficulte());
+	        	aModifier.setCategorie(modele.getBanqueCategorie().getCategorieLibelleExact(questionTemp.getCategorie()));
+	        	aModifier.setFeedback(questionTemp.getFeedback());
+	        	aModifier.setLibelle(questionTemp.getLibelle());
+	        	try {
+	        		aModifier.setBonneReponse(questionTemp.getReponseJuste());
+	        		aModifier.setMauvaiseReponse(questionTemp.getMauvaisesReponses());
+	        	} catch (ReponseException e) {
+	        		aModifier.setBonneReponse(reponseSTUB);
+	        		aModifier.setMauvaiseReponse(reponseFausses);
+	        		aModifier.setBonneReponse(saisieReponseVrai.getText());
+	        	}  	
+	        } else {
+	        	throw new CreerQuestionException("la question existe déjà.");
+	        }
+			AlertBox.showSuccessBox("question modifiée avec succès");
 			Quiz.chargerEtChangerVue("EditerQuestions.fxml");
 			
-		} catch (ReponseException | InvalidNameException | InvalidFormatException e) {
+		} catch (CreerQuestionException | InvalidNameException e) {
 			AlertBox.showErrorBox(e.getMessage());
 		}
 		
