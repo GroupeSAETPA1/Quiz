@@ -26,9 +26,9 @@ public class Accent {
     = Map.ofEntries(
             entry('é','e'),entry('è','e'),entry('ê','e'),entry('ë','e'),
             entry('à','a'),entry('â','a'),entry('ä','a'),
+            entry('û','u'),entry('ü','u'),entry('ù', 'u'),
             entry('ô','o'),entry('ö','o'),
             entry('î','i'),entry('ï','i'),
-            entry('û','u'),entry('ü','u'),
             entry('ç','c'),
             entry('É','E'),entry('È','E'),entry('Ê','E'),entry('Ë','E'),
             entry('Û','U'),entry('Ü','U'),entry('Ù','U'),
@@ -83,6 +83,9 @@ public class Accent {
         if (!Chiffrage.CUSTOM_ALPHABET.contains(caratereARemplacer + "")) {
             reponse = ACCENT_TO_NORMAL.containsKey(caratereARemplacer) ? 
                     ACCENT_TO_NORMAL.get(caratereARemplacer) : '?';
+            if (!ACCENT_TO_NORMAL.containsKey(caratereARemplacer)) {
+                System.err.println(caratereARemplacer);
+            }
         }
         return reponse;
     }
