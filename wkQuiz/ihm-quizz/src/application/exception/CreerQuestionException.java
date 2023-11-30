@@ -6,13 +6,11 @@
 package application.exception;
 
 /** 
- * Superclass de toute les exception lié à la création d'une question
+ * Superclass de toutes les exceptions liées à la création d'une question
  * @author François de Saint Palais
  */
 public class CreerQuestionException extends Exception {
 
-    /** TODO comment field role (attribute, associative role) */
-    private static final long serialVersionUID = 1L;
 
     /** 
      * Constructeur par défaut
@@ -22,10 +20,12 @@ public class CreerQuestionException extends Exception {
     }
 
     /** 
-     * TODO comment initial state properties
-     * @param message
+     * Constructeur avec message spécifique
+     * @param message le message d'erreur à renvoyer
      */
     public CreerQuestionException(String message) {
         super(message);
     }
+    
+    private static final long serialVersionUID = 1L;
 }

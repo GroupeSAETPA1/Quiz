@@ -1,5 +1,6 @@
 /*
- * 
+ * Question.java                                    26 oct. 2023
+ * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
 package application.modele;
@@ -7,6 +8,7 @@ package application.modele;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
@@ -19,7 +21,7 @@ import application.exception.ReponseException;
  */
 public class Question implements Serializable {
 	
-	/** TODO comment field role (attribute, associative role) */
+	/** ID de sérialisation */
     private static final long serialVersionUID = 1L;
 
     private static boolean reponseFausseContientReponseJuste
@@ -132,12 +134,11 @@ public class Question implements Serializable {
      */
     public Question(String libelle,Categorie categorie,int difficulte,
                     String reponseJuste, ArrayList<String> reponsesFausse,
-                    String feedback) throws InvalidFormatException, 
-                    InvalidNameException, ReponseException, DifficulteException {
+                    String feedback) throws CreerQuestionException, InvalidNameException {
         
-        if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX) {
-            throw new InvalidNameException("Le libelle contient " + libelle.length() 
-            + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
+        if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX ) {
+            throw new InvalidNameException("Le libéllé contient " + libelle.length() 
+            + " caractères. Il faut qu'il soit entre 1 et" + LONGUEUR_LIBELLE_MAX);
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
             throw new DifficulteException("Le niveau de difficulté doit être "
@@ -149,19 +150,22 @@ public class Question implements Serializable {
             + LONGUEUR_MAX_REPONSE);
         }
         if (reponsesFausse.isEmpty()) {
-            throw new InvalidFormatException("La liste des mauvaises reponses "
+            throw new InvalidFormatException("La liste des mauvaises réponses "
                     + "ne doit pas etre vide");
         }
         if (!reponsesFausseSansDoublon(reponsesFausse)) {
-            throw new ReponseException("La liste des mauvaises reponses "
+            throw new ReponseException("La liste des mauvaises réponses "
                     + "ne peut pas contenir de valeurs "
                     + "en double");
         }
         
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
-            throw new ReponseException("La liste des reponses fausses "
+            throw new ReponseException("La liste des réponses fausses "
                     + "contient une ou plusieurs propositions égale "
-                    + "a la réponse juste (casse ignorée");
+                    + "à la réponse juste (casse ignorée");
+        }
+        if (contientAccent(reponseJuste, reponsesFausse, libelle, feedback)) {
+        	throw new InvalidNameException("Aucun champ ne doit contenir des accents.");
         }
         
         ArrayList<String>reponseFausseTropLongue = 
@@ -173,7 +177,7 @@ public class Question implements Serializable {
         }
         if (feedback != null && feedback.length() > LONGUEUR_MAX_FEEDBACK) {
             throw new InvalidNameException("Le feedback contient " 
-            + feedback.length() + " caractères . Il peut en contenir au maximum " 
+            + feedback.length() + " caractères. Il peut en contenir au maximum " 
                     + LONGUEUR_MAX_FEEDBACK);
         }
         
@@ -187,8 +191,21 @@ public class Question implements Serializable {
         
     }
 
-    /** 
-     * * Construire un message d'erreur a partir d'une arrayList de reponse trop
+    private boolean contientAccent(String reponseJuste, ArrayList<String> reponsesFausses, String libelle, String feedback) {
+    	boolean ok = true; // ok si pas d'accent
+    	for (int i = 0 ; i < reponsesFausses.size(); i++) {
+    		ok = ok && ModelePrincipal.alphabetOk(reponsesFausses.get(i));
+    	}
+    	
+    	ok = ok && ModelePrincipal.alphabetOk(reponseJuste);
+    	ok = ok && ModelePrincipal.alphabetOk(libelle);
+    	ok = ok && ModelePrincipal.alphabetOk(feedback);
+    	
+    	return !ok;
+	}
+
+	/** 
+     * Construire un message d'erreur a partir d'une arrayList de reponse trop
      * longue
      * @param reponseFausse liste des reponses fausses a ajouter dans le 
      *        stringBuilder
@@ -196,8 +213,8 @@ public class Question implements Serializable {
      */
     private static StringBuilder erreurReponsesFaussesTropLongue(ArrayList<String> reponseFausse) {
         StringBuilder messageErreur = new StringBuilder();
-        messageErreur.append("Une reponse fausse peut contenir au maximum " 
-                + LONGUEUR_MAX_REPONSE + " caractères. Voici les reponses qui posent"
+        messageErreur.append("Une réponse fausse peut contenir au maximum " 
+                + LONGUEUR_MAX_REPONSE + " caractères. Voici les réponses qui posent"
                         + " problèmes : ");
                 for (String reponse : reponseFausse) {
                     messageErreur.append("- " + reponse + " " + reponse.length() 
@@ -280,7 +297,7 @@ public class Question implements Serializable {
      */
     public void setBonneReponse(String nouvelleBonneReponse) 
     throws InvalidNameException, ReponseException {
-        if (nouvelleBonneReponse.equals("")) {
+        if (reponseJuste.isBlank()) {
             throw new InvalidNameException("Bonne réponse vide");
         }
         if (reponseFausseContientReponseJuste(mauvaisesReponses, 
@@ -288,6 +305,12 @@ public class Question implements Serializable {
             throw new ReponseException("Impossible de mettre une bonne "
                     + "reponse si la valeur est deja contenu "
                     + "dans mauvaiseReponse ");
+        }
+        if (   reponseJuste.length() > LONGUEUR_MAX_REPONSE 
+            || nouvelleBonneReponse.length() <= 0) {
+            throw new InvalidNameException("La réponse juste contient" + 
+            libelle.length()  + "Il faut qu'elle contienne entre 1 et " 
+            + LONGUEUR_MAX_REPONSE);
         }
         //else
         this.reponseJuste = nouvelleBonneReponse;
@@ -319,8 +342,16 @@ public class Question implements Serializable {
     /**
      * Change le feedback de la question
      * @param feedback (String) le nouveau feedback
+     * @throws InvalidNameException 
      */
-    public void setFeedback(String feedback) {
+    public void setFeedback(String feedback) throws InvalidNameException {
+        if (libelle.isBlank()) {
+            throw new InvalidNameException("Le libellé est vide");
+        }
+        if (LONGUEUR_LIBELLE_MAX < feedback.length()) {
+            throw new InvalidNameException("Le libellé contient " + feedback.length() 
+            + " caractères. Il faut qu'il en est entre 1 et" + LONGUEUR_LIBELLE_MAX);
+        }
 		this.feedback = feedback;
 	}
     
@@ -356,9 +387,9 @@ public class Question implements Serializable {
             reponseJuste)) {
             
             throw new ReponseException("Impossible de modifier si "
-                                     + "la liste de mauvaise reponse " 
+                                     + "la liste de mauvaise réponse " 
                                      + "contient une possibilité "
-                                     + "égale a la bonne reponse (case ignorée)");
+                                     + "égale à la bonne réponse (case ignorée)");
             
         }
         if (!reponsesFausseSansDoublon(nouvellesMauvaisesReponses)) {
@@ -408,4 +439,7 @@ public class Question implements Serializable {
     	}
     	return aRetouner; 	
     }
+    
+    
+    
 }

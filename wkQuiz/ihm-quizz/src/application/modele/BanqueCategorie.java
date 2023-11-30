@@ -5,7 +5,9 @@
 
 package application.modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
 import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 
@@ -14,9 +16,14 @@ import application.exception.InvalidNameException;
  * @author Quentin Costes
  * @author Tom Douaud
  */
-public class BanqueCategorie {
+public class BanqueCategorie implements Serializable {
 	
-    /** La catégorie Général */
+	/**
+	 * ID de serialisation
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** La catégorie Général */
     protected Categorie categorieGeneral;
     
     /** La liste des catégories */
@@ -24,17 +31,19 @@ public class BanqueCategorie {
     
     /**
      * Constructeur de BanqueCategorie
-     * @throws InvalidNameException 
+     * @throws InvalidNameException L'exception ne serait jamais envoyée 
+     * vu qu'on appele le constructeur de Categorie avec la catégorie general 
+     * qui est valide mais on est obligés de l'entourer d'un try catch
      */
     public BanqueCategorie() {
-        try {
-            categorieGeneral = new Categorie("General");
-        } catch (InvalidNameException e) {
-            throw new InternalError("La création de la categorie Général à "
-                    + "généré une erreur");
-        }
-        categories = new ArrayList<Categorie>();
-        categories.add(categorieGeneral);
+    	try {
+    		categorieGeneral = new Categorie("General");
+    	} catch (InvalidNameException e) {
+    		throw new InternalError("La création de la categorie Général à "
+    				+ "généré une erreur");
+    	}
+    	categories = new ArrayList<Categorie>();
+    	categories.add(categorieGeneral);
     }
     
     /**
@@ -59,7 +68,7 @@ public class BanqueCategorie {
     public Categorie getCategorie(int id) {
     	if (id < 0 || categories.size() <= id) {
             throw new IndexOutOfBoundsException(String.format("Erreur : %d est "
-                    + "hors de la liste de taile %s", id, categories.size()));
+                    + "hors de la liste de taille %s", id, categories.size()));
         }
     	
         return categories.get(id);

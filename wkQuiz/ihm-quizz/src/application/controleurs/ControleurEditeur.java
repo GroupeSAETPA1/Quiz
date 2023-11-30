@@ -4,7 +4,7 @@ import application.Quiz;
 import javafx.fxml.FXML;
 
 /**
- * Controlleur de la page d'Edition.
+ * Controleur de la page d'Edition.
  * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Néo BECOGNE
@@ -14,10 +14,10 @@ import javafx.fxml.FXML;
  * @author Tom DOUAUD
  */
 
-public class ControlleurEditeur {
+public class ControleurEditeur {
 	 
 	/**
-	 * Méthode liée au bouton importer des question 
+	 * Méthode liée au bouton importer des questions
 	 * qui envoie sur la page ImporterQuestion.fxml
 	 */
 	@FXML 

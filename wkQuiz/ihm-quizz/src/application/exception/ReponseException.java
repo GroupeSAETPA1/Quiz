@@ -1,3 +1,8 @@
+/*
+ * ReponseException.java                              novembre 2023
+ * IUT de Rodez, info1 2023-2024, aucun copyright ni copyleft
+ */
+
 package application.exception;
 
 /**

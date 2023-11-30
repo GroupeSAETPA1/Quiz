@@ -1,7 +1,11 @@
 package test.modele;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +35,8 @@ class TestCategorie {
 		assertThrows(InvalidNameException.class, () -> new Categorie("   "));
 		// Le constructeur dépasse la longueur nom max
 		assertThrows(InvalidNameException.class, () -> new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));		
+		// caractere invalide
+		assertThrows(InvalidNameException.class, () -> new Categorie("é"));	
 	}
 
 	/**

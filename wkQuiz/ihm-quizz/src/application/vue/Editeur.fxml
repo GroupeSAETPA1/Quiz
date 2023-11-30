@@ -9,18 +9,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurEditeur">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurEditeur">
    <children>
       <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#accueil">
          <children>
-            <Label layoutX="-1.0" layoutY="74.0" text="Retour" textFill="WHITE">
+            <Label layoutY="80.0" text="Accueil" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
             <ImageView fx:id="AcceuilBouton" fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/IconeRetour.png" />
+                  <Image url="@images/IconeAcceuil.png" />
                </image>
             </ImageView>
          </children>
@@ -73,15 +73,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text fill="WHITE" layoutX="329.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditeur de questions" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="323.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Éditeur de questions" textAlignment="CENTER">
          <font>
             <Font name="Open Sans Regular" size="40.0" />
          </font>
       </Text>
-      <ImageView fitHeight="380.0" fitWidth="70.0" layoutX="488.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-         <image>
-            <Image url="@images/Connector%20line.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

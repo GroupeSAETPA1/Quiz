@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,41 +19,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurRepondreQuestion">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurRepondreQuestion">
    <children>
-      <Group layoutX="32.0" layoutY="20.0">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#quitterQuiz">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label layoutX="1.0" layoutY="76.0" text="Retour" textFill="WHITE">
+            <Label layoutY="80.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Group layoutX="1275.0" layoutY="27.0">
+      <Group layoutX="1280.0" layoutY="20.0" onMouseClicked="#aider">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeAide.png" />
                </image>
             </ImageView>
-            <Label layoutX="16.0" layoutY="82.0" text="Aide" textFill="WHITE">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <Label fx:id="difficulte" layoutX="-155.0" layoutY="138.0" prefHeight="47.0" prefWidth="283.0" text="Difficultée : " textFill="WHITE">
+            <Label layoutX="15.0" layoutY="80.0" text="Aide" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
+      <Label fx:id="difficulte" layoutX="1056.0" layoutY="149.0" prefHeight="47.0" prefWidth="283.0" text="Difficultée : " textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
       <Label fx:id="numero" layoutX="589.0" layoutY="53.0" prefHeight="58.0" prefWidth="283.0" text="Question n°" textFill="WHITE">
          <font>
             <Font size="40.0" />
@@ -62,9 +69,9 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <VBox alignment="CENTER" layoutX="33.0" layoutY="332.0" prefHeight="472.0" prefWidth="1338.0" spacing="30.0">
+      <VBox alignment="CENTER_LEFT" layoutX="33.0" layoutY="332.0" prefHeight="472.0" prefWidth="1338.0" spacing="30.0">
          <children>
-            <RadioButton fx:id="choix1" mnemonicParsing="false" textFill="WHITE">
+            <RadioButton fx:id="choix1" alignment="CENTER_LEFT" contentDisplay="TEXT_ONLY" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -72,27 +79,30 @@
                   <ToggleGroup fx:id="reponses" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="choix2" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix2" alignment="CENTER_LEFT" contentDisplay="TEXT_ONLY" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix3" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix3" alignment="CENTER_LEFT" contentDisplay="TEXT_ONLY" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix4" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix4" alignment="CENTER_LEFT" contentDisplay="TEXT_ONLY" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="choix5" mnemonicParsing="false" textFill="WHITE" toggleGroup="$reponses">
+            <RadioButton fx:id="choix5" alignment="CENTER_LEFT" contentDisplay="TEXT_ONLY" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" textFill="WHITE" toggleGroup="$reponses">
                <font>
                   <Font size="20.0" />
                </font>
             </RadioButton>
          </children>
+         <padding>
+            <Insets left="300.0" />
+         </padding>
       </VBox>
       <Button fx:id="valider" layoutX="625.0" layoutY="808.0" mnemonicParsing="false" onMouseClicked="#validerReponse" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 60; -fx-background-color: #004F08;" text="Valider" textFill="WHITE">
          <font>

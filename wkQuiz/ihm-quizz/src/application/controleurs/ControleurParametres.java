@@ -1,20 +1,19 @@
 /*
- * ControlleurParametres.java                                    10 nov. 2023
+ * ControleurParametres.java                                    10 nov. 2023
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
 package application.controleurs;
 
-import application.modele.Partie;
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
-import org.junit.jupiter.params.provider.EnumSource.Mode;
-
 import application.Quiz;
+import application.exception.DifficulteException;
+import application.modele.Categorie;
 import application.modele.ModelePrincipal;
+import application.modele.Partie;
 import application.modele.Question;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
@@ -24,9 +23,9 @@ import javafx.scene.control.ToggleGroup;
 
 /** 
  * Controller de la page fxml parametre partie
- * @author Lucas
+ * @author Lucas Descriaud
  */
-public class ControlleurParametres {
+public class ControleurParametres {
 
     @FXML
     private ComboBox<String> selecteurCategorie ;
@@ -42,7 +41,7 @@ public class ControlleurParametres {
     @FXML
     public void initialize() {
         selecteurCategorie.getItems().add("Aléatoire");
-        // Ajoute les categorie de banque categorie dans la combo box
+        // Ajoute les catégorie de banque catégorie dans la combo box
         selecteurCategorie.getItems().
         addAll(ModelePrincipal.getInstance().getBanqueCategorie().getCategoriesNom());  
         modele.getPartie().getReponseDonnees().clear();
@@ -53,7 +52,7 @@ public class ControlleurParametres {
     
     
     /*
-     * Fonction lié au bouton de retour a la page d'accueil
+     * Fonction liée au bouton de retour à la page d'accueil
      */
     @FXML
     public void retourAccueil() {
@@ -62,38 +61,36 @@ public class ControlleurParametres {
 
     @FXML
 	private void aider() {
-    	modele.setPagePrecedente("ParametrePartie.fxml"); 
+    	modele.setPagePrecedente("ParametrePartie.fxml");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
     
     /*
-     * Fonction lié au bouton de commencement d'une partie
+     * Fonction liée au bouton de commencement d'une partie
      */
     @FXML
     public void commencerPartie() {
         try {
-        	//ModelePrincipal.getInstance().setPartie(new Partie());
             modifierParametrePartie();
             boolean lancer;
             int nombreQuestion = genererListeQuestionPossible();
             Partie partie = ModelePrincipal.getInstance().getPartie();
             if (nombreQuestion == 0) {
                 throw new IllegalArgumentException("Impossible de lancer un "
-                        + "quiz ! Aucunes questions trouver pour vos choix "
+                        + "quiz ! Aucune question trouvée pour vos choix "
                         + "de parametres"); 
             } else if (nombreQuestion < partie.getNombreQuestion()) {
                 lancer  = AlertBox.showConfirmationBox(
                         "Seulement " + nombreQuestion + 
-                        " questions trouvé pour votre paramétrage \n "
-                        + "voulez vous lance le quizz avec celui-ci ?");
+                        " questions trouvées pour votre paramétrage \n "
+                        + "voulez-vous lancer le quiz avec celui-ci ?");
             } else {
                 lancer = AlertBox.showConfirmationBox(
-                        "Voulez vous lancer le quizz avec ce paramétrage");
+                        "Voulez-vous lancer le quiz avec ce paramétrage ?");
             }
             if (lancer) {
                 ordreAleatoire();
-                
-
+          
                 Quiz.chargerEtChangerVue("RepondreQuestion.fxml");;
             }
         } catch (Exception e) {
@@ -102,7 +99,7 @@ public class ControlleurParametres {
     }
     
     /** 
-     * Melange de maniere aléatoire la liste des questions possibles
+     * Mélange de maniere aléatoire la liste des questions possibles
      */
     private void ordreAleatoire() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
@@ -113,27 +110,30 @@ public class ControlleurParametres {
 
 
     /** 
-     * Ajoute a la liste de questions dans laquelle seront tirés celle de la partie
-     * toutes les questions correspondant au parametre
-     * @return le nombre de question repondant au parametre
+     * Ajoute à la liste de questions qui seront tirées dans la partie
+     * toutes les questions qui correspondent au paramètre
+     * @return le nombre de questions repondant au paramètre
      */
     private int genererListeQuestionPossible() {
         Partie partie = ModelePrincipal.getInstance().getPartie();
+        // On réinitialise la liste des questions possibles
+        partie.getQuestionPossible().clear();
+        Categorie categoriePartie = partie.getCategoriePartie();
         for (Question question : ModelePrincipal.getInstance().
              getBanqueQuestion().getQuestions()) {
             /*
-             * Categorie partie est null si aléatoire choisis donc on prendras
-             * les questions de toutes les categories
-             * Difficulte partie = 0 si on a choisis Tous comme niveau donc on 
-             * prendras les questions de tous les difficultes
+             * La catégorie de la partie est null si aléatoire est choisis donc on prendras
+             * les questions de toutes les catégories.
+             * Difficulte partie = 0 si on à choisi Tous comme niveau donc on 
+             * prendras les questions de toutes les difficultes
              */
-            if (partie.getCategoriePartie() == null ||
-                (question.getCategorie().equals(
-                 partie.getCategoriePartie().toString()))
-               && (question.getDifficulte() == partie.getDifficulte().intValue()
-                   || partie.getDifficulte().intValue() == 0)
+            if ((categoriePartie == null || question.getCategorie().equals
+               (categoriePartie.getNom()))
+               && (question.getDifficulte() == partie.getDifficultePartie()
+               .intValue()
+               || partie.getDifficultePartie().intValue() == 0)
                ){
-                partie.getQuestionPossible().add(question);        
+                partie.getQuestionPossible().add(question); 
             }   
         }
 
@@ -143,28 +143,34 @@ public class ControlleurParametres {
 
 
     /** 
-     * Met a jour les paramètre de la partie
+     * Met à jour les paramètres de la partie
+     * @throws DifficulteException 
      */
-    private void modifierParametrePartie() {
+    private void modifierParametrePartie() throws DifficulteException {
         if (selecteurCategorie.getValue() != null ) {
-            ModelePrincipal.getInstance().getPartie()
-            .setCategoriePartie(selecteurCategorie.getValue());
+            try {
+				ModelePrincipal.getInstance().getPartie()
+				.setCategoriePartie(selecteurCategorie.getValue());
+			} catch (ClassNotFoundException | InternalError | IOException e) {
+				e.printStackTrace();
+			}
         } else {
-            throw new NullPointerException("Categorie non selectionné  ! ");
+            throw new NullPointerException("Categorie non selectionnée  !");
         }
         ModelePrincipal.getInstance().getPartie().setNombreQuestion(getNbQuestion());
         /* 
-         * difficulte partie a 0 = tous type de questions 
+         * Difficultée partie à 0 = tout type de questions 
          */
         ModelePrincipal.getInstance().getPartie().setDifficultePartie(getDifficulte());
     }
 
     /** 
-     * @return La difficulte choisis
+     * Getter de la difficultée choisie
+     * @return La difficultée choisie
      */
     private Integer getDifficulte() {
         if (difficulte.getSelectedToggle() == null) {
-            throw new NullPointerException("Aucunes difficulte selectionee");
+            throw new NullPointerException("Aucune difficultée selectionée !");
         }
         return ModelePrincipal.LABEL_DIFFICULTE_TO_INT.get(
                ((RadioButton) difficulte.getSelectedToggle()).getText());
@@ -172,11 +178,12 @@ public class ControlleurParametres {
     }
 
     /**
-     * @return la valeur choisis pour le nombre de question
+     * Getter du nombre de questions choisi
+     * @return la valeur choisie pour le nombre de questions
      */
     private int getNbQuestion() {
         if (nombreQuestions.getSelectedToggle() == null) {
-            throw new NullPointerException("Nombre de question non selectionné ! ");
+            throw new NullPointerException("Nombre de questiosn non selectionné !");
         }
         //else
         return Integer.parseInt((

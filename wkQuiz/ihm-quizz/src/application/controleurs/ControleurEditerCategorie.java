@@ -1,6 +1,12 @@
+/*
+ * ControleurEditerCategorie.java                                     
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs;
 
 import application.Quiz;
+import application.exception.HomonymeException;
 import application.exception.InvalidNameException;
 import application.modele.Categorie;
 import application.modele.ModelePrincipal;
@@ -9,13 +15,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 /**
- * Controlleur de la page d'édition des catégories.
+ * Controleur de la page d'édition des catégories.
  * Celui-ci instance  des méthodes liée au bouton de la page 
  * 
  * @author Quentin COSTES
  */
 
-public class ControlleurEditerCategorie {
+public class ControleurEditerCategorie {
 	
 	@FXML
 	private TextField input;
@@ -52,18 +58,22 @@ public class ControlleurEditerCategorie {
 	@FXML
 	private void valider() throws InvalidNameException {
 		ModelePrincipal modele = ModelePrincipal.getInstance();
-		Categorie aModifier = modele.getCategorieAModifier();
-		
-		
-		if( modele.categorieExiste(input.getText()) 
-			||  modele.getCategorieAModifier().getNom().equals(input.getText())) {
+				
+		if (modele.categorieExiste(input.getText()) 
+			|| modele.getCategorieAModifier().getNom().equals(input.getText())) {
 			
-			AlertBox.showErrorBox("La Catégorie est déjà existante ");
-		}else {
-			modele.getBanqueCategorie().getCategorieLibelleExact(aModifier.getNom()).setNom(input.getText());
-			AlertBox.showSuccessBox("Catégorie modifiée avec succées");
+			AlertBox.showErrorBox("La catégorie est déjà existante ou vous " 
+			+ "n'avez pas modifié le nom de la catégorie. \nVeuillez réessayer");
+		} else {
+			try {
+				modele.modifierCategorie(input.getText());
+				AlertBox.showSuccessBox("Catégorie modifiée avec succès !");
 
-			Quiz.chargerEtChangerVue("EditerCategories.fxml");
+				Quiz.chargerEtChangerVue("EditerCategories.fxml");
+			} catch (InvalidNameException | HomonymeException e) {
+				AlertBox.showErrorBox(e.getMessage());
+			}
+			
 		}
 	}
 	

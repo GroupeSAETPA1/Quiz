@@ -1,5 +1,5 @@
 /*
- * ControlleurCreationQuestionEtCategorie.java
+ * ControleurCreationQuestionEtCategorie.java
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
@@ -8,6 +8,7 @@ package application.controleurs;
 import java.util.ArrayList;
 
 import application.Quiz;
+import application.exception.CreerQuestionException;
 import application.exception.DifficulteException;
 import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
@@ -37,7 +38,7 @@ import javafx.scene.control.ToggleGroup;
  */
 
 
-public class ControlleurCreationQuestionEtCategorie {
+public class ControleurCreationQuestionEtCategorie {
 
 
     private ArrayList<Categorie> categories;
@@ -65,7 +66,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	private ModelePrincipal model = ModelePrincipal.getInstance();
 
 	/**
-	 * Méthodes liée au bouton annuler, vide les champs 
+	 * Méthode liée au bouton annuler de la question, vide les champs 
 	 */
 	@FXML
 	private void annulerQuestion() {
@@ -73,7 +74,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	}
 	
 	/**
-	 * Méthodes liée au bouton annuler, vide les champs 
+	 * Méthode liée au bouton annuler de la catégorie, vide les champs 
 	 */
 	@FXML
 	private void annulerCategorie() {
@@ -84,14 +85,12 @@ public class ControlleurCreationQuestionEtCategorie {
 	private void aideCategorie() {
 		model.setDisplayCategoriePane(true);
 		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 	
 	@FXML
 	private void aideQuestion() {
 		model.setPagePrecedente("CreationQuestionEtCategorie.fxml");
-		System.out.println("Aider");
 		Quiz.chargerEtChangerVue("Aide.fxml");
 	}
 
@@ -104,7 +103,7 @@ public class ControlleurCreationQuestionEtCategorie {
 
 	    miseAJourListeCategorie();
 
-	    //Permet de sélectionner un onglet dans le TabPane
+	    // Permet de sélectionner un onglet dans le TabPane
 	    if (ModelePrincipal.getInstance().isDisplayCategoriePane()) {
 	    	tabPane.getSelectionModel().select(tabCategorie);
 	    	ModelePrincipal.getInstance().setDisplayCategoriePane(false);
@@ -115,7 +114,7 @@ public class ControlleurCreationQuestionEtCategorie {
 	 * Met à jour la ComboBox de Catégorie avec les catégories du modèle
      */
     private void miseAJourListeCategorie() {
-        //Récupération puis ajout des nom de catégorie
+        // Récupération puis ajout des nom de catégorie
         categories = modele.getCategories();
         
         selectCategorie.getItems().clear();
@@ -123,7 +122,7 @@ public class ControlleurCreationQuestionEtCategorie {
     }
 
     /**
-	 * Méthodes liée au bouton Accueil
+	 * Méthode liée au bouton Accueil
 	 * envoie vers la page Accueil.fxml
 	 */
 	@FXML
@@ -132,32 +131,32 @@ public class ControlleurCreationQuestionEtCategorie {
 	}
 
     /**
-     * Méthodes liée au bouton valider, créer une nouvelle question
+     * Méthode liée au bouton valider, qui crée une nouvelle question
      * à partir des champs
      */
 	@FXML
 	private void validerQuestion() {
 		try {
-			//Récupération de l'indice de la catégorie choisie
+			// Récupération de l'indice de la catégorie choisie
 			int indiceCategorieChoisie = getIndiceCategorieChoisie();
-			if (indiceCategorieChoisie <= 0) {
+			if (indiceCategorieChoisie < 0) {
 				throw new 
-				NullPointerException("Il n'y a pas de Catégorie choisie");
+				NullPointerException("Il n'y a pas de catégorie choisie");
 			}
 			
-			//Récupération du nom de la question
+			// Récupération du nom de la question
 			String libeleQuestion = getLibeleQuestion();
 			
-			//Récupération de la difficulté
+			// Récupération de la difficultée
 			int valeurDifficulte = getDifficulte();
 			
-			//Récupération du feedback
+			// Récupération du feedback
 			String feedback = getFeedback();
 			
-			//Récupération de la réponse vrai
+			// Récupération de la réponse vrai
 			String reponseVrai = getReponseVrai();
 			
-			//Récupération des réponses fausses
+			// Récupération des réponses fausses
 			ArrayList<String> mauvaiseReponses = getMauvaiseReponse();
 			
 			
@@ -167,12 +166,7 @@ public class ControlleurCreationQuestionEtCategorie {
 		} catch (NullPointerException e) {
         	AlertBox.showErrorBox("Les champs requis pour une question ne sont pas tous remplis");
         }
-		
-		 Quiz.charger("EditerQuestions.fxml");
-		
 	}
-
-
 
     /** 
      * @return La liste des mauvaise réponse choisie
@@ -246,7 +240,7 @@ public class ControlleurCreationQuestionEtCategorie {
      */
     private void creerEtGererQuestion(int indiceCategorieChoisie, String libeleQuestion,
             int valeurDifficulte, String feedback, String reponseVrai, ArrayList<String> mauvaiseReponses) {
-        //Création de la question
+        // Création de la question
         boolean questionCreer = false;
         try {
             questionCreer = modele.creerQuestion(libeleQuestion,
@@ -256,20 +250,20 @@ public class ControlleurCreationQuestionEtCategorie {
         } catch (InvalidFormatException e) {
             AlertBox.showErrorBox(e.getMessage());
         } catch (InvalidNameException e) {
-            AlertBox.showErrorBox("Attention, veuillez saisir le nom de la "
-                    + "question ET une réponse juste.");
+            AlertBox.showErrorBox(e.getMessage());
         } catch (ReponseException e) {
-            AlertBox.showErrorBox("Attention, les mauvaise réponse ne doivent "
+            AlertBox.showErrorBox("Attention, les mauvaises réponses ne doivent "
                     + "pas être en double ET la bonne réponse ne peut pas être "
                     + "une mauvaise réponse");
         } catch (HomonymeException e) {
             AlertBox.showWarningBox("La question saisie existe déjà");
         } catch (DifficulteException e) {
-            // TODO Auto-generated catch block
+            AlertBox.showWarningBox("Il manque la difficultée de la question");
+        } catch (CreerQuestionException e) {
             e.printStackTrace();
         }
         if (questionCreer) {
-            AlertBox.showSuccessBox("Question crée !");
+            AlertBox.showSuccessBox("Question crée avec succès !");
             viderChampsQuestion();
         }
     }
@@ -299,13 +293,13 @@ public class ControlleurCreationQuestionEtCategorie {
 
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide "
-                    + ": entre 1 et 30 caractère maximum ");
+                    + ": entre 1 et 30 caractères maximum et qui ne dois pas contenir d'accents");
         } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La categorie saisie existe déjà");
+            AlertBox.showWarningBox("La catégorie saisie existe déjà");
         }
         
         if (categorieCreer) {
-            AlertBox.showSuccessBox("Categorie crée !");
+            AlertBox.showSuccessBox("Categorie crée avec succès !");
             miseAJourListeCategorie();
             Quiz.charger("EditerCategories.fxml");
             viderChampsCategorie();
@@ -331,7 +325,6 @@ public class ControlleurCreationQuestionEtCategorie {
 	     * meme si ce n'est pas le plus optimal pour l'utilisateur
 	     * car la combo box ne prends que des catégories et non une String
 	     */
-	    //TODO Mettre à jour la liste sa va vider la liste et donc ne rien sélectionner
 	}
 
 	/**
