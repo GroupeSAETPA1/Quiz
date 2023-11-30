@@ -18,15 +18,16 @@
 
 /* les onglets */
 .tab {
-    -fx-background-color: #060608; /* Couleur onglet par défault */
+    -fx-background-color: #1C1B22; /* Couleur onglet par défault */
     -fx-font-size: 30px;  /* Taille texte onglet */
     -fx-background-radius: 10 10 0 0; /* Arrondi onglet */
     -fx-padding: 0 10 0 10;
-    
+    -fx-opacity: 0.5;
 }
 /* Onglet selectionné */
 .tab:selected {
     -fx-background-color: #282C34;
+    -fx-opacity: 1;
 }
 
 /* Texte des onglets */

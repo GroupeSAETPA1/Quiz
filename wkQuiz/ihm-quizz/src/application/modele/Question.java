@@ -165,7 +165,8 @@ public class Question implements Serializable {
                     + "à la réponse juste (casse ignorée");
         }
         if (contientAccent(reponseJuste, reponsesFausse, libelle, feedback)) {
-        	throw new InvalidNameException("Aucun champ ne doit contenir des accents.");
+        	throw new InvalidNameException("Aucun champ ne doit contenir des accents " 
+        + " ou des caractères qui ne figurent pas dans la table ASCII (Exemple ç).");
         }
         
         ArrayList<String>reponseFausseTropLongue = 

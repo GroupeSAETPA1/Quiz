@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -19,8 +26,83 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
+<TabPane fx:id="tabPane" prefHeight="900.0" prefWidth="1300.0" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurCreationQuestionEtCategorie">
    <tabs>
+      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
+         <content>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
+               <children>
+                  <Group layoutX="22.0" layoutY="20.0" onMouseClicked="#retourAcceuil">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeRetour.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="10.0" layoutY="80.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
+                           <font>
+                              <Font name="Open Sans" size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideCategorie">
+                     <children>
+                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeAide.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="15.0" layoutY="82.0" text="Aide" textFill="WHITE">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Label layoutX="430.0" layoutY="51.0" prefHeight="58.0" prefWidth="476.0" text="Création d'une catégorie" textFill="WHITE">
+                     <font>
+                        <Font name="Open Sans" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="277.0" layoutY="300.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="222.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeAnnuler.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="saisieNomCategorie" layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onAction="#validerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="633.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/IconeValider.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+         </content>
+      </Tab>
       <Tab closable="false" text="Création Question">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
@@ -41,7 +123,7 @@
                   </Group>
                   <Group layoutX="1170.0" layoutY="20.0" onMouseClicked="#aideQuestion">
                      <children>
-                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="96.0" fitWidth="96.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/IconeAide.png" />
                            </image>
@@ -74,7 +156,7 @@
                         <Font name="Open Sans" size="20.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="803.0" layoutY="160.0" prefHeight="51.0" prefWidth="338.0" text="Réponse vrai : " textFill="WHITE">
+                  <Label layoutX="803.0" layoutY="160.0" prefHeight="51.0" prefWidth="338.0" text="Réponse Vraie : " textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -103,7 +185,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="saisieReponseVrai" layoutX="803.0" layoutY="236.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre Bonne réponse " style="-fx-background-radius: 32px;">
+                  <TextField fx:id="saisieReponseVrai" layoutX="803.0" layoutY="236.0" prefHeight="50.0" prefWidth="418.0" promptText="Saisissez votre bonne réponse " style="-fx-background-radius: 32px;">
                      <font>
                         <Font name="Open Sans" size="20.0" />
                      </font>
@@ -172,87 +254,12 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="saisieFeedback" layoutX="105.0" layoutY="523.0" prefHeight="124.0" prefWidth="412.0" promptText="Ecrivez votre FeddBack">
+                  <TextArea fx:id="saisieFeedback" layoutX="105.0" layoutY="523.0" prefHeight="124.0" prefWidth="412.0" promptText="Ecrivez votre FeddBack (Optionnel)">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </TextArea>
                   <Separator layoutX="647.0" layoutY="151.0" orientation="VERTICAL" prefHeight="524.0" prefWidth="30.0" />
-               </children>
-            </Pane>
-         </content>
-      </Tab>
-      <Tab fx:id="tabCategorie" closable="false" text="Création Catégorie">
-         <content>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #282C34;">
-               <children>
-                  <Group layoutX="18.0" layoutY="18.0" onMouseClicked="#retourAcceuil">
-                     <children>
-                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/IconeRetour.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutY="70.0" prefHeight="57.0" prefWidth="104.0" text="Retour" textFill="WHITE">
-                           <font>
-                              <Font name="Open Sans" size="32.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group layoutX="1170.0" layoutY="18.0" onMouseClicked="#aideCategorie">
-                     <children>
-                        <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/IconeAide.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="16.0" layoutY="84.0" text="Aide" textFill="WHITE">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Label layoutX="430.0" layoutY="50.0" prefHeight="58.0" prefWidth="476.0" text="Création d'une catégorie" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="40.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="277.0" layoutY="300.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la Catégorie : " textFill="WHITE">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="276.0" layoutY="708.0" mnemonicParsing="false" onAction="#annulerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Annuler" textFill="WHITE">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="222.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/IconeAnnuler.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <TextField fx:id="saisieNomCategorie" layoutX="272.0" layoutY="343.0" prefHeight="80.0" prefWidth="720.0" promptText="Saisissez le nom de la catégorie" style="-fx-background-radius: 32;">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="755.0" layoutY="708.0" mnemonicParsing="false" onAction="#validerCategorie" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #2F76FF; -fx-background-radius: 60;" text="Valider" textFill="WHITE">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="633.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/IconeValider.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </Pane>
          </content>

@@ -211,6 +211,8 @@ public class ControleurImport {
             
             StringBuilder messageErreur = new StringBuilder() ;
             
+            messageErreur.append(LectureFichier.getNombreQuestionAjoute() 
+            					 + " lignes analysées.\n");
             // Pour les utilisateur de l'application, une liste commence à 1
             erreurImportLigne.forEach((key , value) -> {
                 messageErreur.append("Erreur d'import à la ligne n°" + (key + 1)

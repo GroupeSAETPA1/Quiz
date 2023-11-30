@@ -32,6 +32,8 @@ public class LectureFichier {
     public static final char SEPARATEUR_CSV = '\t';
     
     private static ModelePrincipal modele = ModelePrincipal.getInstance();
+    
+    private static int nombreQuestionAjoute;
 
     /**
      * Lit le fichier .csv et récupère les lignes
@@ -44,7 +46,7 @@ public class LectureFichier {
         ArrayList<HashMap<String, String>> resultat = new ArrayList<HashMap<String, String>>();
         BufferedReader fichierReader = new BufferedReader(new FileReader(fichierCSV.getAbsolutePath()));
 
-        int nombreQuestionAjoute = 0;
+        nombreQuestionAjoute = 0;
         do {
             ligne = fichierReader.readLine();
 
@@ -55,7 +57,6 @@ public class LectureFichier {
             }
         } while (ligne != null);
         fichierReader.close();
-        AlertBox.showSuccessBox(nombreQuestionAjoute + " lignes analysées.");
         return resultat;
     }
 
@@ -75,10 +76,10 @@ public class LectureFichier {
         for (int i = 0; i < ligneListe.length; i++) {
             ligneListe[i] = Accent.convertirAccent(ligneListe[i]);
             
-            //Il est possible qu'un CSV encadre ces valeur par des ". 
-            //Il faut les supprimer avant d'utiliser les valeurs
+            // Il est possible qu'un CSV encadre ces valeur par des ". 
+            // Il faut les supprimer avant d'utiliser les valeurs
             if (guillemeDebutFin.matcher(ligneListe[i]).matches()) {
-                //On supprime le premier et dernier  qui sont des ".
+                // On supprime le premier et dernier  qui sont des ".
                 ligneListe[i] 
                 = ligneListe[i].substring(1, ligneListe[i].length() - 1);
             }
@@ -183,6 +184,14 @@ public class LectureFichier {
             }
         }
         return creationOK;
+    }
+    
+    /**
+     * Getter du nombre de question ajoutées
+     * @return le nombre de question ajoutées
+     */
+    public static int getNombreQuestionAjoute() {
+		return nombreQuestionAjoute;	
     }
 
 }
