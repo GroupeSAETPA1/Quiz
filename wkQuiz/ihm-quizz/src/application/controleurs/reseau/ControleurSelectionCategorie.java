@@ -58,6 +58,13 @@ public class ControleurSelectionCategorie {
         nombreQuestion.setCellFactory(new TextCellFactory<LigneSelectionCategorie>());
 
         selection.setCellFactory(new CheckBoxCategorieCellFactory());
+        
+        
+        double tailleTableView = 1000;
+        
+        nomCategorie.setPrefWidth(tailleTableView * 0.42);
+        nombreQuestion.setPrefWidth(tailleTableView * 0.35);
+        selection.setPrefWidth(tailleTableView * 0.17);
 
         miseAJourTableau();
     }

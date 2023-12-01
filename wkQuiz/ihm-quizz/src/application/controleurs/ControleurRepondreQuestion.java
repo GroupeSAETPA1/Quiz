@@ -215,11 +215,7 @@ public class ControleurRepondreQuestion {
         String reponsesAAfficher = "";
 
         for (int i = 0; i < nbQuestion; i++) {
-            if (reponsePossibles.get(i).length() > 125) {
-                reponsesAAfficher = formaterLibelle(reponsePossibles.get(i), 125);
-            } else {
-                reponsesAAfficher = reponsePossibles.get(i);
-            }
+        	reponsesAAfficher = formaterLibelle(reponsePossibles.get(i), 125);
             if (i == 0) {
                 choix1.setVisible(true);
                 choix1.setText(reponsesAAfficher);

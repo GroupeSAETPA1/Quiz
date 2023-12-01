@@ -105,7 +105,7 @@ public class ControleurAide {
 			text3.setStyle("-fx-font-size: 20px");
 			text3.setTranslateY(70);
 			
-			text4.setText("Le délimateur du fichier .CSV est le caractère \"é\"\n");
+			text4.setText("Le délimateur du fichier .CSV est le caractère \"\t\" (la tabulation)\n");
 			text4.setStyle("-fx-font-size: 20px");
 			text4.setTranslateY(70);
 			
