@@ -33,7 +33,7 @@ public abstract class AlertBox {
         ButtonType buttonTypeYes = new ButtonType("Valider");
         ButtonType buttonTypeNo = new ButtonType("Annuler");
 
-        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        alert.getButtonTypes().setAll(buttonTypeNo, buttonTypeYes);
 
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == buttonTypeYes;
