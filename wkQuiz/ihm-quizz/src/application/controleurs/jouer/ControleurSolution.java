@@ -116,6 +116,14 @@ public class ControleurSolution {
 
             miseAJourTableau();
         }
+        
+        double tableViewWith = tableauSolution.getPrefWidth();
+        
+        colonneLibelle.setPrefWidth(tableViewWith * 0.42);
+        colonneCategorie.setPrefWidth(tableViewWith * 0.14);
+        colonneReponseJuste.setPrefWidth(tableViewWith * 0.20);
+        colonneFeedBack.setPrefWidth(tableViewWith * 0.18);
+        colonneIndication.setPrefWidth(tableViewWith * 0.10);
     }
 
     /**
