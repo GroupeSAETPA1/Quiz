@@ -91,7 +91,7 @@ public class ControleurEditerCategories {
 
         /* style initial de la table (avec ajouts via mainStyle.css) */
         double tableWidth = 1272;
-        nomColumn.setPrefWidth(tableWidth * 0.45);
+        nomColumn.setPrefWidth(tableWidth * 0.43);
         nomColumn.setResizable(false);
         nbColumn.setPrefWidth(tableWidth * 0.25);
         nbColumn.setResizable(false);

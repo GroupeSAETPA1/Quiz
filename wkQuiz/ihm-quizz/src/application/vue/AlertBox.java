@@ -10,6 +10,7 @@ import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 
 /**
  * Classe contenant les différents types d'alertbox
@@ -66,6 +67,25 @@ public abstract class AlertBox {
         alert.showAndWait();
     }
 
+    /**
+     * Alert box pour afficher un message d'erreur avec une zone de log
+     * @param message le message d'erreur 
+     * @param log tout le log d'erreur à envoyer
+     */
+    public static void showLongErrorBox(String message, String log) {
+    	Alert alert = new Alert(AlertType.ERROR);
+    	alert.setHeaderText(null);
+    	alert.setContentText(message);
+    	alert.setTitle("Erreur");
+    	alert.setResizable(false);
+    	
+    	TextArea logMessage = new TextArea();
+    	logMessage.setText(log);
+    	alert.getDialogPane().setExpandableContent(logMessage);
+    	
+    	alert.showAndWait();
+    }
+    
     /**
      * Alert box pour afficher un message d'avertissement
      * @param message

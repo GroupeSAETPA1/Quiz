@@ -82,15 +82,28 @@ public class ControleurImport {
         	AlertBox.showWarningBox("Aucun fichier selectionné");
         } else if (!fichier.exists()) {
         	AlertBox.showErrorBox(cheminFichierCSV + ", n'existe pas.");
-        } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") + 1).equals("csv")) {
+        } else if (!cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf(".") 
+        									   + 1).equals("csv")) {
         	AlertBox.showErrorBox(
-        			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) + ", n'est pas un fichier CSV");
+        			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") + 1) 
+        			 + ", n'est pas un fichier CSV");
         } else {
             
-            ArrayList<HashMap<String, String>> lignes = LectureFichier.getLigneCSV(fichier);
-            if (!lignes.isEmpty()) {
-            	creerEtGererQuestionCategorie(lignes);            	
-            }
+        	try {
+	            ArrayList<HashMap<String, String>> lignes = 
+	            		LectureFichier.getLigneCSV(fichier);
+	            
+	            if (!lignes.isEmpty()) {
+	            	creerEtGererQuestionCategorie(lignes);            	
+	            }
+        	} catch (ArrayIndexOutOfBoundsException e) {
+        		AlertBox.showErrorBox(
+           			 cheminFichierCSV.substring(cheminFichierCSV.lastIndexOf("\\") 
+           					 					+ 1) + " est un fichier CSV " 
+           					 					+ "invalide.\nVeuillez fournir " 
+           					 					+ "un fichier valide comme " 
+           					 					+ "décrit dans la page d'aide.");
+        	}
         }
     }
 
@@ -209,17 +222,20 @@ public class ControleurImport {
                     + "été importées avec succès");
         } else {
             
-            StringBuilder messageErreur = new StringBuilder() ;
+            String messageLignesImportees = LectureFichier.getNombreQuestionAjoute() 
+					 						+ " lignes analysées.\n";
+            StringBuilder logErreurLignesImportees = new StringBuilder();
+           
             
-            messageErreur.append(LectureFichier.getNombreQuestionAjoute() 
-            					 + " lignes analysées.\n");
             // Pour les utilisateur de l'application, une liste commence à 1
             erreurImportLigne.forEach((key , value) -> {
-                messageErreur.append("Erreur d'import à la ligne n°" + (key + 1)
+            	logErreurLignesImportees.append("Erreur d'import à la ligne n°" 
+            						 + (key + 1)
                                      + " : " + value +"\n");
             });
             
-            AlertBox.showErrorBox(messageErreur.toString());
+            AlertBox.showLongErrorBox(messageLignesImportees, 
+            			logErreurLignesImportees.toString());
         }
     
     }

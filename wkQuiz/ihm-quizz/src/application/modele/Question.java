@@ -162,7 +162,7 @@ public class Question implements Serializable {
         if (reponseFausseContientReponseJuste(reponsesFausse , reponseJuste)) {
             throw new ReponseException("La liste des réponses fausses "
                     + "contient une ou plusieurs propositions égale "
-                    + "à la réponse juste (casse ignorée");
+                    + "à la réponse juste (casse ignorée)");
         }
         if (contientAccent(reponseJuste, reponsesFausse, libelle, feedback)) {
         	throw new InvalidNameException("Aucun champ ne doit contenir des accents " 

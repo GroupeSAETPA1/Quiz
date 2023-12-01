@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import application.Quiz;
 import application.controleurs.factories.TextCellFactory;
+import application.controleurs.jouer.ControleurSolution;
+import application.controleurs.jouer.ControleurSolution.LigneQuestionSolution;
 import application.modele.ModelePrincipal;
 import application.modele.Question;
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -65,6 +68,12 @@ public class ControleurSelectionQuestion {
         
         selection.setCellFactory(new CheckBoxQuestionCellFactory());
         
+        double tailleTableView = 1025;
+        
+        libelleQuestion.setPrefWidth(tailleTableView * 0.45);
+        categorieQuestion.setPrefWidth(tailleTableView * 0.40);
+        selection.setPrefWidth(tailleTableView * 0.15);
+
         miseAJourTableau();
     }
     

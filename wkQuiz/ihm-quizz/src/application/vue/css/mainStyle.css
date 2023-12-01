@@ -1,8 +1,8 @@
 /* Fichier CSS général de l'application Quizéo fait avec JavaFX */
 
-/*                               */
-/* Gestion des onglets (tabview) */
-/*                               */
+/*                              
+   Gestion des onglets (tabview) 
+                                 */
 
 /* Réglage de la taille des onglets */
 .tab-pane {
@@ -16,7 +16,7 @@
     -fx-background-color: #696969; /* Couleur barre onglet (meme couleur que l'application) */
 }
 
-/* les onglets */
+/* Les onglets */
 .tab {
     -fx-background-color: #1C1B22; /* Couleur onglet par défault */
     -fx-font-size: 30px;  /* Taille texte onglet */
@@ -45,22 +45,17 @@
    -fx-border-radius: 0;
 }
 
-/*                         */
-/* Fin gestion des onglets */
-/*                         */
+/*                         
+   Fin gestion des onglets 
+                           */
 
 
-/*                         */
-/* Gestion des scrollpane  */
-/*                         */
+/*                         
+   Gestion des scrollbar  
+                          */
 
-/* Gestion de la couleur de fond des scrollpane et de leur taille*/
-.scroll-pane {
-    -fx-background-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
-    -fx-border-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
-}
-
-.scroll-pane .scroll-bar:vertical {
+/* Gestion de la couleur de fond des scrollbar et de leur taille*/
+.scroll-bar:vertical {
     -fx-border-color: #282C34; /* Couleur barre onglet (meme couleur que l'application) */
     -fx-background-color: #282C34; /* meme couleur que l'application) */
     /* Augmente la taille de la barre de scroll */
@@ -86,13 +81,13 @@
     -fx-background-color: transparent;
 }
 
-/*                            */
-/* Fin gestion des scrollpane */
-/*                            */
+/*                            
+   Fin gestion des scrollpane 
+                              */
 
-/*                            */
-/*  Gestion des radiobuttons  */
-/*                            */
+/*                            
+    Gestion des radiobuttons  
+                              */
 .radio-button .radio {
     -fx-border-width: 1px;
     -fx-border-color: #282C34;
@@ -116,12 +111,12 @@
     -fx-background-radius: 15px;
     -fx-padding: 8px;
 }
-/*                               */
-/* fin Gestion des radiobuttons  */
-/*                               */
-/*                            */
-/*  Gestion des tableView     */
-/*                            */
+/*                               
+  fin Gestion des radiobuttons  
+                               */
+/*                            
+    Gestion des tableView     
+                              */
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-background-color:  #282C34; 
@@ -177,13 +172,13 @@
 }
 
 
-/*                               */
-/* fin Gestion des tableView     */
-/*                               */
+/*                              
+   fin Gestion des tableView     
+                            */
 
-/*                         */
-/*         Divers          */
-/*                         */
+/*                         
+           Divers          
+                         */
 
 .combo-box {
     -fx-font-size: 20px;

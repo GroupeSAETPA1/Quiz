@@ -388,12 +388,6 @@ class TestQuestion {
 	}
 
 	/**
-	 * Teste la methode setMauvaiseReponse de la classe Question
-	 * 
-	 * @see {@link application.modele.Question#setMauvaiseReponse(ArrayList)}
-	 */
-	
-	/**
 	 * Teste la methode getMauvaisesReponses de la classe Question
 	 * 
 	 * @see {@link application.modele.Question#getMauvaisesReponses()}
@@ -423,6 +417,11 @@ class TestQuestion {
 		assertEquals(mauvaiseReponse2, questionValide.get(0).getMauvaisesReponses());
 	}
 	
+	/**
+	 * Teste la methode setMauvaiseReponse de la classe Question
+	 * 
+	 * @see {@link application.modele.Question#setMauvaiseReponse(ArrayList)}
+	 */
 	@Test
 	void testSetMauvaiseReponse() {
 		// Generation d'un jeu de mauvaises reponses 
