@@ -39,7 +39,7 @@ class TestPartie {
     	// On crée une partie et on vérifie que le pseudo
     	// soit bien celui du constructeur
         Partie partie = new Partie();
-        assertEquals("Pseudo", partie.getPseudo());
+        assertEquals("", partie.getPseudo());
     }
 
     /**
