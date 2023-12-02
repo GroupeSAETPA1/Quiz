@@ -3,7 +3,7 @@
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
-package application.controleurs;
+package application.controleurs.jouer;
 
 import java.io.IOException;
 import java.util.ArrayList;

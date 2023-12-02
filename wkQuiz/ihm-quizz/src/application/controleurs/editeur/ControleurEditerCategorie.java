@@ -3,7 +3,7 @@
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 
-package application.controleurs;
+package application.controleurs.editeur;
 
 import application.Quiz;
 import application.exception.HomonymeException;

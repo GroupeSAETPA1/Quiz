@@ -38,8 +38,8 @@
       </Text>
       <TableView fx:id="tableauSolution" layoutX="27.0" layoutY="235.0" prefHeight="550.0" prefWidth="1400.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css">
          <columns>
-            <TableColumn fx:id="colonneLibelle" maxWidth="500.0" minWidth="100.0" prefWidth="245.0" text="Libelle" />
             <TableColumn fx:id="colonneCategorie" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Categorie" />
+            <TableColumn fx:id="colonneLibelle" maxWidth="500.0" minWidth="100.0" prefWidth="245.0" text="Libelle" />
             <TableColumn fx:id="colonneReponseJuste" maxWidth="500.0" minWidth="175.0" prefWidth="310.0" text="Réponse juste" />
             <TableColumn fx:id="colonneFeedBack" maxWidth="500.0" minWidth="100.0" prefWidth="310.0" text="FeedBack" />
             <TableColumn fx:id="colonneIndication" maxWidth="130.0" prefWidth="130.0" resizable="false" text="Indication" />
