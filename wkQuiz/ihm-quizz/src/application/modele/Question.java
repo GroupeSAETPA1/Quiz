@@ -24,6 +24,14 @@ public class Question implements Serializable {
 	/** ID de sérialisation */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Renvoie true si la reponse juste est présente 
+     * dans la liste des réponses fausses
+     * @param aTester
+     * @param reponseJuste
+     * @return true si la reponse juste est présente 
+     * dans la liste des réponses fausses
+     */
     private static boolean reponseFausseContientReponseJuste
     (ArrayList<String> aTester ,  String reponseJuste) {
         boolean fauxContientJuste = false;
@@ -35,13 +43,14 @@ public class Question implements Serializable {
     }
 	
 	/**
-     * Vérifie la validité d'une ArrayList pour le constructeur de question
+     * Renvoie true si aTester n'a que des valeurs distinctes 
+     * false sinon
      * @param aTester : ArrayList dont on veux vérifier la validité
      * @return true si aTester n'est pas vide et qu'elle n'a que des valeurs
-     *         distinctes (casse ignoré)
+     *         distinctes
      *         false sinon
      */
-    private static boolean reponsesFausseSansDoublon(ArrayList<String>aTester) {
+    private static boolean reponsesFausseSansDoublon(ArrayList<String> aTester){
         boolean sansDoublon = true;
         String precedent;
         for (int i = 0 ; i < aTester.size() && sansDoublon; i++) {
@@ -50,7 +59,7 @@ public class Question implements Serializable {
                 if (i != j) {
                     sansDoublon = !precedent.equals(aTester.get(j));                    
                 }
-            }           
+            }
         }
         return sansDoublon;
     }
@@ -378,7 +387,7 @@ public class Question implements Serializable {
      * contient une valeur en double ou 
      * si elle contient une valeur égale à la bonne réponse
      */
-    public void setMauvaiseReponse(ArrayList<String>nouvellesMauvaisesReponses) 
+    public void setMauvaiseReponse(ArrayList<String> nouvellesMauvaisesReponses) 
     throws InvalidFormatException, ReponseException {
         if (nouvellesMauvaisesReponses.isEmpty()) {
             throw new InvalidFormatException("Impossible de modifier "

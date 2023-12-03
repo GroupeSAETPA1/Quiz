@@ -212,7 +212,7 @@ class TestBanqueQuestion {
 		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("libelle"));
 		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("LIBELLE"));
 		// On attend toutes les questions
-		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle("lib"));
+		assertIterableEquals(ensembleQuestionLibelleNom, banqueQuestion.getQuestionsLibelle(""));
 	}
 
 	/**
