@@ -89,15 +89,20 @@ class TestChiffrage {
         mauvaiseReponse.add("Mauvaise Reponse 3");
         mauvaiseReponse.add("Mauvaise Reponse 4");
         
-        modele.creerCategorie("testChiffrement");
+        modele.creerCategorie("testChiffrement"); 
         
         Question question = new Question("QuestionACrypter", modele.getCategoriesLibelleExact("testChiffrement"), 1, "ReponseJuste", mauvaiseReponse, "");        
         modele.getBanqueQuestion().ajouter(question);
         
         ArrayList<String> questionCrypter = Chiffrage.genererTableauCrypter(modele.getBanqueQuestion().getQuestions() , cle);
-        System.out.println(cle);
-        Chiffrage.decrypterFichier(questionCrypter.get(0) , cle);
-        System.out.println("finis");
+        
+        String questionDechiffrer 
+        = Chiffrage.decrypterFichier(questionCrypter.getLast() , cle);
+        
+        System.out.println("==========Question attendue=========");
+        System.out.println(question);
+        System.out.println("==========Question obtenue==========");
+        System.out.println(questionDechiffrer.replace("é", "\n"));
         
         // On supprime la question et la catégorie pour nettoyer 
         // l'environement de test pour les autres tests
@@ -132,11 +137,10 @@ class TestChiffrage {
         } 
     }
     
-    /** Ce test est désactivé car il est basé sur l'aléatoire. */
-    //@Test
+    @Test
     void testCleDepuisDiffe() {
-       //Ce test fail car g^ab est aléatoire
        //TEST pour gab = 2899 (pris aleatoirement)
-       assertEquals("wCDD3900 fgg fgg", Chiffrage.cleDepuisDiffie());
+        Chiffrage.setGab(2899);
+       assertEquals("wCDD3900 dee dee", Chiffrage.cleDepuisDiffie());
     }
 }

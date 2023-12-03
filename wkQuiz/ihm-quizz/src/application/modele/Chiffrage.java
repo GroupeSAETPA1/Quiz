@@ -51,7 +51,6 @@ public class Chiffrage {
             ALPAHABET_TO_INT.put(c, i);
             INT_TO_ALPHABET.put(i, c);
         }
-        System.out.println(ALPAHABET_TO_INT);
     }
     // Nombre de lettres dans l'alphabet personnalisé
     private final static int NOMBRE_LETTRE_ALPHABET = CUSTOM_ALPHABET.length();
@@ -100,7 +99,7 @@ public class Chiffrage {
             }
 		    
 		    // Valeur du caractère de la cle
-		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i%cle.length()));
+		    int cleI = ALPAHABET_TO_INT.get(cle.charAt(i % cle.length()));
 		    
 		    char crypter = INT_TO_ALPHABET.get(
 		            (messageI + cleI) % NOMBRE_LETTRE_ALPHABET);
