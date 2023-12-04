@@ -32,7 +32,7 @@ public class ControleurEnvoieQuestion {
     @FXML Text txtPort;
     @FXML Text information;
     
-    @FXML Text txtIP;
+    @FXML TextField txtIP;
     
     private static Serveur serveur;
     
@@ -60,7 +60,8 @@ public class ControleurEnvoieQuestion {
         if (serveur == null) {
             do {
                 try {
-                    serveur = new Serveur(Serveur.getPort());                
+                    serveur = new Serveur(Serveur.getPort());
+                    txtIP.setText(serveur.getIPServeur());
                 } catch (BindException e) {
                     Serveur.setPort(Serveur.getPort() + 1);
                 }
