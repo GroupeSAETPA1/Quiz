@@ -37,3 +37,9 @@ Modelio/Digramme de classe/.runtime/
 
 #sonarLint
 .sonarlint/
+
+# Fichier de serialisation
+wkQuiz/ihm-quizz/donneesCategorie
+wkQuiz/ihm-quizz/donneesQuestion
+
+CreationExe/

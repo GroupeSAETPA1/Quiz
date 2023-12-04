@@ -1,5 +1,12 @@
+/*
+ * ControleurAccueil.java 				                     octobre 2023
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+
 package application.controleurs;
 
+
+import java.io.IOException;
 
 import application.Quiz;
 import application.modele.ModelePrincipal;
@@ -11,7 +18,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * Controlleur de la page d'accueil.
+ * Controleur de la page d'accueil.
  * Celui-ci instancie des méthodes liées aux boutons de la page 
  * 
  * @author Néo BECOGNE
@@ -22,9 +29,9 @@ import javafx.scene.text.TextAlignment;
  */
 
 
-public class ControlleurAccueil {
+public class ControleurAccueil {
 	
-	private ModelePrincipal model = ModelePrincipal.getInstance();
+	private ModelePrincipal modele = ModelePrincipal.getInstance();
 	
 	@FXML
 	private Text labelPseudo;
@@ -41,9 +48,7 @@ public class ControlleurAccueil {
 	}
 	
 	@FXML
-	private void profil() {
-		System.out.println("PARAMETRE !!!!!!!!!!!!!!!!!!");
-		
+	private void profil() {		
 		TextInputDialog saisiePseudo = new TextInputDialog();
 		
 		saisiePseudo.setContentText("Votre Pseudo");
@@ -79,15 +84,18 @@ public class ControlleurAccueil {
 	 */
 	@FXML 
 	private void online() {
-		//TODO
+		Quiz.changerVue("ModeEnLigne.fxml");
 	}
 	
 	/**
 	 * Méthode liée au groupe quitter,
 	 * ferme l'application
+	 * @throws IOException 
+	 * @throws InternalError 
+	 * @throws ClassNotFoundException 
 	 */
 	@FXML
-	private void quitter() {
+	private void quitter() throws ClassNotFoundException, InternalError, IOException {
 		Quiz.quitter();
 	}
 	
@@ -97,11 +105,8 @@ public class ControlleurAccueil {
 	 */
 	@FXML
 	private void aider() {
-		model.setPagePrecedente("Accueil.fxml");
-		System.out.println("Aider");
+		modele.setPagePrecedente("Accueil.fxml");
 		Quiz.chargerEtChangerVue("Aide.fxml");
-
-		// TODO : lancer une alertBox
 	}
 
 }

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -13,30 +20,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControlleurParametres">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurParametres">
    <children>
-      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retourAccueil">
+      <Group layoutX="30.0" layoutY="20.0" onMouseClicked="#retourAccueil">
          <children>
-            <Label layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="#fcfcfc">
+            <Label layoutX="-3.0" layoutY="72.0" prefHeight="57.0" prefWidth="128.0" text="Accueil" textFill="#fcfcfc">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/IconeRetour.png" />
+                  <Image url="@images/IconeAcceuil.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Label layoutX="275.0" layoutY="59.0" prefHeight="57.0" prefWidth="450.0" text="Paramétrage de partie " textFill="WHITE">
+      <Label contentDisplay="CENTER" layoutX="316.0" layoutY="57.0" prefHeight="58.0" prefWidth="405.0" text="Paramétrage de partie " textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Group layoutX="890.0" layoutY="20.0">
+      <Group layoutX="890.0" layoutY="20.0" onMouseClicked="#aider">
          <children>
-            <Label layoutX="17.0" layoutY="75.0" prefHeight="57.0" prefWidth="77.0" text="Aide " textFill="WHITE">
+            <Label layoutX="15.0" layoutY="80.0" prefHeight="57.0" prefWidth="77.0" text="Aide " textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
@@ -97,7 +104,7 @@
                   <Insets right="125.0" />
                </HBox.margin>
             </Label>
-            <RadioButton mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Facile" textFill="WHITE">
+            <RadioButton mnemonicParsing="false" prefHeight="36.0" prefWidth="116.0" text="Facile" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>

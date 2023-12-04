@@ -10,12 +10,12 @@ import java.io.Serializable;
 import application.exception.InvalidNameException;
 
 /**
- * Modelisation d'une catégorie pour l'application de quizz
+ * Modelisation d'une catégorie pour l'application de quiz
  * @author Costes Quentin
  */
 public class Categorie implements Serializable {
 	
-    /** TODO comment field role (attribute, associative role) */
+    /** ID de sérialisation */
     private static final long serialVersionUID = 1L;
     
     /** Le nom de la catégorie */
@@ -40,9 +40,10 @@ public class Categorie implements Serializable {
      * @param nom à vérifier (String)
      * @return true si le nom est valide, false sinon
      */
-    public static boolean nomValide(String nom) {
-        return !nom.isBlank() && nom.length() <= LONGUEUR_NOM_MAX ;
+    public static boolean nomValide(String nom) {		
+        return !nom.isBlank() && nom.length() <= LONGUEUR_NOM_MAX  && ModelePrincipal.alphabetOk(nom);
     }
+      
 
     /**
      * Setter du nom de la catégorie
@@ -53,7 +54,7 @@ public class Categorie implements Serializable {
     	if (nomValide(nom)) {
     		this.nom = nom;
     	} else {
-    		throw new InvalidNameException("Le nom saisie est vide");
+    		throw new InvalidNameException("Le nom saisi est incorrect");
     	}
     }
 

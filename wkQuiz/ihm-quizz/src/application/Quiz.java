@@ -13,9 +13,7 @@ import application.exception.HomonymeException;
 import application.exception.InvalidFormatException;
 import application.exception.InvalidNameException;
 import application.exception.ReponseException;
-import application.modele.Categorie;
 import application.modele.ModelePrincipal;
-import application.modele.Question;
 import application.vue.AlertBox;
 import application.vue.GestionVues;
 import javafx.application.Application;
@@ -26,10 +24,6 @@ import javafx.stage.Stage;
 /**
  * Classe principale de l'application permettant d'instancier
  * les contrôleurs, les vues et modèles.
- *
- * TODO A enlever à la fin
- * Mettre dans les "VM argument" :
- *  --module-path /path/to/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml
  *
  * @author Néo BECOGNE
  * @author Quentin COSTES
@@ -56,10 +50,10 @@ public class Quiz extends Application {
      * Fonction main qui lance la fenêtre JavaFX
      * @param args non utilisé
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
     	launch(args);
     }
-
+    
     /**
      * Lance l'application
      * @throws InvalidNameException 
@@ -74,37 +68,6 @@ public class Quiz extends Application {
 		ressources = new ArrayList<String>();
 		GestionVues.initialiserScene();
 		
-//		{	// TODO c'est temporaire, c'est pour tester
-//    		ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test1"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test2"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test3"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test4"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test5"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test6"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test7"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test8"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("test9"));
-//    	    ModelePrincipal.getInstance().getBanqueCategorie().ajouter(new Categorie("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-//    	    
-//    	    ArrayList<String> rep = new ArrayList<>();
-//    	    rep.add("coubeh");
-//    	    rep.add("je vais me prendre a cause des tableView");
-//    	    
-//    	   
-//    	    
-//    	    String char250 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium";
-//    	    String char350 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate.";
-//    	    ArrayList<String> rep250 = new ArrayList<>();
-//    	    rep250.add(char250 + "1");
-//    	    rep250.add(char250 + "2");
-//    	    rep250.add(char250 + "3");
-//    	    rep250.add(char250 + "4");
-//    	    
-//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("quoi ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test1"), 1, "feur", rep, ""));
-//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question("qui ?", ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("test2"), 2, "quette", rep, ""));
-//    	    ModelePrincipal.getInstance().getBanqueQuestion().ajouter(new Question(char250, ModelePrincipal.getInstance().getBanqueCategorie().getCategorieLibelleExact("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), 3, char250, rep250, char250));
-//		}
-	    
 	    ressources.add("Accueil.fxml");
 		ressources.add("Editeur.fxml");
 		ressources.add("CreationQuestionEtCategorie.fxml");
@@ -118,6 +81,12 @@ public class Quiz extends Application {
 	    ressources.add("ParametrePartie.fxml");
 	    ressources.add("RepondreQuestion.fxml");
 	    ressources.add("Aide.fxml");
+	    ressources.add("RecevoirQuestions.fxml");
+	    ressources.add("EnvoieQuestion.fxml");
+	    ressources.add("ChoixEnvoie.fxml");
+	    ressources.add("ModeEnLigne.fxml");
+	    ressources.add("Recapitulatif.fxml");
+	    
 
 		
 		for (String element : ressources) {
@@ -138,6 +107,22 @@ public class Quiz extends Application {
 		fenetrePrincipale = primaryStage;
 		primaryStage.setScene(GestionVues.getScene("Accueil.fxml"));
 		fenetrePrincipale.setResizable(false);
+		
+		primaryStage.setOnCloseRequest((e) -> {
+			try {
+			    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application ?")) {
+			    	ModelePrincipal.getInstance().serialiser();
+			        Platform.exit();            
+		        } else {
+		        	// Si l'utilisateur a appuyé par erreur, 
+		        	// il peut annuler le fait de quitter l'application
+		        	e.consume();
+		        }
+			} catch (InternalError | IOException e1) {
+				e1.printStackTrace();
+				System.err.println("Erreur dans la sauvegarde des données");
+			}
+		});
 		
 		primaryStage.show();
 	}
@@ -160,9 +145,12 @@ public class Quiz extends Application {
 	
 	/**
      * Fonction appelée par les controlleurs permettant de quitter l'application
+	 * @throws IOException 
+	 * @throws InternalError 
      */
-	public static void quitter( ) {
+	public static void quitter() throws InternalError, IOException {
 	    if (AlertBox.showConfirmationBox("Êtes vous sur de vouloir quitter l'application")) {
+	    	ModelePrincipal.getInstance().serialiser();
 	        Platform.exit();            
         }
 	}
@@ -175,5 +163,6 @@ public class Quiz extends Application {
 	    GestionVues.charger(vue);
 	    GestionVues.changerVue(vue);
 	}
+	
 
 }

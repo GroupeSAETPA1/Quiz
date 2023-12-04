@@ -10,37 +10,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="1256.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurSolution">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1450.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.jouer.ControleurSolution">
    <children>
-      <Group layoutX="43.0" layoutY="25.0" onMouseClicked="#retour">
+      <Group layoutX="32.0" layoutY="20.0" onMouseClicked="#retour">
          <children>
             <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/IconeRetour.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="CENTER" layoutY="75.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutY="80.0" prefHeight="57.0" prefWidth="128.0" text="Retour" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </Group>
-      <Label layoutX="472.0" layoutY="65.0" text="Solution du Quizz" textFill="WHITE">
+      <Label layoutX="568.0" layoutY="62.0" text="Solution du Quizz" textFill="WHITE">
          <font>
             <Font name="Open Sans" size="40.0" />
          </font>
       </Label>
-      <Text fx:id="score" fill="WHITE" layoutX="379.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score/Nombre de questions" textAlignment="CENTER" wrappingWidth="499.9453125">
+      <Text fx:id="score" fill="WHITE" layoutX="486.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score/Nombre de questions" textAlignment="CENTER" wrappingWidth="499.9453125">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <TableView fx:id="tableauSolution" layoutX="27.0" layoutY="235.0" prefHeight="387.0" prefWidth="1203.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
+      <TableView fx:id="tableauSolution" layoutX="27.0" layoutY="235.0" prefHeight="550.0" prefWidth="1400.0" style="-fx-background-color: #282C34;" stylesheets="@css/mainStyle.css">
+         <columns>
+            <TableColumn fx:id="colonneCategorie" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Categorie" />
+            <TableColumn fx:id="colonneLibelle" maxWidth="500.0" minWidth="100.0" prefWidth="245.0" text="Libelle" />
+            <TableColumn fx:id="colonneReponseJuste" maxWidth="500.0" minWidth="175.0" prefWidth="310.0" text="Réponse juste" />
+            <TableColumn fx:id="colonneFeedBack" maxWidth="500.0" minWidth="100.0" prefWidth="310.0" text="FeedBack" />
+            <TableColumn fx:id="colonneIndication" maxWidth="130.0" prefWidth="130.0" resizable="false" text="Indication" />
+         </columns>
       </TableView>
    </children>
 </Pane>
