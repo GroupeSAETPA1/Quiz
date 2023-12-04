@@ -7,6 +7,7 @@ package application.controleurs.reseau;
 
 import java.io.IOException;
 import java.net.BindException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -145,9 +146,28 @@ public class ControleurEnvoieQuestion {
     
     public void miseAJourListeIP() {
         ArrayList<String> adresseIP = new ArrayList<String>();
-        adresseIP = getIPs();
+        try {
+            adresseIP.add(adresseIpLocale());
+        } catch (Exception e) {
+            adresseIP = getIPs();
+        }
         listeIP.getItems().clear();
         listeIP.getItems().addAll(adresseIP);
+    }
+    
+    
+    public static String adresseIpLocale()
+    throws UnknownHostException, SocketException {
+
+        DatagramSocket socket = new DatagramSocket();
+        
+        socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+
+        String adresseIP = socket.getLocalAddress().getHostAddress();
+
+        socket.close();
+        
+        return adresseIP;
     }
     
 
