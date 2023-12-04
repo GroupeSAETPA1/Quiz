@@ -248,10 +248,10 @@ public class ControleurRepondreQuestion {
    		String libelleFormater = "";
    		
    		
-   		if (libelle.length() > 125) {
+   		if (libelle.length() > 80) {
    			intitule.setStyle("-fx-font-size: 22px;");
    		}
-   		libelleFormater = formaterLibelle(question.getLibelle(), 125);
+   		libelleFormater = formaterLibelle(question.getLibelle(), 80);
    		
    		intitule.setText(libelleFormater);
    		ModelePrincipal.getInstance();
