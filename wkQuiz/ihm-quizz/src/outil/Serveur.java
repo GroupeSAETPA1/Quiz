@@ -49,7 +49,6 @@ public class Serveur {
     public Serveur(int port) throws IOException, ClassNotFoundException  {
     	Serveur.port = port;
         serveur = new ServerSocket(port);
-        System.out.println(serveur.getInetAddress());
     }
     
     public void lancerServeur() throws IOException, ClassNotFoundException, 

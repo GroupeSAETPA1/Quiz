@@ -143,7 +143,9 @@ public class ControleurEnvoieQuestion {
         return reponse;
     }
     
-    
+    /**
+     * Mise à jour de la liste des IP
+     */
     public void miseAJourListeIP() {
         ArrayList<String> adresseIP = new ArrayList<String>();
         try {
@@ -155,7 +157,13 @@ public class ControleurEnvoieQuestion {
         listeIP.getItems().addAll(adresseIP);
     }
     
-    
+    /**
+     * Pour récupérer l'adresse IP,
+     * on execute une requête via une socket, puis on récupère l'adresse.
+     * @return L'adresse ip local du PC
+     * @throws UnknownHostException
+     * @throws SocketException
+     */
     public static String adresseIpLocale()
     throws UnknownHostException, SocketException {
 
