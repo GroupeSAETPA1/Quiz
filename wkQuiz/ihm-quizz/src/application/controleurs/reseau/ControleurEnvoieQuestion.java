@@ -130,7 +130,9 @@ public class ControleurEnvoieQuestion {
                 Enumeration<InetAddress> inetAdress = n.getInetAddresses();
                 while (inetAdress.hasMoreElements()) {
                     InetAddress i = (InetAddress) inetAdress.nextElement();
-                    reponse.add(i.getHostAddress());
+                    if (!i.getHostAddress().contains(":")) {
+                        reponse.add(i.getHostAddress());
+                    }
                 }
             }
         } catch (SocketException e) {
