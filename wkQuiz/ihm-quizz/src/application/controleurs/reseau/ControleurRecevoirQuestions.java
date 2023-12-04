@@ -87,7 +87,7 @@ public class ControleurRecevoirQuestions {
                     for (String ligne : questionClair) {
                         try {
                             HashMap<String, String> dictionnaire 
-                            = LectureFichier.getDictionnaire(ligne);
+                            = LectureFichier.getDictionnaire(ligne, 'é');
                             
                             Question question = LectureFichier
                                     .creerQuestionFromLigneCSV(dictionnaire);
