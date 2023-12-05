@@ -7,10 +7,13 @@ package application.controleurs.reseau;
 
 import java.io.IOException;
 import java.net.BindException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import application.Quiz;
@@ -19,7 +22,7 @@ import application.exception.ClientPasConnecteException;
 import application.modele.ModelePrincipal;
 import application.vue.AlertBox;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import outil.Serveur;
 
@@ -32,7 +35,7 @@ public class ControleurEnvoieQuestion {
     @FXML Text txtPort;
     @FXML Text information;
     
-    @FXML Text txtIP;
+    @FXML ComboBox<String> listeIP;
     
     private static Serveur serveur;
     
@@ -41,26 +44,14 @@ public class ControleurEnvoieQuestion {
     @FXML
     void initialize() throws ClassNotFoundException, IOException {
         
-        String nomOS = System.getProperty("os.name");
+        miseAJourListeIP();
         
-        String adresseIP;
-        
-        if (nomOS.contains("Windows")) {
-            adresseIP = getIPFromWindows();
-        } else if (nomOS.contains("Linux") || nomOS.contains("Mac OS X")) {
-            adresseIP = getIPFromLinux();
-        } else {
-            adresseIP = "OS non reconnu";
-        }
-        
-        
-        txtIP.setText(adresseIP);
         txtPort.setText(Serveur.getPort() + "");
         
         if (serveur == null) {
             do {
                 try {
-                    serveur = new Serveur(Serveur.getPort());                
+                    serveur = new Serveur(Serveur.getPort());
                 } catch (BindException e) {
                     Serveur.setPort(Serveur.getPort() + 1);
                 }
@@ -125,46 +116,66 @@ public class ControleurEnvoieQuestion {
         
         
     }
-
+    
     /**
-     * Revoie l'adresse IPV4 sur un système type Linux
-     * @return L'adresse IPV4 de la machine.
+     * @return La liste de toutes les adresses IP
      */
-    public String getIPFromLinux() {
-        String resultat = "";
+    public static ArrayList<String> getIPs() {
+        ArrayList<String> reponse = new ArrayList<String>();
+        Enumeration<NetworkInterface> networkInterface;
         try {
-            Enumeration<NetworkInterface> interfaces 
-            = NetworkInterface.getNetworkInterfaces();
-
-            while (interfaces.hasMoreElements()) {
-                NetworkInterface iface = interfaces.nextElement();
-
-                // Filtrer les interfaces loopback et les interfaces désactivées
-                if (!iface.isLoopback() && iface.isUp()) {
-                    
-                    Enumeration<InetAddress> addresses = iface.getInetAddresses();
-                    while (addresses.hasMoreElements()) {
-                        InetAddress addr = addresses.nextElement();
-                        // Filtrer les adresses IPv6
-                        if (!addr.getHostAddress().contains(":")) {
-                            resultat = addr.getHostAddress();
-                        }
+            networkInterface = NetworkInterface.getNetworkInterfaces();
+        
+            while (networkInterface.hasMoreElements()) {
+                NetworkInterface n = (NetworkInterface) networkInterface.nextElement();
+                Enumeration<InetAddress> inetAdress = n.getInetAddresses();
+                while (inetAdress.hasMoreElements()) {
+                    InetAddress i = (InetAddress) inetAdress.nextElement();
+                    if (!i.getHostAddress().contains(":")) {
+                        reponse.add(i.getHostAddress());
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (SocketException e) {
             e.printStackTrace();
+            reponse.add("Aucune adresse IP n'a été trouvé !");
         }
-        return resultat;
+        return reponse;
     }
     
     /**
-     * Getter de l'IP si l'OS est Windows
-     * @return L'adresse IP de l'utilisateur
-     * @throws UnknownHostException 
+     * Mise à jour de la liste des IP
      */
-    public static String getIPFromWindows() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostAddress();
+    public void miseAJourListeIP() {
+        ArrayList<String> adresseIP = new ArrayList<String>();
+        try {
+            adresseIP.add(adresseIpLocale());
+        } catch (Exception e) {
+            adresseIP = getIPs();
+        }
+        listeIP.getItems().clear();
+        listeIP.getItems().addAll(adresseIP);
+    }
+    
+    /**
+     * Pour récupérer l'adresse IP,
+     * on execute une requête via une socket, puis on récupère l'adresse.
+     * @return L'adresse ip local du PC
+     * @throws UnknownHostException
+     * @throws SocketException
+     */
+    public static String adresseIpLocale()
+    throws UnknownHostException, SocketException {
+
+        DatagramSocket socket = new DatagramSocket();
+        
+        socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+
+        String adresseIP = socket.getLocalAddress().getHostAddress();
+
+        socket.close();
+        
+        return adresseIP;
     }
     
 

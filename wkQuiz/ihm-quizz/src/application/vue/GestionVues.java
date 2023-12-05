@@ -36,6 +36,7 @@ public class GestionVues {
             
         } catch (IOException e) {
             System.err.println("Chargement impossible de : " + vue);
+            e.printStackTrace();
         } catch (NullPointerException e) {
             System.err.println("Page introuvale : " + vue);
         }

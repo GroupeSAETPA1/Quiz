@@ -177,4 +177,8 @@ public class Serveur {
 	public static void setPort(int nouveauPort) {
 	    port = nouveauPort;
 	}
+	
+	public String getIPServeur() {
+	    return serveur.getInetAddress().getHostName();
+	}
 }
