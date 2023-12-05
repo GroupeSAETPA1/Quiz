@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #282C34;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurAccueil">
    <children>
-      <Label contentDisplay="CENTER" layoutX="411.0" layoutY="60.0" prefHeight="58.0" prefWidth="190.0" text="Quiz Java " textAlignment="CENTER" textFill="WHITE">
+      <Label contentDisplay="CENTER" layoutX="411.0" layoutY="60.0" prefHeight="58.0" prefWidth="190.0" text="  Quizéo" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
