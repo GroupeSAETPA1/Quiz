@@ -15,7 +15,7 @@ réviser leurs connaissances dans le langage Java. Dans le cadre des études à 
 
 </div>
 
-![image](https://github.com/GroupeSAETPA1/Quiz/assets/124200637/9ecaf300-719b-4225-bdf5-17b7e62fb6d5)
+![image](https://github.com/GroupeSAETPA1/Quiz/assets/124200637/0a930be6-685d-41ea-9a5c-a64a02bd043b)
 
 <div align="center">
   
