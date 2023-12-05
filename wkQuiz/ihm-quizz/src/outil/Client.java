@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.modele.Chiffrage;
 import application.vue.AlertBox;
@@ -50,9 +52,15 @@ public class Client {
     public Client(String ip, int port) {
         if (ip.isEmpty()) {
             throw new IllegalArgumentException("L'adresse IP est vide");
+        } else {
+        	Pattern ipValide = Pattern.compile("^(\\d{1,3}\\.){3}\\d{1,3}$");
+        	Matcher matcher = ipValide.matcher(ip);
+        	if (!matcher.find()) {
+                throw new IllegalArgumentException("L'adresse IP \"" + ip + "\" est invalide");
+        	}
         }
         if (port <= 0) {
-            throw new IllegalArgumentException("Le port n'est pas valide");            
+            throw new IllegalArgumentException("Le port \"" + port + "\" n'est pas valide");            
         }
     	this.port = port;
     	this.ip = ip;

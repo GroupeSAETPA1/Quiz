@@ -60,7 +60,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <ComboBox fx:id="selecteurCategorie" layoutX="393.0" layoutY="232.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 332px;" />
+      <ComboBox fx:id="selecteurCategorie" layoutX="393.0" layoutY="232.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 20px;" stylesheets="@css/mainStyle.css" />
       <HBox layoutX="68.0" layoutY="314.0" prefHeight="47.0" prefWidth="764.0">
          <children>
             <Label prefHeight="47.0" prefWidth="326.0" text="Nombre de questions " textFill="WHITE">

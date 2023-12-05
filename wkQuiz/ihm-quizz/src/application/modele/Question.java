@@ -147,15 +147,16 @@ public class Question implements Serializable {
         
         if (libelle.isBlank()  || libelle.length() > LONGUEUR_LIBELLE_MAX ) {
             throw new InvalidNameException("Le libéllé contient " + libelle.length() 
-            + " caractères. Il faut qu'il soit entre 1 et" + LONGUEUR_LIBELLE_MAX);
+            + " caractères. Il faut qu'il soit entre 1 et " + LONGUEUR_LIBELLE_MAX);
         }
         if (difficulte < DIFFICULTE_MINIMALE || difficulte > DIFFICULTE_MAXIMALE) {
             throw new DifficulteException("Le niveau de difficulté doit être "
                                              + "compris entre 1 et 3");
         }
         if (reponseJuste.isBlank() || reponseJuste.length() > LONGUEUR_MAX_REPONSE) {
-            throw new InvalidNameException("La réponse juste contient" + 
-            libelle.length()  + "Il faut qu'elle contienne entre 1 et " 
+            throw new InvalidNameException("La réponse juste contient " 
+            + reponseJuste.length()  
+            + " caractères.\nIl faut qu'elle contienne entre 1 et " 
             + LONGUEUR_MAX_REPONSE);
         }
         if (reponsesFausse.isEmpty()) {
@@ -225,7 +226,7 @@ public class Question implements Serializable {
         StringBuilder messageErreur = new StringBuilder();
         messageErreur.append("Une réponse fausse peut contenir au maximum " 
                 + LONGUEUR_MAX_REPONSE + " caractères. Voici les réponses qui posent"
-                        + " problèmes : ");
+                        + " problèmes : \n");
                 for (String reponse : reponseFausse) {
                     messageErreur.append("- " + reponse + " " + reponse.length() 
                     + " caractères \n" );

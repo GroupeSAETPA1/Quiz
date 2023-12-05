@@ -145,7 +145,7 @@
                         <Font name="Open Sans" size="32.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectCategorie" layoutX="105.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 332px;" />
+                  <ComboBox fx:id="selectCategorie" layoutX="105.0" layoutY="200.0" prefHeight="50.0" prefWidth="300.0" promptText="Choisissez un catégorie" style="-fx-background-radius: 20px;" />
                   <Label layoutX="116.0" layoutY="256.0" prefHeight="51.0" prefWidth="338.0" text="Nom de la question : " textFill="WHITE">
                      <font>
                         <Font name="Open Sans" size="32.0" />
