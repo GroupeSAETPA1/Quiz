@@ -61,8 +61,13 @@ public class ControleurRecevoirQuestions {
         try {
             client = new Client(ipServeur.getText(), Integer.parseInt(portServeur.getText()));
             clientCreer = true;
-        } catch (NumberFormatException e) {
-            AlertBox.showErrorBox(e.getMessage());
+        } catch (IllegalArgumentException e) {
+        	if (e.getMessage().startsWith("For")) {
+        		AlertBox.showErrorBox("Le port \"" + portServeur.getText() 
+        							+ "\" n'est pas valide");
+        	} else {
+        		AlertBox.showErrorBox(e.getMessage());
+        	}
         }
         
         

@@ -205,7 +205,7 @@ public class ControleurEditerCategories {
                     }
 
                 } else {
-                    AlertBox.showErrorBox("Suppression annulée");
+                    AlertBox.showSuccessBox(nomCategorie + " n'a pas été supprimé.");
                 }
             } else {
                 AlertBox.showErrorBox("Vous ne pouvez modifier la catégorie principale");
