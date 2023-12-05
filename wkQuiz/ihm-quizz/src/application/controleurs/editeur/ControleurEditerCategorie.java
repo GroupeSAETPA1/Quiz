@@ -46,6 +46,7 @@ public class ControleurEditerCategorie {
 	 */
 	@FXML 
 	private void retour() {
+		AlertBox.showSuccessBox("Modification annulée");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 	
@@ -83,7 +84,7 @@ public class ControleurEditerCategorie {
      */
 	@FXML
 	private void annuler() {
-		AlertBox.showErrorBox("Modification annulée");
+		AlertBox.showSuccessBox("Modification annulée");
 		Quiz.changerVue("EditerCategories.fxml");
 	}
 }

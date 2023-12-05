@@ -252,13 +252,11 @@ public class ControleurCreationQuestionEtCategorie {
         } catch (InvalidNameException e) {
             AlertBox.showErrorBox(e.getMessage());
         } catch (ReponseException e) {
-            AlertBox.showErrorBox("Attention, les mauvaises réponses ne doivent "
-                    + "pas être en double ET la bonne réponse ne peut pas être "
-                    + "une mauvaise réponse");
+            AlertBox.showLongErrorBox("Erreur dans les réponses :", e.getMessage());
         } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La question saisie existe déjà");
+            AlertBox.showErrorBox("La question saisie existe déjà");
         } catch (DifficulteException e) {
-            AlertBox.showWarningBox("Il manque la difficultée de la question");
+            AlertBox.showErrorBox("Il manque la difficultée de la question");
         } catch (CreerQuestionException e) {
             e.printStackTrace();
         }
@@ -295,7 +293,7 @@ public class ControleurCreationQuestionEtCategorie {
             AlertBox.showErrorBox("Veuillez saisir une nom de catégorie valide "
                     + ": entre 1 et 30 caractères maximum et qui ne dois pas contenir d'accents");
         } catch (HomonymeException e) {
-            AlertBox.showWarningBox("La catégorie saisie existe déjà");
+            AlertBox.showErrorBox("La catégorie saisie existe déjà");
         }
         
         if (categorieCreer) {

@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
  * @author Lucas Descriaud
  */
 public class ControleurParametres {
-
+	
     @FXML
     private ComboBox<String> selecteurCategorie ;
     
@@ -183,7 +183,7 @@ public class ControleurParametres {
      */
     private int getNbQuestion() {
         if (nombreQuestions.getSelectedToggle() == null) {
-            throw new NullPointerException("Nombre de questiosn non selectionné !");
+            throw new NullPointerException("Nombre de questions non selectionné !");
         }
         //else
         return Integer.parseInt((
