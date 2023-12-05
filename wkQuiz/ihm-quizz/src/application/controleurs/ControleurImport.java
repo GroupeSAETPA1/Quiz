@@ -94,7 +94,8 @@ public class ControleurImport {
 	            		LectureFichier.getLigneCSV(fichier);
 	            
 	            if (!lignes.isEmpty()) {
-	            	creerEtGererQuestionCategorie(lignes);            	
+	            	creerEtGererQuestionCategorie(lignes);
+	            	Quiz.charger("CreationQuestionEtCategorie.fxml");
 	            }
         	} catch (ArrayIndexOutOfBoundsException e) {
         		AlertBox.showErrorBox(
