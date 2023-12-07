@@ -323,7 +323,12 @@ public class ModelePrincipal {
      */
     public boolean modifierCategorie(String nouveauNom) throws InvalidNameException, HomonymeException {
         if (getCategoriesLibelleExact(nouveauNom) == null) {
+            ArrayList<Question> questionAModifier 
+            = banqueQuestion.getQuestions(catgorieAModifier);
         	catgorieAModifier.setNom(nouveauNom);
+        	for (Question question : questionAModifier) {
+                question.setCategorie(catgorieAModifier);
+            }
         	return true;
         } else {
         	throw new HomonymeException("La categorie est déja présente dans la banque de categorie.");
