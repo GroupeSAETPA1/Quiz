@@ -11,6 +11,7 @@
     <DEPENDENCIES>
       <COMP relation="Model">
         <COMPID name="digramme de classe" mc="Standard.Package" uid="6393633a-109c-410f-afab-8bbb5fecd4df"/>
+        <COMPID name="Modèle" mc="Standard.Package" uid="d66b2e23-53c1-4231-9aa7-06c99dc06798"/>
       </COMP>
       <COMP relation="DiagramRoot">
         <COMPID name="Digramme de classe" mc="Infrastructure.DiagramSet" uid="8b08bb18-fb0d-426f-a06f-0aac46702548"/>

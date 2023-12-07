@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="application" version="4">
+  <OBJECT>
+    <ID name="application" mc="Standard.Package" uid="e45b9f6b-b1de-498f-b3ad-794eb8f70329"/>
+    <PID name="src" mc="Standard.Package" uid="1971b063-91d0-4818-962a-be3baf45e5bb"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[application]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="modele" mc="Standard.Package" uid="6f38ce7e-d2f9-4698-939a-e3816c16b6b7"/>
+        <COMPID name="vue" mc="Standard.Package" uid="82e5fe38-62b4-4d77-bd52-8bde4375e8e7"/>
+        <COMPID name="controlleur" mc="Standard.Package" uid="cc25b39b-9d9a-4295-a80e-23ab9c5737aa"/>
+        <COMPID name="Quiz" mc="Standard.Class" uid="b9024959-931c-46de-aec1-eb66d513747d"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
